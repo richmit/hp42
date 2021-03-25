@@ -1,0 +1,1205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-03-25 Thu 18:20 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>free42/hp42s/DM42 Repeated Measurements</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Mitch Richling" />
+<meta name="description" content="Description of some free42/hp-42s/DM42 programs for base-n computations"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
+<style>body { min-width: 500px; max-width: 1024px; }</style>
+<style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
+<style>h1,h2,h3 { line-height: 1.4em; }</style>
+<style>h1.title { font-size: 3em; }</style>
+<style>h4,h5,h6 { font-size: 1em; }</style>
+<style>.org-src-container { border: 1px solid #ccc; box-shadow: 3px 3px 3px #eee; font-family: Lucida Console, monospace; font-size: 80%; margin: 0px; padding: 0px 0px; position: relative; }</style>
+<style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
+<style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
+<style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="https://www.mitchr.me/FIXME"> UP </a>
+ |
+ <a accesskey="H" href="https://www.mitchr.me/"> HOME </a>
+</div><div id="content">
+<h1 class="title">free42/hp42s/DM42 Repeated Measurements</h1>
+<table border="2 solid #ccc" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right"><b>Author:</b></td>
+<td class="org-left"><i>Mitch Richling</i></td>
+</tr>
+
+<tr>
+<td class="org-right"><b>Updated:</b></td>
+<td class="org-left"><i>2021-03-25 18:20:37</i></td>
+</tr>
+</tbody>
+</table>
+<p align="center">
+Copyright 2021 Mitch Richling. All rights reserved.
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org1be1f7d">1. Introduction</a></li>
+<li><a href="#orgd209229">2. Supported Methods</a></li>
+<li><a href="#org891fd52">3. Setup</a>
+<ul>
+<li><a href="#orgbbe43e6">3.1. Distribution</a></li>
+<li><a href="#orgd2a6c5e">3.2. Coverage Factors</a></li>
+<li><a href="#org40e85ef">3.3. Automatic Reporting</a></li>
+</ul>
+</li>
+<li><a href="#orgb774a05">4. Reporting</a></li>
+<li><a href="#orgceab6b0">5. Application Menu</a></li>
+<li><a href="#orgb52e2eb">6. Use</a></li>
+<li><a href="#org1979f13">7. Future</a></li>
+<li><a href="#org116025e">8. The Code</a></li>
+<li><a href="#orgc543856">9. Median</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1be1f7d" class="outline-2">
+<h2 id="org1be1f7d"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+I frequently take repeated measurements, but don't feel the need to record all the measurements in my laboratory notebook.  For example, when working on my
+stamp collection I will measure stamp thickness at 5 locations and use the average value.  The application described below is designed to make that process
+more automated and less error prone.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd209229" class="outline-2">
+<h2 id="orgd209229"><span class="section-number-2">2</span> Supported Methods</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+When estimating &amp; reporting measurement uncertainty, two methods are most common.  The first assumes the measurements are statistically independent and
+normally distributed.  In this case the measurement is taken to be the mean, and the standard error (u) is defined as the population standard deviation.  The
+second method assumes a rectangular error distribution.  In this case the measurement is assumed to be the midrange=(max+min)/2, and the standard error is
+defined as u=(max-min)/(2*sqrt(3)).  In both schemes the standard error is frequently "expanded" by a factor (k) in order to provide a probabilistic error
+interval or confidence interval.
+</p>
+
+<p>
+Other schemes are frequently used, and the application provides raw statistics to compute many of them: mean, midrange, range, standard deviation, population
+standard deviation, number of observations, sum, &amp; sum of squares.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org891fd52" class="outline-2">
+<h2 id="org891fd52"><span class="section-number-2">3</span> Setup</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+The last menu provides configuration options.
+</p>
+</div>
+
+<div id="outline-container-orgbbe43e6" class="outline-3">
+<h3 id="orgbbe43e6"><span class="section-number-3">3.1</span> Distribution</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+The distribution to be used in reports is set via the first menu button &#x2013; the current selection is displayed in the menu label (N=Normal &amp; S=Square).  This
+key cycles between normal and rectangular distributions when pressed.  Note that it also defaults the coverage factor (the second menu button)!
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd2a6c5e" class="outline-3">
+<h3 id="orgd2a6c5e"><span class="section-number-3">3.2</span> Coverage Factors</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+The coverage factor used to compute the expanded uncertainty is set via the second menu key.  Repeatedly pressing this button will cycle through predefined
+values appropriate for the already selected distribution.
+</p>
+
+<p>
+This option is used both for reports and the expanded uncertainty computations on the second menu page (<code>[kuN]</code> &amp; <code>[kuS]</code>).  It is not possible to set the
+coverage factor to an arbitrary value; however, the population standard deviation (<code>[PSD]</code>) and rectangular variance (<code>[SqVA]</code>)are in the third menu.
+</p>
+
+<p>
+For normally distributed errors the following coverage factors are supported.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Confidence %</th>
+<th scope="col" class="org-right">Coverage Factor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">68.27</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">95.45</td>
+<td class="org-right">2</td>
+</tr>
+
+<tr>
+<td class="org-right">99.73</td>
+<td class="org-right">3</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+For errors with a rectangular distribution the following coverage factors are supported.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Coverage Factor</th>
+<th scope="col" class="org-left">Key label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">1.73205080757</td>
+<td class="org-left">√3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org40e85ef" class="outline-3">
+<h3 id="org40e85ef"><span class="section-number-3">3.3</span> Automatic Reporting</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+A report can be generated upon entering a specified number of measurements.  This is very handy when a batch of items needs to be measured, and one wishes to
+do a fixed number of measurements per item.  To set the automatic report count provide an integer in X, and use this menu key.  The current value is displayed
+as part of the menu label.  A dash (-) means no automatic reporting is configured.  Use zero to turn off reporting.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb774a05" class="outline-2">
+<h2 id="orgb774a05"><span class="section-number-2">4</span> Reporting</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+I find that most of the time I use units such that measurements integer values.  For example with paper thickness measurements I will use micrometers in a
+range between 700 and 1100.  For other philatelic applications I may use millimeters with one or, rarely, two decimals.  For these applications it is possible
+to fit the measurement value, uncertainty, max, and min all on the screen at once assuming <code>FIX</code> has been set appropriately.  The report function attempts to
+use this compact reporting method if possible.  Otherwise it uses the first line for the measurement estimate and the second line for the expanded
+uncertainty.
+</p>
+
+<p>
+The measurement and expanded uncertainty are reported according to the selected of distribution and coverage factor.  See the setup menu.
+</p>
+
+<p>
+Reports can be automatically generated upon entry of a configurable number of measurements.  See the setup menu.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgceab6b0" class="outline-2">
+<h2 id="orgceab6b0"><span class="section-number-2">5</span> Application Menu</h2>
+<div class="outline-text-2" id="text-5">
+<table id="org65404a1" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Menu</th>
+<th scope="col" class="org-left">Description</th>
+<th scope="col" class="org-left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">M+</td>
+<td class="org-left">Add a new measurement</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">M-</td>
+<td class="org-left">Delete last measurement</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">---</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">REP</td>
+<td class="org-left">Display Report</td>
+<td class="org-left">Reports μ &amp; kuN or MID &amp; kuS depending on distribution</td>
+</tr>
+
+<tr>
+<td class="org-left">---</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">CLRM</td>
+<td class="org-left">Clear all measurements</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">μ</td>
+<td class="org-left">Arithmetic Mean</td>
+<td class="org-left">Normal Errors: Measurement estimate</td>
+</tr>
+
+<tr>
+<td class="org-left">kuN</td>
+<td class="org-left">k*PSD</td>
+<td class="org-left">Normal Errors: Expanded uncertainty estimate</td>
+</tr>
+
+<tr>
+<td class="org-left">MID</td>
+<td class="org-left">(MAX+MIN)/2</td>
+<td class="org-left">Rectangular (Square) Errors: Measurement estimate</td>
+</tr>
+
+<tr>
+<td class="org-left">kuS</td>
+<td class="org-left">k*RNG/2/SQRT(3)</td>
+<td class="org-left">Rectangular (Square) Errors: Expanded uncertainty estimate</td>
+</tr>
+
+<tr>
+<td class="org-left">MIN</td>
+<td class="org-left">Minimum value</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">MAX</td>
+<td class="org-left">Maximum value</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">SD</td>
+<td class="org-left">Standard Deviation</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">PSD</td>
+<td class="org-left">Population Standard Deviation</td>
+<td class="org-left">This is the one with n-1 on the bottom</td>
+</tr>
+
+<tr>
+<td class="org-left">RNG</td>
+<td class="org-left">Range</td>
+<td class="org-left">MAX-MIN</td>
+</tr>
+
+<tr>
+<td class="org-left">SqVA</td>
+<td class="org-left">Rectangular (Square) Variance</td>
+<td class="org-left">(MAX-MIN)/(2*sqrt(3))</td>
+</tr>
+
+<tr>
+<td class="org-left">N</td>
+<td class="org-left">Number of measurements</td>
+<td class="org-left">Number of rows in MeDAT</td>
+</tr>
+
+<tr>
+<td class="org-left">SUMS</td>
+<td class="org-left">Y: Sum Squared X: Sum</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">---</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">D=?</td>
+<td class="org-left">Distribution</td>
+<td class="org-left">Cycle between N=Normal &amp; S=Rectangular (Square).  Defaults k.</td>
+</tr>
+
+<tr>
+<td class="org-left">k=NN</td>
+<td class="org-left">Coverage Factor</td>
+<td class="org-left">Cycle through predefined values for distribution</td>
+</tr>
+
+<tr>
+<td class="org-left">A=NN</td>
+<td class="org-left">Auto Report Count</td>
+<td class="org-left">Automatically generate a report when N measurements are entered</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgb52e2eb" class="outline-2">
+<h2 id="orgb52e2eb"><span class="section-number-2">6</span> Use</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+In use the application is quite like the built in statistics application in that <code>[M+]</code> &amp; <code>[M+]</code> add and delete measurements.  All measurements are stored in
+a matrix named <code>MeDAT</code>.  Feel free to edit this matrix with the <code>MATRIX</code> menu.
+</p>
+
+<p>
+The <code>[REP]</code> key will generate a report.  Reports can also be generated automatically when a set number of measurements have been entered (see the setup menu).
+</p>
+
+<p>
+Menu page two &amp; three compute various statistics useful for uncertainty reporting.  Page two has the most common statistics, and page three is more useful for
+custom uncertainty computations.
+</p>
+
+<p>
+Menu page four is for setup.  The distribution impacts reporting (menu page one: <code>[REP]</code>).  The coverage factor impacts reporting (menu page one: <code>[REP]</code>) and
+and the expanded uncertainty computations (menu page two: <code>[kuN]</code> &amp; <code>[kuS]</code>).  The automatic reporting option impacts the add measurement function (menu page
+one: <code>[M+]</code>) such that a report is automatically generated when a specified number of measurements have been entered.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1979f13" class="outline-2">
+<h2 id="org1979f13"><span class="section-number-2">7</span> Future</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Some things I might do some day&#x2026;
+</p>
+
+<ul class="org-ul">
+<li>I stored all the data in a matrix because I was thinking about adding rank statistics and a graphics</li>
+<li>A graphical representation showing the points and various confidence intervals would be cool</li>
+<li>It would be neat to see a live dot plot of the measurements as they are being entered</li>
+<li>Arbitrary k values</li>
+<li>Support the larger screen when running on the DM42</li>
+<li>Make the sub-functions perfect (i.e. minimally alter stack/last X)</li>
+<li>Make the setup menu not alter the stack</li>
+<li>Add a printed report listing data and both normal &amp; square estimates for all coverage factors</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org116025e" class="outline-2">
+<h2 id="org116025e"><span class="section-number-2">8</span> The Code</h2>
+<div class="outline-text-2" id="text-8">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Repeated Measurements</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  N/A</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: N/A</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-24</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: Settings menu messes with the stack</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: MeDAT -- Measurement Matrix</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: MeDST -- Error Distribution</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: MeCFA -- Coverage Factor</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: MeTGN -- Target Measurement Count (generates a report automatically)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42 3.0</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: DM42 DMCP-3.20 / DM42-3.17</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"MEAS"</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Initalize setup variables</span>
+0
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeDST"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"MeDST"</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeCFA"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"MeCFA"</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeTGN"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"MeTGN"</span>
+R&#8595;
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Menu Setup</span>
+<span style="color: #00ffff;">LBL</span> 01               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu MEAS</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"M+"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 05
+<span style="color: #fa8072;">"M-"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 06
+<span style="color: #fa8072;">"REP"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 07
+<span style="color: #fa8072;">"CLRM"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 08
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 04
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">LBL</span> 02               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu MEAS</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"&#956;"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 09
+<span style="color: #fa8072;">"kuN"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 10
+<span style="color: #fa8072;">"MID"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 11
+<span style="color: #fa8072;">"kuS"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 12
+<span style="color: #fa8072;">"MIN"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 13
+<span style="color: #fa8072;">"MAX"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 14
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">LBL</span> 03               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 3 of menu MEAS</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"SD"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 15
+<span style="color: #fa8072;">"PSD"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 16
+<span style="color: #fa8072;">"RNG"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 17
+<span style="color: #fa8072;">"SqVA"</span> 
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 35
+<span style="color: #fa8072;">"N"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 18
+<span style="color: #fa8072;">"SUMS"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 19
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 04
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">LBL</span> 04               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 4 of menu MEAS</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"D:"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeDST"</span>
+80
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">XEQ IND ST</span> X
+R&#8595;
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 20
+<span style="color: #fa8072;">"k:"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeCFA"</span>
+70
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">XEQ IND ST</span> X
+R&#8595;
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 21
+<span style="color: #fa8072;">"A:"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeTGN"</span>
+<span style="color: #00ffff;">X=0</span>?
+&#9500;<span style="color: #fa8072;">"-"</span>
+<span style="color: #00ffff;">X&#8800;0</span>?
+<span style="color: #00ffff;">AIP</span>
+R&#8595;
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 22
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 04
+<span style="color: #00ffff;">LBL</span> 00
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Menu Actions</span>
+<span style="color: #00ffff;">LBL</span> 05               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key M+</span>
+<span style="color: #00ffff;">REAL</span>?
+<span style="color: #00ffff;">GTO</span> 34
+<span style="color: #fa8072;">"ERR: Bad Value"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 34
+<span style="color: #00ffff;">SF</span> 25                <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Index &amp; grow MeDAT</span>
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">FS?C</span> 25
+<span style="color: #00ffff;">GTO</span> 33
+1
+1
+<span style="color: #00ffff;">DIM</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"MeDAT"</span>
+R&#8595;
+R&#8595;
+<span style="color: #00ffff;">STOEL</span>
+<span style="color: #00ffff;">VIEW</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 33               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">MeDAT exists.  Grow it</span>
+<span style="color: #00ffff;">GROW</span>
+<span style="color: #00ffff;">J-</span>
+<span style="color: #00ffff;">J+</span>
+<span style="color: #00ffff;">WRAP</span>
+<span style="color: #00ffff;">STOEL</span>                <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Store element at new location</span>
+<span style="color: #00ffff;">XEQ</span> 18
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeTGN"</span>
+<span style="color: #00ffff;">X&#8800;Y</span>?
+<span style="color: #00ffff;">GTO</span> 43
+<span style="color: #00ffff;">XEQ</span> 07
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 43
+<span style="color: #00ffff;">VIEW</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 06               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key M-</span>
+<span style="color: #00ffff;">SF</span> 25                <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Index &amp; grow MeDAT</span>
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">RTN</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">MeDAT is missing</span>
+<span style="color: #00ffff;">J-</span>
+<span style="color: #00ffff;">RCLEL</span>
+<span style="color: #00ffff;">DELR</span>
+<span style="color: #00ffff;">VIEW</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 07               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key REP</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">GTO</span> 99
+R&#8595;
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeDST"</span>
+<span style="color: #00ffff;">X=0</span>?                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-BEGIN</span>
+<span style="color: #00ffff;">GTO</span> 39
+<span style="color: #00ffff;">GTO</span> 40
+<span style="color: #00ffff;">LBL</span> 39               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-THEN normal</span>
+<span style="color: #fa8072;">"&#956;="</span>
+<span style="color: #00ffff;">XEQ</span> 09
+<span style="color: #00ffff;">ARCL</span> ST X
+&#9500;<span style="color: #fa8072;">" ku="</span>
+<span style="color: #00ffff;">XEQ</span> 10
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">GTO</span> 41
+<span style="color: #00ffff;">LBL</span> 40               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-ELSE square</span>
+<span style="color: #fa8072;">"C="</span>
+<span style="color: #00ffff;">XEQ</span> 11
+<span style="color: #00ffff;">ARCL</span> ST X
+&#9500;<span style="color: #fa8072;">" ku="</span>
+<span style="color: #00ffff;">XEQ</span> 12
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">LBL</span> 41               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-END</span>
+<span style="color: #00ffff;">ALENG</span>
+21
+<span style="color: #00ffff;">X&lt;Y</span>?                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Can we keep going with 4 value report?</span>
+<span style="color: #00ffff;">GTO</span> 36
+&#9500;<span style="color: #fa8072;">"[LF]&#8595;="</span>
+<span style="color: #00ffff;">XEQ</span> 13
+<span style="color: #00ffff;">ARCL</span> ST X
+&#9500;<span style="color: #fa8072;">"  &#8593;="</span>
+<span style="color: #00ffff;">XEQ</span> 14
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">ALENG</span>
+41
+<span style="color: #00ffff;">X&lt;Y</span>?                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Can we keep going with 4 value report?</span>
+<span style="color: #00ffff;">GTO</span> 36
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 36               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">2 value report</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeDST"</span>
+<span style="color: #00ffff;">X=0</span>?                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-BEGIN</span>
+<span style="color: #00ffff;">GTO</span> 37
+<span style="color: #00ffff;">GTO</span> 38
+<span style="color: #00ffff;">LBL</span> 37               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-THEN normal</span>
+R&#8595;
+<span style="color: #fa8072;">" &#956;="</span>
+<span style="color: #00ffff;">XEQ</span> 09
+<span style="color: #00ffff;">ARCL</span> ST X
+&#9500;<span style="color: #fa8072;">"[LF]ku="</span>
+<span style="color: #00ffff;">XEQ</span> 10
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">GTO</span> 39
+<span style="color: #00ffff;">LBL</span> 38               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-ELSE square</span>
+R&#8595;
+<span style="color: #fa8072;">" C="</span>
+<span style="color: #00ffff;">XEQ</span> 11
+<span style="color: #00ffff;">ARCL</span> ST X
+&#9500;<span style="color: #fa8072;">"[LF]ku="</span>
+<span style="color: #00ffff;">XEQ</span> 12
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">LBL</span> 39               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-END</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 08               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key CLRM</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">CLV</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">CF</span> 25
+<span style="color: #fa8072;">"MeDAT Cleared"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 09               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#956; (mean)</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">GTO</span> 99
+<span style="color: #00ffff;">XEQ</span> 19
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+R&#8595;
+<span style="color: #00ffff;">XEQ</span> 18
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 10               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kuN (expanded uncertainty for normally distributed data)</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">GTO</span> 99
+<span style="color: #00ffff;">XEQ</span> 16
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeCFA"</span>
+60
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">XEQ IND ST</span> X
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+R&#8595;
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 11               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key MID (midrange)</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">GTO</span> 99
+<span style="color: #00ffff;">XEQ</span> 14
+<span style="color: #00ffff;">XEQ</span> 13
+<span style="color: #00ffff;">+</span>
+2
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 12               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kuS (expanded uncertainty for rectangular distributed data)</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">GTO</span> 99
+<span style="color: #00ffff;">XEQ</span> 35
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeCFA"</span>
+60
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">XEQ IND ST</span> X
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+R&#8595;
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 35               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for SqVA</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">GTO</span> 99
+<span style="color: #00ffff;">XEQ</span> 17
+2
+<span style="color: #00ffff;">&#247;</span>
+3
+<span style="color: #00ffff;">SQRT</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 13               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key MIN</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">GTO</span> 99
+[MIN]
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 14               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key MAX</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">GTO</span> 99
+[MAX]
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 15               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key SD</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">GTO</span> 99
+<span style="color: #00ffff;">XEQ</span> 19
+<span style="color: #00ffff;">XEQ</span> 18
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">X&#8593;2</span>
+<span style="color: #00ffff;">RCL&#247; ST</span> Y
+<span style="color: #00ffff;">RCL&#247; ST</span> Y
+<span style="color: #00ffff;">RCL ST</span> Z
+<span style="color: #00ffff;">RCL ST</span> Z
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">SQRT</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 16               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key PSD</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">GTO</span> 99
+<span style="color: #00ffff;">XEQ</span> 19   
+<span style="color: #00ffff;">XEQ</span> 18   
+<span style="color: #00ffff;">X&lt;&gt;Y</span>     
+<span style="color: #00ffff;">X&#8593;2</span>      
+<span style="color: #00ffff;">RCL&#247; ST</span> Y
+<span style="color: #00ffff;">RCL ST</span> Z
+<span style="color: #00ffff;">X&lt;&gt;Y</span> 
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+1
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">SQRT</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 17               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key RNG</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">GTO</span> 99
+<span style="color: #00ffff;">XEQ</span> 14
+<span style="color: #00ffff;">XEQ</span> 13
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 18               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key N</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">FS?C</span> 25
+<span style="color: #00ffff;">GTO</span> 54
+0
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 54
+<span style="color: #00ffff;">DIM</span>? 
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 19               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key SUMS</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">GTO</span> 99
+0
+0
+<span style="color: #00ffff;">LBL</span> 32
+<span style="color: #00ffff;">RCLEL</span>
+<span style="color: #00ffff;">STO+ ST</span> Y
+<span style="color: #00ffff;">X&#8593;2</span>
+<span style="color: #00ffff;">STO+ ST</span> Z
+R&#8595;
+<span style="color: #00ffff;">J+</span>
+<span style="color: #00ffff;">FC</span>? 77
+<span style="color: #00ffff;">GTO</span> 32
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 20               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key D:</span>
+1
+<span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"MeDST"</span>
+2
+<span style="color: #00ffff;">MOD</span>
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"MeDST"</span>
+R&#8595;
+0
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"MeCFA"</span>
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 21               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key k:</span>
+1
+<span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"MeCFA"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeDST"</span>
+<span style="color: #00ffff;">X=0</span>?
+<span style="color: #00ffff;">GTO</span> 29
+<span style="color: #00ffff;">GTO</span> 30
+<span style="color: #00ffff;">LBL</span> 29
+4
+<span style="color: #00ffff;">GTO</span> 31
+<span style="color: #00ffff;">LBL</span> 30
+2
+<span style="color: #00ffff;">LBL</span> 31
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+R&#8595;
+<span style="color: #00ffff;">MOD</span>
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"MeCFA"</span>
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 22               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key A:</span>
+1
+<span style="color: #00ffff;">X&#8800;Y</span>?
+<span style="color: #00ffff;">GTO</span> 42
+<span style="color: #fa8072;">"ERR: Bad Value"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 42
+R&#8595;
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"MeTGN"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Coverage values</span>
+<span style="color: #00ffff;">LBL</span> 60               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Value for coverage factor 0</span>
+1
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 61               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Value for coverage factor 1</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeDST"</span>
+<span style="color: #00ffff;">X=0</span>?
+<span style="color: #00ffff;">GTO</span> 24
+R&#8595;
+2
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 24
+R&#8595;
+3
+<span style="color: #00ffff;">SQRT</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 62               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Value for coverage factor 2</span>
+3
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 63               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Value for coverage factor 3</span>
+4
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Coverage Names</span>
+<span style="color: #00ffff;">LBL</span> 70               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Name for coverage factor 0</span>
+&#9500;<span style="color: #fa8072;">"1"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 71               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Name for coverage factor 1</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeDST"</span>
+<span style="color: #00ffff;">X=0</span>?
+&#9500;<span style="color: #fa8072;">"2"</span>
+<span style="color: #00ffff;">X&#8800;0</span>?
+&#9500;<span style="color: #fa8072;">"&#8730;3"</span>
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 72               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Name for coverage factor 2</span>
+&#9500;<span style="color: #fa8072;">"3"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 73               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Name for coverage factor 3</span>
+&#9500;<span style="color: #fa8072;">"4"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">distribution Names</span>
+<span style="color: #00ffff;">LBL</span> 80               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Name for distribution 0</span>
+&#9500;<span style="color: #fa8072;">"N"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 81               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Name for distribution 1</span>
+&#9500;<span style="color: #fa8072;">"S"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Error States</span>
+<span style="color: #00ffff;">LBL</span> 99               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">ERROR message for missing MeDAT</span>
+<span style="color: #fa8072;">"ERR: No MeDAT"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc543856" class="outline-2">
+<h2 id="orgc543856"><span class="section-number-2">9</span> Median</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+This function computes the median of MeDAT.  Someday I may integrate it into the main <code>MEAS</code> applicaiton.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"MED"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeDAT"</span>
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"TMP"</span>
+R&#8595;
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"TMP"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">GTO</span> 99
+<span style="color: #00ffff;">LBL</span> 44
+[MIN]
+R&#8595;
+<span style="color: #00ffff;">RCLIJ</span>
+R&#8595;
+<span style="color: #00ffff;">R&lt;&gt;R</span>
+<span style="color: #00ffff;">J+</span>
+<span style="color: #00ffff;">FC</span>? 77
+<span style="color: #00ffff;">GTO</span> 44
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"TMP"</span>
+<span style="color: #00ffff;">DIM</span>?
+R&#8595;
+<span style="color: #00ffff;">ENTER</span>
+<span style="color: #00ffff;">ENTER</span>
+2
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">FP</span>
+<span style="color: #00ffff;">X=0</span>?
+<span style="color: #00ffff;">GTO</span> 45
+<span style="color: #fa8072;">"odd"</span>
+R&#8595;
+1
+<span style="color: #00ffff;">+</span>
+2
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">IP</span>
+1
+<span style="color: #00ffff;">STOIJ</span>
+<span style="color: #00ffff;">RCLEL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 45
+<span style="color: #fa8072;">"even"</span>
+R&#8595;
+<span style="color: #00ffff;">ENTER</span>
+2
+<span style="color: #00ffff;">&#247;</span>
+1
+<span style="color: #00ffff;">STOIJ</span>
+R&#8595;
+<span style="color: #00ffff;">RCLEL</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+1
+<span style="color: #00ffff;">+</span>
+1
+<span style="color: #00ffff;">STOIJ</span>
+R&#8595;
+R&#8595;
+<span style="color: #00ffff;">RCLEL</span>  
+<span style="color: #00ffff;">+</span>
+2
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-25 Thu 18:20 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+</div>
+</body>
+</html>

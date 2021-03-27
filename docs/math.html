@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-03-26 Fri 21:16 -->
+<!-- 2021-03-27 Sat 14:19 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42/hp42s/DM42 Simple Math Functions</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-03-26 21:16:33</i></td>
+<td class="org-left"><i>2021-03-27 14:19:03</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,18 +241,38 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgf021c87">1. Introduction</a></li>
-<li><a href="#orgcbbd3fb">2. Types</a></li>
-<li><a href="#orgc5207df">3. Complex Numbers</a></li>
-<li><a href="#org604f010">4. Math Functions</a></li>
-<li><a href="#orge13172e">5. Meta Data</a></li>
+<li><a href="#orge04e5a8">1. Metadata</a></li>
+<li><a href="#org1c61dc8">2. Introduction</a></li>
+<li><a href="#org0c7a6cb">3. Types</a></li>
+<li><a href="#org495a15f">4. Complex Numbers</a></li>
+<li><a href="#org3fcfadd">5. Math Functions</a></li>
+<li><a href="#org4777aa4">6. Meta Data</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgf021c87" class="outline-2">
-<h2 id="orgf021c87"><span class="section-number-2">1</span> Introduction</h2>
+<div id="outline-container-orge04e5a8" class="outline-2">
+<h2 id="orge04e5a8"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
+<p>
+This home for this HTML file is: <a href="https://richmit.github.io/hp42/math.html">https://richmit.github.io/hp42/math.html</a>
+</p>
+
+<p>
+Files related to this document may be found on github: <a href="https://github.com/richmit/hp42">https://github.com/richmit/hp42</a>
+</p>
+
+<ul class="org-ul">
+<li><code>src</code> directory: Contains the org-mode file that generated this HTML document</li>
+<li><code>docs</code> directory: Contains this html document</li>
+<li><code>bin</code> directory: Contains raw program files</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1c61dc8" class="outline-2">
+<h2 id="org1c61dc8"><span class="section-number-2">2</span> Introduction</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 This org-mode file collects together a handful of simple mathematical functions I find useful.  Many of these functions work on what I call an "arithmetic
 type" &#x2013; that is a thing the 42s can do arithmetic with: real numbers, complex numbers, real matrices, &amp; complex matrices.  In order to simplify the code the
@@ -398,19 +418,20 @@ type" &#x2013; that is a thing the 42s can do arithmetic with: real numbers, com
 <td class="org-left">ATAN2</td>
 <td class="org-left">Real</td>
 </tr>
+
+<tr>
+<td class="org-left">YROOT</td>
+<td class="org-left">Nth roots</td>
+<td class="org-left">Real, Complex</td>
+</tr>
 </tbody>
 </table>
-
-<p>
-I don't have a menu specifically for these functions.  Instead I organize these, along with some built in functions, into my custom menu (See:
-<a href="https://richmit.github.io/hp42/custom.html">https://richmit.github.io/hp42/custom.html</a>)
-</p>
 </div>
 </div>
 
-<div id="outline-container-orgcbbd3fb" class="outline-2">
-<h2 id="orgcbbd3fb"><span class="section-number-2">2</span> Types</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-org0c7a6cb" class="outline-2">
+<h2 id="org0c7a6cb"><span class="section-number-2">3</span> Types</h2>
+<div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Arithmetic Type</span>
@@ -464,14 +485,15 @@ R&#8595;                   <span style="color: #ffa500;">@@</span><span style="c
 <span style="color: #00ffff;">LBL</span> 06               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Not matrix, real, or complex</span>
 0
 <span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgc5207df" class="outline-2">
-<h2 id="orgc5207df"><span class="section-number-2">3</span> Complex Numbers</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org495a15f" class="outline-2">
+<h2 id="org495a15f"><span class="section-number-2">4</span> Complex Numbers</h2>
+<div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Real part</span>
@@ -693,9 +715,9 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org604f010" class="outline-2">
-<h2 id="org604f010"><span class="section-number-2">4</span> Math Functions</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org3fcfadd" class="outline-2">
+<h2 id="org3fcfadd"><span class="section-number-2">5</span> Math Functions</h2>
+<div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Percentage of total (just like hp-12c button)</span>
@@ -775,6 +797,7 @@ R&#8595;                   <span style="color: #ffa500;">@@</span><span style="c
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">&#247;</span>
 <span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Base 2 Logarithm</span>
@@ -790,6 +813,7 @@ R&#8595;                   <span style="color: #ffa500;">@@</span><span style="c
 <span style="color: #00ffff;">LN</span>
 <span style="color: #00ffff;">&#247;</span>
 <span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Raise 2 to the power of X</span>
@@ -1098,14 +1122,78 @@ R&#8595;                   <span style="color: #ffa500;">@@</span><span style="c
 <span style="color: #00ffff;">ATAN</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Nth roots prefering real &amp; pure imaginary answers</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: Number</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Number or numeric matrix (element-wise)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Yth root of X</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: The principal value will not be returned when Y is a non-zero integer and X is a negative real number</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: When Y is a non-zero integer and X is a negative real number, a real or pure imaginary root will be returned</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"YROOT"</span>
+<span style="color: #00ffff;">FUNC</span> 21              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">REAL</span>?
+<span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">GTO</span> 92
+<span style="color: #00ffff;">LBL</span> 01
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X is real</span>
+<span style="color: #00ffff;">X&#8805;0</span>?
+<span style="color: #00ffff;">GTO</span> 92
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X is negative, real</span>
+<span style="color: #00ffff;">RCL ST</span> Y
+<span style="color: #00ffff;">REAL</span>?
+<span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">GTO</span> 91
+<span style="color: #00ffff;">LBL</span> 02
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X is negative, real; Y is real</span>
+<span style="color: #00ffff;">FP</span>
+<span style="color: #00ffff;">X&#8800;0</span>?
+<span style="color: #00ffff;">GTO</span> 91
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X is negative, real; Y is real integer</span>
+R&#8595;                @ X Y
+<span style="color: #00ffff;">ABS</span>
+<span style="color: #00ffff;">RCL ST</span> Y          @y abs(x) y
+<span style="color: #00ffff;">X&lt;&gt;Y</span>              @abs(x) y y
+<span style="color: #00ffff;">XEQ</span> 92
+<span style="color: #00ffff;">+/-</span>               @-RT y
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+2
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">FP</span>
+<span style="color: #00ffff;">X=0</span>?
+<span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">GTO</span> 04
+<span style="color: #00ffff;">LBL</span> 03
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X is negative, real; Y is real integer even</span>
+R&#8595;
+0
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">COMPLEX</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 04
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X is negative, real; Y is real integer odd</span>
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 91
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Not special case.  Stack: Y X Y</span>
+R&#8595;
+<span style="color: #00ffff;">LBL</span> 92
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Not special case.  Stack: X Y</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">1/X</span>
+<span style="color: #00ffff;">Y&#8593;X</span>
+<span style="color: #00ffff;">RTN</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orge13172e" class="outline-2">
-<h2 id="orge13172e"><span class="section-number-2">5</span> Meta Data</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-org4777aa4" class="outline-2">
+<h2 id="org4777aa4"><span class="section-number-2">6</span> Meta Data</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/math.html">https://richmit.github.io/hp42/math.html</a>
 </p>
@@ -1117,7 +1205,7 @@ This HTML file was generated from this github repo: <a href="https://github.com/
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-26 Fri 21:16 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-27 Sat 14:19 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

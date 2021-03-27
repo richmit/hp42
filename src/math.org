@@ -1,0 +1,839 @@
+# -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
+#+TITLE:       free42/hp42s/DM42 Simple Math Functions
+#+AUTHOR:      Mitch Richling
+#+EMAIL:       http://www.mitchr.me/
+#+DATE:        2021-03-19
+#+DESCRIPTION: Some simple math functions for the free42/hp-42s/DM42
+#+LANGUAGE:    en
+#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil 
+#+HTML_HEAD: <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
+#+HTML_HEAD: <style>body { min-width: 500px; max-width: 1024px; }</style>
+#+HTML_HEAD: <style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
+#+HTML_HEAD: <style>h1,h2,h3 { line-height: 1.4em; }</style>
+#+HTML_HEAD: <style>h1.title { font-size: 3em; }</style>
+#+HTML_HEAD: <style>h4,h5,h6 { font-size: 1em; }</style>
+#+HTML_HEAD: <style>.org-src-container { border: 1px solid #ccc; box-shadow: 3px 3px 3px #eee; font-family: Lucida Console, monospace; font-size: 80%; margin: 0px; padding: 0px 0px; position: relative; }</style>
+#+HTML_HEAD: <style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
+#+HTML_HEAD: <style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
+#+HTML_HEAD: <style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
+#+HTML_LINK_HOME: https://www.mitchr.me/
+#+HTML_LINK_UP: https://www.mitchr.me/FIXME
+
+#+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
+|        <r> | <l>              |
+|  *Author:* | /{{{author}}}/ |
+| *Updated:* | /{{{time(%Y-%m-%d %H:%M:%S)}}}/ |
+#+ATTR_HTML: :align center
+Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
+
+#+TOC: headlines 5
+
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+#   00   #    10   #    20   #    30   #    40   #    50   #    60   #    70   #    80   #    90   #   100   #   110   #   120   #   130   #   140   #   150   #   160   #
+# 234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+
+* Metadata
+
+This home for this HTML file is: https://richmit.github.io/hp42/math.html
+
+Files related to this document may be found on github: https://github.com/richmit/hp42
+
+   - =src= directory: Contains the org-mode file that generated this HTML document
+   - =docs= directory: Contains this html document
+   - =bin= directory: Contains raw program files
+
+* Introduction
+
+This org-mode file collects together a handful of simple mathematical functions I find useful.  Many of these functions work on what I call an "arithmetic
+type" -- that is a thing the 42s can do arithmetic with: real numbers, complex numbers, real matrices, & complex matrices.  In order to simplify the code the
+=ATYP= function spits out a small integer that can be used in a computed =GOTO= to handle these four special cases.
+
+#+ATTR_HTML: :align center :frame box :rules all
+|----------+---------------------------+--------------------------------------------|
+| Function | Description               | Works On                                   |
+|----------+---------------------------+--------------------------------------------|
+| ATYP     | Arithmetic Type           | N/A                                        |
+|----------+---------------------------+--------------------------------------------|
+| RPART    | Real part                 | Real, Complex, Real Matrix, Complex Matrix |
+| IPART    | Imaginary Part            | Real, Complex, Real Matrix, Complex Matrix |
+| CONJ     | Complex Conjugate         | Real, Complex, Real Matrix, Complex Matrix |
+| CABS     | Magnitude/absolute value  | Real, Complex, Real Matrix, Complex Matrix |
+| CARG     | Complex Argument          | Real, Complex, Real Matrix, Complex Matrix |
+|----------+---------------------------+--------------------------------------------|
+| %T       | Percentage of total       | Real                                       |
+| SGN      | Sign function             | Real, Complex                              |
+| lnXY     | Base Y Logarithm of X     | Real, Complex, Real Matrix, Complex Matrix |
+| ln2      | Base 2 Logarithm          | Real, Complex, Real Matrix, Complex Matrix |
+| X↑2      | Raise 2 to the power of X | Real, Complex, Real Matrix, Complex Matrix |
+| GCD      | GCD                       | Real                                       |
+| LCM      | LCM                       | Real                                       |
+| NPDF     | Standard Normal PDF       | Real                                       |
+| NCDF     | Standard Normal CDF       | Real                                       |
+| IFP      | IP & FP of a number       | Real, Real Matrix                          |
+| FLOOR    | Floor                     | Real                                       |
+| CEIL     | Ceiling                   | Real                                       |
+| HYPOT    | Hypot                     | Real, Complex                              |
+| ATAN2    | ATAN2                     | Real                                       |
+| YROOT    | Nth roots                 | Real, Complex                              |
+|----------+---------------------------+--------------------------------------------|
+
+* Types
+
+#+BEGIN_SRC hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Arithmetic Type
+@@@@ IN:  X: an object
+@@@@ OUT: X: 1 if input X was a real number
+@@@@         2 if input X was a real matrix
+@@@@         3 if input X was a complex number
+@@@@         4 if input X was a complex matrix
+@@@@         0 if none of the above are true
+@@@@ TST: free42_3.0
+@@@@ FAQ: Even on free42<2.5.24 or a real 42s, X, Y, & Z are preserved. T & Last X not so much.
+@@@@ BUG: A 2 will be returned for a real matrix containing strings
+@@@@ BUG: In infinite stack mode with an empty stack 2 will be returned as X=0 when we do L4STK
+@@@@ UPD: 2021-02-23
+LBL "ATYP"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+MAT?
+GTO 01
+GTO 02
+LBL 01               @@@@ Matrix
+CLA
+ARCL ST X
+67
+POSA
+X>0?
+GTO 07
+GTO 08
+LBL 07               @@@@ Complex Matrix
+R↓                   @@## REQ:free42<2.5.24
+4
+RTN
+LBL 08               @@@@ Real/String Matrix
+R↓                   @@## REQ:free42<2.5.24
+2
+RTN
+LBL 02               @@@@ Not matrix
+REAL?
+GTO 03
+GTO 04
+LBL 03               @@@@ Real number
+1
+RTN
+LBL 04               @@@@ Not matrix or real
+CPX?
+GTO 05
+GTO 06
+LBL 05               @@@@ Complex number
+3
+RTN
+LBL 06               @@@@ Not matrix, real, or complex
+0
+RTN
+END
+#+END_SRC
+
+* Complex Numbers
+
+#+BEGIN_SRC hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Real part
+@@@@ IN:  X: Number or numeric matrix (element-wise)
+@@@@ OUT: X: rpart(x)
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-02-23
+LBL "RPART"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+ENTER
+XEQ "ATYP"
+GTO IND ST X
+LBL 00
+RTNERR 4             @@## REQ:free42>=2.5.24
+"ERR: Bad Type"      @@## REQ:free42<2.5.24
+AVIEW                @@## REQ:free42<2.5.24
+RTN                  @@## REQ:free42<2.5.24
+LBL 01               @@@@ Real Number
+LBL 02               @@@@ Real Matrix
+R↓
+RTN
+LBL 03               @@@@ Complex Number
+R↓
+FS? 73
+→REC
+COMPLEX
+X<>Y
+RTN
+LBL 04               @@@@ Complex Matrix
+R↓
+FS? 73
+GTO 05
+GTO 06
+LBL 05               @@@@ POLAR MODE Complex Matrix
+RECT
+COMPLEX
+X<>Y
+POLAR
+RTN
+LBL 06               @@@@ RECT MODE Complex Matrix
+COMPLEX
+X<>Y
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Imaginary Part
+@@@@ IN:  X: Number or numeric matrix (element-wise)
+@@@@ OUT: X: ipart(x)
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-02-23
+LBL "IPART"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+ENTER
+XEQ "ATYP"
+GTO IND ST X
+LBL 00
+RTNERR 4             @@## REQ:free42>=2.5.24
+"ERR: Bad Type"      @@## REQ:free42<2.5.24
+AVIEW                @@## REQ:free42<2.5.24
+RTN                  @@## REQ:free42<2.5.24
+LBL 01               @@@@ Real Number
+0
+RTN
+LBL 02               @@@@ Real Matrix
+R↓
+DIM?
+NEWMAT
+RTN
+LBL 03               @@@@ Complex Number
+R↓
+FS? 73
+→REC
+COMPLEX
+RTN
+LBL 04               @@@@ Complex Matrix
+R↓
+FS? 73
+GTO 05
+GTO 06
+LBL 05               @@@@ POLAR MODE Complex Matrix
+RECT
+COMPLEX
+POLAR
+RTN
+LBL 06               @@@@ RECT MODE Complex Matrix
+COMPLEX
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Complex Conjugate
+@@@@ IN:  X: Number or numeric matrix (element-wise)
+@@@@ OUT: X: conj(x)
+@@@@ TST: free42_3.0
+@@@@ BUG: Fails on alpha string matrix
+@@@@ UPD: 2021-02-23
+LBL "CONJ"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+ENTER
+XEQ "ATYP"
+GTO IND ST X
+LBL 00
+RTNERR 4             @@## REQ:free42>=2.5.24
+"ERR: Bad Type"      @@## REQ:free42<2.5.24
+AVIEW                @@## REQ:free42<2.5.24
+RTN                  @@## REQ:free42<2.5.24
+LBL 01               @@@@ Real Number
+LBL 02               @@@@ Real Matrix
+R↓
+RTN
+LBL 03               @@@@ Complex Number
+LBL 04               @@@@ Complex Matrix
+R↓
+COMPLEX
++/-
+COMPLEX
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Magnitude/absolute value
+@@@@ IN:  X: Number or numeric matrix (element-wise) -- built in ABS won't work with a complex matrix
+@@@@ OUT: X: |x|
+@@@@ TST: CPXRES free42_3.0
+@@@@ BUG: Returns 0 for real 0 input
+@@@@ UPD: 2021-02-23
+LBL "CABS"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+ENTER
+XEQ "ATYP"
+GTO IND ST X
+LBL 00
+RTNERR 4             @@## REQ:free42>=2.5.24
+"ERR: Bad Type"      @@## REQ:free42<2.5.24
+AVIEW                @@## REQ:free42<2.5.24
+RTN                  @@## REQ:free42<2.5.24
+LBL 01               @@@@ Real Number
+LBL 02               @@@@ Real Matrix
+R↓
+ABS
+RTN
+LBL 03               @@@@ Complex Number
+R↓
+FC? 73
+→POL
+COMPLEX
+X<>Y
+RTN
+LBL 04               @@@@ Complex Matrix
+R↓
+FC? 73
+GTO 05
+GTO 06
+LBL 05               @@@@ RECT MODE Complex Matrix
+POLAR
+COMPLEX
+X<>Y
+RECT
+RTN
+LBL 06               @@@@ POLAR MODE Complex Matrix
+COMPLEX
+X<>Y
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Complex Argument
+@@@@ IN:  X: Number or numeric matrix (element-wise)
+@@@@ OUT: X: arg(x)
+@@@@ TST: CPXRES free42_3.0
+@@@@ BUG: Returns 0 for real 0 input
+@@@@ UPD: 2021-02-23
+LBL "CARG"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+ENTER
+XEQ "ATYP"
+GTO IND ST X
+LBL 00
+RTNERR 4             @@## REQ:free42>=2.5.24
+"ERR: Bad Type"      @@## REQ:free42<2.5.24
+AVIEW                @@## REQ:free42<2.5.24
+RTN                  @@## REQ:free42<2.5.24
+LBL 01               @@@@ Real Number
+0
+RTN
+LBL 02               @@@@ Real Matrix
+R↓
+DIM?
+NEWMAT
+RTN
+LBL 03               @@@@ Complex Number
+R↓
+FC? 73
+→POL
+COMPLEX
+RTN
+LBL 04               @@@@ Complex Matrix
+R↓
+FC? 73
+GTO 05
+GTO 06
+LBL 05               @@@@ RECT MODE Complex Matrix
+POLAR
+COMPLEX
+RECT
+RTN
+LBL 06               @@@@ POLAR MODE Complex Matrix
+COMPLEX
+RTN
+END
+#+END_SRC
+
+* Math Functions
+
+#+BEGIN_SRC hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Percentage of total (just like hp-12c button)
+@@@@ IN:  Y: Real Number -- Total
+@@@@ IN:  X: Real Number -- Part
+@@@@ OUT: X: 100*X/Y
+@@@@ UPD: 2021-03-12
+LBL "%T"
+FUNC 21              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+X<>Y
+÷
+100
+×
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Sign function
+@@@@ IN:  X: a number
+@@@@ OUT: X:  0 when input was 0
+@@@@         -1 when input was negative
+@@@@          1 when input was positive
+@@@@ UPD: 2021-02-26
+@@@@ TST: free42_3.0
+LBL "SGN"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+ENTER
+ABS
+X≠0?
+GTO 01
+@@@@ zero
+R↓                   @@## REQ:free42<2.5.24  
+R↓                   @@## REQ:free42<2.5.24  
+0
+RTN
+LBL 01
+@@@@ Non-zero
+X<>Y
+REAL?
+GTO 02
+@@@@ Complex non-zero
+X<>Y
+÷
+RTN
+LBL 02
+@@@@ Real non-zero
+X<0?
+GTO 03
+@@@@ Real positive
+R↓                   @@## REQ:free42<2.5.24  
+R↓                   @@## REQ:free42<2.5.24  
+1
+RTN
+LBL 03
+@@@@ Real negative
+R↓                   @@## REQ:free42<2.5.24  
+R↓                   @@## REQ:free42<2.5.24  
+-1
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Base Y Logarithm of X
+@@@@ IN:  Y: logarithm base
+@@@@      X: number or matrix (element-wise)
+@@@@ OUT: X: log_y(x)
+@@@@ UPD: 2021-02-23
+@@@@ TST: free42_3.0
+LBL "lnXY"
+FUNC 21              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+LN
+X<>Y
+LN
+X<>Y
+÷
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Base 2 Logarithm
+@@@@ IN:  X: number or matrix (element-wise)
+@@@@ OUT: X: log_2(x)
+@@@@ UPD: 2021-02-23
+@@@@ TST: free42_3.0
+LBL "ln2"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+LN
+2
+LN
+÷
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Raise 2 to the power of X
+@@@@ IN:  X: number or matrix (element-wise)
+@@@@ OUT: X: 2^X
+@@@@ UPD: 2021-02-23
+@@@@ TST: free42_3.0
+LBL "X↑2"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+2
+X<>Y
+Y^X
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: GCD
+@@@@ IN:  Y: real number
+@@@@      X: real number
+@@@@ OUT: X: GCD(|IP(X)|, |IP(X)|)
+@@@@ UPD: 2021-02-23
+@@@@ TST: free42_3.0
+LBL "GCD"
+FUNC 21              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+ABS
+IP
+X<>Y
+ABS
+IP
+X>Y?
+X<>Y
+LBL 01
+STO ST Z
+MOD
+X>0?
+GTO 01
+R↓
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: LCM
+@@@@ IN:  Y: real number
+@@@@      X: real number
+@@@@ OUT: X: LCM(|IP(X)|, |IP(X)|)
+@@@@ UPD: 2021-02-23
+@@@@ TST: free42_3.0
+LBL "LCM"
+FUNC 21              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+ABS
+IP
+X≠0?
+GTO 01
+R↓                   @@## REQ:free42<2.5.24  
+R↓                   @@## REQ:free42<2.5.24  
+0
+RTN
+LBL 01
+LSTO "TMPX"  
+X<>Y
+ABS
+IP
+X≠0?
+GTO 02
+R↓                   @@## REQ:free42<2.5.24  
+R↓                   @@## REQ:free42<2.5.24  
+0
+RTN
+LBL 02
+LSTO "TMPY"
+XEQ "GCD"
+RCL "TMPX"
+X<>Y
+÷
+RCL× "TMPY"
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Standard Normal PDF
+@@@@ IN:  X: real number
+@@@@ OUT: X: Standard Normal PDF value at X
+@@@@ UPD: 2021-02-23
+@@@@ TST: free42_3.0
+LBL "NPDF"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+X↑2
+-2
+÷
+E↑X
+2
+PI
+×
+SQRT
+÷
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Standard Normal CDF
+@@@@ IN:  X: real number
+@@@@ OUT: X: Standard Normal CDF value at X
+@@@@ BUG: Only good to 7 decimal places
+@@@@ REF: Zelen & Severo (1964)
+@@@@ UPD: 2021-02-23
+@@@@ TST: free42_3.0
+LBL "NCDF"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+ENTER
+XEQ 00
+×
+1
++
+1/X
+LSTO "T"
+1.005
+LSTO "I"
+R↓                   @@## REQ:free42<2.5.24  
+0
+LBL 11
+XEQ IND "I"
+RCL× "T"
++
+RCL ST Y
+STO× "T"
+R↓
+ISG "I"
+GTO 11
+RCL ST Z
+XEQ "SNPDF"
+×
+1
+X<>Y
+-
+RTN
+LBL 00
+0.2316419
+RTN
+LBL 01
+0.319381530
+RTN
+LBL 02
+-0.356563782
+RTN
+LBL 03
+1.781477937
+RTN
+LBL 04
+-1.821255978
+ RTN
+LBL 05
+1.330274429
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: IP & FP of a number
+@@@@ IN:  X: real number
+@@@@ OUT: Y: IP(X)
+@@@@ OUT: X: FP(X)
+@@@@ UPD: 2021-02-23
+@@@@ TST: free42_3.0
+LBL "IFP"
+FUNC 12              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+IP
+LASTX
+FP
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Floor
+@@@@ IN:  X: real number
+@@@@ OUT: X: floor(X)
+@@@@ UPD: 2021-02-23
+@@@@ TST: free42_3.0
+LBL "FLOOR"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+XEQ "IFP"
+X<0?
+GTO 01
+R↓
+RTN
+LBL 01
+1
+-
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Ceiling
+@@@@ IN:  X: real number
+@@@@ OUT: X: ceil(X)
+@@@@ UPD: 2021-02-23
+@@@@ TST: free42_3.0
+LBL "CEIL"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+XEQ "IFP"
+X>0?
+GTO 01
+R↓
+RTN
+LBL 01
+1
++
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Hypot
+@@@@ IN:  Y: number
+@@@@ IN:  X: number
+@@@@ OUT: X: sqrt(x^2+y^2)
+@@@@ UPD: 2021-02-23
+@@@@ TST: free42_3.0
+@@@@ BUG: Some overflow cases could be avoided by scaling...
+LBL "HYPOT"
+FUNC 21              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+X↑2
+X<>Y
+X↑2
++
+SQRT
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: ATAN2
+@@@@ IN:  Y: number
+@@@@ IN:  X: number
+@@@@ OUT: X: atan2(y, x)
+@@@@ BUG: Only works in RAD mode
+@@@@ UPD: 2021-02-23
+@@@@ TST: free42_3.0
+@@@@ TC:  atan( 1, 1) =>  pi/4
+@@@@ TC:  atan(-1, 1) => -pi/4
+@@@@ TC:  atan( 1,-1) =>  3*pi/4
+@@@@ TC:  atan(-1,-1) => -3*pi/4
+@@@@ TC:  atan( 0, 1) =>  0
+@@@@ TC:  atan( 1, 0) =>  pi
+@@@@ TC:  atan(-1, 0) => -pi
+@@@@ TC:  atan( 0, 0) => ERROR
+LBL "ATAN2"
+FUNC 21              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+X>0?
+GTO 01
+X=0?
+GTO 02
+@@@@ X<0
+X<>Y
+X<0?
+GTO 03
+@@@@ X<0 & Y>=0
+X<>Y              
+÷
+ATAN
+PI
++
+RTN
+LBL 03
+@@@@ X<0 & Y<0
+X<>Y               
+÷
+ATAN
+PI
+-
+RTN
+LBL 02
+X<>Y
+X=0?
+GTO 04
+X>0?
+GTO 05
+@@@@ X=0 & Y<0
+R↓                   @@## REQ:free42<2.5.24  
+R↓                   @@## REQ:free42<2.5.24  
+PI
+-2
+÷
+RTN
+LBL 05
+@@@@ X=0 & Y>0
+R↓                   @@## REQ:free42<2.5.24  
+R↓                   @@## REQ:free42<2.5.24  
+PI
+2
+÷
+RTN
+LBL 04
+@@@@ X=0 & Y=0 ERROR 0/0
+÷
+RTN
+LBL 01    
+@@@@ X>0
+÷
+ATAN
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Nth roots prefering real & pure imaginary answers
+@@@@ IN:  Y: Number
+@@@@ IN:  X: Number or numeric matrix (element-wise)
+@@@@ OUT: X: Yth root of X
+@@@@ BUG: The principal value will not be returned when Y is a non-zero integer and X is a negative real number
+@@@@ FAQ: When Y is a non-zero integer and X is a negative real number, a real or pure imaginary root will be returned
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-02-23
+LBL "YROOT"
+FUNC 21              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+REAL?
+GTO 01
+GTO 92
+LBL 01
+@@@@ X is real
+X≥0?
+GTO 92
+@@@@ X is negative, real
+RCL ST Y
+REAL?
+GTO 02
+GTO 91
+LBL 02
+@@@@ X is negative, real; Y is real
+FP
+X≠0?
+GTO 91
+@@@@ X is negative, real; Y is real integer
+R↓                @ X Y
+ABS
+RCL ST Y          @y abs(x) y
+X<>Y              @abs(x) y y
+XEQ 92
++/-               @-RT y
+X<>Y
+2
+÷
+FP
+X=0?
+GTO 03
+GTO 04
+LBL 03
+@@@@ X is negative, real; Y is real integer even
+R↓
+0
+X<>Y
+COMPLEX
+RTN
+LBL 04
+@@@@ X is negative, real; Y is real integer odd
+R↓
+RTN
+LBL 91
+@@@@ Not special case.  Stack: Y X Y
+R↓
+LBL 92
+@@@@ Not special case.  Stack: X Y
+X<>Y
+1/X
+Y↑X
+RTN
+#+END_SRC
+
+* Meta Data
+
+This home for this HTML file is: https://richmit.github.io/hp42/math.html
+
+This HTML file was generated from this github repo: https://github.com/richmit/hp42
+
+
+

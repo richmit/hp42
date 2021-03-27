@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-03-27 Sat 11:36 -->
+<!-- 2021-03-27 Sat 12:00 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42/hp42s/DM42 Programming Tools</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-03-27 11:36:22</i></td>
+<td class="org-left"><i>2021-03-27 12:00:42</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,42 +241,42 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgc847fab">1. Metadata</a></li>
-<li><a href="#orgdedf595">2. Introduction</a></li>
-<li><a href="#org400cc13">3. Generateing 42s code</a>
+<li><a href="#orgc059e5a">1. Metadata</a></li>
+<li><a href="#orgf0dc8cf">2. Introduction</a></li>
+<li><a href="#org0e438df">3. Generateing 42s code</a>
 <ul>
-<li><a href="#org63b0f59">3.1. Menus</a>
+<li><a href="#org98b5897">3.1. Menus</a>
 <ul>
-<li><a href="#org310bda9">3.1.1. Generic menu generator</a></li>
-<li><a href="#org20f4059">3.1.2. For CUSTOM-type Menus</a></li>
+<li><a href="#orgb379b48">3.1.1. Generic menu generator</a></li>
+<li><a href="#orgea476fe">3.1.2. For CUSTOM-type Menus</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org6ce24ad">4. Emacs Helper Stuff</a>
+<li><a href="#orgbddca26">4. Emacs Helper Stuff</a>
 <ul>
-<li><a href="#org48ddf81">4.1. Emacs function to insert charcters given a list of character codes</a></li>
-<li><a href="#org6044d81">4.2. Emacs Mode for 42s Code</a></li>
-<li><a href="#orga88140f">4.3. yas templates</a></li>
+<li><a href="#org23b5c4c">4.1. Emacs function to insert charcters given a list of character codes</a></li>
+<li><a href="#org43956b7">4.2. Emacs Mode for 42s Code</a></li>
+<li><a href="#orgd40ffd3">4.3. yas templates</a></li>
 </ul>
 </li>
-<li><a href="#org0dcc8cf">5. Prepare Code For Conversion</a>
+<li><a href="#orgba2b3f4">5. Prepare Code For Conversion</a>
 <ul>
-<li><a href="#org3a99c6c">5.1. DM42 DMCP-3.20 / DM42-3.17</a></li>
-<li><a href="#orge8ea1c0">5.2. free42 3.0.1 or newer</a></li>
+<li><a href="#org8f51ff0">5.1. DM42 DMCP-3.20 / DM42-3.17</a></li>
+<li><a href="#orgc094314">5.2. free42 3.0.1 or newer</a></li>
 </ul>
 </li>
-<li><a href="#org8eebe44">6. 42s Notes</a>
+<li><a href="#orgc531004">6. 42s Notes</a>
 <ul>
-<li><a href="#orgb7f3354">6.1. Character Set</a></li>
+<li><a href="#orgbcaac2d">6.1. Character Set</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgc847fab" class="outline-2">
-<h2 id="orgc847fab"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-orgc059e5a" class="outline-2">
+<h2 id="orgc059e5a"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/hp42s-meta.html">https://richmit.github.io/hp42/hp42s-meta.html</a>
@@ -295,8 +295,8 @@ Files related to this document may be found on github: <a href="https://github.c
 </div>
 
 
-<div id="outline-container-orgdedf595" class="outline-2">
-<h2 id="orgdedf595"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-orgf0dc8cf" class="outline-2">
+<h2 id="orgf0dc8cf"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 This org-mode document contains various tools (mostly for Emacs) that help me write programs for the 42s:
@@ -317,17 +317,82 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
 </div>
 
 
-<div id="outline-container-org400cc13" class="outline-2">
-<h2 id="org400cc13"><span class="section-number-2">3</span> Generateing 42s code</h2>
+<div id="outline-container-org0e438df" class="outline-2">
+<h2 id="org0e438df"><span class="section-number-2">3</span> Generateing 42s code</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org63b0f59" class="outline-3">
-<h3 id="org63b0f59"><span class="section-number-3">3.1</span> Menus</h3>
+<div id="outline-container-org98b5897" class="outline-3">
+<h3 id="org98b5897"><span class="section-number-3">3.1</span> Menus</h3>
 <div class="outline-text-3" id="text-3-1">
 </div>
-<div id="outline-container-org310bda9" class="outline-4">
-<h4 id="org310bda9"><span class="section-number-4">3.1.1</span> Generic menu generator</h4>
+<div id="outline-container-orgb379b48" class="outline-4">
+<h4 id="orgb379b48"><span class="section-number-4">3.1.1</span> Generic menu generator</h4>
 <div class="outline-text-4" id="text-3-1-1">
+<p>
+This code will read an org-mode table describing a menu, and generate 42s code to implement the menu.  The menus may be of arbitrary depth and size; however,
+two digit local labels are used in the generated code which limits sizes.
+</p>
+
+<p>
+<code>MJR-generate-42-menu-code</code> arguments:
+</p>
+<ul class="org-ul">
+<li><code>top-lab</code>  The global label to use for the generated program</li>
+<li><code>tbl</code> The org-mode table with the menu description</li>
+<li><code>leaf-function</code> What do do when a <i>action</i> menu is used (a leaf node in the menu).   
+<ul class="org-ul">
+<li><code>"stay"</code> Keep the menu active.</li>
+<li><code>"exit"</code> Exit the menu.</li>
+</ul></li>
+<li><code>exit-function</code> What to do when <code>[EXIT]</code> is pressed.
+<ul class="org-ul">
+<li><code>"exit"</code> Exit the application.</li>
+<li><code>"up"</code> Go up to parent, or exit if we are in the top menu.</li>
+</ul></li>
+<li><code>gen-code</code> A function that generates the code for the <i>action</i>.  It gets a list that contains the table row for the menu item.</li>
+</ul>
+
+<p>
+The first column of the table defines the menu key labels.  <code>foo:bar:foobar</code> defines a top level button named <code>foo</code> that leads to a menu containing another
+menu named <code>bar</code> which contains an <i>action</i> named <code>foobar</code>.  The rest of the columns are used by the <code>gen-code</code> function to write the code for each item.  A
+blank entry in the first column leaves a blank menu button.  A more complete example:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Menu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">foo:bar:foobar</td>
+</tr>
+
+<tr>
+<td class="org-left">foo:bill</td>
+</tr>
+
+<tr>
+<td class="org-left">foo:ted</td>
+</tr>
+
+<tr>
+<td class="org-left">snoopy</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The top level menu will have "<code>foo</code>" &amp; "<code>snoopy</code>".  "<code>snoopy</code>" is an <i>action</i> button while "<code>foo</code>" brings up a menu containing "<code>bar</code>", "<code>bill</code>", &amp; "<code>ted</code>".
+The last two are <i>actions</i> while the first is yet another menu containing "<code>foobar</code>".
+</p>
+
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-generate-42-menu-code</span> (top-lab tbl leaf-function exit-function gen-code) <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">leaf-function "stay" or "exit", exit-function "exit" or "up"</span>
   (<span style="color: #00ffff;">let*</span> ((min-free-lab  2)
@@ -417,9 +482,53 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
 </div>
 </div>
 
-<div id="outline-container-org20f4059" class="outline-4">
-<h4 id="org20f4059"><span class="section-number-4">3.1.2</span> For CUSTOM-type Menus</h4>
+<div id="outline-container-orgea476fe" class="outline-4">
+<h4 id="orgea476fe"><span class="section-number-4">3.1.2</span> For CUSTOM-type Menus</h4>
 <div class="outline-text-4" id="text-3-1-2">
+<p>
+This is a function for use as as the <code>gen-code</code> argument to <code>MJR-generate-42-menu-code</code>.  It generates a menu program that calls other programs or built in
+functions &#x2013; it is very useful for generating menus to be assigned to the CUSTOM menu.  The second column of the defining table is used to specify a function
+or program to call.  When the second column entry is empty, the string used for the key name is used.  Example:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Menu</th>
+<th scope="col" class="org-left">Prog</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">LN</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">log</td>
+<td class="org-left">LOG</td>
+</tr>
+
+<tr>
+<td class="org-left">MYPROG</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+In the first line "<code>LN</code>" is the menu name and function called.  In the second line "<code>log</code>" is the menu name, and "<code>LOG</code>" is the function called.  In the third
+line "<code>MYPROG</code>" is the name of a program &#x2013; the code below figures out if a thing is a built in function or a program and uses <code>XEQ</code> for programs.  Note that
+I may have missed a built in function, so you may have to add one to the list. ;)
+</p>
+
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-custom-x-gen</span> (row) (<span style="color: #00ffff;">let</span> ((blt-in  '(<span style="color: #fa8072;">"%"</span> <span style="color: #fa8072;">"%CH"</span> <span style="color: #fa8072;">"+"</span> <span style="color: #fa8072;">"+/-"</span> <span style="color: #fa8072;">"-"</span> <span style="color: #fa8072;">"1/X"</span> <span style="color: #fa8072;">"10&#8593;X"</span> <span style="color: #fa8072;">"ABS"</span> <span style="color: #fa8072;">"ACOS"</span> <span style="color: #fa8072;">"ACOSH"</span> <span style="color: #fa8072;">"ADV"</span> <span style="color: #fa8072;">"AGRAPH"</span> <span style="color: #fa8072;">"AIP"</span> <span style="color: #fa8072;">"ALENG"</span> <span style="color: #fa8072;">"ALL"</span> <span style="color: #fa8072;">"ALL&#931;"</span> <span style="color: #fa8072;">"AND"</span> <span style="color: #fa8072;">"AOFF"</span> <span style="color: #fa8072;">"AON"</span> <span style="color: #fa8072;">"ARCL"</span> <span style="color: #fa8072;">"AROT"</span> <span style="color: #fa8072;">"ASHF"</span> <span style="color: #fa8072;">"ASIN"</span> <span style="color: #fa8072;">"ASINH"</span> <span style="color: #fa8072;">"ASSIGN"</span> <span style="color: #fa8072;">"ASTO"</span> <span style="color: #fa8072;">"ATAN"</span> <span style="color: #fa8072;">"ATANH"</span> <span style="color: #fa8072;">"ATOX"</span> <span style="color: #fa8072;">"AVIEW"</span>
                                                <span style="color: #fa8072;">"BASE+"</span> <span style="color: #fa8072;">"BASE+/-"</span> <span style="color: #fa8072;">"BASE-"</span> <span style="color: #fa8072;">"BASE&#215;"</span> <span style="color: #fa8072;">"BASE&#247;"</span> <span style="color: #fa8072;">"BEEP"</span> <span style="color: #fa8072;">"BEST"</span> <span style="color: #fa8072;">"BINM"</span> <span style="color: #fa8072;">"BIT?"</span>  <span style="color: #fa8072;">"BIT?"</span>  <span style="color: #fa8072;">"CF"</span> <span style="color: #fa8072;">"CLA"</span> <span style="color: #fa8072;">"CLD"</span> <span style="color: #fa8072;">"CLKEYS"</span> <span style="color: #fa8072;">"CLLCD"</span> <span style="color: #fa8072;">"CLMENU"</span> <span style="color: #fa8072;">"CLP"</span> <span style="color: #fa8072;">"CLRG"</span> <span style="color: #fa8072;">"CLST"</span> <span style="color: #fa8072;">"CLV"</span> <span style="color: #fa8072;">"CLX"</span> <span style="color: #fa8072;">"CL&#931;"</span> <span style="color: #fa8072;">"COMB"</span> <span style="color: #fa8072;">"COMPLEX"</span> <span style="color: #fa8072;">"CORR"</span> <span style="color: #fa8072;">"COS"</span> <span style="color: #fa8072;">"COSH"</span>
@@ -446,12 +555,12 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
 
 
 
-<div id="outline-container-org6ce24ad" class="outline-2">
-<h2 id="org6ce24ad"><span class="section-number-2">4</span> Emacs Helper Stuff</h2>
+<div id="outline-container-orgbddca26" class="outline-2">
+<h2 id="orgbddca26"><span class="section-number-2">4</span> Emacs Helper Stuff</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org48ddf81" class="outline-3">
-<h3 id="org48ddf81"><span class="section-number-3">4.1</span> Emacs function to insert charcters given a list of character codes</h3>
+<div id="outline-container-org23b5c4c" class="outline-3">
+<h3 id="org23b5c4c"><span class="section-number-3">4.1</span> Emacs function to insert charcters given a list of character codes</h3>
 <div class="outline-text-3" id="text-4-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-ins42char</span> (charn)
@@ -474,8 +583,8 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
 </div>
 
 
-<div id="outline-container-org6044d81" class="outline-3">
-<h3 id="org6044d81"><span class="section-number-3">4.2</span> Emacs Mode for 42s Code</h3>
+<div id="outline-container-org43956b7" class="outline-3">
+<h3 id="org43956b7"><span class="section-number-3">4.2</span> Emacs Mode for 42s Code</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 This isn't really a proper mode for 42s code.  Just a quick hack with <code>define-generic-mode</code> to get some syntax highlighting &#x2013; which doesn't fully work as
@@ -515,8 +624,8 @@ hp42s-mode
 </div>
 
 
-<div id="outline-container-orga88140f" class="outline-3">
-<h3 id="orga88140f"><span class="section-number-3">4.3</span> yas templates</h3>
+<div id="outline-container-orgd40ffd3" class="outline-3">
+<h3 id="orgd40ffd3"><span class="section-number-3">4.3</span> yas templates</h3>
 <div class="outline-text-3" id="text-4-3">
 <div class="org-src-container">
 <pre class="src src-snippet"><span style="color: #ff7f24;"># -*- mode: snippet -*-</span>
@@ -564,8 +673,8 @@ RTN       @@@@ IF-TRUE-END (<span style="color: #00ffff;">$</span><span style="c
 </div>
 
 
-<div id="outline-container-org0dcc8cf" class="outline-2">
-<h2 id="org0dcc8cf"><span class="section-number-2">5</span> Prepare Code For Conversion</h2>
+<div id="outline-container-orgba2b3f4" class="outline-2">
+<h2 id="orgba2b3f4"><span class="section-number-2">5</span> Prepare Code For Conversion</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 I include comments like <code>@@##</code> that I use like compiler directives in C.  They provide a way to remove lines of code that are incompatible or unnecessary for
@@ -573,8 +682,8 @@ the target version of free42.  It's a bit of a hack, but it lets me maintain one
 </p>
 </div>
 
-<div id="outline-container-org3a99c6c" class="outline-3">
-<h3 id="org3a99c6c"><span class="section-number-3">5.1</span> DM42 DMCP-3.20 / DM42-3.17</h3>
+<div id="outline-container-org8f51ff0" class="outline-3">
+<h3 id="org8f51ff0"><span class="section-number-3">5.1</span> DM42 DMCP-3.20 / DM42-3.17</h3>
 <div class="outline-text-3" id="text-5-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">progn</span>
@@ -596,8 +705,8 @@ the target version of free42.  It's a bit of a hack, but it lets me maintain one
 </div>
 </div>
 
-<div id="outline-container-orge8ea1c0" class="outline-3">
-<h3 id="orge8ea1c0"><span class="section-number-3">5.2</span> free42 3.0.1 or newer</h3>
+<div id="outline-container-orgc094314" class="outline-3">
+<h3 id="orgc094314"><span class="section-number-3">5.2</span> free42 3.0.1 or newer</h3>
 <div class="outline-text-3" id="text-5-2">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">progn</span>
@@ -623,12 +732,12 @@ the target version of free42.  It's a bit of a hack, but it lets me maintain one
 </div>
 
 
-<div id="outline-container-org8eebe44" class="outline-2">
-<h2 id="org8eebe44"><span class="section-number-2">6</span> 42s Notes</h2>
+<div id="outline-container-orgc531004" class="outline-2">
+<h2 id="orgc531004"><span class="section-number-2">6</span> 42s Notes</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-orgb7f3354" class="outline-3">
-<h3 id="orgb7f3354"><span class="section-number-3">6.1</span> Character Set</h3>
+<div id="outline-container-orgbcaac2d" class="outline-3">
+<h3 id="orgbcaac2d"><span class="section-number-3">6.1</span> Character Set</h3>
 <div class="outline-text-3" id="text-6-1">
 <div class="org-src-container">
 <pre class="src src-text">  0 &#247;
@@ -768,7 +877,7 @@ the target version of free42.  It's a bit of a hack, but it lets me maintain one
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-27 Sat 11:36 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-27 Sat 12:00 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

@@ -64,6 +64,34 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
 
 *** Generic menu generator
 
+This code will read an org-mode table describing a menu, and generate 42s code to implement the menu.  The menus may be of arbitrary depth and size; however,
+two digit local labels are used in the generated code which limits sizes.
+
+=MJR-generate-42-menu-code= arguments:
+  - =top-lab=  The global label to use for the generated program
+  - =tbl= The org-mode table with the menu description
+  - =leaf-function= What do do when a /action/ menu is used (a leaf node in the menu).   
+    - ="stay"= Keep the menu active.
+    - ="exit"= Exit the menu.
+  - =exit-function= What to do when =[EXIT]= is pressed.
+    - ="exit"= Exit the application.
+    - ="up"= Go up to parent, or exit if we are in the top menu.
+  - =gen-code= A function that generates the code for the /action/.  It gets a list that contains the table row for the menu item.
+
+The first column of the table defines the menu key labels.  =foo:bar:foobar= defines a top level button named =foo= that leads to a menu containing another
+menu named =bar= which contains an /action/ named =foobar=.  The rest of the columns are used by the =gen-code= function to write the code for each item.  A
+blank entry in the first column leaves a blank menu button.  A more complete example:
+
+| Menu           |
+|----------------|
+| foo:bar:foobar |
+| foo:bill       |
+| foo:ted        |
+| snoopy         |
+
+The top level menu will have "=foo=" & "=snoopy=".  "=snoopy=" is an /action/ button while "=foo=" brings up a menu containing "=bar=", "=bill=", & "=ted=".
+The last two are /actions/ while the first is yet another menu containing "=foobar=".
+
 #+BEGIN_SRC elisp :results output verbatum
   (defun MJR-generate-42-menu-code (top-lab tbl leaf-function exit-function gen-code) ;; leaf-function "stay" or "exit", exit-function "exit" or "up"
     (let* ((min-free-lab  2)
@@ -153,6 +181,20 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
 #+RESULTS:
 
 *** For CUSTOM-type Menus
+
+This is a function for use as as the =gen-code= argument to =MJR-generate-42-menu-code=.  It generates a menu program that calls other programs or built in
+functions -- it is very useful for generating menus to be assigned to the CUSTOM menu.  The second column of the defining table is used to specify a function
+or program to call.  When the second column entry is empty, the string used for the key name is used.  Example:
+
+| Menu   | Prog |
+|--------+------|
+| LN     |      |
+| log    | LOG  |
+| MYPROG |      |
+
+In the first line "=LN=" is the menu name and function called.  In the second line "=log=" is the menu name, and "=LOG=" is the function called.  In the third
+line "=MYPROG=" is the name of a program -- the code below figures out if a thing is a built in function or a program and uses =XEQ= for programs.  Note that
+I may have missed a built in function, so you may have to add one to the list. ;)
 
 #+BEGIN_SRC elisp :colnames y :results output verbatum
   (defun MJR-custom-x-gen (row) (let ((blt-in  '("%" "%CH" "+" "+/-" "-" "1/X" "10↑X" "ABS" "ACOS" "ACOSH" "ADV" "AGRAPH" "AIP" "ALENG" "ALL" "ALLΣ" "AND" "AOFF" "AON" "ARCL" "AROT" "ASHF" "ASIN" "ASINH" "ASSIGN" "ASTO" "ATAN" "ATANH" "ATOX" "AVIEW"

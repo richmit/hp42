@@ -1,0 +1,771 @@
+# -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
+#+TITLE:       Calculator Programs For Stamp Collectors
+#+AUTHOR:      Mitch Richling
+#+EMAIL:       http://www.mitchr.me/
+#+DATE:        2021-03-19
+#+DESCRIPTION: Description of some free42/hp-42s/DM42 programs for stamp collectors
+#+LANGUAGE:    en
+#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil 
+#+HTML_HEAD: <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
+#+HTML_HEAD: <style>body { min-width: 500px; max-width: 1024px; }</style>
+#+HTML_HEAD: <style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
+#+HTML_HEAD: <style>h1,h2,h3 { line-height: 1.4em; }</style>
+#+HTML_HEAD: <style>h1.title { font-size: 3em; }</style>
+#+HTML_HEAD: <style>h4,h5,h6 { font-size: 1em; }</style>
+#+HTML_HEAD: <style>.org-src-container { border: 1px solid #ccc; box-shadow: 3px 3px 3px #eee; font-family: Lucida Console, monospace; font-size: 80%; margin: 0px; padding: 0px 0px; position: relative; }</style>
+#+HTML_HEAD: <style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
+#+HTML_HEAD: <style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
+#+HTML_HEAD: <style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
+#+HTML_LINK_HOME: https://www.mitchr.me/
+#+HTML_LINK_UP: https://www.mitchr.me/FIXME
+
+#+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
+|        <r> | <l>              |
+|  *Author:* | /{{{author}}}/ |
+| *Updated:* | /{{{time(%Y-%m-%d %H:%M:%S)}}}/ |
+#+ATTR_HTML: :align center
+Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
+
+#+TOC: headlines 5
+
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+#   00   #    10   #    20   #    30   #    40   #    50   #    60   #    70   #    80   #    90   #   100   #   110   #   120   #   130   #   140   #   150   #   160   #
+# 234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+
+# To get org to evaluate all code blocks on export, add the following to the Emacs header on the first line of this file:
+#     org-export-babel-evaluate:t; org-confirm-babel-evaluate:nil
+
+* Metadata
+
+This home for this HTML file is: https://richmit.github.io/hp42/phil.html
+
+Files related to this document may be found on github: https://github.com/richmit/hp42
+
+   - =src= directory: Contains the org-mode file that generated this HTML document
+   - =docs= directory: Contains this html document
+   - =bin= directory: Contains raw program files
+
+
+* Perforations
+
+Perforations are usually measured in units of perfs/2cm; however,
+other units are used in some specialized areas of philately.  For
+example, the Kiusalas gauge is often used by experts for USPS bureau
+issues.  This gauge measures perforations in units of thou/perf.  We
+can approximate perforation measures by measuring the distance (D)
+spanned by a number of perforations (C).
+
+#+begin_src text
+##                                                                                                              ##
+##      | . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . |     ##
+##      |. . . . . . . . . . . . . . . . . . . . . . C = 4 . . . . . . . . . . . . . . . . . . . . . . . .|     ##
+##      | . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . |     ##
+##      |. . . . . ------- . . . . . . . .-------. . . . . . . . ------- . . . . . . . .-------. . . . . .|     ##
+##      | . . . .-/       \-. . . . . . -/       \- . . . . . .-/       \-. . . . . . -/       \- . . . . |     ##
+##      |. . . ./           \. . . . . /           \ . . . . ./           \. . . . . /           \ . . . .|     ##
+##      | . . ./      1      \. . . . /      2      \ . . . ./      3      \. . . . /      4      \ . . . |     ##
+##      |. . . |             | . . . .|             |. . . . |             | . . . .|             |. . . .|     ##
+##      +------+             +--------+             +--------+             +--------+             +-------+     ##
+##             |--------------------------- D = Distance ---------------------------|                           ##
+##                    |--------------------------- D = Distance ---------------------------|                    ##
+##                           |--------------------------- D = Distance ---------------------------|             ##
+##                                                                                                              ##
+#+end_src
+
+If we use P to represent traditional perforations (perfs/2cm), and K to represent Kiusalas perforations (thou/perf)
+
+
+$$ K = \frac{5000 D}{127 (C - 1)} $$
+$$ P = \frac{20 (C - 1)}{D} $$
+$$ P = \frac{100000}{127 K} $$
+
+** Perf Application
+
+Several independent functions are provided:
+
+#+NAME:PERF
+| Menu | Program | Inputs                       | Output           |
+|------+---------+------------------------------+------------------|
+| CD→K |         | Y: count   X: Distance (mm)  | Kiusalas Perfs   |
+| CK→D |         | Y: count   X: Kiusalas Perfs | Distance (mm)    |
+|------+---------+------------------------------+------------------|
+| CD→P |         | Y: count   X: Distance (mm)  | Perfs (perf/2cm) |
+| CP→D |         | Y: count   X: Perfs          | Distance (mm)    |
+|------+---------+------------------------------+------------------|
+| P→K  |         | X: Perfs to Kiusalas         | Kiusalas Perfs   |
+| K→P  |         | X: Kiusalas to Perfs         | Perfs (perf/2cm) |
+
+In addition a menu collecting them all together is provided: =PERFS=
+
+** Code for Functions
+
+#+BEGIN_SRC hp42s
+@@@@ Convert count & distance to kiusalas perforations
+@@@@ IN:  Y: Count
+@@@@      X: Distance (mm)
+@@@@ OUT: X: Kiusalas Perfs
+@@@@ UPD: 2021-03-19
+@@@@ TST: free42_3.0
+LBL "CD→K"
+FUNC 21            @@## REQ:free42>=2.5.24
+L4STK              @@## REQ:free42>=3.0
+X<>Y
+IP
+1
+-
+÷
+127
+÷
+5000
+×
+RTN
+END
+
+@@@@ Convert count & kiusalas perforations to distance
+@@@@ IN:  Y: Count
+@@@@      X: Kiusalas Perfs
+@@@@ OUT: X: Distance (mm)
+@@@@ UPD: 2021-03-19
+@@@@ TST: free42_3.0
+LBL "CK→D"
+FUNC 21            @@## REQ:free42>=2.5.24
+L4STK              @@## REQ:free42>=3.0
+X<>Y
+IP
+1
+-
+×
+127
+×
+5000
+÷
+RTN
+END
+
+@@@@ Convert count & distance to/from perforations
+@@@@ IN:  Y: Count
+@@@@      X: Distance (mm) _OR_ Perfs
+@@@@ OUT: X: Perfs         _OR_ Distance (mm)
+@@@@ UPD: 2021-03-19
+@@@@ TST: free42_3.0
+LBL "CD→P"
+LBL "CP→D"
+FUNC 21            @@## REQ:free42>=2.5.24
+L4STK              @@## REQ:free42>=3.0
+X<>Y
+IP
+1
+-
+X<>Y
+÷
+20
+×
+RTN
+END
+
+@@@@ Convert perfs to/from kiusalas
+@@@@ IN:  Y: perfs    _OR_ kiusalas
+@@@@ OUT: X: kiusalas _OR_ perfs
+@@@@ UPD: 2021-03-19
+@@@@ TST: free42_3.0
+LBL "K→P"
+LBL "P→K"
+FUNC 11            @@## REQ:free42>=2.5.24
+L4STK              @@## REQ:free42>=3.0
+127
+×
+100000
+X<>Y
+÷
+RTN
+END
+#+END_SRC
+
+** Code for Menu
+
+*** Code Generation
+
+ #+BEGIN_SRC elisp :var tbl=PERF :colnames y :results output verbatum
+   (MJR-generate-42-menu-code "PERF" tbl "stay" "exit" #'MJR-custom-x-gen)
+ #+END_SRC
+
+*** The Code
+
+#+begin_src hp42s
+LBL "PERF"
+LBL 01            @@@@ Page 1 of menu PERF
+CLMENU
+"CD→K"
+KEY 1 XEQ 02
+"CK→D"
+KEY 2 XEQ 03
+"CD→P"
+KEY 3 XEQ 04
+"CP→D"
+KEY 4 XEQ 05
+"P→K"
+KEY 5 XEQ 06
+"K→P"
+KEY 6 XEQ 07
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 00
+EXITALL
+RTN
+LBL 02               @@@@ Action for menu key CD→K
+XEQ "CD→K"
+RTN
+LBL 03               @@@@ Action for menu key CK→D
+XEQ "CK→D"
+RTN
+LBL 04               @@@@ Action for menu key CD→P
+XEQ "CD→P"
+RTN
+LBL 05               @@@@ Action for menu key CP→D
+XEQ "CP→D"
+RTN
+LBL 06               @@@@ Action for menu key P→K
+XEQ "P→K"
+RTN
+LBL 07               @@@@ Action for menu key K→P
+XEQ "K→P"
+RTN
+END
+#+end_src
+
+* Image Measurements
+
+Quick and dirty image analysis for stamp collectors for when you don't
+want to load an image up in ImageJ or GIMP, but still need to make
+some measurements.
+
+** Summary of menu items
+
+#+ATTR_HTML: :align center
+#+NAME: menu
+| Menu   | Description                     | Inputs                                                | Output        |
+|--------+---------------------------------+-------------------------------------------------------+---------------|
+| LENGTH | Compute lengths                 | X: Real pixel count or complex pixel coordinate       |               |
+| ANGLE  | Compute angles                  | X: Complex Pixel coordinate                           |               |
+| AREA   | Compute area of rectangle       | X: Complex Pixel coordinate                           |               |
+|        |                                 |                                                       |               |
+| CAL?   | Recall image calibration factor |                                                       | X: CAL factor |
+| CAL    | Store image calibration.        | X: Pixel count or complex pixel coordinate  Y: Length | X: CAL factor |
+| D→P    | Compute Perforations            | X: Pixel count or complex pixel coordinate            | X: Perfs      |
+| D→K    | Compute Kiusalas perforations   | X: Pixel count or complex pixel coordinate            | X: Perfs      |
+|        |                                 |                                                       |               |
+| C:NN   | Set perf count (C)              | X: Integer count of perforations measured             |               |
+| D=mm   | Unites for distance             | Cycle through units: px mm mil um in cm               |               |
+| I=mm   | Image units (when D=px)         | Cycle through units: mm mil um in cm                  |               |
+
+** Image Calibration
+
+This application works with images with square pixels only.  When
+using a scanner make sure the X & Y DPI settings are the same!
+
+Note that image calibration is not required for all functionality.
+
+#+ATTR_HTML: :align center
+ | Menu   | Requires image calibration |
+ |--------+----------------------------|
+ | LENGTH | Always                     |
+ | ANGLE  | Never                      |
+ | AREA   | Always                     |
+ | CAL?   | Always                     |
+ | CAL    | Never                      |
+ | D→P    | Only when D=px             |
+ | D→K    | Only when D=px             |
+ | C:NN   | Never                      |
+ | D=mm   | Never                      |
+ | I=mm   | Never                      |
+
+
+Calibration is retained between runs of the application.  If the
+application is started up without calibration data, then a default
+will be set (2400 DIP scan with units in mm resulting in a calibration
+factor of 94.4881889764).
+
+*** Known DPI
+
+When using a scanner, the scanner DPI settings may be used to roughly
+calibrate an image.
+
+**** Examples
+
+    - 2400 DPI scans and using inches as the unit:  =2400 [ENTER] 1 [CAL]=
+    - 2400 DPI scans and using mm as the unit: =2400 [ENTER] 25.4 [CAL]=
+    - 1000 DPcm scans using mm as the unit: =1000 [ENTER] 10 [CAL]=
+
+*** Using a target
+
+Including a calibration target in the image field is the most common
+way to calibrate microscope images.  For high magnification expensive,
+etched glass reticle are generally used.  For the lower magnifications
+normally used my stamp collectors, a simple scale may be included in
+the image frame.  I simply lay the stamps on top of a plastic ruler.
+
+When using a calibration target it is rare that the target is
+precisely lined up horizontally or vertically, so providing a simple
+pixel count for it's length is impossible.  Instead we provide the
+pixel coordinates of two points on the target.
+
+**** Example
+
+We have a 1mm ruler in the frame.  The 0 mark of the ruler is at pixel
+coordinates (123, 456) and the 3 mark of the ruler is at pixel
+coordinates (567, 345).  If we wish to work directly in mm, then we do
+this:<<caliex>>
+
+  - Enter the 0 coordinate: =123 [ENTER] 456 [COMPLEX]=  -- assuming "=RECT=" mode
+  - Enter the 1 coordinate: =234 [ENTER] 345 [COMPLEX]=
+  - Enter physical distance: =3=
+  - Press the CAL menu key: =[CAL]=
+
+If we wanted to work in cm instead of mm, we would use a distance of
+=0.3= instead.
+
+If we wanted to work in mil instead of mm, we would use a distance of
+=118.11= instead
+
+*** Using a Stamp!
+
+The techniques documented here can be very useful, but must be used
+with care.  Stamp paper can warp and deform -- depending on printing
+process, storage conditions, etc...
+
+Suppose you have an image of a stamp (perhaps from an auction website)
+that should have an design width of 22mm.  You determine the upper
+left of the design is at pixel coordinates (300, 100), and the upper
+right of the design is at pixel coordinates (536, 101).  Also suppose
+you wish to work in inches (you will see why in a moment):
+
+=322 [ENTER] 125 [COMPLEX] 582 [ENTER] 126 [COMPLEX] [-] 22 [ENTER] 25.4 [÷] [CAL]=
+
+Now notice the value on the screen is =300.1840=.  Many stamp images
+posted on auction sites are scanned at 300 DPI, and the fact this is
+so close to 300 tells us that we probably have a 300 DPI scan.  We can
+now use 300 as our calibration data, or use the computed value.
+
+You can use this technique with any feature of a stamp with a known
+measurement -- not just design size.  For example, some souvenir
+sheets have very precise paper sizes allowing the width or height of
+the paper to be used for calibration.
+
+The perforations may also be used as a calibration aid.  For example if
+we know the stamp in question has a perforation of 70 on the Kiusalas
+gauge, then we know 10 perforations should measure very close to 16mm.
+
+*** Calibration factor
+
+The "calibration factor", returned by the =[CAL?]= button, is the
+current image calibration data in units of pixels/length.
+
+**** Examples
+
+    - 2400 DPI scans and using inches as the unit: 2400
+    - 2400 DPI scans and using mm as the unit: 94.4881889764
+    - 1000 DPcm scans using mm as the unit: 100
+
+** Measuring length
+
+*** Horizontal or Vertical Lengths
+
+For horizontal & vertical lengths in the image, one simply needs to
+provided a pixel count as a real number.
+
+**** Examples
+
+   - 2400 DPI image working in inches:
+     - =1200 [LENG]= => 0.5
+     - =2400 [LENG]= => 1.0
+   - The same image working in mm:
+     - =1200 [LENG]= => 12.7
+     - =2400 [LENG]= => 25.4
+
+*** Generic distances
+
+To measure the length of a non-horizontal/vertical line, we provide a
+complex number to the =[LENG]= function.  One might think of the
+coordinates as specifying a line from the origin, upper left image
+pixel at (0, 0), to the given coordinates.  Alternately one might think
+of the coordinates as the width & height of the line.  The signs of
+the coordinates are ignored -- i.e. the absolute value of each
+coordinate is used.
+
+ #+begin_example
+                * P2  -            (0, 0) *
+               /      |                    \
+              /       |                     \
+             /        h                      \
+            /         |                       \
+           /          |                        \
+      P1  *           -                         * (x, y)
+          |--w--|
+#+end_example
+
+To measure the length of a line segment give by two points, we simply
+enter both points as complex numbers and subtract them.  We then give
+the difference to the =[LENG]= function.
+
+**** Examples
+
+  - For the target calibrated image example [[caliex]]
+    - =123 [ENTER] 456 [COMPLEX] 234 [ENTER] 345 [COMPLEX] [LENG]= => 3
+  - For a 2400 DPI image working in inches:
+    - =1 [ENTER] 1 [COMPLEX] 100 [ENTER] 100 [COMPLEX] [LENG]= => 0.058
+
+** Measuring Angles
+
+Angles are measured with respect the horizontal -- the /negative/ of
+the argument of the complex number representing the pixel coordinate.
+We use the negative because pixel y-coordinates go up in the down
+direction.
+
+*** Examples
+
+  - =123 [ENTER] 123 [COMPLEX] [ANGLE]= => -45 -- assuming degree angle mode
+
+** Philatelic Application
+
+*** Are two lines parallel
+
+Why?
+  - Verify that the two cut edges of a US coil stamp are parallel
+  - Verify that perforations are parallel
+  - Verify that the cut edge of a souvenir sheet is parallel with an engraved margin line
+  - Verify that design edges are parallel -- to make sure an image has no perspective distortion
+
+**** Example
+
+ #+begin_example
+     P1 *    * P3                                       P1 *    * P3
+        |    |              P1 *-----* P2                 /    / 
+        |    |      _OR_                     _OR_        /    /  
+        |    |              P3 *-----* P4               /    /   
+     P2 *    * P4                                   P2 *    * P4
+ #+end_example
+
+  - Angle 1: =P1.x [ENTER] P1.y [COMPLEX] P2.x [ENTER] P2.y [COMPLEX] [-] [ANGLE] [STO 00]=
+  - Angle 2: =P3.x [ENTER] P3.y [COMPLEX] P4.x [ENTER] P4.y [COMPLEX] [-] [ANGLE] [STO 00]=
+  - Difference: =[RCL- 00] [ABS]=
+
+The result will be the absolute angle by which the two lines differ --
+i.e. if we have parallel lines it should be 0.
+
+** Measure Area (rectangles)
+
+This function takes /one/ complex number representing the width and
+height of the rectangle.  The sign of the with and height are ignored.
+
+As with the =[LENG]= function, we may obtain the width & height by
+subtracting the upper left & lower right coordinates of the rectangle
+in question.  Note the order of subtraction is irrelevant as the
+=[AREA]= function uses the absolute value of components of the
+coordinates.
+
+*** Example
+
+Compute the area of a rectangle with upper left corner at (10, 10) and
+lower right at (100, 500):
+
+=10 [ENTER] 10 [COMPLEX] 100 [ENTER] 500 [COMPLEX] [-] [AREA]=
+
+Note the coordinates may be entered in any order.
+
+** Calculator Code
+
+#+begin_src hp42s
+@@@@ Image Measurement for Stamp Collectors
+@@@@ IN:  N/A Menu Driven
+@@@@ OUT: N/A Menu Driven
+@@@@ GBL: IMETC -- Image calibration factor.  Set via CAL
+@@@@      IMETI -- Units for Image distances used by D→P & D→K.  Set via I:UNIT Default: mm
+@@@@      IMETD -- Units for Distance used by D→P & D→K.  Set via D:UNIT Default: mm
+@@@@      IMETP -- Perf count used by used by D→P & D→K.  Set via C:NN.  Default: 10
+@@@@ UPD: 2021-03-16
+@@@@ BUG: Stack not stable when moving through menus on old versions of free42 (pre FUNC)
+LBL "IMET"
+LBL 01       @@@@ Page 1 of menu IMET
+SF 25        @@@@ Fails: IMETC not set
+RCL "IMETC"      
+FS?C 25      @@@@ IF-!ERR
+GTO 20
+94.4881889764
+STO "IMETC"
+"WARN: "
+"├CAL Default!"
+AVIEW
+LBL 20       @@@@ IF-END
+R↓
+CLMENU
+"LENG"
+KEY 1 XEQ 03
+"ANGLE"
+KEY 2 XEQ 04
+"AREA"
+KEY 3 XEQ 05
+"CAL?"
+KEY 5 XEQ 06
+"CAL"
+KEY 6 XEQ 07
+KEY 7 GTO 02
+KEY 8 GTO 02
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 02       @@@@ Page 2 of menu IMET
+CLMENU
+"D→P"
+KEY 1 XEQ 08
+"D→K"
+KEY 2 XEQ 09
+"C:"
+SF 25        @@@@ Fails: IMETP not set
+RCL "IMETP"      
+FS?C 25      @@@@ IF-!ERR
+GTO 25
+10
+STO "IMETP"
+LBL 25       @@@@ IF-END
+ARCL ST X
+R↓
+KEY 4 XEQ 11
+"D:"
+SF 25        @@@@ Fails: IMETC not set
+RCL "IMETD"      
+FC? 25       @@@@ IF-BOOL
+GTO 14
+GTO 15
+LBL 14       @@@@ IF-THEN error
+0
+STO "IMETD"
+LBL 15       @@@@ END-IF
+50
++
+XEQ IND ST X
+R↓
+KEY 5 XEQ 12
+RCL "IMETD"
+X≠0?         @@@@ IF-BOOL
+GTO 16
+"I:"
+SF 25        @@@@ Fails: IMETI not set
+RCL "IMETI"      
+FC? 25       @@@@ IF-BOOL
+GTO 17
+GTO 18
+LBL 17       @@@@ IF-THEN error
+0
+STO "IMETI"
+LBL 18       @@@@ END-IF
+70
++
+XEQ IND ST X
+R↓
+KEY 6 XEQ 13
+LBL 16       @@@@ IF-END
+R↓
+KEY 7 GTO 01
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 02
+LBL 00
+EXITALL
+RTN
+LBL 03       @@@@ Action for menu key LENGTH
+ABS
+RCL÷ "IMETC"
+RTN
+LBL 04       @@@@ Action for menu key ANGLE
+CPX?
+GTO 19
+"ERR: "
+"├Cplx Arg Req!"
+AVIEW
+RTN
+LBL 19
+FC? 73 @@ IF-RECT            
+GTO 22             
+GTO 21             
+LBL 22 @@ IF-THEN RECT MODE 
+POLAR
+COMPLEX            
+RECT
+GTO 23
+LBL 21 @@ IF-ELSE POLAR MODE
+POLAR
+COMPLEX            
+RECT
+LBL 23 @@ IF-END
+X<>Y
+R↓
+RTN
+LBL 05       @@@@ Action for menu key AREA
+CPX?
+GTO 19
+"ERR: "
+"├Cplx Arg Req!"
+AVIEW
+RTN
+LBL 19
+FC? 73 @@ IF-RECT            
+GTO 22             
+GTO 21             
+LBL 22 @@ IF-THEN RECT MODE 
+COMPLEX            
+GTO 23
+LBL 21 @@ IF-ELSE POLAR MODE
+POLAR
+COMPLEX            
+RECT
+LBL 23 @@ IF-END
+ABS
+X<>Y
+ABS
+×
+RCL÷ "IMETC"
+RCL÷ "IMETC"
+RTN
+LBL 06       @@@@ Action for menu key CAL?
+RCL "IMETC"
+RTN
+LBL 07       @@@@ Action for menu key CAL
+X<>Y
+ABS
+X<>Y
+÷
+STO "IMETC"
+RTN
+LBL 08       @@@@ Action for menu key D→P
+XEQ 35
+RCL "IMETP"  @@@@ Use converted distance to compute perfs
+1
+-
+X<>Y
+÷
+20
+×
+RTN
+LBL 09       @@@@ Action for menu key D→K
+XEQ 35
+RCL "IMETP"  @@@@ Use converted distance to compute kiusalas perfs
+1
+-
+÷
+127
+÷
+5000
+×
+RTN
+LBL 11       @@@@ Action for menu key PCNT
+STO "IMETP"
+RTN
+LBL 12       @@@@ Action for menu key D:UNIT
+RCL "IMETD"
+1
++
+6
+MOD
+STO "IMETD"
+R↓
+RTN
+LBL 13       @@@@ Action for menu key I:UNIT
+RCL "IMETI"
+1
++
+5
+MOD
+STO "IMETI"
+R↓
+RTN
+LBL 35       @@@@ Convert distance to mm
+RCL "IMETD"
+X=0?         @@@@ IF-BOOL
+GTO 24
+GTO 25
+LBL 24       @@@@ IF-THEN (pixels)
+R↓
+XEQ 03       @@@@ Compute length
+RCL "IMETI"
+80
++
+XEQ IND ST X
+GTO 26
+LBL 25       @@@@ IF-ELSE (not-pixels)
+80
++
+1
+-
+XEQ IND ST X
+LBL 26       @@@@ IF-END
+RTN
+             @@@@ Names for D units
+LBL 50
+"├px"
+RTN
+LBL 51
+"├mm"
+RTN
+LBL 52
+"├mil"
+RTN
+LBL 53
+"├μm"
+RTN
+LBL 54
+"├in"
+RTN
+LBL 55
+"├cm"
+RTN
+@@@@ Names for I units
+LBL 70
+"├mm"
+RTN
+LBL 71
+"├mil"
+RTN
+LBL 72
+"├μm"
+RTN
+LBL 73
+"├in"
+RTN
+LBL 74
+"├cm"
+RTN
+@@@@ Conversion to mm.
+LBL 80       @@@@ "├mm"
+R↓
+RTN
+LBL 81       @@@@ "├mil"
+R↓
+25.4
+×
+1000
+÷
+RTN
+LBL 82       @@@@ "├μm"
+R↓
+1e3
+÷
+RTN
+LBL 83       @@@@ "├in"
+R↓
+25.4
+×
+RTN
+LBL 84       @@@@ "├cm"
+R↓
+10
+×
+RTN
+END
+#+end_src

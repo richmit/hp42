@@ -1,0 +1,1468 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-03-27 Sat 15:00 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Calculator Programs For Stamp Collectors</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Mitch Richling" />
+<meta name="description" content="Description of some free42/hp-42s/DM42 programs for stamp collectors"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
+<style>body { min-width: 500px; max-width: 1024px; }</style>
+<style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
+<style>h1,h2,h3 { line-height: 1.4em; }</style>
+<style>h1.title { font-size: 3em; }</style>
+<style>h4,h5,h6 { font-size: 1em; }</style>
+<style>.org-src-container { border: 1px solid #ccc; box-shadow: 3px 3px 3px #eee; font-family: Lucida Console, monospace; font-size: 80%; margin: 0px; padding: 0px 0px; position: relative; }</style>
+<style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
+<style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
+<style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="https://www.mitchr.me/FIXME"> UP </a>
+ |
+ <a accesskey="H" href="https://www.mitchr.me/"> HOME </a>
+</div><div id="content">
+<h1 class="title">Calculator Programs For Stamp Collectors</h1>
+<table border="2 solid #ccc" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right"><b>Author:</b></td>
+<td class="org-left"><i>Mitch Richling</i></td>
+</tr>
+
+<tr>
+<td class="org-right"><b>Updated:</b></td>
+<td class="org-left"><i>2021-03-27 15:00:21</i></td>
+</tr>
+</tbody>
+</table>
+<p align="center">
+Copyright 2021 Mitch Richling. All rights reserved.
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org099c1c0">1. Metadata</a></li>
+<li><a href="#orgf04de3b">2. Perforations</a>
+<ul>
+<li><a href="#org9fd55ef">2.1. Perf Application</a></li>
+<li><a href="#orgebc6869">2.2. Code for Functions</a></li>
+<li><a href="#orgb34ef3c">2.3. Code for Menu</a>
+<ul>
+<li><a href="#org1e53db0">2.3.1. Code Generation</a></li>
+<li><a href="#orgbff63dc">2.3.2. The Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org8755963">3. Image Measurements</a>
+<ul>
+<li><a href="#org1a25382">3.1. Summary of menu items</a></li>
+<li><a href="#org3fa48af">3.2. Image Calibration</a>
+<ul>
+<li><a href="#orgdd1adf8">3.2.1. Known DPI</a>
+<ul>
+<li><a href="#org4ffadf5">3.2.1.1. Examples</a></li>
+</ul>
+</li>
+<li><a href="#org9a2782f">3.2.2. Using a target</a>
+<ul>
+<li><a href="#org3c2657d">3.2.2.1. Example</a></li>
+</ul>
+</li>
+<li><a href="#orgb7e18ac">3.2.3. Using a Stamp!</a></li>
+<li><a href="#org2548c0e">3.2.4. Calibration factor</a>
+<ul>
+<li><a href="#org50ad059">3.2.4.1. Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orga16f855">3.3. Measuring length</a>
+<ul>
+<li><a href="#orgf85eb82">3.3.1. Horizontal or Vertical Lengths</a>
+<ul>
+<li><a href="#orge58a7a0">3.3.1.1. Examples</a></li>
+</ul>
+</li>
+<li><a href="#orgae86313">3.3.2. Generic distances</a>
+<ul>
+<li><a href="#org20f70e7">3.3.2.1. Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgfd56a31">3.4. Measuring Angles</a>
+<ul>
+<li><a href="#org6634008">3.4.1. Examples</a></li>
+</ul>
+</li>
+<li><a href="#org946cad5">3.5. Philatelic Application</a>
+<ul>
+<li><a href="#org743b5f8">3.5.1. Are two lines parallel</a>
+<ul>
+<li><a href="#org5bb720b">3.5.1.1. Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org4fb72eb">3.6. Measure Area (rectangles)</a>
+<ul>
+<li><a href="#orgb951b88">3.6.1. Example</a></li>
+</ul>
+</li>
+<li><a href="#orgfed8050">3.7. Calculator Code</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org099c1c0" class="outline-2">
+<h2 id="org099c1c0"><span class="section-number-2">1</span> Metadata</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This home for this HTML file is: <a href="https://richmit.github.io/hp42/phil.html">https://richmit.github.io/hp42/phil.html</a>
+</p>
+
+<p>
+Files related to this document may be found on github: <a href="https://github.com/richmit/hp42">https://github.com/richmit/hp42</a>
+</p>
+
+<ul class="org-ul">
+<li><code>src</code> directory: Contains the org-mode file that generated this HTML document</li>
+<li><code>docs</code> directory: Contains this html document</li>
+<li><code>bin</code> directory: Contains raw program files</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgf04de3b" class="outline-2">
+<h2 id="orgf04de3b"><span class="section-number-2">2</span> Perforations</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Perforations are usually measured in units of perfs/2cm; however,
+other units are used in some specialized areas of philately.  For
+example, the Kiusalas gauge is often used by experts for USPS bureau
+issues.  This gauge measures perforations in units of thou/perf.  We
+can approximate perforation measures by measuring the distance (D)
+spanned by a number of perforations (C).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">##                                                                                                              ##
+##      | . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . |     ##
+##      |. . . . . . . . . . . . . . . . . . . . . . C = 4 . . . . . . . . . . . . . . . . . . . . . . . .|     ##
+##      | . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . |     ##
+##      |. . . . . ------- . . . . . . . .-------. . . . . . . . ------- . . . . . . . .-------. . . . . .|     ##
+##      | . . . .-/       \-. . . . . . -/       \- . . . . . .-/       \-. . . . . . -/       \- . . . . |     ##
+##      |. . . ./           \. . . . . /           \ . . . . ./           \. . . . . /           \ . . . .|     ##
+##      | . . ./      1      \. . . . /      2      \ . . . ./      3      \. . . . /      4      \ . . . |     ##
+##      |. . . |             | . . . .|             |. . . . |             | . . . .|             |. . . .|     ##
+##      +------+             +--------+             +--------+             +--------+             +-------+     ##
+##             |--------------------------- D = Distance ---------------------------|                           ##
+##                    |--------------------------- D = Distance ---------------------------|                    ##
+##                           |--------------------------- D = Distance ---------------------------|             ##
+##                                                                                                              ##
+</pre>
+</div>
+
+<p>
+If we use P to represent traditional perforations (perfs/2cm), and K to represent Kiusalas perforations (thou/perf)
+</p>
+
+
+<p>
+\[ K = \frac{5000 D}{127 (C - 1)} \]
+\[ P = \frac{20 (C - 1)}{D} \]
+\[ P = \frac{100000}{127 K} \]
+</p>
+</div>
+
+<div id="outline-container-org9fd55ef" class="outline-3">
+<h3 id="org9fd55ef"><span class="section-number-3">2.1</span> Perf Application</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Several independent functions are provided:
+</p>
+
+<table id="org23a5d04" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Menu</th>
+<th scope="col" class="org-left">Program</th>
+<th scope="col" class="org-left">Inputs</th>
+<th scope="col" class="org-left">Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">CD→K</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Y: count   X: Distance (mm)</td>
+<td class="org-left">Kiusalas Perfs</td>
+</tr>
+
+<tr>
+<td class="org-left">CK→D</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Y: count   X: Kiusalas Perfs</td>
+<td class="org-left">Distance (mm)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">CD→P</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Y: count   X: Distance (mm)</td>
+<td class="org-left">Perfs (perf/2cm)</td>
+</tr>
+
+<tr>
+<td class="org-left">CP→D</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Y: count   X: Perfs</td>
+<td class="org-left">Distance (mm)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">P→K</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">X: Perfs to Kiusalas</td>
+<td class="org-left">Kiusalas Perfs</td>
+</tr>
+
+<tr>
+<td class="org-left">K→P</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">X: Kiusalas to Perfs</td>
+<td class="org-left">Perfs (perf/2cm)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+In addition a menu collecting them all together is provided: <code>PERFS</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgebc6869" class="outline-3">
+<h3 id="orgebc6869"><span class="section-number-3">2.2</span> Code for Functions</h3>
+<div class="outline-text-3" id="text-2-2">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Convert count &amp; distance to kiusalas perforations</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: Count</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: Distance (mm)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Kiusalas Perfs</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-19</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"CD&#8594;K"</span>
+<span style="color: #00ffff;">FUNC</span> 21            <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">IP</span>
+1
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">&#247;</span>
+127
+<span style="color: #00ffff;">&#247;</span>
+5000
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Convert count &amp; kiusalas perforations to distance</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: Count</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: Kiusalas Perfs</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Distance (mm)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-19</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"CK&#8594;D"</span>
+<span style="color: #00ffff;">FUNC</span> 21            <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">IP</span>
+1
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">&#215;</span>
+127
+<span style="color: #00ffff;">&#215;</span>
+5000
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Convert count &amp; distance to/from perforations</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: Count</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: Distance (mm) _OR_ Perfs</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Perfs         _OR_ Distance (mm)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-19</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"CD&#8594;P"</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"CP&#8594;D"</span>
+<span style="color: #00ffff;">FUNC</span> 21            <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">IP</span>
+1
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">&#247;</span>
+20
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Convert perfs to/from kiusalas</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: perfs    _OR_ kiusalas</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: kiusalas _OR_ perfs</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-19</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"K&#8594;P"</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"P&#8594;K"</span>
+<span style="color: #00ffff;">FUNC</span> 11            <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+127
+<span style="color: #00ffff;">&#215;</span>
+100000
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb34ef3c" class="outline-3">
+<h3 id="orgb34ef3c"><span class="section-number-3">2.3</span> Code for Menu</h3>
+<div class="outline-text-3" id="text-2-3">
+</div>
+<div id="outline-container-org1e53db0" class="outline-4">
+<h4 id="org1e53db0"><span class="section-number-4">2.3.1</span> Code Generation</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<div class="org-src-container">
+<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"PERF"</span> tbl <span style="color: #fa8072;">"stay"</span> <span style="color: #fa8072;">"exit"</span> #'MJR-custom-x-gen)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbff63dc" class="outline-4">
+<h4 id="orgbff63dc"><span class="section-number-4">2.3.2</span> The Code</h4>
+<div class="outline-text-4" id="text-2-3-2">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"PERF"</span>
+<span style="color: #00ffff;">LBL</span> 01            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu PERF</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"CD&#8594;K"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 02
+<span style="color: #fa8072;">"CK&#8594;D"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 03
+<span style="color: #fa8072;">"CD&#8594;P"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 04
+<span style="color: #fa8072;">"CP&#8594;D"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 05
+<span style="color: #fa8072;">"P&#8594;K"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 06
+<span style="color: #fa8072;">"K&#8594;P"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 07
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">LBL</span> 00
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 02               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key CD&#8594;K</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"CD&#8594;K"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 03               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key CK&#8594;D</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"CK&#8594;D"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 04               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key CD&#8594;P</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"CD&#8594;P"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 05               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key CP&#8594;D</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"CP&#8594;D"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 06               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key P&#8594;K</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"P&#8594;K"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 07               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key K&#8594;P</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"K&#8594;P"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8755963" class="outline-2">
+<h2 id="org8755963"><span class="section-number-2">3</span> Image Measurements</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Quick and dirty image analysis for stamp collectors for when you don't
+want to load an image up in ImageJ or GIMP, but still need to make
+some measurements.
+</p>
+</div>
+
+<div id="outline-container-org1a25382" class="outline-3">
+<h3 id="org1a25382"><span class="section-number-3">3.1</span> Summary of menu items</h3>
+<div class="outline-text-3" id="text-3-1">
+<table id="orgaa0985a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Menu</th>
+<th scope="col" class="org-left">Description</th>
+<th scope="col" class="org-left">Inputs</th>
+<th scope="col" class="org-left">Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">LENGTH</td>
+<td class="org-left">Compute lengths</td>
+<td class="org-left">X: Real pixel count or complex pixel coordinate</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">ANGLE</td>
+<td class="org-left">Compute angles</td>
+<td class="org-left">X: Complex Pixel coordinate</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">AREA</td>
+<td class="org-left">Compute area of rectangle</td>
+<td class="org-left">X: Complex Pixel coordinate</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">CAL?</td>
+<td class="org-left">Recall image calibration factor</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">X: CAL factor</td>
+</tr>
+
+<tr>
+<td class="org-left">CAL</td>
+<td class="org-left">Store image calibration.</td>
+<td class="org-left">X: Pixel count or complex pixel coordinate  Y: Length</td>
+<td class="org-left">X: CAL factor</td>
+</tr>
+
+<tr>
+<td class="org-left">D→P</td>
+<td class="org-left">Compute Perforations</td>
+<td class="org-left">X: Pixel count or complex pixel coordinate</td>
+<td class="org-left">X: Perfs</td>
+</tr>
+
+<tr>
+<td class="org-left">D→K</td>
+<td class="org-left">Compute Kiusalas perforations</td>
+<td class="org-left">X: Pixel count or complex pixel coordinate</td>
+<td class="org-left">X: Perfs</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">C:NN</td>
+<td class="org-left">Set perf count (C)</td>
+<td class="org-left">X: Integer count of perforations measured</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">D=mm</td>
+<td class="org-left">Unites for distance</td>
+<td class="org-left">Cycle through units: px mm mil um in cm</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">I=mm</td>
+<td class="org-left">Image units (when D=px)</td>
+<td class="org-left">Cycle through units: mm mil um in cm</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org3fa48af" class="outline-3">
+<h3 id="org3fa48af"><span class="section-number-3">3.2</span> Image Calibration</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+This application works with images with square pixels only.  When
+using a scanner make sure the X &amp; Y DPI settings are the same!
+</p>
+
+<p>
+Note that image calibration is not required for all functionality.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Menu</th>
+<th scope="col" class="org-left">Requires image calibration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">LENGTH</td>
+<td class="org-left">Always</td>
+</tr>
+
+<tr>
+<td class="org-left">ANGLE</td>
+<td class="org-left">Never</td>
+</tr>
+
+<tr>
+<td class="org-left">AREA</td>
+<td class="org-left">Always</td>
+</tr>
+
+<tr>
+<td class="org-left">CAL?</td>
+<td class="org-left">Always</td>
+</tr>
+
+<tr>
+<td class="org-left">CAL</td>
+<td class="org-left">Never</td>
+</tr>
+
+<tr>
+<td class="org-left">D→P</td>
+<td class="org-left">Only when D=px</td>
+</tr>
+
+<tr>
+<td class="org-left">D→K</td>
+<td class="org-left">Only when D=px</td>
+</tr>
+
+<tr>
+<td class="org-left">C:NN</td>
+<td class="org-left">Never</td>
+</tr>
+
+<tr>
+<td class="org-left">D=mm</td>
+<td class="org-left">Never</td>
+</tr>
+
+<tr>
+<td class="org-left">I=mm</td>
+<td class="org-left">Never</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+Calibration is retained between runs of the application.  If the
+application is started up without calibration data, then a default
+will be set (2400 DIP scan with units in mm resulting in a calibration
+factor of 94.4881889764).
+</p>
+</div>
+
+<div id="outline-container-orgdd1adf8" class="outline-4">
+<h4 id="orgdd1adf8"><span class="section-number-4">3.2.1</span> Known DPI</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<p>
+When using a scanner, the scanner DPI settings may be used to roughly
+calibrate an image.
+</p>
+</div>
+
+<div id="outline-container-org4ffadf5" class="outline-5">
+<h5 id="org4ffadf5"><span class="section-number-5">3.2.1.1</span> Examples</h5>
+<div class="outline-text-5" id="text-3-2-1-1">
+<ul class="org-ul">
+<li>2400 DPI scans and using inches as the unit:  <code>2400 [ENTER] 1 [CAL]</code></li>
+<li>2400 DPI scans and using mm as the unit: <code>2400 [ENTER] 25.4 [CAL]</code></li>
+<li>1000 DPcm scans using mm as the unit: <code>1000 [ENTER] 10 [CAL]</code></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9a2782f" class="outline-4">
+<h4 id="org9a2782f"><span class="section-number-4">3.2.2</span> Using a target</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<p>
+Including a calibration target in the image field is the most common
+way to calibrate microscope images.  For high magnification expensive,
+etched glass reticle are generally used.  For the lower magnifications
+normally used my stamp collectors, a simple scale may be included in
+the image frame.  I simply lay the stamps on top of a plastic ruler.
+</p>
+
+<p>
+When using a calibration target it is rare that the target is
+precisely lined up horizontally or vertically, so providing a simple
+pixel count for it's length is impossible.  Instead we provide the
+pixel coordinates of two points on the target.
+</p>
+</div>
+
+<div id="outline-container-org3c2657d" class="outline-5">
+<h5 id="org3c2657d"><span class="section-number-5">3.2.2.1</span> Example</h5>
+<div class="outline-text-5" id="text-3-2-2-1">
+<p>
+We have a 1mm ruler in the frame.  The 0 mark of the ruler is at pixel
+coordinates (123, 456) and the 3 mark of the ruler is at pixel
+coordinates (567, 345).  If we wish to work directly in mm, then we do
+this:<a id="org661443d"></a>
+</p>
+
+<ul class="org-ul">
+<li>Enter the 0 coordinate: <code>123 [ENTER] 456 [COMPLEX]</code>  &#x2013; assuming "<code>RECT</code>" mode</li>
+<li>Enter the 1 coordinate: <code>234 [ENTER] 345 [COMPLEX]</code></li>
+<li>Enter physical distance: <code>3</code></li>
+<li>Press the CAL menu key: <code>[CAL]</code></li>
+</ul>
+
+<p>
+If we wanted to work in cm instead of mm, we would use a distance of
+<code>0.3</code> instead.
+</p>
+
+<p>
+If we wanted to work in mil instead of mm, we would use a distance of
+<code>118.11</code> instead
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb7e18ac" class="outline-4">
+<h4 id="orgb7e18ac"><span class="section-number-4">3.2.3</span> Using a Stamp!</h4>
+<div class="outline-text-4" id="text-3-2-3">
+<p>
+The techniques documented here can be very useful, but must be used
+with care.  Stamp paper can warp and deform &#x2013; depending on printing
+process, storage conditions, etc&#x2026;
+</p>
+
+<p>
+Suppose you have an image of a stamp (perhaps from an auction website)
+that should have an design width of 22mm.  You determine the upper
+left of the design is at pixel coordinates (300, 100), and the upper
+right of the design is at pixel coordinates (536, 101).  Also suppose
+you wish to work in inches (you will see why in a moment):
+</p>
+
+<p>
+<code>322 [ENTER] 125 [COMPLEX] 582 [ENTER] 126 [COMPLEX] [-] 22 [ENTER] 25.4 [÷] [CAL]</code>
+</p>
+
+<p>
+Now notice the value on the screen is <code>300.1840</code>.  Many stamp images
+posted on auction sites are scanned at 300 DPI, and the fact this is
+so close to 300 tells us that we probably have a 300 DPI scan.  We can
+now use 300 as our calibration data, or use the computed value.
+</p>
+
+<p>
+You can use this technique with any feature of a stamp with a known
+measurement &#x2013; not just design size.  For example, some souvenir
+sheets have very precise paper sizes allowing the width or height of
+the paper to be used for calibration.
+</p>
+
+<p>
+The perforations may also be used as a calibration aid.  For example if
+we know the stamp in question has a perforation of 70 on the Kiusalas
+gauge, then we know 10 perforations should measure very close to 16mm.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2548c0e" class="outline-4">
+<h4 id="org2548c0e"><span class="section-number-4">3.2.4</span> Calibration factor</h4>
+<div class="outline-text-4" id="text-3-2-4">
+<p>
+The "calibration factor", returned by the <code>[CAL?]</code> button, is the
+current image calibration data in units of pixels/length.
+</p>
+</div>
+
+<div id="outline-container-org50ad059" class="outline-5">
+<h5 id="org50ad059"><span class="section-number-5">3.2.4.1</span> Examples</h5>
+<div class="outline-text-5" id="text-3-2-4-1">
+<ul class="org-ul">
+<li>2400 DPI scans and using inches as the unit: 2400</li>
+<li>2400 DPI scans and using mm as the unit: 94.4881889764</li>
+<li>1000 DPcm scans using mm as the unit: 100</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga16f855" class="outline-3">
+<h3 id="orga16f855"><span class="section-number-3">3.3</span> Measuring length</h3>
+<div class="outline-text-3" id="text-3-3">
+</div>
+<div id="outline-container-orgf85eb82" class="outline-4">
+<h4 id="orgf85eb82"><span class="section-number-4">3.3.1</span> Horizontal or Vertical Lengths</h4>
+<div class="outline-text-4" id="text-3-3-1">
+<p>
+For horizontal &amp; vertical lengths in the image, one simply needs to
+provided a pixel count as a real number.
+</p>
+</div>
+
+<div id="outline-container-orge58a7a0" class="outline-5">
+<h5 id="orge58a7a0"><span class="section-number-5">3.3.1.1</span> Examples</h5>
+<div class="outline-text-5" id="text-3-3-1-1">
+<ul class="org-ul">
+<li>2400 DPI image working in inches:
+<ul class="org-ul">
+<li><code>1200 [LENG]</code> =&gt; 0.5</li>
+<li><code>2400 [LENG]</code> =&gt; 1.0</li>
+</ul></li>
+<li>The same image working in mm:
+<ul class="org-ul">
+<li><code>1200 [LENG]</code> =&gt; 12.7</li>
+<li><code>2400 [LENG]</code> =&gt; 25.4</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgae86313" class="outline-4">
+<h4 id="orgae86313"><span class="section-number-4">3.3.2</span> Generic distances</h4>
+<div class="outline-text-4" id="text-3-3-2">
+<p>
+To measure the length of a non-horizontal/vertical line, we provide a
+complex number to the <code>[LENG]</code> function.  One might think of the
+coordinates as specifying a line from the origin, upper left image
+pixel at (0, 0), to the given coordinates.  Alternately one might think
+of the coordinates as the width &amp; height of the line.  The signs of
+the coordinates are ignored &#x2013; i.e. the absolute value of each
+coordinate is used.
+</p>
+
+<pre class="example">
+          * P2  -            (0, 0) *
+         /      |                    \
+        /       |                     \
+       /        h                      \
+      /         |                       \
+     /          |                        \
+P1  *           -                         * (x, y)
+    |--w--|
+</pre>
+
+<p>
+To measure the length of a line segment give by two points, we simply
+enter both points as complex numbers and subtract them.  We then give
+the difference to the <code>[LENG]</code> function.
+</p>
+</div>
+
+<div id="outline-container-org20f70e7" class="outline-5">
+<h5 id="org20f70e7"><span class="section-number-5">3.3.2.1</span> Examples</h5>
+<div class="outline-text-5" id="text-3-3-2-1">
+<ul class="org-ul">
+<li>For the target calibrated image example <a href="#org661443d">3.2.2.1</a>
+<ul class="org-ul">
+<li><code>123 [ENTER] 456 [COMPLEX] 234 [ENTER] 345 [COMPLEX] [LENG]</code> =&gt; 3</li>
+</ul></li>
+<li>For a 2400 DPI image working in inches:
+<ul class="org-ul">
+<li><code>1 [ENTER] 1 [COMPLEX] 100 [ENTER] 100 [COMPLEX] [LENG]</code> =&gt; 0.058</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfd56a31" class="outline-3">
+<h3 id="orgfd56a31"><span class="section-number-3">3.4</span> Measuring Angles</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+Angles are measured with respect the horizontal &#x2013; the <i>negative</i> of
+the argument of the complex number representing the pixel coordinate.
+We use the negative because pixel y-coordinates go up in the down
+direction.
+</p>
+</div>
+
+<div id="outline-container-org6634008" class="outline-4">
+<h4 id="org6634008"><span class="section-number-4">3.4.1</span> Examples</h4>
+<div class="outline-text-4" id="text-3-4-1">
+<ul class="org-ul">
+<li><code>123 [ENTER] 123 [COMPLEX] [ANGLE]</code> =&gt; -45 &#x2013; assuming degree angle mode</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org946cad5" class="outline-3">
+<h3 id="org946cad5"><span class="section-number-3">3.5</span> Philatelic Application</h3>
+<div class="outline-text-3" id="text-3-5">
+</div>
+<div id="outline-container-org743b5f8" class="outline-4">
+<h4 id="org743b5f8"><span class="section-number-4">3.5.1</span> Are two lines parallel</h4>
+<div class="outline-text-4" id="text-3-5-1">
+<p>
+Why?
+</p>
+<ul class="org-ul">
+<li>Verify that the two cut edges of a US coil stamp are parallel</li>
+<li>Verify that perforations are parallel</li>
+<li>Verify that the cut edge of a souvenir sheet is parallel with an engraved margin line</li>
+<li>Verify that design edges are parallel &#x2013; to make sure an image has no perspective distortion</li>
+</ul>
+</div>
+
+<div id="outline-container-org5bb720b" class="outline-5">
+<h5 id="org5bb720b"><span class="section-number-5">3.5.1.1</span> Example</h5>
+<div class="outline-text-5" id="text-3-5-1-1">
+<pre class="example">
+P1 *    * P3                                       P1 *    * P3
+   |    |              P1 *-----* P2                 /    / 
+   |    |      _OR_                     _OR_        /    /  
+   |    |              P3 *-----* P4               /    /   
+P2 *    * P4                                   P2 *    * P4
+</pre>
+
+<ul class="org-ul">
+<li>Angle 1: <code>P1.x [ENTER] P1.y [COMPLEX] P2.x [ENTER] P2.y [COMPLEX] [-] [ANGLE] [STO 00]</code></li>
+<li>Angle 2: <code>P3.x [ENTER] P3.y [COMPLEX] P4.x [ENTER] P4.y [COMPLEX] [-] [ANGLE] [STO 00]</code></li>
+<li>Difference: <code>[RCL- 00] [ABS]</code></li>
+</ul>
+
+<p>
+The result will be the absolute angle by which the two lines differ &#x2013;
+i.e. if we have parallel lines it should be 0.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4fb72eb" class="outline-3">
+<h3 id="org4fb72eb"><span class="section-number-3">3.6</span> Measure Area (rectangles)</h3>
+<div class="outline-text-3" id="text-3-6">
+<p>
+This function takes <i>one</i> complex number representing the width and
+height of the rectangle.  The sign of the with and height are ignored.
+</p>
+
+<p>
+As with the <code>[LENG]</code> function, we may obtain the width &amp; height by
+subtracting the upper left &amp; lower right coordinates of the rectangle
+in question.  Note the order of subtraction is irrelevant as the
+<code>[AREA]</code> function uses the absolute value of components of the
+coordinates.
+</p>
+</div>
+
+<div id="outline-container-orgb951b88" class="outline-4">
+<h4 id="orgb951b88"><span class="section-number-4">3.6.1</span> Example</h4>
+<div class="outline-text-4" id="text-3-6-1">
+<p>
+Compute the area of a rectangle with upper left corner at (10, 10) and
+lower right at (100, 500):
+</p>
+
+<p>
+<code>10 [ENTER] 10 [COMPLEX] 100 [ENTER] 500 [COMPLEX] [-] [AREA]</code>
+</p>
+
+<p>
+Note the coordinates may be entered in any order.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfed8050" class="outline-3">
+<h3 id="orgfed8050"><span class="section-number-3">3.7</span> Calculator Code</h3>
+<div class="outline-text-3" id="text-3-7">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Image Measurement for Stamp Collectors</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  N/A Menu Driven</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: N/A Menu Driven</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: IMETC -- Image calibration factor.  Set via CAL</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">IMETI -- Units for Image distances used by D&#8594;P &amp; D&#8594;K.  Set via I:UNIT Default: mm</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">IMETD -- Units for Distance used by D&#8594;P &amp; D&#8594;K.  Set via D:UNIT Default: mm</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">IMETP -- Perf count used by used by D&#8594;P &amp; D&#8594;K.  Set via C:NN.  Default: 10</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: Stack not stable when moving through menus on old versions of free42 (pre FUNC)</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"IMET"</span>
+<span style="color: #00ffff;">LBL</span> 01       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu IMET</span>
+<span style="color: #00ffff;">SF</span> 25        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Fails: IMETC not set</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"IMETC"</span>      
+<span style="color: #00ffff;">FS?C</span> 25      <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-!ERR</span>
+<span style="color: #00ffff;">GTO</span> 20
+94.4881889764
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"IMETC"</span>
+<span style="color: #fa8072;">"WARN: "</span>
+<span style="color: #fa8072;">"&#9500;CAL Default!"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">LBL</span> 20       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-END</span>
+R&#8595;
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"LENG"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 03
+<span style="color: #fa8072;">"ANGLE"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 04
+<span style="color: #fa8072;">"AREA"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 05
+<span style="color: #fa8072;">"CAL?"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 06
+<span style="color: #fa8072;">"CAL"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 07
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">LBL</span> 02       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu IMET</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"D&#8594;P"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 08
+<span style="color: #fa8072;">"D&#8594;K"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 09
+<span style="color: #fa8072;">"C:"</span>
+<span style="color: #00ffff;">SF</span> 25        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Fails: IMETP not set</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"IMETP"</span>      
+<span style="color: #00ffff;">FS?C</span> 25      <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-!ERR</span>
+<span style="color: #00ffff;">GTO</span> 25
+10
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"IMETP"</span>
+<span style="color: #00ffff;">LBL</span> 25       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-END</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+R&#8595;
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 11
+<span style="color: #fa8072;">"D:"</span>
+<span style="color: #00ffff;">SF</span> 25        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Fails: IMETC not set</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"IMETD"</span>      
+<span style="color: #00ffff;">FC</span>? 25       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-BOOL</span>
+<span style="color: #00ffff;">GTO</span> 14
+<span style="color: #00ffff;">GTO</span> 15
+<span style="color: #00ffff;">LBL</span> 14       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-THEN error</span>
+0
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"IMETD"</span>
+<span style="color: #00ffff;">LBL</span> 15       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">END-IF</span>
+50
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">XEQ IND ST</span> X
+R&#8595;
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 12
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"IMETD"</span>
+<span style="color: #00ffff;">X&#8800;0</span>?         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-BOOL</span>
+<span style="color: #00ffff;">GTO</span> 16
+<span style="color: #fa8072;">"I:"</span>
+<span style="color: #00ffff;">SF</span> 25        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Fails: IMETI not set</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"IMETI"</span>      
+<span style="color: #00ffff;">FC</span>? 25       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-BOOL</span>
+<span style="color: #00ffff;">GTO</span> 17
+<span style="color: #00ffff;">GTO</span> 18
+<span style="color: #00ffff;">LBL</span> 17       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-THEN error</span>
+0
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"IMETI"</span>
+<span style="color: #00ffff;">LBL</span> 18       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">END-IF</span>
+70
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">XEQ IND ST</span> X
+R&#8595;
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 13
+<span style="color: #00ffff;">LBL</span> 16       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-END</span>
+R&#8595;
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">LBL</span> 00
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 03       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key LENGTH</span>
+<span style="color: #00ffff;">ABS</span>
+<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"IMETC"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 04       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ANGLE</span>
+<span style="color: #00ffff;">CPX</span>?
+<span style="color: #00ffff;">GTO</span> 19
+<span style="color: #fa8072;">"ERR: "</span>
+<span style="color: #fa8072;">"&#9500;Cplx Arg Req!"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 19
+<span style="color: #00ffff;">FC</span>? 73 <span style="color: #ffa500;">@@ </span><span style="color: #ff7f24;">IF-RECT            </span>
+<span style="color: #00ffff;">GTO</span> 22             
+<span style="color: #00ffff;">GTO</span> 21             
+<span style="color: #00ffff;">LBL</span> 22 <span style="color: #ffa500;">@@ </span><span style="color: #ff7f24;">IF-THEN RECT MODE </span>
+<span style="color: #00ffff;">POLAR</span>
+<span style="color: #00ffff;">COMPLEX</span>            
+<span style="color: #00ffff;">RECT</span>
+<span style="color: #00ffff;">GTO</span> 23
+<span style="color: #00ffff;">LBL</span> 21 <span style="color: #ffa500;">@@ </span><span style="color: #ff7f24;">IF-ELSE POLAR MODE</span>
+<span style="color: #00ffff;">POLAR</span>
+<span style="color: #00ffff;">COMPLEX</span>            
+<span style="color: #00ffff;">RECT</span>
+<span style="color: #00ffff;">LBL</span> 23 <span style="color: #ffa500;">@@ </span><span style="color: #ff7f24;">IF-END</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 05       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key AREA</span>
+<span style="color: #00ffff;">CPX</span>?
+<span style="color: #00ffff;">GTO</span> 19
+<span style="color: #fa8072;">"ERR: "</span>
+<span style="color: #fa8072;">"&#9500;Cplx Arg Req!"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 19
+<span style="color: #00ffff;">FC</span>? 73 <span style="color: #ffa500;">@@ </span><span style="color: #ff7f24;">IF-RECT            </span>
+<span style="color: #00ffff;">GTO</span> 22             
+<span style="color: #00ffff;">GTO</span> 21             
+<span style="color: #00ffff;">LBL</span> 22 <span style="color: #ffa500;">@@ </span><span style="color: #ff7f24;">IF-THEN RECT MODE </span>
+<span style="color: #00ffff;">COMPLEX</span>            
+<span style="color: #00ffff;">GTO</span> 23
+<span style="color: #00ffff;">LBL</span> 21 <span style="color: #ffa500;">@@ </span><span style="color: #ff7f24;">IF-ELSE POLAR MODE</span>
+<span style="color: #00ffff;">POLAR</span>
+<span style="color: #00ffff;">COMPLEX</span>            
+<span style="color: #00ffff;">RECT</span>
+<span style="color: #00ffff;">LBL</span> 23 <span style="color: #ffa500;">@@ </span><span style="color: #ff7f24;">IF-END</span>
+<span style="color: #00ffff;">ABS</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">ABS</span>
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"IMETC"</span>
+<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"IMETC"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 06       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key CAL?</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"IMETC"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 07       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key CAL</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">ABS</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"IMETC"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 08       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key D&#8594;P</span>
+<span style="color: #00ffff;">XEQ</span> 35
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"IMETP"</span>  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Use converted distance to compute perfs</span>
+1
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">&#247;</span>
+20
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 09       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key D&#8594;K</span>
+<span style="color: #00ffff;">XEQ</span> 35
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"IMETP"</span>  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Use converted distance to compute kiusalas perfs</span>
+1
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">&#247;</span>
+127
+<span style="color: #00ffff;">&#247;</span>
+5000
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 11       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key PCNT</span>
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"IMETP"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 12       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key D:UNIT</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"IMETD"</span>
+1
+<span style="color: #00ffff;">+</span>
+6
+<span style="color: #00ffff;">MOD</span>
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"IMETD"</span>
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 13       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key I:UNIT</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"IMETI"</span>
+1
+<span style="color: #00ffff;">+</span>
+5
+<span style="color: #00ffff;">MOD</span>
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"IMETI"</span>
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 35       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Convert distance to mm</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"IMETD"</span>
+<span style="color: #00ffff;">X=0</span>?         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-BOOL</span>
+<span style="color: #00ffff;">GTO</span> 24
+<span style="color: #00ffff;">GTO</span> 25
+<span style="color: #00ffff;">LBL</span> 24       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-THEN (pixels)</span>
+R&#8595;
+<span style="color: #00ffff;">XEQ</span> 03       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Compute length</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"IMETI"</span>
+80
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">XEQ IND ST</span> X
+<span style="color: #00ffff;">GTO</span> 26
+<span style="color: #00ffff;">LBL</span> 25       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-ELSE (not-pixels)</span>
+80
+<span style="color: #00ffff;">+</span>
+1
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">XEQ IND ST</span> X
+<span style="color: #00ffff;">LBL</span> 26       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-END</span>
+<span style="color: #00ffff;">RTN</span>
+             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Names for D units</span>
+<span style="color: #00ffff;">LBL</span> 50
+<span style="color: #fa8072;">"&#9500;px"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 51
+<span style="color: #fa8072;">"&#9500;mm"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 52
+<span style="color: #fa8072;">"&#9500;mil"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 53
+<span style="color: #fa8072;">"&#9500;&#956;m"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 54
+<span style="color: #fa8072;">"&#9500;in"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 55
+<span style="color: #fa8072;">"&#9500;cm"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Names for I units</span>
+<span style="color: #00ffff;">LBL</span> 70
+<span style="color: #fa8072;">"&#9500;mm"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 71
+<span style="color: #fa8072;">"&#9500;mil"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 72
+<span style="color: #fa8072;">"&#9500;&#956;m"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 73
+<span style="color: #fa8072;">"&#9500;in"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 74
+<span style="color: #fa8072;">"&#9500;cm"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Conversion to mm.</span>
+<span style="color: #00ffff;">LBL</span> 80       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">"&#9500;mm"</span>
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 81       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">"&#9500;mil"</span>
+R&#8595;
+25.4
+<span style="color: #00ffff;">&#215;</span>
+1000
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 82       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">"&#9500;&#956;m"</span>
+R&#8595;
+1e3
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 83       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">"&#9500;in"</span>
+R&#8595;
+25.4
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 84       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">"&#9500;cm"</span>
+R&#8595;
+10
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-27 Sat 15:00 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+</div>
+</body>
+</html>

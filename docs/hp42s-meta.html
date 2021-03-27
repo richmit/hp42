@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-03-27 Sat 11:33 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>free42/hp42s/DM42 Programming Tools</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Mitch Richling" />
+<meta name="description" content="Random stuff to assist with free42/hp-42s/DM42 programing"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
+<style>body { min-width: 500px; max-width: 1024px; }</style>
+<style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
+<style>h1,h2,h3 { line-height: 1.4em; }</style>
+<style>h1.title { font-size: 3em; }</style>
+<style>h4,h5,h6 { font-size: 1em; }</style>
+<style>.org-src-container { border: 1px solid #ccc; box-shadow: 3px 3px 3px #eee; font-family: Lucida Console, monospace; font-size: 80%; margin: 0px; padding: 0px 0px; position: relative; }</style>
+<style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
+<style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
+<style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="https://www.mitchr.me/FIXME"> UP </a>
+ |
+ <a accesskey="H" href="https://www.mitchr.me/"> HOME </a>
+</div><div id="content">
+<h1 class="title">free42/hp42s/DM42 Programming Tools</h1>
+<table border="2 solid #ccc" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right"><b>Author:</b></td>
+<td class="org-left"><i>Mitch Richling</i></td>
+</tr>
+
+<tr>
+<td class="org-right"><b>Updated:</b></td>
+<td class="org-left"><i>2021-03-27 11:33:17</i></td>
+</tr>
+</tbody>
+</table>
+<p align="center">
+Copyright 2021 Mitch Richling. All rights reserved.
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org38a416d">1. Metaata</a></li>
+<li><a href="#org300332c">2. Introduction</a></li>
+<li><a href="#org410ac80">3. Generateing 42s code</a>
+<ul>
+<li><a href="#org01f4b5d">3.1. Menus</a>
+<ul>
+<li><a href="#org24a33a6">3.1.1. Generic menu generator</a></li>
+<li><a href="#orged11e94">3.1.2. For CUSTOM-type Menus</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgb785c92">4. Emacs Helper Stuff</a>
+<ul>
+<li><a href="#orgc3c543c">4.1. Emacs function to insert charcters given a list of character codes</a></li>
+<li><a href="#orgc833e88">4.2. Emacs Mode for 42s Code</a></li>
+<li><a href="#org2b485f5">4.3. yas templates</a></li>
+</ul>
+</li>
+<li><a href="#org65db5bf">5. Prepare Code For Conversion</a>
+<ul>
+<li><a href="#org8d72ad0">5.1. DM42 DMCP-3.20 / DM42-3.17</a></li>
+<li><a href="#org7950d11">5.2. free42 3.0.1 or newer</a></li>
+</ul>
+</li>
+<li><a href="#org59d593e">6. 42s Notes</a>
+<ul>
+<li><a href="#orgc90b6fb">6.1. Character Set</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org38a416d" class="outline-2">
+<h2 id="org38a416d"><span class="section-number-2">1</span> Metaata</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This home for this HTML file is: <a href="https://richmit.github.io/hp42/hp42s-meta.html">https://richmit.github.io/hp42/hp42s-meta.html</a>
+</p>
+
+<p>
+Files related to this document may be found on github: <a href="https://github.com/richmit/hp42">https://github.com/richmit/hp42</a>
+</p>
+
+<ul class="org-ul">
+<li><code>src</code> directory: Contains the org-mode file that generated this HTML document</li>
+<li><code>docs</code> directory: Contains this html document</li>
+<li><code>bin</code> directory: Contains raw program files</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org300332c" class="outline-2">
+<h2 id="org300332c"><span class="section-number-2">2</span> Introduction</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+This org-mode document contains various tools (mostly for Emacs) that help me write programs for the 42s:
+</p>
+
+<ul class="org-ul">
+<li>Elisp function to generate 42s menu programs</li>
+<li>A tool to insert free42 utf-8 characters given a list of character numbers</li>
+<li>Elisp function to generate custom menus (menus of built-in functions and global labels)</li>
+<li>yasnippet templates to help type code</li>
+<li>ElISP Code to translate my code listings into code for free42 &amp; MD42</li>
+<li>42s notes
+<ul class="org-ul">
+<li>free42 utf-8 characters with character numbers</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org410ac80" class="outline-2">
+<h2 id="org410ac80"><span class="section-number-2">3</span> Generateing 42s code</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org01f4b5d" class="outline-3">
+<h3 id="org01f4b5d"><span class="section-number-3">3.1</span> Menus</h3>
+<div class="outline-text-3" id="text-3-1">
+</div>
+<div id="outline-container-org24a33a6" class="outline-4">
+<h4 id="org24a33a6"><span class="section-number-4">3.1.1</span> Generic menu generator</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-generate-42-menu-code</span> (top-lab tbl leaf-function exit-function gen-code) <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">leaf-function "stay" or "exit", exit-function "exit" or "up"</span>
+  (<span style="color: #00ffff;">let*</span> ((min-free-lab  2)
+         (m-code <span style="color: #fa8072;">""</span>)
+         (x-code <span style="color: #fa8072;">""</span>))
+    (<span style="color: #00ffff;">cl-labels</span> ((add-m-code (a) (<span style="color: #00ffff;">setq</span> m-code (concat m-code a <span style="color: #fa8072;">"\n"</span>)))
+                (add-x-code (a) (<span style="color: #00ffff;">setq</span> x-code (concat x-code a <span style="color: #fa8072;">"\n"</span>)))
+                (prc-mnu (menu) (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">or</span> (not (listp menu))
+                                        (null (cdr menu)))
+                                    menu
+                                    (mapcar #'prc-mnu
+                                            (append (list (car menu))
+                                                    (reverse (cl-reduce (<span style="color: #00ffff;">lambda</span> (result cur-elt)
+                                                                          (<span style="color: #00ffff;">let</span> ((last-elt (cl-first result)))
+                                                                            (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">and</span> (listp last-elt)
+                                                                                     (cdr last-elt)
+                                                                                     (cdr cur-elt)
+                                                                                     (string-equal (cl-first last-elt) (cl-first cur-elt)))
+                                                                                (<span style="color: #00ffff;">progn</span> (nconc (cl-first result) (list (cdr cur-elt)))
+                                                                                       result)
+                                                                                (<span style="color: #00ffff;">if</span> (cdr cur-elt)
+                                                                                    (append (list (list (cl-first cur-elt) (cdr cur-elt))) result)
+                                                                                    (append (list (cl-first cur-elt))  result)))))
+                                                                        (cdr menu)
+                                                                        <span style="color: #b0c4de;">:initial-value</span> ()))))))
+                (gen-mnu (plbl lbl menu) (<span style="color: #00ffff;">let*</span> ((num-menu-keys (1- (length menu)))
+                                                (num-menu-page (ceiling (/ num-menu-keys 6.0)))
+                                                (page-labs     (<span style="color: #00ffff;">cl-loop</span> repeat num-menu-page
+                                                                        for i = lbl then min-free-lab
+                                                                        collect i
+                                                                        when (not (= i lbl))
+                                                                        do (<span style="color: #00ffff;">cl-incf</span> min-free-lab)))
+                                                (rec-key-labs     nil)
+                                                (rec-pag-labs     nil))
+                                           (<span style="color: #00ffff;">if</span> (zerop plbl)
+                                               (add-m-code (message <span style="color: #fa8072;">"LBL \"%s\""</span> (cl-first menu))))
+                                           (<span style="color: #00ffff;">cl-loop</span> for mkey-elt in (cdr menu)
+                                                    for mkey-num from 0
+                                                    for page-num = (truncate (/ mkey-num 6))
+                                                    for page-key = (mod mkey-num 6)
+                                                    for mkey-str = (<span style="color: #00ffff;">if</span> (vectorp mkey-elt) (aref mkey-elt 0) (cl-first mkey-elt))
+                                                    when (= page-key 0)
+                                                    do (<span style="color: #00ffff;">progn</span> (add-m-code (message <span style="color: #fa8072;">"LBL %02d            @@@@ Page %d of menu %s"</span> (nth page-num page-labs) (1+ page-num) (cl-first menu)))
+                                                              (add-m-code <span style="color: #fa8072;">"CLMENU"</span>))
+                                                    when (not (string-equal mkey-str <span style="color: #fa8072;">""</span>))
+                                                    do (<span style="color: #00ffff;">progn</span> (add-m-code (message <span style="color: #fa8072;">"\"%s\""</span> mkey-str))
+                                                              (add-m-code (message <span style="color: #fa8072;">"KEY %d %s %02d"</span> (1+ page-key) (<span style="color: #00ffff;">if</span> (vectorp mkey-elt) <span style="color: #fa8072;">"XEQ"</span> <span style="color: #fa8072;">"GTO"</span>) min-free-lab))
+                                                              (<span style="color: #00ffff;">if</span> (vectorp mkey-elt)
+                                                                  (<span style="color: #00ffff;">progn</span> (add-x-code (message <span style="color: #fa8072;">"LBL %02d               @@@@ Action for menu key %s"</span> min-free-lab mkey-str))
+                                                                         (add-x-code (funcall gen-code (aref mkey-elt 1)))
+                                                                         (add-x-code <span style="color: #fa8072;">"RTN"</span>)))
+                                                              (<span style="color: #00ffff;">push</span> min-free-lab rec-key-labs)
+                                                              (<span style="color: #00ffff;">cl-incf</span> min-free-lab)
+                                                              (<span style="color: #00ffff;">push</span> (nth page-num page-labs) rec-pag-labs))
+                                                    when (<span style="color: #00ffff;">or</span> (= page-key 5) (= mkey-num (1- num-menu-keys)))
+                                                    do (<span style="color: #00ffff;">progn</span> (<span style="color: #00ffff;">if</span> (&lt; 1 num-menu-page)
+                                                                  (<span style="color: #00ffff;">progn</span> (add-m-code (message <span style="color: #fa8072;">"KEY 7 GTO %02d"</span> (nth (mod (1- page-num) num-menu-page) page-labs)))
+                                                                         (add-m-code (message <span style="color: #fa8072;">"KEY 8 GTO %02d"</span> (nth (mod (1+ page-num) num-menu-page) page-labs)))))
+                                                              (<span style="color: #00ffff;">if</span> (string-equal exit-function <span style="color: #fa8072;">"up"</span>)
+                                                                  (add-m-code (message <span style="color: #fa8072;">"KEY 9 GTO %02d"</span> plbl))
+                                                                  (add-m-code (message <span style="color: #fa8072;">"KEY 9 GTO %02d"</span> 0)))
+                                                              (add-m-code <span style="color: #fa8072;">"MENU"</span>)
+                                                              (add-m-code <span style="color: #fa8072;">"STOP"</span>)
+                                                              (<span style="color: #00ffff;">if</span> (string-equal leaf-function <span style="color: #fa8072;">"stay"</span>)
+                                                                  (add-m-code (message <span style="color: #fa8072;">"GTO %02d"</span> (nth page-num page-labs)))
+                                                                  (add-m-code (message <span style="color: #fa8072;">"GTO %02d"</span> 0)))))
+                                           (<span style="color: #00ffff;">cl-loop</span> for mkey-elt in (cdr menu)
+                                                    for m-lab in (reverse rec-key-labs)
+                                                    for p-lab in (reverse rec-pag-labs)
+                                                    when (listp mkey-elt)
+                                                    do (gen-mnu p-lab m-lab mkey-elt)))))
+      (gen-mnu 0 1 (prc-mnu (append (list top-lab) (<span style="color: #00ffff;">cl-loop</span> for row in tbl
+                                                           for n from 0
+                                                           for tmp = (split-string (cl-first row) <span style="color: #fa8072;">":"</span>)
+                                                           do (<span style="color: #00ffff;">setf</span> (car (last tmp)) (vector (car (last tmp)) row))
+                                                           collect tmp))))
+      (add-m-code <span style="color: #fa8072;">"LBL 00"</span>)
+      (add-m-code <span style="color: #fa8072;">"EXITALL"</span>)
+      (add-m-code <span style="color: #fa8072;">"RTN"</span>)
+      (<span style="color: #00ffff;">if</span> (&lt; 100 min-free-lab)
+          (<span style="color: #ffc0cb; font-weight: bold;">error</span> <span style="color: #fa8072;">"ERROR: Too many local labels: %d"</span> min-free-lab)))
+      (princ m-code)
+      (princ x-code)
+      (princ (message <span style="color: #fa8072;">"@@@@ Free labels start at: %d\n"</span> min-free-lab))))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orged11e94" class="outline-4">
+<h4 id="orged11e94"><span class="section-number-4">3.1.2</span> For CUSTOM-type Menus</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-custom-x-gen</span> (row) (<span style="color: #00ffff;">let</span> ((blt-in  '(<span style="color: #fa8072;">"%"</span> <span style="color: #fa8072;">"%CH"</span> <span style="color: #fa8072;">"+"</span> <span style="color: #fa8072;">"+/-"</span> <span style="color: #fa8072;">"-"</span> <span style="color: #fa8072;">"1/X"</span> <span style="color: #fa8072;">"10&#8593;X"</span> <span style="color: #fa8072;">"ABS"</span> <span style="color: #fa8072;">"ACOS"</span> <span style="color: #fa8072;">"ACOSH"</span> <span style="color: #fa8072;">"ADV"</span> <span style="color: #fa8072;">"AGRAPH"</span> <span style="color: #fa8072;">"AIP"</span> <span style="color: #fa8072;">"ALENG"</span> <span style="color: #fa8072;">"ALL"</span> <span style="color: #fa8072;">"ALL&#931;"</span> <span style="color: #fa8072;">"AND"</span> <span style="color: #fa8072;">"AOFF"</span> <span style="color: #fa8072;">"AON"</span> <span style="color: #fa8072;">"ARCL"</span> <span style="color: #fa8072;">"AROT"</span> <span style="color: #fa8072;">"ASHF"</span> <span style="color: #fa8072;">"ASIN"</span> <span style="color: #fa8072;">"ASINH"</span> <span style="color: #fa8072;">"ASSIGN"</span> <span style="color: #fa8072;">"ASTO"</span> <span style="color: #fa8072;">"ATAN"</span> <span style="color: #fa8072;">"ATANH"</span> <span style="color: #fa8072;">"ATOX"</span> <span style="color: #fa8072;">"AVIEW"</span>
+                                               <span style="color: #fa8072;">"BASE+"</span> <span style="color: #fa8072;">"BASE+/-"</span> <span style="color: #fa8072;">"BASE-"</span> <span style="color: #fa8072;">"BASE&#215;"</span> <span style="color: #fa8072;">"BASE&#247;"</span> <span style="color: #fa8072;">"BEEP"</span> <span style="color: #fa8072;">"BEST"</span> <span style="color: #fa8072;">"BINM"</span> <span style="color: #fa8072;">"BIT?"</span>  <span style="color: #fa8072;">"BIT?"</span>  <span style="color: #fa8072;">"CF"</span> <span style="color: #fa8072;">"CLA"</span> <span style="color: #fa8072;">"CLD"</span> <span style="color: #fa8072;">"CLKEYS"</span> <span style="color: #fa8072;">"CLLCD"</span> <span style="color: #fa8072;">"CLMENU"</span> <span style="color: #fa8072;">"CLP"</span> <span style="color: #fa8072;">"CLRG"</span> <span style="color: #fa8072;">"CLST"</span> <span style="color: #fa8072;">"CLV"</span> <span style="color: #fa8072;">"CLX"</span> <span style="color: #fa8072;">"CL&#931;"</span> <span style="color: #fa8072;">"COMB"</span> <span style="color: #fa8072;">"COMPLEX"</span> <span style="color: #fa8072;">"CORR"</span> <span style="color: #fa8072;">"COS"</span> <span style="color: #fa8072;">"COSH"</span>
+                                               <span style="color: #fa8072;">"CPX?"</span>  <span style="color: #fa8072;">"CPXRES"</span> <span style="color: #fa8072;">"CROSS"</span> <span style="color: #fa8072;">"CUSTOM"</span> <span style="color: #fa8072;">"DECM"</span> <span style="color: #fa8072;">"DEG"</span> <span style="color: #fa8072;">"DELAY"</span> <span style="color: #fa8072;">"DELR"</span> <span style="color: #fa8072;">"DET"</span> <span style="color: #fa8072;">"DIM"</span> <span style="color: #fa8072;">"DIM?"</span>  <span style="color: #fa8072;">"DOT"</span> <span style="color: #fa8072;">"DSE"</span> <span style="color: #fa8072;">"EDIT"</span> <span style="color: #fa8072;">"EDITN"</span> <span style="color: #fa8072;">"END"</span> <span style="color: #fa8072;">"ENG"</span> <span style="color: #fa8072;">"ENTER"</span> <span style="color: #fa8072;">"EXITALL"</span> <span style="color: #fa8072;">"EXPF"</span> <span style="color: #fa8072;">"E&#8593;X"</span> <span style="color: #fa8072;">"E&#8593;X-1"</span> <span style="color: #fa8072;">"FC?"</span>  <span style="color: #fa8072;">"FC?C"</span> <span style="color: #fa8072;">"FCSTX"</span> <span style="color: #fa8072;">"FCSTY"</span> <span style="color: #fa8072;">"FIX"</span>
+                                               <span style="color: #fa8072;">"FNRM"</span> <span style="color: #fa8072;">"FP"</span> <span style="color: #fa8072;">"FS?"</span>  <span style="color: #fa8072;">"FS?C"</span> <span style="color: #fa8072;">"FUNC"</span> <span style="color: #fa8072;">"GAMMA"</span> <span style="color: #fa8072;">"GETKEY"</span> <span style="color: #fa8072;">"GETM"</span> <span style="color: #fa8072;">"GRAD"</span> <span style="color: #fa8072;">"GROW"</span> <span style="color: #fa8072;">"GTO"</span> <span style="color: #fa8072;">"HEXM"</span> <span style="color: #fa8072;">"HMS+"</span> <span style="color: #fa8072;">"HMS-"</span> <span style="color: #fa8072;">"I+"</span> <span style="color: #fa8072;">"I-"</span> <span style="color: #fa8072;">"INDEX"</span> <span style="color: #fa8072;">"INPUT"</span> <span style="color: #fa8072;">"INSR"</span> <span style="color: #fa8072;">"INTEG"</span> <span style="color: #fa8072;">"INVRT"</span> <span style="color: #fa8072;">"IP"</span> <span style="color: #fa8072;">"ISG"</span> <span style="color: #fa8072;">"J+"</span> <span style="color: #fa8072;">"J-"</span> <span style="color: #fa8072;">"KEY"</span> <span style="color: #fa8072;">"KEYASN"</span> <span style="color: #fa8072;">"L4STK"</span> <span style="color: #fa8072;">"LASTX"</span>
+                                               <span style="color: #fa8072;">"LBL"</span> <span style="color: #fa8072;">"LCLBL"</span> <span style="color: #fa8072;">"LINF"</span> <span style="color: #fa8072;">"LIN&#931;"</span> <span style="color: #fa8072;">"LN"</span> <span style="color: #fa8072;">"LN1+X"</span> <span style="color: #fa8072;">"LOG"</span> <span style="color: #fa8072;">"LOGF"</span> <span style="color: #fa8072;">"LSTO"</span> <span style="color: #fa8072;">"MAN"</span> <span style="color: #fa8072;">"MAT?"</span>  <span style="color: #fa8072;">"MEAN"</span> <span style="color: #fa8072;">"MENU"</span> <span style="color: #fa8072;">"MOD"</span> <span style="color: #fa8072;">"MVAR"</span> <span style="color: #fa8072;">"N!"</span>  <span style="color: #fa8072;">"NEWMAT"</span> <span style="color: #fa8072;">"NOP"</span> <span style="color: #fa8072;">"NORM"</span> <span style="color: #fa8072;">"NOT"</span> <span style="color: #fa8072;">"OCTM"</span> <span style="color: #fa8072;">"OFF"</span> <span style="color: #fa8072;">"OLD"</span> <span style="color: #fa8072;">"ON"</span> <span style="color: #fa8072;">"OR"</span> <span style="color: #fa8072;">"PERM"</span> <span style="color: #fa8072;">"PGMINT"</span> <span style="color: #fa8072;">"PGMSLV"</span> <span style="color: #fa8072;">"PIXEL"</span>
+                                               <span style="color: #fa8072;">"POLAR"</span> <span style="color: #fa8072;">"POSA"</span> <span style="color: #fa8072;">"PRA"</span> <span style="color: #fa8072;">"PRLCD"</span> <span style="color: #fa8072;">"PROFF"</span> <span style="color: #fa8072;">"PROMPT"</span> <span style="color: #fa8072;">"PRON"</span> <span style="color: #fa8072;">"PRSTK"</span> <span style="color: #fa8072;">"PRUSR"</span> <span style="color: #fa8072;">"PRV"</span> <span style="color: #fa8072;">"PRX"</span> <span style="color: #fa8072;">"PR&#931;"</span> <span style="color: #fa8072;">"PSE"</span> <span style="color: #fa8072;">"PUTM"</span> <span style="color: #fa8072;">"PWRF"</span> <span style="color: #fa8072;">"R&lt;&gt;R"</span> <span style="color: #fa8072;">"RAD"</span> <span style="color: #fa8072;">"RAN"</span> <span style="color: #fa8072;">"RCL"</span> <span style="color: #fa8072;">"RCL+"</span> <span style="color: #fa8072;">"RCL-"</span> <span style="color: #fa8072;">"RCLEL"</span> <span style="color: #fa8072;">"RCLIJ"</span> <span style="color: #fa8072;">"RCL&#215;"</span> <span style="color: #fa8072;">"RCL&#247;"</span> <span style="color: #fa8072;">"RDX,"</span> <span style="color: #fa8072;">"RDX."</span>  <span style="color: #fa8072;">"REAL?"</span>
+                                               <span style="color: #fa8072;">"REALRES"</span> <span style="color: #fa8072;">"RECT"</span> <span style="color: #fa8072;">"RND"</span> <span style="color: #fa8072;">"RNRM"</span> <span style="color: #fa8072;">"ROTXY"</span> <span style="color: #fa8072;">"RSUM"</span> <span style="color: #fa8072;">"RTN"</span> <span style="color: #fa8072;">"RTNERR"</span> <span style="color: #fa8072;">"RTNYES"</span> <span style="color: #fa8072;">"RTNNO"</span> <span style="color: #fa8072;">"R&#8593;"</span> <span style="color: #fa8072;">"R&#8595;"</span> <span style="color: #fa8072;">"SCI"</span> <span style="color: #fa8072;">"SDEV"</span> <span style="color: #fa8072;">"SEED"</span> <span style="color: #fa8072;">"SF"</span> <span style="color: #fa8072;">"SIGN"</span> <span style="color: #fa8072;">"SIN"</span> <span style="color: #fa8072;">"SINH"</span> <span style="color: #fa8072;">"SIZE"</span> <span style="color: #fa8072;">"SLOPE"</span> <span style="color: #fa8072;">"SOLVE"</span> <span style="color: #fa8072;">"SQRT"</span> <span style="color: #fa8072;">"STO"</span> <span style="color: #fa8072;">"STO+"</span> <span style="color: #fa8072;">"STO-"</span> <span style="color: #fa8072;">"STOEL"</span> <span style="color: #fa8072;">"STOIJ"</span> <span style="color: #fa8072;">"STOP"</span> <span style="color: #fa8072;">"STO&#215;"</span>
+                                               <span style="color: #fa8072;">"STO&#247;"</span> <span style="color: #fa8072;">"STR?"</span>  <span style="color: #fa8072;">"SUM"</span> <span style="color: #fa8072;">"TAN"</span> <span style="color: #fa8072;">"TANH"</span> <span style="color: #fa8072;">"TONE"</span> <span style="color: #fa8072;">"TRACE"</span> <span style="color: #fa8072;">"TRANS"</span> <span style="color: #fa8072;">"UVEC"</span> <span style="color: #fa8072;">"VARMENU"</span> <span style="color: #fa8072;">"VIEW"</span> <span style="color: #fa8072;">"WMEAN"</span> <span style="color: #fa8072;">"WRAP"</span> <span style="color: #fa8072;">"WSIZE?"</span>  <span style="color: #fa8072;">"X&lt;0?"</span>  <span style="color: #fa8072;">"X&lt;&gt;"</span> <span style="color: #fa8072;">"X&lt;&gt;Y"</span> <span style="color: #fa8072;">"X&lt;Y?"</span>  <span style="color: #fa8072;">"X=0?"</span>  <span style="color: #fa8072;">"X=Y?"</span>  <span style="color: #fa8072;">"X&gt;0?"</span>  <span style="color: #fa8072;">"X&gt;Y?"</span>  <span style="color: #fa8072;">"XEQ"</span> <span style="color: #fa8072;">"XTOA"</span> <span style="color: #fa8072;">"X&#8593;2"</span> <span style="color: #fa8072;">"X&#8800;0?"</span>
+                                               <span style="color: #fa8072;">"X&#8800;Y?"</span>  <span style="color: #fa8072;">"X&#8804;0?"</span>  <span style="color: #fa8072;">"X&#8804;Y?"</span>  <span style="color: #fa8072;">"X&#8805;0?"</span>  <span style="color: #fa8072;">"X&#8805;Y?"</span>  <span style="color: #fa8072;">"X&#8805;Y?"</span>  <span style="color: #fa8072;">"YINT"</span> <span style="color: #fa8072;">"Y&#8593;X"</span> <span style="color: #fa8072;">"[FIND]"</span> <span style="color: #fa8072;">"[MAX]"</span> <span style="color: #fa8072;">"[MIN]"</span> <span style="color: #fa8072;">"&#215;"</span> <span style="color: #fa8072;">"&#247;"</span> <span style="color: #fa8072;">"&#931;+"</span> <span style="color: #fa8072;">"&#931;-"</span> <span style="color: #fa8072;">"&#931;REG"</span> <span style="color: #fa8072;">"&#931;REG?"</span>  <span style="color: #fa8072;">"&#8592;"</span> <span style="color: #fa8072;">"&#8593;"</span> <span style="color: #fa8072;">"&#8594;"</span> <span style="color: #fa8072;">"&#8594;DEC"</span> <span style="color: #fa8072;">"&#8594;DEG"</span> <span style="color: #fa8072;">"&#8594;HMS"</span> <span style="color: #fa8072;">"&#8594;HR"</span> <span style="color: #fa8072;">"&#8594;OCT"</span> <span style="color: #fa8072;">"&#8594;POL"</span> <span style="color: #fa8072;">"&#8594;RAD"</span> <span style="color: #fa8072;">"&#8594;REC"</span> <span style="color: #fa8072;">"&#8595;"</span>
+                                               <span style="color: #fa8072;">"DDAYS"</span> <span style="color: #fa8072;">"DOW"</span> <span style="color: #fa8072;">"CLK12"</span> <span style="color: #fa8072;">"CLK24"</span> <span style="color: #fa8072;">"DMY"</span> <span style="color: #fa8072;">"MDY"</span> <span style="color: #fa8072;">"YMD"</span> <span style="color: #fa8072;">"DATE"</span> <span style="color: #fa8072;">"TIME"</span> <span style="color: #fa8072;">"DATE+"</span> <span style="color: #fa8072;">"PI"</span>))
+                                    (cm-lb (<span style="color: #00ffff;">if</span> (not (string-equal <span style="color: #fa8072;">""</span> (cl-second row))) 
+                                               (cl-second row)
+                                               (car (last (split-string (cl-first row) <span style="color: #fa8072;">":"</span>))))))
+                                (<span style="color: #00ffff;">if</span> (cl-position cm-lb blt-in <span style="color: #b0c4de;">:test</span> #'string-equal)
+                                    (message <span style="color: #fa8072;">"%s"</span> cm-lb)
+                                    (message <span style="color: #fa8072;">"XEQ \"%s\""</span> cm-lb))))
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgb785c92" class="outline-2">
+<h2 id="orgb785c92"><span class="section-number-2">4</span> Emacs Helper Stuff</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orgc3c543c" class="outline-3">
+<h3 id="orgc3c543c"><span class="section-number-3">4.1</span> Emacs function to insert charcters given a list of character codes</h3>
+<div class="outline-text-3" id="text-4-1">
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-ins42char</span> (charn)
+  <span style="color: #f08080;">"Insert free42 character at point."</span>
+  (<span style="color: #00ffff;">interactive</span> <span style="color: #fa8072;">"sCharacter Number(s): "</span>)
+  (<span style="color: #00ffff;">if</span> charn
+      (<span style="color: #00ffff;">cl-loop</span> for c in (split-string charn)
+               do (insert (nth (eval (car (read-from-string c))) '(<span style="color: #fa8072;">"&#247;"</span> <span style="color: #fa8072;">"&#215;"</span> <span style="color: #fa8072;">"&#8730;"</span>  <span style="color: #fa8072;">"&#8747;"</span> <span style="color: #fa8072;">"&#9618;"</span> <span style="color: #fa8072;">"&#931;"</span> <span style="color: #fa8072;">"&#9656;"</span> <span style="color: #fa8072;">"&#960;"</span> <span style="color: #fa8072;">"&#191;"</span> <span style="color: #fa8072;">"&#8804;"</span>     <span style="color: #fa8072;">"[LF]"</span> <span style="color: #fa8072;">"&#8805;"</span>     <span style="color: #fa8072;">"&#8800;"</span>  <span style="color: #fa8072;">"&#8629;"</span> <span style="color: #fa8072;">"&#8595;"</span> <span style="color: #fa8072;">"&#8594;"</span> 
+                                                                   <span style="color: #fa8072;">"&#8592;"</span> <span style="color: #fa8072;">"&#956;"</span> <span style="color: #fa8072;">"&#163;"</span>  <span style="color: #fa8072;">"&#176;"</span> <span style="color: #fa8072;">"&#197;"</span> <span style="color: #fa8072;">"&#209;"</span> <span style="color: #fa8072;">"&#196;"</span> <span style="color: #fa8072;">"&#8737;"</span> <span style="color: #fa8072;">"&#7431;"</span> <span style="color: #fa8072;">"&#198;"</span>     <span style="color: #fa8072;">"&#8230;"</span>    <span style="color: #fa8072;">"[ESC]"</span> <span style="color: #fa8072;">"&#214;"</span>  <span style="color: #fa8072;">"&#220;"</span> <span style="color: #fa8072;">"&#9618;"</span> <span style="color: #fa8072;">"&#8226;"</span>  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">CHAR 30 &amp; CHAR 4 are the same unicode.  Not sure how to type a char 30 into a string...</span>
+                                                                   <span style="color: #fa8072;">" "</span> <span style="color: #fa8072;">"!"</span> <span style="color: #fa8072;">"\""</span> <span style="color: #fa8072;">"#"</span> <span style="color: #fa8072;">"$"</span> <span style="color: #fa8072;">"%"</span> <span style="color: #fa8072;">"&amp;"</span> <span style="color: #fa8072;">"'"</span> <span style="color: #fa8072;">"("</span> <span style="color: #fa8072;">")"</span>     <span style="color: #fa8072;">"*"</span>    <span style="color: #fa8072;">"+"</span>     <span style="color: #fa8072;">","</span>  <span style="color: #fa8072;">"-"</span> <span style="color: #fa8072;">"."</span> <span style="color: #fa8072;">"/"</span> 
+                                                                   <span style="color: #fa8072;">"0"</span> <span style="color: #fa8072;">"1"</span> <span style="color: #fa8072;">"2"</span>  <span style="color: #fa8072;">"3"</span> <span style="color: #fa8072;">"4"</span> <span style="color: #fa8072;">"5"</span> <span style="color: #fa8072;">"6"</span> <span style="color: #fa8072;">"7"</span> <span style="color: #fa8072;">"8"</span> <span style="color: #fa8072;">"9"</span>     <span style="color: #fa8072;">":"</span>    <span style="color: #fa8072;">";"</span>     <span style="color: #fa8072;">"&lt;"</span>  <span style="color: #fa8072;">"="</span> <span style="color: #fa8072;">"&gt;"</span> <span style="color: #fa8072;">"?"</span>
+                                                                   <span style="color: #fa8072;">"@"</span> <span style="color: #fa8072;">"A"</span> <span style="color: #fa8072;">"B"</span>  <span style="color: #fa8072;">"C"</span> <span style="color: #fa8072;">"D"</span> <span style="color: #fa8072;">"E"</span> <span style="color: #fa8072;">"F"</span> <span style="color: #fa8072;">"G"</span> <span style="color: #fa8072;">"H"</span> <span style="color: #fa8072;">"I"</span>     <span style="color: #fa8072;">"J"</span>    <span style="color: #fa8072;">"K"</span>     <span style="color: #fa8072;">"L"</span>  <span style="color: #fa8072;">"M"</span> <span style="color: #fa8072;">"N"</span> <span style="color: #fa8072;">"O"</span>
+                                                                   <span style="color: #fa8072;">"P"</span> <span style="color: #fa8072;">"Q"</span> <span style="color: #fa8072;">"R"</span>  <span style="color: #fa8072;">"S"</span> <span style="color: #fa8072;">"T"</span> <span style="color: #fa8072;">"U"</span> <span style="color: #fa8072;">"V"</span> <span style="color: #fa8072;">"W"</span> <span style="color: #fa8072;">"X"</span> <span style="color: #fa8072;">"Y"</span>     <span style="color: #fa8072;">"Z"</span>    <span style="color: #fa8072;">"["</span>     <span style="color: #fa8072;">"\\"</span> <span style="color: #fa8072;">"]"</span> <span style="color: #fa8072;">"&#8593;"</span> <span style="color: #fa8072;">"_"</span>
+                                                                   <span style="color: #fa8072;">"`"</span> <span style="color: #fa8072;">"a"</span> <span style="color: #fa8072;">"b"</span>  <span style="color: #fa8072;">"c"</span> <span style="color: #fa8072;">"d"</span> <span style="color: #fa8072;">"e"</span> <span style="color: #fa8072;">"f"</span> <span style="color: #fa8072;">"g"</span> <span style="color: #fa8072;">"h"</span> <span style="color: #fa8072;">"i"</span>     <span style="color: #fa8072;">"j"</span>    <span style="color: #fa8072;">"k"</span>     <span style="color: #fa8072;">"l"</span>  <span style="color: #fa8072;">"m"</span> <span style="color: #fa8072;">"n"</span> <span style="color: #fa8072;">"o"</span>
+                                                                   <span style="color: #fa8072;">"p"</span> <span style="color: #fa8072;">"q"</span> <span style="color: #fa8072;">"r"</span>  <span style="color: #fa8072;">"s"</span> <span style="color: #fa8072;">"t"</span> <span style="color: #fa8072;">"u"</span> <span style="color: #fa8072;">"v"</span> <span style="color: #fa8072;">"w"</span> <span style="color: #fa8072;">"x"</span> <span style="color: #fa8072;">"y"</span>     <span style="color: #fa8072;">"z"</span>    <span style="color: #fa8072;">"{"</span>     <span style="color: #fa8072;">"|"</span>  <span style="color: #fa8072;">"}"</span> <span style="color: #fa8072;">"~"</span> <span style="color: #fa8072;">"&#9500;"</span>
+                                                                   <span style="color: #fa8072;">":"</span> <span style="color: #fa8072;">"&#655;"</span>))))))
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgc833e88" class="outline-3">
+<h3 id="orgc833e88"><span class="section-number-3">4.2</span> Emacs Mode for 42s Code</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+This isn't really a proper mode for 42s code.  Just a quick hack with <code>define-generic-mode</code> to get some syntax highlighting &#x2013; which doesn't fully work as
+some of the characters in keywords are recognized as punctuation.  Still it makes listings a little better.  Someday I may take the time to write a real mode,
+but this works for now.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #00ffff;">define-generic-mode</span> '<span style="color: #00fa9a; font-weight: bold;">hp42s-mode</span>
+      '(<span style="color: #fa8072;">"@@@@"</span> <span style="color: #fa8072;">"@@"</span>)
+      '(<span style="color: #fa8072;">"%"</span> <span style="color: #fa8072;">"%CH"</span> <span style="color: #fa8072;">"+"</span> <span style="color: #fa8072;">"+/-"</span> <span style="color: #fa8072;">"-"</span> <span style="color: #fa8072;">"1/X"</span> <span style="color: #fa8072;">"10&#8593;X"</span> <span style="color: #fa8072;">"ABS"</span> <span style="color: #fa8072;">"ACOS"</span> <span style="color: #fa8072;">"ACOSH"</span> <span style="color: #fa8072;">"ADV"</span> <span style="color: #fa8072;">"AGRAPH"</span> <span style="color: #fa8072;">"AIP"</span> <span style="color: #fa8072;">"ALENG"</span> <span style="color: #fa8072;">"ALL"</span> <span style="color: #fa8072;">"ALL&#931;"</span> <span style="color: #fa8072;">"AND"</span> <span style="color: #fa8072;">"AOFF"</span> <span style="color: #fa8072;">"AON"</span> <span style="color: #fa8072;">"ARCL"</span> <span style="color: #fa8072;">"AROT"</span> <span style="color: #fa8072;">"ASHF"</span> <span style="color: #fa8072;">"ASIN"</span> <span style="color: #fa8072;">"ASINH"</span> <span style="color: #fa8072;">"ASSIGN"</span> <span style="color: #fa8072;">"ASTO"</span> <span style="color: #fa8072;">"ATAN"</span> <span style="color: #fa8072;">"ATANH"</span> <span style="color: #fa8072;">"ATOX"</span> <span style="color: #fa8072;">"AVIEW"</span>
+        <span style="color: #fa8072;">"BASE+"</span> <span style="color: #fa8072;">"BASE+/-"</span> <span style="color: #fa8072;">"BASE-"</span> <span style="color: #fa8072;">"BASE&#215;"</span> <span style="color: #fa8072;">"BASE&#247;"</span> <span style="color: #fa8072;">"BEEP"</span> <span style="color: #fa8072;">"BEST"</span> <span style="color: #fa8072;">"BINM"</span> <span style="color: #fa8072;">"BIT"</span>  <span style="color: #fa8072;">"BIT"</span>  <span style="color: #fa8072;">"CF"</span> <span style="color: #fa8072;">"CLA"</span> <span style="color: #fa8072;">"CLD"</span> <span style="color: #fa8072;">"CLKEYS"</span> <span style="color: #fa8072;">"CLLCD"</span> <span style="color: #fa8072;">"CLMENU"</span> <span style="color: #fa8072;">"CLP"</span> <span style="color: #fa8072;">"CLRG"</span> <span style="color: #fa8072;">"CLST"</span> <span style="color: #fa8072;">"CLV"</span> <span style="color: #fa8072;">"CLX"</span> <span style="color: #fa8072;">"CL&#931;"</span> <span style="color: #fa8072;">"COMB"</span> <span style="color: #fa8072;">"COMPLEX"</span> <span style="color: #fa8072;">"CORR"</span> <span style="color: #fa8072;">"COS"</span> <span style="color: #fa8072;">"COSH"</span>
+        <span style="color: #fa8072;">"CPX"</span>  <span style="color: #fa8072;">"CPXRES"</span> <span style="color: #fa8072;">"CROSS"</span> <span style="color: #fa8072;">"CUSTOM"</span> <span style="color: #fa8072;">"DECM"</span> <span style="color: #fa8072;">"DEG"</span> <span style="color: #fa8072;">"DELAY"</span> <span style="color: #fa8072;">"DELR"</span> <span style="color: #fa8072;">"DET"</span> <span style="color: #fa8072;">"DIM"</span> <span style="color: #fa8072;">"DIM"</span>  <span style="color: #fa8072;">"DOT"</span> <span style="color: #fa8072;">"DSE"</span> <span style="color: #fa8072;">"EDIT"</span> <span style="color: #fa8072;">"EDITN"</span> <span style="color: #fa8072;">"END"</span> <span style="color: #fa8072;">"ENG"</span> <span style="color: #fa8072;">"ENTER"</span> <span style="color: #fa8072;">"EXITALL"</span> <span style="color: #fa8072;">"EXPF"</span> <span style="color: #fa8072;">"E&#8593;X"</span> <span style="color: #fa8072;">"E&#8593;X-1"</span> <span style="color: #fa8072;">"FC"</span>  <span style="color: #fa8072;">"FC?C"</span> <span style="color: #fa8072;">"FCSTX"</span> <span style="color: #fa8072;">"FCSTY"</span> <span style="color: #fa8072;">"FIX"</span>
+        <span style="color: #fa8072;">"FNRM"</span> <span style="color: #fa8072;">"FP"</span> <span style="color: #fa8072;">"FS"</span>  <span style="color: #fa8072;">"FS?C"</span> <span style="color: #fa8072;">"FUNC"</span> <span style="color: #fa8072;">"GAMMA"</span> <span style="color: #fa8072;">"GETKEY"</span> <span style="color: #fa8072;">"GETM"</span> <span style="color: #fa8072;">"GRAD"</span> <span style="color: #fa8072;">"GROW"</span> <span style="color: #fa8072;">"GTO"</span> <span style="color: #fa8072;">"HEXM"</span> <span style="color: #fa8072;">"HMS+"</span> <span style="color: #fa8072;">"HMS-"</span> <span style="color: #fa8072;">"I+"</span> <span style="color: #fa8072;">"I-"</span> <span style="color: #fa8072;">"INDEX"</span> <span style="color: #fa8072;">"INPUT"</span> <span style="color: #fa8072;">"INSR"</span> <span style="color: #fa8072;">"INTEG"</span> <span style="color: #fa8072;">"INVRT"</span> <span style="color: #fa8072;">"IP"</span> <span style="color: #fa8072;">"ISG"</span> <span style="color: #fa8072;">"J+"</span> <span style="color: #fa8072;">"J-"</span> <span style="color: #fa8072;">"KEY"</span> <span style="color: #fa8072;">"KEYASN"</span> <span style="color: #fa8072;">"L4STK"</span> <span style="color: #fa8072;">"LASTX"</span>
+        <span style="color: #fa8072;">"LBL"</span> <span style="color: #fa8072;">"LCLBL"</span> <span style="color: #fa8072;">"LINF"</span> <span style="color: #fa8072;">"LIN&#931;"</span> <span style="color: #fa8072;">"LN"</span> <span style="color: #fa8072;">"LN1+X"</span> <span style="color: #fa8072;">"LOG"</span> <span style="color: #fa8072;">"LOGF"</span> <span style="color: #fa8072;">"LSTO"</span> <span style="color: #fa8072;">"MAN"</span> <span style="color: #fa8072;">"MAT"</span>  <span style="color: #fa8072;">"MEAN"</span> <span style="color: #fa8072;">"MENU"</span> <span style="color: #fa8072;">"MOD"</span> <span style="color: #fa8072;">"MVAR"</span> <span style="color: #fa8072;">"N!"</span>  <span style="color: #fa8072;">"NEWMAT"</span> <span style="color: #fa8072;">"NOP"</span> <span style="color: #fa8072;">"NORM"</span> <span style="color: #fa8072;">"NOT"</span> <span style="color: #fa8072;">"OCTM"</span> <span style="color: #fa8072;">"OFF"</span> <span style="color: #fa8072;">"OLD"</span> <span style="color: #fa8072;">"ON"</span> <span style="color: #fa8072;">"OR"</span> <span style="color: #fa8072;">"PERM"</span> <span style="color: #fa8072;">"PGMINT"</span> <span style="color: #fa8072;">"PGMSLV"</span> <span style="color: #fa8072;">"PIXEL"</span>
+        <span style="color: #fa8072;">"POLAR"</span> <span style="color: #fa8072;">"POSA"</span> <span style="color: #fa8072;">"PRA"</span> <span style="color: #fa8072;">"PRLCD"</span> <span style="color: #fa8072;">"PROFF"</span> <span style="color: #fa8072;">"PROMPT"</span> <span style="color: #fa8072;">"PRON"</span> <span style="color: #fa8072;">"PRSTK"</span> <span style="color: #fa8072;">"PRUSR"</span> <span style="color: #fa8072;">"PRV"</span> <span style="color: #fa8072;">"PRX"</span> <span style="color: #fa8072;">"PR&#931;"</span> <span style="color: #fa8072;">"PSE"</span> <span style="color: #fa8072;">"PUTM"</span> <span style="color: #fa8072;">"PWRF"</span> <span style="color: #fa8072;">"R&lt;&gt;R"</span> <span style="color: #fa8072;">"RAD"</span> <span style="color: #fa8072;">"RAN"</span> <span style="color: #fa8072;">"RCL"</span> <span style="color: #fa8072;">"RCL+"</span> <span style="color: #fa8072;">"RCL-"</span> <span style="color: #fa8072;">"RCLEL"</span> <span style="color: #fa8072;">"RCLIJ"</span> <span style="color: #fa8072;">"RCL&#215;"</span> <span style="color: #fa8072;">"RCL&#247;"</span> <span style="color: #fa8072;">"RDX,"</span> <span style="color: #fa8072;">"RDX."</span>  <span style="color: #fa8072;">"REAL"</span>
+        <span style="color: #fa8072;">"REALRES"</span> <span style="color: #fa8072;">"RECT"</span> <span style="color: #fa8072;">"RND"</span> <span style="color: #fa8072;">"RNRM"</span> <span style="color: #fa8072;">"ROTXY"</span> <span style="color: #fa8072;">"RSUM"</span> <span style="color: #fa8072;">"RTN"</span> <span style="color: #fa8072;">"RTNERR"</span> <span style="color: #fa8072;">"R&#8593;"</span> <span style="color: #fa8072;">"R&#8595;"</span> <span style="color: #fa8072;">"SCI"</span> <span style="color: #fa8072;">"SDEV"</span> <span style="color: #fa8072;">"SEED"</span> <span style="color: #fa8072;">"SF"</span> <span style="color: #fa8072;">"SIGN"</span> <span style="color: #fa8072;">"SIN"</span> <span style="color: #fa8072;">"SINH"</span> <span style="color: #fa8072;">"SIZE"</span> <span style="color: #fa8072;">"SLOPE"</span> <span style="color: #fa8072;">"SOLVE"</span> <span style="color: #fa8072;">"SQRT"</span> <span style="color: #fa8072;">"STO"</span> <span style="color: #fa8072;">"STO+"</span> <span style="color: #fa8072;">"STO-"</span> <span style="color: #fa8072;">"STOEL"</span> <span style="color: #fa8072;">"STOIJ"</span> <span style="color: #fa8072;">"STOP"</span> <span style="color: #fa8072;">"STO&#215;"</span>
+        <span style="color: #fa8072;">"STO&#247;"</span> <span style="color: #fa8072;">"STR"</span>  <span style="color: #fa8072;">"SUM"</span> <span style="color: #fa8072;">"TAN"</span> <span style="color: #fa8072;">"TANH"</span> <span style="color: #fa8072;">"TONE"</span> <span style="color: #fa8072;">"TRACE"</span> <span style="color: #fa8072;">"TRANS"</span> <span style="color: #fa8072;">"UVEC"</span> <span style="color: #fa8072;">"VARMENU"</span> <span style="color: #fa8072;">"VIEW"</span> <span style="color: #fa8072;">"WMEAN"</span> <span style="color: #fa8072;">"WRAP"</span> <span style="color: #fa8072;">"WSIZE"</span>  <span style="color: #fa8072;">"X&lt;0"</span>  <span style="color: #fa8072;">"X&lt;&gt;"</span> <span style="color: #fa8072;">"X&lt;&gt;Y"</span> <span style="color: #fa8072;">"X&lt;Y"</span>  <span style="color: #fa8072;">"X=0"</span>  <span style="color: #fa8072;">"X=0"</span> <span style="color: #fa8072;">"X=Y"</span>  <span style="color: #fa8072;">"X&gt;0"</span>  <span style="color: #fa8072;">"X&gt;Y"</span>  <span style="color: #fa8072;">"XEQ"</span> <span style="color: #fa8072;">"XTOA"</span> <span style="color: #fa8072;">"X&#8593;2"</span> <span style="color: #fa8072;">"X&#8800;0"</span>
+        <span style="color: #fa8072;">"X&#8800;Y"</span>  <span style="color: #fa8072;">"X&#8804;0"</span>  <span style="color: #fa8072;">"X&#8804;Y"</span>  <span style="color: #fa8072;">"X&#8805;0"</span>  <span style="color: #fa8072;">"X&#8805;Y"</span>  <span style="color: #fa8072;">"X&#8805;Y"</span>  <span style="color: #fa8072;">"YINT"</span> <span style="color: #fa8072;">"Y&#8593;X"</span> <span style="color: #fa8072;">"[FIND]"</span> <span style="color: #fa8072;">"[MAX]"</span> <span style="color: #fa8072;">"[MIN]"</span> <span style="color: #fa8072;">"&#215;"</span> <span style="color: #fa8072;">"&#247;"</span> <span style="color: #fa8072;">"&#931;+"</span> <span style="color: #fa8072;">"&#931;-"</span> <span style="color: #fa8072;">"&#931;REG"</span> <span style="color: #fa8072;">"&#931;REG"</span>  <span style="color: #fa8072;">"&#8592;"</span> <span style="color: #fa8072;">"&#8593;"</span> <span style="color: #fa8072;">"&#8594;"</span> <span style="color: #fa8072;">"&#8594;DEC"</span> <span style="color: #fa8072;">"&#8594;DEG"</span> <span style="color: #fa8072;">"&#8594;HMS"</span> <span style="color: #fa8072;">"&#8594;HR"</span> <span style="color: #fa8072;">"&#8594;OCT"</span> <span style="color: #fa8072;">"&#8594;POL"</span> <span style="color: #fa8072;">"&#8594;RAD"</span> <span style="color: #fa8072;">"&#8594;REC"</span> <span style="color: #fa8072;">"&#8595;"</span>
+        <span style="color: #fa8072;">"DDAYS"</span> <span style="color: #fa8072;">"DOW"</span> <span style="color: #fa8072;">"CLK12"</span> <span style="color: #fa8072;">"CLK24"</span> <span style="color: #fa8072;">"DMY"</span> <span style="color: #fa8072;">"MDY"</span> <span style="color: #fa8072;">"YMD"</span> <span style="color: #fa8072;">"DATE"</span> <span style="color: #fa8072;">"TIME"</span> <span style="color: #fa8072;">"ADATE"</span> <span style="color: #fa8072;">"ATIME"</span> <span style="color: #fa8072;">"DATE+"</span> <span style="color: #fa8072;">"XEQ IND ST"</span> <span style="color: #fa8072;">"XEQ IND"</span> <span style="color: #fa8072;">"GTO IND"</span> <span style="color: #fa8072;">"GTO IND ST"</span> <span style="color: #fa8072;">"STO IND ST"</span> <span style="color: #fa8072;">"STO+ IND ST"</span> <span style="color: #fa8072;">"STO- IND ST"</span> <span style="color: #fa8072;">"STOEL IND ST"</span> 
+        <span style="color: #fa8072;">"STOIJ IND ST"</span> <span style="color: #fa8072;">"STOP IND ST"</span> <span style="color: #fa8072;">"STO&#215; IND ST"</span> <span style="color: #fa8072;">"STO&#247; IND ST"</span> <span style="color: #fa8072;">"STO ST"</span> <span style="color: #fa8072;">"STO+ ST"</span> <span style="color: #fa8072;">"STO- ST"</span> <span style="color: #fa8072;">"STOEL ST"</span> <span style="color: #fa8072;">"STOIJ ST"</span> <span style="color: #fa8072;">"STOP ST"</span> <span style="color: #fa8072;">"STO&#215; ST"</span> <span style="color: #fa8072;">"STO&#247; ST"</span> <span style="color: #fa8072;">"RCL IND ST"</span> <span style="color: #fa8072;">"RCL+ IND ST"</span> <span style="color: #fa8072;">"RCL- IND ST"</span> <span style="color: #fa8072;">"RCLEL IND ST"</span>
+        <span style="color: #fa8072;">"RCLIJ IND ST"</span> <span style="color: #fa8072;">"RCL&#215; IND ST"</span> <span style="color: #fa8072;">"RCL&#247; IND ST"</span> <span style="color: #fa8072;">"RCL ST"</span> <span style="color: #fa8072;">"RCL+ ST"</span> <span style="color: #fa8072;">"RCL- ST"</span> <span style="color: #fa8072;">"RCLEL ST"</span>
+        <span style="color: #fa8072;">"RCLIJ ST"</span> <span style="color: #fa8072;">"RCL&#215; ST"</span> <span style="color: #fa8072;">"RCL&#247; ST"</span>
+        <span style="color: #fa8072;">"RTNNO"</span> <span style="color: #fa8072;">"RTNYES"</span> <span style="color: #fa8072;">"PI"</span>
+        )
+      '((<span style="color: #fa8072;">"@@## REQ:.*"</span> . font-lock-preprocessor-face)) <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Not sure why this is broken. </span>
+      '(<span style="color: #fa8072;">".42s\\'"</span>)
+      nil
+      <span style="color: #f08080;">"Major mode for editing HP-42s programs"</span>)
+</pre>
+</div>
+
+<pre class="example">
+hp42s-mode
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org2b485f5" class="outline-3">
+<h3 id="org2b485f5"><span class="section-number-3">4.3</span> yas templates</h3>
+<div class="outline-text-3" id="text-4-3">
+<div class="org-src-container">
+<pre class="src src-snippet"><span style="color: #ff7f24;"># -*- mode: snippet -*-</span>
+<span style="color: #ff7f24;"># name: if-then-end</span>
+<span style="color: #ff7f24;"># key: if</span>
+<span style="color: #ff7f24;"># --</span>
+...?   @@@@ IF-BEGIN (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
+GTO <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span>1<span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (string-to-number yas-text))<span style="color: #00ffff;">}</span>
+GTO <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>
+LBL <span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span> @@@@ IF-THEN (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
+...    @@@@ True Code (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
+LBL <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span> @@@@ IF-END (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
+
+
+<span style="color: #ff7f24;"># -*- mode: snippet -*-</span>
+<span style="color: #ff7f24;"># name: if-then-else-end</span>
+<span style="color: #ff7f24;"># key: ife</span>
+<span style="color: #ff7f24;"># --</span>
+...?   @@@@ IF-BEGIN (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 2 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
+GTO <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span>1<span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (string-to-number yas-text))<span style="color: #00ffff;">}</span>
+GTO <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>
+LBL <span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span> @@@@ IF-THEN (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 2 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
+...    @@@@ True Code (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 2 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
+GTO <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 2 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>
+LBL <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span> @@@@ IF-ELSE (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 2 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
+...    @@@@ False Code (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 2 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
+LBL <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 2 (string-to-number yas-text)))<span style="color: #00ffff;">}</span> @@@@ IF-END (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 2 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
+
+
+<span style="color: #ff7f24;"># -*- mode: snippet -*-</span>
+<span style="color: #ff7f24;"># name: if-then-end-return</span>
+<span style="color: #ff7f24;"># key: ifr</span>
+<span style="color: #ff7f24;"># --</span>
+...?      @@@@ IF-BEGIN (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
+GTO <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span>1<span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (string-to-number yas-text))<span style="color: #00ffff;">}</span>    @@@@ IF-FALSE-BEGIN (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
+...         @@@@ False Code (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
+RTN       @@@@ IF-FALSE-END (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
+LBL <span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>    @@@@ IF-TRUE-BEGIN (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
+...         @@@@ True Code (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
+RTN       @@@@ IF-TRUE-END (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org65db5bf" class="outline-2">
+<h2 id="org65db5bf"><span class="section-number-2">5</span> Prepare Code For Conversion</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+I include comments like <code>@@##</code> that I use like compiler directives in C.  They provide a way to remove lines of code that are incompatible or unnecessary for
+the target version of free42.  It's a bit of a hack, but it lets me maintain one program for diff-rent versions of free42.
+</p>
+</div>
+
+<div id="outline-container-org8d72ad0" class="outline-3">
+<h3 id="org8d72ad0"><span class="section-number-3">5.1</span> DM42 DMCP-3.20 / DM42-3.17</h3>
+<div class="outline-text-3" id="text-5-1">
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #00ffff;">progn</span>
+  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap lines requireing a newer free24</span>
+  (query-replace-regexp <span style="color: #fa8072;">"^.*@@## REQ:free42&gt;=</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">(</span><span style="color: #fa8072;">[0-9.]+</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">)</span><span style="color: #fa8072;">$"</span> '(replace-eval-replacement replace-quote (<span style="color: #00ffff;">if</span> (version&lt; <span style="color: #fa8072;">"2.5.20"</span> (match-string 1)) <span style="color: #fa8072;">""</span> (match-string 0))) nil nil nil nil nil)
+  (query-replace-regexp <span style="color: #fa8072;">"^.*@@## USE:free42&gt;=</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">(</span><span style="color: #fa8072;">[0-9.]+</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">)</span><span style="color: #fa8072;">$"</span> '(replace-eval-replacement replace-quote (<span style="color: #00ffff;">if</span> (version&lt; <span style="color: #fa8072;">"2.5.20"</span> (match-string 1)) <span style="color: #fa8072;">""</span> (match-string 0))) nil nil nil nil nil)
+  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap comment lines</span>
+  (delete-matching-lines <span style="color: #fa8072;">"^ *@@@@.*$"</span> nil nil t)
+  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap directive comments</span>
+  (query-replace-regexp <span style="color: #fa8072;">" +@@## ...:.*$"</span> <span style="color: #fa8072;">""</span> nil nil nil nil nil)
+  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap comments</span>
+  (query-replace-regexp <span style="color: #fa8072;">" +@@@@.*$"</span> <span style="color: #fa8072;">""</span> nil nil nil nil nil)
+  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap leading whitespace</span>
+  (query-replace-regexp <span style="color: #fa8072;">"^ +"</span> <span style="color: #fa8072;">""</span> nil nil nil nil nil)
+  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap empty lines</span>
+  (delete-matching-lines <span style="color: #fa8072;">"^ *$"</span> nil nil t))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7950d11" class="outline-3">
+<h3 id="org7950d11"><span class="section-number-3">5.2</span> free42 3.0.1 or newer</h3>
+<div class="outline-text-3" id="text-5-2">
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #00ffff;">progn</span>
+  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap comment lines</span>
+  (beginning-of-buffer)
+  (delete-matching-lines <span style="color: #fa8072;">"^ *@@@@.*$"</span> nil nil t)
+  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap directive comments</span>
+  (beginning-of-buffer)
+  (query-replace-regexp <span style="color: #fa8072;">" +@@## ...:.*$"</span> <span style="color: #fa8072;">""</span> nil nil nil nil nil)
+  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap comments</span>
+  (beginning-of-buffer)
+  (query-replace-regexp <span style="color: #fa8072;">" +@@@@.*$"</span> <span style="color: #fa8072;">""</span> nil nil nil nil nil)
+  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap leading whitespace</span>
+  (beginning-of-buffer)
+  (query-replace-regexp <span style="color: #fa8072;">"^ +"</span> <span style="color: #fa8072;">""</span> nil nil nil nil nil)
+  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap empty lines</span>
+  (beginning-of-buffer)
+  (delete-matching-lines <span style="color: #fa8072;">"^ *$"</span> nil nil t))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org59d593e" class="outline-2">
+<h2 id="org59d593e"><span class="section-number-2">6</span> 42s Notes</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-orgc90b6fb" class="outline-3">
+<h3 id="orgc90b6fb"><span class="section-number-3">6.1</span> Character Set</h3>
+<div class="outline-text-3" id="text-6-1">
+<div class="org-src-container">
+<pre class="src src-text">  0 &#247;
+  1 &#215;
+  2 &#8730;
+  3 &#8747;
+  4 &#9618;
+  5 &#931;
+  6 &#9656;
+  7 &#960;
+  8 &#191;
+  9 &#8804;
+ 10 [LF]
+ 11 &#8805;
+ 12 &#8800;
+ 13 &#8629;
+ 14 &#8595;
+ 15 &#8594;
+ 16 &#8592;
+ 17 &#956;
+ 18 &#163;
+ 19 &#176;
+ 20 &#197;
+ 21 &#209;
+ 22 &#196;
+ 23 &#8737;
+ 24 &#7431;
+ 25 &#198;
+ 26 &#8230;
+ 27 [ESC]
+ 28 &#214;
+ 29 &#220;
+ 30 &#9618;
+ 31 &#8226;
+ 32 [SPACE]
+ 33 !
+ 34 "
+ 35 #
+ 36 $
+ 37 %
+ 38 &amp;
+ 39 '
+ 40 (
+ 41 )
+ 42 *
+ 43 +
+ 44 ,
+ 45 -
+ 46 .
+ 47 /
+ 48 0
+ 49 1
+ 50 2
+ 51 3
+ 52 4
+ 53 5
+ 54 6
+ 55 7
+ 56 8
+ 57 9
+ 58 :
+ 59 ;
+ 60 &lt;
+ 61 =
+ 62 &gt;
+ 63 ?
+ 64 @
+ 65 A
+ 66 B
+ 67 C
+ 68 D
+ 69 E
+ 70 F
+ 71 G
+ 72 H
+ 73 I
+ 74 J
+ 75 K
+ 76 L
+ 77 M
+ 78 N
+ 79 O
+ 80 P
+ 81 Q
+ 82 R
+ 83 S
+ 84 T
+ 85 U
+ 86 V
+ 87 W
+ 88 X
+ 89 Y
+ 90 Z
+ 91 [
+ 92 \
+ 93 ]
+ 94 &#8593;
+ 95 _
+ 96 `
+ 97 a
+ 98 b
+ 99 c
+100 d
+101 e
+102 f
+103 g
+104 h
+105 i
+106 j
+107 k
+108 l
+109 m
+110 n
+111 o
+112 p
+113 q
+114 r
+115 s
+116 t
+117 u
+118 v
+119 w
+120 x
+121 y
+122 z
+123 {
+124 |
+125 }
+126 ~
+127 &#9500;
+128 :
+129 &#655;
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-27 Sat 11:33 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+</div>
+</body>
+</html>

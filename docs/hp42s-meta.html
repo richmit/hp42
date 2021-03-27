@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-03-27 Sat 11:33 -->
+<!-- 2021-03-27 Sat 11:35 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42/hp42s/DM42 Programming Tools</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-03-27 11:33:17</i></td>
+<td class="org-left"><i>2021-03-27 11:35:23</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,42 +241,42 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org38a416d">1. Metaata</a></li>
-<li><a href="#org300332c">2. Introduction</a></li>
-<li><a href="#org410ac80">3. Generateing 42s code</a>
+<li><a href="#org03beb70">1. Metadata</a></li>
+<li><a href="#org2b41441">2. Introduction</a></li>
+<li><a href="#org37ef84a">3. Generateing 42s code</a>
 <ul>
-<li><a href="#org01f4b5d">3.1. Menus</a>
+<li><a href="#org97d9f40">3.1. Menus</a>
 <ul>
-<li><a href="#org24a33a6">3.1.1. Generic menu generator</a></li>
-<li><a href="#orged11e94">3.1.2. For CUSTOM-type Menus</a></li>
+<li><a href="#org32defbd">3.1.1. Generic menu generator</a></li>
+<li><a href="#orgd0d8db5">3.1.2. For CUSTOM-type Menus</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgb785c92">4. Emacs Helper Stuff</a>
+<li><a href="#org78d1b7f">4. Emacs Helper Stuff</a>
 <ul>
-<li><a href="#orgc3c543c">4.1. Emacs function to insert charcters given a list of character codes</a></li>
-<li><a href="#orgc833e88">4.2. Emacs Mode for 42s Code</a></li>
-<li><a href="#org2b485f5">4.3. yas templates</a></li>
+<li><a href="#org2c3cf0c">4.1. Emacs function to insert charcters given a list of character codes</a></li>
+<li><a href="#org37fbf82">4.2. Emacs Mode for 42s Code</a></li>
+<li><a href="#org43bb81e">4.3. yas templates</a></li>
 </ul>
 </li>
-<li><a href="#org65db5bf">5. Prepare Code For Conversion</a>
+<li><a href="#orga3dfa81">5. Prepare Code For Conversion</a>
 <ul>
-<li><a href="#org8d72ad0">5.1. DM42 DMCP-3.20 / DM42-3.17</a></li>
-<li><a href="#org7950d11">5.2. free42 3.0.1 or newer</a></li>
+<li><a href="#orged12cf4">5.1. DM42 DMCP-3.20 / DM42-3.17</a></li>
+<li><a href="#orga6900db">5.2. free42 3.0.1 or newer</a></li>
 </ul>
 </li>
-<li><a href="#org59d593e">6. 42s Notes</a>
+<li><a href="#org0e67ee8">6. 42s Notes</a>
 <ul>
-<li><a href="#orgc90b6fb">6.1. Character Set</a></li>
+<li><a href="#orgdc5b240">6.1. Character Set</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org38a416d" class="outline-2">
-<h2 id="org38a416d"><span class="section-number-2">1</span> Metaata</h2>
+<div id="outline-container-org03beb70" class="outline-2">
+<h2 id="org03beb70"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/hp42s-meta.html">https://richmit.github.io/hp42/hp42s-meta.html</a>
@@ -295,8 +295,8 @@ Files related to this document may be found on github: <a href="https://github.c
 </div>
 
 
-<div id="outline-container-org300332c" class="outline-2">
-<h2 id="org300332c"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-org2b41441" class="outline-2">
+<h2 id="org2b41441"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 This org-mode document contains various tools (mostly for Emacs) that help me write programs for the 42s:
@@ -317,16 +317,16 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
 </div>
 
 
-<div id="outline-container-org410ac80" class="outline-2">
-<h2 id="org410ac80"><span class="section-number-2">3</span> Generateing 42s code</h2>
+<div id="outline-container-org37ef84a" class="outline-2">
+<h2 id="org37ef84a"><span class="section-number-2">3</span> Generateing 42s code</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org01f4b5d" class="outline-3">
-<h3 id="org01f4b5d"><span class="section-number-3">3.1</span> Menus</h3>
+<div id="outline-container-org97d9f40" class="outline-3">
+<h3 id="org97d9f40"><span class="section-number-3">3.1</span> Menus</h3>
 <div class="outline-text-3" id="text-3-1">
 </div>
-<div id="outline-container-org24a33a6" class="outline-4">
-<h4 id="org24a33a6"><span class="section-number-4">3.1.1</span> Generic menu generator</h4>
+<div id="outline-container-org32defbd" class="outline-4">
+<h4 id="org32defbd"><span class="section-number-4">3.1.1</span> Generic menu generator</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-generate-42-menu-code</span> (top-lab tbl leaf-function exit-function gen-code) <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">leaf-function "stay" or "exit", exit-function "exit" or "up"</span>
@@ -417,8 +417,8 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
 </div>
 </div>
 
-<div id="outline-container-orged11e94" class="outline-4">
-<h4 id="orged11e94"><span class="section-number-4">3.1.2</span> For CUSTOM-type Menus</h4>
+<div id="outline-container-orgd0d8db5" class="outline-4">
+<h4 id="orgd0d8db5"><span class="section-number-4">3.1.2</span> For CUSTOM-type Menus</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-custom-x-gen</span> (row) (<span style="color: #00ffff;">let</span> ((blt-in  '(<span style="color: #fa8072;">"%"</span> <span style="color: #fa8072;">"%CH"</span> <span style="color: #fa8072;">"+"</span> <span style="color: #fa8072;">"+/-"</span> <span style="color: #fa8072;">"-"</span> <span style="color: #fa8072;">"1/X"</span> <span style="color: #fa8072;">"10&#8593;X"</span> <span style="color: #fa8072;">"ABS"</span> <span style="color: #fa8072;">"ACOS"</span> <span style="color: #fa8072;">"ACOSH"</span> <span style="color: #fa8072;">"ADV"</span> <span style="color: #fa8072;">"AGRAPH"</span> <span style="color: #fa8072;">"AIP"</span> <span style="color: #fa8072;">"ALENG"</span> <span style="color: #fa8072;">"ALL"</span> <span style="color: #fa8072;">"ALL&#931;"</span> <span style="color: #fa8072;">"AND"</span> <span style="color: #fa8072;">"AOFF"</span> <span style="color: #fa8072;">"AON"</span> <span style="color: #fa8072;">"ARCL"</span> <span style="color: #fa8072;">"AROT"</span> <span style="color: #fa8072;">"ASHF"</span> <span style="color: #fa8072;">"ASIN"</span> <span style="color: #fa8072;">"ASINH"</span> <span style="color: #fa8072;">"ASSIGN"</span> <span style="color: #fa8072;">"ASTO"</span> <span style="color: #fa8072;">"ATAN"</span> <span style="color: #fa8072;">"ATANH"</span> <span style="color: #fa8072;">"ATOX"</span> <span style="color: #fa8072;">"AVIEW"</span>
@@ -446,12 +446,12 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
 
 
 
-<div id="outline-container-orgb785c92" class="outline-2">
-<h2 id="orgb785c92"><span class="section-number-2">4</span> Emacs Helper Stuff</h2>
+<div id="outline-container-org78d1b7f" class="outline-2">
+<h2 id="org78d1b7f"><span class="section-number-2">4</span> Emacs Helper Stuff</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-orgc3c543c" class="outline-3">
-<h3 id="orgc3c543c"><span class="section-number-3">4.1</span> Emacs function to insert charcters given a list of character codes</h3>
+<div id="outline-container-org2c3cf0c" class="outline-3">
+<h3 id="org2c3cf0c"><span class="section-number-3">4.1</span> Emacs function to insert charcters given a list of character codes</h3>
 <div class="outline-text-3" id="text-4-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-ins42char</span> (charn)
@@ -474,8 +474,8 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
 </div>
 
 
-<div id="outline-container-orgc833e88" class="outline-3">
-<h3 id="orgc833e88"><span class="section-number-3">4.2</span> Emacs Mode for 42s Code</h3>
+<div id="outline-container-org37fbf82" class="outline-3">
+<h3 id="org37fbf82"><span class="section-number-3">4.2</span> Emacs Mode for 42s Code</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 This isn't really a proper mode for 42s code.  Just a quick hack with <code>define-generic-mode</code> to get some syntax highlighting &#x2013; which doesn't fully work as
@@ -515,8 +515,8 @@ hp42s-mode
 </div>
 
 
-<div id="outline-container-org2b485f5" class="outline-3">
-<h3 id="org2b485f5"><span class="section-number-3">4.3</span> yas templates</h3>
+<div id="outline-container-org43bb81e" class="outline-3">
+<h3 id="org43bb81e"><span class="section-number-3">4.3</span> yas templates</h3>
 <div class="outline-text-3" id="text-4-3">
 <div class="org-src-container">
 <pre class="src src-snippet"><span style="color: #ff7f24;"># -*- mode: snippet -*-</span>
@@ -564,8 +564,8 @@ RTN       @@@@ IF-TRUE-END (<span style="color: #00ffff;">$</span><span style="c
 </div>
 
 
-<div id="outline-container-org65db5bf" class="outline-2">
-<h2 id="org65db5bf"><span class="section-number-2">5</span> Prepare Code For Conversion</h2>
+<div id="outline-container-orga3dfa81" class="outline-2">
+<h2 id="orga3dfa81"><span class="section-number-2">5</span> Prepare Code For Conversion</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 I include comments like <code>@@##</code> that I use like compiler directives in C.  They provide a way to remove lines of code that are incompatible or unnecessary for
@@ -573,8 +573,8 @@ the target version of free42.  It's a bit of a hack, but it lets me maintain one
 </p>
 </div>
 
-<div id="outline-container-org8d72ad0" class="outline-3">
-<h3 id="org8d72ad0"><span class="section-number-3">5.1</span> DM42 DMCP-3.20 / DM42-3.17</h3>
+<div id="outline-container-orged12cf4" class="outline-3">
+<h3 id="orged12cf4"><span class="section-number-3">5.1</span> DM42 DMCP-3.20 / DM42-3.17</h3>
 <div class="outline-text-3" id="text-5-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">progn</span>
@@ -596,8 +596,8 @@ the target version of free42.  It's a bit of a hack, but it lets me maintain one
 </div>
 </div>
 
-<div id="outline-container-org7950d11" class="outline-3">
-<h3 id="org7950d11"><span class="section-number-3">5.2</span> free42 3.0.1 or newer</h3>
+<div id="outline-container-orga6900db" class="outline-3">
+<h3 id="orga6900db"><span class="section-number-3">5.2</span> free42 3.0.1 or newer</h3>
 <div class="outline-text-3" id="text-5-2">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">progn</span>
@@ -623,12 +623,12 @@ the target version of free42.  It's a bit of a hack, but it lets me maintain one
 </div>
 
 
-<div id="outline-container-org59d593e" class="outline-2">
-<h2 id="org59d593e"><span class="section-number-2">6</span> 42s Notes</h2>
+<div id="outline-container-org0e67ee8" class="outline-2">
+<h2 id="org0e67ee8"><span class="section-number-2">6</span> 42s Notes</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-orgc90b6fb" class="outline-3">
-<h3 id="orgc90b6fb"><span class="section-number-3">6.1</span> Character Set</h3>
+<div id="outline-container-orgdc5b240" class="outline-3">
+<h3 id="orgdc5b240"><span class="section-number-3">6.1</span> Character Set</h3>
 <div class="outline-text-3" id="text-6-1">
 <div class="org-src-container">
 <pre class="src src-text">  0 &#247;
@@ -768,7 +768,7 @@ the target version of free42.  It's a bit of a hack, but it lets me maintain one
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-27 Sat 11:33 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-27 Sat 11:35 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

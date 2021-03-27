@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-03-27 Sat 12:14 -->
+<!-- 2021-03-27 Sat 12:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42/hp42s/DM42 Base-N Tools</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-03-27 12:14:44</i></td>
+<td class="org-left"><i>2021-03-27 12:15:50</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,28 +241,28 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org48d2006">1. Metadata</a></li>
-<li><a href="#org16aa980">2. Introduction</a></li>
-<li><a href="#org1c1ae12">3. Tiny Number Printing</a>
+<li><a href="#org7c329fc">1. Metadata</a></li>
+<li><a href="#orgfe73832">2. Introduction</a></li>
+<li><a href="#org43b05ce">3. Tiny Number Printing</a>
 <ul>
-<li><a href="#org9f96a62">3.1. Code to print digits</a></li>
-<li><a href="#org00900c9">3.2. Test Code to print all characters</a></li>
+<li><a href="#org93ebd76">3.1. Code to print digits</a></li>
+<li><a href="#org20e6db8">3.2. Test Code to print all characters</a></li>
 </ul>
 </li>
-<li><a href="#orgacb5eeb">4. Print Binary Number</a></li>
-<li><a href="#org16c4d9f">5. Bit Manipulation Functions</a></li>
-<li><a href="#orga993151">6. BASE Menu</a>
+<li><a href="#org8f060ef">4. Print Binary Number</a></li>
+<li><a href="#org4ecc660">5. Bit Manipulation Functions</a></li>
+<li><a href="#org41a77c2">6. BASE Menu</a>
 <ul>
-<li><a href="#orged6ea01">6.1. Menu Contents</a></li>
-<li><a href="#orge3de58b">6.2. Menu Code</a></li>
+<li><a href="#org7eab65e">6.1. Menu Contents</a></li>
+<li><a href="#org672a83c">6.2. Menu Code</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org48d2006" class="outline-2">
-<h2 id="org48d2006"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org7c329fc" class="outline-2">
+<h2 id="org7c329fc"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/base.html">https://richmit.github.io/hp42/base.html</a>
@@ -280,8 +280,8 @@ Files related to this document may be found on github: <a href="https://github.c
 </div>
 </div>
 
-<div id="outline-container-org16aa980" class="outline-2">
-<h2 id="org16aa980"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-orgfe73832" class="outline-2">
+<h2 id="orgfe73832"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 When I'm doing embedded programming I use my HP-16c &amp; DM16 calculators all the time.  I love the DM42, but it has pretty limited base-n capabilities compared
@@ -290,25 +290,25 @@ you still have to use the BASE menu to enter some hexadecimal digits.
 </p>
 
 <p>
-The 42 can deal with 64-bit binary numbers, but it can't display them &#x2013; when you try it displays them in hexadecimal.  The <code>BVIEW</code> <a href="#orgacb5eeb">4</a>
-program remedies this issue and works just fine on a standard HP-42s or free42 screen.  <code>BVIEW</code> uses the <code>TNPR</code> <a href="#org1c1ae12">3</a> function to draw the
+The 42 can deal with 64-bit binary numbers, but it can't display them &#x2013; when you try it displays them in hexadecimal.  The <code>BVIEW</code> <a href="#org8f060ef">4</a>
+program remedies this issue and works just fine on a standard HP-42s or free42 screen.  <code>BVIEW</code> uses the <code>TNPR</code> <a href="#org43b05ce">3</a> function to draw the
 digits &#x2013; this uses a tiny, 5 pixel tall font.  The character set is sufficient to display all kinds of numbers, but the only thing I have implemented so far
 is the binary number printer.
 </p>
 
 <p>
-This code is structured as several independent functions (See: <a href="#org16c4d9f">the code</a>) that are then tied together into a menu (See: <a href="#orged6ea01">Menu Contents</a>) for easy access &#x2013; See
-the code <a href="#orge3de58b">here</a>.  This allows you to use these functions in your own programs.  The individual functions are documented in the code.
+This code is structured as several independent functions (See: <a href="#org4ecc660">the code</a>) that are then tied together into a menu (See: <a href="#org7eab65e">Menu Contents</a>) for easy access &#x2013; See
+the code <a href="#org672a83c">here</a>.  This allows you to use these functions in your own programs.  The individual functions are documented in the code.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org1c1ae12" class="outline-2">
-<h2 id="org1c1ae12"><span class="section-number-2">3</span> Tiny Number Printing</h2>
+<div id="outline-container-org43b05ce" class="outline-2">
+<h2 id="org43b05ce"><span class="section-number-2">3</span> Tiny Number Printing</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org9f96a62" class="outline-3">
-<h3 id="org9f96a62"><span class="section-number-3">3.1</span> Code to print digits</h3>
+<div id="outline-container-org93ebd76" class="outline-3">
+<h3 id="org93ebd76"><span class="section-number-3">3.1</span> Code to print digits</h3>
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Tiny Number PRint</span>
@@ -535,8 +535,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org00900c9" class="outline-3">
-<h3 id="org00900c9"><span class="section-number-3">3.2</span> Test Code to print all characters</h3>
+<div id="outline-container-org20e6db8" class="outline-3">
+<h3 id="org20e6db8"><span class="section-number-3">3.2</span> Test Code to print all characters</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"PATN"</span>   <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Print All Tiny Numbers</span>
@@ -575,8 +575,8 @@ R&#8595;
 </div>
 
 
-<div id="outline-container-orgacb5eeb" class="outline-2">
-<h2 id="orgacb5eeb"><span class="section-number-2">4</span> Print Binary Number</h2>
+<div id="outline-container-org8f060ef" class="outline-2">
+<h2 id="org8f060ef"><span class="section-number-2">4</span> Print Binary Number</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"BVIEW"</span> <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Fill Screen Tiny Numbers</span>
@@ -688,8 +688,8 @@ R&#8595;
 </div>
 
 
-<div id="outline-container-org16c4d9f" class="outline-2">
-<h2 id="org16c4d9f"><span class="section-number-2">5</span> Bit Manipulation Functions</h2>
+<div id="outline-container-org4ecc660" class="outline-2">
+<h2 id="org4ecc660"><span class="section-number-2">5</span> Bit Manipulation Functions</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -1331,14 +1331,14 @@ R&#8595;                             <span style="color: #ffa500;">@@</span><spa
 </div>
 
 
-<div id="outline-container-orga993151" class="outline-2">
-<h2 id="orga993151"><span class="section-number-2">6</span> BASE Menu</h2>
+<div id="outline-container-org41a77c2" class="outline-2">
+<h2 id="org41a77c2"><span class="section-number-2">6</span> BASE Menu</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-orged6ea01" class="outline-3">
-<h3 id="orged6ea01"><span class="section-number-3">6.1</span> Menu Contents</h3>
+<div id="outline-container-org7eab65e" class="outline-3">
+<h3 id="org7eab65e"><span class="section-number-3">6.1</span> Menu Contents</h3>
 <div class="outline-text-3" id="text-6-1">
-<table id="orgb79f03c" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgf291235" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1616,8 +1616,8 @@ R&#8595;                             <span style="color: #ffa500;">@@</span><spa
 </div>
 
 
-<div id="outline-container-orge3de58b" class="outline-3">
-<h3 id="orge3de58b"><span class="section-number-3">6.2</span> Menu Code</h3>
+<div id="outline-container-org672a83c" class="outline-3">
+<h3 id="org672a83c"><span class="section-number-3">6.2</span> Menu Code</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 The menu program is generated via the following bit of elisp.  You must first define the <code>MJR-generate-42-menu-code</code> and <code>MJR-custom-x-gen</code> by evaluating the code blocks in the <code>hp42s-meta.org</code> file.
@@ -1933,7 +1933,7 @@ The menu program is generated via the following bit of elisp.  You must first de
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-27 Sat 12:14 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-27 Sat 12:15 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

@@ -1,0 +1,1123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-03-26 Fri 21:16 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>free42/hp42s/DM42 Simple Math Functions</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Mitch Richling" />
+<meta name="description" content="Some simple math functions for the free42/hp-42s/DM42"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
+<style>body { min-width: 500px; max-width: 1024px; }</style>
+<style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
+<style>h1,h2,h3 { line-height: 1.4em; }</style>
+<style>h1.title { font-size: 3em; }</style>
+<style>h4,h5,h6 { font-size: 1em; }</style>
+<style>.org-src-container { border: 1px solid #ccc; box-shadow: 3px 3px 3px #eee; font-family: Lucida Console, monospace; font-size: 80%; margin: 0px; padding: 0px 0px; position: relative; }</style>
+<style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
+<style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
+<style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="https://www.mitchr.me/FIXME"> UP </a>
+ |
+ <a accesskey="H" href="https://www.mitchr.me/"> HOME </a>
+</div><div id="content">
+<h1 class="title">free42/hp42s/DM42 Simple Math Functions</h1>
+<table border="2 solid #ccc" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right"><b>Author:</b></td>
+<td class="org-left"><i>Mitch Richling</i></td>
+</tr>
+
+<tr>
+<td class="org-right"><b>Updated:</b></td>
+<td class="org-left"><i>2021-03-26 21:16:33</i></td>
+</tr>
+</tbody>
+</table>
+<p align="center">
+Copyright 2021 Mitch Richling. All rights reserved.
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgf021c87">1. Introduction</a></li>
+<li><a href="#orgcbbd3fb">2. Types</a></li>
+<li><a href="#orgc5207df">3. Complex Numbers</a></li>
+<li><a href="#org604f010">4. Math Functions</a></li>
+<li><a href="#orge13172e">5. Meta Data</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf021c87" class="outline-2">
+<h2 id="orgf021c87"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This org-mode file collects together a handful of simple mathematical functions I find useful.  Many of these functions work on what I call an "arithmetic
+type" &#x2013; that is a thing the 42s can do arithmetic with: real numbers, complex numbers, real matrices, &amp; complex matrices.  In order to simplify the code the
+<code>ATYP</code> function spits out a small integer that can be used in a computed <code>GOTO</code> to handle these four special cases.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Function</th>
+<th scope="col" class="org-left">Description</th>
+<th scope="col" class="org-left">Works On</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">ATYP</td>
+<td class="org-left">Arithmetic Type</td>
+<td class="org-left">N/A</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">RPART</td>
+<td class="org-left">Real part</td>
+<td class="org-left">Real, Complex, Real Matrix, Complex Matrix</td>
+</tr>
+
+<tr>
+<td class="org-left">IPART</td>
+<td class="org-left">Imaginary Part</td>
+<td class="org-left">Real, Complex, Real Matrix, Complex Matrix</td>
+</tr>
+
+<tr>
+<td class="org-left">CONJ</td>
+<td class="org-left">Complex Conjugate</td>
+<td class="org-left">Real, Complex, Real Matrix, Complex Matrix</td>
+</tr>
+
+<tr>
+<td class="org-left">CABS</td>
+<td class="org-left">Magnitude/absolute value</td>
+<td class="org-left">Real, Complex, Real Matrix, Complex Matrix</td>
+</tr>
+
+<tr>
+<td class="org-left">CARG</td>
+<td class="org-left">Complex Argument</td>
+<td class="org-left">Real, Complex, Real Matrix, Complex Matrix</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">%T</td>
+<td class="org-left">Percentage of total</td>
+<td class="org-left">Real</td>
+</tr>
+
+<tr>
+<td class="org-left">SGN</td>
+<td class="org-left">Sign function</td>
+<td class="org-left">Real, Complex</td>
+</tr>
+
+<tr>
+<td class="org-left">lnXY</td>
+<td class="org-left">Base Y Logarithm of X</td>
+<td class="org-left">Real, Complex, Real Matrix, Complex Matrix</td>
+</tr>
+
+<tr>
+<td class="org-left">ln2</td>
+<td class="org-left">Base 2 Logarithm</td>
+<td class="org-left">Real, Complex, Real Matrix, Complex Matrix</td>
+</tr>
+
+<tr>
+<td class="org-left">X↑2</td>
+<td class="org-left">Raise 2 to the power of X</td>
+<td class="org-left">Real, Complex, Real Matrix, Complex Matrix</td>
+</tr>
+
+<tr>
+<td class="org-left">GCD</td>
+<td class="org-left">GCD</td>
+<td class="org-left">Real</td>
+</tr>
+
+<tr>
+<td class="org-left">LCM</td>
+<td class="org-left">LCM</td>
+<td class="org-left">Real</td>
+</tr>
+
+<tr>
+<td class="org-left">NPDF</td>
+<td class="org-left">Standard Normal PDF</td>
+<td class="org-left">Real</td>
+</tr>
+
+<tr>
+<td class="org-left">NCDF</td>
+<td class="org-left">Standard Normal CDF</td>
+<td class="org-left">Real</td>
+</tr>
+
+<tr>
+<td class="org-left">IFP</td>
+<td class="org-left">IP &amp; FP of a number</td>
+<td class="org-left">Real, Real Matrix</td>
+</tr>
+
+<tr>
+<td class="org-left">FLOOR</td>
+<td class="org-left">Floor</td>
+<td class="org-left">Real</td>
+</tr>
+
+<tr>
+<td class="org-left">CEIL</td>
+<td class="org-left">Ceiling</td>
+<td class="org-left">Real</td>
+</tr>
+
+<tr>
+<td class="org-left">HYPOT</td>
+<td class="org-left">Hypot</td>
+<td class="org-left">Real, Complex</td>
+</tr>
+
+<tr>
+<td class="org-left">ATAN2</td>
+<td class="org-left">ATAN2</td>
+<td class="org-left">Real</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+I don't have a menu specifically for these functions.  Instead I organize these, along with some built in functions, into my custom menu (See:
+<a href="https://richmit.github.io/hp42/custom.html">https://richmit.github.io/hp42/custom.html</a>)
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcbbd3fb" class="outline-2">
+<h2 id="orgcbbd3fb"><span class="section-number-2">2</span> Types</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Arithmetic Type</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: an object</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: 1 if input X was a real number</span>
+<span style="color: #ffa500;">@@@@         </span><span style="color: #ff7f24;">2 if input X was a real matrix</span>
+<span style="color: #ffa500;">@@@@         </span><span style="color: #ff7f24;">3 if input X was a complex number</span>
+<span style="color: #ffa500;">@@@@         </span><span style="color: #ff7f24;">4 if input X was a complex matrix</span>
+<span style="color: #ffa500;">@@@@         </span><span style="color: #ff7f24;">0 if none of the above are true</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Even on free42&lt;2.5.24 or a real 42s, X, Y, &amp; Z are preserved. T &amp; Last X not so much.</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: A 2 will be returned for a real matrix containing strings</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: In infinite stack mode with an empty stack 2 will be returned as X=0 when we do L4STK</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"ATYP"</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">MAT</span>?
+<span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">LBL</span> 01               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Matrix</span>
+<span style="color: #00ffff;">CLA</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+67
+<span style="color: #00ffff;">POSA</span>
+<span style="color: #00ffff;">X&gt;0</span>?
+<span style="color: #00ffff;">GTO</span> 07
+<span style="color: #00ffff;">GTO</span> 08
+<span style="color: #00ffff;">LBL</span> 07               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Complex Matrix</span>
+R&#8595;                   <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
+4
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 08               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Real/String Matrix</span>
+R&#8595;                   <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
+2
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 02               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Not matrix</span>
+<span style="color: #00ffff;">REAL</span>?
+<span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">GTO</span> 04
+<span style="color: #00ffff;">LBL</span> 03               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Real number</span>
+1
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 04               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Not matrix or real</span>
+<span style="color: #00ffff;">CPX</span>?
+<span style="color: #00ffff;">GTO</span> 05
+<span style="color: #00ffff;">GTO</span> 06
+<span style="color: #00ffff;">LBL</span> 05               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Complex number</span>
+3
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 06               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Not matrix, real, or complex</span>
+0
+<span style="color: #00ffff;">RTN</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc5207df" class="outline-2">
+<h2 id="orgc5207df"><span class="section-number-2">3</span> Complex Numbers</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Real part</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Number or numeric matrix (element-wise)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: rpart(x)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"RPART"</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">ENTER</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"ATYP"</span>
+<span style="color: #00ffff;">GTO IND ST</span> X
+<span style="color: #00ffff;">LBL</span> 00
+<span style="color: #00ffff;">RTNERR</span> 4             <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #fa8072;">"ERR: Bad Type"</span>      <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
+<span style="color: #00ffff;">AVIEW</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
+<span style="color: #00ffff;">RTN</span>                  <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
+<span style="color: #00ffff;">LBL</span> 01               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Real Number</span>
+<span style="color: #00ffff;">LBL</span> 02               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Real Matrix</span>
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 03               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Complex Number</span>
+R&#8595;
+<span style="color: #00ffff;">FS</span>? 73
+&#8594;REC
+<span style="color: #00ffff;">COMPLEX</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 04               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Complex Matrix</span>
+R&#8595;
+<span style="color: #00ffff;">FS</span>? 73
+<span style="color: #00ffff;">GTO</span> 05
+<span style="color: #00ffff;">GTO</span> 06
+<span style="color: #00ffff;">LBL</span> 05               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">POLAR MODE Complex Matrix</span>
+<span style="color: #00ffff;">RECT</span>
+<span style="color: #00ffff;">COMPLEX</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">POLAR</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 06               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">RECT MODE Complex Matrix</span>
+<span style="color: #00ffff;">COMPLEX</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Imaginary Part</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Number or numeric matrix (element-wise)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: ipart(x)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"IPART"</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">ENTER</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"ATYP"</span>
+<span style="color: #00ffff;">GTO IND ST</span> X
+<span style="color: #00ffff;">LBL</span> 00
+<span style="color: #00ffff;">RTNERR</span> 4             <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #fa8072;">"ERR: Bad Type"</span>      <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
+<span style="color: #00ffff;">AVIEW</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
+<span style="color: #00ffff;">RTN</span>                  <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
+<span style="color: #00ffff;">LBL</span> 01               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Real Number</span>
+0
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 02               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Real Matrix</span>
+R&#8595;
+<span style="color: #00ffff;">DIM</span>?
+<span style="color: #00ffff;">NEWMAT</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 03               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Complex Number</span>
+R&#8595;
+<span style="color: #00ffff;">FS</span>? 73
+&#8594;REC
+<span style="color: #00ffff;">COMPLEX</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 04               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Complex Matrix</span>
+R&#8595;
+<span style="color: #00ffff;">FS</span>? 73
+<span style="color: #00ffff;">GTO</span> 05
+<span style="color: #00ffff;">GTO</span> 06
+<span style="color: #00ffff;">LBL</span> 05               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">POLAR MODE Complex Matrix</span>
+<span style="color: #00ffff;">RECT</span>
+<span style="color: #00ffff;">COMPLEX</span>
+<span style="color: #00ffff;">POLAR</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 06               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">RECT MODE Complex Matrix</span>
+<span style="color: #00ffff;">COMPLEX</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Complex Conjugate</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Number or numeric matrix (element-wise)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: conj(x)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: Fails on alpha string matrix</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"CONJ"</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">ENTER</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"ATYP"</span>
+<span style="color: #00ffff;">GTO IND ST</span> X
+<span style="color: #00ffff;">LBL</span> 00
+<span style="color: #00ffff;">RTNERR</span> 4             <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #fa8072;">"ERR: Bad Type"</span>      <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
+<span style="color: #00ffff;">AVIEW</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
+<span style="color: #00ffff;">RTN</span>                  <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
+<span style="color: #00ffff;">LBL</span> 01               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Real Number</span>
+<span style="color: #00ffff;">LBL</span> 02               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Real Matrix</span>
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 03               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Complex Number</span>
+<span style="color: #00ffff;">LBL</span> 04               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Complex Matrix</span>
+R&#8595;
+<span style="color: #00ffff;">COMPLEX</span>
+<span style="color: #00ffff;">+/-</span>
+<span style="color: #00ffff;">COMPLEX</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Magnitude/absolute value</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Number or numeric matrix (element-wise) -- built in ABS won't work with a complex matrix</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: |x|</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: CPXRES free42_3.0</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: Returns 0 for real 0 input</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"CABS"</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">ENTER</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"ATYP"</span>
+<span style="color: #00ffff;">GTO IND ST</span> X
+<span style="color: #00ffff;">LBL</span> 00
+<span style="color: #00ffff;">RTNERR</span> 4             <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #fa8072;">"ERR: Bad Type"</span>      <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
+<span style="color: #00ffff;">AVIEW</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
+<span style="color: #00ffff;">RTN</span>                  <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
+<span style="color: #00ffff;">LBL</span> 01               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Real Number</span>
+<span style="color: #00ffff;">LBL</span> 02               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Real Matrix</span>
+R&#8595;
+<span style="color: #00ffff;">ABS</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 03               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Complex Number</span>
+R&#8595;
+<span style="color: #00ffff;">FC</span>? 73
+&#8594;POL
+<span style="color: #00ffff;">COMPLEX</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 04               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Complex Matrix</span>
+R&#8595;
+<span style="color: #00ffff;">FC</span>? 73
+<span style="color: #00ffff;">GTO</span> 05
+<span style="color: #00ffff;">GTO</span> 06
+<span style="color: #00ffff;">LBL</span> 05               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">RECT MODE Complex Matrix</span>
+<span style="color: #00ffff;">POLAR</span>
+<span style="color: #00ffff;">COMPLEX</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">RECT</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 06               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">POLAR MODE Complex Matrix</span>
+<span style="color: #00ffff;">COMPLEX</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Complex Argument</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Number or numeric matrix (element-wise)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: arg(x)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: CPXRES free42_3.0</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: Returns 0 for real 0 input</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"CARG"</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">ENTER</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"ATYP"</span>
+<span style="color: #00ffff;">GTO IND ST</span> X
+<span style="color: #00ffff;">LBL</span> 00
+<span style="color: #00ffff;">RTNERR</span> 4             <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #fa8072;">"ERR: Bad Type"</span>      <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
+<span style="color: #00ffff;">AVIEW</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
+<span style="color: #00ffff;">RTN</span>                  <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
+<span style="color: #00ffff;">LBL</span> 01               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Real Number</span>
+0
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 02               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Real Matrix</span>
+R&#8595;
+<span style="color: #00ffff;">DIM</span>?
+<span style="color: #00ffff;">NEWMAT</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 03               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Complex Number</span>
+R&#8595;
+<span style="color: #00ffff;">FC</span>? 73
+&#8594;POL
+<span style="color: #00ffff;">COMPLEX</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 04               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Complex Matrix</span>
+R&#8595;
+<span style="color: #00ffff;">FC</span>? 73
+<span style="color: #00ffff;">GTO</span> 05
+<span style="color: #00ffff;">GTO</span> 06
+<span style="color: #00ffff;">LBL</span> 05               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">RECT MODE Complex Matrix</span>
+<span style="color: #00ffff;">POLAR</span>
+<span style="color: #00ffff;">COMPLEX</span>
+<span style="color: #00ffff;">RECT</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 06               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">POLAR MODE Complex Matrix</span>
+<span style="color: #00ffff;">COMPLEX</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org604f010" class="outline-2">
+<h2 id="org604f010"><span class="section-number-2">4</span> Math Functions</h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Percentage of total (just like hp-12c button)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: Real Number -- Total</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Real Number -- Part</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: 100*X/Y</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-12</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"%T"</span>
+<span style="color: #00ffff;">FUNC</span> 21              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">&#247;</span>
+100
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Sign function</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: a number</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X:  0 when input was 0</span>
+<span style="color: #ffa500;">@@@@         </span><span style="color: #ff7f24;">-1 when input was negative</span>
+<span style="color: #ffa500;">@@@@          </span><span style="color: #ff7f24;">1 when input was positive</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-26</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"SGN"</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">ENTER</span>
+<span style="color: #00ffff;">ABS</span>
+<span style="color: #00ffff;">X&#8800;0</span>?
+<span style="color: #00ffff;">GTO</span> 01
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">zero</span>
+R&#8595;                   <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24  </span>
+R&#8595;                   <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24  </span>
+0
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 01
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Non-zero</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">REAL</span>?
+<span style="color: #00ffff;">GTO</span> 02
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Complex non-zero</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 02
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Real non-zero</span>
+<span style="color: #00ffff;">X&lt;0</span>?
+<span style="color: #00ffff;">GTO</span> 03
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Real positive</span>
+R&#8595;                   <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24  </span>
+R&#8595;                   <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24  </span>
+1
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 03
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Real negative</span>
+R&#8595;                   <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24  </span>
+R&#8595;                   <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24  </span>
+-1
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Base Y Logarithm of X</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: logarithm base</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: number or matrix (element-wise)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: log_y(x)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"lnXY"</span>
+<span style="color: #00ffff;">FUNC</span> 21              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LN</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">LN</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Base 2 Logarithm</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: number or matrix (element-wise)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: log_2(x)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"ln2"</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LN</span>
+2
+<span style="color: #00ffff;">LN</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Raise 2 to the power of X</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: number or matrix (element-wise)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: 2^X</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"X&#8593;2"</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+2
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+Y^X
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: GCD</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: real number</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: real number</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: GCD(|IP(X)|, |IP(X)|)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"GCD"</span>
+<span style="color: #00ffff;">FUNC</span> 21              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">ABS</span>
+<span style="color: #00ffff;">IP</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">ABS</span>
+<span style="color: #00ffff;">IP</span>
+<span style="color: #00ffff;">X&gt;Y</span>?
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">LBL</span> 01
+<span style="color: #00ffff;">STO ST</span> Z
+<span style="color: #00ffff;">MOD</span>
+<span style="color: #00ffff;">X&gt;0</span>?
+<span style="color: #00ffff;">GTO</span> 01
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: LCM</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: real number</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: real number</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: LCM(|IP(X)|, |IP(X)|)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"LCM"</span>
+<span style="color: #00ffff;">FUNC</span> 21              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">ABS</span>
+<span style="color: #00ffff;">IP</span>
+<span style="color: #00ffff;">X&#8800;0</span>?
+<span style="color: #00ffff;">GTO</span> 01
+R&#8595;                   <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24  </span>
+R&#8595;                   <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24  </span>
+0
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 01
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"TMPX"</span>  
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">ABS</span>
+<span style="color: #00ffff;">IP</span>
+<span style="color: #00ffff;">X&#8800;0</span>?
+<span style="color: #00ffff;">GTO</span> 02
+R&#8595;                   <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24  </span>
+R&#8595;                   <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24  </span>
+0
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 02
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"TMPY"</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"GCD"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"TMPX"</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"TMPY"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Standard Normal PDF</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: real number</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Standard Normal PDF value at X</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"NPDF"</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">X&#8593;2</span>
+-2
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">E&#8593;X</span>
+2
+<span style="color: #00ffff;">PI</span>
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">SQRT</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Standard Normal CDF</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: real number</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Standard Normal CDF value at X</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: Only good to 7 decimal places</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REF: Zelen &amp; Severo (1964)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"NCDF"</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">ENTER</span>
+<span style="color: #00ffff;">XEQ</span> 00
+<span style="color: #00ffff;">&#215;</span>
+1
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">1/X</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"T"</span>
+1.005
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"I"</span>
+R&#8595;                   <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24  </span>
+0
+<span style="color: #00ffff;">LBL</span> 11
+<span style="color: #00ffff;">XEQ IND</span> <span style="color: #fa8072;">"I"</span>
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"T"</span>
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL ST</span> Y
+<span style="color: #00ffff;">STO&#215;</span> <span style="color: #fa8072;">"T"</span>
+R&#8595;
+<span style="color: #00ffff;">ISG</span> <span style="color: #fa8072;">"I"</span>
+<span style="color: #00ffff;">GTO</span> 11
+<span style="color: #00ffff;">RCL ST</span> Z
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"SNPDF"</span>
+<span style="color: #00ffff;">&#215;</span>
+1
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 00
+0.2316419
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 01
+0.319381530
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 02
+-0.356563782
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 03
+1.781477937
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 04
+-1.821255978
+ <span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 05
+1.330274429
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: IP &amp; FP of a number</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: real number</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Y: IP(X)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: FP(X)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"IFP"</span>
+<span style="color: #00ffff;">FUNC</span> 12              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">IP</span>
+<span style="color: #00ffff;">LASTX</span>
+<span style="color: #00ffff;">FP</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Floor</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: real number</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: floor(X)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FLOOR"</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"IFP"</span>
+<span style="color: #00ffff;">X&lt;0</span>?
+<span style="color: #00ffff;">GTO</span> 01
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 01
+1
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Ceiling</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: real number</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: ceil(X)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"CEIL"</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"IFP"</span>
+<span style="color: #00ffff;">X&gt;0</span>?
+<span style="color: #00ffff;">GTO</span> 01
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 01
+1
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Hypot</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: number</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: number</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: sqrt(x^2+y^2)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: Some overflow cases could be avoided by scaling...</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"HYPOT"</span>
+<span style="color: #00ffff;">FUNC</span> 21              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">X&#8593;2</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">X&#8593;2</span>
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">SQRT</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: ATAN2</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: number</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: number</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: atan2(y, x)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: Only works in RAD mode</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-23</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TC:  atan( 1, 1) =&gt;  pi/4</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TC:  atan(-1, 1) =&gt; -pi/4</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TC:  atan( 1,-1) =&gt;  3*pi/4</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TC:  atan(-1,-1) =&gt; -3*pi/4</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TC:  atan( 0, 1) =&gt;  0</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TC:  atan( 1, 0) =&gt;  pi</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TC:  atan(-1, 0) =&gt; -pi</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TC:  atan( 0, 0) =&gt; ERROR</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"ATAN2"</span>
+<span style="color: #00ffff;">FUNC</span> 21              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">X&gt;0</span>?
+<span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">X=0</span>?
+<span style="color: #00ffff;">GTO</span> 02
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X&lt;0</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">X&lt;0</span>?
+<span style="color: #00ffff;">GTO</span> 03
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X&lt;0 &amp; Y&gt;=0</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>              
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">ATAN</span>
+<span style="color: #00ffff;">PI</span>
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 03
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X&lt;0 &amp; Y&lt;0</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>               
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">ATAN</span>
+<span style="color: #00ffff;">PI</span>
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 02
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">X=0</span>?
+<span style="color: #00ffff;">GTO</span> 04
+<span style="color: #00ffff;">X&gt;0</span>?
+<span style="color: #00ffff;">GTO</span> 05
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X=0 &amp; Y&lt;0</span>
+R&#8595;                   <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24  </span>
+R&#8595;                   <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24  </span>
+<span style="color: #00ffff;">PI</span>
+-2
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 05
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X=0 &amp; Y&gt;0</span>
+R&#8595;                   <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24  </span>
+R&#8595;                   <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24  </span>
+<span style="color: #00ffff;">PI</span>
+2
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 04
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X=0 &amp; Y=0 ERROR 0/0</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 01    
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X&gt;0</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">ATAN</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge13172e" class="outline-2">
+<h2 id="orge13172e"><span class="section-number-2">5</span> Meta Data</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+This home for this HTML file is: <a href="https://richmit.github.io/hp42/math.html">https://richmit.github.io/hp42/math.html</a>
+</p>
+
+<p>
+This HTML file was generated from this github repo: <a href="https://github.com/richmit/hp42">https://github.com/richmit/hp42</a>
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-26 Fri 21:16 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+</div>
+</body>
+</html>

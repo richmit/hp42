@@ -322,9 +322,25 @@ END
 * Print Binary Number
 
 #+BEGIN_SRC hp42s
-LBL "BVIEW" @@@@ Fill Screen Tiny Numbers
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Print binary numbers (up to 64-bit)
+@@@@ IN:  X: An integer
+@@@@ OUT: Nothing -- prints to screen
+@@@@ UPD: 2021-03-20
+LBL "BVIEW"
 FUNC 11            @@## REQ:free42>=2.5.24
 L4STK              @@## REQ:free42>=3.0
+0
+SF 25
+BIT?
+FS?C 25
+GTO 08
+R↓
+"ERR: Bad Int!"
+AVIEW
+RTN
+LBL 08
+R↓
 LSTO "X"
 CLLCD
 EXITALL           @@## REQ:DM42

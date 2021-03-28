@@ -1,0 +1,886 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-03-28 Sun 11:02 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>free42/hp42s/DM42 Custom Menus</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Mitch Richling" />
+<meta name="description" content="Making Custom Menus for the free42/hp-42s/DM42"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
+<style>body { min-width: 500px; max-width: 1024px; }</style>
+<style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
+<style>h1,h2,h3 { line-height: 1.4em; }</style>
+<style>h1.title { font-size: 3em; }</style>
+<style>h4,h5,h6 { font-size: 1em; }</style>
+<style>.org-src-container { border: 1px solid #ccc; box-shadow: 3px 3px 3px #eee; font-family: Lucida Console, monospace; font-size: 80%; margin: 0px; padding: 0px 0px; position: relative; }</style>
+<style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
+<style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
+<style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="https://www.mitchr.me/FIXME"> UP </a>
+ |
+ <a accesskey="H" href="https://www.mitchr.me/"> HOME </a>
+</div><div id="content">
+<h1 class="title">free42/hp42s/DM42 Custom Menus</h1>
+<table border="2 solid #ccc" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right"><b>Author:</b></td>
+<td class="org-left"><i>Mitch Richling</i></td>
+</tr>
+
+<tr>
+<td class="org-right"><b>Updated:</b></td>
+<td class="org-left"><i>2021-03-28 11:02:42</i></td>
+</tr>
+</tbody>
+</table>
+<p align="center">
+Copyright 2021 Mitch Richling. All rights reserved.
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org35b2091">1. Metadata</a></li>
+<li><a href="#orgbee3228">2. Introduction</a>
+<ul>
+<li><a href="#orgf7ab358">2.1. Customizing Custom Menu Table</a></li>
+</ul>
+</li>
+<li><a href="#org4afba84">3. Custom Menu</a>
+<ul>
+<li><a href="#org946a597">3.1. Menu Contents</a></li>
+<li><a href="#orgcb017ca">3.2. Menu Code</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org35b2091" class="outline-2">
+<h2 id="org35b2091"><span class="section-number-2">1</span> Metadata</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This home for this HTML file is: <a href="https://richmit.github.io/hp42/custom.html">https://richmit.github.io/hp42/custom.html</a>
+</p>
+
+<p>
+Files related to this document may be found on github: <a href="https://github.com/richmit/hp42">https://github.com/richmit/hp42</a>
+</p>
+
+<ul class="org-ul">
+<li><code>src</code> directory: Contains the org-mode file that generated this HTML document</li>
+<li><code>docs</code> directory: Contains this html document</li>
+<li><code>bin</code> directory: Contains raw program files</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgbee3228" class="outline-2">
+<h2 id="orgbee3228"><span class="section-number-2">2</span> Introduction</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+The custom menu on the 42s is a wonderful thing, but it is also very limited.  It's just too small!!  And it is only one level deep!!  So instead of simply
+assigning functions to the menu keys, how about assigning programs to the keys which present a hierarchical menu of functions?  Coding up such programs is
+tedious.  So this org-mode document has a Little bit of Emacs lisp that will consume a table, and generate a 42s program implementing a hierarchical menu.
+</p>
+
+<p>
+The flow to create your custom CUST program:
+</p>
+<ul class="org-ul">
+<li>Evaluate the "Generic menu generator" babel block in the <code>hp42s-meta.org</code> file.  This will define the function <code>MJR-generate-42-menu-code</code></li>
+<li>Evaluate the "For CUSTOM-type Menus" babel block in the <code>hp42s-meta.org</code> file.  This will define the function <code>MJR-custom-x-gen</code></li>
+<li>Define your menu in the <a href="#org946a597">Menu Contents</a> section.</li>
+<li>Evaluate the babel block in the <a href="#orgcb017ca">Menu Code</a> section below.</li>
+<li>Load the program on your calculator</li>
+</ul>
+</div>
+
+<div id="outline-container-orgf7ab358" class="outline-3">
+<h3 id="orgf7ab358"><span class="section-number-3">2.1</span> Customizing Custom Menu Table</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+The first column (which I labeled Menu) describes the menu keys.  Colons are used to define a menu hierarchy.  For example "<code>top:mid:thingy</code>" means we have a
+top level menu "<code>top</code>" containing a menu "<code>mid</code>" containing a function/program "<code>thingy</code>".  Another entry like "<code>top:thingy2</code>" would add a function/program
+key "<code>thingy2</code>"to the "<code>top</code>" menu &#x2013; yes menus can contain a mix of functions/programs and menus.
+</p>
+
+<p>
+The only limitation on menu hierarchy depth or size comes from the use of two digit local labels in the generated code.  A label is consume for each
+function/program and for each menu page.
+</p>
+
+<p>
+The second column is the function/program name/label to call.  If this is empty, then the menu name will be used.  For example "<code>SFUN:HYP:SINH</code>" will call the
+<code>SINH</code> function if no Program is specified.
+</p>
+
+<p>
+The other columns of the table are not used.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4afba84" class="outline-2">
+<h2 id="org4afba84"><span class="section-number-2">3</span> Custom Menu</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org946a597" class="outline-3">
+<h3 id="org946a597"><span class="section-number-3">3.1</span> Menu Contents</h3>
+<div class="outline-text-3" id="text-3-1">
+<table id="org01f675a" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Menu</th>
+<th scope="col" class="org-left">Function/Program</th>
+<th scope="col" class="org-left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">SFUN:HYP:SINH</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">SFUN:HYP:COSH</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">SFUN:HYP:TANH</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">SFUN:HYP:ASINH</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">SFUN:HYP:ACOSH</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">SFUN:HYP:ATANH</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">SFUN:L&amp;P:lnYX</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/math.html">https://richmit.github.io/hp42/math.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">SFUN:L&amp;P:ln2</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/math.html">https://richmit.github.io/hp42/math.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">SFUN:L&amp;P:2↑X</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/math.html">https://richmit.github.io/hp42/math.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">SFUN:L&amp;P:YROOT</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/math.html">https://richmit.github.io/hp42/math.html</a></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">SFUN:PERC:%T</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/math.html">https://richmit.github.io/hp42/math.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">SFUN:PERC:%CH</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">SFUN:PERC:%</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">SFUN:PROB:COMB</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">SFUN:PROB:PERM</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">SFUN:PROB:!</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">SFUN:INT:IDIV</td>
+<td class="org-left">BASE÷</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">SFUN:INT:MOD</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">SFUN:INT:GCD</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/math.html">https://richmit.github.io/hp42/math.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">SFUN:INT:LCM</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/math.html">https://richmit.github.io/hp42/math.html</a></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">DATE:DATE</td>
+<td class="org-left">IDATE</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">DATE:TIME</td>
+<td class="org-left">ITIME</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">DATE:UTIME</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">DATE:</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">DATE:DT→U</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">DATE:U→DT</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">DATE:DATE+</td>
+<td class="org-left">IDATE+</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">DATE:DDAYS</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">DATE:DOW</td>
+<td class="org-left">IDOW</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">DATE:</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">DATE:</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">DATE:</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">PHIL:PERF</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/phil.html">https://richmit.github.io/hp42/phil.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">PHIL:IMET</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/phil.html">https://richmit.github.io/hp42/phil.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">PHIL:MEAS</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/meas.html">https://richmit.github.io/hp42/meas.html</a></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">BASE</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/base.html">https://richmit.github.io/hp42/base.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">CONS</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/cons.html">https://richmit.github.io/hp42/cons.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">UNIT</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/unit.html">https://richmit.github.io/hp42/unit.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">MEAS</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/meas.html">https://richmit.github.io/hp42/meas.html</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgcb017ca" class="outline-3">
+<h3 id="orgcb017ca"><span class="section-number-3">3.2</span> Menu Code</h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="org-src-container">
+<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"CUST"</span> tbl <span style="color: #fa8072;">"stay"</span> <span style="color: #fa8072;">"up"</span> #'MJR-custom-x-gen)
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"CUST"</span>
+<span style="color: #00ffff;">LBL</span> 01            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu CUST</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"SFUN"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #fa8072;">"DATE"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">GTO</span> 04
+<span style="color: #fa8072;">"PHIL"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">GTO</span> 05
+<span style="color: #fa8072;">"BASE"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 06
+<span style="color: #fa8072;">"CONS"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 07
+<span style="color: #fa8072;">"UNIT"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 08
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">LBL</span> 02            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu CUST</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"MEAS"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 09
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">LBL</span> 03            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu SFUN</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"HYP"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">GTO</span> 10
+<span style="color: #fa8072;">"L&amp;P"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">GTO</span> 11
+<span style="color: #fa8072;">"PERC"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">GTO</span> 12
+<span style="color: #fa8072;">"PROB"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">GTO</span> 13
+<span style="color: #fa8072;">"INT"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">GTO</span> 14
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">LBL</span> 10            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu HYP</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"SINH"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 15
+<span style="color: #fa8072;">"COSH"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 16
+<span style="color: #fa8072;">"TANH"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 17
+<span style="color: #fa8072;">"ASINH"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 18
+<span style="color: #fa8072;">"ACOSH"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 19
+<span style="color: #fa8072;">"ATANH"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 20
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 10
+<span style="color: #00ffff;">LBL</span> 11            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu L&amp;P</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"lnYX"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 21
+<span style="color: #fa8072;">"ln2"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 22
+<span style="color: #fa8072;">"2&#8593;X"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 23
+<span style="color: #fa8072;">"YROOT"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 24
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 11
+<span style="color: #00ffff;">LBL</span> 12            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu PERC</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"%T"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 25
+<span style="color: #fa8072;">"%CH"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 26
+<span style="color: #fa8072;">"%"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 27
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 12
+<span style="color: #00ffff;">LBL</span> 13            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu PROB</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"COMB"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 28
+<span style="color: #fa8072;">"PERM"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 29
+<span style="color: #fa8072;">"!"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 30
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 13
+<span style="color: #00ffff;">LBL</span> 14            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu INT</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"IDIV"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 31
+<span style="color: #fa8072;">"MOD"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 32
+<span style="color: #fa8072;">"GCD"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 33
+<span style="color: #fa8072;">"LCM"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 34
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 14
+<span style="color: #00ffff;">LBL</span> 04            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu DATE</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"DATE"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 36
+<span style="color: #fa8072;">"TIME"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 37
+<span style="color: #fa8072;">"UTIME"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 38
+<span style="color: #fa8072;">"DT&#8594;U"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 39
+<span style="color: #fa8072;">"U&#8594;DT"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 40
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 35
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 35
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 04
+<span style="color: #00ffff;">LBL</span> 35            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu DATE</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"DATE+"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 41
+<span style="color: #fa8072;">"DDAYS"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 42
+<span style="color: #fa8072;">"DOW"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 43
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 04
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 04
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 35
+<span style="color: #00ffff;">LBL</span> 05            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu PHIL</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"PERF"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 44
+<span style="color: #fa8072;">"IMET"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 45
+<span style="color: #fa8072;">"MEAS"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 46
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 05
+<span style="color: #00ffff;">LBL</span> 00
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 06               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key BASE</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"BASE"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 07               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key CONS</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"CONS"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 08               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key UNIT</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UNIT"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 09               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key MEAS</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MEAS"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 15               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key SINH</span>
+<span style="color: #00ffff;">SINH</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 16               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key COSH</span>
+<span style="color: #00ffff;">COSH</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 17               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key TANH</span>
+<span style="color: #00ffff;">TANH</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 18               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ASINH</span>
+<span style="color: #00ffff;">ASINH</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 19               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ACOSH</span>
+<span style="color: #00ffff;">ACOSH</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 20               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ATANH</span>
+<span style="color: #00ffff;">ATANH</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 21               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key lnYX</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"lnYX"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 22               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ln2</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"ln2"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 23               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key 2&#8593;X</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"2&#8593;X"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 24               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key YROOT</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"YROOT"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 25               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key %T</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"%T"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 26               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key %CH</span>
+<span style="color: #00ffff;">%CH</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 27               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key %</span>
+<span style="color: #00ffff;">%</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 28               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key COMB</span>
+<span style="color: #00ffff;">COMB</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 29               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key PERM</span>
+<span style="color: #00ffff;">PERM</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 30               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key !</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"!"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 31               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key IDIV</span>
+<span style="color: #00ffff;">BASE&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 32               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key MOD</span>
+<span style="color: #00ffff;">MOD</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 33               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key GCD</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"GCD"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 34               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key LCM</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"LCM"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 36               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key DATE</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"IDATE"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 37               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key TIME</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"ITIME"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 38               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key UTIME</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UTIME"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 39               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key DT&#8594;U</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"DT&#8594;U"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 40               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key U&#8594;DT</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"U&#8594;DT"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 41               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key DATE+</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"IDATE+"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 42               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key DDAYS</span>
+<span style="color: #00ffff;">DDAYS</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 43               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key DOW</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"IDOW"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 44               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key PERF</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PERF"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 45               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key IMET</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"IMET"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 46               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key MEAS</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MEAS"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Free labels start at: 47</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-28 Sun 11:02 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+</div>
+</body>
+</html>

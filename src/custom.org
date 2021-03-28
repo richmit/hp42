@@ -1,0 +1,408 @@
+# -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
+#+TITLE:       free42/hp42s/DM42 Custom Menus
+#+AUTHOR:      Mitch Richling
+#+EMAIL:       http://www.mitchr.me/
+#+DATE:        2021-03-19
+#+DESCRIPTION: Making Custom Menus for the free42/hp-42s/DM42
+#+LANGUAGE:    en
+#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil 
+#+HTML_HEAD: <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
+#+HTML_HEAD: <style>body { min-width: 500px; max-width: 1024px; }</style>
+#+HTML_HEAD: <style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
+#+HTML_HEAD: <style>h1,h2,h3 { line-height: 1.4em; }</style>
+#+HTML_HEAD: <style>h1.title { font-size: 3em; }</style>
+#+HTML_HEAD: <style>h4,h5,h6 { font-size: 1em; }</style>
+#+HTML_HEAD: <style>.org-src-container { border: 1px solid #ccc; box-shadow: 3px 3px 3px #eee; font-family: Lucida Console, monospace; font-size: 80%; margin: 0px; padding: 0px 0px; position: relative; }</style>
+#+HTML_HEAD: <style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
+#+HTML_HEAD: <style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
+#+HTML_HEAD: <style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
+#+HTML_LINK_HOME: https://www.mitchr.me/
+#+HTML_LINK_UP: https://www.mitchr.me/FIXME
+
+#+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
+|        <r> | <l>              |
+|  *Author:* | /{{{author}}}/ |
+| *Updated:* | /{{{time(%Y-%m-%d %H:%M:%S)}}}/ |
+#+ATTR_HTML: :align center
+Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
+
+#+TOC: headlines 5
+
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+#   00   #    10   #    20   #    30   #    40   #    50   #    60   #    70   #    80   #    90   #   100   #   110   #   120   #   130   #   140   #   150   #   160   #
+# 234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+
+* Metadata
+
+This home for this HTML file is: https://richmit.github.io/hp42/custom.html
+
+Files related to this document may be found on github: https://github.com/richmit/hp42
+
+   - =src= directory: Contains the org-mode file that generated this HTML document
+   - =docs= directory: Contains this html document
+   - =bin= directory: Contains raw program files
+
+* Introduction
+
+The custom menu on the 42s is a wonderful thing, but it is also very limited.  It's just too small!!  And it is only one level deep!!  So instead of simply
+assigning functions to the menu keys, how about assigning programs to the keys which present a hierarchical menu of functions?  Coding up such programs is
+tedious.  So this org-mode document has a Little bit of Emacs lisp that will consume a table, and generate a 42s program implementing a hierarchical menu.
+
+The flow to create your custom CUST program:
+  - Evaluate the "Generic menu generator" babel block in the =hp42s-meta.org= file.  This will define the function =MJR-generate-42-menu-code=
+  - Evaluate the "For CUSTOM-type Menus" babel block in the =hp42s-meta.org= file.  This will define the function =MJR-custom-x-gen=
+  - Define your menu in the [[Menu Contents][Menu Contents]] section.
+  - Evaluate the babel block in the [[Menu Code][Menu Code]] section below.
+  - Load the program on your calculator
+
+** Customizing Custom Menu Table
+
+The first column (which I labeled Menu) describes the menu keys.  Colons are used to define a menu hierarchy.  For example "=top:mid:thingy=" means we have a
+top level menu "=top=" containing a menu "=mid=" containing a function/program "=thingy=".  Another entry like "=top:thingy2=" would add a function/program
+key "=thingy2="to the "=top=" menu -- yes menus can contain a mix of functions/programs and menus.
+
+The only limitation on menu hierarchy depth or size comes from the use of two digit local labels in the generated code.  A label is consume for each
+function/program and for each menu page.
+
+The second column is the function/program name/label to call.  If this is empty, then the menu name will be used.  For example "=SFUN:HYP:SINH=" will call the
+=SINH= function if no Program is specified.
+
+The other columns of the table are not used.
+
+* Custom Menu
+
+** Menu Contents
+
+#+ATTR_HTML: :rules all :frame box :align center
+#+NAME: custom
+| Menu           | Function/Program |                                          |
+|----------------+------------------+------------------------------------------|
+| SFUN:HYP:SINH  |                  |                                          |
+| SFUN:HYP:COSH  |                  |                                          |
+| SFUN:HYP:TANH  |                  |                                          |
+| SFUN:HYP:ASINH |                  |                                          |
+| SFUN:HYP:ACOSH |                  |                                          |
+| SFUN:HYP:ATANH |                  |                                          |
+|----------------+------------------+------------------------------------------|
+| SFUN:L&P:lnYX  |                  | https://richmit.github.io/hp42/math.html |
+| SFUN:L&P:ln2   |                  | https://richmit.github.io/hp42/math.html |
+| SFUN:L&P:2↑X   |                  | https://richmit.github.io/hp42/math.html |
+| SFUN:L&P:YROOT |                  | https://richmit.github.io/hp42/math.html |
+|----------------+------------------+------------------------------------------|
+| SFUN:PERC:%T   |                  | https://richmit.github.io/hp42/math.html |
+| SFUN:PERC:%CH  |                  |                                          |
+| SFUN:PERC:%    |                  |                                          |
+|----------------+------------------+------------------------------------------|
+| SFUN:PROB:COMB |                  |                                          |
+| SFUN:PROB:PERM |                  |                                          |
+| SFUN:PROB:!    |                  |                                          |
+|----------------+------------------+------------------------------------------|
+| SFUN:INT:IDIV  | BASE÷            |                                          |
+| SFUN:INT:MOD   |                  |                                          |
+| SFUN:INT:GCD   |                  | https://richmit.github.io/hp42/math.html |
+| SFUN:INT:LCM   |                  | https://richmit.github.io/hp42/math.html |
+|----------------+------------------+------------------------------------------|
+| DATE:DATE      | IDATE            | https://richmit.github.io/hp42/date.html |
+| DATE:TIME      | ITIME            | https://richmit.github.io/hp42/date.html |
+| DATE:UTIME     |                  | https://richmit.github.io/hp42/date.html |
+| DATE:          |                  |                                          |
+| DATE:DT→U      |                  | https://richmit.github.io/hp42/date.html |
+| DATE:U→DT      |                  | https://richmit.github.io/hp42/date.html |
+|----------------+------------------+------------------------------------------|
+| DATE:DATE+     | IDATE+           | https://richmit.github.io/hp42/date.html |
+| DATE:DDAYS     |                  |                                          |
+| DATE:DOW       | IDOW             | https://richmit.github.io/hp42/date.html |
+| DATE:          |                  |                                          |
+| DATE:          |                  |                                          |
+| DATE:          |                  |                                          |
+|----------------+------------------+------------------------------------------|
+| PHIL:PERF      |                  | https://richmit.github.io/hp42/phil.html |
+| PHIL:IMET      |                  | https://richmit.github.io/hp42/phil.html |
+| PHIL:MEAS      |                  | https://richmit.github.io/hp42/meas.html |
+|----------------+------------------+------------------------------------------|
+| BASE           |                  | https://richmit.github.io/hp42/base.html |
+| CONS           |                  | https://richmit.github.io/hp42/cons.html |
+| UNIT           |                  | https://richmit.github.io/hp42/unit.html |
+| MEAS           |                  | https://richmit.github.io/hp42/meas.html |
+|----------------+------------------+------------------------------------------|
+
+** Menu Code
+
+#+BEGIN_SRC elisp :var tbl=custom :colnames y :results output verbatum
+    (MJR-generate-42-menu-code "CUST" tbl "stay" "up" #'MJR-custom-x-gen)
+#+END_SRC
+
+#+begin_src hp42s
+LBL "CUST"
+LBL 01            @@@@ Page 1 of menu CUST
+CLMENU
+"SFUN"
+KEY 1 GTO 03
+"DATE"
+KEY 2 GTO 04
+"PHIL"
+KEY 3 GTO 05
+"BASE"
+KEY 4 XEQ 06
+"CONS"
+KEY 5 XEQ 07
+"UNIT"
+KEY 6 XEQ 08
+KEY 7 GTO 02
+KEY 8 GTO 02
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 02            @@@@ Page 2 of menu CUST
+CLMENU
+"MEAS"
+KEY 1 XEQ 09
+KEY 7 GTO 01
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 02
+LBL 03            @@@@ Page 1 of menu SFUN
+CLMENU
+"HYP"
+KEY 1 GTO 10
+"L&P"
+KEY 2 GTO 11
+"PERC"
+KEY 3 GTO 12
+"PROB"
+KEY 4 GTO 13
+"INT"
+KEY 5 GTO 14
+KEY 9 GTO 01
+MENU
+STOP
+GTO 03
+LBL 10            @@@@ Page 1 of menu HYP
+CLMENU
+"SINH"
+KEY 1 XEQ 15
+"COSH"
+KEY 2 XEQ 16
+"TANH"
+KEY 3 XEQ 17
+"ASINH"
+KEY 4 XEQ 18
+"ACOSH"
+KEY 5 XEQ 19
+"ATANH"
+KEY 6 XEQ 20
+KEY 9 GTO 03
+MENU
+STOP
+GTO 10
+LBL 11            @@@@ Page 1 of menu L&P
+CLMENU
+"lnYX"
+KEY 1 XEQ 21
+"ln2"
+KEY 2 XEQ 22
+"2↑X"
+KEY 3 XEQ 23
+"YROOT"
+KEY 4 XEQ 24
+KEY 9 GTO 03
+MENU
+STOP
+GTO 11
+LBL 12            @@@@ Page 1 of menu PERC
+CLMENU
+"%T"
+KEY 1 XEQ 25
+"%CH"
+KEY 2 XEQ 26
+"%"
+KEY 3 XEQ 27
+KEY 9 GTO 03
+MENU
+STOP
+GTO 12
+LBL 13            @@@@ Page 1 of menu PROB
+CLMENU
+"COMB"
+KEY 1 XEQ 28
+"PERM"
+KEY 2 XEQ 29
+"!"
+KEY 3 XEQ 30
+KEY 9 GTO 03
+MENU
+STOP
+GTO 13
+LBL 14            @@@@ Page 1 of menu INT
+CLMENU
+"IDIV"
+KEY 1 XEQ 31
+"MOD"
+KEY 2 XEQ 32
+"GCD"
+KEY 3 XEQ 33
+"LCM"
+KEY 4 XEQ 34
+KEY 9 GTO 03
+MENU
+STOP
+GTO 14
+LBL 04            @@@@ Page 1 of menu DATE
+CLMENU
+"DATE"
+KEY 1 XEQ 36
+"TIME"
+KEY 2 XEQ 37
+"UTIME"
+KEY 3 XEQ 38
+"DT→U"
+KEY 5 XEQ 39
+"U→DT"
+KEY 6 XEQ 40
+KEY 7 GTO 35
+KEY 8 GTO 35
+KEY 9 GTO 01
+MENU
+STOP
+GTO 04
+LBL 35            @@@@ Page 2 of menu DATE
+CLMENU
+"DATE+"
+KEY 1 XEQ 41
+"DDAYS"
+KEY 2 XEQ 42
+"DOW"
+KEY 3 XEQ 43
+KEY 7 GTO 04
+KEY 8 GTO 04
+KEY 9 GTO 01
+MENU
+STOP
+GTO 35
+LBL 05            @@@@ Page 1 of menu PHIL
+CLMENU
+"PERF"
+KEY 1 XEQ 44
+"IMET"
+KEY 2 XEQ 45
+"MEAS"
+KEY 3 XEQ 46
+KEY 9 GTO 01
+MENU
+STOP
+GTO 05
+LBL 00
+EXITALL
+RTN
+LBL 06               @@@@ Action for menu key BASE
+XEQ "BASE"
+RTN
+LBL 07               @@@@ Action for menu key CONS
+XEQ "CONS"
+RTN
+LBL 08               @@@@ Action for menu key UNIT
+XEQ "UNIT"
+RTN
+LBL 09               @@@@ Action for menu key MEAS
+XEQ "MEAS"
+RTN
+LBL 15               @@@@ Action for menu key SINH
+SINH
+RTN
+LBL 16               @@@@ Action for menu key COSH
+COSH
+RTN
+LBL 17               @@@@ Action for menu key TANH
+TANH
+RTN
+LBL 18               @@@@ Action for menu key ASINH
+ASINH
+RTN
+LBL 19               @@@@ Action for menu key ACOSH
+ACOSH
+RTN
+LBL 20               @@@@ Action for menu key ATANH
+ATANH
+RTN
+LBL 21               @@@@ Action for menu key lnYX
+XEQ "lnYX"
+RTN
+LBL 22               @@@@ Action for menu key ln2
+XEQ "ln2"
+RTN
+LBL 23               @@@@ Action for menu key 2↑X
+XEQ "2↑X"
+RTN
+LBL 24               @@@@ Action for menu key YROOT
+XEQ "YROOT"
+RTN
+LBL 25               @@@@ Action for menu key %T
+XEQ "%T"
+RTN
+LBL 26               @@@@ Action for menu key %CH
+%CH
+RTN
+LBL 27               @@@@ Action for menu key %
+%
+RTN
+LBL 28               @@@@ Action for menu key COMB
+COMB
+RTN
+LBL 29               @@@@ Action for menu key PERM
+PERM
+RTN
+LBL 30               @@@@ Action for menu key !
+XEQ "!"
+RTN
+LBL 31               @@@@ Action for menu key IDIV
+BASE÷
+RTN
+LBL 32               @@@@ Action for menu key MOD
+MOD
+RTN
+LBL 33               @@@@ Action for menu key GCD
+XEQ "GCD"
+RTN
+LBL 34               @@@@ Action for menu key LCM
+XEQ "LCM"
+RTN
+LBL 36               @@@@ Action for menu key DATE
+XEQ "IDATE"
+RTN
+LBL 37               @@@@ Action for menu key TIME
+XEQ "ITIME"
+RTN
+LBL 38               @@@@ Action for menu key UTIME
+XEQ "UTIME"
+RTN
+LBL 39               @@@@ Action for menu key DT→U
+XEQ "DT→U"
+RTN
+LBL 40               @@@@ Action for menu key U→DT
+XEQ "U→DT"
+RTN
+LBL 41               @@@@ Action for menu key DATE+
+XEQ "IDATE+"
+RTN
+LBL 42               @@@@ Action for menu key DDAYS
+DDAYS
+RTN
+LBL 43               @@@@ Action for menu key DOW
+XEQ "IDOW"
+RTN
+LBL 44               @@@@ Action for menu key PERF
+XEQ "PERF"
+RTN
+LBL 45               @@@@ Action for menu key IMET
+XEQ "IMET"
+RTN
+LBL 46               @@@@ Action for menu key MEAS
+XEQ "MEAS"
+RTN
+@@@@ Free labels start at: 47
+#+end_src

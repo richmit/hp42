@@ -1,0 +1,216 @@
+# -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
+#+TITLE:       free42/hp42s/DM42 Date Tools
+#+AUTHOR:      Mitch Richling
+#+EMAIL:       http://www.mitchr.me/
+#+DATE:        2021-03-19
+#+DESCRIPTION: Description of some free42/hp-42s/DM42 programs for dates
+#+LANGUAGE:    en
+#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil 
+#+HTML_HEAD: <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
+#+HTML_HEAD: <style>body { min-width: 500px; max-width: 1024px; }</style>
+#+HTML_HEAD: <style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
+#+HTML_HEAD: <style>h1,h2,h3 { line-height: 1.4em; }</style>
+#+HTML_HEAD: <style>h1.title { font-size: 3em; }</style>
+#+HTML_HEAD: <style>h4,h5,h6 { font-size: 1em; }</style>
+#+HTML_HEAD: <style>.org-src-container { border: 1px solid #ccc; box-shadow: 3px 3px 3px #eee; font-family: Lucida Console, monospace; font-size: 80%; margin: 0px; padding: 0px 0px; position: relative; }</style>
+#+HTML_HEAD: <style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
+#+HTML_HEAD: <style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
+#+HTML_HEAD: <style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
+#+HTML_LINK_HOME: https://www.mitchr.me/
+#+HTML_LINK_UP: https://www.mitchr.me/FIXME
+
+#+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
+|        <r> | <l>              |
+|  *Author:* | /{{{author}}}/ |
+| *Updated:* | /{{{time(%Y-%m-%d %H:%M:%S)}}}/ |
+#+ATTR_HTML: :align center
+Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
+
+#+TOC: headlines 5
+
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+#   00   #    10   #    20   #    30   #    40   #    50   #    60   #    70   #    80   #    90   #   100   #   110   #   120   #   130   #   140   #   150   #   160   #
+# 234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+
+* Metadata
+
+This home for this HTML file is: https://richmit.github.io/hp42/date.html
+
+Files related to this document may be found on github: https://github.com/richmit/hp42
+
+   - =src= directory: Contains the org-mode file that generated this HTML document
+   - =docs= directory: Contains this html document
+   - =bin= directory: Contains raw program files
+
+* Introduction
+
+Aside from the UNIX data/time conversion routines, the rest is just wrappers for built in functions to make them print results when called from a program.
+Why?  I wanted to put things like =DATE= in a nested custom menu, and have them print the date just as if I had directly put the function in a custom menu. ;)
+Now that free42 has put these into a separate catalog menu, these are somewhat obsolete.
+
+* Date/Time Functions
+
+#+BEGIN_SRC  hp42s
+  @@@@ Interactive Current Date
+  @@@@ OUT: X: Date encoded as a real
+  @@@@ SFX: Prints date even when called from a program
+  @@@@ UPD: 2021-03-16
+  LBL "IDATE"
+  FUNC 01            @@## REQ:free42>=2.5.24
+  L4STK              @@## REQ:free42>=3.0
+  DATE               @@## REQ:free42>=1.4.66
+  "Date: "
+  ADATE              @@## REQ:free42>=1.4.66
+  AVIEW
+  RTN
+  END
+
+  @@@@ Interactive Current Time
+  @@@@ OUT: X: Time in H.MM.SS format
+  @@@@ SFX: Prints time even when called from a program
+  @@@@ UPD: 2021-03-16
+  LBL "ITIME"
+  FUNC 01            @@## REQ:free42>=2.5.24
+  L4STK              @@## REQ:free42>=3.0
+  TIME               @@## REQ:free42>=1.4.66
+  "Time: "
+  ATIME              @@## REQ:free42>=1.4.66
+  AVIEW
+  RTN
+  END
+
+  @@@@ Current UNIX time
+  @@@@ OUT: X: UNIX time
+  @@@@ UPD: 2021-03-16
+  LBL "UTIME"
+  FUNC 02            @@## REQ:free42>=2.5.24
+  L4STK              @@## REQ:free42>=3.0
+  DATE               @@## REQ:free42>=1.4.66
+  TIME               @@## REQ:free42>=1.4.66
+  XEQ "DT→U"
+  END
+
+  @@@@ Convert date & time to UNIX time
+  @@@@ IN:  Y: Date
+  @@@@ IN:  X: Time
+  @@@@ OUT: X: UNIX time
+  @@@@ UPD: 2021-03-16
+  LBL "DT→U"
+  FUNC 21            @@## REQ:free42>=2.5.24
+  L4STK              @@## REQ:free42>=3.0
+  FS? 67             @@@@ In Y.MD mode
+  1970.0101
+  FC? 67             @@@@ Not in Y.MD mode
+  1.011970           @@@@ Works for M.DY & D.MY
+  RCL ST Z
+  DDAYS              @@## REQ:free42>=1.4.66
+  24
+  ×
+  X<>Y
+  →HR
+  +
+  3600
+  ×
+  RTN
+  END
+
+  @@@@ Convert UNIX time to date & time
+  @@@@ IN:  X: UNIX time
+  @@@@ OUT: Y: Date
+  @@@@ OUT: X: Time
+  @@@@ UPD: 2021-03-16
+  LBL "U→DT"
+  FUNC 12            @@## REQ:free42>=2.5.24
+  L4STK              @@## REQ:free42>=3.0
+  3600
+  ÷
+  RCL ST X
+  24
+  ÷
+  IP
+  FS? 67             @@@@ In Y.MD mode
+  1970.0101
+  FC? 67             @@@@ Not in Y.MD mode
+  1.011970           @@@@ Works for M.DY & D.MY
+  X<>Y
+  DATE+              @@## REQ:free42>=1.4.66
+  X<>Y
+  24
+  MOD                @@## REQ:free42>=1.4.66
+  →HMS
+  RTN
+  END
+
+  @@@@ Interactive U→DT (prints date & time)
+  @@@@ IN:  X: UNIX time
+  @@@@ OUT: Y: Date
+  @@@@ OUT: X: Time
+  @@@@ SFX: Prints date & time even when called from a program
+  @@@@ UPD: 2021-03-16
+  LBL "IU→DT"
+  FUNC 12            @@## REQ:free42>=2.5.24
+  L4STK              @@## REQ:free42>=3.0
+  XEQ "U→DT"
+  X<>Y
+  "Date:  "
+  ADATE              @@## REQ:free42>=1.4.66
+  X<>Y
+  "├[LF]Time: "
+  ATIME              @@## REQ:free42>=1.4.66
+  AVIEW
+  RTN
+  END
+
+  @@@@ Interactive DATE+ (prints date)
+  @@@@ IN:  Y: Date
+  @@@@ IN:  X: Integer
+  @@@@ OUT: X: Date + Integer
+  @@@@ UPD: 2021-03-16
+  LBL "IDATE+"
+  FUNC 21            @@## REQ:free42>=2.5.24
+  L4STK              @@## REQ:free42>=3.0
+  DATE+              @@## REQ:free42>=1.4.66
+  "Date: "
+  ADATE              @@## REQ:free42>=1.4.66
+  AVIEW
+  RTN
+  END
+
+  @@@@ Interactive DOW (prints day)
+  @@@@ IN:  X: Date
+  @@@@ OUT: X: Integer
+  @@@@ SFX: Prints day of week even when called from a program
+  @@@@ UPD: 2021-03-16
+  LBL "IDOW"
+  FUNC 11           @@## REQ:free42>=2.5.24
+  L4STK             @@## REQ:free42>=3.0
+  DOW                 @@## REQ:free42>=1.4.66
+  "Day of Week: "
+  XEQ IND ST X
+  AVIEW
+  RTN
+  LBL 00
+  "├SUN"
+  RTN
+  LBL 01
+  "├MON"
+  RTN
+  LBL 02
+  "├TUE"
+  RTN
+  LBL 04
+  "├WED"
+  RTN
+  LBL 05
+  "├THR"
+  RTN
+  LBL 06
+  "├FRI"
+  RTN
+  LBL 07
+  "├SAT"
+  RTN
+  END
+#+END_SRC

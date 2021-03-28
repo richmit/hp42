@@ -1,0 +1,1427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-03-28 Sun 11:26 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>free42/hp42s/DM42 Custom Unit Conversion Factors</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Mitch Richling" />
+<meta name="description" content="Description of some free42/hp-42s/DM42 programs for unit computations"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
+<style>body { min-width: 500px; max-width: 1024px; }</style>
+<style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
+<style>h1,h2,h3 { line-height: 1.4em; }</style>
+<style>h1.title { font-size: 3em; }</style>
+<style>h4,h5,h6 { font-size: 1em; }</style>
+<style>.org-src-container { border: 1px solid #ccc; box-shadow: 3px 3px 3px #eee; font-family: Lucida Console, monospace; font-size: 80%; margin: 0px; padding: 0px 0px; position: relative; }</style>
+<style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
+<style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
+<style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="https://www.mitchr.me/FIXME"> UP </a>
+ |
+ <a accesskey="H" href="https://www.mitchr.me/"> HOME </a>
+</div><div id="content">
+<h1 class="title">free42/hp42s/DM42 Custom Unit Conversion Factors</h1>
+<table border="2 solid #ccc" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right"><b>Author:</b></td>
+<td class="org-left"><i>Mitch Richling</i></td>
+</tr>
+
+<tr>
+<td class="org-right"><b>Updated:</b></td>
+<td class="org-left"><i>2021-03-28 11:26:29</i></td>
+</tr>
+</tbody>
+</table>
+<p align="center">
+Copyright 2021 Mitch Richling. All rights reserved.
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org20ae19c">1. Metadata</a></li>
+<li><a href="#org6af9a56">2. Introduction</a></li>
+<li><a href="#org41673ba">3. Units</a>
+<ul>
+<li><a href="#org2381c75">3.1. Conversion Factors</a></li>
+<li><a href="#org1d06b82">3.2. Code</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org20ae19c" class="outline-2">
+<h2 id="org20ae19c"><span class="section-number-2">1</span> Metadata</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This home for this HTML file is: <a href="https://richmit.github.io/hp42/unit.html">https://richmit.github.io/hp42/unit.html</a>
+</p>
+
+<p>
+Files related to this document may be found on github: <a href="https://github.com/richmit/hp42">https://github.com/richmit/hp42</a>
+</p>
+
+<ul class="org-ul">
+<li><code>src</code> directory: Contains the org-mode file that generated this HTML document</li>
+<li><code>docs</code> directory: Contains this html document</li>
+<li><code>bin</code> directory: Contains raw program files</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6af9a56" class="outline-2">
+<h2 id="org6af9a56"><span class="section-number-2">2</span> Introduction</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+This application has a few unit conversions for temperatures; however, the focus is on a nice way to organize and recall various conversion factors I
+frequently use.  That is to say, I don't really want to convert "in" to "cm", instead I want to push the conversion factor to the stack.
+</p>
+
+<p>
+Aside from the <code>TEMP</code> menu, all of the menus have the same structure.  The first menu key is the "base" unit for that page.  Pressing any menu key will push
+a conversion factor for the given unit to the "base" unit to the stack.  For example, if the left most menu is "mm" then pressing the "in" button will push
+0.393700787402 to the stack &#x2013; the value you would multiply by to convert from inches to millimeters or divide by to convert from millimeters to inches.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org41673ba" class="outline-2">
+<h2 id="org41673ba"><span class="section-number-2">3</span> Units</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org2381c75" class="outline-3">
+<h3 id="org2381c75"><span class="section-number-3">3.1</span> Conversion Factors</h3>
+<div class="outline-text-3" id="text-3-1">
+<table id="org81efb7a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Type</th>
+<th scope="col" class="org-right">Conversion</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">LEN:mm</td>
+<td class="org-right">1.0</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">LEN:Ang</td>
+<td class="org-right">1e7</td>
+<td class="org-left">Angstrom</td>
+</tr>
+
+<tr>
+<td class="org-left">LEN:μm</td>
+<td class="org-right">1e3</td>
+<td class="org-left">Micron</td>
+</tr>
+
+<tr>
+<td class="org-left">LEN:mil</td>
+<td class="org-right">3.9370078740157e1</td>
+<td class="org-left">mil (1/1000 in)</td>
+</tr>
+
+<tr>
+<td class="org-left">LEN:cm</td>
+<td class="org-right">1e-2</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">LEN:in</td>
+<td class="org-right">3.9370078740157e-2</td>
+<td class="org-left">Inch</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">LEN:cm</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">LEN:in</td>
+<td class="org-right">0.39370078740157</td>
+<td class="org-left">Intl Inch</td>
+</tr>
+
+<tr>
+<td class="org-left">LEN:ft</td>
+<td class="org-right">0.3048</td>
+<td class="org-left">Intl Foot</td>
+</tr>
+
+<tr>
+<td class="org-left">LEN:m</td>
+<td class="org-right">1e-3</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">LEN:yd</td>
+<td class="org-right">0.032808398950131</td>
+<td class="org-left">Intl Yard</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">LEN:km</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">LEN:mi</td>
+<td class="org-right">0.62137119223733</td>
+<td class="org-left">Int Mile</td>
+</tr>
+
+<tr>
+<td class="org-left">LEN:us mi</td>
+<td class="org-right">0.62136994949495</td>
+<td class="org-left">US Mile</td>
+</tr>
+
+<tr>
+<td class="org-left">LEN:nmi</td>
+<td class="org-right">0.53995680345572</td>
+<td class="org-left">Int Nautical mi</td>
+</tr>
+
+<tr>
+<td class="org-left">LEN:m</td>
+<td class="org-right">1e3</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">LEN:ft</td>
+<td class="org-right">3280.8398950131</td>
+<td class="org-left">Intl Foot</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">AREA:hector</td>
+<td class="org-right">1</td>
+<td class="org-left">hector</td>
+</tr>
+
+<tr>
+<td class="org-left">AREA:acre</td>
+<td class="org-right">2.4710538146717</td>
+<td class="org-left">Int Acre</td>
+</tr>
+
+<tr>
+<td class="org-left">AREA:m^2</td>
+<td class="org-right">10000</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">AREA:yd^2</td>
+<td class="org-right">11959.900463011</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">VOL:l</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">VOL:qt</td>
+<td class="org-right">1.0566882049662</td>
+<td class="org-left">US Lq Quart</td>
+</tr>
+
+<tr>
+<td class="org-left">VOL:gal</td>
+<td class="org-right">0.26417205124156</td>
+<td class="org-left">US Lq Gal</td>
+</tr>
+
+<tr>
+<td class="org-left">VOL:cc</td>
+<td class="org-right">1e3</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">VOL:gal</td>
+<td class="org-right">1</td>
+<td class="org-left">Gal</td>
+</tr>
+
+<tr>
+<td class="org-left">VOL:qt</td>
+<td class="org-right">4</td>
+<td class="org-left">Quart</td>
+</tr>
+
+<tr>
+<td class="org-left">VOL:pint</td>
+<td class="org-right">8</td>
+<td class="org-left">Pint</td>
+</tr>
+
+<tr>
+<td class="org-left">VOL:cup</td>
+<td class="org-right">16</td>
+<td class="org-left">Cup</td>
+</tr>
+
+<tr>
+<td class="org-left">VOL:flOZ</td>
+<td class="org-right">128</td>
+<td class="org-left">fl oz</td>
+</tr>
+
+<tr>
+<td class="org-left">VOL:tbsp</td>
+<td class="org-right">256</td>
+<td class="org-left">Tablespoon</td>
+</tr>
+
+<tr>
+<td class="org-left">VOL:tsp</td>
+<td class="org-right">768</td>
+<td class="org-left">Teaspoon</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">TIME:sec</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">TIME:min</td>
+<td class="org-right">60</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">TIME:hour</td>
+<td class="org-right">3600</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">TIME:day</td>
+<td class="org-right">86400</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">TIME:week</td>
+<td class="org-right">604800</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">TIME:year</td>
+<td class="org-right">31536000</td>
+<td class="org-left">365 day year</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">TIME:day</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">TIME:year</td>
+<td class="org-right">365</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">TIME:greg</td>
+<td class="org-right">365.2425</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">TIME:julian</td>
+<td class="org-right">365.25</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">TIME:astro</td>
+<td class="org-right">365.256363004</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Mass:kg</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Mass:lb</td>
+<td class="org-right">2.2046226218488</td>
+<td class="org-left">Pound Int</td>
+</tr>
+
+<tr>
+<td class="org-left">Mass:g</td>
+<td class="org-right">1e3</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Mass:ozWT</td>
+<td class="org-right">35.27396194958</td>
+<td class="org-left">Ounce Weight</td>
+</tr>
+
+<tr>
+<td class="org-left">Mass:ozTr</td>
+<td class="org-right">32.150746568628</td>
+<td class="org-left">Ounce Troy</td>
+</tr>
+
+<tr>
+<td class="org-left">Mass:stone</td>
+<td class="org-right">0.15747304441777</td>
+<td class="org-left">UK Stone</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Mass:kg</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Mass:ton</td>
+<td class="org-right">0.001</td>
+<td class="org-left">Metric Ton</td>
+</tr>
+
+<tr>
+<td class="org-left">Mass:US ton</td>
+<td class="org-right">1.10231131471e-3</td>
+<td class="org-left">US (short) Ton</td>
+</tr>
+
+<tr>
+<td class="org-left">Mass:UK ton</td>
+<td class="org-right">9.84206530988e-4</td>
+<td class="org-left">UK (long) Ton</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Force:N</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Force:kgf</td>
+<td class="org-right">9.80665</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Force:lbf</td>
+<td class="org-right">4.4482216153</td>
+<td class="org-left">Int Pound Force</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Sped:m/s</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Sped:mph</td>
+<td class="org-right">0.44704</td>
+<td class="org-left">Int Mi per hour</td>
+</tr>
+
+<tr>
+<td class="org-left">Sped:kph</td>
+<td class="org-right">0.2777777778</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Sped:knot</td>
+<td class="org-right">0.5144444444</td>
+<td class="org-left">International</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">PRES:Pa</td>
+<td class="org-right">1</td>
+<td class="org-left">N/m^2</td>
+</tr>
+
+<tr>
+<td class="org-left">PRES:bar</td>
+<td class="org-right">100000</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">PRES:psi</td>
+<td class="org-right">6894.7572932</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">PRES:atm</td>
+<td class="org-right">101325</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">PRES:mmHg</td>
+<td class="org-right">133.322</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">PRES:inHg</td>
+<td class="org-right">133.322</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">POW:watt</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">POW:BTU/h</td>
+<td class="org-right">0.2930710702</td>
+<td class="org-left">International</td>
+</tr>
+
+<tr>
+<td class="org-left">POW:hp</td>
+<td class="org-right">735.49875</td>
+<td class="org-left">Metric</td>
+</tr>
+
+<tr>
+<td class="org-left">POW:kcal/h</td>
+<td class="org-right">1.163</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">POW:J/h</td>
+<td class="org-right">0.0002777778</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">TEMP:C→F</td>
+<td class="org-right">9 × 5 ÷ 32 +</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">TEMP:F→C</td>
+<td class="org-right">32 - 5 × 9 ÷</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">TEMP:K→C</td>
+<td class="org-right">273.15 -</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">TEMP:C→K</td>
+<td class="org-right">273.15 +</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org1d06b82" class="outline-3">
+<h3 id="org1d06b82"><span class="section-number-3">3.2</span> Code</h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="org-src-container">
+<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"UNIT"</span> tbl <span style="color: #fa8072;">"stay"</span> <span style="color: #fa8072;">"up"</span> (<span style="color: #00ffff;">lambda</span> (row) (<span style="color: #00ffff;">cl-destructuring-bind</span> (menu cfactor desc) row
+                                                                  (<span style="color: #00ffff;">let</span> ((print-desc 't))    <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Set to NIL to not print description</span>
+                                                                    (<span style="color: #00ffff;">let*</span> ((dlen (length desc))
+                                                                           (dsc1 (<span style="color: #00ffff;">if</span> (&gt; dlen 0)
+                                                                                  (substring desc 0 (min dlen 15))))
+                                                                           (dsc2 (<span style="color: #00ffff;">if</span> (&gt; dlen 14)
+                                                                                     (substring desc 15 (min dlen 22)))))
+                                                                      (mapconcat #'identity
+                                                                                 (cl-remove nil (flatten-list (list (split-string (message <span style="color: #fa8072;">"%s"</span> cfactor))
+                                                                                                                    (<span style="color: #00ffff;">and</span> print-desc dsc1 (message <span style="color: #fa8072;">"\"%s\""</span> dsc1))
+                                                                                                                    (<span style="color: #00ffff;">and</span> print-desc dsc2 (message <span style="color: #fa8072;">"&#9500;\"%s\""</span> dsc2))
+                                                                                                                    (<span style="color: #00ffff;">and</span> print-desc (<span style="color: #00ffff;">or</span> dsc1 dsc2) <span style="color: #fa8072;">"AVIEW"</span>))))
+                                                                                 <span style="color: #fa8072;">"\n"</span>)))))))
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"UNIT"</span>
+<span style="color: #00ffff;">LBL</span> 01            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu CONV</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"LEN"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #fa8072;">"AREA"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">GTO</span> 04
+<span style="color: #fa8072;">"VOL"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">GTO</span> 05
+<span style="color: #fa8072;">"TIME"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">GTO</span> 06
+<span style="color: #fa8072;">"Mass"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">GTO</span> 07
+<span style="color: #fa8072;">"Force"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">GTO</span> 08
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">LBL</span> 02            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu CONV</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"Sped"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">GTO</span> 09
+<span style="color: #fa8072;">"PRES"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">GTO</span> 10
+<span style="color: #fa8072;">"POW"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">GTO</span> 11
+<span style="color: #fa8072;">"TEMP"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">GTO</span> 12
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">LBL</span> 03            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu LEN</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"mm"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 15
+<span style="color: #fa8072;">"Ang"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 16
+<span style="color: #fa8072;">"&#956;m"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 17
+<span style="color: #fa8072;">"mil"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 18
+<span style="color: #fa8072;">"cm"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 19
+<span style="color: #fa8072;">"in"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 20
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 14
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 13
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">LBL</span> 13            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu LEN</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"cm"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 21
+<span style="color: #fa8072;">"in"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 22
+<span style="color: #fa8072;">"ft"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 23
+<span style="color: #fa8072;">"m"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 24
+<span style="color: #fa8072;">"yd"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 25
+<span style="color: #fa8072;">"km"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 26
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 14
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 13
+<span style="color: #00ffff;">LBL</span> 14            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 3 of menu LEN</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"mi"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 27
+<span style="color: #fa8072;">"us mi"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 28
+<span style="color: #fa8072;">"nmi"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 29
+<span style="color: #fa8072;">"m"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 30
+<span style="color: #fa8072;">"ft"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 31
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 13
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 14
+<span style="color: #00ffff;">LBL</span> 04            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu AREA</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"hector"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 32
+<span style="color: #fa8072;">"acre"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 33
+<span style="color: #fa8072;">"m^2"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 34
+<span style="color: #fa8072;">"yd^2"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 35
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 04
+<span style="color: #00ffff;">LBL</span> 05            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu VOL</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"l"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 37
+<span style="color: #fa8072;">"qt"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 38
+<span style="color: #fa8072;">"gal"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 39
+<span style="color: #fa8072;">"cc"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 40
+<span style="color: #fa8072;">"gal"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 41
+<span style="color: #fa8072;">"qt"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 42
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 36
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 36
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 05
+<span style="color: #00ffff;">LBL</span> 36            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu VOL</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"pint"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 43
+<span style="color: #fa8072;">"cup"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 44
+<span style="color: #fa8072;">"flOZ"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 45
+<span style="color: #fa8072;">"tbsp"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 46
+<span style="color: #fa8072;">"tsp"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 47
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 05
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 05
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 36
+<span style="color: #00ffff;">LBL</span> 06            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu TIME</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"sec"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 49
+<span style="color: #fa8072;">"min"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 50
+<span style="color: #fa8072;">"hour"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 51
+<span style="color: #fa8072;">"day"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 52
+<span style="color: #fa8072;">"week"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 53
+<span style="color: #fa8072;">"year"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 54
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 48
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 48
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 06
+<span style="color: #00ffff;">LBL</span> 48            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu TIME</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"day"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 55
+<span style="color: #fa8072;">"year"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 56
+<span style="color: #fa8072;">"greg"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 57
+<span style="color: #fa8072;">"julian"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 58
+<span style="color: #fa8072;">"astro"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 59
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 06
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 06
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 48
+<span style="color: #00ffff;">LBL</span> 07            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu Mass</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"kg"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 61
+<span style="color: #fa8072;">"lb"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 62
+<span style="color: #fa8072;">"g"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 63
+<span style="color: #fa8072;">"ozWT"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 64
+<span style="color: #fa8072;">"ozTr"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 65
+<span style="color: #fa8072;">"stone"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 66
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 60
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 60
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 07
+<span style="color: #00ffff;">LBL</span> 60            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu Mass</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"kg"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 67
+<span style="color: #fa8072;">"ton"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 68
+<span style="color: #fa8072;">"US ton"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 69
+<span style="color: #fa8072;">"UK ton"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 70
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 07
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 07
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 60
+<span style="color: #00ffff;">LBL</span> 08            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu Force</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"N"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 71
+<span style="color: #fa8072;">"kgf"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 72
+<span style="color: #fa8072;">"lbf"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 73
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 08
+<span style="color: #00ffff;">LBL</span> 09            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu Sped</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"m/s"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 74
+<span style="color: #fa8072;">"mph"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 75
+<span style="color: #fa8072;">"kph"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 76
+<span style="color: #fa8072;">"knot"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 77
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 09
+<span style="color: #00ffff;">LBL</span> 10            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu PRES</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"Pa"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 78
+<span style="color: #fa8072;">"bar"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 79
+<span style="color: #fa8072;">"psi"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 80
+<span style="color: #fa8072;">"atm"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 81
+<span style="color: #fa8072;">"mmHg"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 82
+<span style="color: #fa8072;">"inHg"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 83
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 10
+<span style="color: #00ffff;">LBL</span> 11            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu POW</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"watt"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 84
+<span style="color: #fa8072;">"BTU/h"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 85
+<span style="color: #fa8072;">"hp"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 86
+<span style="color: #fa8072;">"kcal/h"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 87
+<span style="color: #fa8072;">"J/h"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 88
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 11
+<span style="color: #00ffff;">LBL</span> 12            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu TEMP</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"C&#8594;F"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 89
+<span style="color: #fa8072;">"F&#8594;C"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 90
+<span style="color: #fa8072;">"K&#8594;C"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 91
+<span style="color: #fa8072;">"C&#8594;K"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 92
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 12
+<span style="color: #00ffff;">LBL</span> 00
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 15               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mm</span>
+1.0
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 16               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key Ang</span>
+1e7
+<span style="color: #fa8072;">"Angstrom"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 17               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#956;m</span>
+1e3
+<span style="color: #fa8072;">"Micron"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 18               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mil</span>
+3.9370078740157e1
+<span style="color: #fa8072;">"mil (1/1000 in)"</span>
+&#9500;<span style="color: #fa8072;">""</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 19               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key cm</span>
+1e-2
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 20               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key in</span>
+3.9370078740157e-2
+<span style="color: #fa8072;">"Inch"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 21               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key cm</span>
+1
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 22               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key in</span>
+0.39370078740157
+<span style="color: #fa8072;">"Intl Inch"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 23               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ft</span>
+0.3048
+<span style="color: #fa8072;">"Intl Foot"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 24               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key m</span>
+1e-3
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 25               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key yd</span>
+0.032808398950131
+<span style="color: #fa8072;">"Intl Yard"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 26               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key km</span>
+1
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 27               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mi</span>
+0.62137119223733
+<span style="color: #fa8072;">"Int Mile"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 28               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key us mi</span>
+0.62136994949495
+<span style="color: #fa8072;">"US Mile"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 29               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key nmi</span>
+0.53995680345572
+<span style="color: #fa8072;">"Int Nautical mi"</span>
+&#9500;<span style="color: #fa8072;">""</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 30               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key m</span>
+1e3
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 31               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ft</span>
+3280.8398950131
+<span style="color: #fa8072;">"Intl Foot"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 32               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key hector</span>
+1
+<span style="color: #fa8072;">"hector"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 33               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key acre</span>
+2.4710538146717
+<span style="color: #fa8072;">"Int Acre"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 34               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key m^2</span>
+10000
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 35               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key yd^2</span>
+11959.900463011
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 37               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key l</span>
+1
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 38               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key qt</span>
+1.0566882049662
+<span style="color: #fa8072;">"US Lq Quart"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 39               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key gal</span>
+0.26417205124156
+<span style="color: #fa8072;">"US Lq Gal"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 40               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key cc</span>
+1e3
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 41               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key gal</span>
+1
+<span style="color: #fa8072;">"Gal"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 42               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key qt</span>
+4
+<span style="color: #fa8072;">"Quart"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 43               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key pint</span>
+8
+<span style="color: #fa8072;">"Pint"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 44               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key cup</span>
+16
+<span style="color: #fa8072;">"Cup"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 45               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key flOZ</span>
+128
+<span style="color: #fa8072;">"fl oz"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 46               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key tbsp</span>
+256
+<span style="color: #fa8072;">"Tablespoon"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 47               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key tsp</span>
+768
+<span style="color: #fa8072;">"Teaspoon"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 49               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key sec</span>
+1
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 50               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key min</span>
+60
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 51               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key hour</span>
+3600
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 52               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key day</span>
+86400
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 53               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key week</span>
+604800
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 54               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key year</span>
+31536000
+<span style="color: #fa8072;">"365 day year"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 55               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key day</span>
+1
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 56               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key year</span>
+365
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 57               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key greg</span>
+365.2425
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 58               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key julian</span>
+365.25
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 59               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key astro</span>
+365.256363004
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 61               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kg</span>
+1
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 62               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key lb</span>
+2.2046226218488
+<span style="color: #fa8072;">"Pound Int"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 63               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key g</span>
+1e3
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 64               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ozWT</span>
+35.27396194958
+<span style="color: #fa8072;">"Ounce Weight"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 65               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ozTr</span>
+32.150746568628
+<span style="color: #fa8072;">"Ounce Troy"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 66               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key stone</span>
+0.15747304441777
+<span style="color: #fa8072;">"UK Stone"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 67               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kg</span>
+1
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 68               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ton</span>
+0.001
+<span style="color: #fa8072;">"Metric Ton"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 69               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key US ton</span>
+1.10231131471e-3
+<span style="color: #fa8072;">"US (short) Ton"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 70               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key UK ton</span>
+9.84206530988e-4
+<span style="color: #fa8072;">"UK (long) Ton"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 71               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key N</span>
+1
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 72               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kgf</span>
+9.80665
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 73               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key lbf</span>
+4.4482216153
+<span style="color: #fa8072;">"Int Pound Force"</span>
+&#9500;<span style="color: #fa8072;">""</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 74               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key m/s</span>
+1
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 75               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mph</span>
+0.44704
+<span style="color: #fa8072;">"Int Mi per hour"</span>
+&#9500;<span style="color: #fa8072;">""</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 76               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kph</span>
+0.2777777778
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 77               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key knot</span>
+0.5144444444
+<span style="color: #fa8072;">"International"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 78               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key Pa</span>
+1
+<span style="color: #fa8072;">"N/m^2"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 79               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key bar</span>
+100000
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 80               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key psi</span>
+6894.7572932
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 81               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key atm</span>
+101325
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 82               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mmHg</span>
+133.322
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 83               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key inHg</span>
+133.322
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 84               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key watt</span>
+1
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 85               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key BTU/h</span>
+0.2930710702
+<span style="color: #fa8072;">"International"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 86               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key hp</span>
+735.49875
+<span style="color: #fa8072;">"Metric"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 87               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kcal/h</span>
+1.163
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 88               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key J/h</span>
+0.0002777778
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 89               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key C&#8594;F</span>
+9
+<span style="color: #00ffff;">&#215;</span>
+5
+<span style="color: #00ffff;">&#247;</span>
+32
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 90               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key F&#8594;C</span>
+32
+<span style="color: #00ffff;">-</span>
+5
+<span style="color: #00ffff;">&#215;</span>
+9
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 91               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key K&#8594;C</span>
+273.15
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 92               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key C&#8594;K</span>
+273.15
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Free labels start at: 93</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-28 Sun 11:26 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+</div>
+</body>
+</html>

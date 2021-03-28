@@ -3,7 +3,7 @@
 #+AUTHOR:      Mitch Richling
 #+EMAIL:       http://www.mitchr.me/
 #+DATE:        2021-03-24
-#+DESCRIPTION: Description of some free42/hp-42s/DM42 programs for base-n computations
+#+DESCRIPTION: Description of some free42/hp-42s/DM42 programs repeated measurements and uncertainty reporting
 #+LANGUAGE:    en
 #+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil 
 #+HTML_HEAD: <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
@@ -17,7 +17,7 @@
 #+HTML_HEAD: <style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
 #+HTML_HEAD: <style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
 #+HTML_LINK_HOME: https://www.mitchr.me/
-#+HTML_LINK_UP: https://www.mitchr.me/FIXME
+#+HTML_LINK_UP: https://richmit.github.io/hp42/
 
 #+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
 |        <r> | <l>              |
@@ -53,9 +53,9 @@ more automated and less error prone.
 * Supported Methods
 
 When estimating & reporting measurement uncertainty, two methods are most common.  The first assumes the measurements are statistically independent and
-normally distributed.  In this case the measurement is taken to be the mean, and the standard error (u) is defined as the population standard deviation.  The
-second method assumes a rectangular error distribution.  In this case the measurement is assumed to be the midrange=(max+min)/2, and the standard error is
-defined as u=(max-min)/(2*sqrt(3)).  In both schemes the standard error is frequently "expanded" by a factor (k) in order to provide a probabilistic error
+normally distributed.  In this case the measurement is taken to be the mean, and the standard uncertainty (u) is defined as the population standard deviation.  The
+second method assumes a rectangular error distribution.  In this case the measurement is assumed to be the midrange=(max+min)/2, and the standard uncertainty is
+defined as u=(max-min)/(2*sqrt(3)).  In both schemes the standard uncertainty is frequently "expanded" by a factor (k) in order to provide a probabilistic uncertainty
 interval or confidence interval.
 
 Other schemes are frequently used, and the application provides raw statistics to compute many of them: mean, midrange, range, standard deviation, population

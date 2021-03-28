@@ -156,6 +156,11 @@ The generator code can be customized in a few ways:
 | atom:comp:pro  | Proton Compton waveln  | proton Compton wavelength         |   1.32140985539e-15 |   0.00000000040e-15 | m          | atom     |
 | atom:comp:neut | Neutron Compton waveln | neutron Compton wavelength        |   1.31959090581e-15 |   0.00000000075e-15 | m          | atom     |
 | atom:comp:muon | Nuon Compton waveln    | muon Compton wavelength           |     1.173444110e-14 |     0.000000026e-14 | m          | atom     |
+|----------------+------------------------+-----------------------------------+---------------------+---------------------+------------+----------|
+| math:grat      | Golden ratio           |                                   |   1.618033988749894 |                     |            |          |
+| math:emc       | Eul-Masc               | Euler–Mascheroni                  |   0.577215664901532 |                     |            |          |
+| math:omga      | Omega                  | Omega constant                    |   0.567143290409783 |                     |            |          |
+| math:lapl      | Laplace limit          | Laplace limit                     |   0.662743419349181 |                     |            |          |
 
 ** Constants Not Used
 
@@ -484,17 +489,18 @@ The generator code can be customized in a few ways:
                                                                     (let ((print-desc 't)    ;; Set to NIL to not print description
                                                                           (print-unit 't))   ;; Set to NIL to not print units
                                                                       (let* ((dlen (length desc))
-                                                                             (dsc1 (cond ((< dlen 15) (concat desc (if print-unit "[LF]")))
+                                                                             (ulen (length units))
+                                                                             (dsc1 (cond ((< dlen 15) (concat desc (if (and (< 0 ulen) print-unit) "[LF]")))
                                                                                          ((>=  dlen 15) (substring desc 0 15))))
                                                                              (dsc2 (if (> dlen 14)
                                                                                        (if (< dlen 22)
-                                                                                           (concat (substring desc 15) (if print-unit "[LF]"))
+                                                                                           (concat (substring desc 15) (if (and (< 0 ulen) print-unit) "[LF]"))
                                                                                            (substring desc 15 22)))))
                                                                         (mapconcat #'identity
                                                                                    (cl-remove nil (list (message "%s" val)
-                                                                                                        (and print-desc      (message "\"%s\"" dsc1))
-                                                                                                        (and print-desc dsc2 (message "├\"%s\"" dsc2))
-                                                                                                        (and print-unit      (message "%s\"%s\"" (if print-desc "├" "") units))
+                                                                                                        (and (< 0 dlen) print-desc      (message "\"%s\"" dsc1))
+                                                                                                        (and (< 0 dlen) print-desc dsc2 (message "├\"%s\"" dsc2))
+                                                                                                        (and (< 0 ulen) print-unit      (message "%s\"%s\"" (if (and (< 0 dlen) print-desc) "├" "") units))
                                                                                                         "AVIEW"))
                                                                                    "\n")))))))
 #+END_SRC
@@ -513,6 +519,8 @@ KEY 3 GTO 04
 KEY 4 GTO 05
 "atom"
 KEY 5 GTO 06
+"math"
+KEY 6 GTO 07
 KEY 9 GTO 00
 MENU
 STOP
@@ -520,27 +528,27 @@ GTO 00
 LBL 02            @@@@ Page 1 of menu univ
 CLMENU
 "h"
-KEY 1 XEQ 08
+KEY 1 XEQ 09
 "hbar"
-KEY 2 XEQ 09
+KEY 2 XEQ 10
 "c"
-KEY 3 XEQ 10
+KEY 3 XEQ 11
 "E0"
-KEY 4 XEQ 11
+KEY 4 XEQ 12
 "μ0"
-KEY 5 XEQ 12
+KEY 5 XEQ 13
 "G"
-KEY 6 XEQ 13
-KEY 7 GTO 07
-KEY 8 GTO 07
+KEY 6 XEQ 14
+KEY 7 GTO 08
+KEY 8 GTO 08
 KEY 9 GTO 01
 MENU
 STOP
 GTO 00
-LBL 07            @@@@ Page 2 of menu univ
+LBL 08            @@@@ Page 2 of menu univ
 CLMENU
 "tp"
-KEY 1 XEQ 14
+KEY 1 XEQ 15
 KEY 7 GTO 02
 KEY 8 GTO 02
 KEY 9 GTO 01
@@ -550,9 +558,9 @@ GTO 00
 LBL 03            @@@@ Page 1 of menu adpt
 CLMENU
 "gacc"
-KEY 1 XEQ 15
+KEY 1 XEQ 16
 "atm"
-KEY 2 XEQ 16
+KEY 2 XEQ 17
 KEY 9 GTO 01
 MENU
 STOP
@@ -560,15 +568,15 @@ GTO 00
 LBL 04            @@@@ Page 1 of menu elec
 CLMENU
 "mN"
-KEY 1 XEQ 17
+KEY 1 XEQ 18
 "μB"
-KEY 2 XEQ 18
+KEY 2 XEQ 19
 "e"
-KEY 3 XEQ 19
+KEY 3 XEQ 20
 "F0"
-KEY 4 XEQ 20
+KEY 4 XEQ 21
 "G0"
-KEY 5 XEQ 21
+KEY 5 XEQ 22
 KEY 9 GTO 01
 MENU
 STOP
@@ -576,29 +584,29 @@ GTO 00
 LBL 05            @@@@ Page 1 of menu pchm
 CLMENU
 "mu"
-KEY 1 XEQ 23
+KEY 1 XEQ 24
 "F"
-KEY 2 XEQ 24
+KEY 2 XEQ 25
 "Na"
-KEY 3 XEQ 25
+KEY 3 XEQ 26
 "k"
-KEY 4 XEQ 26
+KEY 4 XEQ 27
 "R"
-KEY 5 XEQ 27
+KEY 5 XEQ 28
 "s"
-KEY 6 XEQ 28
-KEY 7 GTO 22
-KEY 8 GTO 22
+KEY 6 XEQ 29
+KEY 7 GTO 23
+KEY 8 GTO 23
 KEY 9 GTO 01
 MENU
 STOP
 GTO 00
-LBL 22            @@@@ Page 2 of menu pchm
+LBL 23            @@@@ Page 2 of menu pchm
 CLMENU
 "rc1"
-KEY 1 XEQ 29
+KEY 1 XEQ 30
 "rc2"
-KEY 2 XEQ 30
+KEY 2 XEQ 31
 KEY 7 GTO 05
 KEY 8 GTO 05
 KEY 9 GTO 01
@@ -608,344 +616,377 @@ GTO 00
 LBL 06            @@@@ Page 1 of menu atom
 CLMENU
 "misc"
-KEY 1 GTO 31
+KEY 1 GTO 32
 "mass"
-KEY 2 GTO 32
+KEY 2 GTO 33
 "magm"
-KEY 3 GTO 33
+KEY 3 GTO 34
 "rad"
-KEY 4 GTO 34
+KEY 4 GTO 35
 "comp"
-KEY 5 GTO 35
+KEY 5 GTO 36
 KEY 9 GTO 01
 MENU
 STOP
 GTO 00
-LBL 31            @@@@ Page 1 of menu misc
+LBL 32            @@@@ Page 1 of menu misc
 CLMENU
 "a"
-KEY 1 XEQ 36
+KEY 1 XEQ 37
 "Eh"
-KEY 2 XEQ 37
+KEY 2 XEQ 38
 "Ry"
-KEY 3 XEQ 38
+KEY 3 XEQ 39
 KEY 9 GTO 06
 MENU
 STOP
 GTO 00
-LBL 32            @@@@ Page 1 of menu mass
+LBL 33            @@@@ Page 1 of menu mass
 CLMENU
 "pro"
-KEY 1 XEQ 39
+KEY 1 XEQ 40
 "ele"
-KEY 2 XEQ 40
+KEY 2 XEQ 41
 "neut"
-KEY 3 XEQ 41
+KEY 3 XEQ 42
 "muon"
-KEY 4 XEQ 42
+KEY 4 XEQ 43
 KEY 9 GTO 06
 MENU
 STOP
 GTO 00
-LBL 33            @@@@ Page 1 of menu magm
+LBL 34            @@@@ Page 1 of menu magm
 CLMENU
 "pro"
-KEY 1 XEQ 43
+KEY 1 XEQ 44
 "ele"
-KEY 2 XEQ 44
+KEY 2 XEQ 45
 "neut"
-KEY 3 XEQ 45
+KEY 3 XEQ 46
 "muon"
-KEY 4 XEQ 46
+KEY 4 XEQ 47
 KEY 9 GTO 06
 MENU
 STOP
 GTO 00
-LBL 34            @@@@ Page 1 of menu rad
+LBL 35            @@@@ Page 1 of menu rad
 CLMENU
 "bohr"
-KEY 1 XEQ 47
+KEY 1 XEQ 48
 "ele"
-KEY 2 XEQ 48
+KEY 2 XEQ 49
 KEY 9 GTO 06
 MENU
 STOP
 GTO 00
-LBL 35            @@@@ Page 1 of menu comp
+LBL 36            @@@@ Page 1 of menu comp
 CLMENU
 "std"
-KEY 1 XEQ 49
+KEY 1 XEQ 50
 "pro"
-KEY 2 XEQ 50
+KEY 2 XEQ 51
 "neut"
-KEY 3 XEQ 51
+KEY 3 XEQ 52
 "muon"
-KEY 4 XEQ 52
+KEY 4 XEQ 53
 KEY 9 GTO 06
+MENU
+STOP
+GTO 00
+LBL 07            @@@@ Page 1 of menu math
+CLMENU
+"grat"
+KEY 1 XEQ 54
+"emc"
+KEY 2 XEQ 55
+"omga"
+KEY 3 XEQ 56
+"lapl"
+KEY 4 XEQ 57
+KEY 9 GTO 01
 MENU
 STOP
 GTO 00
 LBL 00
 EXITALL
 RTN
-LBL 08               @@@@ Action for menu key h
+LBL 09               @@@@ Action for menu key h
 6.62607015e-34
 "Planck Constant"
 ├"[LF]"
 ├"J/Hz"
 AVIEW
 RTN
-LBL 09               @@@@ Action for menu key hbar
+LBL 10               @@@@ Action for menu key hbar
 1.054571817e-34
 "Dirac Constant[LF]"
 ├"J*s"
 AVIEW
 RTN
-LBL 10               @@@@ Action for menu key c
+LBL 11               @@@@ Action for menu key c
 299792458
 "Speed of Light[LF]"
 ├"m/s"
 AVIEW
 RTN
-LBL 11               @@@@ Action for menu key E0
+LBL 12               @@@@ Action for menu key E0
 8.8541878128e-12
 "Vac Ele Permitt"
 ├"ivity[LF]"
 ├"F/m"
 AVIEW
 RTN
-LBL 12               @@@@ Action for menu key μ0
+LBL 13               @@@@ Action for menu key μ0
 1.25663706212e-6
 "Vac Mag Permeab"
 ├"ility[LF]"
 ├"N/A^2"
 AVIEW
 RTN
-LBL 13               @@@@ Action for menu key G
+LBL 14               @@@@ Action for menu key G
 6.67430e-11
 "Gravitational C"
 ├"onstant"
 ├"m^3/kg*s^2"
 AVIEW
 RTN
-LBL 14               @@@@ Action for menu key tp
+LBL 15               @@@@ Action for menu key tp
 5.391247e-44
 "Planck Time[LF]"
 ├"s"
 AVIEW
 RTN
-LBL 15               @@@@ Action for menu key gacc
+LBL 16               @@@@ Action for menu key gacc
 9.80665
 "Earth Std Grav "
 ├"Accel[LF]"
 ├"m/s"
 AVIEW
 RTN
-LBL 16               @@@@ Action for menu key atm
+LBL 17               @@@@ Action for menu key atm
 101325
 "Standard Atmosp"
 ├"here[LF]"
 ├"Pa"
 AVIEW
 RTN
-LBL 17               @@@@ Action for menu key mN
+LBL 18               @@@@ Action for menu key mN
 5.0507837461e-27
 "Nuclear Magneto"
 ├"n[LF]"
 ├"J/*T"
 AVIEW
 RTN
-LBL 18               @@@@ Action for menu key μB
+LBL 19               @@@@ Action for menu key μB
 9.2740100783e-24
 "Bohr Magneton[LF]"
 ├"J/T"
 AVIEW
 RTN
-LBL 19               @@@@ Action for menu key e
+LBL 20               @@@@ Action for menu key e
 1.602176634e-19
 "Elementary Char"
 ├"ge[LF]"
 ├"C"
 AVIEW
 RTN
-LBL 20               @@@@ Action for menu key F0
+LBL 21               @@@@ Action for menu key F0
 2.067833848e-15
 "Mag flux quantu"
 ├"m[LF]"
 ├"Wb"
 AVIEW
 RTN
-LBL 21               @@@@ Action for menu key G0
+LBL 22               @@@@ Action for menu key G0
 7.748091729e-5
 "Conductance Qua"
 ├"ntum[LF]"
 ├"S"
 AVIEW
 RTN
-LBL 23               @@@@ Action for menu key mu
+LBL 24               @@@@ Action for menu key mu
 1.66053906660e-27
 "Atomic Mass Uni"
 ├"t[LF]"
 ├"kg"
 AVIEW
 RTN
-LBL 24               @@@@ Action for menu key F
+LBL 25               @@@@ Action for menu key F
 96485.33212
 "Faraday[LF]"
 ├"C/mol"
 AVIEW
 RTN
-LBL 25               @@@@ Action for menu key Na
+LBL 26               @@@@ Action for menu key Na
 6.02214076e23
 "Avogadro's Numb"
 ├"er[LF]"
 ├"1/mol"
 AVIEW
 RTN
-LBL 26               @@@@ Action for menu key k
+LBL 27               @@@@ Action for menu key k
 1.380649e-23
 "Boltzmann Const"
 ├"ant[LF]"
 ├"J/K"
 AVIEW
 RTN
-LBL 27               @@@@ Action for menu key R
+LBL 28               @@@@ Action for menu key R
 8.314462618
 "Ideal Gas Const"
 ├"ant[LF]"
 ├"J/mol*K"
 AVIEW
 RTN
-LBL 28               @@@@ Action for menu key s
+LBL 29               @@@@ Action for menu key s
 5.670374419e-8
 "Stefan Constant"
 ├"[LF]"
 ├"W/m^2*K^4"
 AVIEW
 RTN
-LBL 29               @@@@ Action for menu key rc1
+LBL 30               @@@@ Action for menu key rc1
 3.741771852e-16
 "First Radiation"
 ├" Cnst[LF]"
 ├"W*m^2"
 AVIEW
 RTN
-LBL 30               @@@@ Action for menu key rc2
+LBL 31               @@@@ Action for menu key rc2
 1.438776877e-2
 "Second Radiatio"
 ├"n Cnst[LF]"
 ├"m*K"
 AVIEW
 RTN
-LBL 36               @@@@ Action for menu key a
+LBL 37               @@@@ Action for menu key a
 7.2973525693e-3
-"Fine Structure[LF]"
-├""
+"Fine Structure"
 AVIEW
 RTN
-LBL 37               @@@@ Action for menu key Eh
+LBL 38               @@@@ Action for menu key Eh
 4.3597447222071e-18
 "Hartree Energy[LF]"
 ├"J"
 AVIEW
 RTN
-LBL 38               @@@@ Action for menu key Ry
+LBL 39               @@@@ Action for menu key Ry
 10973731.56816
 "Rydberg Constan"
 ├"t[LF]"
 ├"1/m"
 AVIEW
 RTN
-LBL 39               @@@@ Action for menu key pro
+LBL 40               @@@@ Action for menu key pro
 1.67262192369e-27
 "Proton Mass[LF]"
 ├"kg"
 AVIEW
 RTN
-LBL 40               @@@@ Action for menu key ele
+LBL 41               @@@@ Action for menu key ele
 9.1093837015e-31
 "Electron Mass[LF]"
 ├"kg"
 AVIEW
 RTN
-LBL 41               @@@@ Action for menu key neut
+LBL 42               @@@@ Action for menu key neut
 1.67492749804e-27
 "Neutron Mass[LF]"
 ├"kg"
 AVIEW
 RTN
-LBL 42               @@@@ Action for menu key muon
+LBL 43               @@@@ Action for menu key muon
 1.883531627e-28
 "Muon Mass[LF]"
 ├"kg"
 AVIEW
 RTN
-LBL 43               @@@@ Action for menu key pro
+LBL 44               @@@@ Action for menu key pro
 1.41060679736e-26
 "Proton Mag Mom[LF]"
 ├"J/T"
 AVIEW
 RTN
-LBL 44               @@@@ Action for menu key ele
+LBL 45               @@@@ Action for menu key ele
 -9.2847647043e-24
 "Electron Mag Mo"
 ├"m[LF]"
 ├"J/T"
 AVIEW
 RTN
-LBL 45               @@@@ Action for menu key neut
+LBL 46               @@@@ Action for menu key neut
 -9.6623651e-27
 "Neutron Mag Mom"
 ├"[LF]"
 ├"J/T"
 AVIEW
 RTN
-LBL 46               @@@@ Action for menu key muon
+LBL 47               @@@@ Action for menu key muon
 -4.49044830e-26
 "Muon Mag Mom[LF]"
 ├"J/T"
 AVIEW
 RTN
-LBL 47               @@@@ Action for menu key bohr
+LBL 48               @@@@ Action for menu key bohr
 5.29177210903e-11
 "Bohr Radius[LF]"
 ├"m"
 AVIEW
 RTN
-LBL 48               @@@@ Action for menu key ele
+LBL 49               @@@@ Action for menu key ele
 2.8179403262e-15
 "Electron Radius"
 ├"[LF]"
 ├"m"
 AVIEW
 RTN
-LBL 49               @@@@ Action for menu key std
+LBL 50               @@@@ Action for menu key std
 2.42631023867e-12
 "Compton Wavelen"
 ├"gth[LF]"
 ├"m"
 AVIEW
 RTN
-LBL 50               @@@@ Action for menu key pro
+LBL 51               @@@@ Action for menu key pro
 1.32140985539e-15
 "Proton Compton "
 ├"waveln[LF]"
 ├"m"
 AVIEW
 RTN
-LBL 51               @@@@ Action for menu key neut
+LBL 52               @@@@ Action for menu key neut
 1.31959090581e-15
 "Neutron Compton"
 ├" waveln"
 ├"m"
 AVIEW
 RTN
-LBL 52               @@@@ Action for menu key muon
+LBL 53               @@@@ Action for menu key muon
 1.173444110e-14
 "Nuon Compton wa"
 ├"veln[LF]"
 ├"m"
 AVIEW
 RTN
-@@@@ Free labels start at: 53
+LBL 54               @@@@ Action for menu key grat
+1.618033988749894
+"Golden ratio"
+AVIEW
+RTN
+LBL 55               @@@@ Action for menu key emc
+0.577215664901532
+"Eul-Masc"
+AVIEW
+RTN
+LBL 56               @@@@ Action for menu key omga
+0.567143290409783
+"Omega"
+AVIEW
+RTN
+LBL 57               @@@@ Action for menu key lapl
+0.662743419349181
+"Laplace limit"
+AVIEW
+RTN
+@@@@ Free labels start at: 58
 #+end_src

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-03-27 Sat 15:17 -->
+<!-- 2021-03-28 Sun 09:00 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42/hp42s/DM42 Custom Constants</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-03-27 15:17:01</i></td>
+<td class="org-left"><i>2021-03-28 09:00:01</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,28 +241,28 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgc168a5e">1. Metadata</a></li>
-<li><a href="#org7b39999">2. Introduction</a>
+<li><a href="#orgb1b5f92">1. Metadata</a></li>
+<li><a href="#org137fb9f">2. Introduction</a>
 <ul>
-<li><a href="#org215f72b">2.1. Customizing the Constants Table</a></li>
-<li><a href="#org1efccbe">2.2. Customizing the Gen Code</a></li>
+<li><a href="#org56207ab">2.1. Customizing the Constants Table</a></li>
+<li><a href="#org88c336d">2.2. Customizing the Gen Code</a></li>
 </ul>
 </li>
-<li><a href="#org15d17fb">3. Constants</a>
+<li><a href="#org365259a">3. Constants</a>
 <ul>
-<li><a href="#orgb0e4041">3.1. Constant Data (2018 NIST)</a></li>
-<li><a href="#org2da873b">3.2. Test Data</a></li>
-<li><a href="#orga683014">3.3. Constants Used</a></li>
-<li><a href="#org99bef42">3.4. Constants Not Used</a></li>
-<li><a href="#org394753c">3.5. Code</a></li>
+<li><a href="#orgfad3907">3.1. Constant Data (2018 NIST)</a></li>
+<li><a href="#orgef9b1bf">3.2. Test Data</a></li>
+<li><a href="#orgdd4e61e">3.3. Constants Used</a></li>
+<li><a href="#org1d7a4c7">3.4. Constants Not Used</a></li>
+<li><a href="#orgad840d0">3.5. Code</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgc168a5e" class="outline-2">
-<h2 id="orgc168a5e"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-orgb1b5f92" class="outline-2">
+<h2 id="orgb1b5f92"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/cons.html">https://richmit.github.io/hp42/cons.html</a>
@@ -280,8 +280,8 @@ Files related to this document may be found on github: <a href="https://github.c
 </div>
 </div>
 
-<div id="outline-container-org7b39999" class="outline-2">
-<h2 id="org7b39999"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-org137fb9f" class="outline-2">
+<h2 id="org137fb9f"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Several constants libraries are available for the 42s, and some of them are quite good.  Unfortunately nobody is going to make a constants library with just
@@ -289,11 +289,11 @@ the constants I use. ;)
 </p>
 
 <p>
-This Emacs org-file contains a bit of <a href="#org394753c">lisp code</a> to write a 42s CONST program with the constants <b>you</b> want.  
+This Emacs org-file contains a bit of <a href="#orgad840d0">lisp code</a> to write a 42s CONST program with the constants <b>you</b> want.  
 </p>
 
 <p>
-The <a href="#orga683014">constants I use</a> are taken from the NIST 2018 constants DB.  As a reference I have included the <a href="#org99bef42">unused constants</a> from the NIST list.
+The <a href="#orgdd4e61e">constants I use</a> are taken from the NIST 2018 constants DB.  As a reference I have included the <a href="#org1d7a4c7">unused constants</a> from the NIST list.
 </p>
 
 <p>
@@ -301,15 +301,15 @@ The flow to create your custom CONST program:
 </p>
 <ul class="org-ul">
 <li>Evaluate the "Generic menu generator" babel block in hp42s-meta.org.  This will define the function <code>MJR-generate-42-menu-code</code></li>
-<li>Put the constants you want into the table in the <a href="#orga683014">Constants Used</a> section below (see: <a href="#org215f72b">Customizing the Constants Table</a>)</li>
-<li>Optional: Customize the generator code in the <a href="#org394753c">Code</a> section below.  (see: <a href="#org1efccbe">Customizing the Gen Code</a>)</li>
-<li>Evaluate the babel block in the <a href="#org394753c">Code</a> section below.</li>
+<li>Put the constants you want into the table in the <a href="#orgdd4e61e">Constants Used</a> section below (see: <a href="#org56207ab">Customizing the Constants Table</a>)</li>
+<li>Optional: Customize the generator code in the <a href="#orgad840d0">Code</a> section below.  (see: <a href="#org88c336d">Customizing the Gen Code</a>)</li>
+<li>Evaluate the babel block in the <a href="#orgad840d0">Code</a> section below.</li>
 <li>Load the program on your calculator</li>
 </ul>
 </div>
 
-<div id="outline-container-org215f72b" class="outline-3">
-<h3 id="org215f72b"><span class="section-number-3">2.1</span> Customizing the Constants Table</h3>
+<div id="outline-container-org56207ab" class="outline-3">
+<h3 id="org56207ab"><span class="section-number-3">2.1</span> Customizing the Constants Table</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 The "Menu" column describes the menu keys that will be assigned to the constant.  Colons are used to define a menu hierarchy.  For example "<code>top:mid:con1</code>"
@@ -330,19 +330,19 @@ and each constant consumes one label.
 
 <p>
 The "Desc" column is the source for the description printed by the <code>CONS</code> program. Make sure it is 22 chars or less. Note the description print can be
-suppressed (see: <a href="#org1efccbe">Customizing the Gen Code</a>)
+suppressed (see: <a href="#org88c336d">Customizing the Gen Code</a>)
 </p>
 
 <p>
 The "Unit" column is the source for the second line printed by the <code>CONS</code> program.  Note I use an odd syntax for the units &#x2013; everything in front of the "<code>/</code>"
 is on the top of the fraction and everything after the "<code>/</code>" is on the bottom.  While incorrect syntax for an algebraic expression, it is handy and saves some
-space.  Note the units print can be suppressed (see: <a href="#org1efccbe">Customizing the Gen Code</a>)
+space.  Note the units print can be suppressed (see: <a href="#org88c336d">Customizing the Gen Code</a>)
 </p>
 </div>
 </div>
 
-<div id="outline-container-org1efccbe" class="outline-3">
-<h3 id="org1efccbe"><span class="section-number-3">2.2</span> Customizing the Gen Code</h3>
+<div id="outline-container-org88c336d" class="outline-3">
+<h3 id="org88c336d"><span class="section-number-3">2.2</span> Customizing the Gen Code</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 The generator code can be customized in a few ways:
@@ -358,16 +358,16 @@ The generator code can be customized in a few ways:
 </div>
 </div>
 
-<div id="outline-container-org15d17fb" class="outline-2">
-<h2 id="org15d17fb"><span class="section-number-2">3</span> Constants</h2>
+<div id="outline-container-org365259a" class="outline-2">
+<h2 id="org365259a"><span class="section-number-2">3</span> Constants</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgb0e4041" class="outline-3">
-<h3 id="orgb0e4041"><span class="section-number-3">3.1</span> Constant Data (2018 NIST)</h3>
+<div id="outline-container-orgfad3907" class="outline-3">
+<h3 id="orgfad3907"><span class="section-number-3">3.1</span> Constant Data (2018 NIST)</h3>
 </div>
 
-<div id="outline-container-org2da873b" class="outline-3">
-<h3 id="org2da873b"><span class="section-number-3">3.2</span> Test Data</h3>
+<div id="outline-container-orgef9b1bf" class="outline-3">
+<h3 id="orgef9b1bf"><span class="section-number-3">3.2</span> Test Data</h3>
 <div class="outline-text-3" id="text-3-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
@@ -461,10 +461,10 @@ The generator code can be customized in a few ways:
 </div>
 </div>
 
-<div id="outline-container-orga683014" class="outline-3">
-<h3 id="orga683014"><span class="section-number-3">3.3</span> Constants Used</h3>
+<div id="outline-container-orgdd4e61e" class="outline-3">
+<h3 id="orgdd4e61e"><span class="section-number-3">3.3</span> Constants Used</h3>
 <div class="outline-text-3" id="text-3-3">
-<table id="org35debc5" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="orgad8f483" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -888,12 +888,53 @@ The generator code can be customized in a few ways:
 <td class="org-left">atom</td>
 </tr>
 </tbody>
+<tbody>
+<tr>
+<td class="org-left">math:grat</td>
+<td class="org-left">Golden ratio</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">1.618033988749894</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">math:emc</td>
+<td class="org-left">Eul-Masc</td>
+<td class="org-left">Euler–Mascheroni</td>
+<td class="org-right">0.577215664901532</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">math:omga</td>
+<td class="org-left">Omega</td>
+<td class="org-left">Omega constant</td>
+<td class="org-right">0.567143290409783</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">math:lapl</td>
+<td class="org-left">Laplace limit</td>
+<td class="org-left">Laplace limit</td>
+<td class="org-right">0.662743419349181</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
 
-<div id="outline-container-org99bef42" class="outline-3">
-<h3 id="org99bef42"><span class="section-number-3">3.4</span> Constants Not Used</h3>
+<div id="outline-container-org1d7a4c7" class="outline-3">
+<h3 id="org1d7a4c7"><span class="section-number-3">3.4</span> Constants Not Used</h3>
 <div class="outline-text-3" id="text-3-4">
 <table border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
@@ -4069,25 +4110,26 @@ The generator code can be customized in a few ways:
 </div>
 </div>
 
-<div id="outline-container-org394753c" class="outline-3">
-<h3 id="org394753c"><span class="section-number-3">3.5</span> Code</h3>
+<div id="outline-container-orgad840d0" class="outline-3">
+<h3 id="orgad840d0"><span class="section-number-3">3.5</span> Code</h3>
 <div class="outline-text-3" id="text-3-5">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"CONS"</span> tbl <span style="color: #fa8072;">"exit"</span> <span style="color: #fa8072;">"up"</span> (<span style="color: #00ffff;">lambda</span> (row) (<span style="color: #00ffff;">cl-destructuring-bind</span> (sym desc desc-long val uncertainty units cat) row
                                                                   (<span style="color: #00ffff;">let</span> ((print-desc 't)    <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Set to NIL to not print description</span>
                                                                         (print-unit 't))   <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Set to NIL to not print units</span>
                                                                     (<span style="color: #00ffff;">let*</span> ((dlen (length desc))
-                                                                           (dsc1 (<span style="color: #00ffff;">cond</span> ((&lt; dlen 15) (concat desc (<span style="color: #00ffff;">if</span> print-unit <span style="color: #fa8072;">"[LF]"</span>)))
+                                                                           (ulen (length units))
+                                                                           (dsc1 (<span style="color: #00ffff;">cond</span> ((&lt; dlen 15) (concat desc (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">and</span> (&lt; 0 ulen) print-unit) <span style="color: #fa8072;">"[LF]"</span>)))
                                                                                        ((&gt;=  dlen 15) (substring desc 0 15))))
                                                                            (dsc2 (<span style="color: #00ffff;">if</span> (&gt; dlen 14)
                                                                                      (<span style="color: #00ffff;">if</span> (&lt; dlen 22)
-                                                                                         (concat (substring desc 15) (<span style="color: #00ffff;">if</span> print-unit <span style="color: #fa8072;">"[LF]"</span>))
+                                                                                         (concat (substring desc 15) (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">and</span> (&lt; 0 ulen) print-unit) <span style="color: #fa8072;">"[LF]"</span>))
                                                                                          (substring desc 15 22)))))
                                                                       (mapconcat #'identity
                                                                                  (cl-remove nil (list (message <span style="color: #fa8072;">"%s"</span> val)
-                                                                                                      (<span style="color: #00ffff;">and</span> print-desc      (message <span style="color: #fa8072;">"\"%s\""</span> dsc1))
-                                                                                                      (<span style="color: #00ffff;">and</span> print-desc dsc2 (message <span style="color: #fa8072;">"&#9500;\"%s\""</span> dsc2))
-                                                                                                      (<span style="color: #00ffff;">and</span> print-unit      (message <span style="color: #fa8072;">"%s\"%s\""</span> (<span style="color: #00ffff;">if</span> print-desc <span style="color: #fa8072;">"&#9500;"</span> <span style="color: #fa8072;">""</span>) units))
+                                                                                                      (<span style="color: #00ffff;">and</span> (&lt; 0 dlen) print-desc      (message <span style="color: #fa8072;">"\"%s\""</span> dsc1))
+                                                                                                      (<span style="color: #00ffff;">and</span> (&lt; 0 dlen) print-desc dsc2 (message <span style="color: #fa8072;">"&#9500;\"%s\""</span> dsc2))
+                                                                                                      (<span style="color: #00ffff;">and</span> (&lt; 0 ulen) print-unit      (message <span style="color: #fa8072;">"%s\"%s\""</span> (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">and</span> (&lt; 0 dlen) print-desc) <span style="color: #fa8072;">"&#9500;"</span> <span style="color: #fa8072;">""</span>) units))
                                                                                                       <span style="color: #fa8072;">"AVIEW"</span>))
                                                                                  <span style="color: #fa8072;">"\n"</span>)))))))
 </pre>
@@ -4107,6 +4149,8 @@ The generator code can be customized in a few ways:
 <span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">GTO</span> 05
 <span style="color: #fa8072;">"atom"</span>
 <span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">GTO</span> 06
+<span style="color: #fa8072;">"math"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">GTO</span> 07
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
@@ -4114,27 +4158,27 @@ The generator code can be customized in a few ways:
 <span style="color: #00ffff;">LBL</span> 02            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu univ</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"h"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 08
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 09
 <span style="color: #fa8072;">"hbar"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 09
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 10
 <span style="color: #fa8072;">"c"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 10
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 11
 <span style="color: #fa8072;">"E0"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 11
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 12
 <span style="color: #fa8072;">"&#956;0"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 12
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 13
 <span style="color: #fa8072;">"G"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 13
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 07
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 07
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 14
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 08
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 08
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
 <span style="color: #00ffff;">GTO</span> 00
-<span style="color: #00ffff;">LBL</span> 07            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu univ</span>
+<span style="color: #00ffff;">LBL</span> 08            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu univ</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"tp"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 14
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 15
 <span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 02
 <span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 02
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
@@ -4144,9 +4188,9 @@ The generator code can be customized in a few ways:
 <span style="color: #00ffff;">LBL</span> 03            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu adpt</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"gacc"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 15
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 16
 <span style="color: #fa8072;">"atm"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 16
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 17
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
@@ -4154,15 +4198,15 @@ The generator code can be customized in a few ways:
 <span style="color: #00ffff;">LBL</span> 04            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu elec</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"mN"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 17
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 18
 <span style="color: #fa8072;">"&#956;B"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 18
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 19
 <span style="color: #fa8072;">"e"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 19
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 20
 <span style="color: #fa8072;">"F0"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 20
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 21
 <span style="color: #fa8072;">"G0"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 21
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 22
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
@@ -4170,29 +4214,29 @@ The generator code can be customized in a few ways:
 <span style="color: #00ffff;">LBL</span> 05            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu pchm</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"mu"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 23
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 24
 <span style="color: #fa8072;">"F"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 24
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 25
 <span style="color: #fa8072;">"Na"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 25
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 26
 <span style="color: #fa8072;">"k"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 26
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 27
 <span style="color: #fa8072;">"R"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 27
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 28
 <span style="color: #fa8072;">"s"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 28
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 22
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 22
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 29
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 23
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 23
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
 <span style="color: #00ffff;">GTO</span> 00
-<span style="color: #00ffff;">LBL</span> 22            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu pchm</span>
+<span style="color: #00ffff;">LBL</span> 23            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu pchm</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"rc1"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 29
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 30
 <span style="color: #fa8072;">"rc2"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 30
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 31
 <span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 05
 <span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 05
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
@@ -4202,346 +4246,379 @@ The generator code can be customized in a few ways:
 <span style="color: #00ffff;">LBL</span> 06            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu atom</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"misc"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">GTO</span> 31
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">GTO</span> 32
 <span style="color: #fa8072;">"mass"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">GTO</span> 32
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">GTO</span> 33
 <span style="color: #fa8072;">"magm"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">GTO</span> 33
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">GTO</span> 34
 <span style="color: #fa8072;">"rad"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">GTO</span> 34
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">GTO</span> 35
 <span style="color: #fa8072;">"comp"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">GTO</span> 35
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">GTO</span> 36
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
 <span style="color: #00ffff;">GTO</span> 00
-<span style="color: #00ffff;">LBL</span> 31            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu misc</span>
+<span style="color: #00ffff;">LBL</span> 32            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu misc</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"a"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 36
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 37
 <span style="color: #fa8072;">"Eh"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 37
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 38
 <span style="color: #fa8072;">"Ry"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 38
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 39
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 06
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
 <span style="color: #00ffff;">GTO</span> 00
-<span style="color: #00ffff;">LBL</span> 32            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu mass</span>
+<span style="color: #00ffff;">LBL</span> 33            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu mass</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"pro"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 39
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 40
 <span style="color: #fa8072;">"ele"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 40
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 41
 <span style="color: #fa8072;">"neut"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 41
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 42
 <span style="color: #fa8072;">"muon"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 42
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 43
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 06
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
 <span style="color: #00ffff;">GTO</span> 00
-<span style="color: #00ffff;">LBL</span> 33            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu magm</span>
+<span style="color: #00ffff;">LBL</span> 34            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu magm</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"pro"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 43
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 44
 <span style="color: #fa8072;">"ele"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 44
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 45
 <span style="color: #fa8072;">"neut"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 45
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 46
 <span style="color: #fa8072;">"muon"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 46
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 47
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 06
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
 <span style="color: #00ffff;">GTO</span> 00
-<span style="color: #00ffff;">LBL</span> 34            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu rad</span>
+<span style="color: #00ffff;">LBL</span> 35            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu rad</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"bohr"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 47
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 48
 <span style="color: #fa8072;">"ele"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 48
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 49
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 06
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
 <span style="color: #00ffff;">GTO</span> 00
-<span style="color: #00ffff;">LBL</span> 35            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu comp</span>
+<span style="color: #00ffff;">LBL</span> 36            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu comp</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"std"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 49
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 50
 <span style="color: #fa8072;">"pro"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 50
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 51
 <span style="color: #fa8072;">"neut"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 51
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 52
 <span style="color: #fa8072;">"muon"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 52
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 53
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 06
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">LBL</span> 07            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu math</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"grat"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 54
+<span style="color: #fa8072;">"emc"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 55
+<span style="color: #fa8072;">"omga"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 56
+<span style="color: #fa8072;">"lapl"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 57
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
 <span style="color: #00ffff;">GTO</span> 00
 <span style="color: #00ffff;">LBL</span> 00
 <span style="color: #00ffff;">EXITALL</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 08               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key h</span>
+<span style="color: #00ffff;">LBL</span> 09               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key h</span>
 6.62607015e-34
 <span style="color: #fa8072;">"Planck Constant"</span>
 &#9500;<span style="color: #fa8072;">"[LF]"</span>
 &#9500;<span style="color: #fa8072;">"J/Hz"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 09               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key hbar</span>
+<span style="color: #00ffff;">LBL</span> 10               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key hbar</span>
 1.054571817e-34
 <span style="color: #fa8072;">"Dirac Constant[LF]"</span>
 &#9500;<span style="color: #fa8072;">"J*s"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 10               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key c</span>
+<span style="color: #00ffff;">LBL</span> 11               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key c</span>
 299792458
 <span style="color: #fa8072;">"Speed of Light[LF]"</span>
 &#9500;<span style="color: #fa8072;">"m/s"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 11               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key E0</span>
+<span style="color: #00ffff;">LBL</span> 12               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key E0</span>
 8.8541878128e-12
 <span style="color: #fa8072;">"Vac Ele Permitt"</span>
 &#9500;<span style="color: #fa8072;">"ivity[LF]"</span>
 &#9500;<span style="color: #fa8072;">"F/m"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 12               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#956;0</span>
+<span style="color: #00ffff;">LBL</span> 13               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#956;0</span>
 1.25663706212e-6
 <span style="color: #fa8072;">"Vac Mag Permeab"</span>
 &#9500;<span style="color: #fa8072;">"ility[LF]"</span>
 &#9500;<span style="color: #fa8072;">"N/A^2"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 13               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key G</span>
+<span style="color: #00ffff;">LBL</span> 14               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key G</span>
 6.67430e-11
 <span style="color: #fa8072;">"Gravitational C"</span>
 &#9500;<span style="color: #fa8072;">"onstant"</span>
 &#9500;<span style="color: #fa8072;">"m^3/kg*s^2"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 14               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key tp</span>
+<span style="color: #00ffff;">LBL</span> 15               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key tp</span>
 5.391247e-44
 <span style="color: #fa8072;">"Planck Time[LF]"</span>
 &#9500;<span style="color: #fa8072;">"s"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 15               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key gacc</span>
+<span style="color: #00ffff;">LBL</span> 16               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key gacc</span>
 9.80665
 <span style="color: #fa8072;">"Earth Std Grav "</span>
 &#9500;<span style="color: #fa8072;">"Accel[LF]"</span>
 &#9500;<span style="color: #fa8072;">"m/s"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 16               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key atm</span>
+<span style="color: #00ffff;">LBL</span> 17               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key atm</span>
 101325
 <span style="color: #fa8072;">"Standard Atmosp"</span>
 &#9500;<span style="color: #fa8072;">"here[LF]"</span>
 &#9500;<span style="color: #fa8072;">"Pa"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 17               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mN</span>
+<span style="color: #00ffff;">LBL</span> 18               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mN</span>
 5.0507837461e-27
 <span style="color: #fa8072;">"Nuclear Magneto"</span>
 &#9500;<span style="color: #fa8072;">"n[LF]"</span>
 &#9500;<span style="color: #fa8072;">"J/*T"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 18               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#956;B</span>
+<span style="color: #00ffff;">LBL</span> 19               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#956;B</span>
 9.2740100783e-24
 <span style="color: #fa8072;">"Bohr Magneton[LF]"</span>
 &#9500;<span style="color: #fa8072;">"J/T"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 19               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key e</span>
+<span style="color: #00ffff;">LBL</span> 20               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key e</span>
 1.602176634e-19
 <span style="color: #fa8072;">"Elementary Char"</span>
 &#9500;<span style="color: #fa8072;">"ge[LF]"</span>
 &#9500;<span style="color: #fa8072;">"C"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 20               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key F0</span>
+<span style="color: #00ffff;">LBL</span> 21               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key F0</span>
 2.067833848e-15
 <span style="color: #fa8072;">"Mag flux quantu"</span>
 &#9500;<span style="color: #fa8072;">"m[LF]"</span>
 &#9500;<span style="color: #fa8072;">"Wb"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 21               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key G0</span>
+<span style="color: #00ffff;">LBL</span> 22               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key G0</span>
 7.748091729e-5
 <span style="color: #fa8072;">"Conductance Qua"</span>
 &#9500;<span style="color: #fa8072;">"ntum[LF]"</span>
 &#9500;<span style="color: #fa8072;">"S"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 23               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mu</span>
+<span style="color: #00ffff;">LBL</span> 24               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mu</span>
 1.66053906660e-27
 <span style="color: #fa8072;">"Atomic Mass Uni"</span>
 &#9500;<span style="color: #fa8072;">"t[LF]"</span>
 &#9500;<span style="color: #fa8072;">"kg"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 24               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key F</span>
+<span style="color: #00ffff;">LBL</span> 25               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key F</span>
 96485.33212
 <span style="color: #fa8072;">"Faraday[LF]"</span>
 &#9500;<span style="color: #fa8072;">"C/mol"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 25               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key Na</span>
+<span style="color: #00ffff;">LBL</span> 26               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key Na</span>
 6.02214076e23
 <span style="color: #fa8072;">"Avogadro's Numb"</span>
 &#9500;<span style="color: #fa8072;">"er[LF]"</span>
 &#9500;<span style="color: #fa8072;">"1/mol"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 26               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key k</span>
+<span style="color: #00ffff;">LBL</span> 27               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key k</span>
 1.380649e-23
 <span style="color: #fa8072;">"Boltzmann Const"</span>
 &#9500;<span style="color: #fa8072;">"ant[LF]"</span>
 &#9500;<span style="color: #fa8072;">"J/K"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 27               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key R</span>
+<span style="color: #00ffff;">LBL</span> 28               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key R</span>
 8.314462618
 <span style="color: #fa8072;">"Ideal Gas Const"</span>
 &#9500;<span style="color: #fa8072;">"ant[LF]"</span>
 &#9500;<span style="color: #fa8072;">"J/mol*K"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 28               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key s</span>
+<span style="color: #00ffff;">LBL</span> 29               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key s</span>
 5.670374419e-8
 <span style="color: #fa8072;">"Stefan Constant"</span>
 &#9500;<span style="color: #fa8072;">"[LF]"</span>
 &#9500;<span style="color: #fa8072;">"W/m^2*K^4"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 29               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key rc1</span>
+<span style="color: #00ffff;">LBL</span> 30               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key rc1</span>
 3.741771852e-16
 <span style="color: #fa8072;">"First Radiation"</span>
 &#9500;<span style="color: #fa8072;">" Cnst[LF]"</span>
 &#9500;<span style="color: #fa8072;">"W*m^2"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 30               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key rc2</span>
+<span style="color: #00ffff;">LBL</span> 31               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key rc2</span>
 1.438776877e-2
 <span style="color: #fa8072;">"Second Radiatio"</span>
 &#9500;<span style="color: #fa8072;">"n Cnst[LF]"</span>
 &#9500;<span style="color: #fa8072;">"m*K"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 36               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key a</span>
+<span style="color: #00ffff;">LBL</span> 37               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key a</span>
 7.2973525693e-3
-<span style="color: #fa8072;">"Fine Structure[LF]"</span>
-&#9500;<span style="color: #fa8072;">""</span>
+<span style="color: #fa8072;">"Fine Structure"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 37               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key Eh</span>
+<span style="color: #00ffff;">LBL</span> 38               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key Eh</span>
 4.3597447222071e-18
 <span style="color: #fa8072;">"Hartree Energy[LF]"</span>
 &#9500;<span style="color: #fa8072;">"J"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 38               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key Ry</span>
+<span style="color: #00ffff;">LBL</span> 39               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key Ry</span>
 10973731.56816
 <span style="color: #fa8072;">"Rydberg Constan"</span>
 &#9500;<span style="color: #fa8072;">"t[LF]"</span>
 &#9500;<span style="color: #fa8072;">"1/m"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 39               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key pro</span>
+<span style="color: #00ffff;">LBL</span> 40               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key pro</span>
 1.67262192369e-27
 <span style="color: #fa8072;">"Proton Mass[LF]"</span>
 &#9500;<span style="color: #fa8072;">"kg"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 40               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ele</span>
+<span style="color: #00ffff;">LBL</span> 41               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ele</span>
 9.1093837015e-31
 <span style="color: #fa8072;">"Electron Mass[LF]"</span>
 &#9500;<span style="color: #fa8072;">"kg"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 41               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key neut</span>
+<span style="color: #00ffff;">LBL</span> 42               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key neut</span>
 1.67492749804e-27
 <span style="color: #fa8072;">"Neutron Mass[LF]"</span>
 &#9500;<span style="color: #fa8072;">"kg"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 42               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key muon</span>
+<span style="color: #00ffff;">LBL</span> 43               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key muon</span>
 1.883531627e-28
 <span style="color: #fa8072;">"Muon Mass[LF]"</span>
 &#9500;<span style="color: #fa8072;">"kg"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 43               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key pro</span>
+<span style="color: #00ffff;">LBL</span> 44               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key pro</span>
 1.41060679736e-26
 <span style="color: #fa8072;">"Proton Mag Mom[LF]"</span>
 &#9500;<span style="color: #fa8072;">"J/T"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 44               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ele</span>
+<span style="color: #00ffff;">LBL</span> 45               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ele</span>
 -9.2847647043e-24
 <span style="color: #fa8072;">"Electron Mag Mo"</span>
 &#9500;<span style="color: #fa8072;">"m[LF]"</span>
 &#9500;<span style="color: #fa8072;">"J/T"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 45               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key neut</span>
+<span style="color: #00ffff;">LBL</span> 46               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key neut</span>
 -9.6623651e-27
 <span style="color: #fa8072;">"Neutron Mag Mom"</span>
 &#9500;<span style="color: #fa8072;">"[LF]"</span>
 &#9500;<span style="color: #fa8072;">"J/T"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 46               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key muon</span>
+<span style="color: #00ffff;">LBL</span> 47               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key muon</span>
 -4.49044830e-26
 <span style="color: #fa8072;">"Muon Mag Mom[LF]"</span>
 &#9500;<span style="color: #fa8072;">"J/T"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 47               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key bohr</span>
+<span style="color: #00ffff;">LBL</span> 48               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key bohr</span>
 5.29177210903e-11
 <span style="color: #fa8072;">"Bohr Radius[LF]"</span>
 &#9500;<span style="color: #fa8072;">"m"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 48               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ele</span>
+<span style="color: #00ffff;">LBL</span> 49               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ele</span>
 2.8179403262e-15
 <span style="color: #fa8072;">"Electron Radius"</span>
 &#9500;<span style="color: #fa8072;">"[LF]"</span>
 &#9500;<span style="color: #fa8072;">"m"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 49               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key std</span>
+<span style="color: #00ffff;">LBL</span> 50               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key std</span>
 2.42631023867e-12
 <span style="color: #fa8072;">"Compton Wavelen"</span>
 &#9500;<span style="color: #fa8072;">"gth[LF]"</span>
 &#9500;<span style="color: #fa8072;">"m"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 50               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key pro</span>
+<span style="color: #00ffff;">LBL</span> 51               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key pro</span>
 1.32140985539e-15
 <span style="color: #fa8072;">"Proton Compton "</span>
 &#9500;<span style="color: #fa8072;">"waveln[LF]"</span>
 &#9500;<span style="color: #fa8072;">"m"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 51               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key neut</span>
+<span style="color: #00ffff;">LBL</span> 52               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key neut</span>
 1.31959090581e-15
 <span style="color: #fa8072;">"Neutron Compton"</span>
 &#9500;<span style="color: #fa8072;">" waveln"</span>
 &#9500;<span style="color: #fa8072;">"m"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 52               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key muon</span>
+<span style="color: #00ffff;">LBL</span> 53               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key muon</span>
 1.173444110e-14
 <span style="color: #fa8072;">"Nuon Compton wa"</span>
 &#9500;<span style="color: #fa8072;">"veln[LF]"</span>
 &#9500;<span style="color: #fa8072;">"m"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Free labels start at: 53</span>
+<span style="color: #00ffff;">LBL</span> 54               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key grat</span>
+1.618033988749894
+<span style="color: #fa8072;">"Golden ratio"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 55               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key emc</span>
+0.577215664901532
+<span style="color: #fa8072;">"Eul-Masc"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 56               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key omga</span>
+0.567143290409783
+<span style="color: #fa8072;">"Omega"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 57               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key lapl</span>
+0.662743419349181
+<span style="color: #fa8072;">"Laplace limit"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Free labels start at: 58</span>
 </pre>
 </div>
 </div>
@@ -4549,7 +4626,7 @@ The generator code can be customized in a few ways:
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-27 Sat 15:17 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-28 Sun 09:00 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

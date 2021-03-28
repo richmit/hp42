@@ -50,12 +50,9 @@ Files related to this document may be found on github: https://github.com/richmi
 
 * Perforations
 
-Perforations are usually measured in units of perfs/2cm; however,
-other units are used in some specialized areas of philately.  For
-example, the Kiusalas gauge is often used by experts for USPS bureau
-issues.  This gauge measures perforations in units of thou/perf.  We
-can approximate perforation measures by measuring the distance (D)
-spanned by a number of perforations (C).
+Perforations are usually measured in units of perfs/2cm; however, other units are used in some specialized areas of philately.  For example, the Kiusalas
+gauge is often used by experts for USPS bureau issues.  This gauge measures perforations in units of mil/perf.  We can approximate perforation measures by
+measuring the distance (D) spanned by a number of perforations (C).
 
 #+begin_src text
 ##                                                                                                              ##
@@ -74,7 +71,7 @@ spanned by a number of perforations (C).
 ##                                                                                                              ##
 #+end_src
 
-If we use P to represent traditional perforations (perfs/2cm), and K to represent Kiusalas perforations (thou/perf)
+If we use P to represent traditional perforations (perfs/2cm), and K to represent Kiusalas perforations (mil/perf)
 
 
 $$ K = \frac{5000 D}{127 (C - 1)} $$
@@ -239,9 +236,7 @@ END
 
 * Image Measurements
 
-Quick and dirty image analysis for stamp collectors for when you don't
-want to load an image up in ImageJ or GIMP, but still need to make
-some measurements.
+Quick and dirty image analysis for stamp collectors for when you don't want to load an image up in ImageJ or GIMP, but still need to make some measurements.
 
 ** Summary of menu items
 
@@ -264,8 +259,7 @@ some measurements.
 
 ** Image Calibration
 
-This application works with images with square pixels only.  When
-using a scanner make sure the X & Y DPI settings are the same!
+This application works with images with square pixels only.  When using a scanner make sure the X & Y DPI settings are the same!
 
 Note that image calibration is not required for all functionality.
 
@@ -284,15 +278,12 @@ Note that image calibration is not required for all functionality.
  | I=mm   | Never                      |
 
 
-Calibration is retained between runs of the application.  If the
-application is started up without calibration data, then a default
-will be set (2400 DIP scan with units in mm resulting in a calibration
-factor of 94.4881889764).
+Calibration is retained between runs of the application.  If the application is started up without calibration data, then a default will be set (2400 DIP scan
+with units in mm resulting in a calibration factor of 94.4881889764).
 
 *** Known DPI
 
-When using a scanner, the scanner DPI settings may be used to roughly
-calibrate an image.
+When using a scanner, the scanner DPI settings may be used to roughly calibrate an image.
 
 **** Examples
 
@@ -302,67 +293,50 @@ calibrate an image.
 
 *** Using a target
 
-Including a calibration target in the image field is the most common
-way to calibrate microscope images.  For high magnification expensive,
-etched glass reticle are generally used.  For the lower magnifications
-normally used my stamp collectors, a simple scale may be included in
-the image frame.  I simply lay the stamps on top of a plastic ruler.
+Including a calibration target in the image field is the most common way to calibrate microscope images.  For high magnification expensive, etched glass
+reticle are generally used.  For the lower magnifications normally used my stamp collectors, a simple scale may be included in the image frame.  I simply lay
+the stamps on top of a plastic ruler.
 
-When using a calibration target it is rare that the target is
-precisely lined up horizontally or vertically, so providing a simple
-pixel count for it's length is impossible.  Instead we provide the
-pixel coordinates of two points on the target.
+When using a calibration target it is rare that the target is precisely lined up horizontally or vertically, so providing a simple pixel count for it's length
+is impossible.  Instead we provide the pixel coordinates of two points on the target.
 
 **** Example
 
-We have a 1mm ruler in the frame.  The 0 mark of the ruler is at pixel
-coordinates (123, 456) and the 3 mark of the ruler is at pixel
-coordinates (567, 345).  If we wish to work directly in mm, then we do
-this:<<caliex>>
+We have a 1mm ruler in the frame.  The 0 mark of the ruler is at pixel coordinates (123, 456) and the 3 mark of the ruler is at pixel coordinates (567, 345).
+If we wish to work directly in mm, then we do this:<<caliex>>
 
   - Enter the 0 coordinate: =123 [ENTER] 456 [COMPLEX]=  -- assuming "=RECT=" mode
   - Enter the 1 coordinate: =234 [ENTER] 345 [COMPLEX]=
   - Enter physical distance: =3=
   - Press the CAL menu key: =[CAL]=
 
-If we wanted to work in cm instead of mm, we would use a distance of
-=0.3= instead.
+If we wanted to work in cm instead of mm, we would use a distance of =0.3= instead.
 
-If we wanted to work in mil instead of mm, we would use a distance of
-=118.11= instead
+If we wanted to work in mil instead of mm, we would use a distance of =118.11= instead
 
 *** Using a Stamp!
 
-The techniques documented here can be very useful, but must be used
-with care.  Stamp paper can warp and deform -- depending on printing
-process, storage conditions, etc...
+The techniques documented here can be very useful, but must be used with care.  Stamp paper can warp and deform -- depending on printing process, storage
+conditions, etc...
 
-Suppose you have an image of a stamp (perhaps from an auction website)
-that should have an design width of 22mm.  You determine the upper
-left of the design is at pixel coordinates (300, 100), and the upper
-right of the design is at pixel coordinates (536, 101).  Also suppose
-you wish to work in inches (you will see why in a moment):
+Suppose you have an image of a stamp (perhaps from an auction website) that should have an design width of 22mm.  You determine the upper left of the design
+is at pixel coordinates (300, 100), and the upper right of the design is at pixel coordinates (536, 101).  Also suppose you wish to work in inches (you will
+see why in a moment):
 
 =322 [ENTER] 125 [COMPLEX] 582 [ENTER] 126 [COMPLEX] [-] 22 [ENTER] 25.4 [÷] [CAL]=
 
-Now notice the value on the screen is =300.1840=.  Many stamp images
-posted on auction sites are scanned at 300 DPI, and the fact this is
-so close to 300 tells us that we probably have a 300 DPI scan.  We can
-now use 300 as our calibration data, or use the computed value.
+Now notice the value on the screen is =300.1840=.  Many stamp images posted on auction sites are scanned at 300 DPI, and the fact this is so close to 300
+tells us that we probably have a 300 DPI scan.  We can now use 300 as our calibration data, or use the computed value.
 
-You can use this technique with any feature of a stamp with a known
-measurement -- not just design size.  For example, some souvenir
-sheets have very precise paper sizes allowing the width or height of
-the paper to be used for calibration.
+You can use this technique with any feature of a stamp with a known measurement -- not just design size.  For example, some souvenir sheets have very precise
+paper sizes allowing the width or height of the paper to be used for calibration.
 
-The perforations may also be used as a calibration aid.  For example if
-we know the stamp in question has a perforation of 70 on the Kiusalas
-gauge, then we know 10 perforations should measure very close to 16mm.
+The perforations may also be used as a calibration aid.  For example if we know the stamp in question has a perforation of 70 on the Kiusalas gauge, then we
+know 10 perforations should measure very close to 16mm.
 
 *** Calibration factor
 
-The "calibration factor", returned by the =[CAL?]= button, is the
-current image calibration data in units of pixels/length.
+The "calibration factor", returned by the =[CAL?]= button, is the current image calibration data in units of pixels/length.
 
 **** Examples
 
@@ -388,13 +362,9 @@ provided a pixel count as a real number.
 
 *** Generic distances
 
-To measure the length of a non-horizontal/vertical line, we provide a
-complex number to the =[LENG]= function.  One might think of the
-coordinates as specifying a line from the origin, upper left image
-pixel at (0, 0), to the given coordinates.  Alternately one might think
-of the coordinates as the width & height of the line.  The signs of
-the coordinates are ignored -- i.e. the absolute value of each
-coordinate is used.
+To measure the length of a non-horizontal/vertical line, we provide a complex number to the =[LENG]= function.  One might think of the coordinates as
+specifying a line from the origin, upper left image pixel at (0, 0), to the given coordinates.  Alternately one might think of the coordinates as the width &
+height of the line.  The signs of the coordinates are ignored -- i.e. the absolute value of each coordinate is used.
 
  #+begin_example
                 * P2  -            (0, 0) *
@@ -407,9 +377,8 @@ coordinate is used.
           |--w--|
 #+end_example
 
-To measure the length of a line segment give by two points, we simply
-enter both points as complex numbers and subtract them.  We then give
-the difference to the =[LENG]= function.
+To measure the length of a line segment give by two points, we simply enter both points as complex numbers and subtract them.  We then give the difference to
+the =[LENG]= function.
 
 **** Examples
 
@@ -420,10 +389,8 @@ the difference to the =[LENG]= function.
 
 ** Measuring Angles
 
-Angles are measured with respect the horizontal -- the /negative/ of
-the argument of the complex number representing the pixel coordinate.
-We use the negative because pixel y-coordinates go up in the down
-direction.
+Angles are measured with respect the horizontal -- the /negative/ of the argument of the complex number representing the pixel coordinate.  We use the
+negative because pixel y-coordinates go up in the down direction.
 
 *** Examples
 
@@ -453,24 +420,18 @@ Why?
   - Angle 2: =P3.x [ENTER] P3.y [COMPLEX] P4.x [ENTER] P4.y [COMPLEX] [-] [ANGLE] [STO 00]=
   - Difference: =[RCL- 00] [ABS]=
 
-The result will be the absolute angle by which the two lines differ --
-i.e. if we have parallel lines it should be 0.
+The result will be the absolute angle by which the two lines differ -- i.e. if we have parallel lines it should be 0.
 
 ** Measure Area (rectangles)
 
-This function takes /one/ complex number representing the width and
-height of the rectangle.  The sign of the with and height are ignored.
+This function takes /one/ complex number representing the width and height of the rectangle.  The sign of the with and height are ignored.
 
-As with the =[LENG]= function, we may obtain the width & height by
-subtracting the upper left & lower right coordinates of the rectangle
-in question.  Note the order of subtraction is irrelevant as the
-=[AREA]= function uses the absolute value of components of the
-coordinates.
+As with the =[LENG]= function, we may obtain the width & height by subtracting the upper left & lower right coordinates of the rectangle in question.  Note
+the order of subtraction is irrelevant as the =[AREA]= function uses the absolute value of components of the coordinates.
 
 *** Example
 
-Compute the area of a rectangle with upper left corner at (10, 10) and
-lower right at (100, 500):
+Compute the area of a rectangle with upper left corner at (10, 10) and lower right at (100, 500):
 
 =10 [ENTER] 10 [COMPLEX] 100 [ENTER] 500 [COMPLEX] [-] [AREA]=
 

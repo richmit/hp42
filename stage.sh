@@ -3,31 +3,39 @@
 rm -f *~ */*~ */*/*~
 
 didsomething='FALSE'
-if [ -e src/$1.org ]; then
-  git add src/$1.org
-  didsomething='TRUE'
-fi  
-if [ -e src/$1.html ]; then
-  mv src/$1.html docs/
-  didsomething='TRUE'
-fi
-if [ -e docs/$1.html ]; then
-  git add docs/$1.html
-  didsomething='TRUE'
-fi
-if [ -e bin/$1/ ]; then
-  git add bin/$1/*.raw
-fi
+
+while [ -n "$1" ]; do
+  NAME="$(basename $1 .org)"
+
+  if [ -e src/$NAME.org ]; then
+    git add src/$NAME.org
+    didsomething='TRUE'
+  fi  
+  if [ -e src/$NAME.html ]; then
+    mv src/$NAME.html docs/
+    didsomething='TRUE'
+  fi
+  if [ -e docs/$NAME.html ]; then
+    git add docs/$NAME.html
+    didsomething='TRUE'
+  fi
+  if [ -e bin/$NAME/ ]; then
+    git add bin/$NAME/*.raw
+  fi
+  
+  shift
+done
+
 if [ "$didsomething" = "TRUE" ]; then
   git add docs/index.html docs/index.org
 fi
 git s
 if [ "$didsomething" = "FALSE" ]; then
-  echo "ERROR: No module named $1 found"
-  echo "ERROR: No module named $1 found"
-  echo "ERROR: No module named $1 found"
-  echo "ERROR: No module named $1 found"
-  echo "ERROR: No module named $1 found"
+  echo "ERROR: No actions taken"
+  echo "ERROR: No actions taken"
+  echo "ERROR: No actions taken"
+  echo "ERROR: No actions taken"
+  echo "ERROR: No actions taken"
 else
   echo "git commit -m ''"
   echo "git push"

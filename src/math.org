@@ -5,7 +5,7 @@
 #+DATE:        2021-03-19
 #+DESCRIPTION: Some simple math functions for the free42/hp-42s/DM42
 #+LANGUAGE:    en
-#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil 
+#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil
 #+HTML_HEAD: <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
 #+HTML_HEAD: <style>body { min-width: 500px; max-width: 1024px; }</style>
 #+HTML_HEAD: <style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
@@ -392,8 +392,8 @@ ABS
 X≠0?
 GTO 01
 @@@@ zero
-R↓                   @@## REQ:free42<2.5.24  
-R↓                   @@## REQ:free42<2.5.24  
+R↓                   @@## REQ:free42<2.5.24
+R↓                   @@## REQ:free42<2.5.24
 0
 RTN
 LBL 01
@@ -410,14 +410,14 @@ LBL 02
 X<0?
 GTO 03
 @@@@ Real positive
-R↓                   @@## REQ:free42<2.5.24  
-R↓                   @@## REQ:free42<2.5.24  
+R↓                   @@## REQ:free42<2.5.24
+R↓                   @@## REQ:free42<2.5.24
 1
 RTN
 LBL 03
 @@@@ Real negative
-R↓                   @@## REQ:free42<2.5.24  
-R↓                   @@## REQ:free42<2.5.24  
+R↓                   @@## REQ:free42<2.5.24
+R↓                   @@## REQ:free42<2.5.24
 -1
 RTN
 END
@@ -511,19 +511,19 @@ ABS
 IP
 X≠0?
 GTO 01
-R↓                   @@## REQ:free42<2.5.24  
-R↓                   @@## REQ:free42<2.5.24  
+R↓                   @@## REQ:free42<2.5.24
+R↓                   @@## REQ:free42<2.5.24
 0
 RTN
 LBL 01
-LSTO "TMPX"  
+LSTO "TMPX"
 X<>Y
 ABS
 IP
 X≠0?
 GTO 02
-R↓                   @@## REQ:free42<2.5.24  
-R↓                   @@## REQ:free42<2.5.24  
+R↓                   @@## REQ:free42<2.5.24
+R↓                   @@## REQ:free42<2.5.24
 0
 RTN
 LBL 02
@@ -577,7 +577,7 @@ XEQ 00
 LSTO "T"
 1.005
 LSTO "I"
-R↓                   @@## REQ:free42<2.5.24  
+R↓                   @@## REQ:free42<2.5.24
 0
 LBL 11
 XEQ IND "I"
@@ -718,7 +718,7 @@ X<>Y
 X<0?
 GTO 03
 @@@@ X<0 & Y>=0
-X<>Y              
+X<>Y
 ÷
 ATAN
 PI
@@ -726,7 +726,7 @@ PI
 RTN
 LBL 03
 @@@@ X<0 & Y<0
-X<>Y               
+X<>Y
 ÷
 ATAN
 PI
@@ -739,16 +739,16 @@ GTO 04
 X>0?
 GTO 05
 @@@@ X=0 & Y<0
-R↓                   @@## REQ:free42<2.5.24  
-R↓                   @@## REQ:free42<2.5.24  
+R↓                   @@## REQ:free42<2.5.24
+R↓                   @@## REQ:free42<2.5.24
 PI
 -2
 ÷
 RTN
 LBL 05
 @@@@ X=0 & Y>0
-R↓                   @@## REQ:free42<2.5.24  
-R↓                   @@## REQ:free42<2.5.24  
+R↓                   @@## REQ:free42<2.5.24
+R↓                   @@## REQ:free42<2.5.24
 PI
 2
 ÷
@@ -757,7 +757,7 @@ LBL 04
 @@@@ X=0 & Y=0 ERROR 0/0
 ÷
 RTN
-LBL 01    
+LBL 01
 @@@@ X>0
 ÷
 ATAN
@@ -794,12 +794,12 @@ FP
 X≠0?
 GTO 91
 @@@@ X is negative, real; Y is real integer
-R↓                @ X Y
+R↓
 ABS
-RCL ST Y          @y abs(x) y
-X<>Y              @abs(x) y y
+RCL ST Y
+X<>Y
 XEQ 92
-+/-               @-RT y
++/-
 X<>Y
 2
 ÷
@@ -810,9 +810,9 @@ GTO 04
 LBL 03
 @@@@ X is negative, real; Y is real integer even
 R↓
-0
-X<>Y
-COMPLEX
+-1
+SQRT
+×
 RTN
 LBL 04
 @@@@ X is negative, real; Y is real integer odd
@@ -826,5 +826,27 @@ LBL 92
 X<>Y
 1/X
 Y↑X
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: beta function
+@@@@ IN:  Y: Number
+@@@@ IN:  X: Number
+@@@@ OUT: X: beta(x, y) = beta(y, x)
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-02-23
+LBL "BETA"
+FUNC 21              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+RCL ST Y    
+GAMMA       
+RCL ST Y    
+GAMMA       
+×           
+RCL ST Z    
+RCL ST Z    
++           
+GAMMA       
+÷           
 RTN
 #+END_SRC

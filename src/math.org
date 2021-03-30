@@ -18,6 +18,7 @@
 #+HTML_HEAD: <style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
 #+HTML_LINK_HOME: https://www.mitchr.me/
 #+HTML_LINK_UP: https://richmit.github.io/hp42/
+#+EXPORT_FILE_NAME: ../docs/math
 
 #+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
 |        <r> | <l>              |
@@ -51,34 +52,36 @@ type" -- that is a thing the 42s can do arithmetic with: real numbers, complex n
 =ATYP= function spits out a small integer that can be used in a computed =GOTO= to handle these four special cases.
 
 #+ATTR_HTML: :align center :frame box :rules all
-|----------+---------------------------+--------------------------------------------|
-| Function | Description               | Works On                                   |
-|----------+---------------------------+--------------------------------------------|
-| ATYP     | Arithmetic Type           | N/A                                        |
-|----------+---------------------------+--------------------------------------------|
-| RPART    | Real part                 | Real, Complex, Real Matrix, Complex Matrix |
-| IPART    | Imaginary Part            | Real, Complex, Real Matrix, Complex Matrix |
-| CONJ     | Complex Conjugate         | Real, Complex, Real Matrix, Complex Matrix |
-| CABS     | Magnitude/absolute value  | Real, Complex, Real Matrix, Complex Matrix |
-| CARG     | Complex Argument          | Real, Complex, Real Matrix, Complex Matrix |
-|----------+---------------------------+--------------------------------------------|
-| %T       | Percentage of total       | Real                                       |
-| SGN      | Sign function             | Real, Complex                              |
-| lnXY     | Base Y Logarithm of X     | Real, Complex, Real Matrix, Complex Matrix |
-| ln2      | Base 2 Logarithm          | Real, Complex, Real Matrix, Complex Matrix |
-| X↑2      | Raise 2 to the power of X | Real, Complex, Real Matrix, Complex Matrix |
-| GCD      | GCD                       | Real                                       |
-| LCM      | LCM                       | Real                                       |
-| NPDF     | Standard Normal PDF       | Real                                       |
-| NCDF     | Standard Normal CDF       | Real                                       |
-| IFP      | IP & FP of a number       | Real, Real Matrix                          |
-| FLOOR    | Floor                     | Real                                       |
-| CEIL     | Ceiling                   | Real                                       |
-| HYPOT    | Hypot                     | Real, Complex                              |
-| ATAN2    | ATAN2                     | Real                                       |
-| YROOT    | Nth roots                 | Real, Complex                              |
-| BETA     | Beta function             | Real, Complex                              |
-|----------+---------------------------+--------------------------------------------|
+|----------+------------------------------+--------------------------------------------|
+| Function | Description                  | Works On                                   |
+|----------+------------------------------+--------------------------------------------|
+| ATYP     | Arithmetic Type              | N/A                                        |
+|----------+------------------------------+--------------------------------------------|
+| RPART    | Real part                    | Real, Complex, Real Matrix, Complex Matrix |
+| IPART    | Imaginary Part               | Real, Complex, Real Matrix, Complex Matrix |
+| CONJ     | Complex Conjugate            | Real, Complex, Real Matrix, Complex Matrix |
+| CABS     | Magnitude/absolute value     | Real, Complex, Real Matrix, Complex Matrix |
+| CARG     | Complex Argument             | Real, Complex, Real Matrix, Complex Matrix |
+|----------+------------------------------+--------------------------------------------|
+| %T       | Percentage of total          | Real                                       |
+| SGN      | Sign function                | Real, Complex                              |
+| lnXY     | Base Y Logarithm of X        | Real, Complex, Real Matrix, Complex Matrix |
+| ln2      | Base 2 Logarithm             | Real, Complex, Real Matrix, Complex Matrix |
+| X↑2      | Raise 2 to the power of X    | Real, Complex, Real Matrix, Complex Matrix |
+| GCD      | GCD                          | Real                                       |
+| LCM      | LCM                          | Real                                       |
+| NPDF     | Standard Normal PDF          | Real                                       |
+| NCDF     | Standard Normal CDF          | Real                                       |
+| IFP      | IP & FP of a number          | Real, Real Matrix                          |
+| FLOOR    | Floor                        | Real                                       |
+| CEIL     | Ceiling                      | Real                                       |
+| HYPOT    | Hypot                        | Real, Complex                              |
+| ATAN2    | ATAN2                        | Real                                       |
+| YROOT    | Nth roots                    | Real, Complex                              |
+| BETA     | Beta function                | Real, Complex                              |
+| ERF      | Error Function               | Real                                       |
+| ERFC     | Complementary Error Function | Real                                       |
+|----------+------------------------------+--------------------------------------------|
 
 * Types
 
@@ -590,7 +593,7 @@ R↓
 ISG "I"
 GTO 11
 RCL ST Z
-XEQ "SNPDF"
+XEQ "NPDF"
 ×
 1
 X<>Y
@@ -613,6 +616,57 @@ LBL 04
  RTN
 LBL 05
 1.330274429
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: erf (error) function
+@@@@ IN:  X: real number
+@@@@ OUT: X: erf(X)
+@@@@ FAW: Uses NCDF
+@@@@ UPD: 2021-03-30
+@@@@ TST: free42_3.0
+LBL "ERF"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+ENTER
+ENTER
+2
+SQRT
+×
+ABS
+XEQ "NCDF"
+2
+×
+1
+-
+X<>Y
+X<0?
+GTO 01
+GTO 02
+LBL 01
+R↓
++/-
+RTN
+LBL 02
+R↓
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: erfc (complementary error) function
+@@@@ IN:  X: real number
+@@@@ OUT: X: erfc(X)
+@@@@ FAW: Uses ERF
+@@@@ UPD: 2021-03-30
+@@@@ TST: free42_3.0
+LBL "ERFC"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+XEQ "ERF"
+1
+X<>Y
+-
 RTN
 END
 
@@ -828,7 +882,7 @@ X<>Y
 1/X
 Y↑X
 RTN
-
+END
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: beta function
 @@@@ IN:  Y: Number
@@ -850,4 +904,5 @@ RCL ST Z
 GAMMA       
 ÷           
 RTN
+END
 #+END_SRC

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-03-28 Sun 12:23 -->
+<!-- 2021-03-30 Tue 17:50 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42/hp42s/DM42 Custom Constants</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-03-28 12:23:02</i></td>
+<td class="org-left"><i>2021-03-30 17:50:17</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,28 +241,28 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org1f20478">1. Metadata</a></li>
-<li><a href="#org17859a4">2. Introduction</a>
+<li><a href="#org48f94c6">1. Metadata</a></li>
+<li><a href="#org5524b39">2. Introduction</a>
 <ul>
-<li><a href="#orgfa1b5d8">2.1. Customizing the Constants Table</a></li>
-<li><a href="#orgb49ac91">2.2. Customizing the Gen Code</a></li>
+<li><a href="#org03ef80d">2.1. Customizing the Constants Table</a></li>
+<li><a href="#orgb12b095">2.2. Customizing the Gen Code</a></li>
 </ul>
 </li>
-<li><a href="#orgcf35a54">3. Constants</a>
+<li><a href="#org7e479cd">3. Constants</a>
 <ul>
-<li><a href="#org0f260c6">3.1. Constant Data (2018 NIST)</a></li>
-<li><a href="#org998a88d">3.2. Test Data</a></li>
-<li><a href="#org0071ce4">3.3. Constants Used</a></li>
-<li><a href="#orgc502af4">3.4. Constants Not Used</a></li>
-<li><a href="#org25ee0e3">3.5. Code</a></li>
+<li><a href="#orgbe53aef">3.1. Constant Data (2018 NIST)</a></li>
+<li><a href="#orgcf4bbb1">3.2. Test Data</a></li>
+<li><a href="#org09aa5a0">3.3. Constants Used</a></li>
+<li><a href="#orgf6bcfda">3.4. Constants Not Used</a></li>
+<li><a href="#orga33ab60">3.5. Code</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org1f20478" class="outline-2">
-<h2 id="org1f20478"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org48f94c6" class="outline-2">
+<h2 id="org48f94c6"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/cons.html">https://richmit.github.io/hp42/cons.html</a>
@@ -280,8 +280,8 @@ Files related to this document may be found on github: <a href="https://github.c
 </div>
 </div>
 
-<div id="outline-container-org17859a4" class="outline-2">
-<h2 id="org17859a4"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-org5524b39" class="outline-2">
+<h2 id="org5524b39"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Several constants libraries are available for the 42s, and some of them are quite good.  Unfortunately nobody is going to make a constants library with just
@@ -289,11 +289,11 @@ the constants I use. ;)
 </p>
 
 <p>
-This Emacs org-file contains a bit of <a href="#org25ee0e3">lisp code</a> to write a 42s CONST program with the constants <b>you</b> want.  
+This Emacs org-file contains a bit of <a href="#orga33ab60">lisp code</a> to write a 42s CONST program with the constants <b>you</b> want.  
 </p>
 
 <p>
-The <a href="#org0071ce4">constants I use</a> are taken from the NIST 2018 constants DB.  As a reference I have included the <a href="#orgc502af4">unused constants</a> from the NIST list.
+The <a href="#org09aa5a0">constants I use</a> are taken from the NIST 2018 constants DB.  As a reference I have included the <a href="#orgf6bcfda">unused constants</a> from the NIST list.
 </p>
 
 <p>
@@ -301,15 +301,15 @@ The flow to create your custom CONST program:
 </p>
 <ul class="org-ul">
 <li>Evaluate the "Generic menu generator" babel block in hp42s-meta.org.  This will define the function <code>MJR-generate-42-menu-code</code></li>
-<li>Put the constants you want into the table in the <a href="#org0071ce4">Constants Used</a> section below (see: <a href="#orgfa1b5d8">Customizing the Constants Table</a>)</li>
-<li>Optional: Customize the generator code in the <a href="#org25ee0e3">Code</a> section below.  (see: <a href="#orgb49ac91">Customizing the Gen Code</a>)</li>
-<li>Evaluate the babel block in the <a href="#org25ee0e3">Code</a> section below.</li>
+<li>Put the constants you want into the table in the <a href="#org09aa5a0">Constants Used</a> section below (see: <a href="#org03ef80d">Customizing the Constants Table</a>)</li>
+<li>Optional: Customize the generator code in the <a href="#orga33ab60">Code</a> section below.  (see: <a href="#orgb12b095">Customizing the Gen Code</a>)</li>
+<li>Evaluate the babel block in the <a href="#orga33ab60">Code</a> section below.</li>
 <li>Load the program on your calculator</li>
 </ul>
 </div>
 
-<div id="outline-container-orgfa1b5d8" class="outline-3">
-<h3 id="orgfa1b5d8"><span class="section-number-3">2.1</span> Customizing the Constants Table</h3>
+<div id="outline-container-org03ef80d" class="outline-3">
+<h3 id="org03ef80d"><span class="section-number-3">2.1</span> Customizing the Constants Table</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 The "Menu" column describes the menu keys that will be assigned to the constant.  Colons are used to define a menu hierarchy.  For example "<code>top:mid:con1</code>"
@@ -330,19 +330,19 @@ and each constant consumes one label.
 
 <p>
 The "Desc" column is the source for the description printed by the <code>CONS</code> program. Make sure it is 22 chars or less. Note the description print can be
-suppressed (see: <a href="#orgb49ac91">Customizing the Gen Code</a>)
+suppressed (see: <a href="#orgb12b095">Customizing the Gen Code</a>)
 </p>
 
 <p>
 The "Unit" column is the source for the second line printed by the <code>CONS</code> program.  Note I use an odd syntax for the units &#x2013; everything in front of the "<code>/</code>"
 is on the top of the fraction and everything after the "<code>/</code>" is on the bottom.  While incorrect syntax for an algebraic expression, it is handy and saves some
-space.  Note the units print can be suppressed (see: <a href="#orgb49ac91">Customizing the Gen Code</a>)
+space.  Note the units print can be suppressed (see: <a href="#orgb12b095">Customizing the Gen Code</a>)
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgb49ac91" class="outline-3">
-<h3 id="orgb49ac91"><span class="section-number-3">2.2</span> Customizing the Gen Code</h3>
+<div id="outline-container-orgb12b095" class="outline-3">
+<h3 id="orgb12b095"><span class="section-number-3">2.2</span> Customizing the Gen Code</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 The generator code can be customized in a few ways:
@@ -358,16 +358,16 @@ The generator code can be customized in a few ways:
 </div>
 </div>
 
-<div id="outline-container-orgcf35a54" class="outline-2">
-<h2 id="orgcf35a54"><span class="section-number-2">3</span> Constants</h2>
+<div id="outline-container-org7e479cd" class="outline-2">
+<h2 id="org7e479cd"><span class="section-number-2">3</span> Constants</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org0f260c6" class="outline-3">
-<h3 id="org0f260c6"><span class="section-number-3">3.1</span> Constant Data (2018 NIST)</h3>
+<div id="outline-container-orgbe53aef" class="outline-3">
+<h3 id="orgbe53aef"><span class="section-number-3">3.1</span> Constant Data (2018 NIST)</h3>
 </div>
 
-<div id="outline-container-org998a88d" class="outline-3">
-<h3 id="org998a88d"><span class="section-number-3">3.2</span> Test Data</h3>
+<div id="outline-container-orgcf4bbb1" class="outline-3">
+<h3 id="orgcf4bbb1"><span class="section-number-3">3.2</span> Test Data</h3>
 <div class="outline-text-3" id="text-3-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
@@ -461,10 +461,10 @@ The generator code can be customized in a few ways:
 </div>
 </div>
 
-<div id="outline-container-org0071ce4" class="outline-3">
-<h3 id="org0071ce4"><span class="section-number-3">3.3</span> Constants Used</h3>
+<div id="outline-container-org09aa5a0" class="outline-3">
+<h3 id="org09aa5a0"><span class="section-number-3">3.3</span> Constants Used</h3>
 <div class="outline-text-3" id="text-3-3">
-<table id="org4150172" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="orgd15d696" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -933,8 +933,8 @@ The generator code can be customized in a few ways:
 </div>
 </div>
 
-<div id="outline-container-orgc502af4" class="outline-3">
-<h3 id="orgc502af4"><span class="section-number-3">3.4</span> Constants Not Used</h3>
+<div id="outline-container-orgf6bcfda" class="outline-3">
+<h3 id="orgf6bcfda"><span class="section-number-3">3.4</span> Constants Not Used</h3>
 <div class="outline-text-3" id="text-3-4">
 <table border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
@@ -4110,8 +4110,8 @@ The generator code can be customized in a few ways:
 </div>
 </div>
 
-<div id="outline-container-org25ee0e3" class="outline-3">
-<h3 id="org25ee0e3"><span class="section-number-3">3.5</span> Code</h3>
+<div id="outline-container-orga33ab60" class="outline-3">
+<h3 id="orga33ab60"><span class="section-number-3">3.5</span> Code</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 You must first define the <code>MJR-generate-42-menu-code</code> by evaluating the code block in the <code>hp42s-meta.org</code> file.
@@ -4630,7 +4630,7 @@ You must first define the <code>MJR-generate-42-menu-code</code> by evaluating t
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-28 Sun 12:23 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-30 Tue 17:50 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

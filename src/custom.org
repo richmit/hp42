@@ -18,6 +18,7 @@
 #+HTML_HEAD: <style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
 #+HTML_LINK_HOME: https://www.mitchr.me/
 #+HTML_LINK_UP: https://richmit.github.io/hp42/
+#+EXPORT_FILE_NAME: ../docs/custom
 
 #+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
 |        <r> | <l>              |
@@ -120,24 +121,17 @@ The other columns of the table are not used.
 | SFUN:TRIG:HYPOT |                  | https://richmit.github.io/hp42/math.html |
 | SFUN:TRIG:ATAN2 |                  | https://richmit.github.io/hp42/math.html |
 |-----------------+------------------+------------------------------------------|
-| DATE:DATE       | IDATE            | https://richmit.github.io/hp42/date.html |
-| DATE:TIME       | ITIME            | https://richmit.github.io/hp42/date.html |
-| DATE:UTIME      |                  | https://richmit.github.io/hp42/date.html |
-| DATE:           |                  |                                          |
-| DATE:DT→U       |                  | https://richmit.github.io/hp42/date.html |
-| DATE:U→DT       |                  | https://richmit.github.io/hp42/date.html |
-|-----------------+------------------+------------------------------------------|
-| DATE:DATE+      | IDATE+           | https://richmit.github.io/hp42/date.html |
-| DATE:DDAYS      |                  |                                          |
-| DATE:DOW        | IDOW             | https://richmit.github.io/hp42/date.html |
-| DATE:           |                  |                                          |
-| DATE:           |                  |                                          |
-| DATE:           |                  |                                          |
+| SFUN:ERR:ERF    |                  | https://richmit.github.io/hp42/math.html |
+| SFUN:ERR:ERFC   |                  | https://richmit.github.io/hp42/math.html |
+| SFUN:ERR:       |                  |                                          |
+| SFUN:ERR:NPDF   |                  | https://richmit.github.io/hp42/math.html |
+| SFUN:ERR:NCDF   |                  | https://richmit.github.io/hp42/math.html |
 |-----------------+------------------+------------------------------------------|
 | PHIL:PERF       |                  | https://richmit.github.io/hp42/phil.html |
 | PHIL:IMET       |                  | https://richmit.github.io/hp42/phil.html |
 | PHIL:MEAS       |                  | https://richmit.github.io/hp42/meas.html |
 |-----------------+------------------+------------------------------------------|
+| DATE            | DMENU            | https://richmit.github.io/hp42/date.html |
 | BASE            |                  | https://richmit.github.io/hp42/base.html |
 | CONS            |                  | https://richmit.github.io/hp42/cons.html |
 | UNIT            |                  | https://richmit.github.io/hp42/unit.html |
@@ -156,10 +150,10 @@ LBL 01            @@@@ Page 1 of menu CUST
 CLMENU
 "SFUN"
 KEY 1 GTO 03
-"DATE"
-KEY 2 GTO 04
 "PHIL"
-KEY 3 GTO 05
+KEY 2 GTO 04
+"DATE"
+KEY 3 XEQ 05
 "BASE"
 KEY 4 XEQ 06
 "CONS"
@@ -206,6 +200,8 @@ LBL 10            @@@@ Page 2 of menu SFUN
 CLMENU
 "TRIG"
 KEY 1 GTO 17
+"ERR"
+KEY 2 GTO 18
 KEY 7 GTO 03
 KEY 8 GTO 03
 KEY 9 GTO 01
@@ -215,17 +211,17 @@ GTO 10
 LBL 11            @@@@ Page 1 of menu HYP
 CLMENU
 "SINH"
-KEY 1 XEQ 18
+KEY 1 XEQ 19
 "COSH"
-KEY 2 XEQ 19
+KEY 2 XEQ 20
 "TANH"
-KEY 3 XEQ 20
+KEY 3 XEQ 21
 "ASINH"
-KEY 4 XEQ 21
+KEY 4 XEQ 22
 "ACOSH"
-KEY 5 XEQ 22
+KEY 5 XEQ 23
 "ATANH"
-KEY 6 XEQ 23
+KEY 6 XEQ 24
 KEY 9 GTO 03
 MENU
 STOP
@@ -233,13 +229,13 @@ GTO 11
 LBL 12            @@@@ Page 1 of menu L&P
 CLMENU
 "lnYX"
-KEY 1 XEQ 24
+KEY 1 XEQ 25
 "ln2"
-KEY 2 XEQ 25
+KEY 2 XEQ 26
 "2↑X"
-KEY 3 XEQ 26
+KEY 3 XEQ 27
 "Y√X"
-KEY 4 XEQ 27
+KEY 4 XEQ 28
 KEY 9 GTO 03
 MENU
 STOP
@@ -247,11 +243,11 @@ GTO 12
 LBL 13            @@@@ Page 1 of menu PERC
 CLMENU
 "%T"
-KEY 1 XEQ 28
+KEY 1 XEQ 29
 "%CH"
-KEY 2 XEQ 29
+KEY 2 XEQ 30
 "%"
-KEY 3 XEQ 30
+KEY 3 XEQ 31
 KEY 9 GTO 03
 MENU
 STOP
@@ -259,47 +255,47 @@ GTO 13
 LBL 14            @@@@ Page 1 of menu PROB
 CLMENU
 "COMB"
-KEY 1 XEQ 32
+KEY 1 XEQ 33
 "PERM"
-KEY 2 XEQ 33
+KEY 2 XEQ 34
 "!"
-KEY 3 XEQ 34
+KEY 3 XEQ 35
 "GAMMA"
-KEY 4 XEQ 35
+KEY 4 XEQ 36
 "BETA"
-KEY 5 XEQ 36
-KEY 7 GTO 31
-KEY 8 GTO 31
+KEY 5 XEQ 37
+KEY 7 GTO 32
+KEY 8 GTO 32
 KEY 9 GTO 03
 MENU
 STOP
 GTO 14
-LBL 31            @@@@ Page 2 of menu PROB
+LBL 32            @@@@ Page 2 of menu PROB
 CLMENU
 "NPDF"
-KEY 1 XEQ 37
+KEY 1 XEQ 38
 "NCDF"
-KEY 2 XEQ 38
+KEY 2 XEQ 39
 KEY 7 GTO 14
 KEY 8 GTO 14
 KEY 9 GTO 03
 MENU
 STOP
-GTO 31
+GTO 32
 LBL 15            @@@@ Page 1 of menu INT
 CLMENU
 "IDIV"
-KEY 1 XEQ 39
+KEY 1 XEQ 40
 "MOD"
-KEY 2 XEQ 40
+KEY 2 XEQ 41
 "GCD"
-KEY 3 XEQ 41
+KEY 3 XEQ 42
 "LCM"
-KEY 4 XEQ 42
+KEY 4 XEQ 43
 "FLOR"
-KEY 5 XEQ 43
+KEY 5 XEQ 44
 "CEIL"
-KEY 6 XEQ 44
+KEY 6 XEQ 45
 KEY 9 GTO 03
 MENU
 STOP
@@ -307,15 +303,15 @@ GTO 15
 LBL 16            @@@@ Page 1 of menu CPLX
 CLMENU
 "RPART"
-KEY 1 XEQ 45
+KEY 1 XEQ 46
 "IPART"
-KEY 2 XEQ 46
+KEY 2 XEQ 47
 "CONJ"
-KEY 3 XEQ 47
+KEY 3 XEQ 48
 "CABS"
-KEY 4 XEQ 48
+KEY 4 XEQ 49
 "CARG"
-KEY 5 XEQ 49
+KEY 5 XEQ 50
 KEY 9 GTO 03
 MENU
 STOP
@@ -323,59 +319,44 @@ GTO 16
 LBL 17            @@@@ Page 1 of menu TRIG
 CLMENU
 "HYPOT"
-KEY 1 XEQ 50
+KEY 1 XEQ 51
 "ATAN2"
-KEY 2 XEQ 51
+KEY 2 XEQ 52
 KEY 9 GTO 10
 MENU
 STOP
 GTO 17
-LBL 04            @@@@ Page 1 of menu DATE
+LBL 18            @@@@ Page 1 of menu ERR
 CLMENU
-"DATE"
+"ERF"
 KEY 1 XEQ 53
-"TIME"
+"ERFC"
 KEY 2 XEQ 54
-"UTIME"
-KEY 3 XEQ 55
-"DT→U"
+"NPDF"
+KEY 4 XEQ 55
+"NCDF"
 KEY 5 XEQ 56
-"U→DT"
-KEY 6 XEQ 57
-KEY 7 GTO 52
-KEY 8 GTO 52
+KEY 9 GTO 10
+MENU
+STOP
+GTO 18
+LBL 04            @@@@ Page 1 of menu PHIL
+CLMENU
+"PERF"
+KEY 1 XEQ 57
+"IMET"
+KEY 2 XEQ 58
+"MEAS"
+KEY 3 XEQ 59
 KEY 9 GTO 01
 MENU
 STOP
 GTO 04
-LBL 52            @@@@ Page 2 of menu DATE
-CLMENU
-"DATE+"
-KEY 1 XEQ 58
-"DDAYS"
-KEY 2 XEQ 59
-"DOW"
-KEY 3 XEQ 60
-KEY 7 GTO 04
-KEY 8 GTO 04
-KEY 9 GTO 01
-MENU
-STOP
-GTO 52
-LBL 05            @@@@ Page 1 of menu PHIL
-CLMENU
-"PERF"
-KEY 1 XEQ 61
-"IMET"
-KEY 2 XEQ 62
-"MEAS"
-KEY 3 XEQ 63
-KEY 9 GTO 01
-MENU
-STOP
-GTO 05
 LBL 00
 EXITALL
+RTN
+LBL 05               @@@@ Action for menu key DATE
+XEQ "DMENU"
 RTN
 LBL 06               @@@@ Action for menu key BASE
 XEQ "BASE"
@@ -389,137 +370,125 @@ RTN
 LBL 09               @@@@ Action for menu key MEAS
 XEQ "MEAS"
 RTN
-LBL 18               @@@@ Action for menu key SINH
+LBL 19               @@@@ Action for menu key SINH
 SINH
 RTN
-LBL 19               @@@@ Action for menu key COSH
+LBL 20               @@@@ Action for menu key COSH
 COSH
 RTN
-LBL 20               @@@@ Action for menu key TANH
+LBL 21               @@@@ Action for menu key TANH
 TANH
 RTN
-LBL 21               @@@@ Action for menu key ASINH
+LBL 22               @@@@ Action for menu key ASINH
 ASINH
 RTN
-LBL 22               @@@@ Action for menu key ACOSH
+LBL 23               @@@@ Action for menu key ACOSH
 ACOSH
 RTN
-LBL 23               @@@@ Action for menu key ATANH
+LBL 24               @@@@ Action for menu key ATANH
 ATANH
 RTN
-LBL 24               @@@@ Action for menu key lnYX
+LBL 25               @@@@ Action for menu key lnYX
 XEQ "lnYX"
 RTN
-LBL 25               @@@@ Action for menu key ln2
+LBL 26               @@@@ Action for menu key ln2
 XEQ "ln2"
 RTN
-LBL 26               @@@@ Action for menu key 2↑X
+LBL 27               @@@@ Action for menu key 2↑X
 XEQ "2↑X"
 RTN
-LBL 27               @@@@ Action for menu key Y√X
+LBL 28               @@@@ Action for menu key Y√X
 XEQ "YROOT"
 RTN
-LBL 28               @@@@ Action for menu key %T
+LBL 29               @@@@ Action for menu key %T
 XEQ "%T"
 RTN
-LBL 29               @@@@ Action for menu key %CH
+LBL 30               @@@@ Action for menu key %CH
 %CH
 RTN
-LBL 30               @@@@ Action for menu key %
+LBL 31               @@@@ Action for menu key %
 %
 RTN
-LBL 32               @@@@ Action for menu key COMB
+LBL 33               @@@@ Action for menu key COMB
 COMB
 RTN
-LBL 33               @@@@ Action for menu key PERM
+LBL 34               @@@@ Action for menu key PERM
 PERM
 RTN
-LBL 34               @@@@ Action for menu key !
+LBL 35               @@@@ Action for menu key !
 XEQ "!"
 RTN
-LBL 35               @@@@ Action for menu key GAMMA
+LBL 36               @@@@ Action for menu key GAMMA
 GAMMA
 RTN
-LBL 36               @@@@ Action for menu key BETA
+LBL 37               @@@@ Action for menu key BETA
 XEQ "BETA"
 RTN
-LBL 37               @@@@ Action for menu key NPDF
+LBL 38               @@@@ Action for menu key NPDF
 XEQ "NPDF"
 RTN
-LBL 38               @@@@ Action for menu key NCDF
+LBL 39               @@@@ Action for menu key NCDF
 XEQ "NCDF"
 RTN
-LBL 39               @@@@ Action for menu key IDIV
+LBL 40               @@@@ Action for menu key IDIV
 BASE÷
 RTN
-LBL 40               @@@@ Action for menu key MOD
+LBL 41               @@@@ Action for menu key MOD
 MOD
 RTN
-LBL 41               @@@@ Action for menu key GCD
+LBL 42               @@@@ Action for menu key GCD
 XEQ "GCD"
 RTN
-LBL 42               @@@@ Action for menu key LCM
+LBL 43               @@@@ Action for menu key LCM
 XEQ "LCM"
 RTN
-LBL 43               @@@@ Action for menu key FLOR
+LBL 44               @@@@ Action for menu key FLOR
 XEQ "FLOOR"
 RTN
-LBL 44               @@@@ Action for menu key CEIL
+LBL 45               @@@@ Action for menu key CEIL
 XEQ "CEIL"
 RTN
-LBL 45               @@@@ Action for menu key RPART
+LBL 46               @@@@ Action for menu key RPART
 XEQ "RPART"
 RTN
-LBL 46               @@@@ Action for menu key IPART
+LBL 47               @@@@ Action for menu key IPART
 XEQ "IPART"
 RTN
-LBL 47               @@@@ Action for menu key CONJ
+LBL 48               @@@@ Action for menu key CONJ
 XEQ "CONJ"
 RTN
-LBL 48               @@@@ Action for menu key CABS
+LBL 49               @@@@ Action for menu key CABS
 XEQ "CABS"
 RTN
-LBL 49               @@@@ Action for menu key CARG
+LBL 50               @@@@ Action for menu key CARG
 XEQ "CARG"
 RTN
-LBL 50               @@@@ Action for menu key HYPOT
+LBL 51               @@@@ Action for menu key HYPOT
 XEQ "HYPOT"
 RTN
-LBL 51               @@@@ Action for menu key ATAN2
+LBL 52               @@@@ Action for menu key ATAN2
 XEQ "ATAN2"
 RTN
-LBL 53               @@@@ Action for menu key DATE
-XEQ "IDATE"
+LBL 53               @@@@ Action for menu key ERF
+XEQ "ERF"
 RTN
-LBL 54               @@@@ Action for menu key TIME
-XEQ "ITIME"
+LBL 54               @@@@ Action for menu key ERFC
+XEQ "ERFC"
 RTN
-LBL 55               @@@@ Action for menu key UTIME
-XEQ "UTIME"
+LBL 55               @@@@ Action for menu key NPDF
+XEQ "NPDF"
 RTN
-LBL 56               @@@@ Action for menu key DT→U
-XEQ "DT→U"
+LBL 56               @@@@ Action for menu key NCDF
+XEQ "NCDF"
 RTN
-LBL 57               @@@@ Action for menu key U→DT
-XEQ "U→DT"
-RTN
-LBL 58               @@@@ Action for menu key DATE+
-XEQ "IDATE+"
-RTN
-LBL 59               @@@@ Action for menu key DDAYS
-DDAYS
-RTN
-LBL 60               @@@@ Action for menu key DOW
-XEQ "IDOW"
-RTN
-LBL 61               @@@@ Action for menu key PERF
+LBL 57               @@@@ Action for menu key PERF
 XEQ "PERF"
 RTN
-LBL 62               @@@@ Action for menu key IMET
+LBL 58               @@@@ Action for menu key IMET
 XEQ "IMET"
 RTN
-LBL 63               @@@@ Action for menu key MEAS
+LBL 59               @@@@ Action for menu key MEAS
 XEQ "MEAS"
 RTN
-@@@@ Free labels start at: 64
+@@@@ Free labels start at: 60
 #+end_src

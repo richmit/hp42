@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-03-28 Sun 12:22 -->
+<!-- 2021-03-30 Tue 17:50 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42/hp42s/DM42 Date Tools</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-03-28 12:22:43</i></td>
+<td class="org-left"><i>2021-03-30 17:50:29</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,15 +241,16 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgec6152c">1. Metadata</a></li>
-<li><a href="#orgd5ebbbd">2. Introduction</a></li>
-<li><a href="#org26201a7">3. Date/Time Functions</a></li>
+<li><a href="#orge3960c9">1. Metadata</a></li>
+<li><a href="#orgbb162b8">2. Introduction</a></li>
+<li><a href="#orgc05bf28">3. Date/Time Functions</a></li>
+<li><a href="#orgf08ab54">4. A menu for date/time functions</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgec6152c" class="outline-2">
-<h2 id="orgec6152c"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-orge3960c9" class="outline-2">
+<h2 id="orge3960c9"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a>
@@ -267,19 +268,19 @@ Files related to this document may be found on github: <a href="https://github.c
 </div>
 </div>
 
-<div id="outline-container-orgd5ebbbd" class="outline-2">
-<h2 id="orgd5ebbbd"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-orgbb162b8" class="outline-2">
+<h2 id="orgbb162b8"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-Aside from the UNIX data/time conversion routines, the rest is just wrappers for built in functions to make them print results when called from a program.
-Why?  I wanted to put things like <code>DATE</code> in a nested custom menu, and have them print the date just as if I had directly put the function in a custom menu. ;)
-Now that free42 has put these into a separate catalog menu, these are somewhat obsolete.
+Aside from the date/time conversion routines, the rest is just wrappers for built in functions to make them print results when called from a program.  Why?  I
+wanted to put things like <code>DATE</code> in a nested custom menu, and have them print the date just as if I had directly put the function in a custom menu. ;) Now
+that free42 has put these into a separate catalog menu, these are somewhat obsolete.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org26201a7" class="outline-2">
-<h2 id="org26201a7"><span class="section-number-2">3</span> Date/Time Functions</h2>
+<div id="outline-container-orgc05bf28" class="outline-2">
+<h2 id="orgc05bf28"><span class="section-number-2">3</span> Date/Time Functions</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Interactive Current Date</span>
@@ -287,11 +288,11 @@ Now that free42 has put these into a separate catalog menu, these are somewhat o
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SFX: Prints date even when called from a program</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"IDATE"</span>
-<span style="color: #00ffff;">FUNC</span> 01            <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
-<span style="color: #00ffff;">DATE</span>               <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
+<span style="color: #00ffff;">FUNC</span> 01              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">DATE</span>                 <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
 <span style="color: #fa8072;">"Date: "</span>
-<span style="color: #00ffff;">ADATE</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
+<span style="color: #00ffff;">ADATE</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
@@ -301,11 +302,11 @@ Now that free42 has put these into a separate catalog menu, these are somewhat o
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SFX: Prints time even when called from a program</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"ITIME"</span>
-<span style="color: #00ffff;">FUNC</span> 01            <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
-<span style="color: #00ffff;">TIME</span>               <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
+<span style="color: #00ffff;">FUNC</span> 01              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">TIME</span>                 <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
 <span style="color: #fa8072;">"Time: "</span>
-<span style="color: #00ffff;">ATIME</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
+<span style="color: #00ffff;">ATIME</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
@@ -314,10 +315,10 @@ Now that free42 has put these into a separate catalog menu, these are somewhat o
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: UNIX time</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"UTIME"</span>
-<span style="color: #00ffff;">FUNC</span> 02            <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
-<span style="color: #00ffff;">DATE</span>               <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
-<span style="color: #00ffff;">TIME</span>               <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
+<span style="color: #00ffff;">FUNC</span> 02              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">DATE</span>                 <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
+<span style="color: #00ffff;">TIME</span>                 <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"DT&#8594;U"</span>
 <span style="color: #00ffff;">END</span>
 
@@ -327,14 +328,14 @@ Now that free42 has put these into a separate catalog menu, these are somewhat o
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: UNIX time</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"DT&#8594;U"</span>
-<span style="color: #00ffff;">FUNC</span> 21            <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
-<span style="color: #00ffff;">FS</span>? 67             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">In Y.MD mode</span>
+<span style="color: #00ffff;">FUNC</span> 21              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">FS</span>? 67               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">In Y.MD mode</span>
 1970.0101
-<span style="color: #00ffff;">FC</span>? 67             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Not in Y.MD mode</span>
-1.011970           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Works for M.DY &amp; D.MY</span>
+<span style="color: #00ffff;">FC</span>? 67               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Not in Y.MD mode</span>
+1.011970             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Works for M.DY &amp; D.MY</span>
 <span style="color: #00ffff;">RCL ST</span> Z
-<span style="color: #00ffff;">DDAYS</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
+<span style="color: #00ffff;">DDAYS</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
 24
 <span style="color: #00ffff;">&#215;</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
@@ -351,23 +352,23 @@ Now that free42 has put these into a separate catalog menu, these are somewhat o
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Time</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"U&#8594;DT"</span>
-<span style="color: #00ffff;">FUNC</span> 12            <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">FUNC</span> 12              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 3600
 <span style="color: #00ffff;">&#247;</span>
 <span style="color: #00ffff;">RCL ST</span> X
 24
 <span style="color: #00ffff;">&#247;</span>
 <span style="color: #00ffff;">IP</span>
-<span style="color: #00ffff;">FS</span>? 67             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">In Y.MD mode</span>
+<span style="color: #00ffff;">FS</span>? 67               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">In Y.MD mode</span>
 1970.0101
-<span style="color: #00ffff;">FC</span>? 67             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Not in Y.MD mode</span>
-1.011970           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Works for M.DY &amp; D.MY</span>
+<span style="color: #00ffff;">FC</span>? 67               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Not in Y.MD mode</span>
+1.011970             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Works for M.DY &amp; D.MY</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
-<span style="color: #00ffff;">DATE+</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
+<span style="color: #00ffff;">DATE+</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 24
-<span style="color: #00ffff;">MOD</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
+<span style="color: #00ffff;">MOD</span>                  <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
 &#8594;HMS
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
@@ -379,15 +380,15 @@ Now that free42 has put these into a separate catalog menu, these are somewhat o
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SFX: Prints date &amp; time even when called from a program</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"IU&#8594;DT"</span>
-<span style="color: #00ffff;">FUNC</span> 12            <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">FUNC</span> 12              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"U&#8594;DT"</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #fa8072;">"Date:  "</span>
-<span style="color: #00ffff;">ADATE</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
+<span style="color: #00ffff;">ADATE</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #fa8072;">"&#9500;[LF]Time: "</span>
-<span style="color: #00ffff;">ATIME</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
+<span style="color: #00ffff;">ATIME</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
@@ -398,11 +399,11 @@ Now that free42 has put these into a separate catalog menu, these are somewhat o
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Date + Integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"IDATE+"</span>
-<span style="color: #00ffff;">FUNC</span> 21            <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
-<span style="color: #00ffff;">DATE+</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
+<span style="color: #00ffff;">FUNC</span> 21              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">DATE+</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
 <span style="color: #fa8072;">"Date: "</span>
-<span style="color: #00ffff;">ADATE</span>              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
+<span style="color: #00ffff;">ADATE</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
@@ -413,9 +414,9 @@ Now that free42 has put these into a separate catalog menu, these are somewhat o
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SFX: Prints day of week even when called from a program</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"IDOW"</span>
-<span style="color: #00ffff;">FUNC</span> 11           <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>             <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
-<span style="color: #00ffff;">DOW</span>                 <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">DOW</span>                  <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
 <span style="color: #fa8072;">"Day of Week: "</span>
 <span style="color: #00ffff;">XEQ IND ST</span> X
 <span style="color: #00ffff;">AVIEW</span>
@@ -442,13 +443,311 @@ Now that free42 has put these into a separate catalog menu, these are somewhat o
 <span style="color: #fa8072;">"&#9500;SAT"</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Convert date to Julian day</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Date</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Julian day</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"D&#8594;J"</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">FS</span>? 67               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">In Y.MD mode</span>
+1970.0101
+<span style="color: #00ffff;">FC</span>? 67               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Not in Y.MD mode</span>
+1.011970             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Works for M.DY &amp; D.MY</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">DDAYS</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
+2440587.5
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Convert date to Julian day</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Date</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Julian day</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"J&#8594;D"</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+2440587.5
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">FS</span>? 67               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">In Y.MD mode</span>
+1970.0101
+<span style="color: #00ffff;">FC</span>? 67               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Not in Y.MD mode</span>
+1.011970             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Works for M.DY &amp; D.MY</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">DATE+</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Today's Julian day</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Julian day for today</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"JDATE"</span>
+<span style="color: #00ffff;">FUNC</span> 01              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">DATE</span>                 <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"D&#8594;J"</span>
+<span style="color: #00ffff;">END</span>
+
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Interactive J&#8594;D (prints date)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Date</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Julian day</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"IJ&#8594;D"</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"J&#8594;D"</span>
+<span style="color: #fa8072;">"Date: "</span>
+<span style="color: #00ffff;">ADATE</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<div id="outline-container-orgf08ab54" class="outline-2">
+<h2 id="orgf08ab54"><span class="section-number-2">4</span> A menu for date/time functions</h2>
+<div class="outline-text-2" id="text-4">
+<table id="orgbf7b4da" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Menu</th>
+<th scope="col" class="org-left">Function/Program</th>
+<th scope="col" class="org-left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">DATE</td>
+<td class="org-left">IDATE</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">TIME</td>
+<td class="org-left">ITIME</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">UTIME</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">DT→U</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">U→DT</td>
+<td class="org-left">IU→DT</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">DATE</td>
+<td class="org-left">IDATE</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">JDATE</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">D→J</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">J→D</td>
+<td class="org-left">IJ→D</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">DATE+</td>
+<td class="org-left">IDATE+</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">DDAYS</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">DOW</td>
+<td class="org-left">IDOW</td>
+<td class="org-left"><a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a></td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"DMENU"</span> tbl <span style="color: #fa8072;">"stay"</span> <span style="color: #fa8072;">"up"</span> #'MJR-custom-x-gen)
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"DMENU"</span>
+<span style="color: #00ffff;">LBL</span> 01            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu DMENU</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"DATE"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 04
+<span style="color: #fa8072;">"TIME"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 05
+<span style="color: #fa8072;">"UTIME"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 06
+<span style="color: #fa8072;">"DT&#8594;U"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 07
+<span style="color: #fa8072;">"U&#8594;DT"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 08
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">LBL</span> 02            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu DMENU</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"DATE"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 09
+<span style="color: #fa8072;">"JDATE"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 10
+<span style="color: #fa8072;">"D&#8594;J"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 11
+<span style="color: #fa8072;">"J&#8594;D"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 12
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">LBL</span> 03            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 3 of menu DMENU</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"DATE+"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 13
+<span style="color: #fa8072;">"DDAYS"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 14
+<span style="color: #fa8072;">"DOW"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 15
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">LBL</span> 00
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 04               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key DATE</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"IDATE"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 05               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key TIME</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"ITIME"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 06               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key UTIME</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UTIME"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 07               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key DT&#8594;U</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"DT&#8594;U"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 08               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key U&#8594;DT</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"IU&#8594;DT"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 09               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key DATE</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"IDATE"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 10               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key JDATE</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"JDATE"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 11               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key D&#8594;J</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"D&#8594;J"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 12               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key J&#8594;D</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"IJ&#8594;D"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 13               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key DATE+</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"IDATE+"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 14               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key DDAYS</span>
+<span style="color: #00ffff;">DDAYS</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 15               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key DOW</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"IDOW"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Free labels start at: 16</span>
 </pre>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-28 Sun 12:22 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-30 Tue 17:50 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

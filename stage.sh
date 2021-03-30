@@ -12,6 +12,7 @@ while [ -n "$1" ]; do
     didsomething='TRUE'
   fi  
   if [ -e src/$NAME.html ]; then
+    echo "WARNING: Had to move HTML from src to doc: $NAME.html"
     mv src/$NAME.html docs/
     didsomething='TRUE'
   fi

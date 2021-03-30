@@ -1,0 +1,816 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-03-30 Tue 18:08 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>free42/hp42s/DM42 equations</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Mitch Richling" />
+<meta name="description" content="Description of some free42/hp-42s/DM42 equations"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
+<style>body { min-width: 500px; max-width: 1024px; }</style>
+<style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
+<style>h1,h2,h3 { line-height: 1.4em; }</style>
+<style>h1.title { font-size: 3em; }</style>
+<style>h4,h5,h6 { font-size: 1em; }</style>
+<style>.org-src-container { border: 1px solid #ccc; box-shadow: 3px 3px 3px #eee; font-family: Lucida Console, monospace; font-size: 80%; margin: 0px; padding: 0px 0px; position: relative; }</style>
+<style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
+<style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
+<style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="https://richmit.github.io/hp42/"> UP </a>
+ |
+ <a accesskey="H" href="https://www.mitchr.me/"> HOME </a>
+</div><div id="content">
+<h1 class="title">free42/hp42s/DM42 equations</h1>
+<table border="2 solid #ccc" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right"><b>Author:</b></td>
+<td class="org-left"><i>Mitch Richling</i></td>
+</tr>
+
+<tr>
+<td class="org-right"><b>Updated:</b></td>
+<td class="org-left"><i>2021-03-30 18:08:12</i></td>
+</tr>
+</tbody>
+</table>
+<p align="center">
+Copyright 2021 Mitch Richling. All rights reserved.
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgbd32e98">1. Metadata</a></li>
+<li><a href="#orge716937">2. Equations</a>
+<ul>
+<li><a href="#org318c8de">2.1. Kepler's Equation</a></li>
+<li><a href="#orgb70cdbe">2.2. Kiusalas Perfs</a></li>
+<li><a href="#org09797e2">2.3. TVM Equation</a></li>
+<li><a href="#org5acd431">2.4. Euler Integral</a></li>
+<li><a href="#orga0952dc">2.5. Normal Distribution PDF</a></li>
+<li><a href="#org6a486fa">2.6. F Distribution PDF</a></li>
+<li><a href="#org5a6de42">2.7. Chi Square Distribution PDF</a></li>
+<li><a href="#orga5ea4b4">2.8. Beta Distribution PDF</a></li>
+<li><a href="#orgfdcdaca">2.9. Logistic Distribution PDF</a></li>
+<li><a href="#org5c36e34">2.10. Student's t Distribution PDF</a></li>
+<li><a href="#org5b90a53">2.11. Weibull Distribution PDF</a></li>
+<li><a href="#org432295e">2.12. Exponential Distribution PDF</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgbd32e98" class="outline-2">
+<h2 id="orgbd32e98"><span class="section-number-2">1</span> Metadata</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This home for this HTML file is: <a href="https://richmit.github.io/hp42/equations.html">https://richmit.github.io/hp42/equations.html</a>
+</p>
+
+<p>
+Files related to this document may be found on github: <a href="https://github.com/richmit/hp42">https://github.com/richmit/hp42</a>
+</p>
+
+<ul class="org-ul">
+<li><code>src</code> directory: Contains the org-mode file that generated this HTML document</li>
+<li><code>docs</code> directory: Contains this html document</li>
+<li><code>bin</code> directory: Contains raw program files</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge716937" class="outline-2">
+<h2 id="orge716937"><span class="section-number-2">2</span> Equations</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Here we have a few handy equations.  All of them have MVAR declariations so they work with the 42s' integrator and solver.
+</p>
+</div>
+
+<div id="outline-container-org318c8de" class="outline-3">
+<h3 id="org318c8de"><span class="section-number-3">2.1</span> Kepler's Equation</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+\[E_A - E \sin(E_A) - M_A = 0\]
+</p>
+
+<p>
+\(M_A\) is the mean anomaly, and is represented by "<code>MA</code>" in the program. 
+\(E_A\) is the eccentric anomaly, and is represented by "<code>EA</code>" in the program. 
+\(E\) is the eccentricity. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"KEPLE"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"MA"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"EA"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"M"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"EA"</span>
+<span style="color: #00ffff;">SIN</span>
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"E"</span>
+<span style="color: #00ffff;">+/-</span>
+<span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"EA"</span>
+<span style="color: #00ffff;">RCL-</span> <span style="color: #fa8072;">"MA"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb70cdbe" class="outline-3">
+<h3 id="orgb70cdbe"><span class="section-number-3">2.2</span> Kiusalas Perfs</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+\[\frac{100000}{127 K}-P = 0\]
+</p>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"KIUS"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"P"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"K"</span>
+100000
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"K"</span>
+127
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RCL-</span> <span style="color: #fa8072;">"P"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org09797e2" class="outline-3">
+<h3 id="org09797e2"><span class="section-number-3">2.3</span> TVM Equation</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Can be used to solve TVM problems when solved.
+</p>
+
+<p>
+\[PV+(1 + ip)\cdot PMT\cdot \frac{1-(1+i)^{-N}}{i}+FV\cdot (1+i)^{-N}\]
+</p>
+
+<p>
+In the program we use "<code>B1/E0</code>" for the variable \(p\).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TVM"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"N"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"I"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"PV"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"PMT"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"FV"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"B1/E0"</span>
+1
+<span style="color: #00ffff;">ENTER</span>
+<span style="color: #00ffff;">ENTER</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"I"</span>
+<span style="color: #00ffff;">%</span>
+<span style="color: #00ffff;">STO ST</span> T
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"B1/E0"</span>
+<span style="color: #00ffff;">+</span>
+R&#8595;
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"N"</span>
+<span style="color: #00ffff;">+/-</span>
+<span style="color: #00ffff;">Y&#8593;X</span>
+1
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">LASTX</span>
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"FV"</span>
+R&#8595;
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"PMT"</span>
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"PV"</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5acd431" class="outline-3">
+<h3 id="org5acd431"><span class="section-number-3">2.4</span> Euler Integral</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+Can be used to directly compute the incomplete beta function when integrated.
+</p>
+
+<p>
+Related to the beta function, F distribution, and z distributions.  
+</p>
+
+<p>
+\[(x-1)(1-t)^{y-1}\]
+</p>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"EULI"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"T"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"Y"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"T"</span>
+<span style="color: #00ffff;">RCL</span>  <span style="color: #fa8072;">"X"</span>
+1
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">Y&#8593;X</span>
+1
+<span style="color: #00ffff;">RCL-</span> <span style="color: #fa8072;">"T"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"Y"</span>
+1
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">Y&#8593;X</span>
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga0952dc" class="outline-3">
+<h3 id="orga0952dc"><span class="section-number-3">2.5</span> Normal Distribution PDF</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+Can be used to compute normal probabilities when integrated.
+</p>
+
+<p>
+Related to the err function.  
+</p>
+
+<p>
+\[\frac{1}{s\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-m}{s}\right)^2}\]
+</p>
+
+<p>
+In most sources \(\sigma\) is used instead of \(s\) and \(\mu\) is used instead of \(m\).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"NORMD"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"S"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"M"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL-</span> <span style="color: #fa8072;">"M"</span>
+<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"S"</span>
+<span style="color: #00ffff;">X&#8593;2</span>
+-2
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">E&#8593;X</span>
+<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"S"</span>
+2
+<span style="color: #00ffff;">PI</span>
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">SQRT</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6a486fa" class="outline-3">
+<h3 id="org6a486fa"><span class="section-number-3">2.6</span> F Distribution PDF</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+Can be used to compute F probabilities when integrated.
+</p>
+
+<p>
+\[\frac{\sqrt{\frac{(d_1x)^{d_1}d_2^{d_2}}{(d_1x+d_2)^{d_1+d_2}}}}{x\mathrm{B}\left(\frac{d_1}{2},\frac{d_2}{2}\right)}\]
+</p>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FDIST"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"D1"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"D2"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"D1"</span>
+2
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"D2"</span>
+2
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"BETA"</span>
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"D1"</span>
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"D1"</span>
+<span style="color: #00ffff;">Y&#8593;X</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"D2"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"D2"</span>
+<span style="color: #00ffff;">Y&#8593;X</span>
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"D1"</span>
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"D2"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"D1"</span>
+<span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"D2"</span>
+<span style="color: #00ffff;">Y&#8593;X</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">SQRT</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5a6de42" class="outline-3">
+<h3 id="org5a6de42"><span class="section-number-3">2.7</span> Chi Square Distribution PDF</h3>
+<div class="outline-text-3" id="text-2-7">
+<p>
+Can be used to compute chi square probabilities when integrated.
+</p>
+
+<p>
+\[\frac{x^{\frac{k}{2}-1}e^{-\frac{x}{2}}}{2^{\frac{k}{2}}\Gamma\left(\frac{k}{2}\right)}\]
+</p>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"CHI2"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"K"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"K"</span>
+2
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">ENTER</span>
+<span style="color: #00ffff;">ENTER</span>
+1
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">Y&#8593;X</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+-2
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">E&#8593;X</span>
+<span style="color: #00ffff;">&#215;</span>
+2
+<span style="color: #00ffff;">RCL ST</span> Z
+<span style="color: #00ffff;">Y&#8593;X</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">GAMMA</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga5ea4b4" class="outline-3">
+<h3 id="orga5ea4b4"><span class="section-number-3">2.8</span> Beta Distribution PDF</h3>
+<div class="outline-text-3" id="text-2-8">
+<p>
+Can be used to compute beta probabilities when integrated.
+</p>
+
+<p>
+\[\frac{x^{a-1}(1-x)^{b-1}}{\mathrm{B}(a,b)}\]
+</p>
+
+<p>
+In most sources \(\alpha\) is used instead of \(a\) and \(\beta\) is used instead of \(b\).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"BETAF"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"A"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"B"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"A"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"B"</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"BETA"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+-1
+<span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"A"</span>
+<span style="color: #00ffff;">Y&#8593;X</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">&#247;</span>
+1
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"B"</span>
+1
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">Y&#8593;X</span>
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfdcdaca" class="outline-3">
+<h3 id="orgfdcdaca"><span class="section-number-3">2.9</span> Logistic Distribution PDF</h3>
+<div class="outline-text-3" id="text-2-9">
+<p>
+Can be used to compute logistic probabilities when integrated.
+</p>
+
+<p>
+\[\frac{1}{4s}\mathrm{sech}\left(\frac{x-m}{2s}\right)\]
+</p>
+
+<p>
+Note \(s\) is sometimes called the "scale parameter", and \(m\) is sometimes called the "location parameter".
+</p>
+
+<p>
+Also note that various symbols are used for the parameters &#x2013; \(\mu\) &amp; \(\sigma\) for example.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"LOGID"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"S"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"M"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"M"</span>
+<span style="color: #00ffff;">RCL-</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"S"</span>
+<span style="color: #00ffff;">E&#8593;X</span>
+<span style="color: #00ffff;">ENTER</span>
+<span style="color: #00ffff;">ENTER</span>
+1
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">X&#8593;2</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"S"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5c36e34" class="outline-3">
+<h3 id="org5c36e34"><span class="section-number-3">2.10</span> Student's t Distribution PDF</h3>
+<div class="outline-text-3" id="text-2-10">
+<p>
+Can be used to compute Student's t probabilities when integrated.
+</p>
+
+<p>
+\[\frac{1}{\sqrt{\nu}\cdot\mathrm{B}\left(\frac{1}{2},\frac{\nu}{2}\right)}\left(1+\frac{x^2}{\nu}\right)^{-\frac{\nu+1}{2}}\]
+</p>
+
+<p>
+In the program "<code>V</code>" is used for \(\nu\).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"STUTD"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"V"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
+0.5
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"V"</span>
+2
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"BETA"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"V"</span>
+<span style="color: #00ffff;">SQRT</span>
+<span style="color: #00ffff;">&#215;</span>
+1
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">X&#8593;2</span>
+<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"V"</span>
+<span style="color: #00ffff;">+</span>
+1
+<span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"V"</span>         
+-2
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">Y&#8593;X</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5b90a53" class="outline-3">
+<h3 id="org5b90a53"><span class="section-number-3">2.11</span> Weibull Distribution PDF</h3>
+<div class="outline-text-3" id="text-2-11">
+<p>
+Can be used to compute Weibull probabilities when integrated.
+</p>
+
+<p>
+\[\frac{k}{\lambda}\left(\frac{x}{\lambda}\right)^{k-1}e^{-\left(\frac{x}{\lambda}\right)^k}\]
+</p>
+
+<p>
+In the program below we use "<code>L</code>" for \(\lambda\).
+</p>
+
+<p>
+Note that some sources use \(\frac{1}{\lambda}\) as the parameter instead of \(\lambda\).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"WEIBD"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"K"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"L"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"K"</span>
+<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"L"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"L"</span>
+-1
+<span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"K"</span>
+<span style="color: #00ffff;">Y&#8593;X</span>
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"L"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"K"</span>
+<span style="color: #00ffff;">Y&#8593;X</span>
+<span style="color: #00ffff;">+/-</span>
+<span style="color: #00ffff;">E&#8593;X</span>
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org432295e" class="outline-3">
+<h3 id="org432295e"><span class="section-number-3">2.12</span> Exponential Distribution PDF</h3>
+<div class="outline-text-3" id="text-2-12">
+<p>
+Can be used to compute exponential probabilities when integrated.
+</p>
+
+<p>
+\[\lambda e^{-\lambda x}\]
+</p>
+
+<p>
+In the program below we use "<code>L</code>" for \(\lambda\).  
+</p>
+
+<p>
+Note that some sources use \(\frac{1}{\lambda}\) as the parameter instead of \(\lambda\).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"EXPOD"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"L"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"L"</span>
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">+/-</span>
+<span style="color: #00ffff;">E&#8593;X</span>
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"L"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-30 Tue 18:08 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+</div>
+</body>
+</html>

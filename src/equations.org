@@ -1,0 +1,440 @@
+# -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
+#+TITLE:       free42/hp42s/DM42 equations
+#+AUTHOR:      Mitch Richling
+#+EMAIL:       http://www.mitchr.me/
+#+DATE:        2021-03-19
+#+DESCRIPTION: Description of some free42/hp-42s/DM42 equations
+#+LANGUAGE:    en
+#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil 
+#+HTML_HEAD: <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
+#+HTML_HEAD: <style>body { min-width: 500px; max-width: 1024px; }</style>
+#+HTML_HEAD: <style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
+#+HTML_HEAD: <style>h1,h2,h3 { line-height: 1.4em; }</style>
+#+HTML_HEAD: <style>h1.title { font-size: 3em; }</style>
+#+HTML_HEAD: <style>h4,h5,h6 { font-size: 1em; }</style>
+#+HTML_HEAD: <style>.org-src-container { border: 1px solid #ccc; box-shadow: 3px 3px 3px #eee; font-family: Lucida Console, monospace; font-size: 80%; margin: 0px; padding: 0px 0px; position: relative; }</style>
+#+HTML_HEAD: <style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
+#+HTML_HEAD: <style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
+#+HTML_HEAD: <style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
+#+HTML_LINK_HOME: https://www.mitchr.me/
+#+HTML_LINK_UP: https://richmit.github.io/hp42/
+#+EXPORT_FILE_NAME: ../docs/equations
+
+#+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
+|        <r> | <l>              |
+|  *Author:* | /{{{author}}}/ |
+| *Updated:* | /{{{time(%Y-%m-%d %H:%M:%S)}}}/ |
+#+ATTR_HTML: :align center
+Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
+
+#+TOC: headlines 5
+
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+#   00   #    10   #    20   #    30   #    40   #    50   #    60   #    70   #    80   #    90   #   100   #   110   #   120   #   130   #   140   #   150   #   160   #
+# 234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+
+* Metadata
+
+This home for this HTML file is: https://richmit.github.io/hp42/equations.html
+
+Files related to this document may be found on github: https://github.com/richmit/hp42
+
+   - =src= directory: Contains the org-mode file that generated this HTML document
+   - =docs= directory: Contains this html document
+   - =bin= directory: Contains raw program files
+
+* Equations
+
+Here we have a few handy equations.  All of them have MVAR declariations so they work with the 42s' integrator and solver.
+
+** Kepler's Equation
+
+$$E_A - E \sin(E_A) - M_A = 0$$
+
+$M_A$ is the mean anomaly, and is represented by "=MA=" in the program. 
+$E_A$ is the eccentric anomaly, and is represented by "=EA=" in the program. 
+$E$ is the eccentricity. 
+
+#+BEGIN_SRC hp42s
+LBL "KEPLE"
+MVAR "MA"
+MVAR "EA"
+MVAR "M"
+RCL "EA"
+SIN
+RCL× "E"
++/-
+RCL+ "EA"
+RCL- "MA"
+RTN
+END
+#+END_SRC
+
+** Kiusalas Perfs
+
+$$\frac{100000}{127 K}-P = 0$$
+
+#+BEGIN_SRC hp42s
+LBL "KIUS"
+MVAR "P"
+MVAR "K"
+100000
+RCL× "K"
+127
+÷
+RCL- "P"
+RTN
+END
+#+END_SRC
+
+** TVM Equation
+
+Can be used to solve TVM problems when solved.
+
+$$PV+(1 + ip)\cdot PMT\cdot \frac{1-(1+i)^{-N}}{i}+FV\cdot (1+i)^{-N}$$
+
+In the program we use "=B1/E0=" for the variable $p$.
+
+#+BEGIN_SRC hp42s
+LBL "TVM"
+MVAR "N"
+MVAR "I"
+MVAR "PV"
+MVAR "PMT"
+MVAR "FV"
+MVAR "B1/E0"
+1
+ENTER
+ENTER
+RCL "I"
+%
+STO ST T
+RCL× "B1/E0"
++
+R↓
++
+RCL "N"
++/-
+Y↑X
+1
+X<>Y
+-
+LASTX
+RCL× "FV"
+R↓
+X<>Y
+÷
+×
+RCL× "PMT"
++
+RCL+ "PV"
+END
+#+END_SRC
+
+** Euler Integral
+
+Can be used to directly compute the incomplete beta function when integrated.
+
+Related to the beta function, F distribution, and z distributions.  
+
+$$(x-1)(1-t)^{y-1}$$
+
+#+BEGIN_SRC hp42s
+LBL "EULI"
+MVAR "T"
+MVAR "Y"
+MVAR "X"
+RCL "T"
+RCL  "X"
+1
+-
+Y↑X
+1
+RCL- "T"
+RCL "Y"
+1
+-
+Y↑X
+×
+RTN
+END
+#+END_SRC
+
+** Normal Distribution PDF
+
+Can be used to compute normal probabilities when integrated.
+
+Related to the err function.  
+
+$$\frac{1}{s\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-m}{s}\right)^2}$$
+
+In most sources $\sigma$ is used instead of $s$ and $\mu$ is used instead of $m$.
+
+#+BEGIN_SRC hp42s
+LBL "NORMD"
+MVAR "S"
+MVAR "M"
+MVAR "X"
+RCL "X"
+RCL- "M"
+RCL÷ "S"
+X↑2
+-2
+÷
+E↑X
+RCL÷ "S"
+2
+PI
+×
+SQRT
+÷
+RTN
+END
+#+END_SRC
+
+** F Distribution PDF
+
+Can be used to compute F probabilities when integrated.
+
+$$\frac{\sqrt{\frac{(d_1x)^{d_1}d_2^{d_2}}{(d_1x+d_2)^{d_1+d_2}}}}{x\mathrm{B}\left(\frac{d_1}{2},\frac{d_2}{2}\right)}$$
+
+#+BEGIN_SRC hp42s
+LBL "FDIST"
+MVAR "D1"
+MVAR "D2"
+MVAR "X"
+RCL "D1"
+2
+÷
+RCL "D2"
+2
+÷
+XEQ "BETA"
+RCL× "X"
+RCL "D1"
+RCL× "X"
+RCL "D1"
+Y↑X
+RCL "D2"
+RCL "D2"
+Y↑X
+×
+RCL "D1"
+RCL× "X"
+RCL+ "D2"
+RCL "D1"
+RCL+ "D2"
+Y↑X
+÷
+SQRT
+X<>Y
+÷
+RTN
+END
+#+END_SRC
+
+** Chi Square Distribution PDF
+
+Can be used to compute chi square probabilities when integrated.
+
+$$\frac{x^{\frac{k}{2}-1}e^{-\frac{x}{2}}}{2^{\frac{k}{2}}\Gamma\left(\frac{k}{2}\right)}$$
+
+#+BEGIN_SRC hp42s
+LBL "CHI2"
+MVAR "K"
+MVAR "X"
+RCL "K"
+2
+÷
+ENTER
+ENTER
+1
+-
+RCL "X"
+X<>Y
+Y↑X
+RCL "X"
+-2
+÷
+E↑X
+×
+2
+RCL ST Z
+Y↑X
+÷
+X<>Y
+GAMMA
+÷
+RTN
+END
+#+END_SRC
+
+** Beta Distribution PDF
+
+Can be used to compute beta probabilities when integrated.
+
+$$\frac{x^{a-1}(1-x)^{b-1}}{\mathrm{B}(a,b)}$$
+
+In most sources $\alpha$ is used instead of $a$ and $\beta$ is used instead of $b$.
+
+#+BEGIN_SRC hp42s
+LBL "BETAF"
+MVAR "A"
+MVAR "B"
+MVAR "X"
+RCL "A"
+RCL "B"
+XEQ "BETA"
+RCL "X"
+-1
+RCL+ "A"
+Y↑X
+X<>Y
+÷
+1
+RCL "X"
+-
+RCL "B"
+1
+-
+Y↑X
+×
+RTN
+END
+#+END_SRC
+
+** Logistic Distribution PDF
+
+Can be used to compute logistic probabilities when integrated.
+
+$$\frac{1}{4s}\mathrm{sech}\left(\frac{x-m}{2s}\right)$$
+
+Note $s$ is sometimes called the "scale parameter", and $m$ is sometimes called the "location parameter".
+
+Also note that various symbols are used for the parameters -- $\mu$ & $\sigma$ for example.
+
+#+BEGIN_SRC hp42s
+LBL "LOGID"
+MVAR "S"
+MVAR "M"
+MVAR "X"
+RCL "M"
+RCL- "X"
+RCL÷ "S"
+E↑X
+ENTER
+ENTER
+1
++
+X↑2
+÷
+RCL÷ "S"
+RTN
+END
+#+END_SRC
+
+** Student's t Distribution PDF
+
+Can be used to compute Student's t probabilities when integrated.
+
+$$\frac{1}{\sqrt{\nu}\cdot\mathrm{B}\left(\frac{1}{2},\frac{\nu}{2}\right)}\left(1+\frac{x^2}{\nu}\right)^{-\frac{\nu+1}{2}}$$
+
+In the program "=V=" is used for $\nu$.
+
+#+BEGIN_SRC hp42s
+LBL "STUTD"
+MVAR "V"
+MVAR "X"
+0.5
+RCL "V"
+2
+÷
+XEQ "BETA"
+RCL "V"
+SQRT
+×
+1
+RCL "X"
+X↑2
+RCL÷ "V"
++
+1
+RCL+ "V"         
+-2
+÷
+Y↑X
+X<>Y
+÷
+RTN
+END
+#+END_SRC
+
+** Weibull Distribution PDF
+
+Can be used to compute Weibull probabilities when integrated.
+
+$$\frac{k}{\lambda}\left(\frac{x}{\lambda}\right)^{k-1}e^{-\left(\frac{x}{\lambda}\right)^k}$$
+
+In the program below we use "=L=" for $\lambda$.
+
+Note that some sources use $\frac{1}{\lambda}$ as the parameter instead of $\lambda$.
+
+#+BEGIN_SRC hp42s
+LBL "WEIBD"
+MVAR "K"
+MVAR "L"
+MVAR "X"
+RCL "K"
+RCL÷ "L"
+RCL "X"
+RCL÷ "L"
+-1
+RCL+ "K"
+Y↑X
+×
+RCL "X"
+RCL÷ "L"
+RCL "K"
+Y↑X
++/-
+E↑X
+×
+RTN
+END
+#+END_SRC
+
+** Exponential Distribution PDF
+
+Can be used to compute exponential probabilities when integrated.
+
+$$\lambda e^{-\lambda x}$$
+
+In the program below we use "=L=" for $\lambda$.  
+
+Note that some sources use $\frac{1}{\lambda}$ as the parameter instead of $\lambda$.
+
+#+BEGIN_SRC hp42s
+LBL "EXPOD"
+MVAR "L"
+MVAR "X"
+RCL "L"
+RCL× "X"
++/-
+E↑X
+RCL× "L"
+RTN
+END
+#+END_SRC
+
+** Formula Template :noexport:
+
+$$FORMULA$$
+
+#+BEGIN_SRC hp42s
+LBL "NAME"
+MVAR "V"
+RTN
+END
+#+END_SRC

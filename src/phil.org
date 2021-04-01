@@ -5,7 +5,7 @@
 #+DATE:        2021-03-19
 #+DESCRIPTION: Description of some free42/hp-42s/DM42 programs for stamp collectors
 #+LANGUAGE:    en
-#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil 
+#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil
 #+HTML_HEAD: <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
 #+HTML_HEAD: <style>body { min-width: 500px; max-width: 1024px; }</style>
 #+HTML_HEAD: <style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
@@ -183,14 +183,11 @@ END
 
 ** Code for Menu
 
-*** Code Generation
+ #+BEGIN_SRC elisp :var tbl=PERF :colnames y :results output verbatum :wrap src hp42s
+(MJR-generate-42-menu-code "PERF" tbl "stay" "exit" #'MJR-custom-x-gen)
+#+END_SRC
 
- #+BEGIN_SRC elisp :var tbl=PERF :colnames y :results output verbatum
-   (MJR-generate-42-menu-code "PERF" tbl "stay" "exit" #'MJR-custom-x-gen)
- #+END_SRC
-
-*** The Code
-
+#+RESULTS:
 #+begin_src hp42s
 LBL "PERF"
 LBL 01            @@@@ Page 1 of menu PERF
@@ -232,7 +229,7 @@ RTN
 LBL 07               @@@@ Action for menu key K→P
 XEQ "K→P"
 RTN
-END
+@@@@ Free labels start at: 8
 #+end_src
 
 * Image Measurements
@@ -411,9 +408,9 @@ Why?
 
  #+begin_example
      P1 *    * P3                                       P1 *    * P3
-        |    |              P1 *-----* P2                 /    / 
-        |    |      _OR_                     _OR_        /    /  
-        |    |              P3 *-----* P4               /    /   
+        |    |              P1 *-----* P2                 /    /
+        |    |      _OR_                     _OR_        /    /
+        |    |              P3 *-----* P4               /    /
      P2 *    * P4                                   P2 *    * P4
  #+end_example
 
@@ -453,7 +450,7 @@ Note the coordinates may be entered in any order.
 LBL "IMET"
 LBL 01       @@@@ Page 1 of menu IMET
 SF 25        @@@@ Fails: IMETC not set
-RCL "IMETC"      
+RCL "IMETC"
 FS?C 25      @@@@ IF-!ERR
 GTO 20
 94.4881889764
@@ -488,7 +485,7 @@ KEY 1 XEQ 08
 KEY 2 XEQ 09
 "C:"
 SF 25        @@@@ Fails: IMETP not set
-RCL "IMETP"      
+RCL "IMETP"
 FS?C 25      @@@@ IF-!ERR
 GTO 25
 10
@@ -499,7 +496,7 @@ R↓
 KEY 4 XEQ 11
 "D:"
 SF 25        @@@@ Fails: IMETC not set
-RCL "IMETD"      
+RCL "IMETD"
 FC? 25       @@@@ IF-BOOL
 GTO 14
 GTO 15
@@ -517,7 +514,7 @@ X≠0?         @@@@ IF-BOOL
 GTO 16
 "I:"
 SF 25        @@@@ Fails: IMETI not set
-RCL "IMETI"      
+RCL "IMETI"
 FC? 25       @@@@ IF-BOOL
 GTO 17
 GTO 18
@@ -553,17 +550,17 @@ GTO 19
 AVIEW
 RTN
 LBL 19
-FC? 73 @@ IF-RECT            
-GTO 22             
-GTO 21             
-LBL 22 @@ IF-THEN RECT MODE 
+FC? 73 @@ IF-RECT
+GTO 22
+GTO 21
+LBL 22 @@ IF-THEN RECT MODE
 POLAR
-COMPLEX            
+COMPLEX
 RECT
 GTO 23
 LBL 21 @@ IF-ELSE POLAR MODE
 POLAR
-COMPLEX            
+COMPLEX
 RECT
 LBL 23 @@ IF-END
 X<>Y
@@ -577,15 +574,15 @@ GTO 19
 AVIEW
 RTN
 LBL 19
-FC? 73 @@ IF-RECT            
-GTO 22             
-GTO 21             
-LBL 22 @@ IF-THEN RECT MODE 
-COMPLEX            
+FC? 73 @@ IF-RECT
+GTO 22
+GTO 21
+LBL 22 @@ IF-THEN RECT MODE
+COMPLEX
 GTO 23
 LBL 21 @@ IF-ELSE POLAR MODE
 POLAR
-COMPLEX            
+COMPLEX
 RECT
 LBL 23 @@ IF-END
 ABS
@@ -731,3 +728,14 @@ R↓
 RTN
 END
 #+end_src
+
+* EOF
+
+# End of document.
+
+# The following adds some space at the bottom of exported HTML
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />

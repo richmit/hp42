@@ -5,7 +5,7 @@
 #+DATE:        2021-03-19
 #+DESCRIPTION: Description of some free42/hp-42s/DM42 programs for constants
 #+LANGUAGE:    en
-#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil 
+#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil
 #+HTML_HEAD: <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
 #+HTML_HEAD: <style>body { min-width: 500px; max-width: 1024px; }</style>
 #+HTML_HEAD: <style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
@@ -50,7 +50,7 @@ Files related to this document may be found on github: https://github.com/richmi
 Several constants libraries are available for the 42s, and some of them are quite good.  Unfortunately nobody is going to make a constants library with just
 the constants I use. ;)
 
-This Emacs org-file contains a bit of [[Code][lisp code]] to write a 42s CONST program with the constants *you* want.  
+This Emacs org-file contains a bit of [[Code][lisp code]] to write a 42s CONST program with the constants *you* want.
 
 The [[Constants Used][constants I use]] are taken from the NIST 2018 constants DB.  As a reference I have included the [[Constants Not Used][unused constants]] from the NIST list.
 
@@ -65,7 +65,7 @@ The flow to create your custom CONST program:
 
 The "Menu" column describes the menu keys that will be assigned to the constant.  Colons are used to define a menu hierarchy.  For example "=top:mid:con1="
 means we have a top level menu "=top=" containing a menu "=mid=" containing a constant "=con1=".  Another entry like "=top:con2=" would add a constant named
-"=con2="to the "=top=" menu -- yes menus can contain a mix of constants and menus.  
+"=con2="to the "=top=" menu -- yes menus can contain a mix of constants and menus.
 
 The menu structure can be as deep as you like.  The one I use has a top level menu consisting of NIST constant category labels.  Each of these menus, except
 for "=atom=", directly contain constants -- so most constants are two key presses away.  The exception is the =atom= menu which contains deeper menus -- thus
@@ -487,27 +487,28 @@ The generator code can be customized in a few ways:
 
 You must first define the =MJR-generate-42-menu-code= by evaluating the code block in the =hp42s-meta.org= file.
 
-#+BEGIN_SRC elisp :var tbl=constants :colnames y :results output verbatum
-  (MJR-generate-42-menu-code "CONS" tbl "exit" "up" (lambda (row) (cl-destructuring-bind (sym desc desc-long val uncertainty units cat) row
-                                                                    (let ((print-desc 't)    ;; Set to NIL to not print description
-                                                                          (print-unit 't))   ;; Set to NIL to not print units
-                                                                      (let* ((dlen (length desc))
-                                                                             (ulen (length units))
-                                                                             (dsc1 (cond ((< dlen 15) (concat desc (if (and (< 0 ulen) print-unit) "[LF]")))
-                                                                                         ((>=  dlen 15) (substring desc 0 15))))
-                                                                             (dsc2 (if (> dlen 14)
-                                                                                       (if (< dlen 22)
-                                                                                           (concat (substring desc 15) (if (and (< 0 ulen) print-unit) "[LF]"))
-                                                                                           (substring desc 15 22)))))
-                                                                        (mapconcat #'identity
-                                                                                   (cl-remove nil (list (message "%s" val)
-                                                                                                        (and (< 0 dlen) print-desc      (message "\"%s\"" dsc1))
-                                                                                                        (and (< 0 dlen) print-desc dsc2 (message "├\"%s\"" dsc2))
-                                                                                                        (and (< 0 ulen) print-unit      (message "%s\"%s\"" (if (and (< 0 dlen) print-desc) "├" "") units))
-                                                                                                        "AVIEW"))
-                                                                                   "\n")))))))
+#+BEGIN_SRC elisp :var tbl=constants :colnames y :results output verbatum :wrap src hp42s
+(MJR-generate-42-menu-code "CONS" tbl "exit" "up" (lambda (row) (cl-destructuring-bind (sym desc desc-long val uncertainty units cat) row
+                                                                  (let ((print-desc 't)    ;; Set to NIL to not print description
+                                                                        (print-unit 't))   ;; Set to NIL to not print units
+                                                                    (let* ((dlen (length desc))
+                                                                           (ulen (length units))
+                                                                           (dsc1 (cond ((< dlen 15) (concat desc (if (and (< 0 ulen) print-unit) "[LF]")))
+                                                                                       ((>=  dlen 15) (substring desc 0 15))))
+                                                                           (dsc2 (if (> dlen 14)
+                                                                                     (if (< dlen 22)
+                                                                                         (concat (substring desc 15) (if (and (< 0 ulen) print-unit) "[LF]"))
+                                                                                         (substring desc 15 22)))))
+                                                                      (mapconcat #'identity
+                                                                                 (cl-remove nil (list (message "%s" val)
+                                                                                                      (and (< 0 dlen) print-desc      (message "\"%s\"" dsc1))
+                                                                                                      (and (< 0 dlen) print-desc dsc2 (message "├\"%s\"" dsc2))
+                                                                                                      (and (< 0 ulen) print-unit      (message "%s\"%s\"" (if (and (< 0 dlen) print-desc) "├" "") units))
+                                                                                                      "AVIEW"))
+                                                                                 "\n")))))))
 #+END_SRC
 
+#+RESULTS:
 #+begin_src hp42s
 LBL "CONS"
 LBL 01            @@@@ Page 1 of menu CONS
@@ -993,3 +994,14 @@ AVIEW
 RTN
 @@@@ Free labels start at: 58
 #+end_src
+
+* EOF
+
+# End of document.
+
+# The following adds some space at the bottom of exported HTML
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />

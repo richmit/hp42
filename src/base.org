@@ -5,7 +5,7 @@
 #+DATE:        2021-03-19
 #+DESCRIPTION: Description of some free42/hp-42s/DM42 programs for base-n computations
 #+LANGUAGE:    en
-#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil 
+#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil
 #+HTML_HEAD: <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
 #+HTML_HEAD: <style>body { min-width: 500px; max-width: 1024px; }</style>
 #+HTML_HEAD: <style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
@@ -77,7 +77,7 @@ the code [[Menu Code][here]].  This allows you to use these functions in your ow
 @@@@ Designed to print numbers:
 @@@@    101010b Binary      | 1234567 Decimal    | 123e+45 Float | 123/456 Rational | 123+56i Complex
 @@@@    1A8F10h Hexadecimal | 123,456 Decimal    | 12×10^3 Float | 123:456 Rational | (12,34) Complex
-@@@@    154823o Octal       | -123456 Signed Dec | 1.34567 Float | 123456° Degrees  | 
+@@@@    154823o Octal       | -123456 Signed Dec | 1.34567 Float | 123456° Degrees  |
 @@@@ Characters can be underlined -- this is used by BVIEW to visually separate nibbles
 @@@@ Characters are 3x5 pixels in size.  Underlined characters are 3x7.
 @@@@   - Stock HP-42s screen: 32 characters across.  Two full lines on the screen.
@@ -94,26 +94,26 @@ R↓
 AGRAPH
 RTN
 LBL 00       @@@@ CHAR: 0
-"•μ•"        @@@@ #b11111 #b10001 #b11111 
-RTN           
+"•μ•"        @@@@ #b11111 #b10001 #b11111
+RTN
 LBL 01       @@@@ CHAR: 1
 "£•←"        @@@@ #b10010 #b11111 #b10000
-RTN           
+RTN
 LBL 02       @@@@ CHAR: 2
 "ÜÑ∡"        @@@@ #b11101 #b10101 #b10111
-RTN           
+RTN
 LBL 03       @@@@ CHAR: 3
 "μÑ•"        @@@@ #b10001 #b10101 #b11111
-RTN           
+RTN
 LBL 04       @@@@ CHAR: 4
 "π▒•"        @@@@ #b00111 #b00100 #b11111
-RTN           
+RTN
 LBL 05       @@@@ CHAR: 5
 "∡ÑÜ"        @@@@ #b10111 #b10101 #b11101
-RTN           
+RTN
 LBL 06       @@@@ CHAR: 6
 "•ÑÜ"        @@@@ #b11111 #b10101 #b11101
-RTN           
+RTN
 LBL 07       @@@@ CHAR: 7
 "××•"        @@@@ #b00001 #b00001 #b11111
 RTN
@@ -190,26 +190,26 @@ LBL 31       @@@@ CHAR: )
 "μ↓÷"        @@@@ #b10001 #b01110 #b00000
 RTN
 LBL 40       @@@@ CHAR: 0
-"_Q_"        @@@@ #b1011111 #b1010001 #b1011111 
+"_Q_"        @@@@ #b1011111 #b1010001 #b1011111
 RTN
 LBL 41       @@@@ CHAR: 1
 "R_P"        @@@@ #b1010010 #b1011111 #b1010000
-RTN           
+RTN
 LBL 42       @@@@ CHAR: 2
 "]UW"        @@@@ #b1011101 #b1010101 #b1010111
-RTN           
+RTN
 LBL 43       @@@@ CHAR: 3
 "QU_"        @@@@ #b1010001 #b1010101 #b1011111
-RTN           
+RTN
 LBL 44       @@@@ CHAR: 4
 "GD_"        @@@@ #b1000111 #b1000100 #b1011111
-RTN           
+RTN
 LBL 45       @@@@ CHAR: 5
 "WU]"        @@@@ #b1010111 #b1010101 #b1011101
-RTN           
+RTN
 LBL 46       @@@@ CHAR: 6
 "_U]"        @@@@ #b1011111 #b1010101 #b1011101
-RTN           
+RTN
 LBL 47       @@@@ CHAR: 7
 "AA_"        @@@@ #b1000001 #b1000001 #b1011111
 RTN
@@ -395,7 +395,7 @@ X<>Y
 ROTXY
 RCL "X"
 AND
-X=0?         
+X=0?
 GTO 15
 GTO 16
 LBL 15      @@@@ IF-THEN bit is 0
@@ -452,639 +452,639 @@ END
 * Bit Manipulation Functions
 
 #+BEGIN_SRC hp42s
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Number of bits set
-  @@@@ IN:  X: an integer
-  @@@@ OUT: X: Number of 1 bits in IP(X)
-  @@@@ FAQ: Runtime complexity O(log_2(X))
-  @@@@ UPD: 2021-03-20
-  LBL "B#"
-  FUNC 11                        @@## REQ:free42>=2.5.24
-  L4STK                          @@## REQ:free42>=3.0
-  IP
-  0
-  X<>Y
-  LBL 00
-  0
-  BIT?
-  GTO 01
-  GTO 02
-  LBL 01   @@@@ 1 -> inc Counter
-  R↓
-  1
-  STO+ ST Z
-  LBL 02  
-  R↓
-  X≠0?
-  GTO 03  @@@@ Zero, so return Counter
-  R↓
-  RTN
-  LBL 03  @@@@ Not a zero yet, so wack 1 and rotate
-  1
-  NOT 
-  AND
-  1
-  ROTXY
-  GTO 00
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Number of bits set
+@@@@ IN:  X: an integer
+@@@@ OUT: X: Number of 1 bits in IP(X)
+@@@@ FAQ: Runtime complexity O(log_2(X))
+@@@@ UPD: 2021-03-20
+LBL "B#"
+FUNC 11                        @@## REQ:free42>=2.5.24
+L4STK                          @@## REQ:free42>=3.0
+IP
+0
+X<>Y
+LBL 00
+0
+BIT?
+GTO 01
+GTO 02
+LBL 01   @@@@ 1 -> inc Counter
+R↓
+1
+STO+ ST Z
+LBL 02
+R↓
+X≠0?
+GTO 03  @@@@ Zero, so return Counter
+R↓
+RTN
+LBL 03  @@@@ Not a zero yet, so wack 1 and rotate
+1
+NOT
+AND
+1
+ROTXY
+GTO 00
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Create integer with Y set bits located at bit X
-  @@@@ IN:  Y: An integer
-  @@@@ IN:  X: An integer (LSB=0)
-  @@@@ OUT: X: Integer with IP(X) least significant bits set
-  @@@@ FAQ: Returns int with all 0 bits when X<=0
-  @@@@ FAQ: Returns int with all 1 bits when X>=WSIZE?
-  @@@@ UPD: 2021-03-20
-  LBL "MSKn"
-  FUNC 11                        @@## REQ:free42>=2.5.24
-  L4STK                          @@## REQ:free42>=3.0
-  IP
-  X<>Y
-  IP
-  @@@@ All zeros case
-  X>0?
-  GTO 01
-  R↓                             @@## REQ:free42<2.5.24
-  R↓                             @@## REQ:free42<2.5.24
-  0
-  RTN
-  LBL 01
-  @@@@ All ones case
-  WSIZE?
-  X>Y?
-  GTO 02
-  R↓                             @@## REQ:free42<2.5.24
-  R↓                             @@## REQ:free42<2.5.24
-  R↓                             @@## REQ:free42<2.5.24
-  0
-  NOT
-  RTN
-  LBL 02
-  @@@@ Some ones case
-  R↓
-  2
-  X<>Y
-  Y↑X
-  1
-  -
-  X<>Y
-  +/-
-  ROTXY
-  RTN
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Create integer with Y set bits located at bit X
+@@@@ IN:  Y: An integer
+@@@@ IN:  X: An integer (LSB=0)
+@@@@ OUT: X: Integer with IP(X) least significant bits set
+@@@@ FAQ: Returns int with all 0 bits when X<=0
+@@@@ FAQ: Returns int with all 1 bits when X>=WSIZE?
+@@@@ UPD: 2021-03-20
+LBL "MSKn"
+FUNC 11                        @@## REQ:free42>=2.5.24
+L4STK                          @@## REQ:free42>=3.0
+IP
+X<>Y
+IP
+@@@@ All zeros case
+X>0?
+GTO 01
+R↓                             @@## REQ:free42<2.5.24
+R↓                             @@## REQ:free42<2.5.24
+0
+RTN
+LBL 01
+@@@@ All ones case
+WSIZE?
+X>Y?
+GTO 02
+R↓                             @@## REQ:free42<2.5.24
+R↓                             @@## REQ:free42<2.5.24
+R↓                             @@## REQ:free42<2.5.24
+0
+NOT
+RTN
+LBL 02
+@@@@ Some ones case
+R↓
+2
+X<>Y
+Y↑X
+1
+-
+X<>Y
++/-
+ROTXY
+RTN
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Create integer with right most X bits set
-  @@@@ IN:  X: An integer
-  @@@@ OUT: X: Integer with IP(X) least significant bits set
-  @@@@ FAQ: Returns int with all 0 bits when X<=0
-  @@@@ FAQ: Returns int with all 1 bits when X>=WSIZE?
-  @@@@ UPD: 2021-03-20
-  LBL "MSKR"
-  FUNC 11                        @@## REQ:free42>=2.5.24
-  L4STK                          @@## REQ:free42>=3.0
-  IP
-  @@@@ All zeros case
-  X>0?
-  GTO 01
-  R↓                             @@## REQ:free42<2.5.24
-  0
-  RTN
-  LBL 01
-  @@@@ All ones case
-  WSIZE?
-  X>Y?
-  GTO 02
-  R↓                             @@## REQ:free42<2.5.24
-  R↓                             @@## REQ:free42<2.5.24
-  0
-  NOT
-  RTN
-  LBL 02
-  @@@@ Some ones case
-  R↓
-  2
-  X<>Y
-  Y↑X
-  1
-  -
-  RTN
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Create integer with right most X bits set
+@@@@ IN:  X: An integer
+@@@@ OUT: X: Integer with IP(X) least significant bits set
+@@@@ FAQ: Returns int with all 0 bits when X<=0
+@@@@ FAQ: Returns int with all 1 bits when X>=WSIZE?
+@@@@ UPD: 2021-03-20
+LBL "MSKR"
+FUNC 11                        @@## REQ:free42>=2.5.24
+L4STK                          @@## REQ:free42>=3.0
+IP
+@@@@ All zeros case
+X>0?
+GTO 01
+R↓                             @@## REQ:free42<2.5.24
+0
+RTN
+LBL 01
+@@@@ All ones case
+WSIZE?
+X>Y?
+GTO 02
+R↓                             @@## REQ:free42<2.5.24
+R↓                             @@## REQ:free42<2.5.24
+0
+NOT
+RTN
+LBL 02
+@@@@ Some ones case
+R↓
+2
+X<>Y
+Y↑X
+1
+-
+RTN
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Create integer with left most X bits set
-  @@@@ IN:  X: An integer
-  @@@@ OUT: X: Integer with IP(X) most significant bits set
-  @@@@ FAQ: Returns int with all 0 bits when X<=0
-  @@@@ FAQ: Returns int with all 1 bits when X>=WSIZE?
-  @@@@ UPD: 2021-03-20
-  LBL "MSKL"
-  FUNC 11                        @@## REQ:free42>=2.5.24
-  L4STK                          @@## REQ:free42>=3.0
-  IP
-  @@@@ All zeros case
-  X>0?
-  GTO 01
-  R↓                             @@## REQ:free42<2.5.24
-  0
-  RTN
-  LBL 01
-  @@@@ All ones case
-  WSIZE?
-  X>Y?
-  GTO 02
-  R↓                             @@## REQ:free42<2.5.24
-  R↓                             @@## REQ:free42<2.5.24
-  0
-  NOT
-  RTN
-  LBL 02
-  @@@@ Some ones case
-  R↓
-  ENTER
-  2
-  X<>Y
-  Y↑X
-  1
-  -
-  X<>Y
-  ROTXY
-  RTN
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Create integer with left most X bits set
+@@@@ IN:  X: An integer
+@@@@ OUT: X: Integer with IP(X) most significant bits set
+@@@@ FAQ: Returns int with all 0 bits when X<=0
+@@@@ FAQ: Returns int with all 1 bits when X>=WSIZE?
+@@@@ UPD: 2021-03-20
+LBL "MSKL"
+FUNC 11                        @@## REQ:free42>=2.5.24
+L4STK                          @@## REQ:free42>=3.0
+IP
+@@@@ All zeros case
+X>0?
+GTO 01
+R↓                             @@## REQ:free42<2.5.24
+0
+RTN
+LBL 01
+@@@@ All ones case
+WSIZE?
+X>Y?
+GTO 02
+R↓                             @@## REQ:free42<2.5.24
+R↓                             @@## REQ:free42<2.5.24
+0
+NOT
+RTN
+LBL 02
+@@@@ Some ones case
+R↓
+ENTER
+2
+X<>Y
+Y↑X
+1
+-
+X<>Y
+ROTXY
+RTN
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Set the Xth bit of Y
-  @@@@ IN:  Y: An integer
-  @@@@      X: An integer (0=LSB)
-  @@@@ OUT: X: Integer with IP(X)th bit of Y set
-  @@@@ FAQ: Y is returned unchanged  when X is out of range
-  @@@@ BUG: When X out of range, the type Y is not error checked
-  @@@@ UPD: 2021-03-20
-  LBL "SETB"
-  FUNC 21                       @@## REQ:free42>=2.5.24
-  L4STK                         @@## REQ:free42>=3.0
-  IP
-  @@@@ Do nothing if X negative
-  X≥0?
-  GTO 01
-  R↓
-  RTN
-  LBL 01 @@@@ X is positive
-  @@@@ Do nothing if X>= WSIZE
-  WSIZE?
-  X>Y?
-  GTO 02
-  R↓
-  R↓
-  RTN
-  LBL 02 @@@@ X is less than WSIZE
-  R↓
-  1
-  X<>Y
-  +/-
-  ROTXY
-  OR
-  RTN
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Set the Xth bit of Y
+@@@@ IN:  Y: An integer
+@@@@      X: An integer (0=LSB)
+@@@@ OUT: X: Integer with IP(X)th bit of Y set
+@@@@ FAQ: Y is returned unchanged  when X is out of range
+@@@@ BUG: When X out of range, the type Y is not error checked
+@@@@ UPD: 2021-03-20
+LBL "SETB"
+FUNC 21                       @@## REQ:free42>=2.5.24
+L4STK                         @@## REQ:free42>=3.0
+IP
+@@@@ Do nothing if X negative
+X≥0?
+GTO 01
+R↓
+RTN
+LBL 01 @@@@ X is positive
+@@@@ Do nothing if X>= WSIZE
+WSIZE?
+X>Y?
+GTO 02
+R↓
+R↓
+RTN
+LBL 02 @@@@ X is less than WSIZE
+R↓
+1
+X<>Y
++/-
+ROTXY
+OR
+RTN
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Clear the Xth bit in Y
-  @@@@ IN:  Y: An integer
-  @@@@      X: An integer (0=LSB)
-  @@@@ OUT: X: Integer with IP(X)th bit of Y set
-  @@@@ FAQ: Y is returned unchanged  when X is out of range
-  @@@@ BUG: When X out of range, the type Y is not error checked
-  @@@@ UPD: 2021-03-20
-  LBL "CLRB"
-  FUNC 21                       @@## REQ:free42>=2.5.24
-  L4STK                         @@## REQ:free42>=3.0
-  IP
-  @@@@ Do nothing if X negative
-  X≥0?
-  GTO 01
-  R↓
-  RTN
-  LBL 01 @@@@ X is positive
-  @@@@ Do nothing if X>= WSIZE
-  WSIZE?
-  X>Y?
-  GTO 02
-  R↓
-  R↓
-  RTN
-  LBL 02 @@@@ X is less than WSIZE
-  R↓
-  1
-  X<>Y
-  +/-
-  ROTXY
-  NOT
-  AND
-  RTN
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Clear the Xth bit in Y
+@@@@ IN:  Y: An integer
+@@@@      X: An integer (0=LSB)
+@@@@ OUT: X: Integer with IP(X)th bit of Y set
+@@@@ FAQ: Y is returned unchanged  when X is out of range
+@@@@ BUG: When X out of range, the type Y is not error checked
+@@@@ UPD: 2021-03-20
+LBL "CLRB"
+FUNC 21                       @@## REQ:free42>=2.5.24
+L4STK                         @@## REQ:free42>=3.0
+IP
+@@@@ Do nothing if X negative
+X≥0?
+GTO 01
+R↓
+RTN
+LBL 01 @@@@ X is positive
+@@@@ Do nothing if X>= WSIZE
+WSIZE?
+X>Y?
+GTO 02
+R↓
+R↓
+RTN
+LBL 02 @@@@ X is less than WSIZE
+R↓
+1
+X<>Y
++/-
+ROTXY
+NOT
+AND
+RTN
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Return the Xth bit of Y
-  @@@@ IN:  Y: An integer
-  @@@@      X: An integer (0=LSB)
-  @@@@ OUT: The IP(X)th bit of Y
-  @@@@ FAQ: Returns 0 when X is out of range
-  @@@@ BUG: When X out of range, type Y is not error checked
-  @@@@ UPD: 2021-03-20
-  LBL "GETB"
-  FUNC 21                       @@## REQ:free42>=2.5.24
-  L4STK                         @@## REQ:free42>=3.0
-  @@@@ Return 0 if X negative
-  X≥0?
-  GTO 01
-  R↓                             @@## REQ:free42<2.5.24
-  R↓                             @@## REQ:free42<2.5.24
-  0
-  RTN
-  LBL 01 @@@@ X is positive
-  @@@@ Return 0 if X>= WSIZE
-  WSIZE?
-  X>Y?
-  GTO 02
-  R↓                             @@## REQ:free42<2.5.24
-  R↓                             @@## REQ:free42<2.5.24
-  0
-  RTN
-  LBL 02 @@@@ X is less than WSIZE
-  R↓
-  BIT?   @@@@ IF-BEGIN
-  GTO 01
-  GTO 02
-  LBL 01 @@@@ IF-THEN
-  R↓                             @@## REQ:free42<2.5.24
-  R↓                             @@## REQ:free42<2.5.24
-  1
-  GTO 03
-  LBL 02 @@@@ IF-ELSE
-  R↓                             @@## REQ:free42<2.5.24
-  R↓                             @@## REQ:free42<2.5.24
-  0
-  LBL 03 @@@@ IF-END
-  RTN          
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Return the Xth bit of Y
+@@@@ IN:  Y: An integer
+@@@@      X: An integer (0=LSB)
+@@@@ OUT: The IP(X)th bit of Y
+@@@@ FAQ: Returns 0 when X is out of range
+@@@@ BUG: When X out of range, type Y is not error checked
+@@@@ UPD: 2021-03-20
+LBL "GETB"
+FUNC 21                       @@## REQ:free42>=2.5.24
+L4STK                         @@## REQ:free42>=3.0
+@@@@ Return 0 if X negative
+X≥0?
+GTO 01
+R↓                             @@## REQ:free42<2.5.24
+R↓                             @@## REQ:free42<2.5.24
+0
+RTN
+LBL 01 @@@@ X is positive
+@@@@ Return 0 if X>= WSIZE
+WSIZE?
+X>Y?
+GTO 02
+R↓                             @@## REQ:free42<2.5.24
+R↓                             @@## REQ:free42<2.5.24
+0
+RTN
+LBL 02 @@@@ X is less than WSIZE
+R↓
+BIT?   @@@@ IF-BEGIN
+GTO 01
+GTO 02
+LBL 01 @@@@ IF-THEN
+R↓                             @@## REQ:free42<2.5.24
+R↓                             @@## REQ:free42<2.5.24
+1
+GTO 03
+LBL 02 @@@@ IF-ELSE
+R↓                             @@## REQ:free42<2.5.24
+R↓                             @@## REQ:free42<2.5.24
+0
+LBL 03 @@@@ IF-END
+RTN
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Shift Left
-  @@@@ IN:  X: An integer
-  @@@@ OUT: X: Integer shifted left 1 bit
-  @@@@ UPD: 2021-03-20
-  LBL "SL"
-  FUNC 11                       @@## REQ:free42>=2.5.24
-  L4STK                         @@## REQ:free42>=3.0
-  -1
-  ROTXY
-  1
-  NOT
-  AND
-  RTN
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Shift Left
+@@@@ IN:  X: An integer
+@@@@ OUT: X: Integer shifted left 1 bit
+@@@@ UPD: 2021-03-20
+LBL "SL"
+FUNC 11                       @@## REQ:free42>=2.5.24
+L4STK                         @@## REQ:free42>=3.0
+-1
+ROTXY
+1
+NOT
+AND
+RTN
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Shift Right
-  @@@@ IN:  X: An integer
-  @@@@ OUT: X: Integer shifted right 1 bit
-  @@@@ UPD: 2021-03-20
-  LBL "SR"
-  FUNC 11                       @@## REQ:free42>=2.5.24
-  L4STK                         @@## REQ:free42>=3.0
-  1
-  NOT
-  AND
-  1
-  ROTXY
-  RTN
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Shift Right
+@@@@ IN:  X: An integer
+@@@@ OUT: X: Integer shifted right 1 bit
+@@@@ UPD: 2021-03-20
+LBL "SR"
+FUNC 11                       @@## REQ:free42>=2.5.24
+L4STK                         @@## REQ:free42>=3.0
+1
+NOT
+AND
+1
+ROTXY
+RTN
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Rotate Left
-  @@@@ IN:  X: An integer
-  @@@@ OUT: X: Integer rotated left 1 bit
-  LBL "RL"
-  FUNC 11                       @@## REQ:free42>=2.5.24
-  L4STK                         @@## REQ:free42>=3.0
-  -1
-  ROTXY
-  RTN
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Rotate Left
+@@@@ IN:  X: An integer
+@@@@ OUT: X: Integer rotated left 1 bit
+LBL "RL"
+FUNC 11                       @@## REQ:free42>=2.5.24
+L4STK                         @@## REQ:free42>=3.0
+-1
+ROTXY
+RTN
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Rotate Right
-  @@@@ IN:  X: An integer
-  @@@@ OUT: X: Integer rotated right 1 bit
-  LBL "RR"
-  FUNC 11                       @@## REQ:free42>=2.5.24
-  L4STK                         @@## REQ:free42>=3.0
-  1
-  ROTXY
-  RTN
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Rotate Right
+@@@@ IN:  X: An integer
+@@@@ OUT: X: Integer rotated right 1 bit
+LBL "RR"
+FUNC 11                       @@## REQ:free42>=2.5.24
+L4STK                         @@## REQ:free42>=3.0
+1
+ROTXY
+RTN
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Shift X Left Y Bits
-  @@@@ IN:  Y: An integer
-  @@@@ IN:  X: An integer
-  @@@@ OUT: X: X shifted left IP(Y) bit(s)
-  @@@@ FAQ: Y is returned unchanged when X is zero or negative
-  @@@@ FAQ: 0 is returned when X>=WSIZE
-  @@@@ BUG: The type Y is not error checked when X<=0 or X>=WSIZE
-  @@@@ UPD: 2021-03-20
-  LBL "SLn"
-  FUNC 21                       @@## REQ:free42>=2.5.24
-  L4STK                         @@## REQ:free42>=3.0
-  IP
-  X>0? 
-  GTO 01
-  R↓
-  RTN
-  LBL 01  @@@@ X is positive
-  @@@@ Return 0 if X>= WSIZE
-  WSIZE?
-  X>Y?
-  GTO 02
-  R↓                             @@## REQ:free42<2.5.24
-  R↓                             @@## REQ:free42<2.5.24
-  R↓                             @@## REQ:free42<2.5.24
-  0
-  RTN
-  LBL 02 @@@@ X is less than WSIZE
-  R↓                             @@## REQ:free42<2.5.24
-  X<>Y
-  RCL ST Y
-  @@@@ Rotate left X bits
-  +/-
-  ROTXY
-  @@@@ Zap the right most X bits
-  X<>Y
-  2
-  X<>Y  @@@@ Use X<>Y twice instead of "RCL ST Z" to minimize stack lift
-  Y↑X
-  1
-  -
-  NOT
-  AND
-  RTN
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Shift X Left Y Bits
+@@@@ IN:  Y: An integer
+@@@@ IN:  X: An integer
+@@@@ OUT: X: X shifted left IP(Y) bit(s)
+@@@@ FAQ: Y is returned unchanged when X is zero or negative
+@@@@ FAQ: 0 is returned when X>=WSIZE
+@@@@ BUG: The type Y is not error checked when X<=0 or X>=WSIZE
+@@@@ UPD: 2021-03-20
+LBL "SLn"
+FUNC 21                       @@## REQ:free42>=2.5.24
+L4STK                         @@## REQ:free42>=3.0
+IP
+X>0?
+GTO 01
+R↓
+RTN
+LBL 01  @@@@ X is positive
+@@@@ Return 0 if X>= WSIZE
+WSIZE?
+X>Y?
+GTO 02
+R↓                             @@## REQ:free42<2.5.24
+R↓                             @@## REQ:free42<2.5.24
+R↓                             @@## REQ:free42<2.5.24
+0
+RTN
+LBL 02 @@@@ X is less than WSIZE
+R↓                             @@## REQ:free42<2.5.24
+X<>Y
+RCL ST Y
+@@@@ Rotate left X bits
++/-
+ROTXY
+@@@@ Zap the right most X bits
+X<>Y
+2
+X<>Y  @@@@ Use X<>Y twice instead of "RCL ST Z" to minimize stack lift
+Y↑X
+1
+-
+NOT
+AND
+RTN
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Shift X Right Y Bits
-  @@@@ IN:  Y: An integer
-  @@@@ IN:  X: An integer
-  @@@@ OUT: X: X shifted right IP(Y) bit(s)
-  @@@@ FAQ: Y is returned unchanged when X is zero or negative
-  @@@@ FAQ: 0 is returned when X>=WSIZE
-  @@@@ BUG: The type Y is not error checked when X<=0 or X>=WSIZE
-  @@@@ UPD: 2021-03-20
-  LBL "SRn"
-  FUNC 21                       @@## REQ:free42>=2.5.24
-  L4STK                         @@## REQ:free42>=3.0
-  IP
-  X>0? 
-  GTO 01
-  R↓
-  RTN
-  LBL 01  @@@@ X is positive
-  @@@@ Return 0 if X>= WSIZE
-  WSIZE?
-  X>Y?
-  GTO 02
-  R↓                             @@## REQ:free42<2.5.24
-  R↓                             @@## REQ:free42<2.5.24
-  R↓                             @@## REQ:free42<2.5.24
-  0
-  RTN
-  LBL 02 @@@@ X is less than WSIZE
-  R↓                             @@## REQ:free42<2.5.24
-  X<>Y
-  RCL ST Y
-  @@@@ Zap the right most X bits
-  2
-  X<>Y  @@@@ Use X<>Y twice instead of "RCL ST Z" to minimize stack lift
-  Y↑X
-  1
-  -
-  NOT
-  AND
-  @@@@ Rotate right X bits
-  X<>Y
-  +/-
-  ROTXY
-  RTN
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Shift X Right Y Bits
+@@@@ IN:  Y: An integer
+@@@@ IN:  X: An integer
+@@@@ OUT: X: X shifted right IP(Y) bit(s)
+@@@@ FAQ: Y is returned unchanged when X is zero or negative
+@@@@ FAQ: 0 is returned when X>=WSIZE
+@@@@ BUG: The type Y is not error checked when X<=0 or X>=WSIZE
+@@@@ UPD: 2021-03-20
+LBL "SRn"
+FUNC 21                       @@## REQ:free42>=2.5.24
+L4STK                         @@## REQ:free42>=3.0
+IP
+X>0?
+GTO 01
+R↓
+RTN
+LBL 01  @@@@ X is positive
+@@@@ Return 0 if X>= WSIZE
+WSIZE?
+X>Y?
+GTO 02
+R↓                             @@## REQ:free42<2.5.24
+R↓                             @@## REQ:free42<2.5.24
+R↓                             @@## REQ:free42<2.5.24
+0
+RTN
+LBL 02 @@@@ X is less than WSIZE
+R↓                             @@## REQ:free42<2.5.24
+X<>Y
+RCL ST Y
+@@@@ Zap the right most X bits
+2
+X<>Y  @@@@ Use X<>Y twice instead of "RCL ST Z" to minimize stack lift
+Y↑X
+1
+-
+NOT
+AND
+@@@@ Rotate right X bits
+X<>Y
++/-
+ROTXY
+RTN
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Rotate X Left by Y bits
-  @@@@ IN:  Y: An integer
-  @@@@ IN:  X: An integer
-  @@@@ OUT: X: X rotated left IP(Y) bit(s)
-  @@@@ FAQ: Y is returned unchanged when X is zero or negative
-  @@@@ BUG: The type Y is not error checked when X<=0
-  @@@@ UPD: 2021-03-20
-  LBL "RLn"
-  FUNC 21                       @@## REQ:free42>=2.5.24
-  L4STK                         @@## REQ:free42>=3.0
-  IP
-  X>0? 
-  GTO 01
-  R↓
-  RTN
-  LBL 01  @@@@ X is positive
-  +/-
-  ROTXY
-  RTN
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Rotate X Left by Y bits
+@@@@ IN:  Y: An integer
+@@@@ IN:  X: An integer
+@@@@ OUT: X: X rotated left IP(Y) bit(s)
+@@@@ FAQ: Y is returned unchanged when X is zero or negative
+@@@@ BUG: The type Y is not error checked when X<=0
+@@@@ UPD: 2021-03-20
+LBL "RLn"
+FUNC 21                       @@## REQ:free42>=2.5.24
+L4STK                         @@## REQ:free42>=3.0
+IP
+X>0?
+GTO 01
+R↓
+RTN
+LBL 01  @@@@ X is positive
++/-
+ROTXY
+RTN
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Rotate X Right by Y bits
-  @@@@ IN:  Y: An integer
-  @@@@ IN:  X: An integer
-  @@@@ OUT: X: X rotated right ABS(IP(Y)) bit(s)
-  @@@@ FAQ: Y is returned unchanged when X is zero or negative
-  @@@@ BUG: The type Y is not error checked when X<=0
-  @@@@ UPD: 2021-03-20
-  LBL "RRn"
-  FUNC 21                       @@## REQ:free42>=2.5.24
-  L4STK                         @@## REQ:free42>=3.0
-  IP
-  X>0? 
-  GTO 01
-  R↓
-  RTN
-  LBL 01  @@@@ X is positive
-  ROTXY
-  RTN
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Rotate X Right by Y bits
+@@@@ IN:  Y: An integer
+@@@@ IN:  X: An integer
+@@@@ OUT: X: X rotated right ABS(IP(Y)) bit(s)
+@@@@ FAQ: Y is returned unchanged when X is zero or negative
+@@@@ BUG: The type Y is not error checked when X<=0
+@@@@ UPD: 2021-03-20
+LBL "RRn"
+FUNC 21                       @@## REQ:free42>=2.5.24
+L4STK                         @@## REQ:free42>=3.0
+IP
+X>0?
+GTO 01
+R↓
+RTN
+LBL 01  @@@@ X is positive
+ROTXY
+RTN
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Shift X by Y Bits (left when Y negative)
-  @@@@ IN:  Y: An integer
-  @@@@ IN:  X: An integer
-  @@@@ OUT: X: Integer shifted by IP(Y) bit(s)
-  @@@@ FAQ: Uses SLn & SLr.
-  @@@@ UPD: 2021-03-20
-  LBL "SHFXY"
-  FUNC 21                       @@## REQ:free42>=2.5.24
-  L4STK                         @@## REQ:free42>=3.0
-  IP
-  X<0?
-  GTO 01
-  GTO 02
-  LBL 01 @@@@ X negative -- shift left
-  +/-
-  XEQ "SLn"
-  RTN
-  LBL 02 @@@@ X non-negative -- shift right
-  XEQ "SRn"
-  RTN
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Shift X by Y Bits (left when Y negative)
+@@@@ IN:  Y: An integer
+@@@@ IN:  X: An integer
+@@@@ OUT: X: Integer shifted by IP(Y) bit(s)
+@@@@ FAQ: Uses SLn & SLr.
+@@@@ UPD: 2021-03-20
+LBL "SHFXY"
+FUNC 21                       @@## REQ:free42>=2.5.24
+L4STK                         @@## REQ:free42>=3.0
+IP
+X<0?
+GTO 01
+GTO 02
+LBL 01 @@@@ X negative -- shift left
++/-
+XEQ "SLn"
+RTN
+LBL 02 @@@@ X non-negative -- shift right
+XEQ "SRn"
+RTN
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Right Justify Bits
-  @@@@ IN:  X: an integer
-  @@@@ OUT: Y: Number of shifts required to justify
-  @@@@ OUT: X: Justified number
-  @@@@ FAQ: Like the HP-16c's LJ funciton, but justifies in the other direction
-  @@@@ UPD: 2021-03-20
-  LBL "RJ"
-  FUNC 12                        @@## REQ:free42>=2.5.24
-  L4STK                          @@## REQ:free42>=3.0
-  IP
-  0        
-  X<>Y
-  LBL 00
-  0
-  BIT?
-  GTO 01
-  GTO 02
-  LBL 01   @@@@ LSB is one -- DONE!
-  R↓
-  X<>Y
-  RTN
-  LBL 02   @@@@ LSB is zero
-  R↓
-  1
-  STO+ ST Z
-  ROTXY
-  GTO 00
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Right Justify Bits
+@@@@ IN:  X: an integer
+@@@@ OUT: Y: Number of shifts required to justify
+@@@@ OUT: X: Justified number
+@@@@ FAQ: Like the HP-16c's LJ funciton, but justifies in the other direction
+@@@@ UPD: 2021-03-20
+LBL "RJ"
+FUNC 12                        @@## REQ:free42>=2.5.24
+L4STK                          @@## REQ:free42>=3.0
+IP
+0
+X<>Y
+LBL 00
+0
+BIT?
+GTO 01
+GTO 02
+LBL 01   @@@@ LSB is one -- DONE!
+R↓
+X<>Y
+RTN
+LBL 02   @@@@ LSB is zero
+R↓
+1
+STO+ ST Z
+ROTXY
+GTO 00
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Left Justify Bits
-  @@@@ IN:  X: an integer
-  @@@@ OUT: Y: Number of shifts required to justify
-  @@@@ OUT: X: Justified number
-  @@@@ FAQ: Just like the HP-16c's LJ funciton
-  @@@@ UPD: 2021-03-20
-  LBL "LJ"
-  FUNC 12                        @@## REQ:free42>=2.5.24
-  L4STK                          @@## REQ:free42>=3.0
-  IP
-  0        
-  X<>Y
-  LBL 00
-  WSIZE?
-  1
-  -
-  BIT?
-  GTO 01
-  GTO 02
-  LBL 01   @@@@ MSB is one -- DONE!
-  R↓
-  X<>Y
-  RTN
-  LBL 02   @@@@ MSB is zero
-  R↓
-  1
-  STO+ ST Z
-  +/-
-  ROTXY
-  GTO 00
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Left Justify Bits
+@@@@ IN:  X: an integer
+@@@@ OUT: Y: Number of shifts required to justify
+@@@@ OUT: X: Justified number
+@@@@ FAQ: Just like the HP-16c's LJ funciton
+@@@@ UPD: 2021-03-20
+LBL "LJ"
+FUNC 12                        @@## REQ:free42>=2.5.24
+L4STK                          @@## REQ:free42>=3.0
+IP
+0
+X<>Y
+LBL 00
+WSIZE?
+1
+-
+BIT?
+GTO 01
+GTO 02
+LBL 01   @@@@ MSB is one -- DONE!
+R↓
+X<>Y
+RTN
+LBL 02   @@@@ MSB is zero
+R↓
+1
+STO+ ST Z
++/-
+ROTXY
+GTO 00
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Integer square root
-  @@@@ IN:  X: a non-negative real number
-  @@@@ OUT: X: IP(SQRT(ABS(X)))
-  @@@@ UPD: 2021-03-16
-  LBL "ISQRT"
-  FUNC 11                       @@## REQ:free42>=2.5.24
-  L4STK                         @@## REQ:free42>=3.0
-  ABS
-  SQRT
-  IP
-  RTN
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Integer square root
+@@@@ IN:  X: a non-negative real number
+@@@@ OUT: X: IP(SQRT(ABS(X)))
+@@@@ UPD: 2021-03-16
+LBL "ISQRT"
+FUNC 11                       @@## REQ:free42>=2.5.24
+L4STK                         @@## REQ:free42>=3.0
+ABS
+SQRT
+IP
+RTN
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Integer base 2 log
-  @@@@ IN:  X: a positive real number
-  @@@@ OUT: X: IP(log_2(ABS(X)))
-  @@@@ UPD: 2021-03-16
-  LBL "ILN2"
-  FUNC 11                       @@## REQ:free42>=2.5.24
-  L4STK                         @@## REQ:free42>=3.0
-  ABS
-  LN
-  2
-  LN
-  ÷
-  IP
-  RTN
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Integer base 2 log
+@@@@ IN:  X: a positive real number
+@@@@ OUT: X: IP(log_2(ABS(X)))
+@@@@ UPD: 2021-03-16
+LBL "ILN2"
+FUNC 11                       @@## REQ:free42>=2.5.24
+L4STK                         @@## REQ:free42>=3.0
+ABS
+LN
+2
+LN
+÷
+IP
+RTN
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Position of the Most Significant Set Bit
-  @@@@ IN:  X: An integer
-  @@@@ OUT: X: Position of MSSB in IP(X) or -1 if IP(X) was 0
-  @@@@ FAQ: 
-  @@@@ USE: LJ
-  @@@@ UPD: 2021-03-16
-  @@@@ FAQ: Runtime Complexity O(WSIZE-log_2(X))
-  @@@@ FAQ: Closely related to LJ program
-  LBL "MSSB"
-  FUNC 11                       @@## REQ:free42>=2.5.24
-  L4STK                         @@## REQ:free42>=3.0
-  IP
-  X≠0?
-  GTO 01
-  R↓                             @@## REQ:free42<2.5.24  
-  -1
-  RTN
-  LBL 01 @@ X not zero
-  XEQ "LJ"
-  1
-  +
-  WSIZE?
-  X<>Y
-  -
-  RTN
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Position of the Most Significant Set Bit
+@@@@ IN:  X: An integer
+@@@@ OUT: X: Position of MSSB in IP(X) or -1 if IP(X) was 0
+@@@@ FAQ:
+@@@@ USE: LJ
+@@@@ UPD: 2021-03-16
+@@@@ FAQ: Runtime Complexity O(WSIZE-log_2(X))
+@@@@ FAQ: Closely related to LJ program
+LBL "MSSB"
+FUNC 11                       @@## REQ:free42>=2.5.24
+L4STK                         @@## REQ:free42>=3.0
+IP
+X≠0?
+GTO 01
+R↓                             @@## REQ:free42<2.5.24
+-1
+RTN
+LBL 01 @@ X not zero
+XEQ "LJ"
+1
++
+WSIZE?
+X<>Y
+-
+RTN
+END
 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  @@@@ Position of the Most Significant Set Bit
-  @@@@ IN:  X: An integer
-  @@@@ OUT: X: Position of LSSB in IP(X) or -1 if IP(X) was 0
-  @@@@ UPD: 2021-03-16
-  @@@@ FAQ: Runtime Complexity O(LSSB(X)) & LSSB<WSIZE
-  @@@@ FAQ: Closely related to RJ program
-  LBL "LSSB"
-  FUNC 11                       @@## REQ:free42>=2.5.24
-  L4STK                         @@## REQ:free42>=3.0
-  IP
-  X≠0?
-  GTO 01
-  R↓                             @@## REQ:free42<2.5.24  
-  -1
-  RTN
-  LBL 01 @@ X not zero
-  XEQ "RJ"
-  RTN
-  END
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Position of the Most Significant Set Bit
+@@@@ IN:  X: An integer
+@@@@ OUT: X: Position of LSSB in IP(X) or -1 if IP(X) was 0
+@@@@ UPD: 2021-03-16
+@@@@ FAQ: Runtime Complexity O(LSSB(X)) & LSSB<WSIZE
+@@@@ FAQ: Closely related to RJ program
+LBL "LSSB"
+FUNC 11                       @@## REQ:free42>=2.5.24
+L4STK                         @@## REQ:free42>=3.0
+IP
+X≠0?
+GTO 01
+R↓                             @@## REQ:free42<2.5.24
+-1
+RTN
+LBL 01 @@ X not zero
+XEQ "RJ"
+RTN
+END
 #+END_SRC
 
 
@@ -1161,10 +1161,11 @@ END
 
 The menu program is generated via the following bit of elisp.  You must first define the =MJR-generate-42-menu-code= and =MJR-custom-x-gen= by evaluating the code blocks in the =hp42s-meta.org= file.
 
-#+BEGIN_SRC elisp :var tbl=basem :colnames y :results output verbatum
-    (MJR-generate-42-menu-code "BASE" tbl "stay" "up" #'MJR-custom-x-gen)
+#+BEGIN_SRC elisp :var tbl=basem :colnames y :results output verbatum :wrap src hp42s
+(MJR-generate-42-menu-code "BASE" tbl "stay" "up" #'MJR-custom-x-gen)
 #+END_SRC
 
+#+RESULTS:
 #+begin_src hp42s
 LBL "BASE"
 LBL 01            @@@@ Page 1 of menu BASE
@@ -1465,4 +1466,13 @@ RTN
 @@@@ Free labels start at: 53
 #+end_src
 
+* EOF
 
+# End of document.
+
+# The following adds some space at the bottom of exported HTML
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />

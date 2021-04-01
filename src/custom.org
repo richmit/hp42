@@ -5,7 +5,7 @@
 #+DATE:        2021-03-19
 #+DESCRIPTION: Making Custom Menus for the free42/hp-42s/DM42
 #+LANGUAGE:    en
-#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil 
+#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil
 #+HTML_HEAD: <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
 #+HTML_HEAD: <style>body { min-width: 500px; max-width: 1024px; }</style>
 #+HTML_HEAD: <style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
@@ -72,12 +72,12 @@ The second column is the function/program name/label to call.  If this is empty,
 
 The other columns of the table are not used.
 
-* Custom Menu
+* Custom Menus
 
 ** Menu Contents
 
 #+ATTR_HTML: :rules groups :frame box :align center
-#+NAME: custom
+#+NAME: cust
 | Menu            | Function/Program |                                          |
 |-----------------+------------------+------------------------------------------|
 | SFUN:HYP:SINH   |                  |                                          |
@@ -140,10 +140,11 @@ The other columns of the table are not used.
 
 ** Menu Code
 
-#+BEGIN_SRC elisp :var tbl=custom :colnames y :results output verbatum
-    (MJR-generate-42-menu-code "CUST" tbl "stay" "up" #'MJR-custom-x-gen)
+#+BEGIN_SRC elisp :var tbl=cust :colnames y :results output verbatum :wrap src hp42s
+(MJR-generate-42-menu-code "CUST" tbl "stay" "up" #'MJR-custom-x-gen)
 #+END_SRC
 
+#+RESULTS:
 #+begin_src hp42s
 LBL "CUST"
 LBL 01            @@@@ Page 1 of menu CUST
@@ -492,3 +493,84 @@ XEQ "MEAS"
 RTN
 @@@@ Free labels start at: 60
 #+end_src
+
+
+* Create system =CUSTOM= Menu
+<<MKCM>>
+
+Sometimes our carefully built in =CUSTOM= menu is lost -- an errant program or system memory clear.  What to do?  How about a program that will recreate your
+=CUSTOM= menu when you need it?  In the table below we have the definition of our custom menu, and a bit of lisp that will write a 42s program to =ASSIGN=
+each key.
+
+#+ATTR_HTML: :rules groups :frame box :align center
+#+NAME: custom
+| KEY# | ASSIGNment |
+|------+------------|
+|   01 | CUST       |
+|   02 |            |
+|   03 |            |
+|   04 |            |
+|   05 |            |
+|   06 |            |
+|------+------------|
+|   07 |            |
+|   08 |            |
+|   09 |            |
+|   10 |            |
+|   11 |            |
+|   12 |            |
+|------+------------|
+|   13 | SST        |
+|   14 | SST↑       |
+|   15 | SST→       |
+|   16 | GTO        |
+|   17 | VIEW       |
+|   18 | AVIEW      |
+|------+------------|
+
+Simply evaluate the followign lisp block, and the 42s program will be created.
+
+#+BEGIN_SRC elisp :var tbl=custom :colnames y :results output verbatum :wrap src hp42s
+(princ "LBL \"MKCM\"\n")
+(cl-loop for (da-key da-assignment da-note) in tbl
+         ;;when (not (zerop (length da-assignment)))
+         do (princ (message "ASSIGN \"%s\" TO %s\n" da-assignment da-key)))
+(princ "RTN\n")
+(princ "END\n")
+#+END_SRC
+
+#+RESULTS:
+#+begin_src hp42s
+LBL "MKCM"
+ASSIGN "CUST" TO 01
+ASSIGN "" TO 02
+ASSIGN "" TO 03
+ASSIGN "" TO 04
+ASSIGN "" TO 05
+ASSIGN "" TO 06
+ASSIGN "" TO 07
+ASSIGN "" TO 08
+ASSIGN "" TO 09
+ASSIGN "" TO 10
+ASSIGN "" TO 11
+ASSIGN "" TO 12
+ASSIGN "SST" TO 13
+ASSIGN "SST↑" TO 14
+ASSIGN "SST→" TO 15
+ASSIGN "GTO" TO 16
+ASSIGN "VIEW" TO 17
+ASSIGN "AVIEW" TO 18
+RTN
+END
+#+end_src
+
+* EOF
+
+# End of document.
+
+# The following adds some space at the bottom of exported HTML
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />

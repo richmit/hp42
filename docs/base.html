@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-03-30 Tue 19:14 -->
+<!-- 2021-04-01 Thu 18:16 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42/hp42s/DM42 Base-N Tools</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-03-30 19:14:37</i></td>
+<td class="org-left"><i>2021-04-01 18:16:07</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,28 +241,29 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orga3bc543">1. Metadata</a></li>
-<li><a href="#org5b98ef2">2. Introduction</a></li>
-<li><a href="#org82a2c99">3. Tiny Number Printing</a>
+<li><a href="#orgade39b5">1. Metadata</a></li>
+<li><a href="#orgd9875fc">2. Introduction</a></li>
+<li><a href="#org7f7e3b2">3. Tiny Number Printing</a>
 <ul>
-<li><a href="#org2835bee">3.1. Code to print digits</a></li>
-<li><a href="#orga5e73e0">3.2. Test Code to print all characters</a></li>
+<li><a href="#orge853acd">3.1. Code to print digits</a></li>
+<li><a href="#orgfdfdd4f">3.2. Test Code to print all characters</a></li>
 </ul>
 </li>
-<li><a href="#org253b4d4">4. Print Binary Number</a></li>
-<li><a href="#org0b2a338">5. Bit Manipulation Functions</a></li>
-<li><a href="#org9a3acc1">6. BASE Menu</a>
+<li><a href="#org2e9d50d">4. Print Binary Number</a></li>
+<li><a href="#org3dec1cb">5. Bit Manipulation Functions</a></li>
+<li><a href="#org32f1476">6. BASE Menu</a>
 <ul>
-<li><a href="#orgd49ef85">6.1. Menu Contents</a></li>
-<li><a href="#org42bc617">6.2. Menu Code</a></li>
+<li><a href="#orgbc7d1a4">6.1. Menu Contents</a></li>
+<li><a href="#orgd7b4f95">6.2. Menu Code</a></li>
 </ul>
 </li>
+<li><a href="#org558aed6">7. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orga3bc543" class="outline-2">
-<h2 id="orga3bc543"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-orgade39b5" class="outline-2">
+<h2 id="orgade39b5"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/base.html">https://richmit.github.io/hp42/base.html</a>
@@ -280,8 +281,8 @@ Files related to this document may be found on github: <a href="https://github.c
 </div>
 </div>
 
-<div id="outline-container-org5b98ef2" class="outline-2">
-<h2 id="org5b98ef2"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-orgd9875fc" class="outline-2">
+<h2 id="orgd9875fc"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 
 <div class="figure">
@@ -296,25 +297,25 @@ you still have to use the BASE menu to enter some hexadecimal digits.
 </p>
 
 <p>
-The 42 can deal with 64-bit binary numbers, but it can't display them &#x2013; when you try it displays them in hexadecimal.  The <code>BVIEW</code> <a href="#org253b4d4">4</a>
-program remedies this issue and works just fine on a standard HP-42s or free42 screen.  <code>BVIEW</code> uses the <code>TNPR</code> <a href="#org82a2c99">3</a> function to draw the
+The 42 can deal with 64-bit binary numbers, but it can't display them &#x2013; when you try it displays them in hexadecimal.  The <code>BVIEW</code> <a href="#org2e9d50d">4</a>
+program remedies this issue and works just fine on a standard HP-42s or free42 screen.  <code>BVIEW</code> uses the <code>TNPR</code> <a href="#org7f7e3b2">3</a> function to draw the
 digits &#x2013; this uses a tiny, 5 pixel tall font.  The character set is sufficient to display all kinds of numbers, but the only thing I have implemented so far
 is the binary number printer.
 </p>
 
 <p>
-This code is structured as several independent functions (See: <a href="#org0b2a338">the code</a>) that are then tied together into a menu (See: <a href="#orgd49ef85">Menu Contents</a>) for easy access &#x2013; See
-the code <a href="#org42bc617">here</a>.  This allows you to use these functions in your own programs.  The individual functions are documented in the code.
+This code is structured as several independent functions (See: <a href="#org3dec1cb">the code</a>) that are then tied together into a menu (See: <a href="#orgbc7d1a4">Menu Contents</a>) for easy access &#x2013; See
+the code <a href="#orgd7b4f95">here</a>.  This allows you to use these functions in your own programs.  The individual functions are documented in the code.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org82a2c99" class="outline-2">
-<h2 id="org82a2c99"><span class="section-number-2">3</span> Tiny Number Printing</h2>
+<div id="outline-container-org7f7e3b2" class="outline-2">
+<h2 id="org7f7e3b2"><span class="section-number-2">3</span> Tiny Number Printing</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org2835bee" class="outline-3">
-<h3 id="org2835bee"><span class="section-number-3">3.1</span> Code to print digits</h3>
+<div id="outline-container-orge853acd" class="outline-3">
+<h3 id="orge853acd"><span class="section-number-3">3.1</span> Code to print digits</h3>
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Tiny Number PRint</span>
@@ -327,7 +328,7 @@ the code <a href="#org42bc617">here</a>.  This allows you to use these functions
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Designed to print numbers:</span>
 <span style="color: #ffa500;">@@@@    </span><span style="color: #ff7f24;">101010b Binary      | 1234567 Decimal    | 123e+45 Float | 123/456 Rational | 123+56i Complex</span>
 <span style="color: #ffa500;">@@@@    </span><span style="color: #ff7f24;">1A8F10h Hexadecimal | 123,456 Decimal    | 12&#215;10^3 Float | 123:456 Rational | (12,34) Complex</span>
-<span style="color: #ffa500;">@@@@    </span><span style="color: #ff7f24;">154823o Octal       | -123456 Signed Dec | 1.34567 Float | 123456&#176; Degrees  | </span>
+<span style="color: #ffa500;">@@@@    </span><span style="color: #ff7f24;">154823o Octal       | -123456 Signed Dec | 1.34567 Float | 123456&#176; Degrees  |</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Characters can be underlined -- this is used by BVIEW to visually separate nibbles</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Characters are 3x5 pixels in size.  Underlined characters are 3x7.</span>
 <span style="color: #ffa500;">@@@@   </span><span style="color: #ff7f24;">- Stock HP-42s screen: 32 characters across.  Two full lines on the screen.</span>
@@ -344,26 +345,26 @@ R&#8595;
 <span style="color: #00ffff;">AGRAPH</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 00       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 0</span>
-<span style="color: #fa8072;">"&#8226;&#956;&#8226;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11111 #b10001 #b11111 </span>
-<span style="color: #00ffff;">RTN</span>           
+<span style="color: #fa8072;">"&#8226;&#956;&#8226;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11111 #b10001 #b11111</span>
+<span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 01       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 1</span>
 <span style="color: #fa8072;">"&#163;&#8226;&#8592;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b10010 #b11111 #b10000</span>
-<span style="color: #00ffff;">RTN</span>           
+<span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 02       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 2</span>
 <span style="color: #fa8072;">"&#220;&#209;&#8737;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11101 #b10101 #b10111</span>
-<span style="color: #00ffff;">RTN</span>           
+<span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 03       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 3</span>
 <span style="color: #fa8072;">"&#956;&#209;&#8226;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b10001 #b10101 #b11111</span>
-<span style="color: #00ffff;">RTN</span>           
+<span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 04       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 4</span>
 <span style="color: #fa8072;">"&#960;&#9618;&#8226;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b00111 #b00100 #b11111</span>
-<span style="color: #00ffff;">RTN</span>           
+<span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 05       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 5</span>
 <span style="color: #fa8072;">"&#8737;&#209;&#220;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b10111 #b10101 #b11101</span>
-<span style="color: #00ffff;">RTN</span>           
+<span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 06       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 6</span>
 <span style="color: #fa8072;">"&#8226;&#209;&#220;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11111 #b10101 #b11101</span>
-<span style="color: #00ffff;">RTN</span>           
+<span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 07       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 7</span>
 <span style="color: #fa8072;">"&#215;&#215;&#8226;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b00001 #b00001 #b11111</span>
 <span style="color: #00ffff;">RTN</span>
@@ -440,26 +441,26 @@ R&#8595;
 <span style="color: #fa8072;">"&#956;&#8595;&#247;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b10001 #b01110 #b00000</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 40       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 0</span>
-<span style="color: #fa8072;">"_Q_"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011111 #b1010001 #b1011111 </span>
+<span style="color: #fa8072;">"_Q_"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011111 #b1010001 #b1011111</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 41       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 1</span>
 <span style="color: #fa8072;">"R_P"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1010010 #b1011111 #b1010000</span>
-<span style="color: #00ffff;">RTN</span>           
+<span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 42       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 2</span>
 <span style="color: #fa8072;">"]UW"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011101 #b1010101 #b1010111</span>
-<span style="color: #00ffff;">RTN</span>           
+<span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 43       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 3</span>
 <span style="color: #fa8072;">"QU_"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1010001 #b1010101 #b1011111</span>
-<span style="color: #00ffff;">RTN</span>           
+<span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 44       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 4</span>
 <span style="color: #fa8072;">"GD_"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1000111 #b1000100 #b1011111</span>
-<span style="color: #00ffff;">RTN</span>           
+<span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 45       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 5</span>
 <span style="color: #fa8072;">"WU]"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1010111 #b1010101 #b1011101</span>
-<span style="color: #00ffff;">RTN</span>           
+<span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 46       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 6</span>
 <span style="color: #fa8072;">"_U]"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011111 #b1010101 #b1011101</span>
-<span style="color: #00ffff;">RTN</span>           
+<span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 47       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 7</span>
 <span style="color: #fa8072;">"AA_"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1000001 #b1000001 #b1011111</span>
 <span style="color: #00ffff;">RTN</span>
@@ -541,8 +542,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-orga5e73e0" class="outline-3">
-<h3 id="orga5e73e0"><span class="section-number-3">3.2</span> Test Code to print all characters</h3>
+<div id="outline-container-orgfdfdd4f" class="outline-3">
+<h3 id="orgfdfdd4f"><span class="section-number-3">3.2</span> Test Code to print all characters</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"PATN"</span>   <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Print All Tiny Numbers</span>
@@ -580,8 +581,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org253b4d4" class="outline-2">
-<h2 id="org253b4d4"><span class="section-number-2">4</span> Print Binary Number</h2>
+<div id="outline-container-org2e9d50d" class="outline-2">
+<h2 id="org2e9d50d"><span class="section-number-2">4</span> Print Binary Number</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -654,7 +655,7 @@ R&#8595;
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
 <span style="color: #00ffff;">AND</span>
-<span style="color: #00ffff;">X=0</span>?         
+<span style="color: #00ffff;">X=0</span>?
 <span style="color: #00ffff;">GTO</span> 15
 <span style="color: #00ffff;">GTO</span> 16
 <span style="color: #00ffff;">LBL</span> 15      <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-THEN bit is 0</span>
@@ -711,8 +712,8 @@ R&#8595;
 </div>
 
 
-<div id="outline-container-org0b2a338" class="outline-2">
-<h2 id="org0b2a338"><span class="section-number-2">5</span> Bit Manipulation Functions</h2>
+<div id="outline-container-org3dec1cb" class="outline-2">
+<h2 id="org3dec1cb"><span class="section-number-2">5</span> Bit Manipulation Functions</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -736,7 +737,7 @@ R&#8595;
 R&#8595;
 1
 <span style="color: #00ffff;">STO+ ST</span> Z
-<span style="color: #00ffff;">LBL</span> 02  
+<span style="color: #00ffff;">LBL</span> 02
 R&#8595;
 <span style="color: #00ffff;">X&#8800;0</span>?
 <span style="color: #00ffff;">GTO</span> 03  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Zero, so return Counter</span>
@@ -744,7 +745,7 @@ R&#8595;
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 03  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Not a zero yet, so wack 1 and rotate</span>
 1
-<span style="color: #00ffff;">NOT</span> 
+<span style="color: #00ffff;">NOT</span>
 <span style="color: #00ffff;">AND</span>
 1
 <span style="color: #00ffff;">ROTXY</span>
@@ -989,7 +990,7 @@ R&#8595;                             <span style="color: #ffa500;">@@</span><spa
 R&#8595;                             <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
 0
 <span style="color: #00ffff;">LBL</span> 03 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-END</span>
-<span style="color: #00ffff;">RTN</span>          
+<span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -1061,7 +1062,7 @@ R&#8595;                             <span style="color: #ffa500;">@@</span><spa
 <span style="color: #00ffff;">FUNC</span> 21                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
-<span style="color: #00ffff;">X&gt;0</span>? 
+<span style="color: #00ffff;">X&gt;0</span>?
 <span style="color: #00ffff;">GTO</span> 01
 R&#8595;
 <span style="color: #00ffff;">RTN</span>
@@ -1107,7 +1108,7 @@ R&#8595;                             <span style="color: #ffa500;">@@</span><spa
 <span style="color: #00ffff;">FUNC</span> 21                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
-<span style="color: #00ffff;">X&gt;0</span>? 
+<span style="color: #00ffff;">X&gt;0</span>?
 <span style="color: #00ffff;">GTO</span> 01
 R&#8595;
 <span style="color: #00ffff;">RTN</span>
@@ -1152,7 +1153,7 @@ R&#8595;                             <span style="color: #ffa500;">@@</span><spa
 <span style="color: #00ffff;">FUNC</span> 21                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
-<span style="color: #00ffff;">X&gt;0</span>? 
+<span style="color: #00ffff;">X&gt;0</span>?
 <span style="color: #00ffff;">GTO</span> 01
 R&#8595;
 <span style="color: #00ffff;">RTN</span>
@@ -1174,7 +1175,7 @@ R&#8595;
 <span style="color: #00ffff;">FUNC</span> 21                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
-<span style="color: #00ffff;">X&gt;0</span>? 
+<span style="color: #00ffff;">X&gt;0</span>?
 <span style="color: #00ffff;">GTO</span> 01
 R&#8595;
 <span style="color: #00ffff;">RTN</span>
@@ -1217,7 +1218,7 @@ R&#8595;
 <span style="color: #00ffff;">FUNC</span> 12                        <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>                          <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
-0        
+0
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">LBL</span> 00
 0
@@ -1247,7 +1248,7 @@ R&#8595;
 <span style="color: #00ffff;">FUNC</span> 12                        <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>                          <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
-0        
+0
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">LBL</span> 00
 <span style="color: #00ffff;">WSIZE</span>?
@@ -1304,7 +1305,7 @@ R&#8595;
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Position of the Most Significant Set Bit</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Position of MSSB in IP(X) or -1 if IP(X) was 0</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: </span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ:</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">USE: LJ</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Runtime Complexity O(WSIZE-log_2(X))</span>
@@ -1315,7 +1316,7 @@ R&#8595;
 <span style="color: #00ffff;">IP</span>
 <span style="color: #00ffff;">X&#8800;0</span>?
 <span style="color: #00ffff;">GTO</span> 01
-R&#8595;                             <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24  </span>
+R&#8595;                             <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
 -1
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 01 <span style="color: #ffa500;">@@ </span><span style="color: #ff7f24;">X not zero</span>
@@ -1341,7 +1342,7 @@ R&#8595;                             <span style="color: #ffa500;">@@</span><spa
 <span style="color: #00ffff;">IP</span>
 <span style="color: #00ffff;">X&#8800;0</span>?
 <span style="color: #00ffff;">GTO</span> 01
-R&#8595;                             <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24  </span>
+R&#8595;                             <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&lt;2.5.24</span>
 -1
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 01 <span style="color: #ffa500;">@@ </span><span style="color: #ff7f24;">X not zero</span>
@@ -1354,14 +1355,14 @@ R&#8595;                             <span style="color: #ffa500;">@@</span><spa
 </div>
 
 
-<div id="outline-container-org9a3acc1" class="outline-2">
-<h2 id="org9a3acc1"><span class="section-number-2">6</span> BASE Menu</h2>
+<div id="outline-container-org32f1476" class="outline-2">
+<h2 id="org32f1476"><span class="section-number-2">6</span> BASE Menu</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-orgd49ef85" class="outline-3">
-<h3 id="orgd49ef85"><span class="section-number-3">6.1</span> Menu Contents</h3>
+<div id="outline-container-orgbc7d1a4" class="outline-3">
+<h3 id="orgbc7d1a4"><span class="section-number-3">6.1</span> Menu Contents</h3>
 <div class="outline-text-3" id="text-6-1">
-<table id="org593f46e" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+<table id="orgf51dec8" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
 <colgroup>
@@ -1639,8 +1640,8 @@ R&#8595;                             <span style="color: #ffa500;">@@</span><spa
 </div>
 
 
-<div id="outline-container-org42bc617" class="outline-3">
-<h3 id="org42bc617"><span class="section-number-3">6.2</span> Menu Code</h3>
+<div id="outline-container-orgd7b4f95" class="outline-3">
+<h3 id="orgd7b4f95"><span class="section-number-3">6.2</span> Menu Code</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 The menu program is generated via the following bit of elisp.  You must first define the <code>MJR-generate-42-menu-code</code> and <code>MJR-custom-x-gen</code> by evaluating the code blocks in the <code>hp42s-meta.org</code> file.
@@ -1954,9 +1955,20 @@ The menu program is generated via the following bit of elisp.  You must first de
 </div>
 </div>
 </div>
+
+<div id="outline-container-org558aed6" class="outline-2">
+<h2 id="org558aed6"><span class="section-number-2">7</span> EOF</h2>
+<div class="outline-text-2" id="text-7">
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-30 Tue 19:14 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-01 Thu 18:16 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

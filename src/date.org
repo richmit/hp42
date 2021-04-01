@@ -5,7 +5,7 @@
 #+DATE:        2021-03-19
 #+DESCRIPTION: Description of some free42/hp-42s/DM42 programs for dates
 #+LANGUAGE:    en
-#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil 
+#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil
 #+HTML_HEAD: <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
 #+HTML_HEAD: <style>body { min-width: 500px; max-width: 1024px; }</style>
 #+HTML_HEAD: <style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
@@ -54,7 +54,8 @@ that free42 has put these into a separate catalog menu, these are somewhat obsol
 * Date/Time Functions
 
 #+BEGIN_SRC  hp42s
-@@@@ Interactive Current Date
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:IDATE)
+@@@@ DSC: Interactive Current Date
 @@@@ OUT: X: Date encoded as a real
 @@@@ SFX: Prints date even when called from a program
 @@@@ UPD: 2021-03-16
@@ -68,7 +69,8 @@ AVIEW
 RTN
 END
 
-@@@@ Interactive Current Time
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ITIME)
+@@@@ DSC: Interactive Current Time
 @@@@ OUT: X: Time in H.MM.SS format
 @@@@ SFX: Prints time even when called from a program
 @@@@ UPD: 2021-03-16
@@ -82,7 +84,8 @@ AVIEW
 RTN
 END
 
-@@@@ Current UNIX time
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UTIME)
+@@@@ DSC: Current UNIX time
 @@@@ OUT: X: UNIX time
 @@@@ UPD: 2021-03-16
 LBL "UTIME"
@@ -93,7 +96,8 @@ TIME                 @@## REQ:free42>=1.4.66
 XEQ "DT→U"
 END
 
-@@@@ Convert date & time to UNIX time
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:DT2U)
+@@@@ DSC: Convert date & time to UNIX time
 @@@@ IN:  Y: Date
 @@@@ IN:  X: Time
 @@@@ OUT: X: UNIX time
@@ -117,7 +121,8 @@ X<>Y
 RTN
 END
 
-@@@@ Convert UNIX time to date & time
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:U2DT)
+@@@@ DSC: Convert UNIX time to date & time
 @@@@ IN:  X: UNIX time
 @@@@ OUT: Y: Date
 @@@@ OUT: X: Time
@@ -144,7 +149,8 @@ MOD                  @@## REQ:free42>=1.4.66
 RTN
 END
 
-@@@@ Interactive U→DT (prints date & time)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:IU2DT)
+@@@@ DSC: Interactive U→DT (prints date & time)
 @@@@ IN:  X: UNIX time
 @@@@ OUT: Y: Date
 @@@@ OUT: X: Time
@@ -164,7 +170,8 @@ AVIEW
 RTN
 END
 
-@@@@ Interactive DATE+ (prints date)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:IDATEP)
+@@@@ DSC: Interactive DATE+ (prints date)
 @@@@ IN:  Y: Date
 @@@@ IN:  X: Integer
 @@@@ OUT: X: Date + Integer
@@ -179,7 +186,8 @@ AVIEW
 RTN
 END
 
-@@@@ Interactive DOW (prints day)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:IDOW)
+@@@@ DSC: Interactive DOW (prints day)
 @@@@ IN:  X: Date
 @@@@ OUT: X: Integer
 @@@@ SFX: Prints day of week even when called from a program
@@ -215,7 +223,8 @@ LBL 07
 RTN
 END
 
-@@@@ Convert date to Julian day
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:D2J)
+@@@@ DSC: Convert date to Julian day
 @@@@ IN:  X: Date
 @@@@ OUT: X: Julian day
 @@@@ UPD: 2021-03-16
@@ -233,7 +242,8 @@ DDAYS                @@## REQ:free42>=1.4.66
 RTN
 END
 
-@@@@ Convert date to Julian day
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:J2D)
+@@@@ DSC: Convert date to Julian day
 @@@@ IN:  X: Date
 @@@@ OUT: X: Julian day
 @@@@ UPD: 2021-03-16
@@ -251,7 +261,8 @@ DATE+                @@## REQ:free42>=1.4.66
 RTN
 END
 
-@@@@ Today's Julian day
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:JDATE)
+@@@@ DSC: Today's Julian day
 @@@@ OUT: X: Julian day for today
 @@@@ UPD: 2021-03-16
 LBL "JDATE"
@@ -261,7 +272,8 @@ DATE                 @@## REQ:free42>=1.4.66
 XEQ "D→J"
 END
 
-@@@@ Interactive J→D (prints date)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:IJ2D)
+@@@@ DSC: Interactive J→D (prints date)
 @@@@ IN:  X: Date
 @@@@ OUT: X: Julian day
 @@@@ UPD: 2021-03-16
@@ -275,11 +287,6 @@ AVIEW
 RTN
 END
 #+END_SRC
-
-
-
-
-
 
 * A menu for date/time functions
 
@@ -309,10 +316,13 @@ END
 |       |                  |                                          |
 |-------+------------------+------------------------------------------|
 
-#+BEGIN_SRC elisp :var tbl=dmenu :colnames y :results output verbatum
-  (MJR-generate-42-menu-code "DMENU" tbl "stay" "up" #'MJR-custom-x-gen)
+The menu program is generated via the following bit of elisp.  You must first define the =MJR-generate-42-menu-code= and =MJR-custom-x-gen= by evaluating the code blocks in the =hp42s-meta.org= file.
+
+#+BEGIN_SRC elisp :var tbl=dmenu :colnames y :results output verbatum :wrap src hp42s
+(MJR-generate-42-menu-code "DMENU" tbl "stay" "up" #'MJR-custom-x-gen)
 #+END_SRC
 
+#+RESULTS:
 #+begin_src hp42s
 LBL "DMENU"
 LBL 01            @@@@ Page 1 of menu DMENU
@@ -405,3 +415,13 @@ RTN
 @@@@ Free labels start at: 16
 #+end_src
 
+* EOF
+
+# End of document.
+
+# The following adds some space at the bottom of exported HTML
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />

@@ -5,7 +5,7 @@
 #+DATE:        2021-03-19
 #+DESCRIPTION: Random stuff to assist with free42/hp-42s/DM42 programing
 #+LANGUAGE:    en
-#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil 
+#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil
 #+HTML_HEAD: <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
 #+HTML_HEAD: <style>body { min-width: 500px; max-width: 1024px; }</style>
 #+HTML_HEAD: <style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
@@ -70,7 +70,7 @@ two digit local labels are used in the generated code which limits sizes.
 =MJR-generate-42-menu-code= arguments:
   - =top-lab=  The global label to use for the generated program
   - =tbl= The org-mode table with the menu description
-  - =leaf-function= What do do when a /action/ menu is used (a leaf node in the menu).   
+  - =leaf-function= What do do when a /action/ menu is used (a leaf node in the menu).
     - ="stay"= Keep the menu active.
     - ="exit"= Exit the menu.
   - =exit-function= What to do when =[EXIT]= is pressed.
@@ -93,89 +93,89 @@ The top level menu will have "=foo=" & "=snoopy=".  "=snoopy=" is an /action/ bu
 The last two are /actions/ while the first is yet another menu containing "=foobar=".
 
 #+BEGIN_SRC elisp :results output verbatum
-  (defun MJR-generate-42-menu-code (top-lab tbl leaf-function exit-function gen-code) ;; leaf-function "stay" or "exit", exit-function "exit" or "up"
-    (let* ((min-free-lab  2)
-           (m-code "")
-           (x-code ""))
-      (cl-labels ((add-m-code (a) (setq m-code (concat m-code a "\n")))
-                  (add-x-code (a) (setq x-code (concat x-code a "\n")))
-                  (prc-mnu (menu) (if (or (not (listp menu))
-                                          (null (cdr menu)))
-                                      menu
-                                      (mapcar #'prc-mnu
-                                              (append (list (car menu))
-                                                      (reverse (cl-reduce (lambda (result cur-elt)
-                                                                            (let ((last-elt (cl-first result)))
-                                                                              (if (and (listp last-elt)
-                                                                                       (cdr last-elt)
-                                                                                       (cdr cur-elt)
-                                                                                       (string-equal (cl-first last-elt) (cl-first cur-elt)))
-                                                                                  (progn (nconc (cl-first result) (list (cdr cur-elt)))
-                                                                                         result)
-                                                                                  (if (cdr cur-elt)
-                                                                                      (append (list (list (cl-first cur-elt) (cdr cur-elt))) result)
-                                                                                      (append (list (cl-first cur-elt))  result)))))
-                                                                          (cdr menu)
-                                                                          :initial-value ()))))))
-                  (gen-mnu (plbl lbl menu) (let* ((num-menu-keys (1- (length menu)))
-                                                  (num-menu-page (ceiling (/ num-menu-keys 6.0)))
-                                                  (page-labs     (cl-loop repeat num-menu-page
-                                                                          for i = lbl then min-free-lab
-                                                                          collect i
-                                                                          when (not (= i lbl))
-                                                                          do (cl-incf min-free-lab)))
-                                                  (rec-key-labs     nil)
-                                                  (rec-pag-labs     nil))
-                                             (if (zerop plbl)
-                                                 (add-m-code (message "LBL \"%s\"" (cl-first menu))))
-                                             (cl-loop for mkey-elt in (cdr menu)
-                                                      for mkey-num from 0
-                                                      for page-num = (truncate (/ mkey-num 6))
-                                                      for page-key = (mod mkey-num 6)
-                                                      for mkey-str = (if (vectorp mkey-elt) (aref mkey-elt 0) (cl-first mkey-elt))
-                                                      when (= page-key 0)
-                                                      do (progn (add-m-code (message "LBL %02d            @@@@ Page %d of menu %s" (nth page-num page-labs) (1+ page-num) (cl-first menu)))
-                                                                (add-m-code "CLMENU"))
-                                                      when (not (string-equal mkey-str ""))
-                                                      do (progn (add-m-code (message "\"%s\"" mkey-str))
-                                                                (add-m-code (message "KEY %d %s %02d" (1+ page-key) (if (vectorp mkey-elt) "XEQ" "GTO") min-free-lab))
-                                                                (if (vectorp mkey-elt)
-                                                                    (progn (add-x-code (message "LBL %02d               @@@@ Action for menu key %s" min-free-lab mkey-str))
-                                                                           (add-x-code (funcall gen-code (aref mkey-elt 1)))
-                                                                           (add-x-code "RTN")))
-                                                                (push min-free-lab rec-key-labs)
-                                                                (cl-incf min-free-lab)
-                                                                (push (nth page-num page-labs) rec-pag-labs))
-                                                      when (or (= page-key 5) (= mkey-num (1- num-menu-keys)))
-                                                      do (progn (if (< 1 num-menu-page)
-                                                                    (progn (add-m-code (message "KEY 7 GTO %02d" (nth (mod (1- page-num) num-menu-page) page-labs)))
-                                                                           (add-m-code (message "KEY 8 GTO %02d" (nth (mod (1+ page-num) num-menu-page) page-labs)))))
-                                                                (if (string-equal exit-function "up")
-                                                                    (add-m-code (message "KEY 9 GTO %02d" plbl))
-                                                                    (add-m-code (message "KEY 9 GTO %02d" 0)))
-                                                                (add-m-code "MENU")
-                                                                (add-m-code "STOP")
-                                                                (if (string-equal leaf-function "stay")
-                                                                    (add-m-code (message "GTO %02d" (nth page-num page-labs)))
-                                                                    (add-m-code (message "GTO %02d" 0)))))
-                                             (cl-loop for mkey-elt in (cdr menu)
-                                                      for m-lab in (reverse rec-key-labs)
-                                                      for p-lab in (reverse rec-pag-labs)
-                                                      when (listp mkey-elt)
-                                                      do (gen-mnu p-lab m-lab mkey-elt)))))
-        (gen-mnu 0 1 (prc-mnu (append (list top-lab) (cl-loop for row in tbl
-                                                             for n from 0
-                                                             for tmp = (split-string (cl-first row) ":")
-                                                             do (setf (car (last tmp)) (vector (car (last tmp)) row))
-                                                             collect tmp))))
-        (add-m-code "LBL 00")
-        (add-m-code "EXITALL")
-        (add-m-code "RTN")
-        (if (< 100 min-free-lab)
-            (error "ERROR: Too many local labels: %d" min-free-lab)))
-        (princ m-code)
-        (princ x-code)
-        (princ (message "@@@@ Free labels start at: %d\n" min-free-lab))))
+(defun MJR-generate-42-menu-code (top-lab tbl leaf-function exit-function gen-code) ;; leaf-function "stay" or "exit", exit-function "exit" or "up"
+  (let* ((min-free-lab  2)
+         (m-code "")
+         (x-code ""))
+    (cl-labels ((add-m-code (a) (setq m-code (concat m-code a "\n")))
+                (add-x-code (a) (setq x-code (concat x-code a "\n")))
+                (prc-mnu (menu) (if (or (not (listp menu))
+                                        (null (cdr menu)))
+                                    menu
+                                    (mapcar #'prc-mnu
+                                            (append (list (car menu))
+                                                    (reverse (cl-reduce (lambda (result cur-elt)
+                                                                          (let ((last-elt (cl-first result)))
+                                                                            (if (and (listp last-elt)
+                                                                                     (cdr last-elt)
+                                                                                     (cdr cur-elt)
+                                                                                     (string-equal (cl-first last-elt) (cl-first cur-elt)))
+                                                                                (progn (nconc (cl-first result) (list (cdr cur-elt)))
+                                                                                       result)
+                                                                                (if (cdr cur-elt)
+                                                                                    (append (list (list (cl-first cur-elt) (cdr cur-elt))) result)
+                                                                                    (append (list (cl-first cur-elt))  result)))))
+                                                                        (cdr menu)
+                                                                        :initial-value ()))))))
+                (gen-mnu (plbl lbl menu) (let* ((num-menu-keys (1- (length menu)))
+                                                (num-menu-page (ceiling (/ num-menu-keys 6.0)))
+                                                (page-labs     (cl-loop repeat num-menu-page
+                                                                        for i = lbl then min-free-lab
+                                                                        collect i
+                                                                        when (not (= i lbl))
+                                                                        do (cl-incf min-free-lab)))
+                                                (rec-key-labs     nil)
+                                                (rec-pag-labs     nil))
+                                           (if (zerop plbl)
+                                               (add-m-code (message "LBL \"%s\"" (cl-first menu))))
+                                           (cl-loop for mkey-elt in (cdr menu)
+                                                    for mkey-num from 0
+                                                    for page-num = (truncate (/ mkey-num 6))
+                                                    for page-key = (mod mkey-num 6)
+                                                    for mkey-str = (if (vectorp mkey-elt) (aref mkey-elt 0) (cl-first mkey-elt))
+                                                    when (= page-key 0)
+                                                    do (progn (add-m-code (message "LBL %02d            @@@@ Page %d of menu %s" (nth page-num page-labs) (1+ page-num) (cl-first menu)))
+                                                              (add-m-code "CLMENU"))
+                                                    when (not (string-equal mkey-str ""))
+                                                    do (progn (add-m-code (message "\"%s\"" mkey-str))
+                                                              (add-m-code (message "KEY %d %s %02d" (1+ page-key) (if (vectorp mkey-elt) "XEQ" "GTO") min-free-lab))
+                                                              (if (vectorp mkey-elt)
+                                                                  (progn (add-x-code (message "LBL %02d               @@@@ Action for menu key %s" min-free-lab mkey-str))
+                                                                         (add-x-code (funcall gen-code (aref mkey-elt 1)))
+                                                                         (add-x-code "RTN")))
+                                                              (push min-free-lab rec-key-labs)
+                                                              (cl-incf min-free-lab)
+                                                              (push (nth page-num page-labs) rec-pag-labs))
+                                                    when (or (= page-key 5) (= mkey-num (1- num-menu-keys)))
+                                                    do (progn (if (< 1 num-menu-page)
+                                                                  (progn (add-m-code (message "KEY 7 GTO %02d" (nth (mod (1- page-num) num-menu-page) page-labs)))
+                                                                         (add-m-code (message "KEY 8 GTO %02d" (nth (mod (1+ page-num) num-menu-page) page-labs)))))
+                                                              (if (string-equal exit-function "up")
+                                                                  (add-m-code (message "KEY 9 GTO %02d" plbl))
+                                                                  (add-m-code (message "KEY 9 GTO %02d" 0)))
+                                                              (add-m-code "MENU")
+                                                              (add-m-code "STOP")
+                                                              (if (string-equal leaf-function "stay")
+                                                                  (add-m-code (message "GTO %02d" (nth page-num page-labs)))
+                                                                  (add-m-code (message "GTO %02d" 0)))))
+                                           (cl-loop for mkey-elt in (cdr menu)
+                                                    for m-lab in (reverse rec-key-labs)
+                                                    for p-lab in (reverse rec-pag-labs)
+                                                    when (listp mkey-elt)
+                                                    do (gen-mnu p-lab m-lab mkey-elt)))))
+      (gen-mnu 0 1 (prc-mnu (append (list top-lab) (cl-loop for row in tbl
+                                                            for n from 0
+                                                            for tmp = (split-string (cl-first row) ":")
+                                                            do (setf (car (last tmp)) (vector (car (last tmp)) row))
+                                                            collect tmp))))
+      (add-m-code "LBL 00")
+      (add-m-code "EXITALL")
+      (add-m-code "RTN")
+      (if (< 100 min-free-lab)
+          (error "ERROR: Too many local labels: %d" min-free-lab)))
+    (princ m-code)
+    (princ x-code)
+    (princ (message "@@@@ Free labels start at: %d\n" min-free-lab))))
 #+END_SRC
 
 #+RESULTS:
@@ -197,25 +197,37 @@ line "=MYPROG=" is the name of a program -- the code below figures out if a thin
 I may have missed a built in function, so you may have to add one to the list. ;)
 
 #+BEGIN_SRC elisp :colnames y :results output verbatum
-  (defun MJR-custom-x-gen (row) (let ((blt-in  '("%" "%CH" "+" "+/-" "-" "1/X" "10↑X" "ABS" "ACOS" "ACOSH" "ADV" "AGRAPH" "AIP" "ALENG" "ALL" "ALLΣ" "AND" "AOFF" "AON" "ARCL" "AROT" "ASHF" "ASIN" "ASINH" "ASSIGN" "ASTO" "ATAN" "ATANH" "ATOX" "AVIEW"
-                                                 "BASE+" "BASE+/-" "BASE-" "BASE×" "BASE÷" "BEEP" "BEST" "BINM" "BIT?"  "BIT?"  "CF" "CLA" "CLD" "CLKEYS" "CLLCD" "CLMENU" "CLP" "CLRG" "CLST" "CLV" "CLX" "CLΣ" "COMB" "COMPLEX" "CORR" "COS" "COSH"
-                                                 "CPX?"  "CPXRES" "CROSS" "CUSTOM" "DECM" "DEG" "DELAY" "DELR" "DET" "DIM" "DIM?"  "DOT" "DSE" "EDIT" "EDITN" "END" "ENG" "ENTER" "EXITALL" "EXPF" "E↑X" "E↑X-1" "FC?"  "FC?C" "FCSTX" "FCSTY" "FIX"
-                                                 "FNRM" "FP" "FS?"  "FS?C" "FUNC" "GAMMA" "GETKEY" "GETM" "GRAD" "GROW" "GTO" "HEXM" "HMS+" "HMS-" "I+" "I-" "INDEX" "INPUT" "INSR" "INTEG" "INVRT" "IP" "ISG" "J+" "J-" "KEY" "KEYASN" "L4STK" "LASTX"
-                                                 "LBL" "LCLBL" "LINF" "LINΣ" "LN" "LN1+X" "LOG" "LOGF" "LSTO" "MAN" "MAT?"  "MEAN" "MENU" "MOD" "MVAR" "N!"  "NEWMAT" "NOP" "NORM" "NOT" "OCTM" "OFF" "OLD" "ON" "OR" "PERM" "PGMINT" "PGMSLV" "PIXEL"
-                                                 "POLAR" "POSA" "PRA" "PRLCD" "PROFF" "PROMPT" "PRON" "PRSTK" "PRUSR" "PRV" "PRX" "PRΣ" "PSE" "PUTM" "PWRF" "R<>R" "RAD" "RAN" "RCL" "RCL+" "RCL-" "RCLEL" "RCLIJ" "RCL×" "RCL÷" "RDX," "RDX."  "REAL?"
-                                                 "REALRES" "RECT" "RND" "RNRM" "ROTXY" "RSUM" "RTN" "RTNERR" "RTNYES" "RTNNO" "R↑" "R↓" "SCI" "SDEV" "SEED" "SF" "SIGN" "SIN" "SINH" "SIZE" "SLOPE" "SOLVE" "SQRT" "STO" "STO+" "STO-" "STOEL" "STOIJ" "STOP" "STO×"
-                                                 "STO÷" "STR?"  "SUM" "TAN" "TANH" "TONE" "TRACE" "TRANS" "UVEC" "VARMENU" "VIEW" "WMEAN" "WRAP" "WSIZE?"  "X<0?"  "X<>" "X<>Y" "X<Y?"  "X=0?"  "X=Y?"  "X>0?"  "X>Y?"  "XEQ" "XTOA" "X↑2" "X≠0?"
-                                                 "X≠Y?"  "X≤0?"  "X≤Y?"  "X≥0?"  "X≥Y?"  "X≥Y?"  "YINT" "Y↑X" "[FIND]" "[MAX]" "[MIN]" "×" "÷" "Σ+" "Σ-" "ΣREG" "ΣREG?"  "←" "↑" "→" "→DEC" "→DEG" "→HMS" "→HR" "→OCT" "→POL" "→RAD" "→REC" "↓"
-                                                 "DDAYS" "DOW" "CLK12" "CLK24" "DMY" "MDY" "YMD" "DATE" "TIME" "DATE+" "PI"))
-                                      (cm-lb (if (not (string-equal "" (cl-second row))) 
-                                                 (cl-second row)
-                                                 (car (last (split-string (cl-first row) ":"))))))
-                                  (if (cl-position cm-lb blt-in :test #'string-equal)
-                                      (message "%s" cm-lb)
-                                      (message "XEQ \"%s\"" cm-lb))))
+(defun MJR-custom-x-gen (row) (let ((blt-in  '("%" "%CH" "+" "+/-" "-" "1/X" "10↑X" "ABS" "ACOS" "ACOSH" "ADV" "AGRAPH" "AIP" "ALENG" "ALL" "ALLΣ" "AND" "AOFF" "AON" "ARCL" "AROT" "ASHF" "ASIN" "ASINH" "ASSIGN" "ASTO" "ATAN" "ATANH" "ATOX" "AVIEW"
+                                               "BASE+" "BASE+/-" "BASE-" "BASE×" "BASE÷" "BEEP" "BEST" "BINM" "BIT?"  "BIT?"  "CF" "CLA" "CLD" "CLKEYS" "CLLCD" "CLMENU" "CLP" "CLRG" "CLST" "CLV" "CLX" "CLΣ" "COMB" "COMPLEX" "CORR" "COS" "COSH"
+                                               "CPX?"  "CPXRES" "CROSS" "CUSTOM" "DECM" "DEG" "DELAY" "DELR" "DET" "DIM" "DIM?"  "DOT" "DSE" "EDIT" "EDITN" "END" "ENG" "ENTER" "EXITALL" "EXPF" "E↑X" "E↑X-1" "FC?"  "FC?C" "FCSTX" "FCSTY" "FIX"
+                                               "FNRM" "FP" "FS?"  "FS?C" "FUNC" "GAMMA" "GETKEY" "GETM" "GRAD" "GROW" "GTO" "HEXM" "HMS+" "HMS-" "I+" "I-" "INDEX" "INPUT" "INSR" "INTEG" "INVRT" "IP" "ISG" "J+" "J-" "KEY" "KEYASN" "L4STK" "LASTX"
+                                               "LBL" "LCLBL" "LINF" "LINΣ" "LN" "LN1+X" "LOG" "LOGF" "LSTO" "MAN" "MAT?"  "MEAN" "MENU" "MOD" "MVAR" "N!"  "NEWMAT" "NOP" "NORM" "NOT" "OCTM" "OFF" "OLD" "ON" "OR" "PERM" "PGMINT" "PGMSLV" "PIXEL"
+                                               "POLAR" "POSA" "PRA" "PRLCD" "PROFF" "PROMPT" "PRON" "PRSTK" "PRUSR" "PRV" "PRX" "PRΣ" "PSE" "PUTM" "PWRF" "R<>R" "RAD" "RAN" "RCL" "RCL+" "RCL-" "RCLEL" "RCLIJ" "RCL×" "RCL÷" "RDX," "RDX."  "REAL?"
+                                               "REALRES" "RECT" "RND" "RNRM" "ROTXY" "RSUM" "RTN" "RTNERR" "RTNYES" "RTNNO" "R↑" "R↓" "SCI" "SDEV" "SEED" "SF" "SIGN" "SIN" "SINH" "SIZE" "SLOPE" "SOLVE" "SQRT" "STO" "STO+" "STO-" "STOEL" "STOIJ" "STOP" "STO×"
+                                               "STO÷" "STR?"  "SUM" "TAN" "TANH" "TONE" "TRACE" "TRANS" "UVEC" "VARMENU" "VIEW" "WMEAN" "WRAP" "WSIZE?"  "X<0?"  "X<>" "X<>Y" "X<Y?"  "X=0?"  "X=Y?"  "X>0?"  "X>Y?"  "XEQ" "XTOA" "X↑2" "X≠0?"
+                                               "X≠Y?"  "X≤0?"  "X≤Y?"  "X≥0?"  "X≥Y?"  "X≥Y?"  "YINT" "Y↑X" "[FIND]" "[MAX]" "[MIN]" "×" "÷" "Σ+" "Σ-" "ΣREG" "ΣREG?"  "←" "↑" "→" "→DEC" "→DEG" "→HMS" "→HR" "→OCT" "→POL" "→RAD" "→REC" "↓"
+                                               "DDAYS" "DOW" "CLK12" "CLK24" "DMY" "MDY" "YMD" "DATE" "TIME" "DATE+" "PI"))
+                                    (cm-lb (if (not (string-equal "" (cl-second row)))
+                                               (cl-second row)
+                                               (car (last (split-string (cl-first row) ":"))))))
+                                (if (cl-position cm-lb blt-in :test #'string-equal)
+                                    (message "%s" cm-lb)
+                                    (message "XEQ \"%s\"" cm-lb))))
 #+END_SRC
 
 #+RESULTS:
+
+*** Template for empty menu code
+
+#+NAME: menu
+| Menu:SubMenu:Key |
+|------------------|
+| A                |
+| B                |
+
+#+BEGIN_SRC elisp :var tbl=menu :colnames y :results output verbatum :wrap src hp42s
+(MJR-generate-42-menu-code "PROG_NAME" tbl "stay" "up" (lambda (x) ""))
+#+END_SRC
 
 
 
@@ -223,22 +235,24 @@ I may have missed a built in function, so you may have to add one to the list. ;
 
 ** Emacs function to insert charcters given a list of character codes
 
-#+BEGIN_SRC elisp
-  (defun MJR-ins42char (charn)
-    "Insert free42 character at point."
-    (interactive "sCharacter Number(s): ")
-    (if charn
-        (cl-loop for c in (split-string charn)
-                 do (insert (nth (eval (car (read-from-string c))) '("÷" "×" "√"  "∫" "▒" "Σ" "▸" "π" "¿" "≤"     "[LF]" "≥"     "≠"  "↵" "↓" "→" 
-                                                                     "←" "μ" "£"  "°" "Å" "Ñ" "Ä" "∡" "ᴇ" "Æ"     "…"    "[ESC]" "Ö"  "Ü" "▒" "•"  ;; CHAR 30 & CHAR 4 are the same unicode.  Not sure how to type a char 30 into a string...
-                                                                     " " "!" "\"" "#" "$" "%" "&" "'" "(" ")"     "*"    "+"     ","  "-" "." "/" 
-                                                                     "0" "1" "2"  "3" "4" "5" "6" "7" "8" "9"     ":"    ";"     "<"  "=" ">" "?"
-                                                                     "@" "A" "B"  "C" "D" "E" "F" "G" "H" "I"     "J"    "K"     "L"  "M" "N" "O"
-                                                                     "P" "Q" "R"  "S" "T" "U" "V" "W" "X" "Y"     "Z"    "["     "\\" "]" "↑" "_"
-                                                                     "`" "a" "b"  "c" "d" "e" "f" "g" "h" "i"     "j"    "k"     "l"  "m" "n" "o"
-                                                                     "p" "q" "r"  "s" "t" "u" "v" "w" "x" "y"     "z"    "{"     "|"  "}" "~" "├"
-                                                                     ":" "ʏ"))))))
+#+BEGIN_SRC elisp :results output verbatum
+(defun MJR-ins42char (charn)
+  "Insert free42 character at point."
+  (interactive "sCharacter Number(s): ")
+  (if charn
+      (cl-loop for c in (split-string charn)
+               do (insert (nth (eval (car (read-from-string c))) '("÷" "×" "√"  "∫" "▒" "Σ" "▸" "π" "¿" "≤"     "[LF]" "≥"     "≠"  "↵" "↓" "→"
+                                                                   "←" "μ" "£"  "°" "Å" "Ñ" "Ä" "∡" "ᴇ" "Æ"     "…"    "[ESC]" "Ö"  "Ü" "▒" "•"  ;; CHAR 30 & CHAR 4 are the same unicode.  Not sure how to type a char 30 into a string...
+                                                                   " " "!" "\"" "#" "$" "%" "&" "'" "(" ")"     "*"    "+"     ","  "-" "." "/"
+                                                                   "0" "1" "2"  "3" "4" "5" "6" "7" "8" "9"     ":"    ";"     "<"  "=" ">" "?"
+                                                                   "@" "A" "B"  "C" "D" "E" "F" "G" "H" "I"     "J"    "K"     "L"  "M" "N" "O"
+                                                                   "P" "Q" "R"  "S" "T" "U" "V" "W" "X" "Y"     "Z"    "["     "\\" "]" "↑" "_"
+                                                                   "`" "a" "b"  "c" "d" "e" "f" "g" "h" "i"     "j"    "k"     "l"  "m" "n" "o"
+                                                                   "p" "q" "r"  "s" "t" "u" "v" "w" "x" "y"     "z"    "{"     "|"  "}" "~" "├"
+                                                                   ":" "ʏ"))))))
 #+END_SRC
+
+#+RESULTS:
 
 
 ** Emacs Mode for 42s Code
@@ -248,27 +262,27 @@ some of the characters in keywords are recognized as punctuation.  Still it make
 but this works for now.
 
 #+BEGIN_SRC elisp
-   (define-generic-mode 'hp42s-mode
-         '("@@@@" "@@")
-         '("%" "%CH" "+" "+/-" "-" "1/X" "10↑X" "ABS" "ACOS" "ACOSH" "ADV" "AGRAPH" "AIP" "ALENG" "ALL" "ALLΣ" "AND" "AOFF" "AON" "ARCL" "AROT" "ASHF" "ASIN" "ASINH" "ASSIGN" "ASTO" "ATAN" "ATANH" "ATOX" "AVIEW"
-           "BASE+" "BASE+/-" "BASE-" "BASE×" "BASE÷" "BEEP" "BEST" "BINM" "BIT"  "BIT"  "CF" "CLA" "CLD" "CLKEYS" "CLLCD" "CLMENU" "CLP" "CLRG" "CLST" "CLV" "CLX" "CLΣ" "COMB" "COMPLEX" "CORR" "COS" "COSH"
-           "CPX"  "CPXRES" "CROSS" "CUSTOM" "DECM" "DEG" "DELAY" "DELR" "DET" "DIM" "DIM"  "DOT" "DSE" "EDIT" "EDITN" "END" "ENG" "ENTER" "EXITALL" "EXPF" "E↑X" "E↑X-1" "FC"  "FC?C" "FCSTX" "FCSTY" "FIX"
-           "FNRM" "FP" "FS"  "FS?C" "FUNC" "GAMMA" "GETKEY" "GETM" "GRAD" "GROW" "GTO" "HEXM" "HMS+" "HMS-" "I+" "I-" "INDEX" "INPUT" "INSR" "INTEG" "INVRT" "IP" "ISG" "J+" "J-" "KEY" "KEYASN" "L4STK" "LASTX"
-           "LBL" "LCLBL" "LINF" "LINΣ" "LN" "LN1+X" "LOG" "LOGF" "LSTO" "MAN" "MAT"  "MEAN" "MENU" "MOD" "MVAR" "N!"  "NEWMAT" "NOP" "NORM" "NOT" "OCTM" "OFF" "OLD" "ON" "OR" "PERM" "PGMINT" "PGMSLV" "PIXEL"
-           "POLAR" "POSA" "PRA" "PRLCD" "PROFF" "PROMPT" "PRON" "PRSTK" "PRUSR" "PRV" "PRX" "PRΣ" "PSE" "PUTM" "PWRF" "R<>R" "RAD" "RAN" "RCL" "RCL+" "RCL-" "RCLEL" "RCLIJ" "RCL×" "RCL÷" "RDX," "RDX."  "REAL"
-           "REALRES" "RECT" "RND" "RNRM" "ROTXY" "RSUM" "RTN" "RTNERR" "R↑" "R↓" "SCI" "SDEV" "SEED" "SF" "SIGN" "SIN" "SINH" "SIZE" "SLOPE" "SOLVE" "SQRT" "STO" "STO+" "STO-" "STOEL" "STOIJ" "STOP" "STO×"
-           "STO÷" "STR"  "SUM" "TAN" "TANH" "TONE" "TRACE" "TRANS" "UVEC" "VARMENU" "VIEW" "WMEAN" "WRAP" "WSIZE"  "X<0"  "X<>" "X<>Y" "X<Y"  "X=0"  "X=0" "X=Y"  "X>0"  "X>Y"  "XEQ" "XTOA" "X↑2" "X≠0"
-           "X≠Y"  "X≤0"  "X≤Y"  "X≥0"  "X≥Y"  "X≥Y"  "YINT" "Y↑X" "[FIND]" "[MAX]" "[MIN]" "×" "÷" "Σ+" "Σ-" "ΣREG" "ΣREG"  "←" "↑" "→" "→DEC" "→DEG" "→HMS" "→HR" "→OCT" "→POL" "→RAD" "→REC" "↓"
-           "DDAYS" "DOW" "CLK12" "CLK24" "DMY" "MDY" "YMD" "DATE" "TIME" "ADATE" "ATIME" "DATE+" "XEQ IND ST" "XEQ IND" "GTO IND" "GTO IND ST" "STO IND ST" "STO+ IND ST" "STO- IND ST" "STOEL IND ST" 
-           "STOIJ IND ST" "STOP IND ST" "STO× IND ST" "STO÷ IND ST" "STO ST" "STO+ ST" "STO- ST" "STOEL ST" "STOIJ ST" "STOP ST" "STO× ST" "STO÷ ST" "RCL IND ST" "RCL+ IND ST" "RCL- IND ST" "RCLEL IND ST"
-           "RCLIJ IND ST" "RCL× IND ST" "RCL÷ IND ST" "RCL ST" "RCL+ ST" "RCL- ST" "RCLEL ST"
-           "RCLIJ ST" "RCL× ST" "RCL÷ ST"
-           "RTNNO" "RTNYES" "PI"
-           )
-         '(("@@## REQ:.*" . font-lock-preprocessor-face)) ;; Not sure why this is broken. 
-         '(".42s\\'")
-         nil
-         "Major mode for editing HP-42s programs")
+(define-generic-mode 'hp42s-mode
+                     '("@@@@" "@@")
+                     '("%" "%CH" "+" "+/-" "-" "1/X" "10↑X" "ABS" "ACOS" "ACOSH" "ADV" "AGRAPH" "AIP" "ALENG" "ALL" "ALLΣ" "AND" "AOFF" "AON" "ARCL" "AROT" "ASHF" "ASIN" "ASINH" "ASSIGN" "ASTO" "ATAN" "ATANH" "ATOX" "AVIEW"
+                       "BASE+" "BASE+/-" "BASE-" "BASE×" "BASE÷" "BEEP" "BEST" "BINM" "BIT"  "BIT"  "CF" "CLA" "CLD" "CLKEYS" "CLLCD" "CLMENU" "CLP" "CLRG" "CLST" "CLV" "CLX" "CLΣ" "COMB" "COMPLEX" "CORR" "COS" "COSH"
+                       "CPX"  "CPXRES" "CROSS" "CUSTOM" "DECM" "DEG" "DELAY" "DELR" "DET" "DIM" "DIM"  "DOT" "DSE" "EDIT" "EDITN" "END" "ENG" "ENTER" "EXITALL" "EXPF" "E↑X" "E↑X-1" "FC"  "FC?C" "FCSTX" "FCSTY" "FIX"
+                       "FNRM" "FP" "FS"  "FS?C" "FUNC" "GAMMA" "GETKEY" "GETM" "GRAD" "GROW" "GTO" "HEXM" "HMS+" "HMS-" "I+" "I-" "INDEX" "INPUT" "INSR" "INTEG" "INVRT" "IP" "ISG" "J+" "J-" "KEY" "KEYASN" "L4STK" "LASTX"
+                       "LBL" "LCLBL" "LINF" "LINΣ" "LN" "LN1+X" "LOG" "LOGF" "LSTO" "MAN" "MAT"  "MEAN" "MENU" "MOD" "MVAR" "N!"  "NEWMAT" "NOP" "NORM" "NOT" "OCTM" "OFF" "OLD" "ON" "OR" "PERM" "PGMINT" "PGMSLV" "PIXEL"
+                       "POLAR" "POSA" "PRA" "PRLCD" "PROFF" "PROMPT" "PRON" "PRSTK" "PRUSR" "PRV" "PRX" "PRΣ" "PSE" "PUTM" "PWRF" "R<>R" "RAD" "RAN" "RCL" "RCL+" "RCL-" "RCLEL" "RCLIJ" "RCL×" "RCL÷" "RDX," "RDX."  "REAL"
+                       "REALRES" "RECT" "RND" "RNRM" "ROTXY" "RSUM" "RTN" "RTNERR" "R↑" "R↓" "SCI" "SDEV" "SEED" "SF" "SIGN" "SIN" "SINH" "SIZE" "SLOPE" "SOLVE" "SQRT" "STO" "STO+" "STO-" "STOEL" "STOIJ" "STOP" "STO×"
+                       "STO÷" "STR"  "SUM" "TAN" "TANH" "TONE" "TRACE" "TRANS" "UVEC" "VARMENU" "VIEW" "WMEAN" "WRAP" "WSIZE"  "X<0"  "X<>" "X<>Y" "X<Y"  "X=0"  "X=0" "X=Y"  "X>0"  "X>Y"  "XEQ" "XTOA" "X↑2" "X≠0"
+                       "X≠Y"  "X≤0"  "X≤Y"  "X≥0"  "X≥Y"  "X≥Y"  "YINT" "Y↑X" "[FIND]" "[MAX]" "[MIN]" "×" "÷" "Σ+" "Σ-" "ΣREG" "ΣREG"  "←" "↑" "→" "→DEC" "→DEG" "→HMS" "→HR" "→OCT" "→POL" "→RAD" "→REC" "↓"
+                       "DDAYS" "DOW" "CLK12" "CLK24" "DMY" "MDY" "YMD" "DATE" "TIME" "ADATE" "ATIME" "DATE+" "XEQ IND ST" "XEQ IND" "GTO IND" "GTO IND ST" "STO IND ST" "STO+ IND ST" "STO- IND ST" "STOEL IND ST"
+                       "STOIJ IND ST" "STOP IND ST" "STO× IND ST" "STO÷ IND ST" "STO ST" "STO+ ST" "STO- ST" "STOEL ST" "STOIJ ST" "STOP ST" "STO× ST" "STO÷ ST" "RCL IND ST" "RCL+ IND ST" "RCL- IND ST" "RCLEL IND ST"
+                       "RCLIJ IND ST" "RCL× IND ST" "RCL÷ IND ST" "RCL ST" "RCL+ ST" "RCL- ST" "RCLEL ST"
+                       "RCLIJ ST" "RCL× ST" "RCL÷ ST"
+                       "RTNNO" "RTNYES" "PI"
+                       )
+                     '(("@@## REQ:.*" . font-lock-preprocessor-face)) ;; Not sure why this is broken.
+                     '(".42s\\'")
+                     nil
+                     "Major mode for editing HP-42s programs")
 #+END_SRC
 
 #+RESULTS:
@@ -276,10 +290,16 @@ but this works for now.
 hp42s-mode
 #+end_example
 
-
 ** yas templates
 
-#+BEGIN_SRC snippet
+#+BEGIN_SRC sh :results output verbatum :wrap src snippet
+echo ''
+for f in ~/core/yasnippet/hp42s-mode/*; do cat $f; echo ''; done
+#+END_SRC
+
+#+RESULTS:
+#+begin_src snippet
+
 # -*- mode: snippet -*-
 # name: if-then-end
 # key: if
@@ -288,9 +308,8 @@ hp42s-mode
 GTO ${1:1$(format "%02d" (string-to-number yas-text))}
 GTO ${1:$(format "%02d" (+ 1 (string-to-number yas-text)))}
 LBL $1 @@@@ IF-THEN ($1/${1:$(format "%02d" (+ 1 (string-to-number yas-text)))})
-...    @@@@ True Code ($1/${1:$(format "%02d" (+ 1 (string-to-number yas-text)))})
+@@@@ True Code ($1/${1:$(format "%02d" (+ 1 (string-to-number yas-text)))})
 LBL ${1:$(format "%02d" (+ 1 (string-to-number yas-text)))} @@@@ IF-END ($1/${1:$(format "%02d" (+ 1 (string-to-number yas-text)))})
-
 
 # -*- mode: snippet -*-
 # name: if-then-else-end
@@ -300,12 +319,20 @@ LBL ${1:$(format "%02d" (+ 1 (string-to-number yas-text)))} @@@@ IF-END ($1/${1:
 GTO ${1:1$(format "%02d" (string-to-number yas-text))}
 GTO ${1:$(format "%02d" (+ 1 (string-to-number yas-text)))}
 LBL $1 @@@@ IF-THEN ($1/${1:$(format "%02d" (+ 1 (string-to-number yas-text)))}/${1:$(format "%02d" (+ 2 (string-to-number yas-text)))})
-...    @@@@ True Code ($1/${1:$(format "%02d" (+ 1 (string-to-number yas-text)))}/${1:$(format "%02d" (+ 2 (string-to-number yas-text)))})
+@@@@ True Code ($1/${1:$(format "%02d" (+ 1 (string-to-number yas-text)))}/${1:$(format "%02d" (+ 2 (string-to-number yas-text)))})
 GTO ${1:$(format "%02d" (+ 2 (string-to-number yas-text)))}
 LBL ${1:$(format "%02d" (+ 1 (string-to-number yas-text)))} @@@@ IF-ELSE ($1/${1:$(format "%02d" (+ 1 (string-to-number yas-text)))}/${1:$(format "%02d" (+ 2 (string-to-number yas-text)))})
-...    @@@@ False Code ($1/${1:$(format "%02d" (+ 1 (string-to-number yas-text)))}/${1:$(format "%02d" (+ 2 (string-to-number yas-text)))})
+@@@@ False Code ($1/${1:$(format "%02d" (+ 1 (string-to-number yas-text)))}/${1:$(format "%02d" (+ 2 (string-to-number yas-text)))})
 LBL ${1:$(format "%02d" (+ 2 (string-to-number yas-text)))} @@@@ IF-END ($1/${1:$(format "%02d" (+ 1 (string-to-number yas-text)))}/${1:$(format "%02d" (+ 2 (string-to-number yas-text)))})
 
+# -*- mode: snippet -*-
+# name: if-not-then-end
+# key: ifn
+# --
+...?   @@@@ IF-NOT-BEGIN ($1)
+GTO ${1:1$(format "%02d" (string-to-number yas-text))}
+@@@@ False Code ($1)
+LBL $1 @@@@ IF-NOT-END ($1)
 
 # -*- mode: snippet -*-
 # name: if-then-end-return
@@ -313,13 +340,13 @@ LBL ${1:$(format "%02d" (+ 2 (string-to-number yas-text)))} @@@@ IF-END ($1/${1:
 # --
 ...?      @@@@ IF-BEGIN ($1)
 GTO ${1:1$(format "%02d" (string-to-number yas-text))}    @@@@ IF-FALSE-BEGIN ($1)
-...         @@@@ False Code ($1)
+@@@@ False Code ($1)
 RTN       @@@@ IF-FALSE-END ($1)
 LBL $1    @@@@ IF-TRUE-BEGIN ($1)
-...         @@@@ True Code ($1)
+@@@@ True Code ($1)
 RTN       @@@@ IF-TRUE-END ($1)
-#+END_SRC
 
+#+end_src
 
 * Prepare Code For Conversion
 
@@ -348,22 +375,22 @@ the target version of free42.  It's a bit of a hack, but it lets me maintain one
 ** free42 3.0.1 or newer
 
 #+BEGIN_SRC elisp
-  (progn
-    ;; Zap comment lines
-    (beginning-of-buffer)
-    (delete-matching-lines "^ *@@@@.*$" nil nil t)
-    ;; Zap directive comments
-    (beginning-of-buffer)
-    (query-replace-regexp " +@@## ...:.*$" "" nil nil nil nil nil)
-    ;; Zap comments
-    (beginning-of-buffer)
-    (query-replace-regexp " +@@@@.*$" "" nil nil nil nil nil)
-    ;; Zap leading whitespace
-    (beginning-of-buffer)
-    (query-replace-regexp "^ +" "" nil nil nil nil nil)
-    ;; Zap empty lines
-    (beginning-of-buffer)
-    (delete-matching-lines "^ *$" nil nil t))
+(progn
+  ;; Zap comment lines
+  (beginning-of-buffer)
+  (delete-matching-lines "^ *@@@@.*$" nil nil t)
+  ;; Zap directive comments
+  (beginning-of-buffer)
+  (query-replace-regexp " +@@## ...:.*$" "" nil nil nil nil nil)
+  ;; Zap comments
+  (beginning-of-buffer)
+  (query-replace-regexp " +@@@@.*$" "" nil nil nil nil nil)
+  ;; Zap leading whitespace
+  (beginning-of-buffer)
+  (query-replace-regexp "^ +" "" nil nil nil nil nil)
+  ;; Zap empty lines
+  (beginning-of-buffer)
+  (delete-matching-lines "^ *$" nil nil t))
 #+END_SRC
 
 
@@ -504,8 +531,6 @@ the target version of free42.  It's a bit of a hack, but it lets me maintain one
  129 ʏ
 #+END_SRC
 
-
-
 ** Date format
 
 | Flag 67 | Flag 31 | Mode |
@@ -513,3 +538,14 @@ the target version of free42.  It's a bit of a hack, but it lets me maintain one
 | Set     | N/A     | Y.MD |
 | Clear   | Clear   | M.DY |
 | Clear   | Set     | D.MY |
+
+* EOF
+
+# End of document.
+
+# The following adds some space at the bottom of exported HTML
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />

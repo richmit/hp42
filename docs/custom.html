@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-03-30 Tue 17:50 -->
+<!-- 2021-04-01 Thu 18:16 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42/hp42s/DM42 Custom Menus</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-03-30 17:50:23</i></td>
+<td class="org-left"><i>2021-04-01 18:16:27</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,24 +241,26 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org213bfc6">1. Metadata</a></li>
-<li><a href="#org2166559">2. Introduction</a>
+<li><a href="#org538c1b2">1. Metadata</a></li>
+<li><a href="#org7023754">2. Introduction</a>
 <ul>
-<li><a href="#orge1c765c">2.1. Customizing Custom Menu Table</a></li>
+<li><a href="#orgf92af2a">2.1. Customizing Custom Menu Table</a></li>
 </ul>
 </li>
-<li><a href="#orge05c28c">3. Custom Menu</a>
+<li><a href="#orgc8dc55a">3. Custom Menus</a>
 <ul>
-<li><a href="#org033da7c">3.1. Menu Contents</a></li>
-<li><a href="#org927c8c9">3.2. Menu Code</a></li>
+<li><a href="#org3ac0ec8">3.1. Menu Contents</a></li>
+<li><a href="#orgad51df5">3.2. Menu Code</a></li>
 </ul>
 </li>
+<li><a href="#orgb498d56">4. Create system <code>CUSTOM</code> Menu</a></li>
+<li><a href="#org0c099bc">5. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org213bfc6" class="outline-2">
-<h2 id="org213bfc6"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org538c1b2" class="outline-2">
+<h2 id="org538c1b2"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/custom.html">https://richmit.github.io/hp42/custom.html</a>
@@ -276,8 +278,8 @@ Files related to this document may be found on github: <a href="https://github.c
 </div>
 </div>
 
-<div id="outline-container-org2166559" class="outline-2">
-<h2 id="org2166559"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-org7023754" class="outline-2">
+<h2 id="org7023754"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 The custom menu on the 42s is a wonderful thing, but it is also very limited.  It's just too small!!  And it is only one level deep!!  So instead of simply
@@ -291,14 +293,14 @@ The flow to create your custom CUST program:
 <ul class="org-ul">
 <li>Evaluate the "Generic menu generator" babel block in the <code>hp42s-meta.org</code> file.  This will define the function <code>MJR-generate-42-menu-code</code></li>
 <li>Evaluate the "For CUSTOM-type Menus" babel block in the <code>hp42s-meta.org</code> file.  This will define the function <code>MJR-custom-x-gen</code></li>
-<li>Define your menu in the <a href="#org033da7c">Menu Contents</a> section.</li>
-<li>Evaluate the babel block in the <a href="#org927c8c9">Menu Code</a> section below.</li>
+<li>Define your menu in the <a href="#org3ac0ec8">Menu Contents</a> section.</li>
+<li>Evaluate the babel block in the <a href="#orgad51df5">Menu Code</a> section below.</li>
 <li>Load the program on your calculator</li>
 </ul>
 </div>
 
-<div id="outline-container-orge1c765c" class="outline-3">
-<h3 id="orge1c765c"><span class="section-number-3">2.1</span> Customizing Custom Menu Table</h3>
+<div id="outline-container-orgf92af2a" class="outline-3">
+<h3 id="orgf92af2a"><span class="section-number-3">2.1</span> Customizing Custom Menu Table</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 The first column (which I labeled Menu) describes the menu keys.  Colons are used to define a menu hierarchy.  For example "<code>top:mid:thingy</code>" means we have a
@@ -323,14 +325,14 @@ The other columns of the table are not used.
 </div>
 </div>
 
-<div id="outline-container-orge05c28c" class="outline-2">
-<h2 id="orge05c28c"><span class="section-number-2">3</span> Custom Menu</h2>
+<div id="outline-container-orgc8dc55a" class="outline-2">
+<h2 id="orgc8dc55a"><span class="section-number-2">3</span> Custom Menus</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org033da7c" class="outline-3">
-<h3 id="org033da7c"><span class="section-number-3">3.1</span> Menu Contents</h3>
+<div id="outline-container-org3ac0ec8" class="outline-3">
+<h3 id="org3ac0ec8"><span class="section-number-3">3.1</span> Menu Contents</h3>
 <div class="outline-text-3" id="text-3-1">
-<table id="orgdd32ead" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
+<table id="org4cea04c" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
 
 
 <colgroup>
@@ -643,8 +645,8 @@ The other columns of the table are not used.
 </div>
 </div>
 
-<div id="outline-container-org927c8c9" class="outline-3">
-<h3 id="org927c8c9"><span class="section-number-3">3.2</span> Menu Code</h3>
+<div id="outline-container-orgad51df5" class="outline-3">
+<h3 id="orgad51df5"><span class="section-number-3">3.2</span> Menu Code</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"CUST"</span> tbl <span style="color: #fa8072;">"stay"</span> <span style="color: #fa8072;">"up"</span> #'MJR-custom-x-gen)
@@ -1003,9 +1005,184 @@ The other columns of the table are not used.
 </div>
 </div>
 </div>
+
+
+<div id="outline-container-orgb498d56" class="outline-2">
+<h2 id="orgb498d56"><span class="section-number-2">4</span> Create system <code>CUSTOM</code> Menu</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+<a id="org60aa2bd"></a>
+</p>
+
+<p>
+Sometimes our carefully built in <code>CUSTOM</code> menu is lost &#x2013; an errant program or system memory clear.  What to do?  How about a program that will recreate your
+<code>CUSTOM</code> menu when you need it?  In the table below we have the definition of our custom menu, and a bit of lisp that will write a 42s program to <code>ASSIGN</code>
+each key.
+</p>
+
+<table id="org24cd6ab" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">KEY#</th>
+<th scope="col" class="org-left">ASSIGNment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">01</td>
+<td class="org-left">CUST</td>
+</tr>
+
+<tr>
+<td class="org-right">02</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">03</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">04</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">05</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">06</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">07</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">08</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">09</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">10</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">11</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">12</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">13</td>
+<td class="org-left">SST</td>
+</tr>
+
+<tr>
+<td class="org-right">14</td>
+<td class="org-left">SST↑</td>
+</tr>
+
+<tr>
+<td class="org-right">15</td>
+<td class="org-left">SST→</td>
+</tr>
+
+<tr>
+<td class="org-right">16</td>
+<td class="org-left">GTO</td>
+</tr>
+
+<tr>
+<td class="org-right">17</td>
+<td class="org-left">VIEW</td>
+</tr>
+
+<tr>
+<td class="org-right">18</td>
+<td class="org-left">AVIEW</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Simply evaluate the followign lisp block, and the 42s program will be created.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(princ <span style="color: #fa8072;">"LBL \"MKCM\"\n"</span>)
+(<span style="color: #00ffff;">cl-loop</span> for (da-key da-assignment da-note) in tbl
+         <span style="color: #ffa500;">;;</span><span style="color: #ff7f24;">when (not (zerop (length da-assignment)))</span>
+         do (princ (message <span style="color: #fa8072;">"ASSIGN \"%s\" TO %s\n"</span> da-assignment da-key)))
+(princ <span style="color: #fa8072;">"RTN\n"</span>)
+(princ <span style="color: #fa8072;">"END\n"</span>)
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"MKCM"</span>
+<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">"CUST"</span> TO 01
+<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">""</span> TO 02
+<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">""</span> TO 03
+<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">""</span> TO 04
+<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">""</span> TO 05
+<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">""</span> TO 06
+<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">""</span> TO 07
+<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">""</span> TO 08
+<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">""</span> TO 09
+<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">""</span> TO 10
+<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">""</span> TO 11
+<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">""</span> TO 12
+<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">"SST"</span> TO 13
+<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">"SST&#8593;"</span> TO 14
+<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">"SST&#8594;"</span> TO 15
+<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">"GTO"</span> TO 16
+<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">"VIEW"</span> TO 17
+<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">"AVIEW"</span> TO 18
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0c099bc" class="outline-2">
+<h2 id="org0c099bc"><span class="section-number-2">5</span> EOF</h2>
+<div class="outline-text-2" id="text-5">
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-03-30 Tue 17:50 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-01 Thu 18:16 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

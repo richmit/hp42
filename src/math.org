@@ -35,6 +35,8 @@ Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 #        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
 #        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
 
+# Provde links to programs like this: https://richmit.github.io/hp42/math.html#coderef-lnXY
+
 * Metadata
 
 This home for this HTML file is: https://richmit.github.io/hp42/math.html
@@ -67,7 +69,7 @@ type" -- that is a thing the 42s can do arithmetic with: real numbers, complex n
 | SGN      | Sign function                | Real, Complex                              |
 | lnXY     | Base Y Logarithm of X        | Real, Complex, Real Matrix, Complex Matrix |
 | ln2      | Base 2 Logarithm             | Real, Complex, Real Matrix, Complex Matrix |
-| X↑2      | Raise 2 to the power of X    | Real, Complex, Real Matrix, Complex Matrix |
+| 2↑X      | Raise 2 to the power of X    | Real, Complex, Real Matrix, Complex Matrix |
 | GCD      | GCD                          | Real                                       |
 | LCM      | LCM                          | Real                                       |
 | NPDF     | Standard Normal PDF          | Real                                       |
@@ -86,7 +88,7 @@ type" -- that is a thing the 42s can do arithmetic with: real numbers, complex n
 * Types
 
 #+BEGIN_SRC hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ATYP)
 @@@@ DSC: Arithmetic Type
 @@@@ IN:  X: an object
 @@@@ OUT: X: 1 if input X was a real number
@@ -99,7 +101,7 @@ type" -- that is a thing the 42s can do arithmetic with: real numbers, complex n
 @@@@ BUG: A 2 will be returned for a real matrix containing strings
 @@@@ BUG: In infinite stack mode with an empty stack 2 will be returned as X=0 when we do L4STK
 @@@@ UPD: 2021-02-23
-LBL "ATYP"
+LBL "ATYP"           
 FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 MAT?
@@ -144,7 +146,7 @@ END
 * Complex Numbers
 
 #+BEGIN_SRC hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RPART)
 @@@@ DSC: Real part
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: rpart(x)
@@ -189,7 +191,7 @@ X<>Y
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:IPART)
 @@@@ DSC: Imaginary Part
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: ipart(x)
@@ -235,7 +237,7 @@ COMPLEX
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CONJ)
 @@@@ DSC: Complex Conjugate
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: conj(x)
@@ -266,7 +268,7 @@ COMPLEX
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CABS)
 @@@@ DSC: Magnitude/absolute value
 @@@@ IN:  X: Number or numeric matrix (element-wise) -- built in ABS won't work with a complex matrix
 @@@@ OUT: X: |x|
@@ -313,7 +315,7 @@ X<>Y
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CARG)
 @@@@ DSC: Complex Argument
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: arg(x)
@@ -364,7 +366,7 @@ END
 * Math Functions
 
 #+BEGIN_SRC hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PTOT)
 @@@@ DSC: Percentage of total (just like hp-12c button)
 @@@@ IN:  Y: Real Number -- Total
 @@@@ IN:  X: Real Number -- Part
@@ -380,7 +382,7 @@ X<>Y
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SGN)
 @@@@ DSC: Sign function
 @@@@ IN:  X: a number
 @@@@ OUT: X:  0 when input was 0
@@ -426,14 +428,14 @@ R↓                   @@## REQ:free42<2.5.24
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:lnXY)
 @@@@ DSC: Base Y Logarithm of X
 @@@@ IN:  Y: logarithm base
 @@@@      X: number or matrix (element-wise)
 @@@@ OUT: X: log_y(x)
 @@@@ UPD: 2021-02-23
 @@@@ TST: free42_3.0
-LBL "lnXY"
+LBL "lnXY"           @@@@ OTG: (ref:lnXY)
 FUNC 21              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 LN
@@ -444,7 +446,7 @@ X<>Y
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ln2)
 @@@@ DSC: Base 2 Logarithm
 @@@@ IN:  X: number or matrix (element-wise)
 @@@@ OUT: X: log_2(x)
@@ -460,13 +462,13 @@ LN
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:POW2)
 @@@@ DSC: Raise 2 to the power of X
 @@@@ IN:  X: number or matrix (element-wise)
 @@@@ OUT: X: 2^X
 @@@@ UPD: 2021-02-23
 @@@@ TST: free42_3.0
-LBL "X↑2"
+LBL "2↑X"
 FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 2
@@ -475,7 +477,7 @@ Y^X
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:GCD)
 @@@@ DSC: GCD
 @@@@ IN:  Y: real number
 @@@@      X: real number
@@ -501,7 +503,7 @@ R↓
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:LCM)
 @@@@ DSC: LCM
 @@@@ IN:  Y: real number
 @@@@      X: real number
@@ -540,7 +542,7 @@ RCL× "TMPY"
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:NPDF)
 @@@@ DSC: Standard Normal PDF
 @@@@ IN:  X: real number
 @@@@ OUT: X: Standard Normal PDF value at X
@@ -561,7 +563,7 @@ SQRT
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:NCDF)
 @@@@ DSC: Standard Normal CDF
 @@@@ IN:  X: real number
 @@@@ OUT: X: Standard Normal CDF value at X
@@ -619,7 +621,7 @@ LBL 05
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ERF)
 @@@@ DSC: erf (error) function
 @@@@ IN:  X: real number
 @@@@ OUT: X: erf(X)
@@ -653,7 +655,7 @@ R↓
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ERFC)
 @@@@ DSC: erfc (complementary error) function
 @@@@ IN:  X: real number
 @@@@ OUT: X: erfc(X)
@@ -670,7 +672,7 @@ X<>Y
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:IFP)
 @@@@ DSC: IP & FP of a number
 @@@@ IN:  X: real number
 @@@@ OUT: Y: IP(X)
@@ -686,7 +688,7 @@ FP
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FLOOR)
 @@@@ DSC: Floor
 @@@@ IN:  X: real number
 @@@@ OUT: X: floor(X)
@@ -706,7 +708,7 @@ LBL 01
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CEIL)
 @@@@ DSC: Ceiling
 @@@@ IN:  X: real number
 @@@@ OUT: X: ceil(X)
@@ -726,7 +728,7 @@ LBL 01
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:HYPOT)
 @@@@ DSC: Hypot
 @@@@ IN:  Y: number
 @@@@ IN:  X: number
@@ -745,7 +747,7 @@ SQRT
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ATAN2)
 @@@@ DSC: ATAN2
 @@@@ IN:  Y: number
 @@@@ IN:  X: number
@@ -819,13 +821,15 @@ ATAN
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:YROOT)
 @@@@ DSC: Nth roots prefering real & pure imaginary answers
 @@@@ IN:  Y: Number
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: Yth root of X
-@@@@ BUG: The principal value is not be returned when Y is a non-zero integer and X is a negative real number
-@@@@ FAQ: When Y is a non-zero integer and X is a negative real number, a real or pure imaginary root will be returned
+@@@@ BUG: The principal value is not always returned (by design)
+@@@@ BUG: Real integers are not recognized in complex form. i.e. 0+2i ≠ 2
+@@@@ FAQ: Return is pure imaginary when Y is an odd integer and X<0
+@@@@ FAQ: Return is real when  Y is an even integer and X<0
 @@@@ TST: free42_3.0
 @@@@ UPD: 2021-02-23
 LBL "YROOT"
@@ -883,7 +887,8 @@ X<>Y
 Y↑X
 RTN
 END
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BETA)
 @@@@ DSC: beta function
 @@@@ IN:  Y: Number
 @@@@ IN:  X: Number
@@ -893,16 +898,27 @@ END
 LBL "BETA"
 FUNC 21              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
-RCL ST Y    
-GAMMA       
-RCL ST Y    
-GAMMA       
-×           
-RCL ST Z    
-RCL ST Z    
-+           
-GAMMA       
-÷           
+RCL ST Y
+GAMMA
+RCL ST Y
+GAMMA
+×
+RCL ST Z
+RCL ST Z
++
+GAMMA
+÷
 RTN
 END
 #+END_SRC
+
+* EOF
+
+# End of document.
+
+# The following adds some space at the bottom of exported HTML
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />

@@ -140,6 +140,8 @@ The other columns of the table are not used.
 
 ** Menu Code
 
+The menu program is generated via the following bit of elisp.  You must first define the =MJR-generate-42-menu-code= and =MJR-custom-x-gen= by evaluating the code blocks in the =hp42s-meta.org= file.
+
 #+BEGIN_SRC elisp :var tbl=cust :colnames y :results output verbatum :wrap src hp42s
 (MJR-generate-42-menu-code "CUST" tbl "stay" "up" #'MJR-custom-x-gen)
 #+END_SRC
@@ -496,7 +498,9 @@ RTN
 
 
 * Create system =CUSTOM= Menu
-<<MKCM>>
+:PROPERTIES:
+:CUSTOM_ID: system-custom
+:END:
 
 Sometimes our carefully built in =CUSTOM= menu is lost -- an errant program or system memory clear.  What to do?  How about a program that will recreate your
 =CUSTOM= menu when you need it?  In the table below we have the definition of our custom menu, and a bit of lisp that will write a 42s program to =ASSIGN=

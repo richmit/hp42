@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-01 Thu 18:16 -->
+<!-- 2021-04-01 Thu 19:05 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42/hp42s/DM42 Custom Menus</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-01 18:16:27</i></td>
+<td class="org-left"><i>2021-04-01 19:05:27</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,26 +241,26 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org538c1b2">1. Metadata</a></li>
-<li><a href="#org7023754">2. Introduction</a>
+<li><a href="#org45c57a9">1. Metadata</a></li>
+<li><a href="#orga9535ff">2. Introduction</a>
 <ul>
-<li><a href="#orgf92af2a">2.1. Customizing Custom Menu Table</a></li>
+<li><a href="#org2609283">2.1. Customizing Custom Menu Table</a></li>
 </ul>
 </li>
-<li><a href="#orgc8dc55a">3. Custom Menus</a>
+<li><a href="#org67c9cd2">3. Custom Menus</a>
 <ul>
-<li><a href="#org3ac0ec8">3.1. Menu Contents</a></li>
-<li><a href="#orgad51df5">3.2. Menu Code</a></li>
+<li><a href="#org73a0c15">3.1. Menu Contents</a></li>
+<li><a href="#org5ed8ab3">3.2. Menu Code</a></li>
 </ul>
 </li>
-<li><a href="#orgb498d56">4. Create system <code>CUSTOM</code> Menu</a></li>
-<li><a href="#org0c099bc">5. EOF</a></li>
+<li><a href="#system-custom">4. Create system <code>CUSTOM</code> Menu</a></li>
+<li><a href="#org3e29dbb">5. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org538c1b2" class="outline-2">
-<h2 id="org538c1b2"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org45c57a9" class="outline-2">
+<h2 id="org45c57a9"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/custom.html">https://richmit.github.io/hp42/custom.html</a>
@@ -278,8 +278,8 @@ Files related to this document may be found on github: <a href="https://github.c
 </div>
 </div>
 
-<div id="outline-container-org7023754" class="outline-2">
-<h2 id="org7023754"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-orga9535ff" class="outline-2">
+<h2 id="orga9535ff"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 The custom menu on the 42s is a wonderful thing, but it is also very limited.  It's just too small!!  And it is only one level deep!!  So instead of simply
@@ -293,14 +293,14 @@ The flow to create your custom CUST program:
 <ul class="org-ul">
 <li>Evaluate the "Generic menu generator" babel block in the <code>hp42s-meta.org</code> file.  This will define the function <code>MJR-generate-42-menu-code</code></li>
 <li>Evaluate the "For CUSTOM-type Menus" babel block in the <code>hp42s-meta.org</code> file.  This will define the function <code>MJR-custom-x-gen</code></li>
-<li>Define your menu in the <a href="#org3ac0ec8">Menu Contents</a> section.</li>
-<li>Evaluate the babel block in the <a href="#orgad51df5">Menu Code</a> section below.</li>
+<li>Define your menu in the <a href="#org73a0c15">Menu Contents</a> section.</li>
+<li>Evaluate the babel block in the <a href="#org5ed8ab3">Menu Code</a> section below.</li>
 <li>Load the program on your calculator</li>
 </ul>
 </div>
 
-<div id="outline-container-orgf92af2a" class="outline-3">
-<h3 id="orgf92af2a"><span class="section-number-3">2.1</span> Customizing Custom Menu Table</h3>
+<div id="outline-container-org2609283" class="outline-3">
+<h3 id="org2609283"><span class="section-number-3">2.1</span> Customizing Custom Menu Table</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 The first column (which I labeled Menu) describes the menu keys.  Colons are used to define a menu hierarchy.  For example "<code>top:mid:thingy</code>" means we have a
@@ -325,14 +325,14 @@ The other columns of the table are not used.
 </div>
 </div>
 
-<div id="outline-container-orgc8dc55a" class="outline-2">
-<h2 id="orgc8dc55a"><span class="section-number-2">3</span> Custom Menus</h2>
+<div id="outline-container-org67c9cd2" class="outline-2">
+<h2 id="org67c9cd2"><span class="section-number-2">3</span> Custom Menus</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org3ac0ec8" class="outline-3">
-<h3 id="org3ac0ec8"><span class="section-number-3">3.1</span> Menu Contents</h3>
+<div id="outline-container-org73a0c15" class="outline-3">
+<h3 id="org73a0c15"><span class="section-number-3">3.1</span> Menu Contents</h3>
 <div class="outline-text-3" id="text-3-1">
-<table id="org4cea04c" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
+<table id="org3c8eea1" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
 
 
 <colgroup>
@@ -645,9 +645,13 @@ The other columns of the table are not used.
 </div>
 </div>
 
-<div id="outline-container-orgad51df5" class="outline-3">
-<h3 id="orgad51df5"><span class="section-number-3">3.2</span> Menu Code</h3>
+<div id="outline-container-org5ed8ab3" class="outline-3">
+<h3 id="org5ed8ab3"><span class="section-number-3">3.2</span> Menu Code</h3>
 <div class="outline-text-3" id="text-3-2">
+<p>
+The menu program is generated via the following bit of elisp.  You must first define the <code>MJR-generate-42-menu-code</code> and <code>MJR-custom-x-gen</code> by evaluating the code blocks in the <code>hp42s-meta.org</code> file.
+</p>
+
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"CUST"</span> tbl <span style="color: #fa8072;">"stay"</span> <span style="color: #fa8072;">"up"</span> #'MJR-custom-x-gen)
 </pre>
@@ -1007,20 +1011,16 @@ The other columns of the table are not used.
 </div>
 
 
-<div id="outline-container-orgb498d56" class="outline-2">
-<h2 id="orgb498d56"><span class="section-number-2">4</span> Create system <code>CUSTOM</code> Menu</h2>
-<div class="outline-text-2" id="text-4">
-<p>
-<a id="org60aa2bd"></a>
-</p>
-
+<div id="outline-container-orgab6006a" class="outline-2">
+<h2 id="system-custom"><span class="section-number-2">4</span> Create system <code>CUSTOM</code> Menu</h2>
+<div class="outline-text-2" id="text-system-custom">
 <p>
 Sometimes our carefully built in <code>CUSTOM</code> menu is lost &#x2013; an errant program or system memory clear.  What to do?  How about a program that will recreate your
 <code>CUSTOM</code> menu when you need it?  In the table below we have the definition of our custom menu, and a bit of lisp that will write a 42s program to <code>ASSIGN</code>
 each key.
 </p>
 
-<table id="org24cd6ab" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
+<table id="org2f82946" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
 
 
 <colgroup>
@@ -1170,8 +1170,8 @@ Simply evaluate the followign lisp block, and the 42s program will be created.
 </div>
 </div>
 
-<div id="outline-container-org0c099bc" class="outline-2">
-<h2 id="org0c099bc"><span class="section-number-2">5</span> EOF</h2>
+<div id="outline-container-org3e29dbb" class="outline-2">
+<h2 id="org3e29dbb"><span class="section-number-2">5</span> EOF</h2>
 <div class="outline-text-2" id="text-5">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1182,7 +1182,7 @@ Simply evaluate the followign lisp block, and the 42s program will be created.
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-01 Thu 18:16 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-01 Thu 19:05 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

@@ -67,7 +67,8 @@ the code [[Menu Code][here]].  This allows you to use these functions in your ow
 ** Code to print digits
 
 #+BEGIN_SRC hp42s
-@@@@ Tiny Number PRint
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TNPR)
+@@@@ DSC: Tiny Number PRint
 @@@@ IN:  Z: Y coordinate for upper left point of character -- Top of screen is 1
 @@@@      Y: X coordinate for upper left point of character -- Left of screen is 1
 @@@@      X: Character number -- integer in [0, 28]
@@ -291,7 +292,9 @@ END
 ** Test Code to print all characters
 
 #+BEGIN_SRC hp42s
-LBL "PATN"   @@@@ Print All Tiny Numbers
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PATN)
+@@@@ DSC: Print All Tiny Number Characters
+LBL "PATN"
 CLLCD
 0.031
 STO 00
@@ -325,8 +328,8 @@ END
 * Print Binary Number
 
 #+BEGIN_SRC hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Print binary numbers (up to 64-bit)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BVIEW)
+@@@@ DSC: Print binary numbers (up to 64-bit)
 @@@@ IN:  X: An integer
 @@@@ OUT: Nothing -- prints to screen
 @@@@ UPD: 2021-03-20
@@ -452,8 +455,8 @@ END
 * Bit Manipulation Functions
 
 #+BEGIN_SRC hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Number of bits set
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BCNT)
+@@@@ DSC: Number of bits set
 @@@@ IN:  X: an integer
 @@@@ OUT: X: Number of 1 bits in IP(X)
 @@@@ FAQ: Runtime complexity O(log_2(X))
@@ -488,8 +491,8 @@ ROTXY
 GTO 00
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Create integer with Y set bits located at bit X
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MSKn)
+@@@@ DSC: Create integer with Y set bits located at bit X
 @@@@ IN:  Y: An integer
 @@@@ IN:  X: An integer (LSB=0)
 @@@@ OUT: X: Integer with IP(X) least significant bits set
@@ -534,8 +537,8 @@ ROTXY
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Create integer with right most X bits set
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MSKR)
+@@@@ DSC: Create integer with right most X bits set
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer with IP(X) least significant bits set
 @@@@ FAQ: Returns int with all 0 bits when X<=0
@@ -572,8 +575,8 @@ Y↑X
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Create integer with left most X bits set
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MSKL)
+@@@@ DSC: Create integer with left most X bits set
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer with IP(X) most significant bits set
 @@@@ FAQ: Returns int with all 0 bits when X<=0
@@ -613,8 +616,8 @@ ROTXY
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Set the Xth bit of Y
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SETB)
+@@@@ DSC: Set the Xth bit of Y
 @@@@ IN:  Y: An integer
 @@@@      X: An integer (0=LSB)
 @@@@ OUT: X: Integer with IP(X)th bit of Y set
@@ -648,8 +651,8 @@ OR
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Clear the Xth bit in Y
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CLRB)
+@@@@ DSC: Clear the Xth bit in Y
 @@@@ IN:  Y: An integer
 @@@@      X: An integer (0=LSB)
 @@@@ OUT: X: Integer with IP(X)th bit of Y set
@@ -684,8 +687,8 @@ AND
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Return the Xth bit of Y
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:GETB)
+@@@@ DSC: Return the Xth bit of Y
 @@@@ IN:  Y: An integer
 @@@@      X: An integer (0=LSB)
 @@@@ OUT: The IP(X)th bit of Y
@@ -729,8 +732,8 @@ LBL 03 @@@@ IF-END
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Shift Left
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SL)
+@@@@ DSC: Shift Left
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer shifted left 1 bit
 @@@@ UPD: 2021-03-20
@@ -745,8 +748,8 @@ AND
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Shift Right
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SR)
+@@@@ DSC: Shift Right
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer shifted right 1 bit
 @@@@ UPD: 2021-03-20
@@ -761,8 +764,8 @@ ROTXY
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Rotate Left
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RL)
+@@@@ DSC: Rotate Left
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer rotated left 1 bit
 LBL "RL"
@@ -773,8 +776,8 @@ ROTXY
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Rotate Right
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RR)
+@@@@ DSC: Rotate Right
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer rotated right 1 bit
 LBL "RR"
@@ -785,8 +788,8 @@ ROTXY
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Shift X Left Y Bits
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SLn)
+@@@@ DSC: Shift X Left Y Bits
 @@@@ IN:  Y: An integer
 @@@@ IN:  X: An integer
 @@@@ OUT: X: X shifted left IP(Y) bit(s)
@@ -831,8 +834,8 @@ AND
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Shift X Right Y Bits
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SRn)
+@@@@ DSC: Shift X Right Y Bits
 @@@@ IN:  Y: An integer
 @@@@ IN:  X: An integer
 @@@@ OUT: X: X shifted right IP(Y) bit(s)
@@ -877,8 +880,8 @@ ROTXY
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Rotate X Left by Y bits
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RLn)
+@@@@ DSC: Rotate X Left by Y bits
 @@@@ IN:  Y: An integer
 @@@@ IN:  X: An integer
 @@@@ OUT: X: X rotated left IP(Y) bit(s)
@@ -899,8 +902,8 @@ ROTXY
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Rotate X Right by Y bits
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RRn)
+@@@@ DSC: Rotate X Right by Y bits
 @@@@ IN:  Y: An integer
 @@@@ IN:  X: An integer
 @@@@ OUT: X: X rotated right ABS(IP(Y)) bit(s)
@@ -920,8 +923,8 @@ ROTXY
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Shift X by Y Bits (left when Y negative)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SHFXY)
+@@@@ DSC: Shift X by Y Bits (left when Y negative)
 @@@@ IN:  Y: An integer
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer shifted by IP(Y) bit(s)
@@ -943,8 +946,8 @@ XEQ "SRn"
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Right Justify Bits
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RJ)
+@@@@ DSC: Right Justify Bits
 @@@@ IN:  X: an integer
 @@@@ OUT: Y: Number of shifts required to justify
 @@@@ OUT: X: Justified number
@@ -973,8 +976,8 @@ ROTXY
 GTO 00
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Left Justify Bits
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:LJ)
+@@@@ DSC: Left Justify Bits
 @@@@ IN:  X: an integer
 @@@@ OUT: Y: Number of shifts required to justify
 @@@@ OUT: X: Justified number
@@ -1006,8 +1009,8 @@ ROTXY
 GTO 00
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Integer square root
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ISQRT)
+@@@@ DSC: Integer square root
 @@@@ IN:  X: a non-negative real number
 @@@@ OUT: X: IP(SQRT(ABS(X)))
 @@@@ UPD: 2021-03-16
@@ -1020,8 +1023,8 @@ IP
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Integer base 2 log
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ILN2)
+@@@@ DSC: Integer base 2 log
 @@@@ IN:  X: a positive real number
 @@@@ OUT: X: IP(log_2(ABS(X)))
 @@@@ UPD: 2021-03-16
@@ -1037,8 +1040,8 @@ IP
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Position of the Most Significant Set Bit
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MSSB)
+@@@@ DSC: Position of the Most Significant Set Bit
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Position of MSSB in IP(X) or -1 if IP(X) was 0
 @@@@ FAQ:
@@ -1065,8 +1068,8 @@ X<>Y
 RTN
 END
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Position of the Most Significant Set Bit
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:LSSB)
+@@@@ DSC: Position of the Least Significant Set Bit
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Position of LSSB in IP(X) or -1 if IP(X) was 0
 @@@@ UPD: 2021-03-16
@@ -1086,7 +1089,6 @@ XEQ "RJ"
 RTN
 END
 #+END_SRC
-
 
 * BASE Menu
 

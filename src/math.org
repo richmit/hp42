@@ -101,7 +101,7 @@ type" -- that is a thing the 42s can do arithmetic with: real numbers, complex n
 @@@@ BUG: A 2 will be returned for a real matrix containing strings
 @@@@ BUG: In infinite stack mode with an empty stack 2 will be returned as X=0 when we do L4STK
 @@@@ UPD: 2021-02-23
-LBL "ATYP"           
+LBL "ATYP"
 FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 MAT?
@@ -913,6 +913,49 @@ END
 #+END_SRC
 
 
+#+END_SRC
+
+* Misc
+
+** Quadratic Equation
+
+#+BEGIN_SRC hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:QUADE)
+@@@@ DSC: Solve quadratic equation: ax^2+bx+c=0
+@@@@ IN:  Z: a
+@@@@      Y: b
+@@@@      X: c
+@@@@ OUT: Y: root_1 (-b-sqrt(b^2-4ac))/(2a)
+@@@@      X: root_2 (-b+sqrt(b^2-4ac))/(2a)
+@@@@ TST: free42_3.0
+@@@@ BUG: No error checking
+@@@@ UPD: 2021-04-02
+LBL "QUADE"
+FUNC 32
+L4STK
+-4
+RCL× ST T
+×
+RCL ST Y
+X↑2
++
+SQRT
+2
+RCLx ST T
+÷
+LASTX
+RCL ST Z
++/-
+X<>Y
+÷
+RCL ST X
+RCL ST Z
+-
+RCL ST Z
+RCL ST Z
++
+RTN
+END
 #+END_SRC
 
 * EOF

@@ -1,0 +1,741 @@
+# -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
+#+TITLE:       free42/hp-42s/DM42: Programs For Functions
+#+AUTHOR:      Mitch Richling
+#+EMAIL:       http://www.mitchr.me/
+#+DATE:        2021-03-19
+#+DESCRIPTION: free42/hp-42s/DM42 programs for working with MVAR functions
+#+LANGUAGE:    en
+#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil
+#+HTML_HEAD: <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
+#+HTML_HEAD: <style>body { min-width: 500px; max-width: 1024px; }</style>
+#+HTML_HEAD: <style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
+#+HTML_HEAD: <style>h1,h2,h3 { line-height: 1.4em; }</style>
+#+HTML_HEAD: <style>h1.title { font-size: 3em; }</style>
+#+HTML_HEAD: <style>h4,h5,h6 { font-size: 1em; }</style>
+#+HTML_HEAD: <style>.org-src-container { border: 1px solid #ccc; box-shadow: 3px 3px 3px #eee; font-family: Lucida Console, monospace; font-size: 80%; margin: 0px; padding: 0px 0px; position: relative; }</style>
+#+HTML_HEAD: <style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
+#+HTML_HEAD: <style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
+#+HTML_HEAD: <style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
+#+HTML_LINK_HOME: https://www.mitchr.me/
+#+HTML_LINK_UP: https://richmit.github.io/hp42/
+#+EXPORT_FILE_NAME: ../docs/hp42s-meta
+
+#+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
+|        <r> | <l>              |
+|  *Author:* | /{{{author}}}/ |
+| *Updated:* | /{{{time(%Y-%m-%d %H:%M:%S)}}}/ |
+#+ATTR_HTML: :align center
+Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
+
+#+TOC: headlines 5
+
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+#   00   #    10   #    20   #    30   #    40   #    50   #    60   #    70   #    80   #    90   #   100   #   110   #   120   #   130   #   140   #   150   #   160   #
+# 234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+
+* Introduction
+
+This is an odd collection of programs that work with =MVAR=-type programs (equations).  I was inspired to do this when the =PGMENU= function was added to
+free42.  Right now I only have one real program here (SPT -- Sums, Products, & Tables).  If I ever write a plotter (in work), solver, integrator, or optimizer
+then I will put them into this framework too.  This scheme can work well for functions of 2 variables as well, but doing a surface plotter is well in the
+future. ;) My thinking for such programs is that they share a framework and common set of principals:
+
+  - All the top level programs use =PICF= to:
+    - Select a program and store its name in =EqP=  (Program)
+    - Select a variable and store its name in =EqV= (Variable)
+    - Store the number of return values for the program in =EqD= (Dimension)
+      - =PICF= takes one argument.  If it is 0, then =EqD= is set to 1 otherwise the user is prompted for a value for =EqD=.
+  - When a range for the variable is required, then 
+    - The lower limit is stored in =LLIM= -- the same variable used =INTEG=
+    - The upper limit is stored in =ULIM= -- the same variable used =INTEG=
+  - When a step size is required, it is stored in =STEP=
+  
+* Utility Functions
+** Making MVAR functions from regular functions
+
+Sometimes we need to work with a simple function that takes an argument from the stack and returns one or more values to the stack -- i.e. non "MVAR"
+variables.  To work with such functions we can wrap them.  A generic solution might be to store the name of your simple function in the variable "_FUN", and
+then give "FWRP" to solver, integrator, or SPT program.
+
+#+BEGIN_SRC hp42s
+LBL "FWRP"
+MVAR "X"
+RCL "X"
+XEQ IND "_FUN"
+RTN
+END
+#+END_SRC
+
+** Selecting a function & variable
+
+#+BEGIN_SRC hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PICF)
+@@@@ DSC: Pick an MVAR function and variable
+@@@@ IN:  X: integer
+@@@@ OUT: N/A
+@@@@ UPD: 2021-02-24
+@@@@ GBL: EqP  -- Name of selected function
+@@@@ GBL: EqV -- Name of selected variable
+@@@@ GBL: EqD -- Return count
+@@@@ BUG: Variable menu works like solver, not like integrator.  Can't fix that...
+@@@@ REQ: REQ:free42>=3.0
+LBL "PICF"
+FUNC 10
+L4STK
+CLV "EqP"
+CLV "EqV"
+CLV "EqD"
+X≠0?
+GTO 08
+1
+STO "EqD"
+LBL 08
+EXITALL
+PGMMENU
+"Pick Function"
+AVIEW
+STOP
+ASTO "EqP"
+EXITALL
+VARMENU IND "EqP"
+"Set Var; "
+├"Pick Free Var"
+AVIEW
+STOP
+ASTO "EqV"
+EXITALL
+SF 25
+RCL "EqD"
+FS?C 25
+GTO 07
+"Select Return"
+├" Count"
+AVIEW
+CLMENU
+"1"
+KEY 1 XEQ 02
+"2"
+KEY 2 XEQ 03
+"3"
+KEY 3 XEQ 04
+"4"
+KEY 4 XEQ 05
+MENU
+STOP
+EXITALL
+STO "EqD"
+LBL 07
+"F: "
+ARCL "EqP"
+├"("
+ARCL "EqV"
+├"):→"
+ARCL "EqD"
+AVIEW
+RTN
+LBL 02
+1
+RTN
+LBL 03
+2
+RTN
+LBL 04
+3
+RTN
+LBL 05
+4
+RTN
+END
+#+END_SRC
+
+* Sums, Products, & Tables
+
+Create function tables and computes sums & products.  Works much like the built in integration application.  
+
+The =LOG= button transforms the function results by taking the natural logarithm -- for example this allows us to compute very large products by summing the logarithims.
+
+The =IND= button stores the indipent varaible value in the table.  
+
+When not provided, the values for =LLIM=, =STEP=, & =EqD= default to 1.
+
+#+begin_src hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SPT)
+@@@@ DSC: Sums, Products, & Tables
+@@@@ IN:  N/A
+@@@@ OUT: N/A
+@@@@ UPD: 2021-04-03
+@@@@ GBL: LLIM -- Lower limit for variable
+@@@@ GBL: ULIM -- Upper limit for variable
+@@@@ GBL: STEP -- Size of steps to make
+@@@@ FLG: 82: Set: log function returns
+@@@@ FLG: 83: Set: Store indipent variable in table
+@@@@ FLG: 84: Set: doing table, Clear: Doing sum or product (see flag 85)
+@@@@ FLG: 85: Set: doing sum, Clear; doing product
+@@@@ LLB: 00-12,14-24,26-33
+@@@@ GLB: SPT
+@@@@ USE: PICF
+@@@@ REQ: REQ:free42>=3.0
+LBL "SPT"
+CF 82
+SF 83
+1
+XEQ "PICF"
+R↓
+LBL 01            @@@@ Page 1 of menu PROG_NAME
+CLMENU
+"LLIM"
+KEY 1 XEQ 03
+"ULIM"
+KEY 2 XEQ 04
+"STEP"
+KEY 3 XEQ 05
+"Σ"
+KEY 4 XEQ 06
+"π"
+KEY 5 XEQ 07
+"▒"
+KEY 6 XEQ 08
+KEY 7 GTO 02
+KEY 8 GTO 02
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 02            @@@@ Page 2 of menu PROG_NAME
+CLMENU
+"EQ"
+KEY 1 XEQ 09
+FS? 82
+"LN•"
+FC? 82
+"LN"
+KEY 2 XEQ 10
+FS? 83
+"IND•"
+FC? 83
+"IND"
+KEY 3 XEQ 11
+KEY 7 GTO 01
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 02
+LBL 00
+EXITALL
+RTN
+LBL 03               @@@@ Action for menu key LLIM
+STO "LLIM"
+"LLIM: "
+ARCL ST X
+AVIEW
+RTN
+LBL 04               @@@@ Action for menu key ULIM
+STO "ULIM"
+"ULIM: "
+ARCL ST X
+AVIEW
+RTN
+LBL 05               @@@@ Action for menu key STEP
+STO "STEP"
+"STEP: "
+ARCL ST X
+AVIEW
+RTN
+LBL 06               @@@@ Action for menu key Σ
+CF 84                @@@@ 84 clear -> not a table
+SF 85                @@@@ 85 set   -> sum
+GTO 20
+RTN
+LBL 07               @@@@ Action for menu key π
+CF 84                @@@@ 84 clear -> not a table
+CF 85                @@@@ 85 clear   -> product
+GTO 20
+RTN
+LBL 08               @@@@ Action for menu key ▒
+SF 84                @@@@ 84 set ->  table
+GTO 20
+RTN
+LBL 09               @@@@ Action for menu key EQ
+1
+XEQ "PICF"
+R↓
+RTN
+LBL 10               @@@@ Action for menu key LN
+FS?C 82
+RTN
+SF 82
+RTN
+LBL 11               @@@@ Action for menu key IND
+FS?C 83
+RTN
+SF 83
+RTN
+LBL 20  @@@@ Guts of the sum, product, table code
+@@@@ Default LLIM & STEP to 1 if unset
+1
+SF 25
+RCL "LLIM"
+FC?C 25
+STO "LLIM"
+SF 25
+RCL "STEP"
+FC?C 25
+STO "STEP"
+@@@@ Check for bad LLIM, ULIM, & STEP.  
+RCL "LLIM"
+RCL "ULIM"
+X>Y?
+GTO 12
+"ERR: LLIM ≥"
+├" ULIM"
+AVIEW
+RTN
+LBL 12
+RCL "STEP"
+X>0?
+GTO 14
+"ERR: STEP ≤ 0"
+AVIEW
+RTN
+LBL 14
+RCL "EqD"
+X>0?
+GTO 15
+"ERR: EqD ≤ 0"
+AVIEW
+RTN
+LBL 15
+4
+X≥Y?
+GTO 16
+"ERR: EqD > 4"
+AVIEW
+RTN
+LBL 16
+@@@@ Init before loop
+FS? 84          @@@@ 84 set -> table
+GTO 21          @@@@ 84 clear -> (85 set -> sum , 85 clear -> product)
+GTO 22
+LBL 22
+@@@@ Sum or Product
+FS? 85
+0
+FC? 85
+1
+LSTO "SoP"
+GTO 23
+LBL 21
+@@@@ Table
+1
+ENTER
+ENTER
+RCL "EqD"
+FS? 83
++
+NEWMAT
+LSTO "TMAT"
+R↓    @@@@ Drop matrix off stack to save RAM
+INDEX "TMAT"
+GROW
+LBL 23
+@@@@ Step through indpendant variable values and do sum, product, or table
+RCL "LLIM"
+STO IND "EqV"
+LBL 24
+@@@@ Print progress
+CLA
+ARCL "EqV"
+├"="
+ARCL IND "EqV"
+AVIEW
+FC? 84
+GTO 32
+@@@@  Doing a table: Setup CTR for loop later
+RCL "EqD"
+LSTO "CTR"
+@@@@  Doing a table:  Store indpendant variable if FS? 83
+FC? 83 
+GTO 32
+RCL IND "EqV"
+STOEL
+J+
+LBL 32
+@@@@ Evaluate function
+SF 25
+XEQ IND "EqP"
+FS?C 25
+GTO 17
+"ERR: Func Eval"
+AVIEW
+RTN
+LBL 17
+@@@@ Do thing for sum, product, or table
+FS? 84
+GTO 26
+GTO 27
+LBL 27
+@@@@ Sum or Product
+FC? 82
+GTO 29
+SF 25
+LN
+FS?C 25
+GTO 29
+"ERR: Bad Log"
+AVIEW
+LBL 29
+FS? 85
+STO+ "SoP"
+FC? 85
+STO× "SoP"
+GTO 28
+LBL 26
+@@@@ Table
+LBL 30
+FC? 82
+GTO 31
+SF 25
+LN
+FS?C 25
+GTO 31
+"ERR: Bad Log"
+AVIEW
+LBL 31
+STOEL
+J+
+R↓
+DSE "CTR"
+GTO 30
+LBL 28
+@@@@ Increment indpendant variable
+RCL "STEP"
+RCL IND "EqV"
++
+STO IND "EqV"
+RCL "ULIM"
+X≥Y?
+GTO 24
+@@@@ All done.  Report Results
+FS? 84          @@@@ 84 set -> table
+GTO 33          @@@@ 84 clear -> (85 set -> sum , 85 clear -> product)
+GTO 19
+LBL 19
+@@@@ Sum or Product
+FS? 85
+"SUM: "
+FC? 85
+"PROD: "
+RCL "SoP"
+GTO 18
+LBL 33
+@@@@ Table
+CLA
+RCL "TMAT"
+LBL 18
+ARCL ST X
+AVIEW
+RTN
+END
+#+end_src
+
+* Plots                                                            :noexport:
+** Future
+
+  - Support multiple graphs via EqD -- perhaps just dots for EqD>1?
+
+** Main Menu
+
+| Menu  | Variable       | Values   | Description                                         |
+|-------+----------------+----------+-----------------------------------------------------|
+| EQ    | EqP EqV EqD    |          | Setup Equation                                      |
+| XRNG  | LLIM ULIM STEP |          | Set X range (X: min Y: max).  *MAGIC*               |
+| YRNG  | YMAX YMIN      |          | Set Y range (X: min Y: max).  *MAGIC*               |
+| XYTIC | XTIC YTIC      |          | Set tic width (X: Y-width Y: X-width).  *MAGIC*     |
+| RSV0  | N/A            |          | Reserved                                            |
+| PLOT  | N/A            |          | Draw plot                                           |
+|-------+----------------+----------+-----------------------------------------------------|
+| CON=Y | FLG 81         | Y* N     | Connect points or not                               |
+| AX=Y  | FLG 82         | Y* N     | Draw axis or not. *MAGIC*                           |
+| WID=3 | DrWid          | 1 3* 5 7 | Width of dots, graph lines, axis lines, & tic marks |
+| RES=# | GrMod          | 0 2 3*   | Display resolution                                  |
+| RSV1  | N/A            |          | Reserved                                            |
+| RSV2  | N/A            |          | Reserved                                            |
+
+Magic:
+  - =XRNG= set to [0, 0]: Sets range to default [-10, 10].  
+  - =XRNG= reversed limits: Automatically detected and swapped
+  - =XRNG= set to [M, M]: Sets range to default [(XMIN+XMAX)/2-M*(XMAX-XMIN), (XMIN+XMAX)/2+M*(XMAX-XMIN)].  i.e. it zooms XRNG.
+  - =YRNG= set to [0, 0]: Sets range so that the aspect ratio will be square based on setting of XRNG.
+  - =YRNG= reversed limits: Automatically detected and swapped
+  - =YRNG= set to [M, M]: Sets range to default [(YMIN+YMAX)/2-M*(YMAX-YMIN), (YMIN+YMAX)/2+M*(YMAX-YMIN)].  i.e. it zooms YRNG.
+  - =XYTIC= set to 0:  If one of the tick widths is zero, then no ticks are drawn for that axis
+  - =XYTIC= at least one non-zero: Sets =AX= to =Y=
+  - =AX= set to =N=:  Sets XYTIC to 0 & 0 -- i.e. no ticks are drawn
+  - =RES= set to 0:  The =WID= menu key disapears when =RES= is set to 0, and all widths are 1.
+
+** Graphics Display
+
+After the plot is drawn and being shown, we can do three things:
+  - F1: Autoscale Y & Redraw
+  - F2: Zoom box
+  - F3: Trace.  While traceing, enter pushs a point to the stack as a complex number
+
+#+RESULTS:
+#+begin_src hp42s
+LBL "MPLOT"
+SF 81
+SF 82
+
+SF 25
+RCL "DrWid"
+FS?C 25
+GTO 31
+3
+STO "DrWid"
+LBL 31
+R↓
+
+
+LBL 01            @@@@ Page 1 of menu PROG_NAME
+CLMENU
+"EQ"
+KEY 1 XEQ 03
+"XRNG"
+KEY 2 XEQ 04
+"YRNG"
+KEY 3 XEQ 05
+"XYTIC"
+KEY 4 XEQ 06
+@@@@ "RSV0"
+@@@@ KEY 5 XEQ 07
+"PLOT"
+KEY 6 XEQ 08
+KEY 7 GTO 02
+KEY 8 GTO 02
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 02            @@@@ Page 2 of menu PROG_NAME
+CLMENU
+"CON=Y"
+KEY 1 XEQ 09
+"AX=Y"
+KEY 2 XEQ 10
+"WID=3"
+KEY 3 XEQ 11
+"RES=#"
+KEY 4 XEQ 12
+@@@@ "RSV1"
+@@@@ KEY 5 XEQ 13
+@@@@ "RSV2"
+@@@@ KEY 6 XEQ 14
+KEY 7 GTO 01
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 02
+LBL 00
+EXITALL
+RTN
+LBL 03               @@@@ Action for menu key EQ
+0
+XEQ "PICF"
+RTN
+LBL 04               @@@@ Action for menu key XRNG
+STO "ULIM"
+X<>Y
+STO "LLIM"
+X<>Y
+RTN
+LBL 05               @@@@ Action for menu key YRNG
+
+RTN
+LBL 06               @@@@ Action for menu key XYTIC
+
+RTN
+LBL 07               @@@@ Action for menu key RSV0
+
+RTN
+LBL 08               @@@@ Action for menu key PLOT
+
+RTN
+LBL 09               @@@@ Action for menu key CON=Y
+
+RTN
+LBL 10               @@@@ Action for menu key AX=Y
+
+RTN
+LBL 11               @@@@ Action for menu key WID=3
+
+RTN
+LBL 12               @@@@ Action for menu key RES=#
+
+RTN
+LBL 13               @@@@ Action for menu key RSV1
+
+RTN
+LBL 14               @@@@ Action for menu key RSV2
+
+RTN
+@@@@ Free labels start at: 15
+#+end_src
+
+** Fat lines
+
+#+BEGIN_SRC text
+ 1
+ 2
+ 3                                                                                                                                                            ***
+ 4                                                                                                                                                    ***     *N*                                            2 7 pix writes       1 7 pix blat for 10      1 7 pix blat for 7
+ 5                                                                                                                                            ***     *N*     ***                                            for a 10 pix line    pix line with >2 pad     pix line with any pad
+ 6                                                                                                                                    ***     *N*     ***     ---                                                                  Ex A       Ex B          Ex A        Ex B
+ 7                                                                                                                            ***     *N*     ***     ---     ---                                            1 . >▒  ▒             1 ▒  ▒     1 . >▒        1 . >▒      1 ▒ >▒
+ 8                                                                                                                    ***     *N*     ***     ---     ---     ---                                              .  ▒  ▒               ▒  ▒       .  ▒          .  ▒        ▒  ▒
+ 9                                                                                                            ***     *N*     ***     ---     ---     ---     ---                                              .  ▒  ▒               ▒  ▒       .  ▒          .  ▒        ▒  ▒
+10                                                                                                    ***     *N*     ***     ---     ---     ---     ---     ---                                              .  ▒ >▒               ▒ >▒       .  ▒          .  ▒        .  ▒
+11                                                                                            ***     *N*     ***     ---     ---     ---     ---     ---     ---                                              .  ▒  ▒               .  ▒       .  ▒          ▒  ▒        .  ▒
+12                                                                                    ***     *N*     ***     ---     ---     ---     ---     ---     ---     ---                                              .  ▒  ▒               .  ▒       .  ▒          ▒  ▒        .  ▒
+13                                                                            ***     *N*     ***     ---     ---     ---     ---     ---     ---     --- 7   --- 8                                          7 .  ▒  ▒             7 .  ▒     7 ▒  ▒        7 ▒  ▒      7 .  ▒
+14                                                                    ***     *N*     ***     ---     ---     ---     ---     ---     --- 6   --- 7  +++     +++                                               .  .  ▒               .  ▒       ▒  ▒
+15                                                            ***     *N*     ***     ---     ---     ---     ---     --- 5   --- 6  +++     +++     +++     +++                                               .  .  ▒               .  ▒       ▒  ▒
+16                                                    ***     *N*     ***     ---     ---     ---     --- 4   --- 5  +++     +++     +++     +++     +++     +++                                           10  .  .  ▒            10 .  ▒       ▒  ▒
+17                                            ***     *N*     ***     ---     ---     --- 3   --- 4  +++     +++     +++     +++     +++     +++     +++     +++
+18                                    ***     *N*     ***     ---     --- 2   --- 3  +++     +++     +++     +++     +++     +++     +++     +++     +++     +++
+19                            ***     *N*     ***     --- 1   --- 2  +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++
+20                    ***     *N*     ***     --- 1  +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++
+21            ***     *N*     ***    +++ 1   +++ 1   +++ 2   +++ 2   +++ 3   +++ 3   +++ 4   +++ 4   +++ 5   +++ 5   +++ 6   +++ 6   +++ 7   +++ 7   +++ 8   +++ 8
+22   ▒▒▒*    ▒▒N*    ▒▒▒*    ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒
+23   ▒ON*    ▒O▒*    ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒
+24   ▒▒▒*    ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒
+     3       3(*)    3(*)    3       3       4       4       5       5       6       6       7       7       7*2     7*2     7*2     7*2     7*2     7*2     7*2
+     -       -       -       -       3(1)    4(1)    4(1)    5(2)    5(3)    6(3)    6(4)    7(4)    7(7)    7(5)    7(6)    7(6)    7       7       7*2     7*2
+
+
+             -       -       -      3(1)    4(1)    4(1)    5(2)    5(3)    6(3)    6(4  )  7(4)    7(7)    7(5)    7(6)    7(6)    7       7       7*2     7*2
+            3(*)    3(*)    3       3       4       4       5       5       6       6       7       7       7*2     7*2     7*2     7*2     7*2     7*2     7*2
+ 1          ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒
+ 2          ▒O▒*    ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒
+ 3          ▒▒N*    ▒▒▒*    ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒
+ 4           ***     *N*     ***    +++ 1   +++ 1   +++ 2   +++ 2   +++ 3   +++ 3   +++ 4   +++ 4   +++ 5   +++ 5   +++ 6   +++ 6   +++ 7   +++ 7   +++ 8   +++ 8
+ 5                   ***     *N*     ***     --- 1  +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++
+ 6                           ***     *N*     ***     --- 1   --- 2  +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++                                                              API:  START_COL START_ROW END_ROW START_PAD
+ 7                                   ***     *N*     ***     ---     --- 2   --- 3  +++     +++     +++     +++     +++     +++     +++     +++     +++     +++                                                                    Direction: up 1  down -1
+ 8                                           ***     *N*     ***     ---     ---     --- 3   --- 4  +++     +++     +++     +++     +++     +++     +++     +++                                                                    delta for up 23->4  =>  23-2=21->4+2=6  => (21- 6+1)=16 bot=16/2=8+3 top=16-8=8+3
+ 9                                                   ***     *N*     ***     ---     ---     ---     --- 4   --- 5  +++     +++     +++     +++     +++     +++                                                                                 23->5  =>  23-2=21->5+2=7  => (21- 7+1)=15 bot=15/2=7+3 top=15-7=8+3
+10                                                           ***     *N*     ***     ---     ---     ---     ---     --- 5   --- 6  +++     +++     +++     +++                                                                                 23->6  =>  23-2=21->6+2=8  => (21- 8+1)=14 bot=14/2=7+3 top=14-7=7+3
+11                                                                   ***     *N*     ***     ---     ---     ---     ---     ---     --- 6   --- 7  +++     +++                                                                                 23->7  =>  23-2=21->7+2=9  => (21- 9+1)=13 bot=13/2=6+3 top=13-6=7+3
+12                                                                           ***     *N*     ***     ---     ---     ---     ---     ---     ---     --- 7   --- 8                                                                              23->8  =>  23-2=21->8+2=10 => (21-10+1)=12 bot=12/2=6+3 top=12-6=6+3
+13                                                                                   ***     *N*     ***     ---     ---     ---     ---     ---     ---     ---                                                                          top segment:  Start at (start_row-1, start_col) & blit down
+14                                                                                           ***     *N*     ***     ---     ---     ---     ---     ---     ---
+15                                                                                                   ***     *N*     ***     ---     ---     ---     ---     ---
+16                                                                                                           ***     *N*     ***     ---     ---     ---     ---
+17                                                                                                                   ***     *N*     ***     ---     ---     ---
+18                                                                                                                           ***     *N*     ***     ---     ---
+19                                                                                                                                   ***     *N*     ***     ---
+20                                                                                                                                           ***     *N*     ***
+21                                                                                                                                                   ***     *N*
+22                                                                                                                                                           ***
+23
+24
+
+#+END_SRC
+
+** Graphics Menu
+
+#+BEGIN_SRC text
+   ▒▒        ▒▒     ▒▒           ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒        ▒▒       ▒▒                                  ▒▒▒▒            ▒▒▒▒
+    ▒▒      ▒▒    ▒▒▒▒▒▒         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒         ▒▒     ▒▒          ▒▒▒               ▒▒▒    ▒▒▒▒            ▒▒▒▒
+      ▒▒  ▒▒    ▒▒  ▒▒  ▒▒       ▒▒             ▒▒          ▒▒   ▒▒           ▒▒▒               ▒▒▒        ▒▒▒▒    ▒▒▒▒
+       ▒▒▒▒         ▒▒           ▒▒             ▒▒           ▒▒ ▒▒            ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒        ▒▒▒▒    ▒▒▒▒
+        ▒▒          ▒▒           ▒▒             ▒▒            ▒▒▒             ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒            ▒▒▒▒
+        ▒▒          ▒▒           ▒▒             ▒▒           ▒▒ ▒▒            ▒▒▒               ▒▒▒        ▒▒▒▒    ▒▒▒▒
+        ▒▒      ▒▒  ▒▒  ▒▒       ▒▒             ▒▒          ▒▒   ▒▒           ▒▒▒               ▒▒▒        ▒▒▒▒    ▒▒▒▒
+        ▒▒        ▒▒▒▒▒▒         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒         ▒▒     ▒▒                                   ▒▒▒▒            ▒▒▒▒
+        ▒▒          ▒▒           ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒        ▒▒       ▒▒                                  ▒▒▒▒            ▒▒▒▒
+#+END_SRC
+
+** Code snips
+
+LBL "PLT"
+1.131
+LSTO "XI"
+LBL 01
+RCL "XI"
+IP
+STO IND "EqV"
+XEQ IND "EqP"
+RCL "XI"
+PIXEL
+ISG "XI"
+GTO 01
+
+
+
+lbl 91
+1
+rtn
+lbl 92
+3
+rtn
+lbl 93
+7
+rtn
+lbl 94
+15
+rtn
+lbl 95
+31
+rtn
+lbl 96
+63
+rtn
+lbl 97
+127
+rtn
+
+
+
+* WORKING                                                          :noexport:
+
+#+NAME: menu
+| Menu |        |
+|------+--------|
+| LLIM |        |
+| ULIM |        |
+| STEP |        |
+| Σ    |        |
+| π    |        |
+| ▒    |        |
+|------+--------|
+| EQ   | FLG 81 |
+| LN   | FLG 82 |
+| IND  | FLG 83 |
+
+#+BEGIN_SRC elisp :var tbl=menu :colnames y :results output verbatum :wrap src hp42s
+(MJR-generate-42-menu-code "PROG_NAME" tbl "stay" "up" (lambda (x) ""))
+#+END_SRC
+
+#+RESULTS:
+#+begin_src hp42s
+#+END_SRC
+
+
+LBL "FX"
+MVAR "X"
+MVAR "A"
+MVAR "N"
+RCL "N"
+LSTO "C"
+RCL "X"
+LBL 01
+ENTER
+RCL× "A"
+DSE "C"
+GTO 01
+RTN
+

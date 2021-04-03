@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-04-03 Sat 12:27 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>free42/hp-42s/DM42: Programs For Functions</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Mitch Richling" />
+<meta name="description" content="free42/hp-42s/DM42 programs for working with MVAR functions"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
+<style>body { min-width: 500px; max-width: 1024px; }</style>
+<style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
+<style>h1,h2,h3 { line-height: 1.4em; }</style>
+<style>h1.title { font-size: 3em; }</style>
+<style>h4,h5,h6 { font-size: 1em; }</style>
+<style>.org-src-container { border: 1px solid #ccc; box-shadow: 3px 3px 3px #eee; font-family: Lucida Console, monospace; font-size: 80%; margin: 0px; padding: 0px 0px; position: relative; }</style>
+<style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
+<style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
+<style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="https://richmit.github.io/hp42/"> UP </a>
+ |
+ <a accesskey="H" href="https://www.mitchr.me/"> HOME </a>
+</div><div id="content">
+<h1 class="title">free42/hp-42s/DM42: Programs For Functions</h1>
+<table border="2 solid #ccc" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right"><b>Author:</b></td>
+<td class="org-left"><i>Mitch Richling</i></td>
+</tr>
+
+<tr>
+<td class="org-right"><b>Updated:</b></td>
+<td class="org-left"><i>2021-04-03 12:27:37</i></td>
+</tr>
+</tbody>
+</table>
+<p align="center">
+Copyright 2021 Mitch Richling. All rights reserved.
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org8d57724">1. Metadata</a></li>
+<li><a href="#org2c7f022">2. Introduction</a></li>
+<li><a href="#orgd9c6bb9">3. Utility Functions</a>
+<ul>
+<li><a href="#org57af156">3.1. Making MVAR functions from regular functions</a></li>
+<li><a href="#orgf908808">3.2. Selecting a function &amp; variable</a></li>
+</ul>
+</li>
+<li><a href="#org0503d45">4. Sums, Products, &amp; Tables</a></li>
+<li><a href="#org55ecfc7">5. EOF</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8d57724" class="outline-2">
+<h2 id="org8d57724"><span class="section-number-2">1</span> Metadata</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This home for this HTML file is: <a href="https://richmit.github.io/hp42/pgmforfun.html">https://richmit.github.io/hp42/pgmforfun.html</a>
+</p>
+
+<p>
+Files related to this document may be found on github: <a href="https://github.com/richmit/hp42">https://github.com/richmit/hp42</a>
+</p>
+
+<ul class="org-ul">
+<li><code>src</code> directory: Contains the org-mode file that generated this HTML document</li>
+<li><code>docs</code> directory: Contains this html document</li>
+<li><code>bin</code> directory: Contains raw program files</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2c7f022" class="outline-2">
+<h2 id="org2c7f022"><span class="section-number-2">2</span> Introduction</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+This is an odd collection of programs that work with <code>MVAR</code>-type programs (equations).  I was inspired to do this when the <code>PGMENU</code> function was added to
+free42.  Right now I only have one real program here (SPT &#x2013; Sums, Products, &amp; Tables).  If I ever write a plotter (in work), solver, integrator, or optimizer
+then I will put them into this framework too.  This scheme can work well for functions of 2 variables as well, but doing a surface plotter is well in the
+future. ;) My thinking for such programs is that they share a framework and common set of principals:
+</p>
+
+<ul class="org-ul">
+<li>All the top level programs use <code>PICF</code> to:
+<ul class="org-ul">
+<li>Select a program and store its name in <code>EqP</code>  (Program)</li>
+<li>Select a variable and store its name in <code>EqV</code> (Variable)</li>
+<li>Store the number of return values for the program in <code>EqD</code> (Dimension)
+<ul class="org-ul">
+<li><code>PICF</code> takes one argument.  If it is 0, then <code>EqD</code> is set to 1 otherwise the user is prompted for a value for <code>EqD</code>.</li>
+</ul></li>
+</ul></li>
+<li>When a range for the variable is required, then 
+<ul class="org-ul">
+<li>The lower limit is stored in <code>LLIM</code> &#x2013; the same variable used <code>INTEG</code></li>
+<li>The upper limit is stored in <code>ULIM</code> &#x2013; the same variable used <code>INTEG</code></li>
+</ul></li>
+<li>When a step size is required, it is stored in <code>STEP</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd9c6bb9" class="outline-2">
+<h2 id="orgd9c6bb9"><span class="section-number-2">3</span> Utility Functions</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org57af156" class="outline-3">
+<h3 id="org57af156"><span class="section-number-3">3.1</span> Making MVAR functions from regular functions</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Sometimes we need to work with a simple function that takes an argument from the stack and returns one or more values to the stack &#x2013; i.e. non "MVAR"
+variables.  To work with such functions we can wrap them.  A generic solution might be to store the name of your simple function in the variable "_FUN", and
+then give "FWRP" to solver, integrator, or SPT program.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FWRP"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">XEQ IND</span> <span style="color: #fa8072;">"_FUN"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf908808" class="outline-3">
+<h3 id="orgf908808"><span class="section-number-3">3.2</span> Selecting a function &amp; variable</h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-PICF" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PICF)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Pick an MVAR function and variable</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: integer</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: N/A</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-24</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: EqP  -- Name of selected function</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: EqV -- Name of selected variable</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: EqD -- Return count</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: Variable menu works like solver, not like integrator.  Can't fix that...</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"PICF"</span>
+<span style="color: #00ffff;">FUNC</span> 10
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">CLV</span> <span style="color: #fa8072;">"EqP"</span>
+<span style="color: #00ffff;">CLV</span> <span style="color: #fa8072;">"EqV"</span>
+<span style="color: #00ffff;">CLV</span> <span style="color: #fa8072;">"EqD"</span>
+<span style="color: #00ffff;">X&#8800;0</span>?
+<span style="color: #00ffff;">GTO</span> 08
+1
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"EqD"</span>
+<span style="color: #00ffff;">LBL</span> 08
+<span style="color: #00ffff;">EXITALL</span>
+PGMMENU
+<span style="color: #fa8072;">"Pick Function"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">ASTO</span> <span style="color: #fa8072;">"EqP"</span>
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">VARMENU</span> IND <span style="color: #fa8072;">"EqP"</span>
+<span style="color: #fa8072;">"Set Var; "</span>
+&#9500;<span style="color: #fa8072;">"Pick Free Var"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">ASTO</span> <span style="color: #fa8072;">"EqV"</span>
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"EqD"</span>
+<span style="color: #00ffff;">FS?C</span> 25
+<span style="color: #00ffff;">GTO</span> 07
+<span style="color: #fa8072;">"Select Return"</span>
+&#9500;<span style="color: #fa8072;">" Count"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"1"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 02
+<span style="color: #fa8072;">"2"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 03
+<span style="color: #fa8072;">"3"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 04
+<span style="color: #fa8072;">"4"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 05
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"EqD"</span>
+<span style="color: #00ffff;">LBL</span> 07
+<span style="color: #fa8072;">"F: "</span>
+<span style="color: #00ffff;">ARCL</span> <span style="color: #fa8072;">"EqP"</span>
+&#9500;<span style="color: #fa8072;">"("</span>
+<span style="color: #00ffff;">ARCL</span> <span style="color: #fa8072;">"EqV"</span>
+&#9500;<span style="color: #fa8072;">"):&#8594;"</span>
+<span style="color: #00ffff;">ARCL</span> <span style="color: #fa8072;">"EqD"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 02
+1
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 03
+2
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 04
+3
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 05
+4
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0503d45" class="outline-2">
+<h2 id="org0503d45"><span class="section-number-2">4</span> Sums, Products, &amp; Tables</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Create function tables and computes sums &amp; products.  Works much like the built in integration application.  
+</p>
+
+<p>
+The <code>LOG</code> button transforms the function results by taking the natural logarithm &#x2013; for example this allows us to compute very large products by summing the logarithims.
+</p>
+
+<p>
+The <code>IND</code> button stores the indipent varaible value in the table.  
+</p>
+
+<p>
+When not provided, the values for <code>LLIM</code>, <code>STEP</code>, &amp; <code>EqD</code> default to 1.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-SPT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SPT)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Sums, Products, &amp; Tables</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  N/A</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: N/A</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-03</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: LLIM -- Lower limit for variable</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: ULIM -- Upper limit for variable</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: STEP -- Size of steps to make</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 82: Set: log function returns</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 83: Set: Store indipent variable in table</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 84: Set: doing table, Clear: Doing sum or product (see flag 85)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 85: Set: doing sum, Clear; doing product</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LLB: 00-12,14-24,26-33</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GLB: SPT</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">USE: PICF</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"SPT"</span>
+<span style="color: #00ffff;">CF</span> 82
+<span style="color: #00ffff;">SF</span> 83
+1
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PICF"</span>
+R&#8595;
+<span style="color: #00ffff;">LBL</span> 01            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu PROG_NAME</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"LLIM"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 03
+<span style="color: #fa8072;">"ULIM"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 04
+<span style="color: #fa8072;">"STEP"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 05
+<span style="color: #fa8072;">"&#931;"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 06
+<span style="color: #fa8072;">"&#960;"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 07
+<span style="color: #fa8072;">"&#9618;"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 08
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">LBL</span> 02            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu PROG_NAME</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"EQ"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 09
+<span style="color: #00ffff;">FS</span>? 82
+<span style="color: #fa8072;">"LN&#8226;"</span>
+<span style="color: #00ffff;">FC</span>? 82
+<span style="color: #fa8072;">"LN"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 10
+<span style="color: #00ffff;">FS</span>? 83
+<span style="color: #fa8072;">"IND&#8226;"</span>
+<span style="color: #00ffff;">FC</span>? 83
+<span style="color: #fa8072;">"IND"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 11
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">LBL</span> 00
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 03               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key LLIM</span>
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"LLIM"</span>
+<span style="color: #fa8072;">"LLIM: "</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 04               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ULIM</span>
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"ULIM"</span>
+<span style="color: #fa8072;">"ULIM: "</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 05               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key STEP</span>
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"STEP"</span>
+<span style="color: #fa8072;">"STEP: "</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 06               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#931;</span>
+<span style="color: #00ffff;">CF</span> 84                <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">84 clear -&gt; not a table</span>
+<span style="color: #00ffff;">SF</span> 85                <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">85 set   -&gt; sum</span>
+<span style="color: #00ffff;">GTO</span> 20
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 07               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#960;</span>
+<span style="color: #00ffff;">CF</span> 84                <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">84 clear -&gt; not a table</span>
+<span style="color: #00ffff;">CF</span> 85                <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">85 clear   -&gt; product</span>
+<span style="color: #00ffff;">GTO</span> 20
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 08               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#9618;</span>
+<span style="color: #00ffff;">SF</span> 84                <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">84 set -&gt;  table</span>
+<span style="color: #00ffff;">GTO</span> 20
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 09               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key EQ</span>
+1
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PICF"</span>
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 10               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key LN</span>
+<span style="color: #00ffff;">FS?C</span> 82
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">SF</span> 82
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 11               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key IND</span>
+<span style="color: #00ffff;">FS?C</span> 83
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">SF</span> 83
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 20  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Guts of the sum, product, table code</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Default LLIM &amp; STEP to 1 if unset</span>
+1
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"LLIM"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"LLIM"</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"STEP"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"STEP"</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Check for bad LLIM, ULIM, &amp; STEP.  </span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"LLIM"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ULIM"</span>
+<span style="color: #00ffff;">X&gt;Y</span>?
+<span style="color: #00ffff;">GTO</span> 12
+<span style="color: #fa8072;">"ERR: LLIM &#8805;"</span>
+&#9500;<span style="color: #fa8072;">" ULIM"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 12
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"STEP"</span>
+<span style="color: #00ffff;">X&gt;0</span>?
+<span style="color: #00ffff;">GTO</span> 14
+<span style="color: #fa8072;">"ERR: STEP &#8804; 0"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 14
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"EqD"</span>
+<span style="color: #00ffff;">X&gt;0</span>?
+<span style="color: #00ffff;">GTO</span> 15
+<span style="color: #fa8072;">"ERR: EqD &#8804; 0"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 15
+4
+<span style="color: #00ffff;">X&#8805;Y</span>?
+<span style="color: #00ffff;">GTO</span> 16
+<span style="color: #fa8072;">"ERR: EqD &gt; 4"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 16
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Init before loop</span>
+<span style="color: #00ffff;">FS</span>? 84          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">84 set -&gt; table</span>
+<span style="color: #00ffff;">GTO</span> 21          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">84 clear -&gt; (85 set -&gt; sum , 85 clear -&gt; product)</span>
+<span style="color: #00ffff;">GTO</span> 22
+<span style="color: #00ffff;">LBL</span> 22
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Sum or Product</span>
+<span style="color: #00ffff;">FS</span>? 85
+0
+<span style="color: #00ffff;">FC</span>? 85
+1
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"SoP"</span>
+<span style="color: #00ffff;">GTO</span> 23
+<span style="color: #00ffff;">LBL</span> 21
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Table</span>
+1
+<span style="color: #00ffff;">ENTER</span>
+<span style="color: #00ffff;">ENTER</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"EqD"</span>
+<span style="color: #00ffff;">FS</span>? 83
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">NEWMAT</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"TMAT"</span>
+R&#8595;    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Drop matrix off stack to save RAM</span>
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"TMAT"</span>
+<span style="color: #00ffff;">GROW</span>
+<span style="color: #00ffff;">LBL</span> 23
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Step through indpendant variable values and do sum, product, or table</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"LLIM"</span>
+<span style="color: #00ffff;">STO</span> IND <span style="color: #fa8072;">"EqV"</span>
+<span style="color: #00ffff;">LBL</span> 24
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Print progress</span>
+<span style="color: #00ffff;">CLA</span>
+<span style="color: #00ffff;">ARCL</span> <span style="color: #fa8072;">"EqV"</span>
+&#9500;<span style="color: #fa8072;">"="</span>
+<span style="color: #00ffff;">ARCL</span> IND <span style="color: #fa8072;">"EqV"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">FC</span>? 84
+<span style="color: #00ffff;">GTO</span> 32
+<span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">Doing a table: Setup CTR for loop later</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"EqD"</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"CTR"</span>
+<span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">Doing a table:  Store indpendant variable if FS? 83</span>
+<span style="color: #00ffff;">FC</span>? 83 
+<span style="color: #00ffff;">GTO</span> 32
+<span style="color: #00ffff;">RCL</span> IND <span style="color: #fa8072;">"EqV"</span>
+<span style="color: #00ffff;">STOEL</span>
+<span style="color: #00ffff;">J+</span>
+<span style="color: #00ffff;">LBL</span> 32
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Evaluate function</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">XEQ IND</span> <span style="color: #fa8072;">"EqP"</span>
+<span style="color: #00ffff;">FS?C</span> 25
+<span style="color: #00ffff;">GTO</span> 17
+<span style="color: #fa8072;">"ERR: Func Eval"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 17
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Do thing for sum, product, or table</span>
+<span style="color: #00ffff;">FS</span>? 84
+<span style="color: #00ffff;">GTO</span> 26
+<span style="color: #00ffff;">GTO</span> 27
+<span style="color: #00ffff;">LBL</span> 27
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Sum or Product</span>
+<span style="color: #00ffff;">FC</span>? 82
+<span style="color: #00ffff;">GTO</span> 29
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">LN</span>
+<span style="color: #00ffff;">FS?C</span> 25
+<span style="color: #00ffff;">GTO</span> 29
+<span style="color: #fa8072;">"ERR: Bad Log"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">LBL</span> 29
+<span style="color: #00ffff;">FS</span>? 85
+<span style="color: #00ffff;">STO+</span> <span style="color: #fa8072;">"SoP"</span>
+<span style="color: #00ffff;">FC</span>? 85
+<span style="color: #00ffff;">STO&#215;</span> <span style="color: #fa8072;">"SoP"</span>
+<span style="color: #00ffff;">GTO</span> 28
+<span style="color: #00ffff;">LBL</span> 26
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Table</span>
+<span style="color: #00ffff;">LBL</span> 30
+<span style="color: #00ffff;">FC</span>? 82
+<span style="color: #00ffff;">GTO</span> 31
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">LN</span>
+<span style="color: #00ffff;">FS?C</span> 25
+<span style="color: #00ffff;">GTO</span> 31
+<span style="color: #fa8072;">"ERR: Bad Log"</span>
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">LBL</span> 31
+<span style="color: #00ffff;">STOEL</span>
+<span style="color: #00ffff;">J+</span>
+R&#8595;
+<span style="color: #00ffff;">DSE</span> <span style="color: #fa8072;">"CTR"</span>
+<span style="color: #00ffff;">GTO</span> 30
+<span style="color: #00ffff;">LBL</span> 28
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Increment indpendant variable</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"STEP"</span>
+<span style="color: #00ffff;">RCL</span> IND <span style="color: #fa8072;">"EqV"</span>
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">STO</span> IND <span style="color: #fa8072;">"EqV"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ULIM"</span>
+<span style="color: #00ffff;">X&#8805;Y</span>?
+<span style="color: #00ffff;">GTO</span> 24
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">All done.  Report Results</span>
+<span style="color: #00ffff;">FS</span>? 84          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">84 set -&gt; table</span>
+<span style="color: #00ffff;">GTO</span> 33          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">84 clear -&gt; (85 set -&gt; sum , 85 clear -&gt; product)</span>
+<span style="color: #00ffff;">GTO</span> 19
+<span style="color: #00ffff;">LBL</span> 19
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Sum or Product</span>
+<span style="color: #00ffff;">FS</span>? 85
+<span style="color: #fa8072;">"SUM: "</span>
+<span style="color: #00ffff;">FC</span>? 85
+<span style="color: #fa8072;">"PROD: "</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"SoP"</span>
+<span style="color: #00ffff;">GTO</span> 18
+<span style="color: #00ffff;">LBL</span> 33
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Table</span>
+<span style="color: #00ffff;">CLA</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"TMAT"</span>
+<span style="color: #00ffff;">LBL</span> 18
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org55ecfc7" class="outline-2">
+<h2 id="org55ecfc7"><span class="section-number-2">5</span> EOF</h2>
+<div class="outline-text-2" id="text-5">
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-03 Sat 12:27 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+</div>
+</body>
+</html>

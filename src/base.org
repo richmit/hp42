@@ -332,10 +332,11 @@ END
 @@@@ DSC: Print binary numbers (up to 64-bit)
 @@@@ IN:  X: An integer
 @@@@ OUT: Nothing -- prints to screen
+@@@@ FLG: 81  Set: We are on DM42, Clear: We are not on DM42
 @@@@ UPD: 2021-03-20
 LBL "BVIEW"
-FUNC 11            @@## REQ:free42>=2.5.24
-L4STK              @@## REQ:free42>=3.0
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
 0
 SF 25
 BIT?
@@ -348,22 +349,44 @@ RTN
 LBL 08
 R↓
 LSTO "X"
+20
+1
+FS? 68
+STO+ ST Y
+FS? 70
+STO+ ST Y
+FS? 71
+STO+ ST Y
+R↓             @@@@ 20:DECN 21:BINM 22:OCTM 23:HEXM
+LSTO "SBMD"
+R↓
+CF 81
+SF 25
+RCL "GrMod"
+FS?C 25
+SF 81
+FC? 81
+GTO 18
+0
+STO "GrMod"     @@@@ Set graphics mode to 42 classic on DM42
+R↓
+LBL 18
 CLLCD
-EXITALL           @@## REQ:DM42
+EXITALL              @@## REQ:DM42
 63
 1000
 ÷
 LSTO "CTR"
 LBL 00
 LBL 07
-            @@@@ Figure out X&Y coordinates for digit
-RCL "CTR"   @@@@ IF
+@@@@ Figure out X&Y coordinates for digit
+RCL "CTR"            @@@@ IF
 IP
 32
 X>Y?
 GTO 01
 GTO 02
-LBL 01      @@@@ IF-THEN FIRST ROW
+LBL 01               @@@@ IF-THEN FIRST ROW
 1
 RCL "CTR"
 4
@@ -371,7 +394,7 @@ RCL "CTR"
 1
 +
 GTO 03
-LBL 02      @@@@ IF-ELSE SECOND ROW
+LBL 02               @@@@ IF-ELSE SECOND ROW
 9
 RCL "CTR"
 32
@@ -380,19 +403,19 @@ RCL "CTR"
 ×
 1
 +
-LBL 03      @@@@ IF-END
-            @@@@ Figure out current bit value
+LBL 03               @@@@ IF-END
+@@@@ Figure out current bit value
 63
-RCL "CTR"   @@@@ IF-BEGIN
+RCL "CTR"            @@@@ IF-BEGIN
 IP
 -
 WSIZE?
 X>Y?
 GTO 10
 GTO 11
-LBL 10      @@@@ IF-THEN
+LBL 10               @@@@ IF-THEN
 R↓
-+/-         @@@@ IF-BEGIN
++/-                  @@@@ IF-BEGIN
 1
 X<>Y
 ROTXY
@@ -401,25 +424,27 @@ AND
 X=0?
 GTO 15
 GTO 16
-LBL 15      @@@@ IF-THEN bit is 0
+LBL 15               @@@@ IF-THEN bit is 0
 R↓
 0
 GTO 17
-LBL 16      @@@@ IF-ELSE bit is 1
+LBL 16               @@@@ IF-ELSE bit is 1
 R↓
 1
 LBL 17
 LSTO "CB"
 GTO 12
-LBL 11      @@@@ IF-ELSE
+LBL 11               @@@@ IF-ELSE
 R↓
 R↓
+@@@@ Bit beyond WSIZE.  Print something
 0
 LSTO "CB"
-LBL 12      @@@@ IF-END
+GTO 14              @@@@ Remove this line if you want to pad numbers
+LBL 12               @@@@ IF-END
 R↓
-            @@@@ Figure out grouping
-RCL "CTR"   @@@@ IF-START grouping
+@@@@ Figure out grouping
+RCL "CTR"            @@@@ IF-START grouping
 IP
 4
 ÷
@@ -430,27 +455,47 @@ FP
 X=0?
 GTO 04
 GTO 05
-LBL 04      @@@@ IF-THEN
+LBL 04               @@@@ IF-THEN
 R↓
 0
 GTO 06
-LBL 05      @@@@ IF-ELSE
+LBL 05               @@@@ IF-ELSE
 R↓
 40
-LBL 06      @@@@ IF-END
-            @@@@ Compute digit charge code
+LBL 06               @@@@ IF-END
+@@@@ Compute digit character code
 RCL+ "CB"
-            @@@@ Draw it
+@@@@ Draw it
 XEQ "TNPR"
+LBL 14
 ISG  "CTR"
 GTO 00
-            @@@@ Recall original X
+FC? 81
+GTO 19
+@@@@ On DM42.  Hack to keep screen clean
+EXITALL
+GETKEY
+CLLCD
+"BVIEW FINISHED"
+AVIEW
+LBL 19
+XEQ IND "SBMD"
+@@@@ Recall original X
 RCL "X"
-EXITALL           @@## REQ:DM42
+RTN
+LBL 20
+DECM
+RTN
+LBL 21
+BINM
+RTN
+LBL 22
+RTN
+LBL 23
+HEXM
 RTN
 END
 #+END_SRC
-
 
 * Bit Manipulation Functions
 
@@ -508,8 +553,6 @@ IP
 @@@@ All zeros case
 X>0?
 GTO 01
-R↓                             @@## REQ:free42<2.5.24
-R↓                             @@## REQ:free42<2.5.24
 0
 RTN
 LBL 01
@@ -517,9 +560,6 @@ LBL 01
 WSIZE?
 X>Y?
 GTO 02
-R↓                             @@## REQ:free42<2.5.24
-R↓                             @@## REQ:free42<2.5.24
-R↓                             @@## REQ:free42<2.5.24
 0
 NOT
 RTN
@@ -551,7 +591,6 @@ IP
 @@@@ All zeros case
 X>0?
 GTO 01
-R↓                             @@## REQ:free42<2.5.24
 0
 RTN
 LBL 01
@@ -559,8 +598,6 @@ LBL 01
 WSIZE?
 X>Y?
 GTO 02
-R↓                             @@## REQ:free42<2.5.24
-R↓                             @@## REQ:free42<2.5.24
 0
 NOT
 RTN
@@ -589,7 +626,6 @@ IP
 @@@@ All zeros case
 X>0?
 GTO 01
-R↓                             @@## REQ:free42<2.5.24
 0
 RTN
 LBL 01
@@ -597,8 +633,6 @@ LBL 01
 WSIZE?
 X>Y?
 GTO 02
-R↓                             @@## REQ:free42<2.5.24
-R↓                             @@## REQ:free42<2.5.24
 0
 NOT
 RTN
@@ -701,8 +735,6 @@ L4STK                         @@## REQ:free42>=3.0
 @@@@ Return 0 if X negative
 X≥0?
 GTO 01
-R↓                             @@## REQ:free42<2.5.24
-R↓                             @@## REQ:free42<2.5.24
 0
 RTN
 LBL 01 @@@@ X is positive
@@ -710,8 +742,6 @@ LBL 01 @@@@ X is positive
 WSIZE?
 X>Y?
 GTO 02
-R↓                             @@## REQ:free42<2.5.24
-R↓                             @@## REQ:free42<2.5.24
 0
 RTN
 LBL 02 @@@@ X is less than WSIZE
@@ -720,13 +750,9 @@ BIT?   @@@@ IF-BEGIN
 GTO 01
 GTO 02
 LBL 01 @@@@ IF-THEN
-R↓                             @@## REQ:free42<2.5.24
-R↓                             @@## REQ:free42<2.5.24
 1
 GTO 03
 LBL 02 @@@@ IF-ELSE
-R↓                             @@## REQ:free42<2.5.24
-R↓                             @@## REQ:free42<2.5.24
 0
 LBL 03 @@@@ IF-END
 RTN
@@ -810,13 +836,9 @@ LBL 01  @@@@ X is positive
 WSIZE?
 X>Y?
 GTO 02
-R↓                             @@## REQ:free42<2.5.24
-R↓                             @@## REQ:free42<2.5.24
-R↓                             @@## REQ:free42<2.5.24
 0
 RTN
 LBL 02 @@@@ X is less than WSIZE
-R↓                             @@## REQ:free42<2.5.24
 X<>Y
 RCL ST Y
 @@@@ Rotate left X bits
@@ -856,13 +878,9 @@ LBL 01  @@@@ X is positive
 WSIZE?
 X>Y?
 GTO 02
-R↓                             @@## REQ:free42<2.5.24
-R↓                             @@## REQ:free42<2.5.24
-R↓                             @@## REQ:free42<2.5.24
 0
 RTN
 LBL 02 @@@@ X is less than WSIZE
-R↓                             @@## REQ:free42<2.5.24
 X<>Y
 RCL ST Y
 @@@@ Zap the right most X bits
@@ -1055,7 +1073,6 @@ L4STK                         @@## REQ:free42>=3.0
 IP
 X≠0?
 GTO 01
-R↓                             @@## REQ:free42<2.5.24
 -1
 RTN
 LBL 01 @@ X not zero
@@ -1081,7 +1098,6 @@ L4STK                         @@## REQ:free42>=3.0
 IP
 X≠0?
 GTO 01
-R↓                             @@## REQ:free42<2.5.24
 -1
 RTN
 LBL 01 @@ X not zero
@@ -1157,11 +1173,20 @@ END
 |------------------+---------|
 | BVIEW            |         |
 |------------------+---------|
-
+| HEXM             |         |
+| DECM             |         |
+| OCTM             |         |
+| BINM             |         |
+| CFG:WSIZE        |         |
+| CFG:WSIZE?       |         |
+| CFG:BSIGNED      |         |
+| CFG:BWRAP        |         |
+| BMNU             |         |
 
 ** Menu Code
 
 The menu program is generated via the following bit of elisp.  You must first define the =MJR-generate-42-menu-code= and =MJR-custom-x-gen= by evaluating the code blocks in the =hp42s-meta.org= file.
+The skelliton was generated by the following code.  That skelliton has been fleshed out with some custom code.
 
 #+BEGIN_SRC elisp :var tbl=basem :colnames y :results output verbatum :wrap src hp42s
 (MJR-generate-42-menu-code "BASE" tbl "stay" "up" #'MJR-custom-x-gen)
@@ -1169,303 +1194,405 @@ The menu program is generated via the following bit of elisp.  You must first de
 
 #+RESULTS:
 #+begin_src hp42s
+@@@ FLG: 81 Used in a temp way
 LBL "BASE"
 LBL 01            @@@@ Page 1 of menu BASE
 CLMENU
 "S&R"
-KEY 1 GTO 02
+KEY 1 GTO 03
 "BITS"
-KEY 2 GTO 03
+KEY 2 GTO 04
 "FUN"
-KEY 3 GTO 04
+KEY 3 GTO 05
 "MASK"
-KEY 4 GTO 05
+KEY 4 GTO 06
 "ARTH"
-KEY 5 GTO 06
+KEY 5 GTO 07
 "BVIEW"
-KEY 6 XEQ 07
+KEY 6 XEQ 08
+KEY 7 GTO 02
+KEY 8 GTO 02
 KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02            @@@@ Page 1 of menu S&R
+LBL 02            @@@@ Page 2 of menu BASE
 CLMENU
-"SLn"
-KEY 1 XEQ 10
-"SRn"
-KEY 2 XEQ 11
-"RLn"
-KEY 3 XEQ 12
-"RRn"
-KEY 4 XEQ 13
-"BVIEW"
+"HEX"
+FS? 71
+├"•"
+KEY 1 XEQ 09
+"DEC"
+SF 81
+FS? 71
+CF 81
+FS? 70
+CF 81
+FS? 68
+CF 81
+FS? 81
+├"•"
+KEY 2 XEQ 10
+"OCT"
+SF 81
+FS? 71
+CF 81
+FC? 70
+CF 81
+FS? 81
+├"•"
+KEY 3 XEQ 11
+"BIN"
+SF 81
+FC? 68
+CF 81
+FS? 69
+CF 81
+FS? 81
+├"•"
+KEY 4 XEQ 12
+"CFG"
+KEY 5 GTO 13
+"BMNU"
 KEY 6 XEQ 14
-KEY 7 GTO 09
-KEY 8 GTO 08
-KEY 9 GTO 01
+KEY 7 GTO 01
+KEY 8 GTO 01
+KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 08            @@@@ Page 2 of menu S&R
+LBL 03            @@@@ Page 1 of menu S&R
 CLMENU
-"LJ"
-KEY 1 XEQ 15
-"RJ"
-KEY 2 XEQ 16
-"SHFXY"
-KEY 3 XEQ 17
-"ROTXY"
-KEY 4 XEQ 18
+"SLn"
+KEY 1 XEQ 17
+"SRn"
+KEY 2 XEQ 18
+"RLn"
+KEY 3 XEQ 19
+"RRn"
+KEY 4 XEQ 20
 "BVIEW"
-KEY 6 XEQ 19
-KEY 7 GTO 02
-KEY 8 GTO 09
-KEY 9 GTO 01
-MENU
-STOP
-GTO 08
-LBL 09            @@@@ Page 3 of menu S&R
-CLMENU
-"SL"
-KEY 1 XEQ 20
-"SR"
-KEY 2 XEQ 21
-"RL"
-KEY 3 XEQ 22
-"RR"
-KEY 4 XEQ 23
-"BVIEW"
-KEY 6 XEQ 24
-KEY 7 GTO 08
-KEY 8 GTO 02
-KEY 9 GTO 01
-MENU
-STOP
-GTO 09
-LBL 03            @@@@ Page 1 of menu BITS
-CLMENU
-"GETB"
-KEY 1 XEQ 25
-"SB"
-KEY 2 XEQ 26
-"CB"
-KEY 3 XEQ 27
-"BVIEW"
-KEY 6 XEQ 28
+KEY 6 XEQ 21
+KEY 7 GTO 16
+KEY 8 GTO 15
 KEY 9 GTO 01
 MENU
 STOP
 GTO 03
-LBL 04            @@@@ Page 1 of menu FUN
+LBL 15            @@@@ Page 2 of menu S&R
 CLMENU
-"B#"
-KEY 1 XEQ 29
-"MSSB"
-KEY 2 XEQ 30
-"LSSB"
-KEY 3 XEQ 31
-"ILN2"
-KEY 4 XEQ 32
-"ISQRT"
-KEY 5 XEQ 33
+"LJ"
+KEY 1 XEQ 22
+"RJ"
+KEY 2 XEQ 23
+"SHFXY"
+KEY 3 XEQ 24
+"ROTXY"
+KEY 4 XEQ 25
 "BVIEW"
-KEY 6 XEQ 34
+KEY 6 XEQ 26
+KEY 7 GTO 03
+KEY 8 GTO 16
+KEY 9 GTO 01
+MENU
+STOP
+GTO 15
+LBL 16            @@@@ Page 3 of menu S&R
+CLMENU
+"SL"
+KEY 1 XEQ 27
+"SR"
+KEY 2 XEQ 28
+"RL"
+KEY 3 XEQ 29
+"RR"
+KEY 4 XEQ 30
+"BVIEW"
+KEY 6 XEQ 31
+KEY 7 GTO 15
+KEY 8 GTO 03
+KEY 9 GTO 01
+MENU
+STOP
+GTO 16
+LBL 04            @@@@ Page 1 of menu BITS
+CLMENU
+"GETB"
+KEY 1 XEQ 32
+"SB"
+KEY 2 XEQ 33
+"CB"
+KEY 3 XEQ 34
+"BVIEW"
+KEY 6 XEQ 35
 KEY 9 GTO 01
 MENU
 STOP
 GTO 04
-LBL 05            @@@@ Page 1 of menu MASK
+LBL 05            @@@@ Page 1 of menu FUN
 CLMENU
-"MSKL"
-KEY 1 XEQ 35
-"MSKR"
-KEY 2 XEQ 36
-"MSKn"
-KEY 3 XEQ 37
+"B#"
+KEY 1 XEQ 36
+"MSSB"
+KEY 2 XEQ 37
+"LSSB"
+KEY 3 XEQ 38
+"ILN2"
+KEY 4 XEQ 39
+"ISQRT"
+KEY 5 XEQ 40
 "BVIEW"
-KEY 6 XEQ 38
+KEY 6 XEQ 41
 KEY 9 GTO 01
 MENU
 STOP
 GTO 05
-LBL 06            @@@@ Page 1 of menu ARTH
+LBL 06            @@@@ Page 1 of menu MASK
 CLMENU
-"AND"
-KEY 1 XEQ 41
-"OR"
-KEY 2 XEQ 42
-"XOR"
-KEY 3 XEQ 43
-"NOT"
-KEY 4 XEQ 44
-"NEG"
-KEY 5 XEQ 45
-KEY 7 GTO 40
-KEY 8 GTO 39
+"MSKL"
+KEY 1 XEQ 42
+"MSKR"
+KEY 2 XEQ 43
+"MSKn"
+KEY 3 XEQ 44
+"BVIEW"
+KEY 6 XEQ 45
 KEY 9 GTO 01
 MENU
 STOP
 GTO 06
-LBL 39            @@@@ Page 2 of menu ARTH
+LBL 07            @@@@ Page 1 of menu ARTH
+CLMENU
+"AND"
+KEY 1 XEQ 48
+"OR"
+KEY 2 XEQ 49
+"XOR"
+KEY 3 XEQ 50
+"NOT"
+KEY 4 XEQ 51
+"NEG"
+KEY 5 XEQ 52
+KEY 7 GTO 47
+KEY 8 GTO 46
+KEY 9 GTO 01
+MENU
+STOP
+GTO 07
+LBL 46            @@@@ Page 2 of menu ARTH
 CLMENU
 "BVIEW"
-KEY 1 XEQ 46
+KEY 1 XEQ 53
 "+"
-KEY 2 XEQ 47
+KEY 2 XEQ 54
 "-"
-KEY 3 XEQ 48
+KEY 3 XEQ 55
 "×"
-KEY 4 XEQ 49
+KEY 4 XEQ 56
 "÷"
-KEY 5 XEQ 50
+KEY 5 XEQ 57
 "MOD"
-KEY 6 XEQ 51
-KEY 7 GTO 06
-KEY 8 GTO 40
+KEY 6 XEQ 58
+KEY 7 GTO 07
+KEY 8 GTO 47
 KEY 9 GTO 01
 MENU
 STOP
-GTO 39
-LBL 40            @@@@ Page 3 of menu ARTH
+GTO 46
+LBL 47            @@@@ Page 3 of menu ARTH
 CLMENU
 "BVIEW"
-KEY 1 XEQ 52
-KEY 7 GTO 39
-KEY 8 GTO 06
+KEY 1 XEQ 59
+KEY 7 GTO 46
+KEY 8 GTO 07
 KEY 9 GTO 01
 MENU
 STOP
-GTO 40
+GTO 47
+LBL 13            @@@@ Page 1 of menu CFG
+DECM              @@@@ Switch to DECM so we can set word size easily. ;)
+CLMENU
+"WSIZE"
+KEY 1 XEQ 60
+"WSZ?"
+KEY 2 XEQ 61
+FS? 78
+"BSG•"
+FC? 78
+"BSG"
+KEY 3 XEQ 62
+FS? 79
+"BWR•"
+FC? 79
+"BWRP"
+KEY 4 XEQ 63
+KEY 9 GTO 02
+MENU
+STOP
+GTO 13
 LBL 00
 EXITALL
 RTN
-LBL 07               @@@@ Action for menu key BVIEW
+LBL 08               @@@@ Action for menu key BVIEW
 XEQ "BVIEW"
 RTN
-LBL 10               @@@@ Action for menu key SLn
+LBL 09               @@@@ Action for menu key HEXM
+HEXM
+RTN
+LBL 10               @@@@ Action for menu key DECM
+DECM
+RTN
+LBL 11               @@@@ Action for menu key OCTM
+OCTM
+RTN
+LBL 12               @@@@ Action for menu key BINM
+BINM
+RTN
+LBL 14               @@@@ Action for menu key BMNU
+EXITALL
+"Press R/S To"
+"├ Return"
+AVIEW
+HEXM
+STOP
+RTN
+LBL 17               @@@@ Action for menu key SLn
 XEQ "SLn"
 RTN
-LBL 11               @@@@ Action for menu key SRn
+LBL 18               @@@@ Action for menu key SRn
 XEQ "SRn"
 RTN
-LBL 12               @@@@ Action for menu key RLn
+LBL 19               @@@@ Action for menu key RLn
 XEQ "RLn"
 RTN
-LBL 13               @@@@ Action for menu key RRn
+LBL 20               @@@@ Action for menu key RRn
 XEQ "RRn"
 RTN
-LBL 14               @@@@ Action for menu key BVIEW
+LBL 21               @@@@ Action for menu key BVIEW
 XEQ "BVIEW"
 RTN
-LBL 15               @@@@ Action for menu key LJ
+LBL 22               @@@@ Action for menu key LJ
 XEQ "LJ"
 RTN
-LBL 16               @@@@ Action for menu key RJ
+LBL 23               @@@@ Action for menu key RJ
 XEQ "RJ"
 RTN
-LBL 17               @@@@ Action for menu key SHFXY
+LBL 24               @@@@ Action for menu key SHFXY
 XEQ "SHFXY"
 RTN
-LBL 18               @@@@ Action for menu key ROTXY
+LBL 25               @@@@ Action for menu key ROTXY
 ROTXY
 RTN
-LBL 19               @@@@ Action for menu key BVIEW
+LBL 26               @@@@ Action for menu key BVIEW
 XEQ "BVIEW"
 RTN
-LBL 20               @@@@ Action for menu key SL
+LBL 27               @@@@ Action for menu key SL
 XEQ "SL"
 RTN
-LBL 21               @@@@ Action for menu key SR
+LBL 28               @@@@ Action for menu key SR
 XEQ "SR"
 RTN
-LBL 22               @@@@ Action for menu key RL
+LBL 29               @@@@ Action for menu key RL
 XEQ "RL"
 RTN
-LBL 23               @@@@ Action for menu key RR
+LBL 30               @@@@ Action for menu key RR
 XEQ "RR"
 RTN
-LBL 24               @@@@ Action for menu key BVIEW
+LBL 31               @@@@ Action for menu key BVIEW
 XEQ "BVIEW"
 RTN
-LBL 25               @@@@ Action for menu key GETB
+LBL 32               @@@@ Action for menu key GETB
 XEQ "GETB"
 RTN
-LBL 26               @@@@ Action for menu key SB
+LBL 33               @@@@ Action for menu key SB
 XEQ "SETB"
 RTN
-LBL 27               @@@@ Action for menu key CB
+LBL 34               @@@@ Action for menu key CB
 XEQ "CLRB"
 RTN
-LBL 28               @@@@ Action for menu key BVIEW
+LBL 35               @@@@ Action for menu key BVIEW
 XEQ "BVIEW"
 RTN
-LBL 29               @@@@ Action for menu key B#
+LBL 36               @@@@ Action for menu key B#
 XEQ "B#"
 RTN
-LBL 30               @@@@ Action for menu key MSSB
+LBL 37               @@@@ Action for menu key MSSB
 XEQ "MSSB"
 RTN
-LBL 31               @@@@ Action for menu key LSSB
+LBL 38               @@@@ Action for menu key LSSB
 XEQ "LSSB"
 RTN
-LBL 32               @@@@ Action for menu key ILN2
+LBL 39               @@@@ Action for menu key ILN2
 XEQ "ILN2"
 RTN
-LBL 33               @@@@ Action for menu key ISQRT
+LBL 40               @@@@ Action for menu key ISQRT
 XEQ "ISQRT"
 RTN
-LBL 34               @@@@ Action for menu key BVIEW
+LBL 41               @@@@ Action for menu key BVIEW
 XEQ "BVIEW"
 RTN
-LBL 35               @@@@ Action for menu key MSKL
+LBL 42               @@@@ Action for menu key MSKL
 XEQ "MSKL"
 RTN
-LBL 36               @@@@ Action for menu key MSKR
+LBL 43               @@@@ Action for menu key MSKR
 XEQ "MSKR"
 RTN
-LBL 37               @@@@ Action for menu key MSKn
+LBL 44               @@@@ Action for menu key MSKn
 XEQ "MSKn"
 RTN
-LBL 38               @@@@ Action for menu key BVIEW
+LBL 45               @@@@ Action for menu key BVIEW
 XEQ "BVIEW"
 RTN
-LBL 41               @@@@ Action for menu key AND
+LBL 48               @@@@ Action for menu key AND
 AND
 RTN
-LBL 42               @@@@ Action for menu key OR
+LBL 49               @@@@ Action for menu key OR
 OR
 RTN
-LBL 43               @@@@ Action for menu key XOR
+LBL 50               @@@@ Action for menu key XOR
 XEQ "XOR"
 RTN
-LBL 44               @@@@ Action for menu key NOT
+LBL 51               @@@@ Action for menu key NOT
 NOT
 RTN
-LBL 45               @@@@ Action for menu key NEG
+LBL 52               @@@@ Action for menu key NEG
 BASE+/-
 RTN
-LBL 46               @@@@ Action for menu key BVIEW
+LBL 53               @@@@ Action for menu key BVIEW
 XEQ "BVIEW"
 RTN
-LBL 47               @@@@ Action for menu key +
+LBL 54               @@@@ Action for menu key +
 BASE+
 RTN
-LBL 48               @@@@ Action for menu key -
+LBL 55               @@@@ Action for menu key -
 BASE-
 RTN
-LBL 49               @@@@ Action for menu key ×
+LBL 56               @@@@ Action for menu key ×
 BASE×
 RTN
-LBL 50               @@@@ Action for menu key ÷
+LBL 57               @@@@ Action for menu key ÷
 BASE÷
 RTN
-LBL 51               @@@@ Action for menu key MOD
+LBL 58               @@@@ Action for menu key MOD
 MOD
 RTN
-LBL 52               @@@@ Action for menu key BVIEW
+LBL 59               @@@@ Action for menu key BVIEW
 XEQ "BVIEW"
 RTN
-@@@@ Free labels start at: 53
+LBL 60               @@@@ Action for menu key WSIZE
+WSIZE
+RTN
+LBL 61               @@@@ Action for menu key WSIZE?
+WSIZE?
+RTN
+LBL 62               @@@@ Action for menu key BSIGNED
+BSIGNED
+RTN
+LBL 63               @@@@ Action for menu key BWRAP
+BWRAP
+RTN
+END
+@@@@ Free labels start at: 64
 #+end_src
 
 * EOF

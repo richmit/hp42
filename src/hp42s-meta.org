@@ -165,7 +165,7 @@ The last two are /actions/ while the first is yet another menu containing "=foob
                                                     do (gen-mnu p-lab m-lab mkey-elt)))))
       (gen-mnu 0 1 (prc-mnu (append (list top-lab) (cl-loop for row in tbl
                                                             for n from 0
-                                                            for tmp = (split-string (cl-first row) ":")
+                                                            for tmp = (split-string (message "%s" (cl-first row)) ":")
                                                             do (setf (car (last tmp)) (vector (car (last tmp)) row))
                                                             collect tmp))))
       (add-m-code "LBL 00")
@@ -220,16 +220,45 @@ I may have missed a built in function, so you may have to add one to the list. ;
 *** Template for empty menu code
 
 #+NAME: menu
-| Menu:SubMenu:Key |
-|------------------|
-| A                |
-| B                |
+| Menu |
+|------|
+| a    |
+| b    |
+| c    |
 
 #+BEGIN_SRC elisp :var tbl=menu :colnames y :results output verbatum :wrap src hp42s
 (MJR-generate-42-menu-code "PROG_NAME" tbl "stay" "up" (lambda (x) ""))
 #+END_SRC
 
+#+RESULTS:
+#+begin_src hp42s
+LBL "PROG_NAME"
+LBL 01            @@@@ Page 1 of menu PROG_NAME
+CLMENU
+"a"
+KEY 1 XEQ 02
+"b"
+KEY 2 XEQ 03
+"c"
+KEY 3 XEQ 04
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 00
+EXITALL
+RTN
+LBL 02               @@@@ Action for menu key a
 
+RTN
+LBL 03               @@@@ Action for menu key b
+
+RTN
+LBL 04               @@@@ Action for menu key c
+
+RTN
+@@@@ Free labels start at: 5
+#+end_src
 
 * Emacs Helper Stuff
 
@@ -538,6 +567,17 @@ the target version of free42.  It's a bit of a hack, but it lets me maintain one
 | Set     | N/A     | Y.MD |
 | Clear   | Clear   | M.DY |
 | Clear   | Set     | D.MY |
+
+* DM 42 Notes
+
+** Display
+
+GrMod is a read write variable.
+   - 0 = standard HP-42S resolution 131x16
+   - 2 = DM42 full resolution 200x120
+   - 3 = DM42 full resolution 400x240
+
+ResX & ResY are read only variables that have the display resolution
 
 * EOF
 

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-03 Sat 20:19 -->
+<!-- 2021-04-04 Sun 12:30 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Programming Tools</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-03 20:19:13</i></td>
+<td class="org-left"><i>2021-04-04 12:30:41</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,51 +241,41 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgcd66cb5">1. Metadata</a></li>
-<li><a href="#orged14e3e">2. Introduction</a></li>
-<li><a href="#org08e5b81">3. Generateing 42s code</a>
+<li><a href="#org9271d17">1. Metadata</a></li>
+<li><a href="#org042c0a8">2. Introduction</a></li>
+<li><a href="#orgabc9573">3. Generateing 42s menu code</a>
 <ul>
-<li><a href="#org63c35f3">3.1. Menus</a>
-<ul>
-<li><a href="#orge39fd1f">3.1.1. Generic menu generator</a></li>
-<li><a href="#org78adea3">3.1.2. For CUSTOM-type Menus</a></li>
-<li><a href="#org7fad35c">3.1.3. Template for empty menu code</a></li>
+<li><a href="#org4f619be">3.1. Generic menu generator</a></li>
+<li><a href="#orgf0ffb53">3.2. For CUSTOM-type Menus</a></li>
+<li><a href="#org0b8ba60">3.3. Template for empty menu code</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a href="#org9fd4dd8">4. Emacs Helper Stuff</a>
+<li><a href="#orgffca75c">4. Emacs Helper Stuff</a>
 <ul>
-<li><a href="#org65cb53d">4.1. Emacs function to insert charcters given a list of character codes</a></li>
-<li><a href="#org0843119">4.2. Emacs Mode for 42s Code</a></li>
-<li><a href="#orge5ce5bd">4.3. yas templates</a></li>
+<li><a href="#org863f75a">4.1. Emacs function to insert charcters given a list of character codes</a></li>
+<li><a href="#org968d0c8">4.2. Emacs Mode for 42s Code</a></li>
+<li><a href="#org7388bd1">4.3. yas templates</a></li>
 </ul>
 </li>
-<li><a href="#orgb760f62">5. Prepare Code For Conversion</a>
+<li><a href="#org6ca2690">5. Prepare Code For Conversion</a></li>
+<li><a href="#org869eb86">6. free42 Notes</a>
 <ul>
-<li><a href="#org7226177">5.1. DM42 DMCP-3.20 / DM42-3.17</a></li>
-<li><a href="#org695b112">5.2. free42 3.0.1 or newer</a></li>
-<li><a href="#org8d129d2">5.3. Clean Tangled Code</a></li>
+<li><a href="#org866db82">6.1. Character Set</a></li>
+<li><a href="#orgbab64ad">6.2. Date format</a></li>
 </ul>
 </li>
-<li><a href="#orgf1bb6c9">6. 42s Notes</a>
+<li><a href="#org70ce4a5">7. DM 42 Notes</a>
 <ul>
-<li><a href="#org9bfdca1">6.1. Character Set</a></li>
-<li><a href="#org3703523">6.2. Date format</a></li>
+<li><a href="#org9c4f055">7.1. Display</a></li>
 </ul>
 </li>
-<li><a href="#orgffd7d13">7. DM 42 Notes</a>
-<ul>
-<li><a href="#org855255c">7.1. Display</a></li>
-</ul>
-</li>
-<li><a href="#org69566e5">8. EOF</a></li>
+<li><a href="#orge87d6b5">8. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgcd66cb5" class="outline-2">
-<h2 id="orgcd66cb5"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org9271d17" class="outline-2">
+<h2 id="org9271d17"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/hp42s-meta.html">https://richmit.github.io/hp42/hp42s-meta.html</a>
@@ -303,8 +293,8 @@ Files related to this document may be found on github: <a href="https://github.c
 </div>
 </div>
 
-<div id="outline-container-orged14e3e" class="outline-2">
-<h2 id="orged14e3e"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-org042c0a8" class="outline-2">
+<h2 id="org042c0a8"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 This org-mode document contains various tools (mostly for Emacs) that help me write programs for the 42s:
@@ -324,17 +314,13 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
 </div>
 </div>
 
-<div id="outline-container-org08e5b81" class="outline-2">
-<h2 id="org08e5b81"><span class="section-number-2">3</span> Generateing 42s code</h2>
+<div id="outline-container-orgabc9573" class="outline-2">
+<h2 id="orgabc9573"><span class="section-number-2">3</span> Generateing 42s menu code</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org63c35f3" class="outline-3">
-<h3 id="org63c35f3"><span class="section-number-3">3.1</span> Menus</h3>
+<div id="outline-container-org4f619be" class="outline-3">
+<h3 id="org4f619be"><span class="section-number-3">3.1</span> Generic menu generator</h3>
 <div class="outline-text-3" id="text-3-1">
-</div>
-<div id="outline-container-orge39fd1f" class="outline-4">
-<h4 id="orge39fd1f"><span class="section-number-4">3.1.1</span> Generic menu generator</h4>
-<div class="outline-text-4" id="text-3-1-1">
 <p>
 This code will read an org-mode table describing a menu, and generate 42s code to implement the menu.  The menus may be of arbitrary depth and size; however,
 two digit local labels are used in the generated code which limits sizes.
@@ -490,9 +476,9 @@ The last two are <i>actions</i> while the first is yet another menu containing "
 </div>
 </div>
 
-<div id="outline-container-org78adea3" class="outline-4">
-<h4 id="org78adea3"><span class="section-number-4">3.1.2</span> For CUSTOM-type Menus</h4>
-<div class="outline-text-4" id="text-3-1-2">
+<div id="outline-container-orgf0ffb53" class="outline-3">
+<h3 id="orgf0ffb53"><span class="section-number-3">3.2</span> For CUSTOM-type Menus</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
 This is a function for use as as the <code>gen-code</code> argument to <code>MJR-generate-42-menu-code</code>.  It generates a menu program that calls other programs or built in
 functions &#x2013; it is very useful for generating menus to be assigned to the CUSTOM menu.  The second column of the defining table is used to specify a function
@@ -559,10 +545,10 @@ I may have missed a built in function, so you may have to add one to the list. ;
 </div>
 </div>
 
-<div id="outline-container-org7fad35c" class="outline-4">
-<h4 id="org7fad35c"><span class="section-number-4">3.1.3</span> Template for empty menu code</h4>
-<div class="outline-text-4" id="text-3-1-3">
-<table id="orgefd52bc" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org0b8ba60" class="outline-3">
+<h3 id="org0b8ba60"><span class="section-number-3">3.3</span> Template for empty menu code</h3>
+<div class="outline-text-3" id="text-3-3">
+<table id="org8000ddf" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -625,14 +611,13 @@ I may have missed a built in function, so you may have to add one to the list. ;
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-org9fd4dd8" class="outline-2">
-<h2 id="org9fd4dd8"><span class="section-number-2">4</span> Emacs Helper Stuff</h2>
+<div id="outline-container-orgffca75c" class="outline-2">
+<h2 id="orgffca75c"><span class="section-number-2">4</span> Emacs Helper Stuff</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org65cb53d" class="outline-3">
-<h3 id="org65cb53d"><span class="section-number-3">4.1</span> Emacs function to insert charcters given a list of character codes</h3>
+<div id="outline-container-org863f75a" class="outline-3">
+<h3 id="org863f75a"><span class="section-number-3">4.1</span> Emacs function to insert charcters given a list of character codes</h3>
 <div class="outline-text-3" id="text-4-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-ins42char</span> (charn)
@@ -655,8 +640,8 @@ I may have missed a built in function, so you may have to add one to the list. ;
 </div>
 
 
-<div id="outline-container-org0843119" class="outline-3">
-<h3 id="org0843119"><span class="section-number-3">4.2</span> Emacs Mode for 42s Code</h3>
+<div id="outline-container-org968d0c8" class="outline-3">
+<h3 id="org968d0c8"><span class="section-number-3">4.2</span> Emacs Mode for 42s Code</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 This isn't really a proper mode for 42s code.  Just a quick hack with <code>define-generic-mode</code> to get some syntax highlighting &#x2013; which doesn't fully work as
@@ -695,8 +680,8 @@ hp42s-mode
 </div>
 </div>
 
-<div id="outline-container-orge5ce5bd" class="outline-3">
-<h3 id="orge5ce5bd"><span class="section-number-3">4.3</span> yas templates</h3>
+<div id="outline-container-org7388bd1" class="outline-3">
+<h3 id="org7388bd1"><span class="section-number-3">4.3</span> yas templates</h3>
 <div class="outline-text-3" id="text-4-3">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #b0c4de;">echo</span> <span style="color: #fa8072;">''</span>
@@ -758,75 +743,62 @@ RTN       @@@@ IF-TRUE-END (<span style="color: #00ffff;">$</span><span style="c
 </div>
 </div>
 
-<div id="outline-container-orgb760f62" class="outline-2">
-<h2 id="orgb760f62"><span class="section-number-2">5</span> Prepare Code For Conversion</h2>
+<div id="outline-container-org6ca2690" class="outline-2">
+<h2 id="org6ca2690"><span class="section-number-2">5</span> Prepare Code For Conversion</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 I include comments like <code>@@##</code> that I use like compiler directives in C.  They provide a way to remove lines of code that are incompatible or unnecessary for
-the target version of free42.  It's a bit of a hack, but it lets me maintain one program for diff-rent versions of free42.
+the target version of free42.  It's a bit of a hack, but it lets me maintain one program for diff-rent versions of free42.  When I "tangle" an <code>org-mode</code> buffer,
+the code is automatically filtered for the selected version of free42 (set via <code>MJR-target-free42-version</code>).
 </p>
-</div>
 
-<div id="outline-container-org7226177" class="outline-3">
-<h3 id="org7226177"><span class="section-number-3">5.1</span> DM42 DMCP-3.20 / DM42-3.17</h3>
-<div class="outline-text-3" id="text-5-1">
-<div class="org-src-container">
-<pre class="src src-elisp">(<span style="color: #00ffff;">progn</span>
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap lines requireing a newer free24</span>
-  (query-replace-regexp <span style="color: #fa8072;">"^.*@@## REQ:free42&gt;=</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">(</span><span style="color: #fa8072;">[0-9.]+</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">)</span><span style="color: #fa8072;">$"</span> '(replace-eval-replacement replace-quote (<span style="color: #00ffff;">if</span> (version&lt; <span style="color: #fa8072;">"2.5.20"</span> (match-string 1)) <span style="color: #fa8072;">""</span> (match-string 0))) nil nil nil nil nil)
-  (query-replace-regexp <span style="color: #fa8072;">"^.*@@## USE:free42&gt;=</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">(</span><span style="color: #fa8072;">[0-9.]+</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">)</span><span style="color: #fa8072;">$"</span> '(replace-eval-replacement replace-quote (<span style="color: #00ffff;">if</span> (version&lt; <span style="color: #fa8072;">"2.5.20"</span> (match-string 1)) <span style="color: #fa8072;">""</span> (match-string 0))) nil nil nil nil nil)
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap comment lines</span>
-  (delete-matching-lines <span style="color: #fa8072;">"^ *@@@@.*$"</span> nil nil t)
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap directive comments</span>
-  (query-replace-regexp <span style="color: #fa8072;">" +@@## ...:.*$"</span> <span style="color: #fa8072;">""</span> nil nil nil nil nil)
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap comments</span>
-  (query-replace-regexp <span style="color: #fa8072;">" +@@@@.*$"</span> <span style="color: #fa8072;">""</span> nil nil nil nil nil)
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap leading whitespace</span>
-  (query-replace-regexp <span style="color: #fa8072;">"^ +"</span> <span style="color: #fa8072;">""</span> nil nil nil nil nil)
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap empty lines</span>
-  (delete-matching-lines <span style="color: #fa8072;">"^ *$"</span> nil nil t))
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org695b112" class="outline-3">
-<h3 id="org695b112"><span class="section-number-3">5.2</span> free42 3.0.1 or newer</h3>
-<div class="outline-text-3" id="text-5-2">
-<div class="org-src-container">
-<pre class="src src-elisp">(<span style="color: #00ffff;">progn</span>
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap comment lines</span>
-  (beginning-of-buffer)
-  (delete-matching-lines <span style="color: #fa8072;">"^ *@@@@.*$"</span> nil nil t)
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap directive comments</span>
-  (beginning-of-buffer)
-  (query-replace-regexp <span style="color: #fa8072;">" +@@## ...:.*$"</span> <span style="color: #fa8072;">""</span> nil nil nil nil nil)
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap comments</span>
-  (beginning-of-buffer)
-  (query-replace-regexp <span style="color: #fa8072;">" +@@@@.*$"</span> <span style="color: #fa8072;">""</span> nil nil nil nil nil)
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap leading whitespace</span>
-  (beginning-of-buffer)
-  (query-replace-regexp <span style="color: #fa8072;">"^ +"</span> <span style="color: #fa8072;">""</span> nil nil nil nil nil)
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap empty lines</span>
-  (beginning-of-buffer)
-  (delete-matching-lines <span style="color: #fa8072;">"^ *$"</span> nil nil t))
-</pre>
-</div>
-</div>
-</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
-<div id="outline-container-org8d129d2" class="outline-3">
-<h3 id="org8d129d2"><span class="section-number-3">5.3</span> Clean Tangled Code</h3>
-<div class="outline-text-3" id="text-5-3">
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">DM42 Version</th>
+<th scope="col" class="org-right">Target Free42</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">DMCP-3.20 / DM42-3.17</td>
+<td class="org-right">2.5.20</td>
+</tr>
+</tbody>
+</table>
+
 <p>
 This function cleans up tangled (C-c C-v t) code so that it can be cleanly pasted into free42.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-process-tangled-42s-code</span> ()
+<pre class="src src-elisp">(<span style="color: #00ffff;">defvar</span> <span style="color: #7fffd4;">MJR-target-free42-version</span> nil)
+(<span style="color: #00ffff;">setq</span> MJR-target-free42-version <span style="color: #fa8072;">"3.0.2"</span>)
+
+(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-process-tangled-42s-code</span> ()
   <span style="color: #f08080;">"Prepare tangled hp42s code for upload"</span>
   (<span style="color: #00ffff;">interactive</span>)
+  (<span style="color: #00ffff;">let</span> ((zap-loc-too-new 0)
+        (zap-loc-too-old 0))
+  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Remove code requireing a newer version of free42 than our target</span>
+  (goto-char (point-min))
+  (<span style="color: #00ffff;">while</span> (re-search-forward <span style="color: #fa8072;">"^.*@@## REQ:free42&gt;=</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">(</span><span style="color: #fa8072;">[0-9.]+</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">)</span><span style="color: #fa8072;"> *$"</span> nil t)
+    (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">and</span> MJR-target-free42-version (version&lt; MJR-target-free42-version (match-string 1)))
+        (<span style="color: #00ffff;">progn</span> (<span style="color: #00ffff;">cl-incf</span> zap-loc-too-new)
+               (replace-match <span style="color: #fa8072;">""</span>))))
+  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Remove code only needed for an older version of free42 than our target</span>
+  (goto-char (point-min))
+  (<span style="color: #00ffff;">while</span> (re-search-forward <span style="color: #fa8072;">"^.*@@## REQ:free42&lt;</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">(</span><span style="color: #fa8072;">[0-9.]+</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">)</span><span style="color: #fa8072;"> *$"</span> nil t)
+    (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">and</span> MJR-target-free42-version (version&lt;= MJR-target-free42-version (match-string 1)))
+        (<span style="color: #00ffff;">progn</span> (<span style="color: #00ffff;">cl-incf</span> zap-loc-too-old)
+               (replace-match <span style="color: #fa8072;">""</span>))))
   <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap comments</span>
   (goto-char (point-min))
   (<span style="color: #00ffff;">while</span> (re-search-forward <span style="color: #fa8072;">"</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">(</span><span style="color: #fa8072;">@@@@</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">|</span><span style="color: #fa8072;">@@##</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">)</span><span style="color: #fa8072;">.*$"</span> nil t)
@@ -844,41 +816,31 @@ This function cleans up tangled (C-c C-v t) code so that it can be cleanly paste
     (replace-match <span style="color: #fa8072;">"END\n"</span>))
   <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Save the buffer</span>
   (save-buffer)
-  )
+  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Report our status</span>
+  (<span style="color: #00ffff;">if</span> MJR-target-free42-version
+      (message <span style="color: #fa8072;">"MJR-process-tangled-42s-code (%s): Tangle complete. Zapped %d loc too old, and %d loc too new."</span> (buffer-name) zap-loc-too-old zap-loc-too-new)
+      (message <span style="color: #fa8072;">"MJR-process-tangled-42s-code (%s): Tangle complete. MJR-target-free42-version not set."</span> (buffer-name) zap-loc-too-old zap-loc-too-new))
+  ))
 </pre>
 </div>
 
-<pre class="example">
-MJR-process-tangled-42s-code
-</pre>
+<p>
+The above function must be added to the tangle-hook like this:
+</p>
 
 <div class="org-src-container">
 <pre class="src src-elisp">(add-hook 'org-babel-post-tangle-hook 'MJR-process-tangled-42s-code)
 </pre>
 </div>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left">MJR-process-tangled-42s-code</td>
-</tr>
-</tbody>
-</table>
-</div>
 </div>
 </div>
 
-<div id="outline-container-orgf1bb6c9" class="outline-2">
-<h2 id="orgf1bb6c9"><span class="section-number-2">6</span> 42s Notes</h2>
+<div id="outline-container-org869eb86" class="outline-2">
+<h2 id="org869eb86"><span class="section-number-2">6</span> free42 Notes</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-org9bfdca1" class="outline-3">
-<h3 id="org9bfdca1"><span class="section-number-3">6.1</span> Character Set</h3>
+<div id="outline-container-org866db82" class="outline-3">
+<h3 id="org866db82"><span class="section-number-3">6.1</span> Character Set</h3>
 <div class="outline-text-3" id="text-6-1">
 <div class="org-src-container">
 <pre class="src src-text">  0 &#247;
@@ -1016,8 +978,8 @@ MJR-process-tangled-42s-code
 </div>
 </div>
 
-<div id="outline-container-org3703523" class="outline-3">
-<h3 id="org3703523"><span class="section-number-3">6.2</span> Date format</h3>
+<div id="outline-container-orgbab64ad" class="outline-3">
+<h3 id="orgbab64ad"><span class="section-number-3">6.2</span> Date format</h3>
 <div class="outline-text-3" id="text-6-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1060,12 +1022,12 @@ MJR-process-tangled-42s-code
 </div>
 </div>
 
-<div id="outline-container-orgffd7d13" class="outline-2">
-<h2 id="orgffd7d13"><span class="section-number-2">7</span> DM 42 Notes</h2>
+<div id="outline-container-org70ce4a5" class="outline-2">
+<h2 id="org70ce4a5"><span class="section-number-2">7</span> DM 42 Notes</h2>
 <div class="outline-text-2" id="text-7">
 </div>
-<div id="outline-container-org855255c" class="outline-3">
-<h3 id="org855255c"><span class="section-number-3">7.1</span> Display</h3>
+<div id="outline-container-org9c4f055" class="outline-3">
+<h3 id="org9c4f055"><span class="section-number-3">7.1</span> Display</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 GrMod is a read write variable.
@@ -1083,8 +1045,8 @@ ResX &amp; ResY are read only variables that have the display resolution
 </div>
 </div>
 
-<div id="outline-container-org69566e5" class="outline-2">
-<h2 id="org69566e5"><span class="section-number-2">8</span> EOF</h2>
+<div id="outline-container-orge87d6b5" class="outline-2">
+<h2 id="orge87d6b5"><span class="section-number-2">8</span> EOF</h2>
 <div class="outline-text-2" id="text-8">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1095,7 +1057,7 @@ ResX &amp; ResY are read only variables that have the display resolution
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-03 Sat 20:19 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-04 Sun 12:30 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

@@ -57,11 +57,8 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
    - 42s notes
      - free42 utf-8 characters with character numbers
 
-* Generateing 42s code
-
-** Menus
-
-*** Generic menu generator
+* Generateing 42s menu code
+** Generic menu generator
 
 This code will read an org-mode table describing a menu, and generate 42s code to implement the menu.  The menus may be of arbitrary depth and size; however,
 two digit local labels are used in the generated code which limits sizes.
@@ -180,7 +177,7 @@ The last two are /actions/ while the first is yet another menu containing "=foob
 
 #+RESULTS:
 
-*** For CUSTOM-type Menus
+** For CUSTOM-type Menus
 
 This is a function for use as as the =gen-code= argument to =MJR-generate-42-menu-code=.  It generates a menu program that calls other programs or built in
 functions -- it is very useful for generating menus to be assigned to the CUSTOM menu.  The second column of the defining table is used to specify a function
@@ -217,7 +214,7 @@ I may have missed a built in function, so you may have to add one to the list. ;
 
 #+RESULTS:
 
-*** Template for empty menu code
+** Template for empty menu code
 
 #+NAME: menu
 | Menu |
@@ -380,57 +377,37 @@ RTN       @@@@ IF-TRUE-END ($1)
 * Prepare Code For Conversion
 
 I include comments like =@@##= that I use like compiler directives in C.  They provide a way to remove lines of code that are incompatible or unnecessary for
-the target version of free42.  It's a bit of a hack, but it lets me maintain one program for diff-rent versions of free42.
+the target version of free42.  It's a bit of a hack, but it lets me maintain one program for diff-rent versions of free42.  When I "tangle" an =org-mode= buffer,
+the code is automatically filtered for the selected version of free42 (set via =MJR-target-free42-version=).
 
-** DM42 DMCP-3.20 / DM42-3.17
-
-#+BEGIN_SRC elisp
-(progn
-  ;; Zap lines requireing a newer free24
-  (query-replace-regexp "^.*@@## REQ:free42>=\\([0-9.]+\\)$" '(replace-eval-replacement replace-quote (if (version< "2.5.20" (match-string 1)) "" (match-string 0))) nil nil nil nil nil)
-  (query-replace-regexp "^.*@@## USE:free42>=\\([0-9.]+\\)$" '(replace-eval-replacement replace-quote (if (version< "2.5.20" (match-string 1)) "" (match-string 0))) nil nil nil nil nil)
-  ;; Zap comment lines
-  (delete-matching-lines "^ *@@@@.*$" nil nil t)
-  ;; Zap directive comments
-  (query-replace-regexp " +@@## ...:.*$" "" nil nil nil nil nil)
-  ;; Zap comments
-  (query-replace-regexp " +@@@@.*$" "" nil nil nil nil nil)
-  ;; Zap leading whitespace
-  (query-replace-regexp "^ +" "" nil nil nil nil nil)
-  ;; Zap empty lines
-  (delete-matching-lines "^ *$" nil nil t))
-#+END_SRC
-
-** free42 3.0.1 or newer
-
-#+BEGIN_SRC elisp
-(progn
-  ;; Zap comment lines
-  (beginning-of-buffer)
-  (delete-matching-lines "^ *@@@@.*$" nil nil t)
-  ;; Zap directive comments
-  (beginning-of-buffer)
-  (query-replace-regexp " +@@## ...:.*$" "" nil nil nil nil nil)
-  ;; Zap comments
-  (beginning-of-buffer)
-  (query-replace-regexp " +@@@@.*$" "" nil nil nil nil nil)
-  ;; Zap leading whitespace
-  (beginning-of-buffer)
-  (query-replace-regexp "^ +" "" nil nil nil nil nil)
-  ;; Zap empty lines
-  (beginning-of-buffer)
-  (delete-matching-lines "^ *$" nil nil t))
-#+END_SRC
-
-
-** Clean Tangled Code
+#+ATTR_HTML: :border 2 :frame box :rules all :align center
+| DM42 Version          | Target Free42 |
+|-----------------------+---------------|
+| DMCP-3.20 / DM42-3.17 |        2.5.20 |
 
 This function cleans up tangled (C-c C-v t) code so that it can be cleanly pasted into free42.
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC elisp :results output silent
+(defvar MJR-target-free42-version nil)
+(setq MJR-target-free42-version "3.0.2")
+
 (defun MJR-process-tangled-42s-code ()
   "Prepare tangled hp42s code for upload"
   (interactive)
+  (let ((zap-loc-too-new 0)
+        (zap-loc-too-old 0))
+  ;; Remove code requireing a newer version of free42 than our target
+  (goto-char (point-min))
+  (while (re-search-forward "^.*@@## REQ:free42>=\\([0-9.]+\\) *$" nil t)
+    (if (and MJR-target-free42-version (version< MJR-target-free42-version (match-string 1)))
+        (progn (cl-incf zap-loc-too-new)
+               (replace-match ""))))
+  ;; Remove code only needed for an older version of free42 than our target
+  (goto-char (point-min))
+  (while (re-search-forward "^.*@@## REQ:free42<\\([0-9.]+\\) *$" nil t)
+    (if (and MJR-target-free42-version (version<= MJR-target-free42-version (match-string 1)))
+        (progn (cl-incf zap-loc-too-old)
+               (replace-match ""))))
   ;; Zap comments
   (goto-char (point-min))
   (while (re-search-forward "\\(@@@@\\|@@##\\).*$" nil t)
@@ -448,23 +425,20 @@ This function cleans up tangled (C-c C-v t) code so that it can be cleanly paste
     (replace-match "END\n"))
   ;; Save the buffer
   (save-buffer)
-  )
+  ;; Report our status
+  (if MJR-target-free42-version
+      (message "MJR-process-tangled-42s-code (%s): Tangle complete. Zapped %d loc too old, and %d loc too new." (buffer-name) zap-loc-too-old zap-loc-too-new)
+      (message "MJR-process-tangled-42s-code (%s): Tangle complete. MJR-target-free42-version not set." (buffer-name) zap-loc-too-old zap-loc-too-new))
+  ))
 #+END_SRC
 
-#+RESULTS:
-#+begin_example
-MJR-process-tangled-42s-code
-#+end_example
+The above function must be added to the tangle-hook like this:
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC elisp :results output silent
 (add-hook 'org-babel-post-tangle-hook 'MJR-process-tangled-42s-code)
 #+END_SRC
 
-#+RESULTS:
-| MJR-process-tangled-42s-code |
-
-* 42s Notes
-
+* free42 Notes
 ** Character Set
 
 #+BEGIN_SRC text

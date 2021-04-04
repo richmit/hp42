@@ -3,13 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-03 Sat 19:32 -->
+<!-- 2021-04-04 Sun 16:17 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>free42 Simple Math Functions</title>
+<title>free42 Random Math Stuff</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Mitch Richling" />
-<meta name="description" content="Some simple math functions for the free42/hp-42s/DM42"
+<meta name="description" content="Some simple math stuff for free42"
  />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
@@ -212,7 +212,7 @@
  |
  <a accesskey="H" href="https://www.mitchr.me/"> HOME </a>
 </div><div id="content">
-<h1 class="title">free42 Simple Math Functions</h1>
+<h1 class="title">free42 Random Math Stuff</h1>
 <table border="2 solid #ccc" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-03 19:32:39</i></td>
+<td class="org-left"><i>2021-04-04 16:17:22</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,29 +241,30 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org1786708">1. Metadata</a></li>
-<li><a href="#org93299cf">2. Introduction</a></li>
-<li><a href="#org76b9525">3. Types</a></li>
-<li><a href="#org83f1d61">4. Complex Numbers</a></li>
-<li><a href="#orgcffff2a">5. Math Functions</a></li>
-<li><a href="#org1b7b3d4">6. Misc</a>
+<li><a href="#orgc327e61">1. Metadata</a></li>
+<li><a href="#orgafb5089">2. Introduction</a>
 <ul>
-<li><a href="#org24c603d">6.1. Quadratic Equation</a></li>
-<li><a href="#org2a4850f">6.2. Polynomials</a>
-<ul>
-<li><a href="#org0849862">6.2.1. Evaluate a Polynomial</a></li>
-<li><a href="#orged72c70">6.2.2. Wrap a polynomial</a></li>
+<li><a href="#org959fb4d">2.1. Simple Functions</a></li>
 </ul>
 </li>
+<li><a href="#orgae76420">3. Types</a></li>
+<li><a href="#org8681a6e">4. Complex Numbers</a></li>
+<li><a href="#org129c806">5. Math Functions</a></li>
+<li><a href="#org0cd2879">6. Polynomials</a>
+<ul>
+<li><a href="#orgd90c14a">6.1. Quadratic Equation (Coef on Stack)</a></li>
+<li><a href="#org6158d68">6.2. Evaluate a Polynomial</a></li>
+<li><a href="#org5d1b7f9">6.3. Wrap a polynomial</a></li>
 </ul>
 </li>
-<li><a href="#orgcabbd73">7. EOF</a></li>
+<li><a href="#org71e83c6">7. 3D Vectors</a></li>
+<li><a href="#org91fcaf0">8. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org1786708" class="outline-2">
-<h2 id="org1786708"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-orgc327e61" class="outline-2">
+<h2 id="orgc327e61"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/math.html">https://richmit.github.io/hp42/math.html</a>
@@ -281,15 +282,19 @@ Files related to this document may be found on github: <a href="https://github.c
 </div>
 </div>
 
-<div id="outline-container-org93299cf" class="outline-2">
-<h2 id="org93299cf"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-orgafb5089" class="outline-2">
+<h2 id="orgafb5089"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-This org-mode file collects together a handful of simple mathematical functions I find useful.  Many of these functions work on what I call an "arithmetic
+This org-mode file collects together a handful of simple mathematical stuff I find useful.  Many of these functions work on what I call an "arithmetic
 type" &#x2013; that is a thing the 42s can do arithmetic with: real numbers, complex numbers, real matrices, &amp; complex matrices.  In order to simplify the code the
 <code>ATYP</code> function spits out a small integer that can be used in a computed <code>GOTO</code> to handle these four special cases.
 </p>
+</div>
 
+<div id="outline-container-org959fb4d" class="outline-3">
+<h3 id="org959fb4d"><span class="section-number-3">2.1</span> Simple Functions</h3>
+<div class="outline-text-3" id="text-2-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
@@ -457,9 +462,10 @@ type" &#x2013; that is a thing the 42s can do arithmetic with: real numbers, com
 </table>
 </div>
 </div>
+</div>
 
-<div id="outline-container-org76b9525" class="outline-2">
-<h2 id="org76b9525"><span class="section-number-2">3</span> Types</h2>
+<div id="outline-container-orgae76420" class="outline-2">
+<h2 id="orgae76420"><span class="section-number-2">3</span> Types</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-ATYP" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ATYP)</span>
@@ -518,8 +524,8 @@ type" &#x2013; that is a thing the 42s can do arithmetic with: real numbers, com
 </div>
 </div>
 
-<div id="outline-container-org83f1d61" class="outline-2">
-<h2 id="org83f1d61"><span class="section-number-2">4</span> Complex Numbers</h2>
+<div id="outline-container-org8681a6e" class="outline-2">
+<h2 id="org8681a6e"><span class="section-number-2">4</span> Complex Numbers</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-RPART" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (RPART)</span>
@@ -727,8 +733,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-orgcffff2a" class="outline-2">
-<h2 id="orgcffff2a"><span class="section-number-2">5</span> Math Functions</h2>
+<div id="outline-container-org129c806" class="outline-2">
+<h2 id="org129c806"><span class="section-number-2">5</span> Math Functions</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-PTOT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PTOT)</span>
@@ -1270,12 +1276,12 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org1b7b3d4" class="outline-2">
-<h2 id="org1b7b3d4"><span class="section-number-2">6</span> Misc</h2>
+<div id="outline-container-org0cd2879" class="outline-2">
+<h2 id="org0cd2879"><span class="section-number-2">6</span> Polynomials</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-org24c603d" class="outline-3">
-<h3 id="org24c603d"><span class="section-number-3">6.1</span> Quadratic Equation</h3>
+<div id="outline-container-orgd90c14a" class="outline-3">
+<h3 id="orgd90c14a"><span class="section-number-3">6.1</span> Quadratic Equation (Coef on Stack)</h3>
 <div class="outline-text-3" id="text-6-1">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-QUADE" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (QUADE)</span>
@@ -1319,13 +1325,9 @@ RCLx ST T
 </div>
 </div>
 
-<div id="outline-container-org2a4850f" class="outline-3">
-<h3 id="org2a4850f"><span class="section-number-3">6.2</span> Polynomials</h3>
+<div id="outline-container-org6158d68" class="outline-3">
+<h3 id="org6158d68"><span class="section-number-3">6.2</span> Evaluate a Polynomial</h3>
 <div class="outline-text-3" id="text-6-2">
-</div>
-<div id="outline-container-org0849862" class="outline-4">
-<h4 id="org0849862"><span class="section-number-4">6.2.1</span> Evaluate a Polynomial</h4>
-<div class="outline-text-4" id="text-6-2-1">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-PLYE" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PLYE)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Evaluate a polynomial</span>
@@ -1357,9 +1359,9 @@ RCLx ST T
 </div>
 </div>
 
-<div id="outline-container-orged72c70" class="outline-4">
-<h4 id="orged72c70"><span class="section-number-4">6.2.2</span> Wrap a polynomial</h4>
-<div class="outline-text-4" id="text-6-2-2">
+<div id="outline-container-org5d1b7f9" class="outline-3">
+<h3 id="org5d1b7f9"><span class="section-number-3">6.3</span> Wrap a polynomial</h3>
+<div class="outline-text-3" id="text-6-3">
 <p>
 Make a polynomial stored in a matrix into a <code>MVAR</code> function suitable for use with SOLVER, INTEG, etc&#x2026;
 </p>
@@ -1386,11 +1388,173 @@ R&#8595;
 </div>
 </div>
 </div>
+
+<div id="outline-container-org71e83c6" class="outline-2">
+<h2 id="org71e83c6"><span class="section-number-2">7</span> 3D Vectors</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+This is a simple little application that makes working with 3D vectors less painfull.  
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Menu</th>
+<th scope="col" class="org-left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">→V</td>
+<td class="org-left">Put stack elements X, Y, &amp; Z into a vector: [Z, Y, X]</td>
+</tr>
+
+<tr>
+<td class="org-left">V→</td>
+<td class="org-left">Vector contents to stack. [A, B, C] =&gt; X: C, Y: B, Z: A</td>
+</tr>
+
+<tr>
+<td class="org-left">DOT</td>
+<td class="org-left">Dot product</td>
+</tr>
+
+<tr>
+<td class="org-left">CROSS</td>
+<td class="org-left">Cross product</td>
+</tr>
+
+<tr>
+<td class="org-left">MAG</td>
+<td class="org-left">Euculidian magnitude</td>
+</tr>
+
+<tr>
+<td class="org-left">VVIEW</td>
+<td class="org-left">View a vector one element at a time &#x2013; press <code>R/S</code> for next element</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"3VEC"</span>
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">LBL</span> 01
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"&#8594;V"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 02
+<span style="color: #fa8072;">"V&#8594;"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 03
+<span style="color: #fa8072;">"DOT"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 04
+<span style="color: #fa8072;">"CROSS"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 05
+<span style="color: #fa8072;">"MAG"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 06
+<span style="color: #fa8072;">"VVIEW"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 07
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">LBL</span> 00
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 02               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#8594;V</span>
+<span style="color: #00ffff;">FUNC</span> 31
+3
+<span style="color: #00ffff;">XEQ</span> 81
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"TMPM"</span>
+R&#8595;
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"TMPM"</span>
+<span style="color: #00ffff;">WRAP</span>
+<span style="color: #00ffff;">J-</span>
+<span style="color: #00ffff;">LBL</span> 92
+<span style="color: #00ffff;">STOEL</span>
+R&#8595;
+<span style="color: #00ffff;">J-</span>
+<span style="color: #00ffff;">FC</span>? 77
+<span style="color: #00ffff;">GTO</span> 92
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"TMPM"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 03               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key V&#8594;</span>
+<span style="color: #00ffff;">FUNC</span> 13
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"TMPM"</span>
+R&#8595;
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"TMPM"</span>
+<span style="color: #00ffff;">WRAP</span>
+<span style="color: #00ffff;">LBL</span> 91
+<span style="color: #00ffff;">RCLEL</span>
+<span style="color: #00ffff;">J+</span>
+<span style="color: #00ffff;">FC</span>? 77
+<span style="color: #00ffff;">GTO</span> 91
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 04               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key DOT</span>
+<span style="color: #00ffff;">FUNC</span> 21
+<span style="color: #00ffff;">DOT</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 05               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key CROSS</span>
+<span style="color: #00ffff;">FUNC</span> 21
+<span style="color: #00ffff;">CROSS</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 06               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key MAG</span>
+<span style="color: #00ffff;">FUNC</span> 11
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"TMPM"</span>
+R&#8595;
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"TMPM"</span>
+<span style="color: #00ffff;">WRAP</span>
+0
+<span style="color: #00ffff;">LBL</span> 93
+<span style="color: #00ffff;">RCLEL</span>
+<span style="color: #00ffff;">X&#8593;2</span>
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">J+</span>
+<span style="color: #00ffff;">FC</span>? 77
+<span style="color: #00ffff;">GTO</span> 93
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">SQRT</span>
+<span style="color: #00ffff;">LBL</span> 07               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key "VVIEW"</span>
+<span style="color: #00ffff;">FUNC</span> 00
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"TMPM"</span>
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"TMPM"</span>
+<span style="color: #00ffff;">WRAP</span>
+1
+<span style="color: #00ffff;">LBL</span> 94
+<span style="color: #00ffff;">CLA</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+&#9500;<span style="color: #fa8072;">":"</span>
+<span style="color: #00ffff;">RCLEL</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+R&#8595;
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">STOP</span>
+1
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">J+</span>
+<span style="color: #00ffff;">FC</span>? 77
+<span style="color: #00ffff;">GTO</span> 94
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 81 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NEWVEC</span>
+<span style="color: #00ffff;">FUNC</span> 11
+1
+<span style="color: #00ffff;">NEWMAT</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
 </div>
 
-<div id="outline-container-orgcabbd73" class="outline-2">
-<h2 id="orgcabbd73"><span class="section-number-2">7</span> EOF</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-org91fcaf0" class="outline-2">
+<h2 id="org91fcaf0"><span class="section-number-2">8</span> EOF</h2>
+<div class="outline-text-2" id="text-8">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1400,7 +1564,7 @@ R&#8595;
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-03 Sat 19:32 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-04 Sun 16:17 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

@@ -1,9 +1,9 @@
 # -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
-#+TITLE:       free42 Simple Math Functions
+#+TITLE:       free42 Random Math Stuff
 #+AUTHOR:      Mitch Richling
 #+EMAIL:       http://www.mitchr.me/
 #+DATE:        2021-03-19
-#+DESCRIPTION: Some simple math functions for the free42/hp-42s/DM42
+#+DESCRIPTION: Some simple math stuff for free42
 #+LANGUAGE:    en
 #+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil
 #+HTML_HEAD: <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
@@ -49,9 +49,11 @@ Files related to this document may be found on github: https://github.com/richmi
 
 * Introduction
 
-This org-mode file collects together a handful of simple mathematical functions I find useful.  Many of these functions work on what I call an "arithmetic
+This org-mode file collects together a handful of simple mathematical stuff I find useful.  Many of these functions work on what I call an "arithmetic
 type" -- that is a thing the 42s can do arithmetic with: real numbers, complex numbers, real matrices, & complex matrices.  In order to simplify the code the
 =ATYP= function spits out a small integer that can be used in a computed =GOTO= to handle these four special cases.
+
+** Simple Functions
 
 #+ATTR_HTML: :align center :frame box :rules all
 |----------+------------------------------+--------------------------------------------|
@@ -883,9 +885,8 @@ END
 
 #+END_SRC
 
-* Misc
-
-** Quadratic Equation
+* Polynomials
+** Quadratic Equation (Coef on Stack)
 
 #+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:QUADE)
@@ -926,9 +927,7 @@ RTN
 END
 #+END_SRC
 
-** Polynomials
-
-*** Evaluate a Polynomial
+** Evaluate a Polynomial
 
 #+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PLYE)
@@ -958,7 +957,7 @@ RTN
 END
 #+END_SRC
 
-*** Wrap a polynomial 
+** Wrap a polynomial 
 
 Make a polynomial stored in a matrix into a =MVAR= function suitable for use with SOLVER, INTEG, etc...
 
@@ -980,6 +979,128 @@ R↓
 RTN
 END
 #+END_SRC
+
+* 3D Vectors
+
+This is a simple little application that makes working with 3D vectors less painfull.  
+
+#+ATTR_HTML: :align center :frame box :rules all
+|-------+---------------------------------------------------------------------|
+| Menu  |                                                                     |
+|-------+---------------------------------------------------------------------|
+| →V    | Put stack elements X, Y, & Z into a vector: [Z, Y, X]               |
+| V→    | Vector contents to stack. [A, B, C] => X: C, Y: B, Z: A             |
+| DOT   | Dot product                                                         |
+| CROSS | Cross product                                                       |
+| MAG   | Euculidian magnitude                                                |
+| VVIEW | View a vector one element at a time -- press =R/S= for next element |
+|-------+---------------------------------------------------------------------|
+
+#+begin_src hp42s :tangle yes
+LBL "3VEC"
+L4STK
+LBL 01
+CLMENU
+"→V"
+KEY 1 XEQ 02
+"V→"
+KEY 2 XEQ 03
+"DOT"
+KEY 3 XEQ 04
+"CROSS"
+KEY 4 XEQ 05
+"MAG"
+KEY 5 XEQ 06
+"VVIEW"
+KEY 6 XEQ 07
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 00
+EXITALL
+RTN
+LBL 02               @@@@ Action for menu key →V
+FUNC 31
+3
+XEQ 81
+LSTO "TMPM"
+R↓
+INDEX "TMPM"
+WRAP
+J-
+LBL 92
+STOEL
+R↓
+J-
+FC? 77
+GTO 92
+RCL "TMPM"
+RTN
+LBL 03               @@@@ Action for menu key V→
+FUNC 13
+LSTO "TMPM"
+R↓
+INDEX "TMPM"
+WRAP
+LBL 91
+RCLEL
+J+
+FC? 77
+GTO 91
+RTN
+LBL 04               @@@@ Action for menu key DOT
+FUNC 21
+DOT
+RTN
+LBL 05               @@@@ Action for menu key CROSS
+FUNC 21
+CROSS
+RTN
+LBL 06               @@@@ Action for menu key MAG
+FUNC 11
+LSTO "TMPM"
+R↓
+INDEX "TMPM"
+WRAP
+0
+LBL 93
+RCLEL
+X↑2
++
+J+
+FC? 77
+GTO 93
+RTN
+SQRT
+LBL 07               @@@@ Action for menu key "VVIEW"
+FUNC 00
+LSTO "TMPM"
+INDEX "TMPM"
+WRAP
+1
+LBL 94
+CLA
+ARCL ST X
+├":"
+RCLEL
+ARCL ST X
+R↓
+AVIEW
+STOP
+1
++
+J+
+FC? 77
+GTO 94
+RTN
+LBL 81 @@@@ NEWVEC
+FUNC 11
+1
+NEWMAT
+RTN
+END
+#+end_src
 
 * EOF
 

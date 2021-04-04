@@ -1,5 +1,5 @@
 # -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
-#+TITLE:       free42/hp42s/DM42 Custom Menus
+#+TITLE:       free42 Custom Menus
 #+AUTHOR:      Mitch Richling
 #+EMAIL:       http://www.mitchr.me/
 #+DATE:        2021-03-19
@@ -142,12 +142,12 @@ The other columns of the table are not used.
 
 The menu program is generated via the following bit of elisp.  You must first define the =MJR-generate-42-menu-code= and =MJR-custom-x-gen= by evaluating the code blocks in the =hp42s-meta.org= file.
 
-#+BEGIN_SRC elisp :var tbl=cust :colnames y :results output verbatum :wrap src hp42s
+#+BEGIN_SRC elisp :var tbl=cust :colnames y :results output verbatum :wrap "src hp42s :tangle yes"
 (MJR-generate-42-menu-code "CUST" tbl "stay" "up" #'MJR-custom-x-gen)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s
+#+begin_src hp42s :tangle yes
 LBL "CUST"
 LBL 01            @@@@ Page 1 of menu CUST
 CLMENU
@@ -489,6 +489,7 @@ LBL 58               @@@@ Action for menu key MEAS
 XEQ "MEAS"
 RTN
 @@@@ Free labels start at: 59
+END
 #+end_src
 
 
@@ -506,7 +507,7 @@ each key.
 | KEY# | ASSIGNment |
 |------+------------|
 |   01 | CUST       |
-|   02 |            |
+|   02 | VirtV      |
 |   03 |            |
 |   04 |            |
 |   05 |            |
@@ -529,7 +530,7 @@ each key.
 
 Simply evaluate the followign lisp block, and the 42s program will be created.
 
-#+BEGIN_SRC elisp :var tbl=custom :colnames y :results output verbatum :wrap src hp42s
+#+BEGIN_SRC elisp :var tbl=custom :colnames y :results output verbatum :wrap "src hp42s :tangle yes"
 (princ "LBL \"MKCM\"\n")
 (cl-loop for (da-key da-assignment da-note) in tbl
          ;;when (not (zerop (length da-assignment)))
@@ -539,10 +540,10 @@ Simply evaluate the followign lisp block, and the 42s program will be created.
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s
+#+begin_src hp42s :tangle yes
 LBL "MKCM"
 ASSIGN "CUST" TO 01
-ASSIGN "" TO 02
+ASSIGN "VirtV" TO 02
 ASSIGN "" TO 03
 ASSIGN "" TO 04
 ASSIGN "" TO 05
@@ -561,8 +562,31 @@ ASSIGN "VIEW" TO 17
 ASSIGN "AVIEW" TO 18
 RTN
 END
-@@@
 #+end_src
+
+* Set some prefrences
+
+#+BEGIN_SRC hp42s :tangle yes
+LBL "SPREF"
+ALL     @@@@ Display all digits
+RECT    @@@@ Complex number format
+RAD     @@@@ Angle mode
+CPXRES  @@@@ Complex results
+RDX.    @@@@ Use periods
+KEYASN  @@@@ Custom menu
+DECM    @@@@ Make sure we are in decimal mode
+64      @@@@ WSIZE
+FS? 78
+BSIGNED @@@@ Unsigned integer mode
+FS? 79
+BWRAP   @@@@ Don't wrap integers
+DMY     @@@@ D.MY mode
+CL12    @@@@ AM/PM mode
+4STK    @@@@ Four level stack
+EXITALL @@@@ Exit menus
+RTN
+END
+#+END_SRC
 
 * EOF
 

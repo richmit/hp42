@@ -1,5 +1,5 @@
 # -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
-#+TITLE:       free42/hp42s/DM42 Date Tools
+#+TITLE:       free42 Date Tools
 #+AUTHOR:      Mitch Richling
 #+EMAIL:       http://www.mitchr.me/
 #+DATE:        2021-03-19
@@ -318,12 +318,12 @@ END
 
 The menu program is generated via the following bit of elisp.  You must first define the =MJR-generate-42-menu-code= and =MJR-custom-x-gen= by evaluating the code blocks in the =hp42s-meta.org= file.
 
-#+BEGIN_SRC elisp :var tbl=dmenu :colnames y :results output verbatum :wrap src hp42s
+#+BEGIN_SRC elisp :var tbl=dmenu :colnames y :results output verbatum :wrap "src hp42s :tangle yes"
 (MJR-generate-42-menu-code "DMENU" tbl "stay" "up" #'MJR-custom-x-gen)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s
+#+begin_src hp42s :tangle yes
 LBL "DMENU"
 LBL 01            @@@@ Page 1 of menu DMENU
 CLMENU
@@ -413,6 +413,7 @@ LBL 15               @@@@ Action for menu key DOW
 XEQ "IDOW"
 RTN
 @@@@ Free labels start at: 16
+END
 #+end_src
 
 * EOF

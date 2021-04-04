@@ -99,7 +99,7 @@ In addition a menu collecting them all together is provided: =PERFS=
 
 ** Code for Functions
 
-#+BEGIN_SRC hp42s
+#+begin_src hp42s :tangle yes
 @@@@ Convert count & distance to kiusalas perforations
 @@@@ IN:  Y: Count
 @@@@      X: Distance (mm)
@@ -183,12 +183,12 @@ END
 
 ** Code for Menu
 
- #+BEGIN_SRC elisp :var tbl=PERF :colnames y :results output verbatum :wrap src hp42s
+ #+BEGIN_SRC elisp :var tbl=PERF :colnames y :results output verbatum :wrap "src hp42s :tangle yes"
 (MJR-generate-42-menu-code "PERF" tbl "stay" "exit" #'MJR-custom-x-gen)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s
+#+begin_src hp42s :tangle yes
 LBL "PERF"
 LBL 01            @@@@ Page 1 of menu PERF
 CLMENU
@@ -230,6 +230,7 @@ LBL 07               @@@@ Action for menu key K→P
 XEQ "K→P"
 RTN
 @@@@ Free labels start at: 8
+END
 #+end_src
 
 * Image Measurements
@@ -437,7 +438,7 @@ Note the coordinates may be entered in any order.
 
 ** Calculator Code
 
-#+begin_src hp42s
+#+begin_src hp42s :tangle yes
 @@@@ Image Measurement for Stamp Collectors
 @@@@ IN:  N/A Menu Driven
 @@@@ OUT: N/A Menu Driven

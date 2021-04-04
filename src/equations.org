@@ -1,5 +1,5 @@
 # -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
-#+TITLE:       free42/hp42s/DM42 equations
+#+TITLE:       free42 equations
 #+AUTHOR:      Mitch Richling
 #+EMAIL:       http://www.mitchr.me/
 #+DATE:        2021-03-19
@@ -57,7 +57,7 @@ $M_A$ is the mean anomaly, and is represented by "=MA=" in the program.
 $E_A$ is the eccentric anomaly, and is represented by "=EA=" in the program.
 $E$ is the eccentricity.
 
-#+BEGIN_SRC hp42s
+#+begin_src hp42s :tangle yes
 LBL "KEPLE"
 MVAR "MA"
 MVAR "EA"
@@ -76,7 +76,7 @@ END
 
 $$\frac{100000}{127 K}-P = 0$$
 
-#+BEGIN_SRC hp42s
+#+begin_src hp42s :tangle yes
 LBL "KIUS"
 MVAR "P"
 MVAR "K"
@@ -97,7 +97,7 @@ $$PV+(1 + ip)\cdot PMT\cdot \frac{1-(1+i)^{-N}}{i}+FV\cdot (1+i)^{-N}$$
 
 In the program we use "=B1/E0=" for the variable $p$.
 
-#+BEGIN_SRC hp42s
+#+begin_src hp42s :tangle yes
 LBL "TVM"
 MVAR "N"
 MVAR "I"
@@ -141,7 +141,7 @@ Related to the beta function, F distribution, and z distributions.
 
 $$(x-1)(1-t)^{y-1}$$
 
-#+BEGIN_SRC hp42s
+#+begin_src hp42s :tangle yes
 LBL "EULI"
 MVAR "T"
 MVAR "Y"
@@ -172,7 +172,7 @@ $$\frac{1}{s\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-m}{s}\right)^2}$$
 
 In most sources $\sigma$ is used instead of $s$ and $\mu$ is used instead of $m$.
 
-#+BEGIN_SRC hp42s
+#+begin_src hp42s :tangle yes
 LBL "NORMD"
 MVAR "S"
 MVAR "M"
@@ -200,7 +200,7 @@ Can be used to compute F probabilities when integrated.
 
 $$\frac{\sqrt{\frac{(d_1x)^{d_1}d_2^{d_2}}{(d_1x+d_2)^{d_1+d_2}}}}{x\mathrm{B}\left(\frac{d_1}{2},\frac{d_2}{2}\right)}$$
 
-#+BEGIN_SRC hp42s
+#+begin_src hp42s :tangle yes
 LBL "FDIST"
 MVAR "D1"
 MVAR "D2"
@@ -241,7 +241,7 @@ Can be used to compute chi square probabilities when integrated.
 
 $$\frac{x^{\frac{k}{2}-1}e^{-\frac{x}{2}}}{2^{\frac{k}{2}}\Gamma\left(\frac{k}{2}\right)}$$
 
-#+BEGIN_SRC hp42s
+#+begin_src hp42s :tangle yes
 LBL "CHI2"
 MVAR "K"
 MVAR "X"
@@ -279,7 +279,7 @@ $$\frac{x^{a-1}(1-x)^{b-1}}{\mathrm{B}(a,b)}$$
 
 In most sources $\alpha$ is used instead of $a$ and $\beta$ is used instead of $b$.
 
-#+BEGIN_SRC hp42s
+#+begin_src hp42s :tangle yes
 LBL "BETAF"
 MVAR "A"
 MVAR "B"
@@ -315,7 +315,7 @@ Note $s$ is sometimes called the "scale parameter", and $m$ is sometimes called 
 
 Also note that various symbols are used for the parameters -- $\mu$ & $\sigma$ for example.
 
-#+BEGIN_SRC hp42s
+#+begin_src hp42s :tangle yes
 LBL "LOGID"
 MVAR "S"
 MVAR "M"
@@ -343,7 +343,7 @@ $$\frac{1}{\sqrt{\nu}\cdot\mathrm{B}\left(\frac{1}{2},\frac{\nu}{2}\right)}\left
 
 In the program "=V=" is used for $\nu$.
 
-#+BEGIN_SRC hp42s
+#+begin_src hp42s :tangle yes
 LBL "STUTD"
 MVAR "V"
 MVAR "X"
@@ -381,7 +381,7 @@ In the program below we use "=L=" for $\lambda$.
 
 Note that some sources use $\frac{1}{\lambda}$ as the parameter instead of $\lambda$.
 
-#+BEGIN_SRC hp42s
+#+begin_src hp42s :tangle yes
 LBL "WEIBD"
 MVAR "K"
 MVAR "L"
@@ -415,7 +415,7 @@ In the program below we use "=L=" for $\lambda$.
 
 Note that some sources use $\frac{1}{\lambda}$ as the parameter instead of $\lambda$.
 
-#+BEGIN_SRC hp42s
+#+begin_src hp42s :tangle yes
 LBL "EXPOD"
 MVAR "L"
 MVAR "X"
@@ -432,7 +432,7 @@ END
 
 $$FORMULA$$
 
-#+BEGIN_SRC hp42s
+#+begin_src hp42s :tangle yes
 LBL "NAME"
 MVAR "V"
 RTN

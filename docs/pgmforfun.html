@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-03 Sat 12:27 -->
+<!-- 2021-04-03 Sat 19:33 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42/hp-42s/DM42: Programs For Functions</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-03 12:27:37</i></td>
+<td class="org-left"><i>2021-04-03 19:33:34</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,22 +241,22 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org8d57724">1. Metadata</a></li>
-<li><a href="#org2c7f022">2. Introduction</a></li>
-<li><a href="#orgd9c6bb9">3. Utility Functions</a>
+<li><a href="#orgbda442a">1. Metadata</a></li>
+<li><a href="#org754017d">2. Introduction</a></li>
+<li><a href="#org3366bd9">3. Utility Functions</a>
 <ul>
-<li><a href="#org57af156">3.1. Making MVAR functions from regular functions</a></li>
-<li><a href="#orgf908808">3.2. Selecting a function &amp; variable</a></li>
+<li><a href="#org11b8086">3.1. Making MVAR functions from regular functions</a></li>
+<li><a href="#orgaf2e652">3.2. Selecting a function &amp; variable</a></li>
 </ul>
 </li>
-<li><a href="#org0503d45">4. Sums, Products, &amp; Tables</a></li>
-<li><a href="#org55ecfc7">5. EOF</a></li>
+<li><a href="#orgc44e9e5">4. Sums, Products, &amp; Tables</a></li>
+<li><a href="#org65a014a">5. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org8d57724" class="outline-2">
-<h2 id="org8d57724"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-orgbda442a" class="outline-2">
+<h2 id="orgbda442a"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/pgmforfun.html">https://richmit.github.io/hp42/pgmforfun.html</a>
@@ -274,8 +274,8 @@ Files related to this document may be found on github: <a href="https://github.c
 </div>
 </div>
 
-<div id="outline-container-org2c7f022" class="outline-2">
-<h2 id="org2c7f022"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-org754017d" class="outline-2">
+<h2 id="org754017d"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 This is an odd collection of programs that work with <code>MVAR</code>-type programs (equations).  I was inspired to do this when the <code>PGMENU</code> function was added to
@@ -304,12 +304,12 @@ future. ;) My thinking for such programs is that they share a framework and comm
 </div>
 </div>
 
-<div id="outline-container-orgd9c6bb9" class="outline-2">
-<h2 id="orgd9c6bb9"><span class="section-number-2">3</span> Utility Functions</h2>
+<div id="outline-container-org3366bd9" class="outline-2">
+<h2 id="org3366bd9"><span class="section-number-2">3</span> Utility Functions</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org57af156" class="outline-3">
-<h3 id="org57af156"><span class="section-number-3">3.1</span> Making MVAR functions from regular functions</h3>
+<div id="outline-container-org11b8086" class="outline-3">
+<h3 id="org11b8086"><span class="section-number-3">3.1</span> Making MVAR functions from regular functions</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Sometimes we need to work with a simple function that takes an argument from the stack and returns one or more values to the stack &#x2013; i.e. non "MVAR"
@@ -329,8 +329,8 @@ then give "FWRP" to solver, integrator, or SPT program.
 </div>
 </div>
 
-<div id="outline-container-orgf908808" class="outline-3">
-<h3 id="orgf908808"><span class="section-number-3">3.2</span> Selecting a function &amp; variable</h3>
+<div id="outline-container-orgaf2e652" class="outline-3">
+<h3 id="orgaf2e652"><span class="section-number-3">3.2</span> Selecting a function &amp; variable</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-PICF" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PICF)</span>
@@ -416,8 +416,8 @@ PGMMENU
 </div>
 </div>
 
-<div id="outline-container-org0503d45" class="outline-2">
-<h2 id="org0503d45"><span class="section-number-2">4</span> Sums, Products, &amp; Tables</h2>
+<div id="outline-container-orgc44e9e5" class="outline-2">
+<h2 id="orgc44e9e5"><span class="section-number-2">4</span> Sums, Products, &amp; Tables</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Create function tables and computes sums &amp; products.  Works much like the built in integration application.  
@@ -719,8 +719,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org55ecfc7" class="outline-2">
-<h2 id="org55ecfc7"><span class="section-number-2">5</span> EOF</h2>
+<div id="outline-container-org65a014a" class="outline-2">
+<h2 id="org65a014a"><span class="section-number-2">5</span> EOF</h2>
 <div class="outline-text-2" id="text-5">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -731,7 +731,7 @@ R&#8595;
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-03 Sat 12:27 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-03 Sat 19:33 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

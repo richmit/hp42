@@ -1,5 +1,5 @@
 # -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
-#+TITLE:       free42/hp42s/DM42 Simple Math Functions
+#+TITLE:       free42 Simple Math Functions
 #+AUTHOR:      Mitch Richling
 #+EMAIL:       http://www.mitchr.me/
 #+DATE:        2021-03-19
@@ -87,7 +87,7 @@ type" -- that is a thing the 42s can do arithmetic with: real numbers, complex n
 
 * Types
 
-#+BEGIN_SRC hp42s
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ATYP)
 @@@@ DSC: Arithmetic Type
 @@@@ IN:  X: an object
@@ -116,11 +116,9 @@ X>0?
 GTO 07
 GTO 08
 LBL 07               @@@@ Complex Matrix
-R↓                   @@## REQ:free42<2.5.24
 4
 RTN
 LBL 08               @@@@ Real/String Matrix
-R↓                   @@## REQ:free42<2.5.24
 2
 RTN
 LBL 02               @@@@ Not matrix
@@ -145,7 +143,7 @@ END
 
 * Complex Numbers
 
-#+BEGIN_SRC hp42s
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RPART)
 @@@@ DSC: Real part
 @@@@ IN:  X: Number or numeric matrix (element-wise)
@@ -160,9 +158,6 @@ XEQ "ATYP"
 GTO IND ST X
 LBL 00
 RTNERR 4             @@## REQ:free42>=2.5.24
-"ERR: Bad Type"      @@## REQ:free42<2.5.24
-AVIEW                @@## REQ:free42<2.5.24
-RTN                  @@## REQ:free42<2.5.24
 LBL 01               @@@@ Real Number
 LBL 02               @@@@ Real Matrix
 R↓
@@ -205,9 +200,6 @@ XEQ "ATYP"
 GTO IND ST X
 LBL 00
 RTNERR 4             @@## REQ:free42>=2.5.24
-"ERR: Bad Type"      @@## REQ:free42<2.5.24
-AVIEW                @@## REQ:free42<2.5.24
-RTN                  @@## REQ:free42<2.5.24
 LBL 01               @@@@ Real Number
 0
 RTN
@@ -252,9 +244,6 @@ XEQ "ATYP"
 GTO IND ST X
 LBL 00
 RTNERR 4             @@## REQ:free42>=2.5.24
-"ERR: Bad Type"      @@## REQ:free42<2.5.24
-AVIEW                @@## REQ:free42<2.5.24
-RTN                  @@## REQ:free42<2.5.24
 LBL 01               @@@@ Real Number
 LBL 02               @@@@ Real Matrix
 R↓
@@ -283,9 +272,6 @@ XEQ "ATYP"
 GTO IND ST X
 LBL 00
 RTNERR 4             @@## REQ:free42>=2.5.24
-"ERR: Bad Type"      @@## REQ:free42<2.5.24
-AVIEW                @@## REQ:free42<2.5.24
-RTN                  @@## REQ:free42<2.5.24
 LBL 01               @@@@ Real Number
 LBL 02               @@@@ Real Matrix
 R↓
@@ -330,9 +316,6 @@ XEQ "ATYP"
 GTO IND ST X
 LBL 00
 RTNERR 4             @@## REQ:free42>=2.5.24
-"ERR: Bad Type"      @@## REQ:free42<2.5.24
-AVIEW                @@## REQ:free42<2.5.24
-RTN                  @@## REQ:free42<2.5.24
 LBL 01               @@@@ Real Number
 0
 RTN
@@ -365,7 +348,7 @@ END
 
 * Math Functions
 
-#+BEGIN_SRC hp42s
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PTOT)
 @@@@ DSC: Percentage of total (just like hp-12c button)
 @@@@ IN:  Y: Real Number -- Total
@@ -398,8 +381,6 @@ ABS
 X≠0?
 GTO 01
 @@@@ zero
-R↓                   @@## REQ:free42<2.5.24
-R↓                   @@## REQ:free42<2.5.24
 0
 RTN
 LBL 01
@@ -416,14 +397,10 @@ LBL 02
 X<0?
 GTO 03
 @@@@ Real positive
-R↓                   @@## REQ:free42<2.5.24
-R↓                   @@## REQ:free42<2.5.24
 1
 RTN
 LBL 03
 @@@@ Real negative
-R↓                   @@## REQ:free42<2.5.24
-R↓                   @@## REQ:free42<2.5.24
 -1
 RTN
 END
@@ -517,8 +494,6 @@ ABS
 IP
 X≠0?
 GTO 01
-R↓                   @@## REQ:free42<2.5.24
-R↓                   @@## REQ:free42<2.5.24
 0
 RTN
 LBL 01
@@ -528,8 +503,6 @@ ABS
 IP
 X≠0?
 GTO 02
-R↓                   @@## REQ:free42<2.5.24
-R↓                   @@## REQ:free42<2.5.24
 0
 RTN
 LBL 02
@@ -583,7 +556,6 @@ XEQ 00
 LSTO "T"
 1.005
 LSTO "I"
-R↓                   @@## REQ:free42<2.5.24
 0
 LBL 11
 XEQ IND "I"
@@ -796,16 +768,12 @@ GTO 04
 X>0?
 GTO 05
 @@@@ X=0 & Y<0
-R↓                   @@## REQ:free42<2.5.24
-R↓                   @@## REQ:free42<2.5.24
 PI
 -2
 ÷
 RTN
 LBL 05
 @@@@ X=0 & Y>0
-R↓                   @@## REQ:free42<2.5.24
-R↓                   @@## REQ:free42<2.5.24
 PI
 2
 ÷
@@ -919,7 +887,7 @@ END
 
 ** Quadratic Equation
 
-#+BEGIN_SRC hp42s
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:QUADE)
 @@@@ DSC: Solve quadratic equation: ax^2+bx+c=0
 @@@@ IN:  Z: a
@@ -931,8 +899,8 @@ END
 @@@@ BUG: No error checking
 @@@@ UPD: 2021-04-02
 LBL "QUADE"
-FUNC 32
-L4STK
+FUNC 32              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
 -4
 RCL× ST T
 ×
@@ -954,6 +922,61 @@ RCL ST Z
 RCL ST Z
 RCL ST Z
 +
+RTN
+END
+#+END_SRC
+
+** Polynomials
+
+*** Evaluate a Polynomial
+
+#+BEGIN_SRC hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PLYE)
+@@@@ DSC: Evaluate a polynomial
+@@@@ IN:  Y: Matrix with polynomial coefficients.  DIM of 1xn, nx1, whatever...
+@@@@      X: Value at which polynomial should be evaluated
+@@@@ OUT: Y: original polynomial matrix
+@@@@      X: value of polynomial evaluated at X
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-04-03
+LBL "PLYE"
+FUNC 21              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+X<>Y
+LSTO "TMPM"
+INDEX "TMPM"
+WRAP
+0
+LBL 01
+RCL× ST Z
+RCLEL
++
+J+
+FC? 77
+GTO 32
+RTN
+END
+#+END_SRC
+
+*** Wrap a polynomial 
+
+Make a polynomial stored in a matrix into a =MVAR= function suitable for use with SOLVER, INTEG, etc...
+
+#+BEGIN_SRC hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PWRP)
+@@@@ DSC: Wrap a polynomial
+@@@@ IN:  X: N/A
+@@@@ OUT: X: N/A
+@@@@ GLB: _PLY -- Store a polynomial matrix in this variable
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-04-03
+LBL "PWRP"
+MVAR "X"
+RCL "_PLY"
+RCL "X"
+XEQ "PLYE"
+X<>Y
+R↓
 RTN
 END
 #+END_SRC

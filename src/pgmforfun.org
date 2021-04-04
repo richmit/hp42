@@ -69,7 +69,7 @@ Sometimes we need to work with a simple function that takes an argument from the
 variables.  To work with such functions we can wrap them.  A generic solution might be to store the name of your simple function in the variable "_FUN", and
 then give "FWRP" to solver, integrator, or SPT program.
 
-#+BEGIN_SRC hp42s
+#+begin_src hp42s :tangle yes
 LBL "FWRP"
 MVAR "X"
 RCL "X"
@@ -80,7 +80,7 @@ END
 
 ** Selecting a function & variable
 
-#+BEGIN_SRC hp42s
+#+begin_src hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PICF)
 @@@@ DSC: Pick an MVAR function and variable
 @@@@ IN:  X: integer
@@ -170,7 +170,7 @@ The =IND= button stores the indipent varaible value in the table.
 
 When not provided, the values for =LLIM=, =STEP=, & =EqD= default to 1.
 
-#+begin_src hp42s
+#+begin_src hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SPT)
 @@@@ DSC: Sums, Products, & Tables
 @@@@ IN:  N/A
@@ -493,8 +493,10 @@ After the plot is drawn and being shown, we can do three things:
   - F2: Zoom box
   - F3: Trace.  While traceing, enter pushs a point to the stack as a complex number
 
+** Code
+
 #+RESULTS:
-#+begin_src hp42s
+#+begin_src hp42s :tangle no
 LBL "MPLOT"
 SF 81
 SF 82
@@ -593,6 +595,7 @@ LBL 14               @@@@ Action for menu key RSV2
 
 RTN
 @@@@ Free labels start at: 15
+END
 #+end_src
 
 ** Fat lines
@@ -655,20 +658,6 @@ RTN
 
 #+END_SRC
 
-** Graphics Menu
-
-#+BEGIN_SRC text
-   ▒▒        ▒▒     ▒▒           ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒        ▒▒       ▒▒                                  ▒▒▒▒            ▒▒▒▒
-    ▒▒      ▒▒    ▒▒▒▒▒▒         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒         ▒▒     ▒▒          ▒▒▒               ▒▒▒    ▒▒▒▒            ▒▒▒▒
-      ▒▒  ▒▒    ▒▒  ▒▒  ▒▒       ▒▒             ▒▒          ▒▒   ▒▒           ▒▒▒               ▒▒▒        ▒▒▒▒    ▒▒▒▒
-       ▒▒▒▒         ▒▒           ▒▒             ▒▒           ▒▒ ▒▒            ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒        ▒▒▒▒    ▒▒▒▒
-        ▒▒          ▒▒           ▒▒             ▒▒            ▒▒▒             ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒            ▒▒▒▒
-        ▒▒          ▒▒           ▒▒             ▒▒           ▒▒ ▒▒            ▒▒▒               ▒▒▒        ▒▒▒▒    ▒▒▒▒
-        ▒▒      ▒▒  ▒▒  ▒▒       ▒▒             ▒▒          ▒▒   ▒▒           ▒▒▒               ▒▒▒        ▒▒▒▒    ▒▒▒▒
-        ▒▒        ▒▒▒▒▒▒         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒         ▒▒     ▒▒                                   ▒▒▒▒            ▒▒▒▒
-        ▒▒          ▒▒           ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒        ▒▒       ▒▒                                  ▒▒▒▒            ▒▒▒▒
-#+END_SRC
-
 ** Code snips
 
 LBL "PLT"
@@ -711,45 +700,6 @@ rtn
 
 
 * WORKING                                                          :noexport:
-
-#+NAME: menu
-| Menu |        |
-|------+--------|
-| LLIM |        |
-| ULIM |        |
-| STEP |        |
-| Σ    |        |
-| π    |        |
-| ▒    |        |
-|------+--------|
-| EQ   | FLG 81 |
-| LN   | FLG 82 |
-| IND  | FLG 83 |
-
-#+BEGIN_SRC elisp :var tbl=menu :colnames y :results output verbatum :wrap src hp42s
-(MJR-generate-42-menu-code "PROG_NAME" tbl "stay" "up" (lambda (x) ""))
-#+END_SRC
-
-#+RESULTS:
-#+begin_src hp42s
-#+END_SRC
-
-
-LBL "FX"
-MVAR "X"
-MVAR "A"
-MVAR "N"
-RCL "N"
-LSTO "C"
-RCL "X"
-LBL 01
-ENTER
-RCL× "A"
-DSE "C"
-GTO 01
-RTN
-
-
 * EOF
 
 # End of document.

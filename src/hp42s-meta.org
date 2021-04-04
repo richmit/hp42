@@ -1,5 +1,5 @@
 # -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
-#+TITLE:       free42/hp42s/DM42 Programming Tools
+#+TITLE:       free42 Programming Tools
 #+AUTHOR:      Mitch Richling
 #+EMAIL:       http://www.mitchr.me/
 #+DATE:        2021-03-19
@@ -56,7 +56,6 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
    - ElISP Code to translate my code listings into code for free42 & MD42
    - 42s notes
      - free42 utf-8 characters with character numbers
-
 
 * Generateing 42s code
 
@@ -175,7 +174,8 @@ The last two are /actions/ while the first is yet another menu containing "=foob
           (error "ERROR: Too many local labels: %d" min-free-lab)))
     (princ m-code)
     (princ x-code)
-    (princ (message "@@@@ Free labels start at: %d\n" min-free-lab))))
+    (princ (message "@@@@ Free labels start at: %d\n" min-free-lab))
+    (princ "END")))
 #+END_SRC
 
 #+RESULTS:
@@ -226,12 +226,12 @@ I may have missed a built in function, so you may have to add one to the list. ;
 | b    |
 | c    |
 
-#+BEGIN_SRC elisp :var tbl=menu :colnames y :results output verbatum :wrap src hp42s
+#+BEGIN_SRC elisp :var tbl=menu :colnames y :results output verbatum :wrap "src hp42s :tangle yes"
 (MJR-generate-42-menu-code "PROG_NAME" tbl "stay" "up" (lambda (x) ""))
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s
+#+begin_src hp42s :tangle yes
 LBL "PROG_NAME"
 LBL 01            @@@@ Page 1 of menu PROG_NAME
 CLMENU
@@ -422,6 +422,46 @@ the target version of free42.  It's a bit of a hack, but it lets me maintain one
   (delete-matching-lines "^ *$" nil nil t))
 #+END_SRC
 
+
+** Clean Tangled Code
+
+This function cleans up tangled (C-c C-v t) code so that it can be cleanly pasted into free42.
+
+#+BEGIN_SRC elisp
+(defun MJR-process-tangled-42s-code ()
+  "Prepare tangled hp42s code for upload"
+  (interactive)
+  ;; Zap comments
+  (goto-char (point-min))
+  (while (re-search-forward "\\(@@@@\\|@@##\\).*$" nil t)
+    (replace-match ""))
+  ;; Zap trailing whitespace
+  (goto-char (point-min))
+  (while (re-search-forward "  *$" nil t)
+    (replace-match ""))
+  ;; Zap blank lines
+  (goto-char (point-min))  
+  (flush-lines "^[[:space:]]*$")
+  ;; Add lines after END commands
+  (goto-char (point-min))
+  (while (re-search-forward "^END$" nil t)
+    (replace-match "END\n"))
+  ;; Save the buffer
+  (save-buffer)
+  )
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+MJR-process-tangled-42s-code
+#+end_example
+
+#+BEGIN_SRC elisp
+(add-hook 'org-babel-post-tangle-hook 'MJR-process-tangled-42s-code)
+#+END_SRC
+
+#+RESULTS:
+| MJR-process-tangled-42s-code |
 
 * 42s Notes
 

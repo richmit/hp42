@@ -1,5 +1,5 @@
 # -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
-#+TITLE:       free42/hp42s/DM42 Custom Constants
+#+TITLE:       free42 Custom Constants
 #+AUTHOR:      Mitch Richling
 #+EMAIL:       http://www.mitchr.me/
 #+DATE:        2021-03-19
@@ -487,7 +487,7 @@ The generator code can be customized in a few ways:
 
 You must first define the =MJR-generate-42-menu-code= by evaluating the code block in the =hp42s-meta.org= file.
 
-#+BEGIN_SRC elisp :var tbl=constants :colnames y :results output verbatum :wrap src hp42s
+#+BEGIN_SRC elisp :var tbl=constants :colnames y :results output verbatum :wrap "src hp42s :tangle yes"
 (MJR-generate-42-menu-code "CONS" tbl "exit" "up" (lambda (row) (cl-destructuring-bind (sym desc desc-long val uncertainty units cat) row
                                                                   (let ((print-desc 't)    ;; Set to NIL to not print description
                                                                         (print-unit 't))   ;; Set to NIL to not print units
@@ -509,7 +509,7 @@ You must first define the =MJR-generate-42-menu-code= by evaluating the code blo
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s
+#+begin_src hp42s :tangle yes
 LBL "CONS"
 LBL 01            @@@@ Page 1 of menu CONS
 CLMENU
@@ -993,6 +993,7 @@ LBL 57               @@@@ Action for menu key lapl
 AVIEW
 RTN
 @@@@ Free labels start at: 58
+END
 #+end_src
 
 * EOF

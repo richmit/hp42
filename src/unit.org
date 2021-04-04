@@ -1,5 +1,5 @@
 # -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
-#+TITLE:       free42/hp42s/DM42 Custom Unit Conversion Factors
+#+TITLE:       free42 Custom Unit Conversion Factors
 #+AUTHOR:      Mitch Richling
 #+EMAIL:       http://www.mitchr.me/
 #+DATE:        2021-03-19
@@ -155,7 +155,7 @@ a conversion factor for the given unit to the "base" unit to the stack.  For exa
 
 ** Code
 
-#+BEGIN_SRC elisp :var tbl=units :colnames y :results output verbatum :wrap src hp42s
+#+BEGIN_SRC elisp :var tbl=units :colnames y :results output verbatum :wrap "src hp42s :tangle yes"
 (MJR-generate-42-menu-code "UNIT" tbl "stay" "up" (lambda (row) (cl-destructuring-bind (menu cfactor desc) row
                                                                   (let ((print-desc 't))    ;; Set to NIL to not print description
                                                                     (let* ((dlen (length desc))
@@ -172,7 +172,7 @@ a conversion factor for the given unit to the "base" unit to the stack.  For exa
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s
+#+begin_src hp42s :tangle yes
 LBL "UNIT"
 LBL 01            @@@@ Page 1 of menu UNIT
 CLMENU
@@ -785,6 +785,7 @@ LBL 92               @@@@ Action for menu key C→K
 +
 RTN
 @@@@ Free labels start at: 93
+END
 #+end_src
 
 * EOF

@@ -54,17 +54,16 @@ When I'm doing embedded programming I use my HP-16c & DM16 calculators all the t
 to the 16c.  The programs here significantly augment the 42's capabilities on this front, but they don't quite make the 42 as nice as the 16c.  In particular
 you still have to use the BASE menu to enter some hexadecimal digits.
 
-The 42 can deal with 64-bit binary numbers, but it can't display them -- when you try it displays them in hexadecimal.  The =BVIEW= [[Print Binary Number]]
-program remedies this issue and works just fine on a standard HP-42s or free42 screen.  =BVIEW= uses the =TNPR= [[Tiny Number Printing]] function to draw the
-digits -- this uses a tiny, 5 pixel tall font.  The character set is sufficient to display all kinds of numbers, but the only thing I have implemented so far
-is the binary number printer.
+The 42 can deal with 64-bit binary numbers, but it can't display them -- when you try it displays them in hexadecimal.  The [[(BVIEW)][=BVIEW=]] program remedies this
+issue and works just fine on a standard HP-42s or free42 screen.  [[(BVIEW)][=BVIEW=]] uses the [[(TNPR)][=TNPR=]] function to draw the digits -- this uses a tiny, 5 pixel tall font.
+The character set is sufficient to display all kinds of numbers, but the only thing I have implemented so far is the binary number printer.
 
 This code is structured as several independent functions (See: [[Bit Manipulation Functions][the code]]) that are then tied together into a menu (See: [[Menu Contents][Menu Contents]]) for easy access -- See
 the code [[Menu Code][here]].  This allows you to use these functions in your own programs.  The individual functions are documented in the code.
 
 * Tiny Number Printing
 
-** Code to print digits
+** =TNPR=: Tiny number printer
 
 #+begin_src hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TNPR)
@@ -76,15 +75,21 @@ the code [[Menu Code][here]].  This allows you to use these functions in your ow
 @@@@ UPD: 2021-02-24
 @@@@ BUG: Characters can be *VERY* tiny in high resolution modes on DM42
 @@@@ Designed to print numbers:
-@@@@    101010b Binary      | 1234567 Decimal    | 123e+45 Float | 123/456 Rational | 123+56i Complex
-@@@@    1A8F10h Hexadecimal | 123,456 Decimal    | 12×10^3 Float | 123:456 Rational | (12,34) Complex
-@@@@    154823o Octal       | -123456 Signed Dec | 1.34567 Float | 123456° Degrees  |
+@@@@    101010b Binary      | 1234567 Decimal    | 123e+45 Float | 123/456 Rational | 123 i56 Complex
+@@@@    1A8F10h Hexadecimal | 123,456 Decimal    | 12×10^3 Float | 123456° Degrees  | 123 ∡56 Complex
+@@@@    154823o Octal       | -123456 Signed Dec | 1.34567 Float | 
 @@@@ Characters can be underlined -- this is used by BVIEW to visually separate nibbles
 @@@@ Characters are 3x5 pixels in size.  Underlined characters are 3x7.
 @@@@   - Stock HP-42s screen: 32 characters across.  Two full lines on the screen.
 @@@@ Non-Underlined Character numbers:
-@@@@     00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
-@@@@      0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F  e  -  +  ×  /  ^  :  ,  .  °  b  o  h  i  (  )
+@@@@     00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21  22 23 24 25 26  27  28  29 30  31
+@@@@      0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F  e  -  +  ×  /  ^ UNK  ,  .  °  b   o   h   i  ∡ SPC
+@@@@     48 49 50 51 52 53 54 55 56 57 65 66 67 68 69 70 16 45 43 01 00 94  -- 23 46 19 98 111 104 105 23  32
+@@@@  C   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y                    Y  Y  Y              Y  Y                 Y  Y   Y
+@@@@  R   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y                    Y  Y  Y              Y  Y               
+@@@@  B   Y  Y                                               Y  Y                               
+@@@@  O   Y  Y  Y  Y  Y  Y  Y  Y                             Y  Y                               
+@@@@  H   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y     Y  Y
 @@@@ Add 40 to the above character number for the underlined version
 LBL "TNPR"
 FUNC 30      @@## REQ:free42>=2.5.24
@@ -162,6 +167,7 @@ LBL 21       @@@@ CHAR: ^
 RTN
 LBL 22       @@@@ CHAR: :
 "÷[LF]÷"     @@@@ #b00000 #b01010 #b00000
+"•••"        @@@@ #b11111 #b11111 #b11111
 RTN
 LBL 23       @@@@ CHAR: ,
 "←¿÷"        @@@@ #b10000 #b01000 #b00000
@@ -184,11 +190,11 @@ RTN
 LBL 29       @@@@ CHAR: i
 "÷Ü÷"        @@@@ #b00000 #b11101 #b00000
 RTN
-LBL 30       @@@@ CHAR: (
-"÷↓μ"        @@@@ #b00000 #b01110 #b10001
+LBL 30       @@@@ CHAR: ∡
+"ᴇÅ£"        @@@@ #b11000 #b10100 #b10010
 RTN
-LBL 31       @@@@ CHAR: )
-"μ↓÷"        @@@@ #b10001 #b01110 #b00000
+LBL 31       @@@@ CHAR: SPC
+"÷÷÷"        @@@@ #b00000 #b00000 #b00000
 RTN
 LBL 40       @@@@ CHAR: 0
 "_Q_"        @@@@ #b1011111 #b1010001 #b1011111
@@ -258,6 +264,7 @@ LBL 61       @@@@ CHAR: ^
 RTN
 LBL 62       @@@@ CHAR: :
 "@J@"        @@@@ #b1000000 #b1001010 #b1000000
+"___"        @@@@ #b1011111 #b1011111 #b1011111
 RTN
 LBL 63       @@@@ CHAR: ,
 "PH@"        @@@@ #b1010000 #b1001000 #b1000000
@@ -280,16 +287,16 @@ RTN
 LBL 69       @@@@ CHAR: i
 "@]@"        @@@@ #b1000000 #b1011101 #b1000000
 RTN
-LBL 70       @@@@ CHAR: (
-"@NQ"        @@@@ #b1000000 #b1001110 #b1010001
+LBL 70       @@@@ CHAR: ∡
+"XTR"        @@@@ #b1011000 #b1010100 #b1010010
 RTN
-LBL 71       @@@@ CHAR: )
-"QN@"        @@@@ #b1010001 #b1001110 #b1000000
+LBL 71       @@@@ CHAR: SPC
+"@@@"        @@@@ #b1000000 #b1000000 #b1000000
 RTN
 END
 #+END_SRC
 
-** Test Code to print all characters
+** =PATN=: Test =TNPR= by printing all characters
 
 #+begin_src hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PATN)
@@ -325,7 +332,7 @@ RTN
 END
 #+END_SRC
 
-* Print Binary Number
+* =BVIEW=: Print a 64-bit Binary Number
 
 #+begin_src hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BVIEW)
@@ -507,7 +514,9 @@ END
 
 * Bit Manipulation Functions
 
-#+begin_src hp42s :tangle yes
+** =B#=: Count set bits
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BCNT)
 @@@@ DSC: Number of bits set
 @@@@ IN:  X: an integer
@@ -543,7 +552,11 @@ AND
 ROTXY
 GTO 00
 END
+#+END_SRC
 
+** =MSKn=: Create integer with Y set bits located at bit X
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MSKn)
 @@@@ DSC: Create integer with Y set bits located at bit X
 @@@@ IN:  Y: An integer
@@ -584,7 +597,11 @@ X<>Y
 ROTXY
 RTN
 END
+#+END_SRC
 
+** =MSKR=: Create integer with right most X bits set
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MSKR)
 @@@@ DSC: Create integer with right most X bits set
 @@@@ IN:  X: An integer
@@ -619,7 +636,11 @@ Y↑X
 -
 RTN
 END
+#+END_SRC
 
+** =MSKL=: Create integer with left most X bits set
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MSKL)
 @@@@ DSC: Create integer with left most X bits set
 @@@@ IN:  X: An integer
@@ -657,7 +678,11 @@ X<>Y
 ROTXY
 RTN
 END
+#+END_SRC
 
+** =SETB=: Set the Xth bit of Y
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SETB)
 @@@@ DSC: Set the Xth bit of Y
 @@@@ IN:  Y: An integer
@@ -692,7 +717,11 @@ ROTXY
 OR
 RTN
 END
+#+END_SRC
 
+** =CLRB=: Clear the Xth bit in Y
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CLRB)
 @@@@ DSC: Clear the Xth bit in Y
 @@@@ IN:  Y: An integer
@@ -728,7 +757,11 @@ NOT
 AND
 RTN
 END
+#+END_SRC
 
+** =GETB=: Return the Xth bit of Y
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:GETB)
 @@@@ DSC: Return the Xth bit of Y
 @@@@ IN:  Y: An integer
@@ -765,9 +798,13 @@ LBL 02 @@@@ IF-ELSE
 LBL 03 @@@@ IF-END
 RTN
 END
+#+END_SRC
 
+** =SL=: Shift Left 1 Bit
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SL)
-@@@@ DSC: Shift Left
+@@@@ DSC: Shift Left 1 Bit
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer shifted left 1 bit
 @@@@ UPD: 2021-03-20
@@ -781,9 +818,13 @@ NOT
 AND
 RTN
 END
+#+END_SRC
 
+** =SR=: Shift Right 1 Bit
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SR)
-@@@@ DSC: Shift Right
+@@@@ DSC: Shift Right 1 Bit
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer shifted right 1 bit
 @@@@ UPD: 2021-03-20
@@ -797,9 +838,13 @@ AND
 ROTXY
 RTN
 END
+#+END_SRC
 
+** =RL=: Rotate Left 1 Bit
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RL)
-@@@@ DSC: Rotate Left
+@@@@ DSC: Rotate Left 1 Bit
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer rotated left 1 bit
 LBL "RL"
@@ -809,9 +854,13 @@ L4STK                         @@## REQ:free42>=3.0
 ROTXY
 RTN
 END
+#+END_SRC
 
+** =RR=: Rotate Right 1 Bit
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RR)
-@@@@ DSC: Rotate Right
+@@@@ DSC: Rotate Right 1 Bit
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer rotated right 1 bit
 LBL "RR"
@@ -821,9 +870,13 @@ L4STK                         @@## REQ:free42>=3.0
 ROTXY
 RTN
 END
+#+END_SRC
 
+** =SLn=: Shift Y Left X Bits
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SLn)
-@@@@ DSC: Shift X Left Y Bits
+@@@@ DSC: Shift Y Left X Bits
 @@@@ IN:  Y: An integer
 @@@@ IN:  X: An integer
 @@@@ OUT: X: X shifted left IP(Y) bit(s)
@@ -863,9 +916,13 @@ NOT
 AND
 RTN
 END
+#+END_SRC
 
+** =SRn=: Shift Y Right X Bits
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SRn)
-@@@@ DSC: Shift X Right Y Bits
+@@@@ DSC: Shift Y Right X Bits
 @@@@ IN:  Y: An integer
 @@@@ IN:  X: An integer
 @@@@ OUT: X: X shifted right IP(Y) bit(s)
@@ -905,9 +962,13 @@ X<>Y
 ROTXY
 RTN
 END
+#+END_SRC
 
+** =RLn=: Rotate Y Left by X bits
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RLn)
-@@@@ DSC: Rotate X Left by Y bits
+@@@@ DSC: Rotate Y Left by X bits
 @@@@ IN:  Y: An integer
 @@@@ IN:  X: An integer
 @@@@ OUT: X: X rotated left IP(Y) bit(s)
@@ -927,9 +988,13 @@ LBL 01  @@@@ X is positive
 ROTXY
 RTN
 END
+#+END_SRC
 
+** =RRn=: Rotate Y Right by X bits
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RRn)
-@@@@ DSC: Rotate X Right by Y bits
+@@@@ DSC: Rotate Y Right by X bits
 @@@@ IN:  Y: An integer
 @@@@ IN:  X: An integer
 @@@@ OUT: X: X rotated right ABS(IP(Y)) bit(s)
@@ -948,7 +1013,11 @@ LBL 01  @@@@ X is positive
 ROTXY
 RTN
 END
+#+END_SRC
 
+** =SHFXY=: Shift X by Y Bits (left when Y negative)
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SHFXY)
 @@@@ DSC: Shift X by Y Bits (left when Y negative)
 @@@@ IN:  Y: An integer
@@ -971,7 +1040,11 @@ LBL 02 @@@@ X non-negative -- shift right
 XEQ "SRn"
 RTN
 END
+#+END_SRC
 
+** =RJ=: Right Justify Bits
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RJ)
 @@@@ DSC: Right Justify Bits
 @@@@ IN:  X: an integer
@@ -1001,7 +1074,11 @@ STO+ ST Z
 ROTXY
 GTO 00
 END
+#+END_SRC
 
+** =LJ=: Left Justify Bits
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:LJ)
 @@@@ DSC: Left Justify Bits
 @@@@ IN:  X: an integer
@@ -1034,7 +1111,11 @@ STO+ ST Z
 ROTXY
 GTO 00
 END
+#+END_SRC
 
+** =ISQRT=: Integer square root
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ISQRT)
 @@@@ DSC: Integer square root
 @@@@ IN:  X: a non-negative real number
@@ -1048,7 +1129,10 @@ SQRT
 IP
 RTN
 END
+#+END_SRC
 
+** =ILN2=: Integer base 2 log
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ILN2)
 @@@@ DSC: Integer base 2 log
 @@@@ IN:  X: a positive real number
@@ -1065,7 +1149,11 @@ LN
 IP
 RTN
 END
+#+END_SRC
 
+** =MSSB=: Position of the Most Significant Set Bit
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MSSB)
 @@@@ DSC: Position of the Most Significant Set Bit
 @@@@ IN:  X: An integer
@@ -1092,7 +1180,11 @@ X<>Y
 -
 RTN
 END
+#+END_SRC
 
+** =LSSB=: Position of the Least Significant Set Bit
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:LSSB)
 @@@@ DSC: Position of the Least Significant Set Bit
 @@@@ IN:  X: An integer
@@ -1113,6 +1205,7 @@ XEQ "RJ"
 RTN
 END
 #+END_SRC
+
 
 * BASE Menu
 
@@ -1194,7 +1287,7 @@ END
 ** Menu Code
 
 The menu program is generated via the following bit of elisp.  You must first define the =MJR-generate-42-menu-code= and =MJR-custom-x-gen= by evaluating the code blocks in the =hp42s-meta.org= file.
-The skelliton was generated by the following code.  That skelliton has been fleshed out with some custom code.
+The skeleton was generated by the following code.  That skeleton has been fleshed out with some custom code.
 
 #+BEGIN_SRC elisp :var tbl=basem :colnames y :results output verbatum :wrap "src hp42s :tangle yes"
 ;;(MJR-generate-42-menu-code "BASE" tbl "stay" "up" #'MJR-custom-x-gen)
@@ -1624,6 +1717,309 @@ SF 02
 RTN
 END
 #+end_src
+
+* WORKING                                                          :noexport:
+
+The stuff in this section is work in progress...  Do not expect anything to work!!!
+
+#+BEGIN_SRC hp42s
+@@@@ Convert a native character number to TNPR character number
+LBL "CTOT"
+FUNC 11
+L4STK
+X=0?
+GTO 90 @@@@ divide 0
+1
+X=Y?
+GTO 91 @@@@ mult 1
+R↓
+23
+X>Y?
+GTO 22 @@@@ UNK 01
+R↓
+111
+X<Y?
+GTO 22 @@@@ UNK 01
+R↓
+23
+-
+GTO IND ST X
+RTN
+LBL 90
+20
+RTN
+LBL 91
+19
+RTN
+LBL 01   @@@@ HP 24 -> TNPR 22
+22
+RTN
+LBL 00   @@@@ HP 23 -> TNPR 23
+23
+RTN
+LBL 09   @@@@ HP 32 -> TNPR 31
+31
+RTN
+LBL 20   @@@@ HP 43 -> TNPR 18
+18
+RTN
+LBL 22   @@@@ HP 45 -> TNPR 17
+17
+RTN
+LBL 23   @@@@ HP 46 -> TNPR 24
+24
+RTN
+LBL 25   @@@@ HP 48 -> TNPR 00
+0
+RTN
+LBL 26   @@@@ HP 49 -> TNPR 01
+1
+RTN
+LBL 27   @@@@ HP 50 -> TNPR 02
+2
+RTN
+LBL 28   @@@@ HP 51 -> TNPR 03
+3
+RTN
+LBL 29   @@@@ HP 52 -> TNPR 04
+4
+RTN
+LBL 30   @@@@ HP 53 -> TNPR 05
+5
+RTN
+LBL 31   @@@@ HP 54 -> TNPR 06
+6
+RTN
+LBL 32   @@@@ HP 55 -> TNPR 07
+7
+RTN
+LBL 33   @@@@ HP 56 -> TNPR 08
+8
+RTN
+LBL 34   @@@@ HP 57 -> TNPR 09
+9
+RTN
+LBL 42   @@@@ HP 65 -> TNPR 10
+10
+RTN
+LBL 43   @@@@ HP 66 -> TNPR 11
+11
+RTN
+LBL 44   @@@@ HP 67 -> TNPR 12
+12
+RTN
+LBL 45   @@@@ HP 68 -> TNPR 13
+13
+RTN
+LBL 46   @@@@ HP 69 -> TNPR 14
+14
+RTN
+LBL 47   @@@@ HP 70 -> TNPR 15
+15
+RTN
+LBL 71   @@@@ HP 94 -> TNPR 21
+21
+RTN
+LBL 75   @@@@ HP 98 -> TNPR 26
+26
+RTN
+LBL 81   @@@@ HP 104 -> TNPR 28
+28
+RTN
+LBL 82   @@@@ HP 105 -> TNPR 29
+29
+RTN
+LBL 88   @@@@ HP 111 -> TNPR 27
+27
+RTN
+LBL 02   @@@@ HP 25 -> TNPR 22
+22
+RTN
+LBL 03   @@@@ HP 26 -> TNPR 22
+22
+RTN
+LBL 04   @@@@ HP 27 -> TNPR 22
+22
+RTN
+LBL 05   @@@@ HP 28 -> TNPR 22
+22
+RTN
+LBL 06   @@@@ HP 29 -> TNPR 22
+22
+RTN
+LBL 07   @@@@ HP 30 -> TNPR 22
+22
+RTN
+LBL 08   @@@@ HP 31 -> TNPR 22
+22
+RTN
+LBL 10   @@@@ HP 33 -> TNPR 22
+22
+RTN
+LBL 11   @@@@ HP 34 -> TNPR 22
+22
+RTN
+LBL 12   @@@@ HP 35 -> TNPR 22
+22
+RTN
+LBL 13   @@@@ HP 36 -> TNPR 22
+22
+RTN
+LBL 14   @@@@ HP 37 -> TNPR 22
+22
+RTN
+LBL 15   @@@@ HP 38 -> TNPR 22
+22
+RTN
+LBL 16   @@@@ HP 39 -> TNPR 22
+22
+RTN
+LBL 17   @@@@ HP 40 -> TNPR 22
+22
+RTN
+LBL 18   @@@@ HP 41 -> TNPR 22
+22
+RTN
+LBL 19   @@@@ HP 42 -> TNPR 22
+22
+RTN
+LBL 21   @@@@ HP 44 -> TNPR 22
+22
+RTN
+LBL 24   @@@@ HP 47 -> TNPR 22
+22
+RTN
+LBL 35   @@@@ HP 58 -> TNPR 22
+22
+RTN
+LBL 36   @@@@ HP 59 -> TNPR 22
+22
+RTN
+LBL 37   @@@@ HP 60 -> TNPR 22
+22
+RTN
+LBL 38   @@@@ HP 61 -> TNPR 22
+22
+RTN
+LBL 39   @@@@ HP 62 -> TNPR 22
+22
+RTN
+LBL 40   @@@@ HP 63 -> TNPR 22
+22
+RTN
+LBL 41   @@@@ HP 64 -> TNPR 22
+22
+RTN
+LBL 48   @@@@ HP 71 -> TNPR 22
+22
+RTN
+LBL 49   @@@@ HP 72 -> TNPR 22
+22
+RTN
+LBL 50   @@@@ HP 73 -> TNPR 22
+22
+RTN
+LBL 51   @@@@ HP 74 -> TNPR 22
+22
+RTN
+LBL 52   @@@@ HP 75 -> TNPR 22
+22
+RTN
+LBL 53   @@@@ HP 76 -> TNPR 22
+22
+RTN
+LBL 54   @@@@ HP 77 -> TNPR 22
+22
+RTN
+LBL 55   @@@@ HP 78 -> TNPR 22
+22
+RTN
+LBL 56   @@@@ HP 79 -> TNPR 22
+22
+RTN
+LBL 57   @@@@ HP 80 -> TNPR 22
+22
+RTN
+LBL 58   @@@@ HP 81 -> TNPR 22
+22
+RTN
+LBL 59   @@@@ HP 82 -> TNPR 22
+22
+RTN
+LBL 60   @@@@ HP 83 -> TNPR 22
+22
+RTN
+LBL 61   @@@@ HP 84 -> TNPR 22
+22
+RTN
+LBL 62   @@@@ HP 85 -> TNPR 22
+22
+RTN
+LBL 63   @@@@ HP 86 -> TNPR 22
+22
+RTN
+LBL 64   @@@@ HP 87 -> TNPR 22
+22
+RTN
+LBL 65   @@@@ HP 88 -> TNPR 22
+22
+RTN
+LBL 66   @@@@ HP 89 -> TNPR 22
+22
+RTN
+LBL 67   @@@@ HP 90 -> TNPR 22
+22
+RTN
+LBL 68   @@@@ HP 91 -> TNPR 22
+22
+RTN
+LBL 69   @@@@ HP 92 -> TNPR 22
+22
+RTN
+LBL 70   @@@@ HP 93 -> TNPR 22
+22
+RTN
+LBL 72   @@@@ HP 95 -> TNPR 22
+22
+RTN
+LBL 73   @@@@ HP 96 -> TNPR 22
+22
+RTN
+LBL 74   @@@@ HP 97 -> TNPR 22
+22
+RTN
+LBL 76   @@@@ HP 99 -> TNPR 22
+22
+RTN
+LBL 77   @@@@ HP 100 -> TNPR 22
+22
+RTN
+LBL 78   @@@@ HP 101 -> TNPR 22
+22
+RTN
+LBL 79   @@@@ HP 102 -> TNPR 22
+22
+RTN
+LBL 80   @@@@ HP 103 -> TNPR 22
+22
+RTN
+LBL 83   @@@@ HP 106 -> TNPR 22
+22
+RTN
+LBL 84   @@@@ HP 107 -> TNPR 22
+22
+RTN
+LBL 85   @@@@ HP 108 -> TNPR 22
+22
+RTN
+LBL 86   @@@@ HP 109 -> TNPR 22
+22
+RTN
+LBL 87   @@@@ HP 110 -> TNPR 22
+22
+RTN
+END
+#+END_SRC
 
 * EOF
 

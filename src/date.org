@@ -53,7 +53,9 @@ that free42 has put these into a separate catalog menu, these are somewhat obsol
 
 * Date/Time Functions
 
-#+BEGIN_SRC  hp42s
+** =IDATE=: Interactive Current Date
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:IDATE)
 @@@@ DSC: Interactive Current Date
 @@@@ OUT: X: Date encoded as a real
@@ -68,7 +70,11 @@ ADATE                @@## REQ:free42>=1.4.66
 AVIEW
 RTN
 END
+#+END_SRC
 
+** =ITIME=: Interactive Current Time
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ITIME)
 @@@@ DSC: Interactive Current Time
 @@@@ OUT: X: Time in H.MM.SS format
@@ -83,7 +89,11 @@ ATIME                @@## REQ:free42>=1.4.66
 AVIEW
 RTN
 END
+#+END_SRC
 
+** =UTIME=: Current UNIX time
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UTIME)
 @@@@ DSC: Current UNIX time
 @@@@ OUT: X: UNIX time
@@ -95,7 +105,11 @@ DATE                 @@## REQ:free42>=1.4.66
 TIME                 @@## REQ:free42>=1.4.66
 XEQ "DT→U"
 END
+#+END_SRC
 
+** =DT→U=: Convert date & time to UNIX time
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:DT2U)
 @@@@ DSC: Convert date & time to UNIX time
 @@@@ IN:  Y: Date
@@ -120,7 +134,11 @@ X<>Y
 ×
 RTN
 END
+#+END_SRC
 
+** =U→DT=: Convert UNIX time to date & time
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:U2DT)
 @@@@ DSC: Convert UNIX time to date & time
 @@@@ IN:  X: UNIX time
@@ -148,7 +166,11 @@ MOD                  @@## REQ:free42>=1.4.66
 →HMS
 RTN
 END
+#+END_SRC
 
+** =IU→DT=: Interactive =U→DT= (prints date & time)
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:IU2DT)
 @@@@ DSC: Interactive U→DT (prints date & time)
 @@@@ IN:  X: UNIX time
@@ -169,7 +191,11 @@ ATIME                @@## REQ:free42>=1.4.66
 AVIEW
 RTN
 END
+#+END_SRC
 
+** =IDATE+=: Interactive DATE+ (prints date)
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:IDATEP)
 @@@@ DSC: Interactive DATE+ (prints date)
 @@@@ IN:  Y: Date
@@ -185,7 +211,11 @@ ADATE                @@## REQ:free42>=1.4.66
 AVIEW
 RTN
 END
+#+END_SRC
 
+** =IDOW=: Interactive =DOW= (prints day)
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:IDOW)
 @@@@ DSC: Interactive DOW (prints day)
 @@@@ IN:  X: Date
@@ -222,7 +252,11 @@ LBL 07
 "├SAT"
 RTN
 END
+#+END_SRC
 
+** =D→J=: Convert date to Julian day
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:D2J)
 @@@@ DSC: Convert date to Julian day
 @@@@ IN:  X: Date
@@ -241,7 +275,11 @@ DDAYS                @@## REQ:free42>=1.4.66
 +
 RTN
 END
+#+END_SRC
 
+** =J→D=: Convert date to Julian day
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:J2D)
 @@@@ DSC: Convert date to Julian day
 @@@@ IN:  X: Date
@@ -260,7 +298,11 @@ X<>Y
 DATE+                @@## REQ:free42>=1.4.66
 RTN
 END
+#+END_SRC
 
+** =JDATE=: Today's Julian day
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:JDATE)
 @@@@ DSC: Today's Julian day
 @@@@ OUT: X: Julian day for today
@@ -271,7 +313,11 @@ L4STK                @@## REQ:free42>=3.0
 DATE                 @@## REQ:free42>=1.4.66
 XEQ "D→J"
 END
+#+END_SRC
 
+** =IJ→D=: Interactive =J→D= (prints date)
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:IJ2D)
 @@@@ DSC: Interactive J→D (prints date)
 @@@@ IN:  X: Date

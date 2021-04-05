@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-03 Sat 19:32 -->
+<!-- 2021-04-05 Mon 18:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 equations</title>
@@ -251,7 +251,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-03 19:32:25</i></td>
+<td class="org-left"><i>2021-04-05 18:45:19</i></td>
 </tr>
 </tbody>
 </table>
@@ -263,30 +263,30 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org5fcb254">1. Metadata</a></li>
-<li><a href="#org7f0b682">2. Equations</a>
+<li><a href="#org4d339cb">1. Metadata</a></li>
+<li><a href="#org6c8b1fb">2. Equations</a>
 <ul>
-<li><a href="#org2409e98">2.1. Kepler's Equation</a></li>
-<li><a href="#org135873d">2.2. Kiusalas Perfs</a></li>
-<li><a href="#orgac4f61d">2.3. TVM Equation</a></li>
-<li><a href="#orgffa5b69">2.4. Euler Integral</a></li>
-<li><a href="#org3c1e50f">2.5. Normal Distribution PDF</a></li>
-<li><a href="#orgc240144">2.6. F Distribution PDF</a></li>
-<li><a href="#org512fef9">2.7. Chi Square Distribution PDF</a></li>
-<li><a href="#orgd817f77">2.8. Beta Distribution PDF</a></li>
-<li><a href="#org9b591ab">2.9. Logistic Distribution PDF</a></li>
-<li><a href="#org651ae8d">2.10. Student's t Distribution PDF</a></li>
-<li><a href="#orgf6970f9">2.11. Weibull Distribution PDF</a></li>
-<li><a href="#org389126e">2.12. Exponential Distribution PDF</a></li>
+<li><a href="#org2776e5e">2.1. <code>KEPLE</code>: Kepler's Equation</a></li>
+<li><a href="#orgd178547">2.2. <code>KIUS</code>: Kiusalas Perfs</a></li>
+<li><a href="#org0c5ba33">2.3. <code>TVM</code>: Time Value of Money Equation</a></li>
+<li><a href="#org77117f8">2.4. <code>EULI</code>:Euler Integral</a></li>
+<li><a href="#org2976f07">2.5. <code>NORMD</code>: Normal Distribution PDF</a></li>
+<li><a href="#orga83bb31">2.6. <code>FDIST</code>: F Distribution PDF</a></li>
+<li><a href="#org8528566">2.7. <code>CHI2</code>: Chi Square Distribution PDF</a></li>
+<li><a href="#org0d4c8ff">2.8. <code>BETAF</code>: Beta Distribution PDF</a></li>
+<li><a href="#org5a7ef11">2.9. <code>LOGID</code>: Logistic Distribution PDF</a></li>
+<li><a href="#org7149e92">2.10. <code>STUTD</code>: Student's t Distribution PDF</a></li>
+<li><a href="#org6f5b87d">2.11. <code>WEIBD</code>: Weibull Distribution PDF</a></li>
+<li><a href="#orgbe93884">2.12. <code>EXPOD</code>: Exponential Distribution PDF</a></li>
 </ul>
 </li>
-<li><a href="#org3cc005c">3. EOF</a></li>
+<li><a href="#org1548772">3. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org5fcb254" class="outline-2">
-<h2 id="org5fcb254"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org4d339cb" class="outline-2">
+<h2 id="org4d339cb"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/equations.html">https://richmit.github.io/hp42/equations.html</a>
@@ -304,29 +304,31 @@ Files related to this document may be found on github: <a href="https://github.c
 </div>
 </div>
 
-<div id="outline-container-org7f0b682" class="outline-2">
-<h2 id="org7f0b682"><span class="section-number-2">2</span> Equations</h2>
+<div id="outline-container-org6c8b1fb" class="outline-2">
+<h2 id="org6c8b1fb"><span class="section-number-2">2</span> Equations</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Here we have a few handy equations.  All of them have MVAR declariations so they work with the 42s' integrator and solver.
 </p>
 </div>
 
-<div id="outline-container-org2409e98" class="outline-3">
-<h3 id="org2409e98"><span class="section-number-3">2.1</span> Kepler's Equation</h3>
+<div id="outline-container-org2776e5e" class="outline-3">
+<h3 id="org2776e5e"><span class="section-number-3">2.1</span> <code>KEPLE</code>: Kepler's Equation</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 \[E_A - E \sin(E_A) - M_A = 0\]
 </p>
 
 <p>
-\(M_A\) is the mean anomaly, and is represented by "<code>MA</code>" in the program.
-\(E_A\) is the eccentric anomaly, and is represented by "<code>EA</code>" in the program.
-\(E\) is the eccentricity.
+\(M_A\) is the mean anomaly, and is represented by "<code>MA</code>" in the program.  \(E_A\) is the eccentric anomaly, and is represented by "<code>EA</code>" in the program.  \(E\) is
+the eccentricity.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"KEPLE"</span>
+<pre class="src src-hp42s"><span id="coderef-KEPLE" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (KEPLE)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: MVAR Kepler's Equation</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-05</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"KEPLE"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"MA"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"EA"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"M"</span>
@@ -343,15 +345,18 @@ Here we have a few handy equations.  All of them have MVAR declariations so they
 </div>
 </div>
 
-<div id="outline-container-org135873d" class="outline-3">
-<h3 id="org135873d"><span class="section-number-3">2.2</span> Kiusalas Perfs</h3>
+<div id="outline-container-orgd178547" class="outline-3">
+<h3 id="orgd178547"><span class="section-number-3">2.2</span> <code>KIUS</code>: Kiusalas Perfs</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 \[\frac{100000}{127 K}-P = 0\]
 </p>
 
 <div class="org-src-container">
-<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"KIUS"</span>
+<pre class="src src-hp42s"><span id="coderef-KIUS" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (KIUS)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: MVAR Kiusalas Perferations vs Standard Perferations</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-05</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"KIUS"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"P"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"K"</span>
 100000
@@ -366,8 +371,8 @@ Here we have a few handy equations.  All of them have MVAR declariations so they
 </div>
 </div>
 
-<div id="outline-container-orgac4f61d" class="outline-3">
-<h3 id="orgac4f61d"><span class="section-number-3">2.3</span> TVM Equation</h3>
+<div id="outline-container-org0c5ba33" class="outline-3">
+<h3 id="org0c5ba33"><span class="section-number-3">2.3</span> <code>TVM</code>: Time Value of Money Equation</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Can be used to solve TVM problems when solved.
@@ -382,7 +387,10 @@ In the program we use "<code>B1/E0</code>" for the variable \(p\).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TVM"</span>
+<pre class="src src-hp42s"><span id="coderef-TVM" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TVM)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: MVAR Time Value of Money Equation</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-05</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TVM"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"N"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"I"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"PV"</span>
@@ -420,8 +428,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-orgffa5b69" class="outline-3">
-<h3 id="orgffa5b69"><span class="section-number-3">2.4</span> Euler Integral</h3>
+<div id="outline-container-org77117f8" class="outline-3">
+<h3 id="org77117f8"><span class="section-number-3">2.4</span> <code>EULI</code>:Euler Integral</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Can be used to directly compute the incomplete beta function when integrated.
@@ -436,7 +444,10 @@ Related to the beta function, F distribution, and z distributions.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"EULI"</span>
+<pre class="src src-hp42s"><span id="coderef-EULI" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (EULI)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: MVAR Euler Integral</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-05</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"EULI"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"T"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"Y"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
@@ -459,8 +470,8 @@ Related to the beta function, F distribution, and z distributions.
 </div>
 </div>
 
-<div id="outline-container-org3c1e50f" class="outline-3">
-<h3 id="org3c1e50f"><span class="section-number-3">2.5</span> Normal Distribution PDF</h3>
+<div id="outline-container-org2976f07" class="outline-3">
+<h3 id="org2976f07"><span class="section-number-3">2.5</span> <code>NORMD</code>: Normal Distribution PDF</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 Can be used to compute normal probabilities when integrated.
@@ -479,7 +490,10 @@ In most sources \(\sigma\) is used instead of \(s\) and \(\mu\) is used instead 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"NORMD"</span>
+<pre class="src src-hp42s"><span id="coderef-NORMD" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (NORMD)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: MVAR Normal Distribution PDF</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-05</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"NORMD"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"S"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"M"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
@@ -503,8 +517,8 @@ In most sources \(\sigma\) is used instead of \(s\) and \(\mu\) is used instead 
 </div>
 </div>
 
-<div id="outline-container-orgc240144" class="outline-3">
-<h3 id="orgc240144"><span class="section-number-3">2.6</span> F Distribution PDF</h3>
+<div id="outline-container-orga83bb31" class="outline-3">
+<h3 id="orga83bb31"><span class="section-number-3">2.6</span> <code>FDIST</code>: F Distribution PDF</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 Can be used to compute F probabilities when integrated.
@@ -515,7 +529,10 @@ Can be used to compute F probabilities when integrated.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FDIST"</span>
+<pre class="src src-hp42s"><span id="coderef-FDIST" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FDIST)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: MVAR F Distribution PDF</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-05</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FDIST"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"D1"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"D2"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
@@ -552,8 +569,8 @@ Can be used to compute F probabilities when integrated.
 </div>
 </div>
 
-<div id="outline-container-org512fef9" class="outline-3">
-<h3 id="org512fef9"><span class="section-number-3">2.7</span> Chi Square Distribution PDF</h3>
+<div id="outline-container-org8528566" class="outline-3">
+<h3 id="org8528566"><span class="section-number-3">2.7</span> <code>CHI2</code>: Chi Square Distribution PDF</h3>
 <div class="outline-text-3" id="text-2-7">
 <p>
 Can be used to compute chi square probabilities when integrated.
@@ -564,7 +581,10 @@ Can be used to compute chi square probabilities when integrated.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"CHI2"</span>
+<pre class="src src-hp42s"><span id="coderef-CHI2" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (CHI2)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: MVAR Chi Square Distribution PDF</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-05</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"CHI2"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"K"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"K"</span>
@@ -596,8 +616,8 @@ Can be used to compute chi square probabilities when integrated.
 </div>
 </div>
 
-<div id="outline-container-orgd817f77" class="outline-3">
-<h3 id="orgd817f77"><span class="section-number-3">2.8</span> Beta Distribution PDF</h3>
+<div id="outline-container-org0d4c8ff" class="outline-3">
+<h3 id="org0d4c8ff"><span class="section-number-3">2.8</span> <code>BETAF</code>: Beta Distribution PDF</h3>
 <div class="outline-text-3" id="text-2-8">
 <p>
 Can be used to compute beta probabilities when integrated.
@@ -612,7 +632,10 @@ In most sources \(\alpha\) is used instead of \(a\) and \(\beta\) is used instea
 </p>
 
 <div class="org-src-container">
-<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"BETAF"</span>
+<pre class="src src-hp42s"><span id="coderef-BETAF" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (BETAF)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: MVAR Beta Distribution PDF</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-05</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"BETAF"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"A"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"B"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
@@ -640,8 +663,8 @@ In most sources \(\alpha\) is used instead of \(a\) and \(\beta\) is used instea
 </div>
 </div>
 
-<div id="outline-container-org9b591ab" class="outline-3">
-<h3 id="org9b591ab"><span class="section-number-3">2.9</span> Logistic Distribution PDF</h3>
+<div id="outline-container-org5a7ef11" class="outline-3">
+<h3 id="org5a7ef11"><span class="section-number-3">2.9</span> <code>LOGID</code>: Logistic Distribution PDF</h3>
 <div class="outline-text-3" id="text-2-9">
 <p>
 Can be used to compute logistic probabilities when integrated.
@@ -660,7 +683,10 @@ Also note that various symbols are used for the parameters &#x2013; \(\mu\) &amp
 </p>
 
 <div class="org-src-container">
-<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"LOGID"</span>
+<pre class="src src-hp42s"><span id="coderef-LOGID" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (LOGID)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: MVAR Logistic Distribution PDF</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-05</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"LOGID"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"S"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"M"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
@@ -682,8 +708,8 @@ Also note that various symbols are used for the parameters &#x2013; \(\mu\) &amp
 </div>
 </div>
 
-<div id="outline-container-org651ae8d" class="outline-3">
-<h3 id="org651ae8d"><span class="section-number-3">2.10</span> Student's t Distribution PDF</h3>
+<div id="outline-container-org7149e92" class="outline-3">
+<h3 id="org7149e92"><span class="section-number-3">2.10</span> <code>STUTD</code>: Student's t Distribution PDF</h3>
 <div class="outline-text-3" id="text-2-10">
 <p>
 Can be used to compute Student's t probabilities when integrated.
@@ -698,7 +724,10 @@ In the program "<code>V</code>" is used for \(\nu\).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"STUTD"</span>
+<pre class="src src-hp42s"><span id="coderef-STUTD" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (STUTD)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: MVAR Student's t Distribution PDF</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-05</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"STUTD"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"V"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
 0.5
@@ -728,8 +757,8 @@ In the program "<code>V</code>" is used for \(\nu\).
 </div>
 </div>
 
-<div id="outline-container-orgf6970f9" class="outline-3">
-<h3 id="orgf6970f9"><span class="section-number-3">2.11</span> Weibull Distribution PDF</h3>
+<div id="outline-container-org6f5b87d" class="outline-3">
+<h3 id="org6f5b87d"><span class="section-number-3">2.11</span> <code>WEIBD</code>: Weibull Distribution PDF</h3>
 <div class="outline-text-3" id="text-2-11">
 <p>
 Can be used to compute Weibull probabilities when integrated.
@@ -748,7 +777,10 @@ Note that some sources use \(\frac{1}{\lambda}\) as the parameter instead of \(\
 </p>
 
 <div class="org-src-container">
-<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"WEIBD"</span>
+<pre class="src src-hp42s"><span id="coderef-WEIBD" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (WEIBD)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: MVAR Weibull Distribution PDF</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-05</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"WEIBD"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"K"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"L"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
@@ -774,8 +806,8 @@ Note that some sources use \(\frac{1}{\lambda}\) as the parameter instead of \(\
 </div>
 </div>
 
-<div id="outline-container-org389126e" class="outline-3">
-<h3 id="org389126e"><span class="section-number-3">2.12</span> Exponential Distribution PDF</h3>
+<div id="outline-container-orgbe93884" class="outline-3">
+<h3 id="orgbe93884"><span class="section-number-3">2.12</span> <code>EXPOD</code>: Exponential Distribution PDF</h3>
 <div class="outline-text-3" id="text-2-12">
 <p>
 Can be used to compute exponential probabilities when integrated.
@@ -794,7 +826,10 @@ Note that some sources use \(\frac{1}{\lambda}\) as the parameter instead of \(\
 </p>
 
 <div class="org-src-container">
-<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"EXPOD"</span>
+<pre class="src src-hp42s"><span id="coderef-EXPOD" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (EXPOD)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: MVAR Exponential Distribution PDF</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-05</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"EXPOD"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"L"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"L"</span>
@@ -810,8 +845,8 @@ Note that some sources use \(\frac{1}{\lambda}\) as the parameter instead of \(\
 </div>
 </div>
 
-<div id="outline-container-org3cc005c" class="outline-2">
-<h2 id="org3cc005c"><span class="section-number-2">3</span> EOF</h2>
+<div id="outline-container-org1548772" class="outline-2">
+<h2 id="org1548772"><span class="section-number-2">3</span> EOF</h2>
 <div class="outline-text-2" id="text-3">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -822,7 +857,7 @@ Note that some sources use \(\frac{1}{\lambda}\) as the parameter instead of \(\
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-03 Sat 19:32 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-05 Mon 18:45 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

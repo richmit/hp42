@@ -49,15 +49,17 @@ Files related to this document may be found on github: https://github.com/richmi
 
 Here we have a few handy equations.  All of them have MVAR declariations so they work with the 42s' integrator and solver.
 
-** Kepler's Equation
+** =KEPLE=: Kepler's Equation
 
 $$E_A - E \sin(E_A) - M_A = 0$$
 
-$M_A$ is the mean anomaly, and is represented by "=MA=" in the program.
-$E_A$ is the eccentric anomaly, and is represented by "=EA=" in the program.
-$E$ is the eccentricity.
+$M_A$ is the mean anomaly, and is represented by "=MA=" in the program.  $E_A$ is the eccentric anomaly, and is represented by "=EA=" in the program.  $E$ is
+the eccentricity.
 
 #+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:KEPLE)
+@@@@ DSC: MVAR Kepler's Equation
+@@@@ UPD: 2021-04-05
 LBL "KEPLE"
 MVAR "MA"
 MVAR "EA"
@@ -72,11 +74,14 @@ RTN
 END
 #+END_SRC
 
-** Kiusalas Perfs
+** =KIUS=: Kiusalas Perfs
 
 $$\frac{100000}{127 K}-P = 0$$
 
 #+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:KIUS)
+@@@@ DSC: MVAR Kiusalas Perferations vs Standard Perferations
+@@@@ UPD: 2021-04-05
 LBL "KIUS"
 MVAR "P"
 MVAR "K"
@@ -89,7 +94,7 @@ RTN
 END
 #+END_SRC
 
-** TVM Equation
+** =TVM=: Time Value of Money Equation
 
 Can be used to solve TVM problems when solved.
 
@@ -98,6 +103,9 @@ $$PV+(1 + ip)\cdot PMT\cdot \frac{1-(1+i)^{-N}}{i}+FV\cdot (1+i)^{-N}$$
 In the program we use "=B1/E0=" for the variable $p$.
 
 #+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TVM)
+@@@@ DSC: MVAR Time Value of Money Equation
+@@@@ UPD: 2021-04-05
 LBL "TVM"
 MVAR "N"
 MVAR "I"
@@ -133,7 +141,7 @@ RCL+ "PV"
 END
 #+END_SRC
 
-** Euler Integral
+** =EULI=:Euler Integral
 
 Can be used to directly compute the incomplete beta function when integrated.
 
@@ -142,6 +150,9 @@ Related to the beta function, F distribution, and z distributions.
 $$(x-1)(1-t)^{y-1}$$
 
 #+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:EULI)
+@@@@ DSC: MVAR Euler Integral
+@@@@ UPD: 2021-04-05
 LBL "EULI"
 MVAR "T"
 MVAR "Y"
@@ -162,7 +173,7 @@ RTN
 END
 #+END_SRC
 
-** Normal Distribution PDF
+** =NORMD=: Normal Distribution PDF
 
 Can be used to compute normal probabilities when integrated.
 
@@ -173,6 +184,9 @@ $$\frac{1}{s\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-m}{s}\right)^2}$$
 In most sources $\sigma$ is used instead of $s$ and $\mu$ is used instead of $m$.
 
 #+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:NORMD)
+@@@@ DSC: MVAR Normal Distribution PDF
+@@@@ UPD: 2021-04-05
 LBL "NORMD"
 MVAR "S"
 MVAR "M"
@@ -194,13 +208,16 @@ RTN
 END
 #+END_SRC
 
-** F Distribution PDF
+** =FDIST=: F Distribution PDF
 
 Can be used to compute F probabilities when integrated.
 
 $$\frac{\sqrt{\frac{(d_1x)^{d_1}d_2^{d_2}}{(d_1x+d_2)^{d_1+d_2}}}}{x\mathrm{B}\left(\frac{d_1}{2},\frac{d_2}{2}\right)}$$
 
 #+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FDIST)
+@@@@ DSC: MVAR F Distribution PDF
+@@@@ UPD: 2021-04-05
 LBL "FDIST"
 MVAR "D1"
 MVAR "D2"
@@ -235,13 +252,16 @@ RTN
 END
 #+END_SRC
 
-** Chi Square Distribution PDF
+** =CHI2=: Chi Square Distribution PDF
 
 Can be used to compute chi square probabilities when integrated.
 
 $$\frac{x^{\frac{k}{2}-1}e^{-\frac{x}{2}}}{2^{\frac{k}{2}}\Gamma\left(\frac{k}{2}\right)}$$
 
 #+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CHI2)
+@@@@ DSC: MVAR Chi Square Distribution PDF
+@@@@ UPD: 2021-04-05
 LBL "CHI2"
 MVAR "K"
 MVAR "X"
@@ -271,7 +291,7 @@ RTN
 END
 #+END_SRC
 
-** Beta Distribution PDF
+** =BETAF=: Beta Distribution PDF
 
 Can be used to compute beta probabilities when integrated.
 
@@ -280,6 +300,9 @@ $$\frac{x^{a-1}(1-x)^{b-1}}{\mathrm{B}(a,b)}$$
 In most sources $\alpha$ is used instead of $a$ and $\beta$ is used instead of $b$.
 
 #+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BETAF)
+@@@@ DSC: MVAR Beta Distribution PDF
+@@@@ UPD: 2021-04-05
 LBL "BETAF"
 MVAR "A"
 MVAR "B"
@@ -305,7 +328,7 @@ RTN
 END
 #+END_SRC
 
-** Logistic Distribution PDF
+** =LOGID=: Logistic Distribution PDF
 
 Can be used to compute logistic probabilities when integrated.
 
@@ -316,6 +339,9 @@ Note $s$ is sometimes called the "scale parameter", and $m$ is sometimes called 
 Also note that various symbols are used for the parameters -- $\mu$ & $\sigma$ for example.
 
 #+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:LOGID)
+@@@@ DSC: MVAR Logistic Distribution PDF
+@@@@ UPD: 2021-04-05
 LBL "LOGID"
 MVAR "S"
 MVAR "M"
@@ -335,7 +361,7 @@ RTN
 END
 #+END_SRC
 
-** Student's t Distribution PDF
+** =STUTD=: Student's t Distribution PDF
 
 Can be used to compute Student's t probabilities when integrated.
 
@@ -344,6 +370,9 @@ $$\frac{1}{\sqrt{\nu}\cdot\mathrm{B}\left(\frac{1}{2},\frac{\nu}{2}\right)}\left
 In the program "=V=" is used for $\nu$.
 
 #+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:STUTD)
+@@@@ DSC: MVAR Student's t Distribution PDF
+@@@@ UPD: 2021-04-05
 LBL "STUTD"
 MVAR "V"
 MVAR "X"
@@ -371,7 +400,7 @@ RTN
 END
 #+END_SRC
 
-** Weibull Distribution PDF
+** =WEIBD=: Weibull Distribution PDF
 
 Can be used to compute Weibull probabilities when integrated.
 
@@ -382,6 +411,9 @@ In the program below we use "=L=" for $\lambda$.
 Note that some sources use $\frac{1}{\lambda}$ as the parameter instead of $\lambda$.
 
 #+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:WEIBD)
+@@@@ DSC: MVAR Weibull Distribution PDF
+@@@@ UPD: 2021-04-05
 LBL "WEIBD"
 MVAR "K"
 MVAR "L"
@@ -405,7 +437,7 @@ RTN
 END
 #+END_SRC
 
-** Exponential Distribution PDF
+** =EXPOD=: Exponential Distribution PDF
 
 Can be used to compute exponential probabilities when integrated.
 
@@ -416,6 +448,9 @@ In the program below we use "=L=" for $\lambda$.
 Note that some sources use $\frac{1}{\lambda}$ as the parameter instead of $\lambda$.
 
 #+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:EXPOD)
+@@@@ DSC: MVAR Exponential Distribution PDF
+@@@@ UPD: 2021-04-05
 LBL "EXPOD"
 MVAR "L"
 MVAR "X"

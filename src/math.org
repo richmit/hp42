@@ -49,45 +49,15 @@ Files related to this document may be found on github: https://github.com/richmi
 
 * Introduction
 
-This org-mode file collects together a handful of simple mathematical stuff I find useful.  Many of these functions work on what I call an "arithmetic
-type" -- that is a thing the 42s can do arithmetic with: real numbers, complex numbers, real matrices, & complex matrices.  In order to simplify the code the
-=ATYP= function spits out a small integer that can be used in a computed =GOTO= to handle these four special cases.
+This org-mode file collects together a handful of mathematical stuff I find useful.  I keep this stuff in my [[https://richmit.github.io/hp42/math.html][custom menu]].
 
-** Simple Functions
+* Arithmetic Types
 
-#+ATTR_HTML: :align center :frame box :rules all
-|----------+------------------------------+--------------------------------------------|
-| Function | Description                  | Works On                                   |
-|----------+------------------------------+--------------------------------------------|
-| ATYP     | Arithmetic Type              | N/A                                        |
-|----------+------------------------------+--------------------------------------------|
-| RPART    | Real part                    | Real, Complex, Real Matrix, Complex Matrix |
-| IPART    | Imaginary Part               | Real, Complex, Real Matrix, Complex Matrix |
-| CONJ     | Complex Conjugate            | Real, Complex, Real Matrix, Complex Matrix |
-| CABS     | Magnitude/absolute value     | Real, Complex, Real Matrix, Complex Matrix |
-| CARG     | Complex Argument             | Real, Complex, Real Matrix, Complex Matrix |
-|----------+------------------------------+--------------------------------------------|
-| %T       | Percentage of total          | Real                                       |
-| SGN      | Sign function                | Real, Complex                              |
-| lnXY     | Base Y Logarithm of X        | Real, Complex, Real Matrix, Complex Matrix |
-| ln2      | Base 2 Logarithm             | Real, Complex, Real Matrix, Complex Matrix |
-| 2↑X      | Raise 2 to the power of X    | Real, Complex, Real Matrix, Complex Matrix |
-| GCD      | GCD                          | Real                                       |
-| LCM      | LCM                          | Real                                       |
-| NPDF     | Standard Normal PDF          | Real                                       |
-| NCDF     | Standard Normal CDF          | Real                                       |
-| IFP      | IP & FP of a number          | Real, Real Matrix                          |
-| FLOOR    | Floor                        | Real                                       |
-| CEIL     | Ceiling                      | Real                                       |
-| HYPOT    | Hypot                        | Real, Complex                              |
-| ATAN2    | ATAN2                        | Real                                       |
-| YROOT    | Nth roots                    | Real, Complex                              |
-| BETA     | Beta function                | Real, Complex                              |
-| ERF      | Error Function               | Real                                       |
-| ERFC     | Complementary Error Function | Real                                       |
-|----------+------------------------------+--------------------------------------------|
+Many of the simple math functions here work on what I call an "arithmetic type" -- that is a thing the 42s can do arithmetic with: real numbers, complex
+numbers, real matrices, & complex matrices.  In order to simplify the code the =ATYP= function spits out a small integer that can be used in a computed =GOTO=
+to handle these four special cases.
 
-* Types
+** =ATYP=: Return type of object
 
 #+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ATYP)
@@ -143,7 +113,9 @@ RTN
 END
 #+END_SRC
 
-* Complex Numbers
+* Complex Number Functions
+
+** =RPART=: Real Part
 
 #+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RPART)
@@ -187,7 +159,11 @@ COMPLEX
 X<>Y
 RTN
 END
+#+END_SRC
 
+** =IPART=: Imaginary Part
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:IPART)
 @@@@ DSC: Imaginary Part
 @@@@ IN:  X: Number or numeric matrix (element-wise)
@@ -230,7 +206,11 @@ LBL 06               @@@@ RECT MODE Complex Matrix
 COMPLEX
 RTN
 END
+#+END_SRC
 
+** =CONJ=: Complex Conjugate
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CONJ)
 @@@@ DSC: Complex Conjugate
 @@@@ IN:  X: Number or numeric matrix (element-wise)
@@ -258,7 +238,11 @@ COMPLEX
 COMPLEX
 RTN
 END
+#+END_SRC
 
+** =CABS=: Magnitude/absolute value
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CABS)
 @@@@ DSC: Magnitude/absolute value
 @@@@ IN:  X: Number or numeric matrix (element-wise) -- built in ABS won't work with a complex matrix
@@ -302,7 +286,11 @@ COMPLEX
 X<>Y
 RTN
 END
+#+END_SRC
 
+** =CARG=: Complex Argument
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CARG)
 @@@@ DSC: Complex Argument
 @@@@ IN:  X: Number or numeric matrix (element-wise)
@@ -350,6 +338,8 @@ END
 
 * Math Functions
 
+** =%T=: Percentage of total (just like hp-12c button)
+
 #+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PTOT)
 @@@@ DSC: Percentage of total (just like hp-12c button)
@@ -366,7 +356,11 @@ X<>Y
 ×
 RTN
 END
+#+END_SRC
 
+** =SGN=: Sign function
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SGN)
 @@@@ DSC: Sign function
 @@@@ IN:  X: a number
@@ -406,7 +400,11 @@ LBL 03
 -1
 RTN
 END
+#+END_SRC
 
+** =lnXY=: Base Y Logarithm of X
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:lnXY)
 @@@@ DSC: Base Y Logarithm of X
 @@@@ IN:  Y: logarithm base
@@ -414,7 +412,7 @@ END
 @@@@ OUT: X: log_y(x)
 @@@@ UPD: 2021-02-23
 @@@@ TST: free42_3.0
-LBL "lnXY"           @@@@ OTG: (ref:lnXY)
+LBL "lnXY"
 FUNC 21              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 LN
@@ -424,7 +422,11 @@ X<>Y
 ÷
 RTN
 END
+#+END_SRC
 
+** =ln2=: Base 2 Logarithm
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ln2)
 @@@@ DSC: Base 2 Logarithm
 @@@@ IN:  X: number or matrix (element-wise)
@@ -440,7 +442,11 @@ LN
 ÷
 RTN
 END
+#+END_SRC
 
+** =2↑X=: Raise 2 to the power of X
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:POW2)
 @@@@ DSC: Raise 2 to the power of X
 @@@@ IN:  X: number or matrix (element-wise)
@@ -455,7 +461,11 @@ X<>Y
 Y^X
 RTN
 END
+#+END_SRC
 
+** =GCD=: Greatest Common Denominator
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:GCD)
 @@@@ DSC: GCD
 @@@@ IN:  Y: real number
@@ -481,7 +491,11 @@ GTO 01
 R↓
 RTN
 END
+#+END_SRC
 
+** =LCM=: Least Common Multiple
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:LCM)
 @@@@ DSC: LCM
 @@@@ IN:  Y: real number
@@ -516,7 +530,11 @@ X<>Y
 RCL× "TMPY"
 RTN
 END
+#+END_SRC
 
+** =NPDF=: Standard Normal Density
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:NPDF)
 @@@@ DSC: Standard Normal PDF
 @@@@ IN:  X: real number
@@ -537,7 +555,11 @@ SQRT
 ÷
 RTN
 END
+#+END_SRC
 
+** =NCDF=: Standard Normal CDF
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:NCDF)
 @@@@ DSC: Standard Normal CDF
 @@@@ IN:  X: real number
@@ -594,7 +616,11 @@ LBL 05
 1.330274429
 RTN
 END
+#+END_SRC
 
+** =ERF=: The erf (error) function
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ERF)
 @@@@ DSC: erf (error) function
 @@@@ IN:  X: real number
@@ -628,7 +654,11 @@ LBL 02
 R↓
 RTN
 END
+#+END_SRC
 
+** =ERFC=: The erfc (complementary error) function
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ERFC)
 @@@@ DSC: erfc (complementary error) function
 @@@@ IN:  X: real number
@@ -645,7 +675,11 @@ X<>Y
 -
 RTN
 END
+#+END_SRC
 
+** =IFP=: Integer & Fractional Part
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:IFP)
 @@@@ DSC: IP & FP of a number
 @@@@ IN:  X: real number
@@ -661,7 +695,11 @@ LASTX
 FP
 RTN
 END
+#+END_SRC
 
+** =FLOOR=: Floor
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FLOOR)
 @@@@ DSC: Floor
 @@@@ IN:  X: real number
@@ -681,7 +719,11 @@ LBL 01
 -
 RTN
 END
+#+END_SRC
 
+** =CEIL=: Ceiling
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CEIL)
 @@@@ DSC: Ceiling
 @@@@ IN:  X: real number
@@ -701,7 +743,11 @@ LBL 01
 +
 RTN
 END
+#+END_SRC
 
+** =HYPOT=: The Hypot function
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:HYPOT)
 @@@@ DSC: Hypot
 @@@@ IN:  Y: number
@@ -720,7 +766,11 @@ X↑2
 SQRT
 RTN
 END
+#+END_SRC
 
+** =ATAN2=: Two Argument Inverse Tangent
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ATAN2)
 @@@@ DSC: ATAN2
 @@@@ IN:  Y: number
@@ -790,7 +840,11 @@ LBL 01
 ATAN
 RTN
 END
+#+END_SRC
 
+** =YROOT=: Nth Roots prefering real & pure imaginary results
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:YROOT)
 @@@@ DSC: Nth roots prefering real & pure imaginary answers
 @@@@ IN:  Y: Number
@@ -857,7 +911,11 @@ X<>Y
 Y↑X
 RTN
 END
+#+END_SRC
 
+** =BETA=: The Beta Function
+
+#+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BETA)
 @@@@ DSC: beta function
 @@@@ IN:  Y: Number
@@ -882,11 +940,11 @@ RTN
 END
 #+END_SRC
 
-
 #+END_SRC
 
 * Polynomials
-** Quadratic Equation (Coef on Stack)
+
+** =QUADE=: Solve Quadratic Equation (Coef on Stack)
 
 #+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:QUADE)
@@ -927,7 +985,7 @@ RTN
 END
 #+END_SRC
 
-** Evaluate a Polynomial
+** =PLYE=: Evaluate a Polynomial (Coef in Matrix)
 
 #+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PLYE)
@@ -957,17 +1015,16 @@ RTN
 END
 #+END_SRC
 
-** Wrap a polynomial 
-
-Make a polynomial stored in a matrix into a =MVAR= function suitable for use with SOLVER, INTEG, etc...
+** =PWRP=: Wrap a Matrix Polynomial in a =MVAR= Function
 
 #+BEGIN_SRC hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PWRP)
-@@@@ DSC: Wrap a polynomial
+@@@@ DSC: Make a polynomial stored in a matrix into a =MVAR= function
 @@@@ IN:  X: N/A
 @@@@ OUT: X: N/A
 @@@@ GLB: _PLY -- Store a polynomial matrix in this variable
 @@@@ TST: free42_3.0
+@@@@ FAQ: Allows one to use SOLVER & INTEG on polynomials
 @@@@ UPD: 2021-04-03
 LBL "PWRP"
 MVAR "X"
@@ -980,7 +1037,7 @@ RTN
 END
 #+END_SRC
 
-* 3D Vectors
+* 3D Vector Menu
 
 This is a simple little application that makes working with 3D vectors less painfull.  
 
@@ -996,7 +1053,13 @@ This is a simple little application that makes working with 3D vectors less pain
 | VVIEW | View a vector one element at a time -- press =R/S= for next element |
 |-------+---------------------------------------------------------------------|
 
-#+begin_src hp42s :tangle yes
+#+BEGIN_SRC hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:VEC3)
+@@@@ DSC: Handy menu making 3D vectors easy to manipulate
+@@@@ IN:  N/A
+@@@@ OUT: N/A
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-04-05
 LBL "3VEC"
 L4STK
 LBL 01
@@ -1100,10 +1163,9 @@ FUNC 11
 NEWMAT
 RTN
 END
-#+end_src
+#+END_SRC
 
 * WORKING                                                          :noexport:
-
 
 * EOF
 

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-04 Sun 14:14 -->
+<!-- 2021-04-05 Mon 18:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Base-N Tools</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-04 14:14:58</i></td>
+<td class="org-left"><i>2021-04-05 18:43:11</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,29 +241,54 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgecf8875">1. Metadata</a></li>
-<li><a href="#org7964503">2. Introduction</a></li>
-<li><a href="#org3de9425">3. Tiny Number Printing</a>
+<li><a href="#org19b2e1d">1. Metadata</a></li>
+<li><a href="#orgb29ca37">2. Introduction</a></li>
+<li><a href="#orgb33a4b3">3. Tiny Number Printing</a>
 <ul>
-<li><a href="#org0fc59d0">3.1. Code to print digits</a></li>
-<li><a href="#orge149be6">3.2. Test Code to print all characters</a></li>
+<li><a href="#org767272a">3.1. <code>TNPR</code>: Tiny number printer</a></li>
+<li><a href="#orgdb7a284">3.2. <code>PATN</code>: Test <code>TNPR</code> by printing all characters</a></li>
 </ul>
 </li>
-<li><a href="#org11a3337">4. Print Binary Number</a></li>
-<li><a href="#orgaf24fab">5. Bit Manipulation Functions</a></li>
-<li><a href="#org0522c25">6. BASE Menu</a>
+<li><a href="#org636660e">4. <code>BVIEW</code>: Print a 64-bit Binary Number</a></li>
+<li><a href="#org7ee2f3c">5. Bit Manipulation Functions</a>
 <ul>
-<li><a href="#orgaa8b5f2">6.1. Menu Contents</a></li>
-<li><a href="#org92e3c0f">6.2. Menu Code</a></li>
+<li><a href="#orga73ab4b">5.1. <code>B#</code>: Count set bits</a></li>
+<li><a href="#org169b74d">5.2. <code>MSKn</code>: Create integer with Y set bits located at bit X</a></li>
+<li><a href="#org15f4008">5.3. <code>MSKR</code>: Create integer with right most X bits set</a></li>
+<li><a href="#org4b42f04">5.4. <code>MSKL</code>: Create integer with left most X bits set</a></li>
+<li><a href="#org4b4479d">5.5. <code>SETB</code>: Set the Xth bit of Y</a></li>
+<li><a href="#org60d5933">5.6. <code>CLRB</code>: Clear the Xth bit in Y</a></li>
+<li><a href="#org3ea5c39">5.7. <code>GETB</code>: Return the Xth bit of Y</a></li>
+<li><a href="#org6539da0">5.8. <code>SL</code>: Shift Left 1 Bit</a></li>
+<li><a href="#org17091cb">5.9. <code>SR</code>: Shift Right 1 Bit</a></li>
+<li><a href="#orgf1c436f">5.10. <code>RL</code>: Rotate Left 1 Bit</a></li>
+<li><a href="#orgc193558">5.11. <code>RR</code>: Rotate Right 1 Bit</a></li>
+<li><a href="#org8055948">5.12. <code>SLn</code>: Shift Y Left X Bits</a></li>
+<li><a href="#orgf3b263c">5.13. <code>SRn</code>: Shift Y Right X Bits</a></li>
+<li><a href="#org111c9d4">5.14. <code>RLn</code>: Rotate Y Left by X bits</a></li>
+<li><a href="#orgc451566">5.15. <code>RRn</code>: Rotate Y Right by X bits</a></li>
+<li><a href="#orgbf12743">5.16. <code>SHFXY</code>: Shift X by Y Bits (left when Y negative)</a></li>
+<li><a href="#org7d1f342">5.17. <code>RJ</code>: Right Justify Bits</a></li>
+<li><a href="#org9763000">5.18. <code>LJ</code>: Left Justify Bits</a></li>
+<li><a href="#org34bebc0">5.19. <code>ISQRT</code>: Integer square root</a></li>
+<li><a href="#org3407458">5.20. <code>ILN2</code>: Integer base 2 log</a></li>
+<li><a href="#org5e3655b">5.21. <code>MSSB</code>: Position of the Most Significant Set Bit</a></li>
+<li><a href="#orgf3bfa68">5.22. <code>LSSB</code>: Position of the Least Significant Set Bit</a></li>
 </ul>
 </li>
-<li><a href="#org600ba07">7. EOF</a></li>
+<li><a href="#org836b985">6. BASE Menu</a>
+<ul>
+<li><a href="#org91e0753">6.1. Menu Contents</a></li>
+<li><a href="#org20cdf99">6.2. Menu Code</a></li>
+</ul>
+</li>
+<li><a href="#org3084b53">7. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgecf8875" class="outline-2">
-<h2 id="orgecf8875"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org19b2e1d" class="outline-2">
+<h2 id="org19b2e1d"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/base.html">https://richmit.github.io/hp42/base.html</a>
@@ -281,8 +306,8 @@ Files related to this document may be found on github: <a href="https://github.c
 </div>
 </div>
 
-<div id="outline-container-org7964503" class="outline-2">
-<h2 id="org7964503"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-orgb29ca37" class="outline-2">
+<h2 id="orgb29ca37"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 
 <div class="figure">
@@ -297,25 +322,24 @@ you still have to use the BASE menu to enter some hexadecimal digits.
 </p>
 
 <p>
-The 42 can deal with 64-bit binary numbers, but it can't display them &#x2013; when you try it displays them in hexadecimal.  The <code>BVIEW</code> <a href="#org11a3337">4</a>
-program remedies this issue and works just fine on a standard HP-42s or free42 screen.  <code>BVIEW</code> uses the <code>TNPR</code> <a href="#org3de9425">3</a> function to draw the
-digits &#x2013; this uses a tiny, 5 pixel tall font.  The character set is sufficient to display all kinds of numbers, but the only thing I have implemented so far
-is the binary number printer.
+The 42 can deal with 64-bit binary numbers, but it can't display them &#x2013; when you try it displays them in hexadecimal.  The <a href="#coderef-BVIEW" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-BVIEW');" onmouseout="CodeHighlightOff(this, 'coderef-BVIEW');"><code>BVIEW</code></a> program remedies this
+issue and works just fine on a standard HP-42s or free42 screen.  <a href="#coderef-BVIEW" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-BVIEW');" onmouseout="CodeHighlightOff(this, 'coderef-BVIEW');"><code>BVIEW</code></a> uses the <a href="#coderef-TNPR" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-TNPR');" onmouseout="CodeHighlightOff(this, 'coderef-TNPR');"><code>TNPR</code></a> function to draw the digits &#x2013; this uses a tiny, 5 pixel tall font.
+The character set is sufficient to display all kinds of numbers, but the only thing I have implemented so far is the binary number printer.
 </p>
 
 <p>
-This code is structured as several independent functions (See: <a href="#orgaf24fab">the code</a>) that are then tied together into a menu (See: <a href="#orgaa8b5f2">Menu Contents</a>) for easy access &#x2013; See
-the code <a href="#org92e3c0f">here</a>.  This allows you to use these functions in your own programs.  The individual functions are documented in the code.
+This code is structured as several independent functions (See: <a href="#org7ee2f3c">the code</a>) that are then tied together into a menu (See: <a href="#org91e0753">Menu Contents</a>) for easy access &#x2013; See
+the code <a href="#org20cdf99">here</a>.  This allows you to use these functions in your own programs.  The individual functions are documented in the code.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org3de9425" class="outline-2">
-<h2 id="org3de9425"><span class="section-number-2">3</span> Tiny Number Printing</h2>
+<div id="outline-container-orgb33a4b3" class="outline-2">
+<h2 id="orgb33a4b3"><span class="section-number-2">3</span> Tiny Number Printing</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org0fc59d0" class="outline-3">
-<h3 id="org0fc59d0"><span class="section-number-3">3.1</span> Code to print digits</h3>
+<div id="outline-container-org767272a" class="outline-3">
+<h3 id="org767272a"><span class="section-number-3">3.1</span> <code>TNPR</code>: Tiny number printer</h3>
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-TNPR" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TNPR)</span>
@@ -327,15 +351,21 @@ the code <a href="#org92e3c0f">here</a>.  This allows you to use these functions
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-24</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: Characters can be *VERY* tiny in high resolution modes on DM42</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Designed to print numbers:</span>
-<span style="color: #ffa500;">@@@@    </span><span style="color: #ff7f24;">101010b Binary      | 1234567 Decimal    | 123e+45 Float | 123/456 Rational | 123+56i Complex</span>
-<span style="color: #ffa500;">@@@@    </span><span style="color: #ff7f24;">1A8F10h Hexadecimal | 123,456 Decimal    | 12&#215;10^3 Float | 123:456 Rational | (12,34) Complex</span>
-<span style="color: #ffa500;">@@@@    </span><span style="color: #ff7f24;">154823o Octal       | -123456 Signed Dec | 1.34567 Float | 123456&#176; Degrees  |</span>
+<span style="color: #ffa500;">@@@@    </span><span style="color: #ff7f24;">101010b Binary      | 1234567 Decimal    | 123e+45 Float | 123/456 Rational | 123 i56 Complex</span>
+<span style="color: #ffa500;">@@@@    </span><span style="color: #ff7f24;">1A8F10h Hexadecimal | 123,456 Decimal    | 12&#215;10^3 Float | 123456&#176; Degrees  | 123 &#8737;56 Complex</span>
+<span style="color: #ffa500;">@@@@    </span><span style="color: #ff7f24;">154823o Octal       | -123456 Signed Dec | 1.34567 Float | </span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Characters can be underlined -- this is used by BVIEW to visually separate nibbles</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Characters are 3x5 pixels in size.  Underlined characters are 3x7.</span>
 <span style="color: #ffa500;">@@@@   </span><span style="color: #ff7f24;">- Stock HP-42s screen: 32 characters across.  Two full lines on the screen.</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Non-Underlined Character numbers:</span>
-<span style="color: #ffa500;">@@@@     </span><span style="color: #ff7f24;">00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31</span>
-<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F  e  -  +  &#215;  /  ^  :  ,  .  &#176;  b  o  h  i  (  )</span>
+<span style="color: #ffa500;">@@@@     </span><span style="color: #ff7f24;">00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21  22 23 24 25 26  27  28  29 30  31</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F  e  -  +  &#215;  /  ^ UNK  ,  .  &#176;  b   o   h   i  &#8737; SPC</span>
+<span style="color: #ffa500;">@@@@     </span><span style="color: #ff7f24;">48 49 50 51 52 53 54 55 56 57 65 66 67 68 69 70 16 45 43 01 00 94  -- 23 46 19 98 111 104 105 23  32</span>
+<span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">C   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y                    Y  Y  Y              Y  Y                 Y  Y   Y</span>
+<span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">R   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y                    Y  Y  Y              Y  Y               </span>
+<span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">B   Y  Y                                               Y  Y                               </span>
+<span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">O   Y  Y  Y  Y  Y  Y  Y  Y                             Y  Y                               </span>
+<span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">H   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y     Y  Y</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Add 40 to the above character number for the underlined version</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TNPR"</span>
 <span style="color: #00ffff;">FUNC</span> 30      <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
@@ -413,6 +443,7 @@ R&#8595;
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 22       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: :</span>
 <span style="color: #fa8072;">"&#247;[LF]&#247;"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b00000 #b01010 #b00000</span>
+<span style="color: #fa8072;">"&#8226;&#8226;&#8226;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11111 #b11111 #b11111</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 23       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: ,</span>
 <span style="color: #fa8072;">"&#8592;&#191;&#247;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b10000 #b01000 #b00000</span>
@@ -435,11 +466,11 @@ R&#8595;
 <span style="color: #00ffff;">LBL</span> 29       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: i</span>
 <span style="color: #fa8072;">"&#247;&#220;&#247;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b00000 #b11101 #b00000</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 30       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: (</span>
-<span style="color: #fa8072;">"&#247;&#8595;&#956;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b00000 #b01110 #b10001</span>
+<span style="color: #00ffff;">LBL</span> 30       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: &#8737;</span>
+<span style="color: #fa8072;">"&#7431;&#197;&#163;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11000 #b10100 #b10010</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 31       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: )</span>
-<span style="color: #fa8072;">"&#956;&#8595;&#247;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b10001 #b01110 #b00000</span>
+<span style="color: #00ffff;">LBL</span> 31       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: SPC</span>
+<span style="color: #fa8072;">"&#247;&#247;&#247;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b00000 #b00000 #b00000</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 40       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 0</span>
 <span style="color: #fa8072;">"_Q_"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011111 #b1010001 #b1011111</span>
@@ -509,6 +540,7 @@ R&#8595;
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 62       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: :</span>
 <span style="color: #fa8072;">"@J@"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1000000 #b1001010 #b1000000</span>
+<span style="color: #fa8072;">"___"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011111 #b1011111 #b1011111</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 63       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: ,</span>
 <span style="color: #fa8072;">"PH@"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1010000 #b1001000 #b1000000</span>
@@ -531,11 +563,11 @@ R&#8595;
 <span style="color: #00ffff;">LBL</span> 69       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: i</span>
 <span style="color: #fa8072;">"@]@"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1000000 #b1011101 #b1000000</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 70       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: (</span>
-<span style="color: #fa8072;">"@NQ"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1000000 #b1001110 #b1010001</span>
+<span style="color: #00ffff;">LBL</span> 70       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: &#8737;</span>
+<span style="color: #fa8072;">"XTR"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011000 #b1010100 #b1010010</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 71       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: )</span>
-<span style="color: #fa8072;">"QN@"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1010001 #b1001110 #b1000000</span>
+<span style="color: #00ffff;">LBL</span> 71       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: SPC</span>
+<span style="color: #fa8072;">"@@@"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1000000 #b1000000 #b1000000</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
 </pre>
@@ -543,8 +575,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-orge149be6" class="outline-3">
-<h3 id="orge149be6"><span class="section-number-3">3.2</span> Test Code to print all characters</h3>
+<div id="outline-container-orgdb7a284" class="outline-3">
+<h3 id="orgdb7a284"><span class="section-number-3">3.2</span> <code>PATN</code>: Test <code>TNPR</code> by printing all characters</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-PATN" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PATN)</span>
@@ -584,8 +616,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org11a3337" class="outline-2">
-<h2 id="org11a3337"><span class="section-number-2">4</span> Print Binary Number</h2>
+<div id="outline-container-org636660e" class="outline-2">
+<h2 id="org636660e"><span class="section-number-2">4</span> <code>BVIEW</code>: Print a 64-bit Binary Number</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-BVIEW" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (BVIEW)</span>
@@ -768,9 +800,13 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-orgaf24fab" class="outline-2">
-<h2 id="orgaf24fab"><span class="section-number-2">5</span> Bit Manipulation Functions</h2>
+<div id="outline-container-org7ee2f3c" class="outline-2">
+<h2 id="org7ee2f3c"><span class="section-number-2">5</span> Bit Manipulation Functions</h2>
 <div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-orga73ab4b" class="outline-3">
+<h3 id="orga73ab4b"><span class="section-number-3">5.1</span> <code>B#</code>: Count set bits</h3>
+<div class="outline-text-3" id="text-5-1">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-BCNT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (BCNT)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Number of bits set</span>
@@ -807,8 +843,16 @@ R&#8595;
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">GTO</span> 00
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-MSKn" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MSKn)</span>
+<div id="outline-container-org169b74d" class="outline-3">
+<h3 id="org169b74d"><span class="section-number-3">5.2</span> <code>MSKn</code>: Create integer with Y set bits located at bit X</h3>
+<div class="outline-text-3" id="text-5-2">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-MSKn" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MSKn)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Create integer with Y set bits located at bit X</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer (LSB=0)</span>
@@ -848,8 +892,16 @@ R&#8595;
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-MSKR" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MSKR)</span>
+<div id="outline-container-org15f4008" class="outline-3">
+<h3 id="org15f4008"><span class="section-number-3">5.3</span> <code>MSKR</code>: Create integer with right most X bits set</h3>
+<div class="outline-text-3" id="text-5-3">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-MSKR" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MSKR)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Create integer with right most X bits set</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Integer with IP(X) least significant bits set</span>
@@ -883,8 +935,16 @@ R&#8595;
 <span style="color: #00ffff;">-</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-MSKL" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MSKL)</span>
+<div id="outline-container-org4b42f04" class="outline-3">
+<h3 id="org4b42f04"><span class="section-number-3">5.4</span> <code>MSKL</code>: Create integer with left most X bits set</h3>
+<div class="outline-text-3" id="text-5-4">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-MSKL" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MSKL)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Create integer with left most X bits set</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Integer with IP(X) most significant bits set</span>
@@ -921,8 +981,16 @@ R&#8595;
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-SETB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SETB)</span>
+<div id="outline-container-org4b4479d" class="outline-3">
+<h3 id="org4b4479d"><span class="section-number-3">5.5</span> <code>SETB</code>: Set the Xth bit of Y</h3>
+<div class="outline-text-3" id="text-5-5">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-SETB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SETB)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Set the Xth bit of Y</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
 <span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: An integer (0=LSB)</span>
@@ -956,8 +1024,16 @@ R&#8595;
 <span style="color: #00ffff;">OR</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-CLRB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (CLRB)</span>
+<div id="outline-container-org60d5933" class="outline-3">
+<h3 id="org60d5933"><span class="section-number-3">5.6</span> <code>CLRB</code>: Clear the Xth bit in Y</h3>
+<div class="outline-text-3" id="text-5-6">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-CLRB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (CLRB)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Clear the Xth bit in Y</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
 <span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: An integer (0=LSB)</span>
@@ -992,8 +1068,16 @@ R&#8595;
 <span style="color: #00ffff;">AND</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-GETB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (GETB)</span>
+<div id="outline-container-org3ea5c39" class="outline-3">
+<h3 id="org3ea5c39"><span class="section-number-3">5.7</span> <code>GETB</code>: Return the Xth bit of Y</h3>
+<div class="outline-text-3" id="text-5-7">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-GETB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (GETB)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Return the Xth bit of Y</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
 <span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: An integer (0=LSB)</span>
@@ -1029,9 +1113,17 @@ R&#8595;
 <span style="color: #00ffff;">LBL</span> 03 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-END</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-SL" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SL)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Shift Left</span>
+<div id="outline-container-org6539da0" class="outline-3">
+<h3 id="org6539da0"><span class="section-number-3">5.8</span> <code>SL</code>: Shift Left 1 Bit</h3>
+<div class="outline-text-3" id="text-5-8">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-SL" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SL)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Shift Left 1 Bit</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Integer shifted left 1 bit</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-20</span>
@@ -1045,9 +1137,17 @@ R&#8595;
 <span style="color: #00ffff;">AND</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-SR" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SR)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Shift Right</span>
+<div id="outline-container-org17091cb" class="outline-3">
+<h3 id="org17091cb"><span class="section-number-3">5.9</span> <code>SR</code>: Shift Right 1 Bit</h3>
+<div class="outline-text-3" id="text-5-9">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-SR" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SR)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Shift Right 1 Bit</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Integer shifted right 1 bit</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-20</span>
@@ -1061,9 +1161,17 @@ R&#8595;
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-RL" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (RL)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Rotate Left</span>
+<div id="outline-container-orgf1c436f" class="outline-3">
+<h3 id="orgf1c436f"><span class="section-number-3">5.10</span> <code>RL</code>: Rotate Left 1 Bit</h3>
+<div class="outline-text-3" id="text-5-10">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-RL" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (RL)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Rotate Left 1 Bit</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Integer rotated left 1 bit</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"RL"</span>
@@ -1073,9 +1181,17 @@ R&#8595;
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-RR" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (RR)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Rotate Right</span>
+<div id="outline-container-orgc193558" class="outline-3">
+<h3 id="orgc193558"><span class="section-number-3">5.11</span> <code>RR</code>: Rotate Right 1 Bit</h3>
+<div class="outline-text-3" id="text-5-11">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-RR" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (RR)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Rotate Right 1 Bit</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Integer rotated right 1 bit</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"RR"</span>
@@ -1085,9 +1201,17 @@ R&#8595;
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-SLn" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SLn)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Shift X Left Y Bits</span>
+<div id="outline-container-org8055948" class="outline-3">
+<h3 id="org8055948"><span class="section-number-3">5.12</span> <code>SLn</code>: Shift Y Left X Bits</h3>
+<div class="outline-text-3" id="text-5-12">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-SLn" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SLn)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Shift Y Left X Bits</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: X shifted left IP(Y) bit(s)</span>
@@ -1127,9 +1251,17 @@ R&#8595;
 <span style="color: #00ffff;">AND</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-SRn" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SRn)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Shift X Right Y Bits</span>
+<div id="outline-container-orgf3b263c" class="outline-3">
+<h3 id="orgf3b263c"><span class="section-number-3">5.13</span> <code>SRn</code>: Shift Y Right X Bits</h3>
+<div class="outline-text-3" id="text-5-13">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-SRn" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SRn)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Shift Y Right X Bits</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: X shifted right IP(Y) bit(s)</span>
@@ -1169,9 +1301,17 @@ R&#8595;
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-RLn" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (RLn)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Rotate X Left by Y bits</span>
+<div id="outline-container-org111c9d4" class="outline-3">
+<h3 id="org111c9d4"><span class="section-number-3">5.14</span> <code>RLn</code>: Rotate Y Left by X bits</h3>
+<div class="outline-text-3" id="text-5-14">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-RLn" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (RLn)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Rotate Y Left by X bits</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: X rotated left IP(Y) bit(s)</span>
@@ -1191,9 +1331,17 @@ R&#8595;
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-RRn" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (RRn)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Rotate X Right by Y bits</span>
+<div id="outline-container-orgc451566" class="outline-3">
+<h3 id="orgc451566"><span class="section-number-3">5.15</span> <code>RRn</code>: Rotate Y Right by X bits</h3>
+<div class="outline-text-3" id="text-5-15">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-RRn" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (RRn)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Rotate Y Right by X bits</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: X rotated right ABS(IP(Y)) bit(s)</span>
@@ -1212,8 +1360,16 @@ R&#8595;
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-SHFXY" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SHFXY)</span>
+<div id="outline-container-orgbf12743" class="outline-3">
+<h3 id="orgbf12743"><span class="section-number-3">5.16</span> <code>SHFXY</code>: Shift X by Y Bits (left when Y negative)</h3>
+<div class="outline-text-3" id="text-5-16">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-SHFXY" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SHFXY)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Shift X by Y Bits (left when Y negative)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
@@ -1235,8 +1391,16 @@ R&#8595;
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"SRn"</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-RJ" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (RJ)</span>
+<div id="outline-container-org7d1f342" class="outline-3">
+<h3 id="org7d1f342"><span class="section-number-3">5.17</span> <code>RJ</code>: Right Justify Bits</h3>
+<div class="outline-text-3" id="text-5-17">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-RJ" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (RJ)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Right Justify Bits</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: an integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Y: Number of shifts required to justify</span>
@@ -1265,8 +1429,16 @@ R&#8595;
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">GTO</span> 00
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-LJ" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (LJ)</span>
+<div id="outline-container-org9763000" class="outline-3">
+<h3 id="org9763000"><span class="section-number-3">5.18</span> <code>LJ</code>: Left Justify Bits</h3>
+<div class="outline-text-3" id="text-5-18">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-LJ" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (LJ)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Left Justify Bits</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: an integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Y: Number of shifts required to justify</span>
@@ -1298,8 +1470,16 @@ R&#8595;
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">GTO</span> 00
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-ISQRT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ISQRT)</span>
+<div id="outline-container-org34bebc0" class="outline-3">
+<h3 id="org34bebc0"><span class="section-number-3">5.19</span> <code>ISQRT</code>: Integer square root</h3>
+<div class="outline-text-3" id="text-5-19">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-ISQRT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ISQRT)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Integer square root</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: a non-negative real number</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: IP(SQRT(ABS(X)))</span>
@@ -1312,8 +1492,16 @@ R&#8595;
 <span style="color: #00ffff;">IP</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-ILN2" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ILN2)</span>
+<div id="outline-container-org3407458" class="outline-3">
+<h3 id="org3407458"><span class="section-number-3">5.20</span> <code>ILN2</code>: Integer base 2 log</h3>
+<div class="outline-text-3" id="text-5-20">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-ILN2" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ILN2)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Integer base 2 log</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: a positive real number</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: IP(log_2(ABS(X)))</span>
@@ -1329,8 +1517,16 @@ R&#8595;
 <span style="color: #00ffff;">IP</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-MSSB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MSSB)</span>
+<div id="outline-container-org5e3655b" class="outline-3">
+<h3 id="org5e3655b"><span class="section-number-3">5.21</span> <code>MSSB</code>: Position of the Most Significant Set Bit</h3>
+<div class="outline-text-3" id="text-5-21">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-MSSB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MSSB)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Position of the Most Significant Set Bit</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Position of MSSB in IP(X) or -1 if IP(X) was 0</span>
@@ -1356,8 +1552,16 @@ R&#8595;
 <span style="color: #00ffff;">-</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-LSSB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (LSSB)</span>
+<div id="outline-container-orgf3bfa68" class="outline-3">
+<h3 id="orgf3bfa68"><span class="section-number-3">5.22</span> <code>LSSB</code>: Position of the Least Significant Set Bit</h3>
+<div class="outline-text-3" id="text-5-22">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-LSSB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (LSSB)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Position of the Least Significant Set Bit</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Position of LSSB in IP(X) or -1 if IP(X) was 0</span>
@@ -1380,15 +1584,17 @@ R&#8595;
 </div>
 </div>
 </div>
+</div>
 
-<div id="outline-container-org0522c25" class="outline-2">
-<h2 id="org0522c25"><span class="section-number-2">6</span> BASE Menu</h2>
+
+<div id="outline-container-org836b985" class="outline-2">
+<h2 id="org836b985"><span class="section-number-2">6</span> BASE Menu</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-orgaa8b5f2" class="outline-3">
-<h3 id="orgaa8b5f2"><span class="section-number-3">6.1</span> Menu Contents</h3>
+<div id="outline-container-org91e0753" class="outline-3">
+<h3 id="org91e0753"><span class="section-number-3">6.1</span> Menu Contents</h3>
 <div class="outline-text-3" id="text-6-1">
-<table id="org6973882" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+<table id="org3f52072" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
 <colgroup>
@@ -1711,12 +1917,12 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org92e3c0f" class="outline-3">
-<h3 id="org92e3c0f"><span class="section-number-3">6.2</span> Menu Code</h3>
+<div id="outline-container-org20cdf99" class="outline-3">
+<h3 id="org20cdf99"><span class="section-number-3">6.2</span> Menu Code</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 The menu program is generated via the following bit of elisp.  You must first define the <code>MJR-generate-42-menu-code</code> and <code>MJR-custom-x-gen</code> by evaluating the code blocks in the <code>hp42s-meta.org</code> file.
-The skelliton was generated by the following code.  That skelliton has been fleshed out with some custom code.
+The skeleton was generated by the following code.  That skeleton has been fleshed out with some custom code.
 </p>
 
 <div class="org-src-container">
@@ -2153,8 +2359,8 @@ BWRAP
 </div>
 </div>
 
-<div id="outline-container-org600ba07" class="outline-2">
-<h2 id="org600ba07"><span class="section-number-2">7</span> EOF</h2>
+<div id="outline-container-org3084b53" class="outline-2">
+<h2 id="org3084b53"><span class="section-number-2">7</span> EOF</h2>
 <div class="outline-text-2" id="text-7">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -2165,7 +2371,7 @@ BWRAP
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-04 Sun 14:14 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-05 Mon 18:43 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

@@ -452,18 +452,14 @@ END
 #+end_src
 
 * Plots                                                            :noexport:
-** Future
-
-  - Support multiple graphs via EqD -- perhaps just dots for EqD>1?
-
 ** Main Menu
 
 #+NAME: menu
 | Menu  | Variable       | Values   | Description                                      |
 |-------+----------------+----------+--------------------------------------------------|
 | EQ    | EqP EqV EqD    |          | Setup Equation                                   |
-| XRNG  | LLIM ULIM STEP |          | Set X range (X: min Y: max).  *MAGIC*            |
-| YRNG  | YMAX YMIN      |          | Set Y range (X: min Y: max).  *MAGIC*            |
+| XRNG  | LLIM ULIM STEP |          | Set X range (X: max Y: min).  *MAGIC*            |
+| YRNG  | YMAX YMIN      |          | Set Y range (X: max Y: min).  *MAGIC*            |
 | XYGRD | XGRD YGRD      |          | Set grid width (X: Y-width Y: X-width).  *MAGIC* |
 | GrMod | N/A            |          | Reserved                                         |
 | PLOT  | N/A            |          | Draw plot                                        |
@@ -488,9 +484,12 @@ Magic:
 ** Graphics Display
 
 After the plot is drawn and being shown, we can do three things:
-  - F1: Autoscale Y & Redraw
-  - F2: Zoom box
-  - F3: Trace.  While traceing, enter pushs a point to the stack as a complex number
+  - [2] [4] [8] [6]  Adjust zoom box
+  - [ENTER]          Zoom to box & Redraw
+  - [+/-]            Autoscale Y & Redraw.  If zoom box has narrowed x range, then use that range.
+  - [5]              Set zoom box adjustment & trace speed
+  - [1] [3]          Trace movement
+  - [.]              Push trace point to someplace --- duno where...  Stack?
 
 ** Code
 
@@ -504,7 +503,7 @@ LBL "MPLOT"
 3 
 STO "GrMod"
 R↓
-LBL 01            @@@@ Page 1 of menu MPLOT
+LBL 01                    @@@@ Page 1 of menu MPLOT
 CLMENU
 "EQ"
 KEY 1 XEQ 02
@@ -521,14 +520,14 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 00               @@@@ Application Exit
+LBL 00                    @@@@ Application Exit
 EXITALL
 RTN
-LBL 02               @@@@ Action for menu key EQ
+LBL 02                    @@@@ Action for menu key EQ
 0
 XEQ "PICF"
 RTN
-LBL 03               @@@@ Action for menu key XRNG
+LBL 03                    @@@@ Action for menu key XRNG
 FUNC 00
 X≠Y?
 GTO 24
@@ -566,7 +565,7 @@ X<>Y
 STO "LLIM"
 X<>Y
 RTN
-LBL 04               @@@@ Action for menu key YRNG
+LBL 04                    @@@@ Action for menu key YRNG
 FUNC 00
 X≠Y?
 GTO 22
@@ -604,15 +603,15 @@ X<>Y
 STO "YMIN"
 X<>Y
 RTN
-LBL 05               @@@@ Action for menu key XYGRD
+LBL 05                    @@@@ Action for menu key XYGRD
 STO "YGRD"
 X<>Y
 STO "XGRD"
 X<>Y
 RTN
-LBL 06               @@@@ Action for menu key XXXX
+LBL 06                    @@@@ Action for menu key XXXX
 RCL "GrMod"
-LBL 07               @@@@ Action for menu key PLOT
+LBL 07                    @@@@ Action for menu key PLOT
 @@@@ Set YWID
 RCL "YMAX"
 RCL- "YMIN"
@@ -631,8 +630,8 @@ RCL "ResX"
 STO "XWID"
 @@@@ Draw stuff
 CLLCD
-CLMENU              @@@@ Only needed on DM42
-EXITALL             @@@@ Only needed on DM42
+CLMENU                    @@@@ Only needed on DM42
+EXITALL                   @@@@ Only needed on DM42
 @@@@ Draw X Axis
 0
 XEQ 56
@@ -723,9 +722,152 @@ XEQ 51
 LBL 42
 ISG "XI"
 GTO 41
-STOP
+LBL 87                    @@@@ Zoom Box
+10
+LSTO "ZBSPD"
+1
+LSTO "ZBTOP"
+RCL "ResY"
+LSTO "ZBBOT"
+1
+LSTO "ZBLFT"
+RCL "ResX"
+LSTO "ZBRGT"
+LBL 88
+RCL "ZBSPD"
+LSTO "CTR"
+LBL 71
+RCL "ZBRGT"
+RCL "CTR"
++
+XEQ 48
+DSE "CTR"
+GTO 71
+RCL "ZBSPD"
+LSTO "CTR"
+LBL 72
+RCL "ZBBOT"
+RCL "CTR"
++
+XEQ 58
+DSE "CTR"
+GTO 72
+RCL "ZBSPD"
+LSTO "CTR"
+LBL 73
+RCL "ZBTOP"
+RCL "CTR"
+-
+XEQ 58
+DSE "CTR"
+GTO 73
+RCL "ZBSPD"
+LSTO "CTR"
+LBL 74
+RCL "ZBLFT"
+RCL "CTR"
+-
+XEQ 48
+DSE "CTR"
+GTO 74
+GETKEY1
+13   
+X=Y?                      @@@@ 13 ENTER
+GTO 89   
+R↓
+17
+X=Y?                      @@@@ 24 Backspace
+GTO 86
+R↓
+25
+X=Y?                      @@@@ 25 Speed Change
+GTO 95
+R↓
+24
+X=Y?                      @@@@ 24 LEFT
+GTO 91
+R↓
+26
+X=Y?                      @@@@ 26 RIGHT
+GTO 92
+R↓
+20
+X=Y?                      @@@@ 20 TOP
+GTO 93
+R↓
+30
+X=Y?                      @@@@ 30 BOTTOM
+GTO 94
+GTO 48
+LBL 95                    @@@@ Change Speed
+RCL "ZBSPD"
+9
+-
+X<0?
+10
+STO "ZBSPD"
+GTO 88
+LBL 91                    @@@@ LEFT REDO
+RCL "ZBRGT"             
+-2
+RCL× "ZBSPD"            
++
+RCL "ZBSPD"
+RCL+ "ZBLFT"
+X<Y?
+STO "ZBLFT"
+GTO 88
+LBL 92                    @@@@ RIGHT REDO
+RCL "ZBLFT"             
+2
+RCL× "ZBSPD"            
++           
+RCL "ZBSPD"
++/-                     
+RCL+ "ZBRGT"
+X>Y?
+STO "ZBRGT"
+GTO 88
+LBL 93                    @@@@ TOP REDO
+RCL "ZBBOT"             
+-2
+RCL× "ZBSPD"            
++                         @@@@ Upper_limit
+RCL "ZBSPD"
+RCL+ "ZBTOP"          @@@ New_ZBTOP Lower_limit
+X<Y?
+STO "ZBTOP"
+GTO 88
+LBL 94                    @@@@ BOT REDO
+RCL "ZBTOP"             
+2
+RCL× "ZBSPD"            
++                         @@@@ Lower_limit
+RCL "ZBSPD"
++/-                     
+RCL+ "ZBBOT"          @@@ New_ZBBOT Lower_limit
+X>Y?
+STO "ZBBOT"
+GTO 88
+LBL 89
+RCL "ZBTOP"
+XEQ 57
+RCL "ZBBOT"
+XEQ 57
+STO "YMIN"
+R↓
+STO "YMAX"
+RCL "ZBRGT"
+XEQ 47
+RCL "ZBLFT"
+XEQ 47
+STO "LLIM"
+X<>Y
+STO "ULIM"
+GTO 07
+LBL 86
 RTN
-LBL 51         @@@@ Draw BIG Pix  (assumes Alpha is set)
+LBL 51                    @@@@ Draw BIG Pix  (assumes Alpha is set)
 FUNC 00
 1
 -
@@ -735,7 +877,7 @@ X<>Y
 X<>Y
 AGRAPH
 RTN
-LBL 58         @@@@ HLINE
+LBL 58                    @@@@ HLINE
 FUNC 00
 XEQ 55
 GTO 17
@@ -744,7 +886,7 @@ GTO 17
 PIXEL
 LBL 17
 RTN
-LBL 48         @@@@ VLINE
+LBL 48                    @@@@ VLINE
 FUNC 00
 XEQ 45
 GTO 16
@@ -754,7 +896,7 @@ X<>Y
 PIXEL
 LBL 16
 RTN
-LBL 45           @@@@ X Out Of Range
+LBL 45                    @@@@ X Out Of Range
 FUNC 00
 X≤0?
 RTNYES
@@ -762,7 +904,7 @@ RCL "ResX"
 X<Y?
 RTNYES
 RTNNO
-LBL 55           @@@@ Y Out Of Range
+LBL 55                    @@@@ Y Out Of Range
 FUNC 00
 X≤0?
 RTNYES
@@ -770,7 +912,7 @@ RCL "ResY"
 X<Y?
 RTNYES
 RTNNO
-LBL 46               @@@@ XR->XI
+LBL 46                    @@@@ XR->XI
 FUNC 11
 RCL- "LLIM"
 RCL÷ "XWID"
@@ -778,20 +920,27 @@ RCL÷ "XWID"
 +
 IP
 RTN
-LBL 47               @@@@ XI->XR
+LBL 47                    @@@@ XI->XR
 FUNC 11
 1
 -
 RCL× "XWID"
 RCL+ "LLIM"
 RTN
-LBL 56               @@@@ YR->YI
+LBL 56                    @@@@ YR->YI
 FUNC 11
 RCL- "YMAX"
 RCL÷ "YWID"
 1
 +
 IP
+RTN
+LBL 57                    @@@@ YI->YR
+FUNC 11
+1
+-
+RCL× "YWID"
+RCL+ "YMAX"
 RTN
 END
 #+end_src
@@ -890,7 +1039,6 @@ rtn
 lbl 97
 127
 rtn
-
 
 
 * WORKING                                                          :noexport:

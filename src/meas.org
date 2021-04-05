@@ -187,8 +187,7 @@ Some things I might do some day...
 @@@@ GBL: MeDST -- Error Distribution
 @@@@ GBL: MeCFA -- Coverage Factor
 @@@@ GBL: MeTGN -- Target Measurement Count (generates a report automatically)
-@@@@ TST: free42 3.0
-@@@@ TST: DM42 DMCP-3.20 / DM42-3.17
+@@@@ TST: free42 3.0.2
 LBL "MEAS"
 @@@@ Initialize setup variables
 0
@@ -264,27 +263,9 @@ STOP
 GTO 03
 LBL 04               @@@@ Page 4 of menu MEAS
 CLMENU
-"D:"
-RCL "MeDST"
-80
-+
-XEQ IND ST X
-R↓
-KEY 1 XEQ 20
-"k:"
-RCL "MeCFA"
-70
-+
-XEQ IND ST X
-R↓
+XEQ 55
 KEY 2 XEQ 21
-"A:"
-RCL "MeTGN"
-X=0?
-├"-"
-X≠0?
-AIP
-R↓
+XEQ 56
 KEY 3 XEQ 22
 KEY 7 GTO 03
 KEY 8 GTO 01
@@ -297,6 +278,7 @@ EXITALL
 RTN
 @@@@ Menu Actions
 LBL 05               @@@@ Action for menu key M+
+FUNC 00
 REAL?
 GTO 34
 "ERR: Bad Value"
@@ -332,6 +314,7 @@ LBL 43
 VIEW "MeDAT"
 RTN
 LBL 06               @@@@ Action for menu key M-
+FUNC 00
 SF 25                @@@@ Index & grow MeDAT
 INDEX "MeDAT"
 FC?C 25
@@ -342,6 +325,7 @@ DELR
 VIEW "MeDAT"
 RTN
 LBL 07               @@@@ Action for menu key REP
+FUNC 00
 SF 25
 INDEX "MeDAT"
 FC?C 25
@@ -355,7 +339,12 @@ LBL 39               @@@@ IF-THEN normal
 "μ="
 XEQ 09
 ARCL ST X
-├" ku="
+├" "
+RCL "MeCFA"
+70
++
+XEQ IND ST X
+├"×u="
 XEQ 10
 ARCL ST X
 GTO 41
@@ -363,7 +352,12 @@ LBL 40               @@@@ IF-ELSE square
 "C="
 XEQ 11
 ARCL ST X
-├" ku="
+├" "
+RCL "MeCFA"
+70
++
+XEQ IND ST X
+├"×u="
 XEQ 12
 ARCL ST X
 LBL 41               @@@@ IF-END
@@ -409,6 +403,7 @@ LBL 39               @@@@ IF-END
 AVIEW
 RTN
 LBL 08               @@@@ Action for menu key CLRM
+FUNC 00
 SF 25
 INDEX "MeDAT"
 CLV "MeDAT"
@@ -417,6 +412,7 @@ CF 25
 AVIEW
 RTN
 LBL 09               @@@@ Action for menu key μ (mean)
+FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
@@ -428,6 +424,7 @@ XEQ 18
 ÷
 RTN
 LBL 10               @@@@ Action for menu key kuN (expanded uncertainty for normally distributed data)
+FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
@@ -442,6 +439,7 @@ R↓
 ×
 RTN
 LBL 11               @@@@ Action for menu key MID (midrange)
+FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
@@ -453,6 +451,7 @@ XEQ 13
 ÷
 RTN
 LBL 12               @@@@ Action for menu key kuS (expanded uncertainty for rectangular distributed data)
+FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
@@ -466,7 +465,8 @@ X<>Y
 R↓
 ×
 RTN
-LBL 35               @@@@ Action for SqVA
+LBL 35               @@@@ Action for menu key SqVA
+FUNC 0
 SF 25
 INDEX "MeDAT"
 FC?C 25
@@ -479,6 +479,7 @@ SQRT
 ÷
 RTN
 LBL 13               @@@@ Action for menu key MIN
+FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
@@ -488,6 +489,7 @@ X<>Y
 R↓
 RTN
 LBL 14               @@@@ Action for menu key MAX
+FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
@@ -497,6 +499,7 @@ X<>Y
 R↓
 RTN
 LBL 15               @@@@ Action for menu key SD
+FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
@@ -515,6 +518,7 @@ X<>Y
 SQRT
 RTN
 LBL 16               @@@@ Action for menu key PSD
+FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
@@ -536,6 +540,7 @@ X<>Y
 R↓
 RTN
 LBL 17               @@@@ Action for menu key RNG
+FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
@@ -545,6 +550,7 @@ XEQ 13
 -
 RTN
 LBL 18               @@@@ Action for menu key N
+FUNC 01
 SF 25
 RCL "MeDAT"
 FS?C 25
@@ -556,6 +562,7 @@ DIM?
 R↓
 RTN
 LBL 19               @@@@ Action for menu key SUMS
+FUNC 02
 SF 25
 INDEX "MeDAT"
 FC?C 25
@@ -573,6 +580,7 @@ FC? 77
 GTO 32
 RTN
 LBL 20               @@@@ Action for menu key D:
+FUNC 00
 1
 RCL+ "MeDST"
 2
@@ -584,6 +592,7 @@ STO "MeCFA"
 R↓
 RTN
 LBL 21               @@@@ Action for menu key k:
+FUNC 00
 1
 RCL+ "MeCFA"
 RCL "MeDST"
@@ -603,6 +612,7 @@ STO "MeCFA"
 R↓
 RTN
 LBL 22               @@@@ Action for menu key A:
+FUNC 00
 1
 X≠Y?
 GTO 42
@@ -665,7 +675,32 @@ LBL 99               @@@@ ERROR message for missing MeDAT
 "ERR: No MeDAT"
 AVIEW
 RTN
-END
+LBL 55
+FUNC 00
+"D:"
+RCL "MeDST"
+80
++
+XEQ IND ST X
+R↓
+KEY 1 XEQ 20
+"k:"
+RCL "MeCFA"
+70
++
+XEQ IND ST X
+R↓
+RTN
+LBL 56
+FUNC 00
+"A:"
+RCL "MeTGN"
+X=0?
+├"-"
+X≠0?
+AIP
+R↓
+RTNEND
 #+end_src
 
 * Median

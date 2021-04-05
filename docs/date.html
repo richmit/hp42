@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-03 Sat 20:22 -->
+<!-- 2021-04-05 Mon 18:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Date Tools</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-03 20:22:24</i></td>
+<td class="org-left"><i>2021-04-05 18:45:25</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,17 +241,32 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org3f04c34">1. Metadata</a></li>
-<li><a href="#org7540628">2. Introduction</a></li>
-<li><a href="#org5981f93">3. Date/Time Functions</a></li>
-<li><a href="#org1f91c24">4. A menu for date/time functions</a></li>
-<li><a href="#org929fb28">5. EOF</a></li>
+<li><a href="#orgf5131ff">1. Metadata</a></li>
+<li><a href="#org2135c79">2. Introduction</a></li>
+<li><a href="#org89d61d9">3. Date/Time Functions</a>
+<ul>
+<li><a href="#orgb34f7fe">3.1. <code>IDATE</code>: Interactive Current Date</a></li>
+<li><a href="#orgd0d938f">3.2. <code>ITIME</code>: Interactive Current Time</a></li>
+<li><a href="#orgf27a9e2">3.3. <code>UTIME</code>: Current UNIX time</a></li>
+<li><a href="#org2e017d5">3.4. <code>DT→U</code>: Convert date &amp; time to UNIX time</a></li>
+<li><a href="#orgf9ae960">3.5. <code>U→DT</code>: Convert UNIX time to date &amp; time</a></li>
+<li><a href="#org26c7879">3.6. <code>IU→DT</code>: Interactive <code>U→DT</code> (prints date &amp; time)</a></li>
+<li><a href="#org87eca64">3.7. <code>IDATE+</code>: Interactive DATE+ (prints date)</a></li>
+<li><a href="#org1ad7c7b">3.8. <code>IDOW</code>: Interactive <code>DOW</code> (prints day)</a></li>
+<li><a href="#orgdadbc04">3.9. <code>D→J</code>: Convert date to Julian day</a></li>
+<li><a href="#org6568af6">3.10. <code>J→D</code>: Convert date to Julian day</a></li>
+<li><a href="#orge413be5">3.11. <code>JDATE</code>: Today's Julian day</a></li>
+<li><a href="#org5d62dc4">3.12. <code>IJ→D</code>: Interactive <code>J→D</code> (prints date)</a></li>
+</ul>
+</li>
+<li><a href="#org16faeeb">4. A menu for date/time functions</a></li>
+<li><a href="#org9553944">5. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org3f04c34" class="outline-2">
-<h2 id="org3f04c34"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-orgf5131ff" class="outline-2">
+<h2 id="orgf5131ff"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a>
@@ -269,8 +284,8 @@ Files related to this document may be found on github: <a href="https://github.c
 </div>
 </div>
 
-<div id="outline-container-org7540628" class="outline-2">
-<h2 id="org7540628"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-org2135c79" class="outline-2">
+<h2 id="org2135c79"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Aside from the date/time conversion routines, the rest is just wrappers for built in functions to make them print results when called from a program.  Why?  I
@@ -280,9 +295,13 @@ that free42 has put these into a separate catalog menu, these are somewhat obsol
 </div>
 </div>
 
-<div id="outline-container-org5981f93" class="outline-2">
-<h2 id="org5981f93"><span class="section-number-2">3</span> Date/Time Functions</h2>
+<div id="outline-container-org89d61d9" class="outline-2">
+<h2 id="org89d61d9"><span class="section-number-2">3</span> Date/Time Functions</h2>
 <div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgb34f7fe" class="outline-3">
+<h3 id="orgb34f7fe"><span class="section-number-3">3.1</span> <code>IDATE</code>: Interactive Current Date</h3>
+<div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-IDATE" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (IDATE)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Interactive Current Date</span>
@@ -298,8 +317,16 @@ that free42 has put these into a separate catalog menu, these are somewhat obsol
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-ITIME" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ITIME)</span>
+<div id="outline-container-orgd0d938f" class="outline-3">
+<h3 id="orgd0d938f"><span class="section-number-3">3.2</span> <code>ITIME</code>: Interactive Current Time</h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-ITIME" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ITIME)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Interactive Current Time</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Time in H.MM.SS format</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SFX: Prints time even when called from a program</span>
@@ -313,8 +340,16 @@ that free42 has put these into a separate catalog menu, these are somewhat obsol
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-UTIME" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (UTIME)</span>
+<div id="outline-container-orgf27a9e2" class="outline-3">
+<h3 id="orgf27a9e2"><span class="section-number-3">3.3</span> <code>UTIME</code>: Current UNIX time</h3>
+<div class="outline-text-3" id="text-3-3">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-UTIME" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (UTIME)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Current UNIX time</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: UNIX time</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
@@ -325,8 +360,16 @@ that free42 has put these into a separate catalog menu, these are somewhat obsol
 <span style="color: #00ffff;">TIME</span>                 <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"DT&#8594;U"</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-DT2U" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (DT2U)</span>
+<div id="outline-container-org2e017d5" class="outline-3">
+<h3 id="org2e017d5"><span class="section-number-3">3.4</span> <code>DT→U</code>: Convert date &amp; time to UNIX time</h3>
+<div class="outline-text-3" id="text-3-4">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-DT2U" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (DT2U)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Convert date &amp; time to UNIX time</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: Date</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Time</span>
@@ -350,8 +393,16 @@ that free42 has put these into a separate catalog menu, these are somewhat obsol
 <span style="color: #00ffff;">&#215;</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-U2DT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (U2DT)</span>
+<div id="outline-container-orgf9ae960" class="outline-3">
+<h3 id="orgf9ae960"><span class="section-number-3">3.5</span> <code>U→DT</code>: Convert UNIX time to date &amp; time</h3>
+<div class="outline-text-3" id="text-3-5">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-U2DT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (U2DT)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Convert UNIX time to date &amp; time</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: UNIX time</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Y: Date</span>
@@ -378,8 +429,16 @@ that free42 has put these into a separate catalog menu, these are somewhat obsol
 &#8594;HMS
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-IU2DT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (IU2DT)</span>
+<div id="outline-container-org26c7879" class="outline-3">
+<h3 id="org26c7879"><span class="section-number-3">3.6</span> <code>IU→DT</code>: Interactive <code>U→DT</code> (prints date &amp; time)</h3>
+<div class="outline-text-3" id="text-3-6">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-IU2DT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (IU2DT)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Interactive U&#8594;DT (prints date &amp; time)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: UNIX time</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Y: Date</span>
@@ -399,8 +458,16 @@ that free42 has put these into a separate catalog menu, these are somewhat obsol
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-IDATEP" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (IDATEP)</span>
+<div id="outline-container-org87eca64" class="outline-3">
+<h3 id="org87eca64"><span class="section-number-3">3.7</span> <code>IDATE+</code>: Interactive DATE+ (prints date)</h3>
+<div class="outline-text-3" id="text-3-7">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-IDATEP" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (IDATEP)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Interactive DATE+ (prints date)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: Date</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Integer</span>
@@ -415,8 +482,16 @@ that free42 has put these into a separate catalog menu, these are somewhat obsol
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-IDOW" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (IDOW)</span>
+<div id="outline-container-org1ad7c7b" class="outline-3">
+<h3 id="org1ad7c7b"><span class="section-number-3">3.8</span> <code>IDOW</code>: Interactive <code>DOW</code> (prints day)</h3>
+<div class="outline-text-3" id="text-3-8">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-IDOW" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (IDOW)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Interactive DOW (prints day)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Date</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Integer</span>
@@ -452,8 +527,16 @@ that free42 has put these into a separate catalog menu, these are somewhat obsol
 <span style="color: #fa8072;">"&#9500;SAT"</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-D2J" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (D2J)</span>
+<div id="outline-container-orgdadbc04" class="outline-3">
+<h3 id="orgdadbc04"><span class="section-number-3">3.9</span> <code>D→J</code>: Convert date to Julian day</h3>
+<div class="outline-text-3" id="text-3-9">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-D2J" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (D2J)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Convert date to Julian day</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Date</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Julian day</span>
@@ -471,8 +554,16 @@ that free42 has put these into a separate catalog menu, these are somewhat obsol
 <span style="color: #00ffff;">+</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-J2D" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (J2D)</span>
+<div id="outline-container-org6568af6" class="outline-3">
+<h3 id="org6568af6"><span class="section-number-3">3.10</span> <code>J→D</code>: Convert date to Julian day</h3>
+<div class="outline-text-3" id="text-3-10">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-J2D" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (J2D)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Convert date to Julian day</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Date</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Julian day</span>
@@ -490,8 +581,16 @@ that free42 has put these into a separate catalog menu, these are somewhat obsol
 <span style="color: #00ffff;">DATE+</span>                <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-JDATE" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (JDATE)</span>
+<div id="outline-container-orge413be5" class="outline-3">
+<h3 id="orge413be5"><span class="section-number-3">3.11</span> <code>JDATE</code>: Today's Julian day</h3>
+<div class="outline-text-3" id="text-3-11">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-JDATE" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (JDATE)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Today's Julian day</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Julian day for today</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
@@ -501,8 +600,16 @@ that free42 has put these into a separate catalog menu, these are somewhat obsol
 <span style="color: #00ffff;">DATE</span>                 <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=1.4.66</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"D&#8594;J"</span>
 <span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
 
-<span id="coderef-IJ2D" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (IJ2D)</span>
+<div id="outline-container-org5d62dc4" class="outline-3">
+<h3 id="org5d62dc4"><span class="section-number-3">3.12</span> <code>IJ→D</code>: Interactive <code>J→D</code> (prints date)</h3>
+<div class="outline-text-3" id="text-3-12">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-IJ2D" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (IJ2D)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Interactive J&#8594;D (prints date)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Date</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Julian day</span>
@@ -520,11 +627,12 @@ that free42 has put these into a separate catalog menu, these are somewhat obsol
 </div>
 </div>
 </div>
+</div>
 
-<div id="outline-container-org1f91c24" class="outline-2">
-<h2 id="org1f91c24"><span class="section-number-2">4</span> A menu for date/time functions</h2>
+<div id="outline-container-org16faeeb" class="outline-2">
+<h2 id="org16faeeb"><span class="section-number-2">4</span> A menu for date/time functions</h2>
 <div class="outline-text-2" id="text-4">
-<table id="org3f806fe" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
+<table id="org9b058e3" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
 
 
 <colgroup>
@@ -759,8 +867,8 @@ The menu program is generated via the following bit of elisp.  You must first de
 </div>
 </div>
 
-<div id="outline-container-org929fb28" class="outline-2">
-<h2 id="org929fb28"><span class="section-number-2">5</span> EOF</h2>
+<div id="outline-container-org9553944" class="outline-2">
+<h2 id="org9553944"><span class="section-number-2">5</span> EOF</h2>
 <div class="outline-text-2" id="text-5">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -771,7 +879,7 @@ The menu program is generated via the following bit of elisp.  You must first de
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-03 Sat 20:22 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-05 Mon 18:45 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

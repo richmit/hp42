@@ -98,13 +98,17 @@ Several independent functions are provided:
 In addition a menu collecting them all together is provided: =PERFS=
 
 ** Code for Functions
+#+end_src
+
+*** =CD→K=: Convert count & distance to kiusalas perforations
 
 #+begin_src hp42s :tangle yes
-@@@@ Convert count & distance to kiusalas perforations
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CD2K)
+@@@@ DSC: Convert count & distance to kiusalas perforations
 @@@@ IN:  Y: Count
 @@@@      X: Distance (mm)
 @@@@ OUT: X: Kiusalas Perfs
-@@@@ UPD: 2021-03-19
+@@@@ UPD: 2021-04-05
 @@@@ TST: free42_3.0
 LBL "CD→K"
 FUNC 21            @@## REQ:free42>=2.5.24
@@ -120,12 +124,17 @@ IP
 ×
 RTN
 END
+#+end_src
 
-@@@@ Convert count & kiusalas perforations to distance
+*** =CK→D=: Convert count & kiusalas perforations to distance
+
+#+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CK2D)
+@@@@ DSC: Convert count & kiusalas perforations to distance
 @@@@ IN:  Y: Count
 @@@@      X: Kiusalas Perfs
 @@@@ OUT: X: Distance (mm)
-@@@@ UPD: 2021-03-19
+@@@@ UPD: 2021-04-05
 @@@@ TST: free42_3.0
 LBL "CK→D"
 FUNC 21            @@## REQ:free42>=2.5.24
@@ -141,12 +150,17 @@ IP
 ÷
 RTN
 END
+#+end_src
 
-@@@@ Convert count & distance to/from perforations
+*** =CK→D=: Convert count & kiusalas perforations to distance
+
+#+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CK2D)
+@@@@ DSC: Convert count & distance to/from perforations
 @@@@ IN:  Y: Count
 @@@@      X: Distance (mm) _OR_ Perfs
 @@@@ OUT: X: Perfs         _OR_ Distance (mm)
-@@@@ UPD: 2021-03-19
+@@@@ UPD: 2021-04-05
 @@@@ TST: free42_3.0
 LBL "CD→P"
 LBL "CP→D"
@@ -162,11 +176,16 @@ X<>Y
 ×
 RTN
 END
+#+end_src
 
-@@@@ Convert perfs to/from kiusalas
+*** =K→P= & = =P→K=: Convert perfs to/from kiusalas
+
+#+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:K2P) (ref:P2K)
+@@@@ DSC: Convert perfs to/from kiusalas
 @@@@ IN:  Y: perfs    _OR_ kiusalas
 @@@@ OUT: X: kiusalas _OR_ perfs
-@@@@ UPD: 2021-03-19
+@@@@ UPD: 2021-04-05
 @@@@ TST: free42_3.0
 LBL "K→P"
 LBL "P→K"
@@ -189,6 +208,11 @@ END
 
 #+RESULTS:
 #+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PERF)
+@@@@ DSC: Menu for perferation tools
+@@@@ IN:  N/A
+@@@@ OUT: N/A
+@@@@ UPD: 2021-04-05
 LBL "PERF"
 LBL 01            @@@@ Page 1 of menu PERF
 CLMENU

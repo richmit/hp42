@@ -164,7 +164,7 @@ The last two are /actions/ while the first is yet another menu containing "=foob
                                                             for tmp = (split-string (message "%s" (cl-first row)) ":")
                                                             do (setf (car (last tmp)) (vector (car (last tmp)) row))
                                                             collect tmp))))
-      (add-m-code "LBL 00")
+      (add-m-code "LBL 00 @@@@ Application Exit")
       (add-m-code "EXITALL")
       (add-m-code "RTN")
       (if (< 100 min-free-lab)

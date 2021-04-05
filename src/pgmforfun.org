@@ -458,33 +458,32 @@ END
 
 ** Main Menu
 
-| Menu  | Variable       | Values   | Description                                         |
-|-------+----------------+----------+-----------------------------------------------------|
-| EQ    | EqP EqV EqD    |          | Setup Equation                                      |
-| XRNG  | LLIM ULIM STEP |          | Set X range (X: min Y: max).  *MAGIC*               |
-| YRNG  | YMAX YMIN      |          | Set Y range (X: min Y: max).  *MAGIC*               |
-| XYTIC | XTIC YTIC      |          | Set tic width (X: Y-width Y: X-width).  *MAGIC*     |
-| RSV0  | N/A            |          | Reserved                                            |
-| PLOT  | N/A            |          | Draw plot                                           |
-|-------+----------------+----------+-----------------------------------------------------|
-| CON=Y | FLG 81         | Y* N     | Connect points or not                               |
-| AX=Y  | FLG 82         | Y* N     | Draw axis or not. *MAGIC*                           |
-| WID=3 | DrWid          | 1 3* 5 7 | Width of dots, graph lines, axis lines, & tic marks |
-| RES=# | GrMod          | 0 2 3*   | Display resolution                                  |
-| RSV1  | N/A            |          | Reserved                                            |
-| RSV2  | N/A            |          | Reserved                                            |
+#+NAME: menu
+| Menu  | Variable       | Values   | Description                                      |
+|-------+----------------+----------+--------------------------------------------------|
+| EQ    | EqP EqV EqD    |          | Setup Equation                                   |
+| XRNG  | LLIM ULIM STEP |          | Set X range (X: min Y: max).  *MAGIC*            |
+| YRNG  | YMAX YMIN      |          | Set Y range (X: min Y: max).  *MAGIC*            |
+| XYGRD | XGRD YGRD      |          | Set grid width (X: Y-width Y: X-width).  *MAGIC* |
+| GrMod | N/A            |          | Reserved                                         |
+| PLOT  | N/A            |          | Draw plot                                        |
+
+
+#+BEGIN_SRC elisp :var tbl=menu :colnames y :results output verbatum :wrap "src hp42s :tangle yes"
+(MJR-generate-42-menu-code "MPLOT" tbl "stay" "up" (lambda (x) ""))
+#+END_SRC
 
 Magic:
   - =XRNG= set to [0, 0]: Sets range to default [-10, 10].  
   - =XRNG= reversed limits: Automatically detected and swapped
   - =XRNG= set to [M, M]: Sets range to default [(XMIN+XMAX)/2-M*(XMAX-XMIN), (XMIN+XMAX)/2+M*(XMAX-XMIN)].  i.e. it zooms XRNG.
-  - =YRNG= set to [0, 0]: Sets range so that the aspect ratio will be square based on setting of XRNG.
+  - =YRNG= set to [0, 0]: Sets range to default [-6, 6]
   - =YRNG= reversed limits: Automatically detected and swapped
   - =YRNG= set to [M, M]: Sets range to default [(YMIN+YMAX)/2-M*(YMAX-YMIN), (YMIN+YMAX)/2+M*(YMAX-YMIN)].  i.e. it zooms YRNG.
-  - =XYTIC= set to 0:  If one of the tick widths is zero, then no ticks are drawn for that axis
-  - =XYTIC= at least one non-zero: Sets =AX= to =Y=
-  - =AX= set to =N=:  Sets XYTIC to 0 & 0 -- i.e. no ticks are drawn
-  - =RES= set to 0:  The =WID= menu key disapears when =RES= is set to 0, and all widths are 1.
+  - =XYGRD= set to 0:  If one of the grid widths is zero, then no grids are drawn for that axis
+  - =XYGRD= set to a negative number:  No axis or grid marks will be drawn for that axis
+  - =XYGRD= at least one non-zero: Sets =AX= to =Y=
+  - =GrMod= When les than 3, line width is 1.  No grid lines.  When set to 3, line width is 3 and grid lines are 1.
 
 ** Graphics Display
 
@@ -495,108 +494,316 @@ After the plot is drawn and being shown, we can do three things:
 
 ** Code
 
-#+RESULTS:
-#+begin_src hp42s :tangle no
+#+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MPLOT)
+@@@@ DSC: Plot a MVAR function
+@@@@ IN:  Nothing
+@@@@ OUT: Nothing
+@@@@ UPD: 2021-04-04
 LBL "MPLOT"
-SF 81
-SF 82
-
-SF 25
-RCL "DrWid"
-FS?C 25
-GTO 31
-3
-STO "DrWid"
-LBL 31
+3 
+STO "GrMod"
 R↓
-
-
-LBL 01            @@@@ Page 1 of menu PROG_NAME
+LBL 01            @@@@ Page 1 of menu MPLOT
 CLMENU
 "EQ"
-KEY 1 XEQ 03
+KEY 1 XEQ 02
 "XRNG"
-KEY 2 XEQ 04
+KEY 2 XEQ 03
 "YRNG"
-KEY 3 XEQ 05
-"XYTIC"
-KEY 4 XEQ 06
-@@@@ "RSV0"
-@@@@ KEY 5 XEQ 07
+KEY 3 XEQ 04
+"XYGRD"
+KEY 4 XEQ 05
+@@@@@KEY 5 XEQ 06
 "PLOT"
-KEY 6 XEQ 08
-KEY 7 GTO 02
-KEY 8 GTO 02
+KEY 6 XEQ 07
 KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02            @@@@ Page 2 of menu PROG_NAME
-CLMENU
-"CON=Y"
-KEY 1 XEQ 09
-"AX=Y"
-KEY 2 XEQ 10
-"WID=3"
-KEY 3 XEQ 11
-"RES=#"
-KEY 4 XEQ 12
-@@@@ "RSV1"
-@@@@ KEY 5 XEQ 13
-@@@@ "RSV2"
-@@@@ KEY 6 XEQ 14
-KEY 7 GTO 01
-KEY 8 GTO 01
-KEY 9 GTO 00
-MENU
-STOP
-GTO 02
-LBL 00
+LBL 00               @@@@ Application Exit
 EXITALL
 RTN
-LBL 03               @@@@ Action for menu key EQ
+LBL 02               @@@@ Action for menu key EQ
 0
 XEQ "PICF"
 RTN
-LBL 04               @@@@ Action for menu key XRNG
+LBL 03               @@@@ Action for menu key XRNG
+FUNC 00
+X≠Y?
+GTO 24
+X=0?
+GTO 26
+@@@@ Code for LLIM=ULIM≠0
+RCL "ULIM"
+RCL- "LLIM"
+2
+÷
+×
+RCL "ULIM"
+RCL+ "LLIM"
+2
+÷
+RCL ST X        
+RCL ST Z
+-               
+STO "LLIM"
+R↓
++
+STO "ULIM"
+RTN
+LBL 26
+@@@@ Code for LLIM=ULIM=0
+-10
+STO "LLIM"
+10
+STO "ULIM"
+RTN
+LBL 24
+@@@@@ Code for LLIM≠ULIM
 STO "ULIM"
 X<>Y
 STO "LLIM"
 X<>Y
 RTN
-LBL 05               @@@@ Action for menu key YRNG
-
+LBL 04               @@@@ Action for menu key YRNG
+FUNC 00
+X≠Y?
+GTO 22
+X=0?
+GTO 23
+@@@@ Code for YMIN=YMAX≠0
+RCL "YMAX"
+RCL- "YMIN"
+2
+÷
+×
+RCL "YMAX"
+RCL+ "YMIN"
+2
+÷
+RCL ST X        
+RCL ST Z
+-               
+STO "YMIN"
+R↓
++
+STO "YMAX"
 RTN
-LBL 06               @@@@ Action for menu key XYTIC
-
+LBL 23
+@@@@ Code for YMIN=YMAX=0
+-6
+STO "YMIN"
+6
+STO "YMAX"
 RTN
-LBL 07               @@@@ Action for menu key RSV0
-
+LBL 22
+@@@@@ Code for YMIN≠YMAX
+STO "YMAX"
+X<>Y
+STO "YMIN"
+X<>Y
 RTN
-LBL 08               @@@@ Action for menu key PLOT
-
+LBL 05               @@@@ Action for menu key XYGRD
+STO "YGRD"
+X<>Y
+STO "XGRD"
+X<>Y
 RTN
-LBL 09               @@@@ Action for menu key CON=Y
-
+LBL 06               @@@@ Action for menu key XXXX
+RCL "GrMod"
+LBL 07               @@@@ Action for menu key PLOT
+@@@@ Set YWID
+RCL "YMAX"
+RCL- "YMIN"
+1
+RCL "ResY"
+-
+÷
+STO "YWID"
+@@@@ Set YWID
+RCL "ULIM"
+RCL- "LLIM"
+RCL "ResX"
+1
+-
+÷
+STO "XWID"
+@@@@ Draw stuff
+CLLCD
+CLMENU              @@@@ Only needed on DM42
+EXITALL             @@@@ Only needed on DM42
+@@@@ Draw X Axis
+0
+XEQ 56
+XEQ 58
+1
+-
+XEQ 58
+2
++
+XEQ 58
+@@@@ Draw X Grid
+RCL "XGRD"
+X≤0?
+GTO 08
+RCL "ULIM"
+RCL÷ "XGRD" 
+IP
+RCL× "XGRD"
+RCL+ "XGRD"
+RCL "LLIM"
+RCL÷ "XGRD" 
+IP
+RCL× "XGRD"
+RCL- "XGRD"
+LBL 09
+ENTER
+XEQ 46
+XEQ 48
+R↓
+RCL+ "XGRD"
+X<Y?
+GTO 09
+LBL 08
+@@@@ Draw Y Axis
+0
+XEQ 46
+XEQ 48
+1
+-
+XEQ 48
+2
++
+XEQ 48
+@@@@ Draw Y Grid
+RCL "YGRD"
+X≤0?
+GTO 10
+RCL "YMAX"
+RCL÷ "YGRD" 
+IP
+RCL× "YGRD"
+RCL+ "YGRD"
+RCL "YMIN"
+RCL÷ "YGRD" 
+IP
+RCL× "YGRD"
+RCL- "YGRD"
+LBL 11
+ENTER
+XEQ 56
+XEQ 58
+R↓
+RCL+ "YGRD"
+X<Y?
+GTO 11
+LBL 10
+@@@@ Set Alpha to our box
+"πππ"
+@@@@ Plot curve
+RCL "ResX"
+1000
+÷
+1
++
+LSTO "XI"
+LBL 41
+RCL "XI"
+IP
+XEQ 47
+STO IND "EqV"
+XEQ IND "EqP"
+XEQ 56
+XEQ 55
+GTO 42
+RCL "XI"
+XEQ 51
+@@@@@ PIXEL
+LBL 42
+ISG "XI"
+GTO 41
+STOP
 RTN
-LBL 10               @@@@ Action for menu key AX=Y
-
+LBL 51         @@@@ Draw BIG Pix  (assumes Alpha is set)
+FUNC 00
+1
+-
+X<>Y
+1
+-
+X<>Y
+AGRAPH
 RTN
-LBL 11               @@@@ Action for menu key WID=3
-
+LBL 58         @@@@ HLINE
+FUNC 00
+XEQ 55
+GTO 17
++/-
+1
+PIXEL
+LBL 17
 RTN
-LBL 12               @@@@ Action for menu key RES=#
-
+LBL 48         @@@@ VLINE
+FUNC 00
+XEQ 45
+GTO 16
++/-
+1
+X<>Y
+PIXEL
+LBL 16
 RTN
-LBL 13               @@@@ Action for menu key RSV1
-
+LBL 45           @@@@ X Out Of Range
+FUNC 00
+X≤0?
+RTNYES
+RCL "ResX"
+X<Y?
+RTNYES
+RTNNO
+LBL 55           @@@@ Y Out Of Range
+FUNC 00
+X≤0?
+RTNYES
+RCL "ResY"
+X<Y?
+RTNYES
+RTNNO
+LBL 46               @@@@ XR->XI
+FUNC 11
+RCL- "LLIM"
+RCL÷ "XWID"
+1
++
+IP
 RTN
-LBL 14               @@@@ Action for menu key RSV2
-
+LBL 47               @@@@ XI->XR
+FUNC 11
+1
+-
+RCL× "XWID"
+RCL+ "LLIM"
 RTN
-@@@@ Free labels start at: 15
+LBL 56               @@@@ YR->YI
+FUNC 11
+RCL- "YMAX"
+RCL÷ "YWID"
+1
++
+IP
+RTN
 END
 #+end_src
+
+
+
+
+
+
+
+
+
 
 ** Fat lines
 
@@ -660,19 +867,6 @@ END
 
 ** Code snips
 
-LBL "PLT"
-1.131
-LSTO "XI"
-LBL 01
-RCL "XI"
-IP
-STO IND "EqV"
-XEQ IND "EqP"
-RCL "XI"
-PIXEL
-ISG "XI"
-GTO 01
-
 
 
 lbl 91
@@ -700,6 +894,7 @@ rtn
 
 
 * WORKING                                                          :noexport:
+
 * EOF
 
 # End of document.

@@ -1,5 +1,5 @@
 # -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
-#+TITLE:       free42/hp-42s/DM42: Programs For Functions
+#+TITLE:       free42: Programs For Functions
 #+AUTHOR:      Mitch Richling
 #+EMAIL:       http://www.mitchr.me/
 #+DATE:        2021-03-19
@@ -47,44 +47,171 @@ Files related to this document may be found on github: https://github.com/richmi
 
 * Introduction
 
+$$\mathrm{Plots} \;\;\;\;\;\;\; \mathrm{Sums} \;\; \sum_{n=1}^{15}\frac{1}{n^2} \;\;\;\;\;\;\; \mathrm{Products} \;\; \prod_{n=1}^{15}\frac{1}{n^2} \;\;\;\;\;\;\; \mathrm{Integrals} \;\; \int_{1}^{15}\frac{1}{x^2}dx \;\;\;\;\;\;\; \mathrm{Roots} $$
+
 This is an odd collection of programs that work with =MVAR=-type programs (equations).  I was inspired to do this when the =PGMENU= function was added to
-free42.  Right now I only have one real program here (SPT -- Sums, Products, & Tables).  If I ever write a plotter (in work), solver, integrator, or optimizer
-then I will put them into this framework too.  This scheme can work well for functions of 2 variables as well, but doing a surface plotter is well in the
-future. ;) My thinking for such programs is that they share a framework and common set of principals:
+free42.  My current plans include the following programs:
 
-  - All the top level programs use =PICF= to:
-    - Select a program and store its name in =EqP=  (Program)
-    - Select a variable and store its name in =EqV= (Variable)
-    - Store the number of return values for the program in =EqD= (Dimension)
-      - =PICF= takes one argument.  If it is 0, then =EqD= is set to 1 otherwise the user is prompted for a value for =EqD=.
-  - When a range for the variable is required, then 
-    - The lower limit is stored in =LLIM= -- the same variable used =INTEG=
-    - The upper limit is stored in =ULIM= -- the same variable used =INTEG=
-  - When a step size is required, it is stored in =STEP=
-  
-* Utility Functions
-** Making MVAR functions from regular functions
+#+ATTR_HTML: :align center
+|---------+------------------------------------------------------------------+------------|
+| Program | Description                                                      | Status     |
+|---------+------------------------------------------------------------------+------------|
+| =FSPT=  | Interactive application for computing Sums, Products, and Tables | *Beta*     |
+| =FPLT=  | Interactive application for plotting a function                  | *In Work*  |
+|---------+------------------------------------------------------------------+------------|
+| =FSLV=  | Solve EqP for EqV in [LLIM, ULIM]                                | /Planned/  |
+| =FINT=  | Integrate EqP for EqV in [LLIM, ULIM]                            | /Planned/  |
+| =FSUM=  | Sum EqP for values of EqV from LLIM to ULIM stepping by STEP     | *Complete* |
+| =FPRD=  | Product EqP for values of EqV from LLIM to ULIM stepping by STEP | *Complete* |
+|---------+------------------------------------------------------------------+------------|
+| =PICF=  | Interactive application to select and describe an =MVAR= program | *Complete* |
+| =WRPF=  | Wrap a simple function inside an =MVAR= program                  | *Complete* |
+|---------+------------------------------------------------------------------+------------|
+| =FVARM= | MVAR program with all the global variables for these apps        | *Complete* |
+| =FMENU=  | Menu program orginizeing these apps                              | *In Work*  |
+|---------+------------------------------------------------------------------+------------|
 
-Sometimes we need to work with a simple function that takes an argument from the stack and returns one or more values to the stack -- i.e. non "MVAR"
-variables.  To work with such functions we can wrap them.  A generic solution might be to store the name of your simple function in the variable "_FUN", and
-then give "FWRP" to solver, integrator, or SPT program.
+My thinking for such programs is that they share a framework and common  principals.
+
+All the top level programs use =PICF= to collect information about the =MVAR= program to be used.  The collected information is housed in three global
+variables:
+
+#+ATTR_HTML: :align center
+|----------+-------------------------------------|
+| Variable | Contents                            |
+|----------+-------------------------------------|
+| =EqP=    | Name of MVAR program                |
+| =EqV=    | Name of independent variable        |
+| =EqD=    | Number of returns from MVAR program |
+|----------+-------------------------------------|
+
+Depending on what we are doing with the =MVAR= program, we may need to know something about the independent variable too.  For example when summing function
+values we need to know lower and upper ranges over which to sum, and a step size by which to increment the variable.  We use a consistent set of global
+variables based upon names used by built in tools:
+
+#+ATTR_HTML: :align center
+|----------+-------------------------------------|
+| Variable | Contents                            |
+|----------+-------------------------------------|
+| =LLIM=   | Lower limit of independent variable |
+| =ULIM=   | Upper limit of independent variable |
+| =STEP=   | A step size                         |
+|----------+-------------------------------------|
+
+If a second variable is used, then similar variables are used; however, we have no precedent for what to name them.  So I have decided to use the following:
+
+#+ATTR_HTML: :align center
+|----------+------------------------------------------------|
+| Variable | Contents                                       |
+|----------+------------------------------------------------|
+| =YMIN=   | Lower limit of second or dependent variable    |
+| =YMAX=   | Upper limit of second or dependent variable    |
+| =YSTP=   | A step size for a second or dependent variable |
+|----------+------------------------------------------------|
+
+If an accuracy is required, then we use the variable =ACC=.
+
+* Test Functions
+A few =MVAR= functions to test with
 
 #+begin_src hp42s :tangle yes
-LBL "FWRP"
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFQ)
+@@@@ DSC: A quadratic with zeros at 0 and 1
+LBL "TFQ"
 MVAR "X"
 RCL "X"
-XEQ IND "_FUN"
+1
+-
+RCL "X"
+×
+RTN 
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFC)
+@@@@ DSC: A cubic with zeros at -1, 0.9, and 1
+LBL "TFC"
+MVAR "X"
+RCL "X"
+1
+-
+RCL "X"
+1
++
+×
+RCL "X"
+.9
+-
+×
+RTN 
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFO)
+@@@@ DSC: A function that with increasing frequency approaching zero
+LBL "TFO"
+MVAR "X"
+RCL "X"
+ABS
+0.01
++
+SIN
+RTN 
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFM)
+@@@@ DSC: A function that has many step discontinuities
+@@@@ FAQ: Good test to make sure we don't connect across known discontinuities
+LBL "TFM"
+MVAR "X"
+RCL "X"
+IP
+MOD
+.5
+-
+2
+×
+RTN 
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFF)
+@@@@ DSC: A function flips between 1 and -1 each call
+@@@@ FAQ: Worst case performance for connecting dots
+LBL "TFF"
+MVAR "X"
+1
+FS?C 85
+RTN
+SF 85
+-1
 RTN
 END
 #+END_SRC
 
-** Selecting a function & variable
+* Utility Functions
+
+** =WRPF=: Wrap simple functions with =MVAR= program
+
+Sometimes we need to work with a simple function that takes an argument from the stack and returns one or more values to the stack -- i.e. non "MVAR"
+variables.  To work with such functions we can wrap them.  A generic solution might be to store the name of your simple function in the variable "IEqV", and
+then give "WRPF" to solver, integrator, or =FSPT= program.
+
+#+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:WRPF)
+@@@@ DSC: Wrap a simple function inside an =MVAR= program
+LBL "WRPF"
+MVAR "X"
+RCL "X"
+XEQ IND "IEqV"
+RTN
+END
+#+END_SRC
+
+** =PICF=: Interactively Query For =MVAR= Program, Variable, and Number of Returns
 
 #+begin_src hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PICF)
 @@@@ DSC: Pick an MVAR function and variable
 @@@@ IN:  X: integer
-@@@@ OUT: N/A
+@@@@ FAQ: If X=0, then EqD is set to 1.  Otherwise the user is prompted.
 @@@@ UPD: 2021-02-24
 @@@@ GBL: EqP  -- Name of selected function
 @@@@ GBL: EqV -- Name of selected variable
@@ -160,18 +287,18 @@ RTN
 END
 #+END_SRC
 
-* Sums, Products, & Tables
+* =FSPT=: Interactive Sums, Products, & Tables
 
 Create function tables and computes sums & products.  Works much like the built in integration application.  
 
-The =LOG= button transforms the function results by taking the natural logarithm -- for example this allows us to compute very large products by summing the logarithims.
+The =LOG= button transforms the function results by taking the natural logarithm -- for example this allows us to compute very large products by summing the logarithms.
 
-The =IND= button stores the indipent varaible value in the table.  
+The =IND= button stores the independent variable value in the table.  
 
 When not provided, the values for =LLIM=, =STEP=, & =EqD= default to 1.
 
 #+begin_src hp42s :tangle yes
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SPT)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FSPT)
 @@@@ DSC: Sums, Products, & Tables
 @@@@ IN:  N/A
 @@@@ OUT: N/A
@@ -180,14 +307,14 @@ When not provided, the values for =LLIM=, =STEP=, & =EqD= default to 1.
 @@@@ GBL: ULIM -- Upper limit for variable
 @@@@ GBL: STEP -- Size of steps to make
 @@@@ FLG: 82: Set: log function returns
-@@@@ FLG: 83: Set: Store indipent variable in table
+@@@@ FLG: 83: Set: Store independent variable in table
 @@@@ FLG: 84: Set: doing table, Clear: Doing sum or product (see flag 85)
 @@@@ FLG: 85: Set: doing sum, Clear; doing product
 @@@@ LLB: 00-12,14-24,26-33
-@@@@ GLB: SPT
+@@@@ GLB: FSPT
 @@@@ USE: PICF
 @@@@ REQ: REQ:free42>=3.0
-LBL "SPT"
+LBL "FSPT"
 CF 82
 SF 83
 1
@@ -351,7 +478,7 @@ R↓    @@@@ Drop matrix off stack to save RAM
 INDEX "TMAT"
 GROW
 LBL 23
-@@@@ Step through indpendant variable values and do sum, product, or table
+@@@@ Step through independent variable values and do sum, product, or table
 RCL "LLIM"
 STO IND "EqV"
 LBL 24
@@ -366,7 +493,7 @@ GTO 32
 @@@@  Doing a table: Setup CTR for loop later
 RCL "EqD"
 LSTO "CTR"
-@@@@  Doing a table:  Store indpendant variable if FS? 83
+@@@@  Doing a table:  Store independent variable if FS? 83
 FC? 83 
 GTO 32
 RCL IND "EqV"
@@ -420,7 +547,7 @@ R↓
 DSE "CTR"
 GTO 30
 LBL 28
-@@@@ Increment indpendant variable
+@@@@ Increment independent variable
 RCL "STEP"
 RCL IND "EqV"
 +
@@ -451,59 +578,228 @@ RTN
 END
 #+end_src
 
-* Plots                                                            :noexport:
-** Main Menu
+* Programmatic Sums & Products
 
-#+NAME: menu
-| Menu  | Variable       | Values   | Description                                      |
-|-------+----------------+----------+--------------------------------------------------|
-| EQ    | EqP EqV EqD    |          | Setup Equation                                   |
-| XRNG  | LLIM ULIM STEP |          | Set X range (X: max Y: min).  *MAGIC*            |
-| YRNG  | YMAX YMIN      |          | Set Y range (X: max Y: min).  *MAGIC*            |
-| XYGRD | XGRD YGRD      |          | Set grid width (X: Y-width Y: X-width).  *MAGIC* |
-| GrMod | N/A            |          | Reserved                                         |
-| PLOT  | N/A            |          | Draw plot                                        |
+If you already have =EqP=, =EqV=, =LLIM=, =ULIM=, & =STEP= set, then you can use these programs.  These will be faster than the interactive version because they are optimized into tighter loops and because they don't provide any progress updates.
 
+** =FSUM=: Sums
 
-#+BEGIN_SRC elisp :var tbl=menu :colnames y :results output verbatum :wrap "src hp42s :tangle yes"
-(MJR-generate-42-menu-code "MPLOT" tbl "stay" "up" (lambda (x) ""))
+#+BEGIN_SRC hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FSUM)
+@@@@ DSC: Sum a function evaluated at regular intervals over a range
+@@@@ OUT: X: The sum
+@@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP
+@@@@ FAQ: Faster than sum in FSPT
+@@@@ FAQ: EqD is ignored -- only last function value is summed
+@@@@ UPD: 2021-04-06
+@@@@ REQ: REQ:free42>=3.0
+LBL "FSUM"
+FUNC 01
+0
+LSTO "Sum"
+@@@@ Step through independent variable values and do sum
+RCL "LLIM"
+STO IND "EqV"
+LBL 24
+@@@@ Evaluate function
+SF 25
+XEQ IND "EqP"
+FC?C 25
+RTNERR 2
+STO+ "Sum"
+@@@@ Increment independent variable
+RCL "STEP"
+RCL+ IND "EqV"
+STO IND "EqV"
+RCL "ULIM"
+X≥Y?
+GTO 24
+@@@@ All done, put Sum on stack
+RCL "Sum"
+RTN
+END
 #+END_SRC
+
+** =FPRD=: Products
+
+#+BEGIN_SRC hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FPRD)
+@@@@ DSC: Product of a function evaluated at regular intervals over a range
+@@@@ OUT: X: The product
+@@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP
+@@@@ FAQ: Faster than product in FSPT
+@@@@ FAQ: EqD is ignored -- only last function value is summed
+@@@@ UPD: 2021-04-06
+@@@@ REQ: REQ:free42>=3.0
+LBL "FPRD"
+FUNC 01
+1
+LSTO "Prd"
+@@@@ Step through independent variable values and do product
+RCL "LLIM"
+STO IND "EqV"
+LBL 24
+@@@@ Evaluate function
+SF 25
+XEQ IND "EqP"
+FC?C 25
+RTNERR 2
+STO× "Prd"
+@@@@ Increment independent variable
+RCL "STEP"
+RCL+ IND "EqV"
+STO IND "EqV"
+RCL "ULIM"
+X≥Y?
+GTO 24
+@@@@ All done, put Prd on stack
+RCL "Prd"
+RTN
+END
+#+END_SRC
+
+* Roots & Integrals
+
+Why?  These are built in!  True, but these make it easy to do an integration or find a root when =EqP=, =EqV=, =LLIM=, =ULIM=, & =STEP= are already set.  For
+example if you have just plotted a function, =FSLV= makes it easy to find a root in the plot range.
+
+** =FSLV=: Find a root
+
+#+BEGIN_SRC hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FSLV)
+@@@@ DSC: Use SOLVE to find a root for EqV in EqP on [LLIM, ULIM]
+
+@@@@ OUT: T: Code indicating solver exit reason
+@@@@         0 Found a root
+@@@@         1 Sign Reversal
+@@@@         2 Extremum
+@@@@         3 Bad Guess or Guesses
+@@@@         3 Constant?
+@@@@ OUT: Z: EqP evaluated at X
+@@@@ OUT: Y: Previous best guess
+@@@@ OUT: X: Final best guess -- a root if we are lucky
+@@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP
+@@@@ FAQ: Faster than product in FSPT
+@@@@ FAQ: EqD is ignored -- only last function value is summed
+@@@@ GBL: EqP, EqV, LLIM, ULIM
+@@@@ UPD: 2021-04-06
+@@@@ REQ: REQ:free42>=3.0
+LBL "FSLV"
+FUNC 04
+PGMSLV IND "EqP"
+RCL "LLIM"
+STO IND "EqV"
+RCL "ULIM"
+SOLVE IND "EqV"
+RTN
+END
+#+END_SRC
+
+** =FINT=: Integrate
+
+#+BEGIN_SRC hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FINT)
+@@@@ DSC: Use INTEG to find a root for EqV in EqP on [LLIM, ULIM]
+@@@@ OUT: X: The integral
+@@@@ FAQ: No error checking is done on ACC, LLIM, ULIM, STEP, EqV, or EqP
+@@@@ FAQ: EqD is ignored -- only last function value is summed
+@@@@ GBL: EqP, EqV, LLIM, ULIM, ACC
+@@@@ UPD: 2021-04-06
+@@@@ REQ: REQ:free42>=3.0
+LBL "FINT"
+FUNC 03
+PGMINT IND "EqP"
+INTEG IND "EqV"
+RTN
+END
+#+END_SRC
+
+* Plots                                                            :noexport:
+
+
+#+BEGIN_SRC text
+:::::::::::::::::::::::'##:::::'##::::'###::::'########::'##::: ##:'####:'##::: ##::'######::::::::::::::::::::::::
+::::::::::::::::::::::: ##:'##: ##:::'## ##::: ##.... ##: ###:: ##:. ##:: ###:: ##:'##... ##:::::::::::::::::::::::
+::::::::::::::::::::::: ##: ##: ##::'##:. ##:: ##:::: ##: ####: ##:: ##:: ####: ##: ##:::..::::::::::::::::::::::::
+::::::::::::::::::::::: ##: ##: ##:'##:::. ##: ########:: ## ## ##:: ##:: ## ## ##: ##::'####::::::::::::::::::::::
+::::::::::::::::::::::: ##: ##: ##: #########: ##.. ##::: ##. ####:: ##:: ##. ####: ##::: ##:::::::::::::::::::::::
+::::::::::::::::::::::: ##: ##: ##: ##.... ##: ##::. ##:: ##:. ###:: ##:: ##:. ###: ##::: ##:::::::::::::::::::::::
+:::::::::::::::::::::::. ###. ###:: ##:::: ##: ##:::. ##: ##::. ##:'####: ##::. ##:. ######::::::::::::::::::::::::
+::::::::::::::::::::::::...::...:::..:::::..::..:::::..::..::::..::....::..::::..:::......:::::::::::::::::::::::::
+#+END_SRC
+
+Code in this section is under construction.  Most likely broken.
+
+** User Interface
+
+*** Main Menu
+
+#+ATTR_HTML: :align center
+|-------+----------------+--------------------------------------------------|
+| Menu  | Variable       | Description                                      |
+|-------+----------------+--------------------------------------------------|
+| EQ    | EqP EqV EqD    | Setup Equation                                   |
+| XRNG  | LLIM ULIM STEP | Set X range (X: max Y: min).  *MAGIC*            |
+| YRNG  | YMAX YMIN      | Set Y range (X: max Y: min).  *MAGIC*            |
+| GRID  | STEP YSTP      | Set grid width (X: Y-width Y: X-width).  *MAGIC* |
+| N/A   | N/A            | Reserved                                         |
+| PLOT  | N/A            | Draw plot                                        |
+|-------+----------------+--------------------------------------------------|
 
 Magic:
   - =XRNG= set to [0, 0]: Sets range to default [-10, 10].  
   - =XRNG= reversed limits: Automatically detected and swapped
-  - =XRNG= set to [M, M]: Sets range to default [(XMIN+XMAX)/2-M*(XMAX-XMIN), (XMIN+XMAX)/2+M*(XMAX-XMIN)].  i.e. it zooms XRNG.
+  - =XRNG= set to [M, M]: Zooms range by a factor of M.
   - =YRNG= set to [0, 0]: Sets range to default [-6, 6]
   - =YRNG= reversed limits: Automatically detected and swapped
-  - =YRNG= set to [M, M]: Sets range to default [(YMIN+YMAX)/2-M*(YMAX-YMIN), (YMIN+YMAX)/2+M*(YMAX-YMIN)].  i.e. it zooms YRNG.
-  - =XYGRD= set to 0:  If one of the grid widths is zero, then no grids are drawn for that axis
-  - =XYGRD= set to a negative number:  No axis or grid marks will be drawn for that axis
-  - =XYGRD= at least one non-zero: Sets =AX= to =Y=
-  - =GrMod= When les than 3, line width is 1.  No grid lines.  When set to 3, line width is 3 and grid lines are 1.
+  - =YRNG= set to [M, M]: Zooms range by a factor of M.
+  - =GRID= set to 0:  If one of the grid widths is zero, then no grids are drawn for that axis
+  - =GRID= set to a negative number:  No axis or grid marks will be drawn for that axis
 
-** Graphics Display
+*** Graphics Display
 
-After the plot is drawn and being shown, we can do three things:
-  - [2] [4] [8] [6]  Adjust zoom box
-  - [ENTER]          Zoom to box & Redraw
-  - [+/-]            Autoscale Y & Redraw.  If zoom box has narrowed x range, then use that range.
-  - [5]              Set zoom box adjustment & trace speed
-  - [1] [3]          Trace movement
-  - [.]              Push trace point to someplace --- duno where...  Stack?
+#+ATTR_HTML: :align center
+|-----------+-----------------------------------------------+---------------------|
+| Key       | Action                                        | Note                |
+|-----------+-----------------------------------------------+---------------------|
+| =[2]=     | Adjust bottom side of zoom box                |                     |
+| =[4]=     | Adjust left side of zoom box                  |                     |
+| =[8]=     | Adjust top side of zoom box                   |                     |
+| =[6]=     | Adjust right side of zoom box                 |                     |
+| =[ENTER]= | Zoom to box & Redraw                          |                     |
+| =[X<>Y]=  | Auto-scale Y & Redraw.  Ignores zoom box.     |                     |
+| =[+]=     | Set zoom box adjustment & trace speed to fast |                     |
+| =[-]=     | Set zoom box adjustment & trace speed to slow |                     |
+| =[+/-]=   | Activate trace cursor                         | Not Implemented Yet |
+| =[1]=     | Move trace point left                         | Not Implemented Yet |
+| =[3]=     | Move trace point right                        | Not Implemented Yet |
+| =[STO]=   | Push trace point to TP (matrix) & LTP (cplx)  | Not Implemented Yet |
+| =[7]=     | Find root between left & right edges of box.  |                     |
+| =[*]=     | Zoom out 2x (multiply ranges by 2)            |                     |
+| =[/]=     | Zoom in 2x (divide ranges by 2)               |                     |
+| =[←]=     | Exit to main menu                             |                     |
+|-----------+-----------------------------------------------+---------------------|
 
 ** Code
 
 #+begin_src hp42s :tangle yes
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MPLOT)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (REF:FPLT)
 @@@@ DSC: Plot a MVAR function
-@@@@ IN:  Nothing
-@@@@ OUT: Nothing
+@@@@ GBL: EqP, EqV, LLIM, ULIM, STEP, YMIN, YMAX, YSTP
+@@@@ FAQ: STEP & YSTP are used for grids
 @@@@ UPD: 2021-04-04
-LBL "MPLOT"
+
+@@@@ FREE: 10-19 -11 -12
+@@@@ FREE: 30-39
+@@@@ FREE: 60-69
+@@@@ FREE: 70-79
+
+
+LBL "FPLT"
 3 
 STO "GrMod"
 R↓
-LBL 01                    @@@@ Page 1 of menu MPLOT
+LBL 01               @@@@ Page 1 of menu FPLT
 CLMENU
 "EQ"
 KEY 1 XEQ 02
@@ -511,7 +807,7 @@ KEY 1 XEQ 02
 KEY 2 XEQ 03
 "YRNG"
 KEY 3 XEQ 04
-"XYGRD"
+"GRID"
 KEY 4 XEQ 05
 @@@@@KEY 5 XEQ 06
 "PLOT"
@@ -520,14 +816,14 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 00                    @@@@ Application Exit
+LBL 00               @@@@ Application Exit
 EXITALL
 RTN
-LBL 02                    @@@@ Action for menu key EQ
+LBL 02               @@@@ Action for menu key EQ
 0
 XEQ "PICF"
 RTN
-LBL 03                    @@@@ Action for menu key XRNG
+LBL 03               @@@@ Action for menu key XRNG
 FUNC 00
 X≠Y?
 GTO 24
@@ -565,7 +861,7 @@ X<>Y
 STO "LLIM"
 X<>Y
 RTN
-LBL 04                    @@@@ Action for menu key YRNG
+LBL 04               @@@@ Action for menu key YRNG
 FUNC 00
 X≠Y?
 GTO 22
@@ -603,15 +899,15 @@ X<>Y
 STO "YMIN"
 X<>Y
 RTN
-LBL 05                    @@@@ Action for menu key XYGRD
-STO "YGRD"
+LBL 05               @@@@ Action for menu key GRID
+STO "YSTP"
 X<>Y
-STO "XGRD"
+STO "STEP"
 X<>Y
 RTN
-LBL 06                    @@@@ Action for menu key XXXX
+LBL 06               @@@@ Action for menu key XXXX
 RCL "GrMod"
-LBL 07                    @@@@ Action for menu key PLOT
+LBL 07               @@@@ Action for menu key PLOT
 @@@@ Set YWID
 RCL "YMAX"
 RCL- "YMIN"
@@ -630,9 +926,12 @@ RCL "ResX"
 STO "XWID"
 @@@@ Draw stuff
 CLLCD
-CLMENU                    @@@@ Only needed on DM42
-EXITALL                   @@@@ Only needed on DM42
+CLMENU               @@@@ Only needed on DM42
+EXITALL              @@@@ Only needed on DM42
 @@@@ Draw X Axis
+RCL "STEP"
+X<0?           @@@@ No axis if negative
+GTO 11
 0
 XEQ 56
 XEQ 58
@@ -642,30 +941,34 @@ XEQ 58
 2
 +
 XEQ 58
+LBL 11
 @@@@ Draw X Grid
-RCL "XGRD"
+RCL "STEP"
 X≤0?
 GTO 08
 RCL "ULIM"
-RCL÷ "XGRD" 
+RCL÷ "STEP" 
 IP
-RCL× "XGRD"
-RCL+ "XGRD"
+RCL× "STEP"
+RCL+ "STEP"
 RCL "LLIM"
-RCL÷ "XGRD" 
+RCL÷ "STEP" 
 IP
-RCL× "XGRD"
-RCL- "XGRD"
+RCL× "STEP"
+RCL- "STEP"
 LBL 09
 ENTER
 XEQ 46
 XEQ 48
 R↓
-RCL+ "XGRD"
+RCL+ "STEP"
 X<Y?
 GTO 09
 LBL 08
 @@@@ Draw Y Axis
+RCL "YSTP"
+X<0?           @@@@ No axis if negative
+GTO 12
 0
 XEQ 46
 XEQ 48
@@ -675,32 +978,36 @@ XEQ 48
 2
 +
 XEQ 48
+LBL 12
 @@@@ Draw Y Grid
-RCL "YGRD"
+RCL "YSTP"
 X≤0?
-GTO 10
-RCL "YMAX"
-RCL÷ "YGRD" 
+GTO 20
+RCL "YMAX"         
+RCL÷ "YSTP"        
 IP
-RCL× "YGRD"
-RCL+ "YGRD"
-RCL "YMIN"
-RCL÷ "YGRD" 
+RCL× "YSTP"        
+RCL+ "YSTP"        
+RCL "YMIN"         
+RCL÷ "YSTP"         
 IP
-RCL× "YGRD"
-RCL- "YGRD"
-LBL 11
+RCL× "YSTP"         
+RCL- "YSTP"         
+LBL 21
 ENTER
 XEQ 56
 XEQ 58
 R↓
-RCL+ "YGRD"
+RCL+ "YSTP"
 X<Y?
-GTO 11
-LBL 10
+GTO 21
+LBL 20
 @@@@ Set Alpha to our box
 "πππ"
 @@@@ Plot curve
+@@@@ Init YPMAX & YPMIN
+SF 82
+@@@@ Loop across screen
 RCL "ResX"
 1000
 ÷
@@ -712,16 +1019,38 @@ RCL "XI"
 IP
 XEQ 47
 STO IND "EqV"
+SF 25
 XEQ IND "EqP"
+FC?C 25
+GTO 42
+FC? 82    
+GTO 43
+@@@@ Setup YPMIN & YPMAX 
+LSTO "YPMAX"
+LSTO "YPMIN"
+CF 82
+LBL 43
+@@@@ Update YPMIN & YPMAX if required.
+RCL "YPMAX"
+X<>Y
+X>Y?
+LSTO "YPMAX"
+RCL "YPMIN"
+X<>Y
+X<Y?
+LSTO "YPMIN"
+@@@@ If y is on screen, then draw it
 XEQ 56
 XEQ 55
 GTO 42
 RCL "XI"
+@@@@@ DRAW FAT PIXEL
 XEQ 51
-@@@@@ PIXEL
+@@@@ Backend of loop - NEXT TARGET
 LBL 42
 ISG "XI"
 GTO 41
+@@@@ Done with graph.  Now start graph UI
 LBL 87                    @@@@ Zoom Box
 10
 LSTO "ZBSPD"
@@ -736,40 +1065,40 @@ LSTO "ZBRGT"
 LBL 88
 RCL "ZBSPD"
 LSTO "CTR"
-LBL 71
+LBL 52
 RCL "ZBRGT"
 RCL "CTR"
 +
 XEQ 48
 DSE "CTR"
-GTO 71
+GTO 52
 RCL "ZBSPD"
 LSTO "CTR"
-LBL 72
+LBL 53
 RCL "ZBBOT"
 RCL "CTR"
 +
 XEQ 58
 DSE "CTR"
-GTO 72
+GTO 53
 RCL "ZBSPD"
 LSTO "CTR"
-LBL 73
+LBL 54
 RCL "ZBTOP"
 RCL "CTR"
 -
 XEQ 58
 DSE "CTR"
-GTO 73
+GTO 54
 RCL "ZBSPD"
 LSTO "CTR"
-LBL 74
+LBL 59
 RCL "ZBLFT"
 RCL "CTR"
 -
 XEQ 48
 DSE "CTR"
-GTO 74
+GTO 59
 GETKEY1
 13   
 X=Y?                      @@@@ 13 ENTER
@@ -779,8 +1108,12 @@ R↓
 X=Y?                      @@@@ 24 Backspace
 GTO 86
 R↓
-25
-X=Y?                      @@@@ 25 Speed Change
+32
+X=Y?                      @@@@ - speed slow
+GTO 96
+R↓
+37
+X=Y?                      @@@@ - speed fast
 GTO 95
 R↓
 24
@@ -798,14 +1131,53 @@ R↓
 30
 X=Y?                      @@@@ 30 BOTTOM
 GTO 94
+R↓
+14
+X=Y?                      @@@@ 14 autoscale
+GTO 98
+R↓
+22
+X=Y?                      @@@@ 22 zoom in
+GTO 97
+R↓
+27
+X=Y?                      @@@@ 27 zoom out
+GTO 99
 GTO 48
-LBL 95                    @@@@ Change Speed
-RCL "ZBSPD"
-9
--
-X<0?
-10
-STO "ZBSPD"
+LBL 97 @@@@ 22 / zoom in 
+0.5
+ENTER
+ENTER
+XEQ 03
+XEQ 04
+GTO 07
+LBL 99 @@@@ 27 x zoom out
+2.0
+ENTER
+ENTER
+XEQ 03
+XEQ 04
+GTO 07
+LBL 98    @@@@ Autoscale Y 
+RCL "YPMAX"
+-5
+RCL× "YWID"
++
+RCL "YPMIN"
+5
+RCL× "YWID"
++
+STO "YMIN"
+X<>Y
+STO "YMAX"
+GTO 07
+LBL 95 @@@@ 37 + set speed fast
+10 
+LSTO "ZBSPD"
+GTO 88
+LBL 96 @@@@ 32 - set speed slow
+1 
+LSTO "ZBSPD"
 GTO 88
 LBL 91                    @@@@ LEFT REDO
 RCL "ZBRGT"             
@@ -815,7 +1187,7 @@ RCL× "ZBSPD"
 RCL "ZBSPD"
 RCL+ "ZBLFT"
 X<Y?
-STO "ZBLFT"
+LSTO "ZBLFT"
 GTO 88
 LBL 92                    @@@@ RIGHT REDO
 RCL "ZBLFT"             
@@ -826,7 +1198,7 @@ RCL "ZBSPD"
 +/-                     
 RCL+ "ZBRGT"
 X>Y?
-STO "ZBRGT"
+LSTO "ZBRGT"
 GTO 88
 LBL 93                    @@@@ TOP REDO
 RCL "ZBBOT"             
@@ -836,7 +1208,7 @@ RCL× "ZBSPD"
 RCL "ZBSPD"
 RCL+ "ZBTOP"          @@@ New_ZBTOP Lower_limit
 X<Y?
-STO "ZBTOP"
+LSTO "ZBTOP"
 GTO 88
 LBL 94                    @@@@ BOT REDO
 RCL "ZBTOP"             
@@ -847,7 +1219,7 @@ RCL "ZBSPD"
 +/-                     
 RCL+ "ZBBOT"          @@@ New_ZBBOT Lower_limit
 X>Y?
-STO "ZBBOT"
+LSTO "ZBBOT"
 GTO 88
 LBL 89
 RCL "ZBTOP"
@@ -880,21 +1252,21 @@ RTN
 LBL 58                    @@@@ HLINE
 FUNC 00
 XEQ 55
-GTO 17
+GTO 27
 +/-
 1
 PIXEL
-LBL 17
+LBL 27
 RTN
 LBL 48                    @@@@ VLINE
 FUNC 00
 XEQ 45
-GTO 16
+GTO 28
 +/-
 1
 X<>Y
 PIXEL
-LBL 16
+LBL 28
 RTN
 LBL 45                    @@@@ X Out Of Range
 FUNC 00
@@ -918,7 +1290,6 @@ RCL- "LLIM"
 RCL÷ "XWID"
 1
 +
-IP
 RTN
 LBL 47                    @@@@ XI->XR
 FUNC 11
@@ -933,7 +1304,6 @@ RCL- "YMAX"
 RCL÷ "YWID"
 1
 +
-IP
 RTN
 LBL 57                    @@@@ YI->YR
 FUNC 11
@@ -944,15 +1314,6 @@ RCL+ "YMAX"
 RTN
 END
 #+end_src
-
-
-
-
-
-
-
-
-
 
 ** Fat lines
 
@@ -1014,34 +1375,137 @@ END
 
 #+END_SRC
 
-** Code snips
+* Menus
 
+** =FVARM=: Global Variables Menu
 
+#+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FVARM)
+@@@@ DSC: MVAR Program with all the global vartiables used by the F* programs
+@@@@ GBL: EqP, EqV, EqD, ACC, IEqV, LLIM, ULIM, STEP, YMIN, YMAX, & YSTP
+@@@@ UPD: 2021-04-06
+LBL "FVARM"
+MVAR "LLIM"
+MVAR "ULIM"
+MVAR "STEP"
+MVAR "YMIN"
+MVAR "YMAX"
+MVAR "YSTP"
+MVAR "EqP"
+MVAR "EqV"
+MVAR "EqD"
+MVAR "ACC"
+MVAR "IEqV"
+RTN
+END
+#+END_SRC
 
-lbl 91
+** =FMENU=: Main menu for all apps
+
+#+begin_src hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FMENU)
+@@@@ DSC: Auto-generated menu program
+LBL "FMENU"
+LBL 01            @@@@ Page 1 of menu FMENU
+CLMENU
+"FSPT"
+KEY 1 XEQ 03
+"FPLT"
+KEY 2 XEQ 04
+@@@@ "RSV0"
+@@@@ KEY 3 XEQ 05
+@@@@ "RSV1"
+@@@@ KEY 4 XEQ 06
+"PICF"
+KEY 5 XEQ 07
+"VARS"
+KEY 6 XEQ 08
+KEY 7 GTO 02
+KEY 8 GTO 02
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 02            @@@@ Page 2 of menu FMENU
+CLMENU
+"FSLV"
+KEY 1 XEQ 09
+"FINT"
+KEY 2 XEQ 10
+"FSUM"
+KEY 3 XEQ 11
+"FPRD"
+KEY 4 XEQ 12
+"PICF"
+KEY 5 XEQ 13
+"VARS"
+KEY 6 XEQ 14
+KEY 7 GTO 01
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 02
+LBL 00 @@@@ Application Exit
+EXITALL
+RTN
+LBL 03               @@@@ Action for menu key FSPT
+XEQ "FSPT"
+RTN
+LBL 04               @@@@ Action for menu key FPLT
+XEQ "FPLT"
+RTN
+LBL 05               @@@@ Action for menu key RSV0
+XEQ "RSV0"
+RTN
+LBL 06               @@@@ Action for menu key RSV1
+XEQ "RSV1"
+RTN
+LBL 07               @@@@ Action for menu key PICF
 1
-rtn
-lbl 92
-3
-rtn
-lbl 93
-7
-rtn
-lbl 94
-15
-rtn
-lbl 95
-31
-rtn
-lbl 96
-63
-rtn
-lbl 97
-127
-rtn
-
+XEQ "PICF"
+RTN
+LBL 08               @@@@ Action for menu key VARS
+VARMENU "FVARM"
+STOP
+RTN
+LBL 09               @@@@ Action for menu key FSLV
+XEQ "FSLV"
+RTN
+LBL 10               @@@@ Action for menu key FINT
+XEQ "FINT"
+RTN
+LBL 11               @@@@ Action for menu key FSUM
+XEQ "FSUM"
+RTN
+LBL 12               @@@@ Action for menu key FPRD
+XEQ "FPRD"
+RTN
+LBL 13               @@@@ Action for menu key PICF
+1
+XEQ "PICF"
+RTN
+LBL 14               @@@@ Action for menu key VARS
+VARMENU "FVARM"
+STOP
+RTN
+END
+#+end_src
 
 * WORKING                                                          :noexport:
+
+#+BEGIN_SRC text
+:::::::::::::::::::::::'##:::::'##::::'###::::'########::'##::: ##:'####:'##::: ##::'######::::::::::::::::::::::::
+::::::::::::::::::::::: ##:'##: ##:::'## ##::: ##.... ##: ###:: ##:. ##:: ###:: ##:'##... ##:::::::::::::::::::::::
+::::::::::::::::::::::: ##: ##: ##::'##:. ##:: ##:::: ##: ####: ##:: ##:: ####: ##: ##:::..::::::::::::::::::::::::
+::::::::::::::::::::::: ##: ##: ##:'##:::. ##: ########:: ## ## ##:: ##:: ## ## ##: ##::'####::::::::::::::::::::::
+::::::::::::::::::::::: ##: ##: ##: #########: ##.. ##::: ##. ####:: ##:: ##. ####: ##::: ##:::::::::::::::::::::::
+::::::::::::::::::::::: ##: ##: ##: ##.... ##: ##::. ##:: ##:. ###:: ##:: ##:. ###: ##::: ##:::::::::::::::::::::::
+:::::::::::::::::::::::. ###. ###:: ##:::: ##: ##:::. ##: ##::. ##:'####: ##::. ##:. ######::::::::::::::::::::::::
+::::::::::::::::::::::::...::...:::..:::::..::..:::::..::..::::..::....::..::::..:::......:::::::::::::::::::::::::
+#+END_SRC
+
+Code in this section is under construction.  Most likely broken.
 
 * EOF
 

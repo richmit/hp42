@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-05 Mon 18:44 -->
+<!-- 2021-04-06 Tue 20:30 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>free42/hp-42s/DM42: Programs For Functions</title>
+<title>free42: Programs For Functions</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Mitch Richling" />
 <meta name="description" content="free42/hp-42s/DM42 programs for working with MVAR functions"
@@ -205,6 +205,28 @@
 <style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
 <style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
 <style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="org-div-home-and-up">
@@ -212,7 +234,7 @@
  |
  <a accesskey="H" href="https://www.mitchr.me/"> HOME </a>
 </div><div id="content">
-<h1 class="title">free42/hp-42s/DM42: Programs For Functions</h1>
+<h1 class="title">free42: Programs For Functions</h1>
 <table border="2 solid #ccc" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
@@ -229,7 +251,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-05 18:44:46</i></td>
+<td class="org-left"><i>2021-04-06 20:30:05</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,22 +263,41 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgcd48e11">1. Metadata</a></li>
-<li><a href="#org6ab2121">2. Introduction</a></li>
-<li><a href="#org3e5d68a">3. Utility Functions</a>
+<li><a href="#org0c8944c">1. Metadata</a></li>
+<li><a href="#org9a43b37">2. Introduction</a></li>
+<li><a href="#orge8def8a">3. Test Functions</a></li>
+<li><a href="#org63d0b25">4. Utility Functions</a>
 <ul>
-<li><a href="#org20c9a5a">3.1. Making MVAR functions from regular functions</a></li>
-<li><a href="#org5177a1b">3.2. Selecting a function &amp; variable</a></li>
+<li><a href="#orgd0784f3">4.1. <code>WRPF</code>: Wrap simple functions with <code>MVAR</code> program</a></li>
+<li><a href="#orgd30870a">4.2. <code>PICF</code>: Interactively Query For <code>MVAR</code> Program, Variable, and Number of Returns</a></li>
 </ul>
 </li>
-<li><a href="#org7355c90">4. Sums, Products, &amp; Tables</a></li>
-<li><a href="#org281a2fa">5. EOF</a></li>
+<li><a href="#org272daa7">5. <code>FSPT</code>: Interactive Sums, Products, &amp; Tables</a></li>
+<li><a href="#orga61cdb8">6. Programmatic Sums &amp; Products</a>
+<ul>
+<li><a href="#org6ddda72">6.1. <code>FSUM</code>: Sums</a></li>
+<li><a href="#org5d6d199">6.2. <code>FPRD</code>: Products</a></li>
+</ul>
+</li>
+<li><a href="#org70bce7b">7. Roots &amp; Integrals</a>
+<ul>
+<li><a href="#orgd90e96f">7.1. <code>FSLV</code>: Find a root</a></li>
+<li><a href="#orgcaf38e6">7.2. <code>FINT</code>: Integrate</a></li>
+</ul>
+</li>
+<li><a href="#org87d35da">8. Menus</a>
+<ul>
+<li><a href="#org5078942">8.1. <code>FVARM</code>: Global Variables Menu</a></li>
+<li><a href="#org7efc040">8.2. <code>FMENU</code>: Main menu for all apps</a></li>
+</ul>
+</li>
+<li><a href="#org7b335ba">9. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgcd48e11" class="outline-2">
-<h2 id="orgcd48e11"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org0c8944c" class="outline-2">
+<h2 id="org0c8944c"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/pgmforfun.html">https://richmit.github.io/hp42/pgmforfun.html</a>
@@ -274,54 +315,297 @@ Files related to this document may be found on github: <a href="https://github.c
 </div>
 </div>
 
-<div id="outline-container-org6ab2121" class="outline-2">
-<h2 id="org6ab2121"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-org9a43b37" class="outline-2">
+<h2 id="org9a43b37"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-This is an odd collection of programs that work with <code>MVAR</code>-type programs (equations).  I was inspired to do this when the <code>PGMENU</code> function was added to
-free42.  Right now I only have one real program here (SPT &#x2013; Sums, Products, &amp; Tables).  If I ever write a plotter (in work), solver, integrator, or optimizer
-then I will put them into this framework too.  This scheme can work well for functions of 2 variables as well, but doing a surface plotter is well in the
-future. ;) My thinking for such programs is that they share a framework and common set of principals:
+\[\mathrm{Plots} \;\;\;\;\;\;\; \mathrm{Sums} \;\; \sum_{n=1}^{15}\frac{1}{n^2} \;\;\;\;\;\;\; \mathrm{Products} \;\; \prod_{n=1}^{15}\frac{1}{n^2} \;\;\;\;\;\;\; \mathrm{Integrals} \;\; \int_{1}^{15}\frac{1}{x^2}dx \;\;\;\;\;\;\; \mathrm{Roots} \]
 </p>
 
-<ul class="org-ul">
-<li>All the top level programs use <code>PICF</code> to:
-<ul class="org-ul">
-<li>Select a program and store its name in <code>EqP</code>  (Program)</li>
-<li>Select a variable and store its name in <code>EqV</code> (Variable)</li>
-<li>Store the number of return values for the program in <code>EqD</code> (Dimension)
-<ul class="org-ul">
-<li><code>PICF</code> takes one argument.  If it is 0, then <code>EqD</code> is set to 1 otherwise the user is prompted for a value for <code>EqD</code>.</li>
-</ul></li>
-</ul></li>
-<li>When a range for the variable is required, then 
-<ul class="org-ul">
-<li>The lower limit is stored in <code>LLIM</code> &#x2013; the same variable used <code>INTEG</code></li>
-<li>The upper limit is stored in <code>ULIM</code> &#x2013; the same variable used <code>INTEG</code></li>
-</ul></li>
-<li>When a step size is required, it is stored in <code>STEP</code></li>
-</ul>
+<p>
+This is an odd collection of programs that work with <code>MVAR</code>-type programs (equations).  I was inspired to do this when the <code>PGMENU</code> function was added to
+free42.  My current plans include the following programs:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Program</th>
+<th scope="col" class="org-left">Description</th>
+<th scope="col" class="org-left">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>FSPT</code></td>
+<td class="org-left">Interactive application for computing Sums, Products, and Tables</td>
+<td class="org-left"><b>Beta</b></td>
+</tr>
+
+<tr>
+<td class="org-left"><code>FPLT</code></td>
+<td class="org-left">Interactive application for plotting a function</td>
+<td class="org-left"><b>In Work</b></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left"><code>FSLV</code></td>
+<td class="org-left">Solve EqP for EqV in [LLIM, ULIM]</td>
+<td class="org-left"><i>Planned</i></td>
+</tr>
+
+<tr>
+<td class="org-left"><code>FINT</code></td>
+<td class="org-left">Integrate EqP for EqV in [LLIM, ULIM]</td>
+<td class="org-left"><i>Planned</i></td>
+</tr>
+
+<tr>
+<td class="org-left"><code>FSUM</code></td>
+<td class="org-left">Sum EqP for values of EqV from LLIM to ULIM stepping by STEP</td>
+<td class="org-left"><b>Complete</b></td>
+</tr>
+
+<tr>
+<td class="org-left"><code>FPRD</code></td>
+<td class="org-left">Product EqP for values of EqV from LLIM to ULIM stepping by STEP</td>
+<td class="org-left"><b>Complete</b></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left"><code>PICF</code></td>
+<td class="org-left">Interactive application to select and describe an <code>MVAR</code> program</td>
+<td class="org-left"><b>Complete</b></td>
+</tr>
+
+<tr>
+<td class="org-left"><code>WRPF</code></td>
+<td class="org-left">Wrap a simple function inside an <code>MVAR</code> program</td>
+<td class="org-left"><b>Complete</b></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left"><code>FVARM</code></td>
+<td class="org-left">MVAR program with all the global variables for these apps</td>
+<td class="org-left"><b>Complete</b></td>
+</tr>
+
+<tr>
+<td class="org-left"><code>FMENU</code></td>
+<td class="org-left">Menu program orginizeing these apps</td>
+<td class="org-left"><b>In Work</b></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+My thinking for such programs is that they share a framework and common  principals.
+</p>
+
+<p>
+All the top level programs use <code>PICF</code> to collect information about the <code>MVAR</code> program to be used.  The collected information is housed in three global
+variables:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Variable</th>
+<th scope="col" class="org-left">Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>EqP</code></td>
+<td class="org-left">Name of MVAR program</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>EqV</code></td>
+<td class="org-left">Name of independent variable</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>EqD</code></td>
+<td class="org-left">Number of returns from MVAR program</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Depending on what we are doing with the <code>MVAR</code> program, we may need to know something about the independent variable too.  For example when summing function
+values we need to know lower and upper ranges over which to sum, and a step size by which to increment the variable.  We use a consistent set of global
+variables based upon names used by built in tools:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Variable</th>
+<th scope="col" class="org-left">Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>LLIM</code></td>
+<td class="org-left">Lower limit of independent variable</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>ULIM</code></td>
+<td class="org-left">Upper limit of independent variable</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>STEP</code></td>
+<td class="org-left">A step size</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+If a second variable is used, then similar variables are used; however, we have no precedent for what to name them.  So I have decided to use the following:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Variable</th>
+<th scope="col" class="org-left">Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>YMIN</code></td>
+<td class="org-left">Lower limit of second or dependent variable</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>YMAX</code></td>
+<td class="org-left">Upper limit of second or dependent variable</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>YSTP</code></td>
+<td class="org-left">A step size for a second or dependent variable</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+If an accuracy is required, then we use the variable <code>ACC</code>.
+</p>
 </div>
 </div>
 
-<div id="outline-container-org3e5d68a" class="outline-2">
-<h2 id="org3e5d68a"><span class="section-number-2">3</span> Utility Functions</h2>
+<div id="outline-container-orge8def8a" class="outline-2">
+<h2 id="orge8def8a"><span class="section-number-2">3</span> Test Functions</h2>
 <div class="outline-text-2" id="text-3">
-</div>
-<div id="outline-container-org20c9a5a" class="outline-3">
-<h3 id="org20c9a5a"><span class="section-number-3">3.1</span> Making MVAR functions from regular functions</h3>
-<div class="outline-text-3" id="text-3-1">
 <p>
-Sometimes we need to work with a simple function that takes an argument from the stack and returns one or more values to the stack &#x2013; i.e. non "MVAR"
-variables.  To work with such functions we can wrap them.  A generic solution might be to store the name of your simple function in the variable "_FUN", and
-then give "FWRP" to solver, integrator, or SPT program.
+A few <code>MVAR</code> functions to test with
 </p>
 
 <div class="org-src-container">
-<pre class="src src-hp42s"><span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FWRP"</span>
+<pre class="src src-hp42s"><span id="coderef-TFQ" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TFQ)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: A quadratic with zeros at 0 and 1</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TFQ"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
-<span style="color: #00ffff;">XEQ IND</span> <span style="color: #fa8072;">"_FUN"</span>
+1
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RTN</span> 
+<span style="color: #00ffff;">END</span>
+
+<span id="coderef-TFC" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TFC)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: A cubic with zeros at -1, 0.9, and 1</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TFC"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+1
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+1
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+.9
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RTN</span> 
+<span style="color: #00ffff;">END</span>
+
+<span id="coderef-TFO" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TFO)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: A function that with increasing frequency approaching zero</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TFO"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">ABS</span>
+0.01
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">SIN</span>
+<span style="color: #00ffff;">RTN</span> 
+<span style="color: #00ffff;">END</span>
+
+<span id="coderef-TFM" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TFM)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: A function that has many step discontinuities</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Good test to make sure we don't connect across known discontinuities</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TFM"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">IP</span>
+<span style="color: #00ffff;">MOD</span>
+.5
+<span style="color: #00ffff;">-</span>
+2
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RTN</span> 
+<span style="color: #00ffff;">END</span>
+
+<span id="coderef-TFF" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TFF)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: A function flips between 1 and -1 each call</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Worst case performance for connecting dots</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TFF"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
+1
+<span style="color: #00ffff;">FS?C</span> 85
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">SF</span> 85
+-1
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">END</span>
 </pre>
@@ -329,14 +613,41 @@ then give "FWRP" to solver, integrator, or SPT program.
 </div>
 </div>
 
-<div id="outline-container-org5177a1b" class="outline-3">
-<h3 id="org5177a1b"><span class="section-number-3">3.2</span> Selecting a function &amp; variable</h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-org63d0b25" class="outline-2">
+<h2 id="org63d0b25"><span class="section-number-2">4</span> Utility Functions</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orgd0784f3" class="outline-3">
+<h3 id="orgd0784f3"><span class="section-number-3">4.1</span> <code>WRPF</code>: Wrap simple functions with <code>MVAR</code> program</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Sometimes we need to work with a simple function that takes an argument from the stack and returns one or more values to the stack &#x2013; i.e. non "MVAR"
+variables.  To work with such functions we can wrap them.  A generic solution might be to store the name of your simple function in the variable "IEqV", and
+then give "WRPF" to solver, integrator, or <code>FSPT</code> program.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-WRPF" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (WRPF)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Wrap a simple function inside an =MVAR= program</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"WRPF"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">XEQ IND</span> <span style="color: #fa8072;">"IEqV"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd30870a" class="outline-3">
+<h3 id="orgd30870a"><span class="section-number-3">4.2</span> <code>PICF</code>: Interactively Query For <code>MVAR</code> Program, Variable, and Number of Returns</h3>
+<div class="outline-text-3" id="text-4-2">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-PICF" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PICF)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Pick an MVAR function and variable</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: integer</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: N/A</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: If X=0, then EqD is set to 1.  Otherwise the user is prompted.</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-24</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: EqP  -- Name of selected function</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: EqV -- Name of selected variable</span>
@@ -416,19 +727,19 @@ PGMMENU
 </div>
 </div>
 
-<div id="outline-container-org7355c90" class="outline-2">
-<h2 id="org7355c90"><span class="section-number-2">4</span> Sums, Products, &amp; Tables</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org272daa7" class="outline-2">
+<h2 id="org272daa7"><span class="section-number-2">5</span> <code>FSPT</code>: Interactive Sums, Products, &amp; Tables</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 Create function tables and computes sums &amp; products.  Works much like the built in integration application.  
 </p>
 
 <p>
-The <code>LOG</code> button transforms the function results by taking the natural logarithm &#x2013; for example this allows us to compute very large products by summing the logarithims.
+The <code>LOG</code> button transforms the function results by taking the natural logarithm &#x2013; for example this allows us to compute very large products by summing the logarithms.
 </p>
 
 <p>
-The <code>IND</code> button stores the indipent varaible value in the table.  
+The <code>IND</code> button stores the independent variable value in the table.  
 </p>
 
 <p>
@@ -436,7 +747,7 @@ When not provided, the values for <code>LLIM</code>, <code>STEP</code>, &amp; <c
 </p>
 
 <div class="org-src-container">
-<pre class="src src-hp42s"><span id="coderef-SPT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SPT)</span>
+<pre class="src src-hp42s"><span id="coderef-FSPT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FSPT)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Sums, Products, &amp; Tables</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  N/A</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: N/A</span>
@@ -445,14 +756,14 @@ When not provided, the values for <code>LLIM</code>, <code>STEP</code>, &amp; <c
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: ULIM -- Upper limit for variable</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: STEP -- Size of steps to make</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 82: Set: log function returns</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 83: Set: Store indipent variable in table</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 83: Set: Store independent variable in table</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 84: Set: doing table, Clear: Doing sum or product (see flag 85)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 85: Set: doing sum, Clear; doing product</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LLB: 00-12,14-24,26-33</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GLB: SPT</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GLB: FSPT</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">USE: PICF</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REQ: REQ:free42&gt;=3.0</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"SPT"</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FSPT"</span>
 <span style="color: #00ffff;">CF</span> 82
 <span style="color: #00ffff;">SF</span> 83
 1
@@ -616,7 +927,7 @@ R&#8595;    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f2
 <span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"TMAT"</span>
 <span style="color: #00ffff;">GROW</span>
 <span style="color: #00ffff;">LBL</span> 23
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Step through indpendant variable values and do sum, product, or table</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Step through independent variable values and do sum, product, or table</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"LLIM"</span>
 <span style="color: #00ffff;">STO</span> IND <span style="color: #fa8072;">"EqV"</span>
 <span style="color: #00ffff;">LBL</span> 24
@@ -631,7 +942,7 @@ R&#8595;    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f2
 <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">Doing a table: Setup CTR for loop later</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"EqD"</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"CTR"</span>
-<span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">Doing a table:  Store indpendant variable if FS? 83</span>
+<span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">Doing a table:  Store independent variable if FS? 83</span>
 <span style="color: #00ffff;">FC</span>? 83 
 <span style="color: #00ffff;">GTO</span> 32
 <span style="color: #00ffff;">RCL</span> IND <span style="color: #fa8072;">"EqV"</span>
@@ -685,7 +996,7 @@ R&#8595;
 <span style="color: #00ffff;">DSE</span> <span style="color: #fa8072;">"CTR"</span>
 <span style="color: #00ffff;">GTO</span> 30
 <span style="color: #00ffff;">LBL</span> 28
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Increment indpendant variable</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Increment independent variable</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"STEP"</span>
 <span style="color: #00ffff;">RCL</span> IND <span style="color: #fa8072;">"EqV"</span>
 <span style="color: #00ffff;">+</span>
@@ -719,9 +1030,299 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org281a2fa" class="outline-2">
-<h2 id="org281a2fa"><span class="section-number-2">5</span> EOF</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orga61cdb8" class="outline-2">
+<h2 id="orga61cdb8"><span class="section-number-2">6</span> Programmatic Sums &amp; Products</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+If you already have <code>EqP</code>, <code>EqV</code>, <code>LLIM</code>, <code>ULIM</code>, &amp; <code>STEP</code> set, then you can use these programs.  These will be faster than the interactive version because they are optimized into tighter loops and because they don't provide any progress updates.
+</p>
+</div>
+
+<div id="outline-container-org6ddda72" class="outline-3">
+<h3 id="org6ddda72"><span class="section-number-3">6.1</span> <code>FSUM</code>: Sums</h3>
+<div class="outline-text-3" id="text-6-1">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-FSUM" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FSUM)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Sum a function evaluated at regular intervals over a range</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: The sum</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Faster than sum in FSPT</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: EqD is ignored -- only last function value is summed</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-06</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FSUM"</span>
+<span style="color: #00ffff;">FUNC</span> 01
+0
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"Sum"</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Step through independent variable values and do sum</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"LLIM"</span>
+<span style="color: #00ffff;">STO</span> IND <span style="color: #fa8072;">"EqV"</span>
+<span style="color: #00ffff;">LBL</span> 24
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Evaluate function</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">XEQ IND</span> <span style="color: #fa8072;">"EqP"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">RTNERR</span> 2
+<span style="color: #00ffff;">STO+</span> <span style="color: #fa8072;">"Sum"</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Increment independent variable</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"STEP"</span>
+<span style="color: #00ffff;">RCL+</span> IND <span style="color: #fa8072;">"EqV"</span>
+<span style="color: #00ffff;">STO</span> IND <span style="color: #fa8072;">"EqV"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ULIM"</span>
+<span style="color: #00ffff;">X&#8805;Y</span>?
+<span style="color: #00ffff;">GTO</span> 24
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">All done, put Sum on stack</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"Sum"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5d6d199" class="outline-3">
+<h3 id="org5d6d199"><span class="section-number-3">6.2</span> <code>FPRD</code>: Products</h3>
+<div class="outline-text-3" id="text-6-2">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-FPRD" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FPRD)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Product of a function evaluated at regular intervals over a range</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: The product</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Faster than product in FSPT</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: EqD is ignored -- only last function value is summed</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-06</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FPRD"</span>
+<span style="color: #00ffff;">FUNC</span> 01
+1
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"Prd"</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Step through independent variable values and do product</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"LLIM"</span>
+<span style="color: #00ffff;">STO</span> IND <span style="color: #fa8072;">"EqV"</span>
+<span style="color: #00ffff;">LBL</span> 24
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Evaluate function</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">XEQ IND</span> <span style="color: #fa8072;">"EqP"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+<span style="color: #00ffff;">RTNERR</span> 2
+<span style="color: #00ffff;">STO&#215;</span> <span style="color: #fa8072;">"Prd"</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Increment independent variable</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"STEP"</span>
+<span style="color: #00ffff;">RCL+</span> IND <span style="color: #fa8072;">"EqV"</span>
+<span style="color: #00ffff;">STO</span> IND <span style="color: #fa8072;">"EqV"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ULIM"</span>
+<span style="color: #00ffff;">X&#8805;Y</span>?
+<span style="color: #00ffff;">GTO</span> 24
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">All done, put Prd on stack</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"Prd"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org70bce7b" class="outline-2">
+<h2 id="org70bce7b"><span class="section-number-2">7</span> Roots &amp; Integrals</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Why?  These are built in!  True, but these make it easy to do an integration or find a root when <code>EqP</code>, <code>EqV</code>, <code>LLIM</code>, <code>ULIM</code>, &amp; <code>STEP</code> are already set.  For
+example if you have just plotted a function, <code>FSLV</code> makes it easy to find a root in the plot range.
+</p>
+</div>
+
+<div id="outline-container-orgd90e96f" class="outline-3">
+<h3 id="orgd90e96f"><span class="section-number-3">7.1</span> <code>FSLV</code>: Find a root</h3>
+<div class="outline-text-3" id="text-7-1">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-FSLV" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FSLV)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Use SOLVE to find a root for EqV in EqP on [LLIM, ULIM]</span>
+
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: T: Code indicating solver exit reason</span>
+<span style="color: #ffa500;">@@@@         </span><span style="color: #ff7f24;">0 Found a root</span>
+<span style="color: #ffa500;">@@@@         </span><span style="color: #ff7f24;">1 Sign Reversal</span>
+<span style="color: #ffa500;">@@@@         </span><span style="color: #ff7f24;">2 Extremum</span>
+<span style="color: #ffa500;">@@@@         </span><span style="color: #ff7f24;">3 Bad Guess or Guesses</span>
+<span style="color: #ffa500;">@@@@         </span><span style="color: #ff7f24;">3 Constant?</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Z: EqP evaluated at X</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Y: Previous best guess</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Final best guess -- a root if we are lucky</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Faster than product in FSPT</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: EqD is ignored -- only last function value is summed</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: EqP, EqV, LLIM, ULIM</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-06</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FSLV"</span>
+<span style="color: #00ffff;">FUNC</span> 04
+<span style="color: #00ffff;">PGMSLV</span> IND <span style="color: #fa8072;">"EqP"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"LLIM"</span>
+<span style="color: #00ffff;">STO</span> IND <span style="color: #fa8072;">"EqV"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ULIM"</span>
+<span style="color: #00ffff;">SOLVE</span> IND <span style="color: #fa8072;">"EqV"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcaf38e6" class="outline-3">
+<h3 id="orgcaf38e6"><span class="section-number-3">7.2</span> <code>FINT</code>: Integrate</h3>
+<div class="outline-text-3" id="text-7-2">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-FINT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FINT)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Use INTEG to find a root for EqV in EqP on [LLIM, ULIM]</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: The integral</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: No error checking is done on ACC, LLIM, ULIM, STEP, EqV, or EqP</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: EqD is ignored -- only last function value is summed</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: EqP, EqV, LLIM, ULIM, ACC</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-06</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FINT"</span>
+<span style="color: #00ffff;">FUNC</span> 03
+<span style="color: #00ffff;">PGMINT</span> IND <span style="color: #fa8072;">"EqP"</span>
+<span style="color: #00ffff;">INTEG</span> IND <span style="color: #fa8072;">"EqV"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org87d35da" class="outline-2">
+<h2 id="org87d35da"><span class="section-number-2">8</span> Menus</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-org5078942" class="outline-3">
+<h3 id="org5078942"><span class="section-number-3">8.1</span> <code>FVARM</code>: Global Variables Menu</h3>
+<div class="outline-text-3" id="text-8-1">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-FVARM" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FVARM)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: MVAR Program with all the global vartiables used by the F* programs</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: EqP, EqV, EqD, ACC, IEqV, LLIM, ULIM, STEP, YMIN, YMAX, &amp; YSTP</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-06</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FVARM"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"LLIM"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"ULIM"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"STEP"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"YMIN"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"YMAX"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"YSTP"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"EqP"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"EqV"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"EqD"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"ACC"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"IEqV"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7efc040" class="outline-3">
+<h3 id="org7efc040"><span class="section-number-3">8.2</span> <code>FMENU</code>: Main menu for all apps</h3>
+<div class="outline-text-3" id="text-8-2">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-FMENU" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FMENU)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Auto-generated menu program</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FMENU"</span>
+<span style="color: #00ffff;">LBL</span> 01            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu FMENU</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"FSPT"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 03
+<span style="color: #fa8072;">"FPLT"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 04
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">"RSV0"</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">KEY 3 XEQ 05</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">"RSV1"</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">KEY 4 XEQ 06</span>
+<span style="color: #fa8072;">"PICF"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 07
+<span style="color: #fa8072;">"VARS"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 08
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">LBL</span> 02            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu FMENU</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"FSLV"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 09
+<span style="color: #fa8072;">"FINT"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 10
+<span style="color: #fa8072;">"FSUM"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 11
+<span style="color: #fa8072;">"FPRD"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 12
+<span style="color: #fa8072;">"PICF"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 13
+<span style="color: #fa8072;">"VARS"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 14
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">LBL</span> 00 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Application Exit</span>
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 03               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key FSPT</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FSPT"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 04               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key FPLT</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FPLT"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 05               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key RSV0</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"RSV0"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 06               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key RSV1</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"RSV1"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 07               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key PICF</span>
+1
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PICF"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 08               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key VARS</span>
+<span style="color: #00ffff;">VARMENU</span> <span style="color: #fa8072;">"FVARM"</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 09               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key FSLV</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FSLV"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 10               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key FINT</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FINT"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 11               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key FSUM</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FSUM"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 12               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key FPRD</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FPRD"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 13               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key PICF</span>
+1
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PICF"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 14               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key VARS</span>
+<span style="color: #00ffff;">VARMENU</span> <span style="color: #fa8072;">"FVARM"</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7b335ba" class="outline-2">
+<h2 id="org7b335ba"><span class="section-number-2">9</span> EOF</h2>
+<div class="outline-text-2" id="text-9">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -731,7 +1332,7 @@ R&#8595;
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-05 Mon 18:44 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-06 Tue 20:30 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

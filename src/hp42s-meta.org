@@ -129,18 +129,23 @@ The last two are /actions/ while the first is yet another menu containing "=foob
                                                     for page-num = (truncate (/ mkey-num 6))
                                                     for page-key = (mod mkey-num 6)
                                                     for mkey-str = (if (vectorp mkey-elt) (aref mkey-elt 0) (cl-first mkey-elt))
+                                                    for is-leaf  = (vectorp mkey-elt)
+                                                    for is-lleaf = (and (vectorp mkey-elt) (numberp (cl-second (aref mkey-elt 1))))
                                                     when (= page-key 0)
                                                     do (progn (add-m-code (message "LBL %02d            @@@@ Page %d of menu %s" (nth page-num page-labs) (1+ page-num) (cl-first menu)))
                                                               (add-m-code "CLMENU"))
-                                                    when (not (string-equal mkey-str ""))
+                                                    when (not (or (string-equal mkey-str "") (string-equal mkey-str "▒▒▒▒")))
                                                     do (progn (add-m-code (message "\"%s\"" mkey-str))
-                                                              (add-m-code (message "KEY %d %s %02d" (1+ page-key) (if (vectorp mkey-elt) "XEQ" "GTO") min-free-lab))
-                                                              (if (vectorp mkey-elt)
+                                                              (if is-lleaf
+                                                                  (add-m-code (message "KEY %d XEQ %02s" (1+ page-key) (cadr (aref mkey-elt 1))))
+                                                                  (add-m-code (message "KEY %d %s %02d" (1+ page-key) (if is-leaf "XEQ" "GTO") min-free-lab)))
+                                                              (if (and is-leaf (not is-lleaf))
                                                                   (progn (add-x-code (message "LBL %02d               @@@@ Action for menu key %s" min-free-lab mkey-str))
                                                                          (add-x-code (funcall gen-code (aref mkey-elt 1)))
                                                                          (add-x-code "RTN")))
                                                               (push min-free-lab rec-key-labs)
-                                                              (cl-incf min-free-lab)
+                                                              (if (not is-lleaf) 
+                                                                  (cl-incf min-free-lab))
                                                               (push (nth page-num page-labs) rec-pag-labs))
                                                     when (or (= page-key 5) (= mkey-num (1- num-menu-keys)))
                                                     do (progn (if (< 1 num-menu-page)
@@ -215,6 +220,99 @@ I may have missed a built in function, so you may have to add one to the list. ;
 #+END_SRC
 
 #+RESULTS:
+
+** For CUSTOM-type Menus
+
+#+BEGIN_SRC elisp :colnames y :results output verbatum
+(defun MJR-generate-42-xeq-menu-code (top-lab tbl)
+  (let* ((min-free-lab  2)
+         (m-code ""))
+    (cl-labels ((add-m-code (a) (setq m-code (concat m-code a "\n")))
+                (prc-mnu (menu) (if (or (not (listp menu))
+                                        (null (cdr menu)))
+                                    menu
+                                    (mapcar #'prc-mnu
+                                            (append (list (car menu))
+                                                    (reverse (cl-reduce (lambda (result cur-elt)
+                                                                          (let ((last-elt (cl-first result)))
+                                                                            (if (and (listp last-elt)
+                                                                                     (cdr last-elt)
+                                                                                     (cdr cur-elt)
+                                                                                     (string-equal (cl-first last-elt) (cl-first cur-elt)))
+                                                                                (progn (nconc (cl-first result) (list (cdr cur-elt)))
+                                                                                       result)
+                                                                                (if (cdr cur-elt)
+                                                                                    (append (list (list (cl-first cur-elt) (cdr cur-elt))) result)
+                                                                                    (append (list (cl-first cur-elt))  result)))))
+                                                                        (cdr menu)
+                                                                        :initial-value ()))))))
+                (gen-mnu (plbl lbl menu) (let* ((num-menu-keys (1- (length menu)))
+                                                (num-menu-page (ceiling (/ num-menu-keys 6.0)))
+                                                (page-labs     (cl-loop repeat num-menu-page
+                                                                        for i = lbl then min-free-lab
+                                                                        collect i
+                                                                        when (not (= i lbl))
+                                                                        do (cl-incf min-free-lab)))
+                                                (rec-key-labs     nil)
+                                                (rec-pag-labs     nil))
+                                           (if (zerop plbl)
+                                               (add-m-code (message "LBL \"%s\"" (cl-first menu))))
+                                           (cl-loop for mkey-elt in (cdr menu)
+                                                    for mkey-num from 0
+                                                    for page-num = (truncate (/ mkey-num 6))
+                                                    for page-key = (mod mkey-num 6)
+                                                    for mkey-str = (if (vectorp mkey-elt) (aref mkey-elt 0) (cl-first mkey-elt))
+                                                    when (= page-key 0)
+                                                    do (progn (add-m-code (message "LBL %02d            @@@@ Page %d of menu %s" (nth page-num page-labs) (1+ page-num) (cl-first menu)))
+                                                              (add-m-code "CLMENU"))
+                                                    when (not (string-equal mkey-str ""))
+                                                    do (progn (add-m-code (message "\"%s\"" mkey-str))
+                                                              (if (vectorp mkey-elt)
+                                                                  (add-m-code (message "KEY %d XEQ %02s" (1+ page-key) (cadr (aref mkey-elt 1))))
+                                                                  (add-m-code (message "KEY %d GTO %02d" (1+ page-key) min-free-lab)))
+
+                                                                  ;; (progn (add-x-code (message "LBL %02d               @@@@ Action for menu key %s" min-free-lab mkey-str))
+                                                                  ;;        (add-x-code (funcall gen-code (aref mkey-elt 1)))
+                                                                  ;;        (add-x-code "RTN")))
+
+                                                              (push min-free-lab rec-key-labs)
+                                                              (if (not (vectorp mkey-elt)) 
+                                                                  (cl-incf min-free-lab))
+                                                              (push (nth page-num page-labs) rec-pag-labs))
+
+
+                                                    when (or (= page-key 5) (= mkey-num (1- num-menu-keys)))
+                                                    do (progn (if (< 1 num-menu-page)
+                                                                  (progn (add-m-code (message "KEY 7 GTO %02d" (nth (mod (1- page-num) num-menu-page) page-labs)))
+                                                                         (add-m-code (message "KEY 8 GTO %02d" (nth (mod (1+ page-num) num-menu-page) page-labs)))))
+                                                              (add-m-code (message "KEY 9 GTO %02d" plbl))
+                                                              (add-m-code "MENU")
+                                                              (add-m-code "STOP")
+                                                              (add-m-code (message "GTO %02d" (nth page-num page-labs)))))
+                                           (cl-loop for mkey-elt in (cdr menu)
+                                                    for m-lab in (reverse rec-key-labs)
+                                                    for p-lab in (reverse rec-pag-labs)
+                                                    when (listp mkey-elt)
+                                                    do (gen-mnu p-lab m-lab mkey-elt)))))
+      (gen-mnu 0 1 (prc-mnu (append (list top-lab) (cl-loop for row in tbl
+                                                            for n from 0
+                                                            for tmp = (split-string (message "%s" (cl-first row)) ":")
+                                                            do (setf (car (last tmp)) (vector (car (last tmp)) row))
+                                                            collect tmp))))
+      (add-m-code "LBL 00 @@@@ Application Exit")
+      (add-m-code "EXITALL")
+      (add-m-code "RTN")
+      (if (< 100 min-free-lab)
+          (error "ERROR: Too many local labels: %d" min-free-lab)))
+    (princ (message "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:%s)\n" top-lab))
+    (princ (message "@@@@ DSC: Auto-generated menu program\n"))
+    (princ m-code)
+    (princ (message "@@@@ Free labels start at: %d\n" min-free-lab))
+    (princ "END")))
+#+END_SRC
+
+#+RESULTS:
+
 
 ** Template for empty menu code
 
@@ -594,6 +692,21 @@ GrMod is a read write variable.
    - 3 = DM42 full resolution 400x240
 
 ResX & ResY are read only variables that have the display resolution
+
+* WORKING                                                          :noexport:
+
+#+BEGIN_SRC text
+:::::::::::::::::::::::'##:::::'##::::'###::::'########::'##::: ##:'####:'##::: ##::'######::::::::::::::::::::::::
+::::::::::::::::::::::: ##:'##: ##:::'## ##::: ##.... ##: ###:: ##:. ##:: ###:: ##:'##... ##:::::::::::::::::::::::
+::::::::::::::::::::::: ##: ##: ##::'##:. ##:: ##:::: ##: ####: ##:: ##:: ####: ##: ##:::..::::::::::::::::::::::::
+::::::::::::::::::::::: ##: ##: ##:'##:::. ##: ########:: ## ## ##:: ##:: ## ## ##: ##::'####::::::::::::::::::::::
+::::::::::::::::::::::: ##: ##: ##: #########: ##.. ##::: ##. ####:: ##:: ##. ####: ##::: ##:::::::::::::::::::::::
+::::::::::::::::::::::: ##: ##: ##: ##.... ##: ##::. ##:: ##:. ###:: ##:: ##:. ###: ##::: ##:::::::::::::::::::::::
+:::::::::::::::::::::::. ###. ###:: ##:::: ##: ##:::. ##: ##::. ##:'####: ##::. ##:. ######::::::::::::::::::::::::
+::::::::::::::::::::::::...::...:::..:::::..::..:::::..::..::::..::....::..::::..:::......:::::::::::::::::::::::::
+#+END_SRC
+
+Code in this section is under construction.  Most likely broken.
 
 * EOF
 

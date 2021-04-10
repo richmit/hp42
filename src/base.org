@@ -298,7 +298,7 @@ END
 
 ** =PATN=: Test =TNPR= by printing all characters
 
-#+begin_src hp42s
+#+begin_src hp42s :tangle no
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PATN)
 @@@@ DSC: Print All Tiny Number Characters
 LBL "PATN"
@@ -517,42 +517,53 @@ END
 ** =B#=: Count set bits
 
 #+BEGIN_SRC hp42s :tangle yes
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BCNT)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Number of bits set
+@@@@ NAM: B# 
 @@@@ IN:  X: an integer
 @@@@ OUT: X: Number of 1 bits in IP(X)
 @@@@ FAQ: Runtime complexity O(log_2(X))
+@@@@ LBL: Used 01-03
 @@@@ UPD: 2021-03-20
 LBL "B#"
-FUNC 11                        @@## REQ:free42>=2.5.24
-L4STK                          @@## REQ:free42>=3.0
+FUNC 11    @@## REQ:free42>=2.5.24
+L4STK      @@## REQ:free42>=3.0
 IP
 0
-X<>Y
-LBL 00
-0
-BIT?
-GTO 01
-GTO 02
-LBL 01   @@@@ 1 -> inc Counter
-R↓
-1
-STO+ ST Z
-LBL 02
-R↓
-X≠0?
-GTO 03  @@@@ Zero, so return Counter
-R↓
-RTN
-LBL 03  @@@@ Not a zero yet, so wack 1 and rotate
+X<>Y       @@@@ NUM CNT
 1
 NOT
-AND
-1
+X<>Y       @@@@ NUM MASK CNT
+LBL 01
+RCL ST Y   @@@@ MASK NUM MASK CNT
+X<>Y       @@@@ NUM MASK MASK CNT
+AND        @@@@ NUM_N MASK CNT
+LASTX      @@@@ NUM NUM_N MASK CNT
+X=Y?
+GTO 02
+@@@@ Current bit was set: increment counter
+R↓         @@@@ NUM_N MASK CNT
+1 
+STO+ ST T  @@@@ 1 NUM_N MASK CNT
+LBL 02
+@@@@ Current bit was clear
+R↓         @@@@ NUM_N MASK CNT
+X=0?
+GTO 03  
+@@@@ Still have bits to check
+X<>Y       @@@@ MASK NUM_N CNT
+-1
 ROTXY
-GTO 00
+X<>Y       @@@@ NUM_N MASK CNT
+GTO 01
+LBL 03
+@@@@ No bits left to check
+R↓         @@@@ MASK CNT
+R↓         @@@@ CNT
+RTN
 END
 #+END_SRC
+
 
 ** =MSKn=: Create integer with Y set bits located at bit X
 
@@ -564,6 +575,7 @@ END
 @@@@ OUT: X: Integer with IP(X) least significant bits set
 @@@@ FAQ: Returns int with all 0 bits when X<=0
 @@@@ FAQ: Returns int with all 1 bits when X>=WSIZE?
+@@@@ LBL: Used 04-05
 @@@@ UPD: 2021-03-20
 LBL "MSKn"
 FUNC 11                        @@## REQ:free42>=2.5.24
@@ -573,18 +585,18 @@ X<>Y
 IP
 @@@@ All zeros case
 X>0?
-GTO 01
+GTO 04
 0
 RTN
-LBL 01
+LBL 04
 @@@@ All ones case
 WSIZE?
 X>Y?
-GTO 02
+GTO 05
 0
 NOT
 RTN
-LBL 02
+LBL 05
 @@@@ Some ones case
 R↓
 2
@@ -1733,7 +1745,7 @@ END
 
 Code in this section is under construction.  Most likely broken.
 
-#+BEGIN_SRC hp42s
+#+BEGIN_SRC hp42s :tangle no
 @@@@ Convert a native character number to TNPR character number
 LBL "CTOT"
 FUNC 11

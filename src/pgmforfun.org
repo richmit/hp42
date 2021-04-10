@@ -114,7 +114,42 @@ If an accuracy is required, then we use the variable =ACC=.
 * Test Functions
 A few =MVAR= functions to test with
 
-#+begin_src hp42s :tangle yes
+#+begin_src hp42s :tangle no
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFS)
+@@@@ DSC: SIGN
+LBL "TFS"
+MVAR "X"
+RCL "X"
+1
+-
+SIGN
+5
+×
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFE)
+@@@@ DSC: Exponential
+LBL "TFE"
+MVAR "X"
+RCL "X"
+E↑X
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFL)
+@@@@ DSC: Linear M*X+B
+LBL "TFL"
+MVAR "X"
+MVAR "M"
+MVAR "B"
+RCL "X"
+RCL× "M"
+RCL+ "B"
+RTN
+END
+
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFQ)
 @@@@ DSC: A quadratic with zeros at 0 and 1
 LBL "TFQ"
@@ -124,7 +159,7 @@ RCL "X"
 -
 RCL "X"
 ×
-RTN 
+RTN
 END
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFC)
@@ -142,7 +177,7 @@ RCL "X"
 .9
 -
 ×
-RTN 
+RTN
 END
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFO)
@@ -151,25 +186,41 @@ LBL "TFO"
 MVAR "X"
 RCL "X"
 ABS
-0.01
+0.001
 +
+1/X
 SIN
-RTN 
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFI)
+@@@@ DSC: A function that has many undefined regions
+@@@@ FAQ: Good test to make sure we don't connect across known discontinuities
+LBL "TFI"
+MVAR "X"
+RCL "X"
+2
+MOD
+IP
+1/X
+5
+×
+RTN
 END
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFM)
 @@@@ DSC: A function that has many step discontinuities
-@@@@ FAQ: Good test to make sure we don't connect across known discontinuities
 LBL "TFM"
 MVAR "X"
 RCL "X"
-IP
+2
 MOD
+IP
 .5
 -
-2
+10
 ×
-RTN 
+RTN
 END
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFF)
@@ -177,11 +228,11 @@ END
 @@@@ FAQ: Worst case performance for connecting dots
 LBL "TFF"
 MVAR "X"
-1
+5
 FS?C 85
 RTN
 SF 85
--1
+-5
 RTN
 END
 #+END_SRC
@@ -289,13 +340,15 @@ END
 
 * =FSPT=: Interactive Sums, Products, & Tables
 
-Create function tables and computes sums & products.  Works much like the built in integration application.  
+Create function tables and computes sums & products.  Works much like the built in integration application.
 
 The =LOG= button transforms the function results by taking the natural logarithm -- for example this allows us to compute very large products by summing the logarithms.
 
-The =IND= button stores the independent variable value in the table.  
+The =IND= button stores the independent variable value in the table.
 
 When not provided, the values for =LLIM=, =STEP=, & =EqD= default to 1.
+
+Note: Using =[SHIFT]= before =[LLIM]=, =[ULIM]=, and =[STEP]= menu keys will recall the current value to the stack instead of setting the value.
 
 #+begin_src hp42s :tangle yes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FSPT)
@@ -364,18 +417,24 @@ LBL 00
 EXITALL
 RTN
 LBL 03               @@@@ Action for menu key LLIM
+FS? 64
+RCL "LLIM"
 STO "LLIM"
 "LLIM: "
 ARCL ST X
 AVIEW
 RTN
 LBL 04               @@@@ Action for menu key ULIM
+FS? 64
+RCL "ULIM"
 STO "ULIM"
 "ULIM: "
 ARCL ST X
 AVIEW
 RTN
 LBL 05               @@@@ Action for menu key STEP
+FS? 64
+RCL "STEP"
 STO "STEP"
 "STEP: "
 ARCL ST X
@@ -421,7 +480,7 @@ SF 25
 RCL "STEP"
 FC?C 25
 STO "STEP"
-@@@@ Check for bad LLIM, ULIM, & STEP.  
+@@@@ Check for bad LLIM, ULIM, & STEP.
 RCL "LLIM"
 RCL "ULIM"
 X>Y?
@@ -494,7 +553,7 @@ GTO 32
 RCL "EqD"
 LSTO "CTR"
 @@@@  Doing a table:  Store independent variable if FS? 83
-FC? 83 
+FC? 83
 GTO 32
 RCL IND "EqV"
 STOEL
@@ -714,71 +773,109 @@ RTN
 END
 #+END_SRC
 
-* Plots                                                            :noexport:
+* Evaluation
 
+Sometimes you just need to quickly evaluate a function for several diffrent input values.  
 
-#+BEGIN_SRC text
-:::::::::::::::::::::::'##:::::'##::::'###::::'########::'##::: ##:'####:'##::: ##::'######::::::::::::::::::::::::
-::::::::::::::::::::::: ##:'##: ##:::'## ##::: ##.... ##: ###:: ##:. ##:: ###:: ##:'##... ##:::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##::'##:. ##:: ##:::: ##: ####: ##:: ##:: ####: ##: ##:::..::::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##:'##:::. ##: ########:: ## ## ##:: ##:: ## ## ##: ##::'####::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##: #########: ##.. ##::: ##. ####:: ##:: ##. ####: ##::: ##:::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##: ##.... ##: ##::. ##:: ##:. ###:: ##:: ##:. ###: ##::: ##:::::::::::::::::::::::
-:::::::::::::::::::::::. ###. ###:: ##:::: ##: ##:::. ##: ##::. ##:'####: ##::. ##:. ######::::::::::::::::::::::::
-::::::::::::::::::::::::...::...:::..:::::..::..:::::..::..::::..::....::..::::..:::......:::::::::::::::::::::::::
+** =FEVL=: Quicly Evaluate A Function
+
+I frequently use =VARMENU= to repeatidly evluate a formula, with diffrent input values.  Functionally that means typeing in the value, and then hitting the
+variable button twice.  That's not super efficient when repeatidly changeing the same variable.  That's wehre this little function comes in.  
+
+#+BEGIN_SRC hp42s :tangle yes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FEVL)
+@@@@ DSC: Evaluate EqP at X
+@@@@ OUT: X: EqP(x)
+@@@@ FAQ: No error checking is done on EqV or EqP
+@@@@ GBL: EqP, EqV
+@@@@ UPD: 2021-04-09
+@@@@ REQ: REQ:free42>=3.0
+LBL "FEVL"
+STO IND "EqV"
+XEQ IND "EqP"
+RTN
+END
 #+END_SRC
 
-Code in this section is under construction.  Most likely broken.
+* Plots
+
+Features:
+   - Designed for high resolution mode of DM42
+   - Dots are connected
+   - Interactive zoom-box
+   - Optional autoscale of y-axis
+   - Control over axis and grid line drawin
+   - Quick access to solver and integrater from plot
+   - Factor zoom
+   - Default window
+   - Minimal & efficient interface
+   - Integrated with other tools on this page -- solver & integrater
 
 ** User Interface
 
 *** Main Menu
 
 #+ATTR_HTML: :align center
-|-------+----------------+--------------------------------------------------|
-| Menu  | Variable       | Description                                      |
-|-------+----------------+--------------------------------------------------|
-| EQ    | EqP EqV EqD    | Setup Equation                                   |
-| XRNG  | LLIM ULIM STEP | Set X range (X: max Y: min).  *MAGIC*            |
-| YRNG  | YMAX YMIN      | Set Y range (X: max Y: min).  *MAGIC*            |
-| GRID  | STEP YSTP      | Set grid width (X: Y-width Y: X-width).  *MAGIC* |
-| N/A   | N/A            | Reserved                                         |
-| PLOT  | N/A            | Draw plot                                        |
-|-------+----------------+--------------------------------------------------|
+|------+--------------------------------------------------|
+| Menu | Description                                      |
+|------+--------------------------------------------------|
+| EQ   | Setup Equation                                   |
+| XRNG | Set X range (X: max Y: min).  *MAGIC*            |
+| YRNG | Set Y range (X: max Y: min).  *MAGIC*            |
+| GRID | Set grid width (X: Y-width Y: X-width).  *MAGIC* |
+| COMP | Computations (solve & integrate)                 |
+| PLOT | Draw plot                                        |
+|------+--------------------------------------------------|
 
 Magic:
-  - =XRNG= set to [0, 0]: Sets range to default [-10, 10].  
+  - =XRNG= set to [0, 0]: Sets range to default [-10, 10].
   - =XRNG= reversed limits: Automatically detected and swapped
   - =XRNG= set to [M, M]: Zooms range by a factor of M.
   - =YRNG= set to [0, 0]: Sets range to default [-6, 6]
   - =YRNG= reversed limits: Automatically detected and swapped
   - =YRNG= set to [M, M]: Zooms range by a factor of M.
   - =GRID= set to 0:  If one of the grid widths is zero, then no grids are drawn for that axis
-  - =GRID= set to a negative number:  No axis or grid marks will be drawn for that axis
+  - =GRID= set to a negative value:  No axis or grid marks will be drawn for that axis
+  - =GRID=: If grid lines are closer than 10 pixels, then grids are suppressed.
+
+For a graph with default settings: [0] [ENTER] [XRNG] [YRNG] [GRID] [PLOT]
+
+** Computational Menu
+
+This menu is for doing computations on the current equation based on
+the current plot range or last zoom box region.
+
+#+ATTR_HTML: :align center
+|------+-----------------------------------------------------------------|
+| Menu | Description                                                     |
+|------+-----------------------------------------------------------------|
+| ROOT | Find a root in plot range                                       |
+| INTG | Integrate over plot range with ACC equal to the area of a pixel |
+| ▒▒▒▒ | TBD                                                             |
+| ▒▒▒▒ | TBD                                                             |
+| ▒▒▒▒ | TBD                                                             |
+| R<>B | Swap plot range with last zoom box range                        |
+|------+-----------------------------------------------------------------|
 
 *** Graphics Display
 
 #+ATTR_HTML: :align center
-|-----------+-----------------------------------------------+---------------------|
-| Key       | Action                                        | Note                |
-|-----------+-----------------------------------------------+---------------------|
-| =[2]=     | Adjust bottom side of zoom box                |                     |
-| =[4]=     | Adjust left side of zoom box                  |                     |
-| =[8]=     | Adjust top side of zoom box                   |                     |
-| =[6]=     | Adjust right side of zoom box                 |                     |
-| =[ENTER]= | Zoom to box & Redraw                          |                     |
-| =[X<>Y]=  | Auto-scale Y & Redraw.  Ignores zoom box.     |                     |
-| =[+]=     | Set zoom box adjustment & trace speed to fast |                     |
-| =[-]=     | Set zoom box adjustment & trace speed to slow |                     |
-| =[+/-]=   | Activate trace cursor                         | Not Implemented Yet |
-| =[1]=     | Move trace point left                         | Not Implemented Yet |
-| =[3]=     | Move trace point right                        | Not Implemented Yet |
-| =[STO]=   | Push trace point to TP (matrix) & LTP (cplx)  | Not Implemented Yet |
-| =[7]=     | Find root between left & right edges of box.  |                     |
-| =[*]=     | Zoom out 2x (multiply ranges by 2)            |                     |
-| =[/]=     | Zoom in 2x (divide ranges by 2)               |                     |
-| =[←]=     | Exit to main menu                             |                     |
-|-----------+-----------------------------------------------+---------------------|
+|-----------+------------------------------------------------------|
+| Key       | Action                                               |
+|-----------+------------------------------------------------------|
+| =[2]=     | Adjust bottom side of zoom box                       |
+| =[4]=     | Adjust left side of zoom box                         |
+| =[8]=     | Adjust top side of zoom box                          |
+| =[6]=     | Adjust right side of zoom box                        |
+| =[ENTER]= | Zoom to box & Redraw                                 |
+| =[X<>Y]=  | Auto-scale Y & Redraw.  Zoombox  is used for x-range |
+| =[+]=     | Set zoom box adjustment speed to fast                |
+| =[-]=     | Set zoom box adjustment speed to slow                |
+| =[*]=     | Zoom out 2x (multiply ranges by 2)                   |
+| =[/]=     | Zoom in 2x (divide ranges by 2)                      |
+| =[←]=     | Exit to main menu.  Note: saves the zoom box range.  |
+| [.]       | Toggle connected dots in graph                       |
+|-----------+------------------------------------------------------|
 
 ** Code
 
@@ -786,20 +883,34 @@ Magic:
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (REF:FPLT)
 @@@@ DSC: Plot a MVAR function
 @@@@ GBL: EqP, EqV, LLIM, ULIM, STEP, YMIN, YMAX, YSTP
+@@@@ GBL: ZLLIM, ZULIM -- zoom box limits.
 @@@@ FAQ: STEP & YSTP are used for grids
-@@@@ UPD: 2021-04-04
-
-@@@@ FREE: 10-19 -11 -12
-@@@@ FREE: 30-39
-@@@@ FREE: 60-69
-@@@@ FREE: 70-79
-
+@@@@ FLG: 03: PREF: Set: draw dots only;  Clear: connect dots
+@@@@ FLG: 04: PREF: Set: Use GrMod 2; Clear Use GrMod 3
+@@@@ FLG: 05: PREF: Reserved
+@@@@ FLG: 82: TEMP: Used for max/min computation
+@@@@ FLG: 83: TEMP: Used for automatic autoscale redraw
+@@@@ FLG: 84: TEMP: Reserved
+@@@@ FRE: LBL: 79-99
+@@@@ REQ: REQ:free42>=3.0
+@@@@ UPD: 2021-04-09
 
 LBL "FPLT"
-3 
+FC? 04
+3
+FS? 04
+2
 STO "GrMod"
 R↓
+131
+STO "ResX"
+R↓
+16
+STO "ResY"
+R↓
+XEQ 74
 LBL 01               @@@@ Page 1 of menu FPLT
+CF 83                @@@@ Turn off auto yscale redraw
 CLMENU
 "EQ"
 KEY 1 XEQ 02
@@ -809,7 +920,8 @@ KEY 2 XEQ 03
 KEY 3 XEQ 04
 "GRID"
 KEY 4 XEQ 05
-@@@@@KEY 5 XEQ 06
+"COMP"
+KEY 5 XEQ 06
 "PLOT"
 KEY 6 XEQ 07
 KEY 9 GTO 00
@@ -825,6 +937,8 @@ XEQ "PICF"
 RTN
 LBL 03               @@@@ Action for menu key XRNG
 FUNC 00
+FS? 64
+GTO 10               @@@@ For shift we just display settings
 X≠Y?
 GTO 24
 X=0?
@@ -839,30 +953,39 @@ RCL "ULIM"
 RCL+ "LLIM"
 2
 ÷
-RCL ST X        
+RCL ST X
 RCL ST Z
--               
+-
 STO "LLIM"
 R↓
 +
 STO "ULIM"
-RTN
+GTO 10
 LBL 26
 @@@@ Code for LLIM=ULIM=0
--10
-STO "LLIM"
-10
-STO "ULIM"
-RTN
+CLV "LLIM"
+CLV "ULIM"
+XEQ 74
+GTO 10
 LBL 24
-@@@@@ Code for LLIM≠ULIM
+@@@@ Code for LLIM≠ULIM
 STO "ULIM"
 X<>Y
 STO "LLIM"
 X<>Y
+LBL 10
+"XMIN: "
+RCL "LLIM"
+ARCL ST X
+├"[LF]XMAX: "
+RCL "ULIM"
+ARCL ST X
+AVIEW
 RTN
 LBL 04               @@@@ Action for menu key YRNG
 FUNC 00
+FS? 64
+GTO 50               @@@@ For shift we just display settings
 X≠Y?
 GTO 22
 X=0?
@@ -877,37 +1000,124 @@ RCL "YMAX"
 RCL+ "YMIN"
 2
 ÷
-RCL ST X        
+RCL ST X
 RCL ST Z
--               
+-
 STO "YMIN"
 R↓
 +
 STO "YMAX"
-RTN
+GTO 50
 LBL 23
 @@@@ Code for YMIN=YMAX=0
--6
-STO "YMIN"
-6
-STO "YMAX"
-RTN
+CLV "YMIN"
+CLV "YMAX"
+XEQ 74
+GTO 50
 LBL 22
-@@@@@ Code for YMIN≠YMAX
+@@@@ Code for YMIN≠YMAX
 STO "YMAX"
 X<>Y
 STO "YMIN"
 X<>Y
+LBL 50
+"YMIN: "
+RCL "YMIN"
+ARCL ST X
+├"[LF]YMAX: "
+RCL "YMAX"
+ARCL ST X
+AVIEW
 RTN
 LBL 05               @@@@ Action for menu key GRID
+FUNC 00
+FS? 64
+GTO 49               @@@@ For shift we just display settings
 STO "YSTP"
 X<>Y
 STO "STEP"
-X<>Y
+LBL 49
+"XSTP: "
+RCL "STEP"
+ARCL ST X
+├"[LF]YSTP: "
+RCL "YSTP"
+ARCL ST X
+AVIEW
 RTN
-LBL 06               @@@@ Action for menu key XXXX
+LBL 06               @@@@ Action for menu key COMP
+LBL 30               @@@@ menu COMP
+CLMENU
+"ROOT"
+KEY 1 XEQ 32
+"INTG"
+KEY 2 XEQ 33
+"EVAL"
+KEY 3 XEQ 34
+@@@@ "RSV1"
+@@@@ KEY 4 XEQ 35
+@@@@ "RSV2"
+@@@@ KEY 5 XEQ 36
+"R<>B"
+KEY 6 XEQ 37
+KEY 9 GTO 31
+MENU
+STOP
+GTO 30
+LBL 31               @@@@ Menu Exit
+RTN
+LBL 32               @@@@ Action for menu key FSLV
+FUNC 04
+XEQ "FSLV"
+RTN
+LBL 33               @@@@ Action for menu key FINT
+FUNC 01
+RCL "ULIM"
+RCL- "LLIM"
+RCL÷ "ResX"
+RCL "YMAX"
+RCL- "YMIN"
+RCL÷ "ResY"
+×
+XEQ "FINT"
+RTN
+LBL 34               @@@@ Action for menu key RSV0
+XEQ "FEVL"
+@@@@ RSV0
+RTN
+LBL 35               @@@@ Action for menu key RSV1
+@@@@ RSV1
+RTN
+LBL 36               @@@@ Action for menu key RSV2
+@@@@ RSV2
+RTN
+LBL 37               @@@@ Action for menu key RANGE <> BOX swap
+XEQ 39
+RTN
 RCL "GrMod"
 LBL 07               @@@@ Action for menu key PLOT
+@@@@ Set AGRAPH flags to OR
+CF 34
+CF 35
+@@@@ Just in case an important var is not set
+XEQ 74
+SF 25
+RCL "EqV"
+FC?C 25
+GTO 76
+R↓
+SF 25
+RCL "EqP"
+FC?C 25
+GTO 76
+R↓
+GTO 77  @@ All good
+LBL 76
+"ERR: Pick An"
+├" EQ First!"
+AVIEW
+RTN
+LBL 77
 @@@@ Set YWID
 RCL "YMAX"
 RCL- "YMIN"
@@ -928,9 +1138,40 @@ STO "XWID"
 CLLCD
 CLMENU               @@@@ Only needed on DM42
 EXITALL              @@@@ Only needed on DM42
+FC? 83
+GTO 17
+@@@@ Doing an autoscale draw
+RCL "ResX"
+14
+÷
+IP
+1
+-
+LSTO "I"
+LBL 15
+RCL "ResY"
+2
+÷                             @@@@ Yctr
+9
+-
+RCL "I"
+14
+×                             @@@@ X coord
+"@`px|~├~|xp`@"               @@@@ Draw up triangle
+AGRAPH
+"×∫π→•?├?•→π∫×"               @@@@ Draw down triangle
+X<>Y
+12
++
+X<>Y
+AGRAPH
+DSE "I"                       @@@@ Loopity doopity do
+GTO 15
+GTO 20               @@@@ Jump past axis and grid drawing for autoscale redraw
+LBL 17
 @@@@ Draw X Axis
 RCL "STEP"
-X<0?           @@@@ No axis if negative
+X<0?                 @@@@ No axis if negative
 GTO 11
 0
 XEQ 56
@@ -945,14 +1186,20 @@ LBL 11
 @@@@ Draw X Grid
 RCL "STEP"
 X≤0?
-GTO 08
+GTO 08               @@@@ no grid when STEP<=0
+RCL "XWID"
+10
+×
+X>Y?
+GTO 08               @@@@ no grid when too small
+R↓
 RCL "ULIM"
-RCL÷ "STEP" 
+RCL÷ "STEP"
 IP
 RCL× "STEP"
 RCL+ "STEP"
 RCL "LLIM"
-RCL÷ "STEP" 
+RCL÷ "STEP"
 IP
 RCL× "STEP"
 RCL- "STEP"
@@ -967,7 +1214,7 @@ GTO 09
 LBL 08
 @@@@ Draw Y Axis
 RCL "YSTP"
-X<0?           @@@@ No axis if negative
+X<0?                 @@@@ No axis if negative
 GTO 12
 0
 XEQ 46
@@ -982,17 +1229,23 @@ LBL 12
 @@@@ Draw Y Grid
 RCL "YSTP"
 X≤0?
-GTO 20
-RCL "YMAX"         
-RCL÷ "YSTP"        
+GTO 20               @@@@ no grid when STEP<=0
+RCL "YWID"
+-10
+×
+X>Y?
+GTO 20               @@@@ no grid when too small
+R↓
+RCL "YMAX"
+RCL÷ "YSTP"
 IP
-RCL× "YSTP"        
-RCL+ "YSTP"        
-RCL "YMIN"         
-RCL÷ "YSTP"         
+RCL× "YSTP"
+RCL+ "YSTP"
+RCL "YMIN"
+RCL÷ "YSTP"
 IP
-RCL× "YSTP"         
-RCL- "YSTP"         
+RCL× "YSTP"
+RCL- "YSTP"
 LBL 21
 ENTER
 XEQ 56
@@ -1007,25 +1260,29 @@ LBL 20
 @@@@ Plot curve
 @@@@ Init YPMAX & YPMIN
 SF 82
+@@@@ Init LASTY
+0
+LSTO "LASTY"
+R↓
 @@@@ Loop across screen
 RCL "ResX"
 1000
 ÷
 1
 +
-LSTO "XI"
+LSTO "XICUR"
 LBL 41
-RCL "XI"
+RCL "XICUR"
 IP
 XEQ 47
 STO IND "EqV"
 SF 25
 XEQ IND "EqP"
 FC?C 25
-GTO 42
-FC? 82    
+GTO 29
+FC? 82
 GTO 43
-@@@@ Setup YPMIN & YPMAX 
+@@@@ Setup YPMIN & YPMAX
 LSTO "YPMAX"
 LSTO "YPMIN"
 CF 82
@@ -1039,31 +1296,71 @@ RCL "YPMIN"
 X<>Y
 X<Y?
 LSTO "YPMIN"
+FC? 83
+GTO 78
+@@@@ Draw autoscale progress bar
+RCL "ResY"
+2
+÷
+1
+-
+RCL "XICUR"
+AGRAPH
+R↓
+R↓
+GTO 19
+LBL 78
 @@@@ If y is on screen, then draw it
 XEQ 56
 XEQ 55
+GTO 29
+@@@@ DRAW FAT PIXEL
+RCL "XICUR"
+XEQ 51              @@@ XICUR YICUR
+R↓
+@@@@ Do we draw lines?
+FS? 03
+GTO 19
+@@@@ Don't do lines for an autoscale draw
+FS? 83
+GTO 19
+@@@@ Do we have a last point?
+RCL "LASTY"
+X=0?
+GTO 19
+@@@@ Yep & Yep.  We draw a line!
+X<>Y
+RCL "XICUR"  @@@@ xi  newy lasty
+XEQ 40
+LBL 19
+@@@@ Save last Y
+R↓
+LSTO "LASTY"
 GTO 42
-RCL "XI"
-@@@@@ DRAW FAT PIXEL
-XEQ 51
-@@@@ Backend of loop - NEXT TARGET
+LBL 29  @@@@ Bad Y target
+0
+LSTO "LASTY"
+@@@@ Backend of loop
 LBL 42
-ISG "XI"
+ISG "XICUR"
 GTO 41
-@@@@ Done with graph.  Now start graph UI
-LBL 87                    @@@@ Zoom Box
+@@@@ Done with graph.
+@@@@ Setup zoom box
 10
-LSTO "ZBSPD"
+LSTO "FPZSPD"
 1
 LSTO "ZBTOP"
+LSTO "ZBLFT"
 RCL "ResY"
 LSTO "ZBBOT"
-1
-LSTO "ZBLFT"
 RCL "ResX"
 LSTO "ZBRGT"
-LBL 88
-RCL "ZBSPD"
+@@@@ Do we redraw with autoscale?
+FS?C 83
+GTO 68
+@@@@ graph UI
+LBL 16
+RCL "FPZSPD"
 LSTO "CTR"
 LBL 52
 RCL "ZBRGT"
@@ -1072,7 +1369,7 @@ RCL "CTR"
 XEQ 48
 DSE "CTR"
 GTO 52
-RCL "ZBSPD"
+RCL "FPZSPD"
 LSTO "CTR"
 LBL 53
 RCL "ZBBOT"
@@ -1081,7 +1378,7 @@ RCL "CTR"
 XEQ 58
 DSE "CTR"
 GTO 53
-RCL "ZBSPD"
+RCL "FPZSPD"
 LSTO "CTR"
 LBL 54
 RCL "ZBTOP"
@@ -1090,7 +1387,7 @@ RCL "CTR"
 XEQ 58
 DSE "CTR"
 GTO 54
-RCL "ZBSPD"
+RCL "FPZSPD"
 LSTO "CTR"
 LBL 59
 RCL "ZBLFT"
@@ -1099,66 +1396,94 @@ RCL "CTR"
 XEQ 48
 DSE "CTR"
 GTO 59
+LBL 44
 GETKEY1
-13   
-X=Y?                      @@@@ 13 ENTER
-GTO 89   
+13
+X=Y?                 @@@@ 13 ENTER key
+GTO 73
 R↓
 17
-X=Y?                      @@@@ 24 Backspace
-GTO 86
+X=Y?                 @@@@ 24 Backspace key
+GTO 60
 R↓
 32
-X=Y?                      @@@@ - speed slow
-GTO 96
+X=Y?                 @@@@ - speed slow key
+GTO 66
 R↓
 37
-X=Y?                      @@@@ - speed fast
-GTO 95
+X=Y?                 @@@@ - speed fast key
+GTO 65
 R↓
 24
-X=Y?                      @@@@ 24 LEFT
-GTO 91
+X=Y?                 @@@@ 24 LEFT key
+GTO 61
 R↓
 26
-X=Y?                      @@@@ 26 RIGHT
-GTO 92
+X=Y?                 @@@@ 26 RIGHT key
+GTO 62
 R↓
 20
-X=Y?                      @@@@ 20 TOP
-GTO 93
+X=Y?                 @@@@ 20 TOP key
+GTO 63
 R↓
 30
-X=Y?                      @@@@ 30 BOTTOM
-GTO 94
+X=Y?                 @@@@ 30 BOTTOM key
+GTO 64
 R↓
 14
-X=Y?                      @@@@ 14 autoscale
-GTO 98
+X=Y?                 @@@@ 14 autoscale key
+GTO 68
 R↓
 22
-X=Y?                      @@@@ 22 zoom in
-GTO 97
+X=Y?                 @@@@ 22 zoom in key
+GTO 67
+R↓
+35
+X=Y?                 @@@@ 35 period.  toggle dots/lines
+GTO 75
 R↓
 27
-X=Y?                      @@@@ 27 zoom out
-GTO 99
-GTO 48
-LBL 97 @@@@ 22 / zoom in 
+X=Y?                 @@@@ 27 zoom out key
+GTO 69
+GTO 44               @@@@ Nothing matched get another key
+LBL 67               @@@@ 22 / zoom
 0.5
 ENTER
 ENTER
 XEQ 03
 XEQ 04
 GTO 07
-LBL 99 @@@@ 27 x zoom out
+LBL 69               @@@@ 27 x zoom out
 2.0
 ENTER
 ENTER
 XEQ 03
 XEQ 04
 GTO 07
-LBL 98    @@@@ Autoscale Y 
+LBL 68               @@@@ Autoscale Y
+1
+RCL "ZBLFT"
+-
+ABS
+RCL "ResX"
+RCL "ZBRGT"
+-
+ABS
++
+X=0?
+GTO 14
+@@@@ Zoom box has been set
+RCL "ZBLFT"
+XEQ 47
+RCL "ZBRGT"
+XEQ 47
+STO "ULIM"
+X<>Y
+STO "LLIM"
+SF 83
+GTO 07
+LBL 14
+@@@@ No zoom box
 RCL "YPMAX"
 -5
 RCL× "YWID"
@@ -1171,57 +1496,66 @@ STO "YMIN"
 X<>Y
 STO "YMAX"
 GTO 07
-LBL 95 @@@@ 37 + set speed fast
-10 
-LSTO "ZBSPD"
-GTO 88
-LBL 96 @@@@ 32 - set speed slow
-1 
-LSTO "ZBSPD"
-GTO 88
-LBL 91                    @@@@ LEFT REDO
-RCL "ZBRGT"             
+LBL 75               @@@@ 35 toggle dots/lines
+FS?C 03
+GTO 07
+SF 03
+GTO 07
+LBL 65               @@@@ 37 + set speed fast
+10
+LSTO "FPZSPD"
+GTO 16
+LBL 66               @@@@ 32 - set speed slow
+1
+LSTO "FPZSPD"
+GTO 16
+LBL 61               @@@@ LEFT REDO
+RCL "ZBRGT"
 -2
-RCL× "ZBSPD"            
+RCL× "FPZSPD"
 +
-RCL "ZBSPD"
+RCL "FPZSPD"
 RCL+ "ZBLFT"
 X<Y?
 LSTO "ZBLFT"
-GTO 88
-LBL 92                    @@@@ RIGHT REDO
-RCL "ZBLFT"             
+XEQ 47
+STO "ZLLIM"
+GTO 16
+LBL 62               @@@@ RIGHT REDO
+RCL "ZBLFT"
 2
-RCL× "ZBSPD"            
-+           
-RCL "ZBSPD"
-+/-                     
+RCL× "FPZSPD"
++
+RCL "FPZSPD"
++/-
 RCL+ "ZBRGT"
 X>Y?
 LSTO "ZBRGT"
-GTO 88
-LBL 93                    @@@@ TOP REDO
-RCL "ZBBOT"             
+XEQ 47
+STO "ZULIM"
+GTO 16
+LBL 63               @@@@ TOP REDO
+RCL "ZBBOT"
 -2
-RCL× "ZBSPD"            
-+                         @@@@ Upper_limit
-RCL "ZBSPD"
-RCL+ "ZBTOP"          @@@ New_ZBTOP Lower_limit
+RCL× "FPZSPD"
++                    @@@@ Upper_limit
+RCL "FPZSPD"
+RCL+ "ZBTOP"         @@@ New_ZBTOP Lower_limit
 X<Y?
 LSTO "ZBTOP"
-GTO 88
-LBL 94                    @@@@ BOT REDO
-RCL "ZBTOP"             
+GTO 16
+LBL 64               @@@@ BOT REDO
+RCL "ZBTOP"
 2
-RCL× "ZBSPD"            
-+                         @@@@ Lower_limit
-RCL "ZBSPD"
-+/-                     
-RCL+ "ZBBOT"          @@@ New_ZBBOT Lower_limit
+RCL× "FPZSPD"
++                    @@@@ Lower_limit
+RCL "FPZSPD"
++/-
+RCL+ "ZBBOT"         @@@ New_ZBBOT Lower_limit
 X>Y?
 LSTO "ZBBOT"
-GTO 88
-LBL 89
+GTO 16
+LBL 73
 RCL "ZBTOP"
 XEQ 57
 RCL "ZBBOT"
@@ -1237,9 +1571,89 @@ STO "LLIM"
 X<>Y
 STO "ULIM"
 GTO 07
-LBL 86
+LBL 60
 RTN
-LBL 51                    @@@@ Draw BIG Pix  (assumes Alpha is set)
+LBL 40  @@@@ Draw Line
+FUNC 00
+@@@@ xi newy lasty
+LSTO "XNUE"
+R↓              @@@@ yn yo
+RCL ST Y        @@@@ yo yn yo
+RCL- ST Y       @@@@ yo-yn yn yo
+ABS             @@@@ |yo-yn| yn yo
+3
+X>Y?
+RTN @@@@ Pts too close, no line to draw
+@@@@ We are drawing a line!
+R↓
+R↓              @@@@ yn yo
+LSTO "YNUE"
+X<>Y
+LSTO "YOLD"     @@@@ yo yn
++
+2
+÷
+IP
+LSTO "YCTR"
+@@@@ CTR -> OLD Y
+RCL "XNUE"
+1
+-
+RCL "YOLD"
+RCL "YCTR"
+XEQ 70
+@@@@ CTR -> NEW Y
+R↓
+R↓
+R↓
+RCL "XNUE"
+RCL "YNUE"
+RCL "YCTR"
+XEQ 70
+R↓
+R↓
+R↓
+RTN
+LBL 70          @@@@ Draw Fat, Vertical Line Segment   Ystart Yend X .  Yend already has a fat point drawn.
+FUNC 00
+X<Y?
+GTO 71
+@@@@ Line going up
+1
+STO- ST T
+R↓              @@@@ Ystart Yend X-1
+1
+STO- ST Z
+R↓              @@@@ Ystart Yend-1 X-1
+3
+-               @@@@ Ystart-3 Yend+1 X-1
+LBL 72          @@@@ ycur Yend-1 X-1
+RCL ST Z        @@@@ X-1 ycur Yend-1 X-1
+AGRAPH
+R↓              @@@@ ycur Yend-1 X-1
+3
+-               @@@@ ycur(updated) Yend-1 X-1
+X>Y?
+GTO 72
+RTN
+LBL 71
+@@@@ Line going down
+1
+STO- ST T
+R↓              @@@@ Ystart Yend X-1
+1
+STO- ST Z
+R↓              @@@@ Ystart Yend-1 X-1
+LBL 18          @@@@ Ycur Yend-1 X-1
+RCL ST Z        @@@@ X-1 Ycur Yend-1 X-1
+AGRAPH
+R↓              @@@@ yc yn+1 xn-1
+3
++               @@@@ yc yn+1 xn-1
+X<Y?
+GTO 18
+RTN
+LBL 51               @@@@ Draw BIG Pix  (assumes Alpha is set)
 FUNC 00
 1
 -
@@ -1249,7 +1663,7 @@ X<>Y
 X<>Y
 AGRAPH
 RTN
-LBL 58                    @@@@ HLINE
+LBL 58               @@@@ HLINE
 FUNC 00
 XEQ 55
 GTO 27
@@ -1258,7 +1672,7 @@ GTO 27
 PIXEL
 LBL 27
 RTN
-LBL 48                    @@@@ VLINE
+LBL 48               @@@@ VLINE
 FUNC 00
 XEQ 45
 GTO 28
@@ -1268,7 +1682,7 @@ X<>Y
 PIXEL
 LBL 28
 RTN
-LBL 45                    @@@@ X Out Of Range
+LBL 45               @@@@ X Out Of Range
 FUNC 00
 X≤0?
 RTNYES
@@ -1276,7 +1690,7 @@ RCL "ResX"
 X<Y?
 RTNYES
 RTNNO
-LBL 55                    @@@@ Y Out Of Range
+LBL 55               @@@@ Y Out Of Range
 FUNC 00
 X≤0?
 RTNYES
@@ -1284,96 +1698,106 @@ RCL "ResY"
 X<Y?
 RTNYES
 RTNNO
-LBL 46                    @@@@ XR->XI
+LBL 46               @@@@ XR->XI
 FUNC 11
 RCL- "LLIM"
 RCL÷ "XWID"
 1
 +
 RTN
-LBL 47                    @@@@ XI->XR
+LBL 47               @@@@ XI->XR
 FUNC 11
 1
 -
 RCL× "XWID"
 RCL+ "LLIM"
 RTN
-LBL 56                    @@@@ YR->YI
+LBL 56               @@@@ YR->YI
 FUNC 11
 RCL- "YMAX"
 RCL÷ "YWID"
 1
 +
 RTN
-LBL 57                    @@@@ YI->YR
+LBL 57               @@@@ YI->YR
 FUNC 11
 1
 -
 RCL× "YWID"
 RCL+ "YMAX"
 RTN
+LBL 39               @@@@ Swap rng & box
+FUNC 00
+SF 25
+RCL "ZLLIM"
+FC?C 25
+GTO 38
+SF 25
+RCL "ZULIM"
+FC?C 25
+GTO 38
+SF 25
+RCL "LLIM"
+FC?C 25
+GTO 38
+SF 25
+RCL "ULIM"
+FC?C 25
+GTO 38
+STO "ZULIM"
+R↓
+STO "ZLLIM"
+R↓
+STO "ULIM"
+X<>Y
+STO "LLIM"
+"XMIN: "
+ARCL ST X
+R↓
+├"[LF]XMAX: "
+ARCL ST X
+R↓
+AVIEW
+RTN
+LBL 38
+"ERR: Range or "
+"├ unset"
+AVIEW
+RTN
+LBL 74   @@@@ Set any unset global variables to defaults
+10
+SF 25
+RCL "ULIM"
+FC?C 25
+STO "ULIM"
+-10
+SF 25
+RCL "LLIM"
+FC?C 25
+STO "LLIM"
+6
+SF 25
+RCL "YMAX"
+FC?C 25
+STO "YMAX"
+-6
+SF 25
+RCL "YMIN"
+FC?C 25
+STO "YMIN"
+0
+SF 25
+RCL "YSTP"
+FC?C 25
+STO "YSTP"
+0
+SF 25
+RCL "STEP"
+FC?C 25
+STO "STEP"
+RTN
 END
 #+end_src
-
-** Fat lines
-
-#+BEGIN_SRC text
- 1
- 2
- 3                                                                                                                                                            ***
- 4                                                                                                                                                    ***     *N*                                            2 7 pix writes       1 7 pix blat for 10      1 7 pix blat for 7
- 5                                                                                                                                            ***     *N*     ***                                            for a 10 pix line    pix line with >2 pad     pix line with any pad
- 6                                                                                                                                    ***     *N*     ***     ---                                                                  Ex A       Ex B          Ex A        Ex B
- 7                                                                                                                            ***     *N*     ***     ---     ---                                            1 . >▒  ▒             1 ▒  ▒     1 . >▒        1 . >▒      1 ▒ >▒
- 8                                                                                                                    ***     *N*     ***     ---     ---     ---                                              .  ▒  ▒               ▒  ▒       .  ▒          .  ▒        ▒  ▒
- 9                                                                                                            ***     *N*     ***     ---     ---     ---     ---                                              .  ▒  ▒               ▒  ▒       .  ▒          .  ▒        ▒  ▒
-10                                                                                                    ***     *N*     ***     ---     ---     ---     ---     ---                                              .  ▒ >▒               ▒ >▒       .  ▒          .  ▒        .  ▒
-11                                                                                            ***     *N*     ***     ---     ---     ---     ---     ---     ---                                              .  ▒  ▒               .  ▒       .  ▒          ▒  ▒        .  ▒
-12                                                                                    ***     *N*     ***     ---     ---     ---     ---     ---     ---     ---                                              .  ▒  ▒               .  ▒       .  ▒          ▒  ▒        .  ▒
-13                                                                            ***     *N*     ***     ---     ---     ---     ---     ---     ---     --- 7   --- 8                                          7 .  ▒  ▒             7 .  ▒     7 ▒  ▒        7 ▒  ▒      7 .  ▒
-14                                                                    ***     *N*     ***     ---     ---     ---     ---     ---     --- 6   --- 7  +++     +++                                               .  .  ▒               .  ▒       ▒  ▒
-15                                                            ***     *N*     ***     ---     ---     ---     ---     --- 5   --- 6  +++     +++     +++     +++                                               .  .  ▒               .  ▒       ▒  ▒
-16                                                    ***     *N*     ***     ---     ---     ---     --- 4   --- 5  +++     +++     +++     +++     +++     +++                                           10  .  .  ▒            10 .  ▒       ▒  ▒
-17                                            ***     *N*     ***     ---     ---     --- 3   --- 4  +++     +++     +++     +++     +++     +++     +++     +++
-18                                    ***     *N*     ***     ---     --- 2   --- 3  +++     +++     +++     +++     +++     +++     +++     +++     +++     +++
-19                            ***     *N*     ***     --- 1   --- 2  +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++
-20                    ***     *N*     ***     --- 1  +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++
-21            ***     *N*     ***    +++ 1   +++ 1   +++ 2   +++ 2   +++ 3   +++ 3   +++ 4   +++ 4   +++ 5   +++ 5   +++ 6   +++ 6   +++ 7   +++ 7   +++ 8   +++ 8
-22   ▒▒▒*    ▒▒N*    ▒▒▒*    ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒
-23   ▒ON*    ▒O▒*    ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒
-24   ▒▒▒*    ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒
-     3       3(*)    3(*)    3       3       4       4       5       5       6       6       7       7       7*2     7*2     7*2     7*2     7*2     7*2     7*2
-     -       -       -       -       3(1)    4(1)    4(1)    5(2)    5(3)    6(3)    6(4)    7(4)    7(7)    7(5)    7(6)    7(6)    7       7       7*2     7*2
-
-
-             -       -       -      3(1)    4(1)    4(1)    5(2)    5(3)    6(3)    6(4  )  7(4)    7(7)    7(5)    7(6)    7(6)    7       7       7*2     7*2
-            3(*)    3(*)    3       3       4       4       5       5       6       6       7       7       7*2     7*2     7*2     7*2     7*2     7*2     7*2
- 1          ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒
- 2          ▒O▒*    ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒     ▒O▒
- 3          ▒▒N*    ▒▒▒*    ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒     ▒▒▒
- 4           ***     *N*     ***    +++ 1   +++ 1   +++ 2   +++ 2   +++ 3   +++ 3   +++ 4   +++ 4   +++ 5   +++ 5   +++ 6   +++ 6   +++ 7   +++ 7   +++ 8   +++ 8
- 5                   ***     *N*     ***     --- 1  +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++
- 6                           ***     *N*     ***     --- 1   --- 2  +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++     +++                                                              API:  START_COL START_ROW END_ROW START_PAD
- 7                                   ***     *N*     ***     ---     --- 2   --- 3  +++     +++     +++     +++     +++     +++     +++     +++     +++     +++                                                                    Direction: up 1  down -1
- 8                                           ***     *N*     ***     ---     ---     --- 3   --- 4  +++     +++     +++     +++     +++     +++     +++     +++                                                                    delta for up 23->4  =>  23-2=21->4+2=6  => (21- 6+1)=16 bot=16/2=8+3 top=16-8=8+3
- 9                                                   ***     *N*     ***     ---     ---     ---     --- 4   --- 5  +++     +++     +++     +++     +++     +++                                                                                 23->5  =>  23-2=21->5+2=7  => (21- 7+1)=15 bot=15/2=7+3 top=15-7=8+3
-10                                                           ***     *N*     ***     ---     ---     ---     ---     --- 5   --- 6  +++     +++     +++     +++                                                                                 23->6  =>  23-2=21->6+2=8  => (21- 8+1)=14 bot=14/2=7+3 top=14-7=7+3
-11                                                                   ***     *N*     ***     ---     ---     ---     ---     ---     --- 6   --- 7  +++     +++                                                                                 23->7  =>  23-2=21->7+2=9  => (21- 9+1)=13 bot=13/2=6+3 top=13-6=7+3
-12                                                                           ***     *N*     ***     ---     ---     ---     ---     ---     ---     --- 7   --- 8                                                                              23->8  =>  23-2=21->8+2=10 => (21-10+1)=12 bot=12/2=6+3 top=12-6=6+3
-13                                                                                   ***     *N*     ***     ---     ---     ---     ---     ---     ---     ---                                                                          top segment:  Start at (start_row-1, start_col) & blit down
-14                                                                                           ***     *N*     ***     ---     ---     ---     ---     ---     ---
-15                                                                                                   ***     *N*     ***     ---     ---     ---     ---     ---
-16                                                                                                           ***     *N*     ***     ---     ---     ---     ---
-17                                                                                                                   ***     *N*     ***     ---     ---     ---
-18                                                                                                                           ***     *N*     ***     ---     ---
-19                                                                                                                                   ***     *N*     ***     ---
-20                                                                                                                                           ***     *N*     ***
-21                                                                                                                                                   ***     *N*
-22                                                                                                                                                           ***
-23
-24
-
-#+END_SRC
 
 * Menus
 
@@ -1412,8 +1836,8 @@ CLMENU
 KEY 1 XEQ 03
 "FPLT"
 KEY 2 XEQ 04
-@@@@ "RSV0"
-@@@@ KEY 3 XEQ 05
+"EVAL"
+KEY 3 XEQ 05
 @@@@ "RSV1"
 @@@@ KEY 4 XEQ 06
 "PICF"
@@ -1455,8 +1879,8 @@ RTN
 LBL 04               @@@@ Action for menu key FPLT
 XEQ "FPLT"
 RTN
-LBL 05               @@@@ Action for menu key RSV0
-XEQ "RSV0"
+LBL 05               @@@@ Action for menu key FEVL
+XEQ "FEVL"
 RTN
 LBL 06               @@@@ Action for menu key RSV1
 XEQ "RSV1"

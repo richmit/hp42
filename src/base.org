@@ -59,7 +59,7 @@ you still have to use the BASE menu to enter some hexadecimal digits.
 
 The 42 can deal with 64-bit binary numbers, but it can't display them -- when you try it displays them in hexadecimal.  The =BVIEW= program remedies this
 issue and works just fine on a standard free42 screen.  The remainder of the functionality is encapsulated into one program that presents a multitude of bit
-manipulation tools in a single, hierarchical menu stricture.  So you only end up with three programs on your 42s -- important for the DM42 because of it's
+manipulation tools in a single, hierarchical menu stricture.  So you only end up with two programs on your 42s -- important for the DM42 because of it's
 limited RAM.
 
 * =BVIEW=: Printing 64-bit Binary Numbers
@@ -70,7 +70,7 @@ limited RAM.
 @@@@ IN:  X: An integer
 @@@@ OUT: Nothing -- prints to screen
 @@@@ FLG: 81: TEMP: Set: We are on DM42;            Clear: We are not on DM42
-@@@@ FLG: 01: PREF: Set: BVIEW jumps to BASE menu;  Clear: BVIEW won't jump to BASE menu
+@@@@ FLG: 01: PREF: Reserved
 @@@@ FLG: 02: PREF: Set: BVIEW prints WSIZE digits; Clear: BVIEW prints 64 digits
 @@@@ FAQ: If XEQ while system BASE menu is active, returns to same menu.
 @@@@ BUG: Sometimes gets the system base menu to return to wrong. ;)
@@ -216,15 +216,12 @@ GTO 00
 FC? 81
 GTO 19
 @@@@ On DM42.  Hack to keep screen clean
-EXITALL
 GETKEY
 CLLCD
 "BVIEW FINISHED"
 AVIEW
 LBL 19
 XEQ IND "SBMD"
-FC? 01
-EXITALL
 @@@@ Recall original X
 RCL "X"
 RTN
@@ -302,28 +299,28 @@ END
 | S&R:SRn          |      87 | Shift Y Right X Bits                            |
 | S&R:RLn          |      86 | Rotate Y Left by X bits                         |
 | S&R:RRn          |      85 | Rotate Y Right by X bits                        |
-| S&R:             |         |                                                 |
+| S&R:▒▒▒▒         |         |                                                 |
 | S&R:BVIEW        |      76 |                                                 |
 |------------------+---------+-------------------------------------------------|
 | S&R:LJ           |      82 | Left Justify Bits                               |
 | S&R:RJ           |      83 | Right Justify Bits                              |
 | S&R:SHFXY        |      84 | Shift X by Y Bits (left when Y negative)        |
 | S&R:ROTXY        |         |                                                 |
-| S&R:             |         |                                                 |
+| S&R:▒▒▒▒         |         |                                                 |
 | S&R:BVIEW        |      76 |                                                 |
 |------------------+---------+-------------------------------------------------|
 | S&R:SL           |      92 | Shift Left 1 Bit                                |
 | S&R:SR           |      91 | Shift Right 1 Bit                               |
 | S&R:RL           |      90 | Rotate Left 1 Bit                               |
 | S&R:RR           |      89 | Rotate Right 1 Bit                              |
-| S&R:             |         |                                                 |
+| S&R:▒▒▒▒         |         |                                                 |
 | S&R:BVIEW        |      76 |                                                 |
 |------------------+---------+-------------------------------------------------|
 | BITS:GETB        |      93 | Return the Xth bit of Y                         |
 | BITS:SB          |      95 | Set the Xth bit of Y                            |
 | BITS:CB          |      94 | Clear the Xth bit in Y                          |
-| BITS:            |         |                                                 |
-| BITS:            |         |                                                 |
+| BITS:▒▒▒▒        |         |                                                 |
+| BITS:▒▒▒▒        |         |                                                 |
 | BITS:BVIEW       |      76 |                                                 |
 |------------------+---------+-------------------------------------------------|
 | FUN:B#           |      99 | Count set bits                                  |
@@ -336,8 +333,8 @@ END
 | MASK:MSKL        |      96 | Create integer with left most X bits set        |
 | MASK:MSKR        |      97 | Create integer with right most X bits set       |
 | MASK:MSKn        |      98 | Create integer with Y set bits located at bit X |
-| MASK:            |         |                                                 |
-| MASK:            |         |                                                 |
+| MASK:▒▒▒▒        |         |                                                 |
+| MASK:▒▒▒▒        |         |                                                 |
 | MASK:BVIEW       |      76 |                                                 |
 |------------------+---------+-------------------------------------------------|
 | ARTH:AND         |         |                                                 |
@@ -360,12 +357,15 @@ END
 | 37               |    DECM | Set current base to decimal                     |
 | 38               |    OCTM | Set current base to octal                       |
 | 39               |    BINM | Set current base to binary                      |
-| CFG:31           |   WSIZE | Set WSIZE                                       |
-| CFG:32           | BSIGNED | Toggle signed/unsigned mode                     |
-| CFG:33           |   BWRAP | Toggle wrapped mode                             |
-| CFG:34           |      73 | Toggle BVIEW TODO                               |
-| CFG:35           |      74 | Toggle BVIEW TODO                               |
+| ▒▒▒▒             |       - |                                                 |
 | BMNU             |      75 | Switch to built in BASE menu                    |
+|------------------+---------+-------------------------------------------------|
+| 77               |   WSIZE | Set WSIZE                                       |
+| 32               | BSIGNED | Toggle signed/unsigned mode                     |
+| 33               |   BWRAP | Toggle wrapped mode                             |
+| ▒▒▒▒             |       - |                                                 |
+| 35               |      74 | Toggle BVIEW TODO                               |
+| ▒▒▒▒             |       - |                                                 |
 
 ** Menu Code
 
@@ -384,18 +384,18 @@ LBL "BASE"
 LBL 01            @@@@ Page 1 of menu BASE
 CLMENU
 "S&R"
-KEY 1 GTO 03
+KEY 1 GTO 04
 "BITS"
-KEY 2 GTO 04
+KEY 2 GTO 05
 "FUN"
-KEY 3 GTO 05
+KEY 3 GTO 06
 "MASK"
-KEY 4 GTO 06
+KEY 4 GTO 07
 "ARTH"
-KEY 5 GTO 07
+KEY 5 GTO 08
 "BVIEW"
 KEY 6 XEQ 76
-KEY 7 GTO 02
+KEY 7 GTO 03
 KEY 8 GTO 02
 KEY 9 GTO 00
 MENU
@@ -404,24 +404,38 @@ GTO 01
 LBL 02            @@@@ Page 2 of menu BASE
 CLMENU
 XEQ 36
-KEY 1 XEQ 08
+KEY 1 XEQ 09
 XEQ 37
-KEY 2 XEQ 09
+KEY 2 XEQ 10
 XEQ 38
-KEY 3 XEQ 10
+KEY 3 XEQ 11
 XEQ 39
-KEY 4 XEQ 11
-"CFG"
-KEY 5 GTO 12
+KEY 4 XEQ 12
 "BMNU"
 KEY 6 XEQ 75
 KEY 7 GTO 01
-KEY 8 GTO 01
+KEY 8 GTO 03
 KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 03            @@@@ Page 1 of menu S&R
+LBL 03            @@@@ Page 3 of menu BASE
+CLMENU
+XEQ 77
+KEY 1 XEQ 13
+XEQ 32
+KEY 2 XEQ 14
+XEQ 33
+KEY 3 XEQ 15
+XEQ 35
+KEY 5 XEQ 74
+KEY 7 GTO 02
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 03
+LBL 04            @@@@ Page 1 of menu S&R
 CLMENU
 "SLn"
 KEY 1 XEQ 88
@@ -433,13 +447,13 @@ KEY 3 XEQ 86
 KEY 4 XEQ 85
 "BVIEW"
 KEY 6 XEQ 76
-KEY 7 GTO 14
-KEY 8 GTO 13
+KEY 7 GTO 17
+KEY 8 GTO 16
 KEY 9 GTO 01
 MENU
 STOP
-GTO 03
-LBL 13            @@@@ Page 2 of menu S&R
+GTO 04
+LBL 16            @@@@ Page 2 of menu S&R
 CLMENU
 "LJ"
 KEY 1 XEQ 82
@@ -448,16 +462,16 @@ KEY 2 XEQ 83
 "SHFXY"
 KEY 3 XEQ 84
 "ROTXY"
-KEY 4 XEQ 15
+KEY 4 XEQ 18
 "BVIEW"
 KEY 6 XEQ 76
-KEY 7 GTO 03
-KEY 8 GTO 14
+KEY 7 GTO 04
+KEY 8 GTO 17
 KEY 9 GTO 01
 MENU
 STOP
-GTO 13
-LBL 14            @@@@ Page 3 of menu S&R
+GTO 16
+LBL 17            @@@@ Page 3 of menu S&R
 CLMENU
 "SL"
 KEY 1 XEQ 92
@@ -469,13 +483,13 @@ KEY 3 XEQ 90
 KEY 4 XEQ 89
 "BVIEW"
 KEY 6 XEQ 76
-KEY 7 GTO 13
-KEY 8 GTO 03
+KEY 7 GTO 16
+KEY 8 GTO 04
 KEY 9 GTO 01
 MENU
 STOP
-GTO 14
-LBL 04            @@@@ Page 1 of menu BITS
+GTO 17
+LBL 05            @@@@ Page 1 of menu BITS
 CLMENU
 "GETB"
 KEY 1 XEQ 93
@@ -488,8 +502,8 @@ KEY 6 XEQ 76
 KEY 9 GTO 01
 MENU
 STOP
-GTO 04
-LBL 05            @@@@ Page 1 of menu FUN
+GTO 05
+LBL 06            @@@@ Page 1 of menu FUN
 CLMENU
 "B#"
 KEY 1 XEQ 99
@@ -506,8 +520,8 @@ KEY 6 XEQ 76
 KEY 9 GTO 01
 MENU
 STOP
-GTO 05
-LBL 06            @@@@ Page 1 of menu MASK
+GTO 06
+LBL 07            @@@@ Page 1 of menu MASK
 CLMENU
 "MSKL"
 KEY 1 XEQ 96
@@ -520,119 +534,103 @@ KEY 6 XEQ 76
 KEY 9 GTO 01
 MENU
 STOP
-GTO 06
-LBL 07            @@@@ Page 1 of menu ARTH
+GTO 07
+LBL 08            @@@@ Page 1 of menu ARTH
 CLMENU
 "AND"
-KEY 1 XEQ 17
+KEY 1 XEQ 20
 "OR"
-KEY 2 XEQ 18
+KEY 2 XEQ 21
 "XOR"
-KEY 3 XEQ 19
+KEY 3 XEQ 22
 "NOT"
-KEY 4 XEQ 20
+KEY 4 XEQ 23
 "NEG"
-KEY 5 XEQ 21
+KEY 5 XEQ 24
 "BVIEW"
 KEY 6 XEQ 76
-KEY 7 GTO 16
-KEY 8 GTO 16
+KEY 7 GTO 19
+KEY 8 GTO 19
 KEY 9 GTO 01
 MENU
 STOP
-GTO 07
-LBL 16            @@@@ Page 2 of menu ARTH
+GTO 08
+LBL 19            @@@@ Page 2 of menu ARTH
 CLMENU
 "+"
-KEY 1 XEQ 22
+KEY 1 XEQ 25
 "-"
-KEY 2 XEQ 23
+KEY 2 XEQ 26
 "×"
-KEY 3 XEQ 24
+KEY 3 XEQ 27
 "÷"
-KEY 4 XEQ 25
+KEY 4 XEQ 28
 "MOD"
-KEY 5 XEQ 26
+KEY 5 XEQ 29
 "BVIEW"
 KEY 6 XEQ 76
-KEY 7 GTO 07
-KEY 8 GTO 07
+KEY 7 GTO 08
+KEY 8 GTO 08
 KEY 9 GTO 01
 MENU
 STOP
-GTO 16
-LBL 12            @@@@ Page 1 of menu CFG
-CLMENU
-XEQ 31
-KEY 1 XEQ 27
-XEQ 32
-KEY 2 XEQ 28
-XEQ 33
-KEY 3 XEQ 29
-XEQ 34
-KEY 4 XEQ 73
-XEQ 35
-KEY 5 XEQ 74
-KEY 9 GTO 02
-MENU
-STOP
-GTO 12
+GTO 19
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 08               @@@@ Action for menu key 36
+LBL 09               @@@@ Action for menu key 36
 HEXM
 RTN
-LBL 09               @@@@ Action for menu key 37
+LBL 10               @@@@ Action for menu key 37
 DECM
 RTN
-LBL 10               @@@@ Action for menu key 38
+LBL 11               @@@@ Action for menu key 38
 OCTM
 RTN
-LBL 11               @@@@ Action for menu key 39
+LBL 12               @@@@ Action for menu key 39
 BINM
 RTN
-LBL 15               @@@@ Action for menu key ROTXY
-ROTXY
-RTN
-LBL 17               @@@@ Action for menu key AND
-AND
-RTN
-LBL 18               @@@@ Action for menu key OR
-OR
-RTN
-LBL 19               @@@@ Action for menu key XOR
-XOR
-RTN
-LBL 20               @@@@ Action for menu key NOT
-NOT
-RTN
-LBL 21               @@@@ Action for menu key NEG
-BASE+/-
-RTN
-LBL 22               @@@@ Action for menu key +
-BASE+
-RTN
-LBL 23               @@@@ Action for menu key -
-BASE-
-RTN
-LBL 24               @@@@ Action for menu key ×
-BASE×
-RTN
-LBL 25               @@@@ Action for menu key ÷
-BASE÷
-RTN
-LBL 26               @@@@ Action for menu key MOD
-MOD
-RTN
-LBL 27               @@@@ Action for menu key 31
+LBL 13               @@@@ Action for menu key 77
 WSIZE
 RTN
-LBL 28               @@@@ Action for menu key 32
+LBL 14               @@@@ Action for menu key 32
 BSIGNED
 RTN
-LBL 29               @@@@ Action for menu key 33
+LBL 15               @@@@ Action for menu key 33
 BWRAP
+RTN
+LBL 18               @@@@ Action for menu key ROTXY
+ROTXY
+RTN
+LBL 20               @@@@ Action for menu key AND
+AND
+RTN
+LBL 21               @@@@ Action for menu key OR
+OR
+RTN
+LBL 22               @@@@ Action for menu key XOR
+XOR
+RTN
+LBL 23               @@@@ Action for menu key NOT
+NOT
+RTN
+LBL 24               @@@@ Action for menu key NEG
+BASE+/-
+RTN
+LBL 25               @@@@ Action for menu key +
+BASE+
+RTN
+LBL 26               @@@@ Action for menu key -
+BASE-
+RTN
+LBL 27               @@@@ Action for menu key ×
+BASE×
+RTN
+LBL 28               @@@@ Action for menu key ÷
+BASE÷
+RTN
+LBL 29               @@@@ Action for menu key MOD
+MOD
 RTN
 @@@@ Free labels start at: 30
 #+end_src
@@ -1273,7 +1271,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ Menu Label: WSIZE
-LBL 31
+LBL 77
 "W:"
 WSIZE?
 AIP
@@ -1296,15 +1294,6 @@ FS? 79
 "BWR•"
 FC? 79
 "BWRP"
-RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Menu Label: BVIEW 
-LBL 34
-FS? 01
-"BVM•"
-FC? 01
-"BVM"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1363,14 +1352,6 @@ FS? 69
 CF 81
 FS? 81
 ├"•"
-RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Toggle 01
-LBL 73
-FS?C 01
-RTN
-SF 01
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

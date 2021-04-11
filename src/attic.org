@@ -1,0 +1,325 @@
+# -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
+#+TITLE:       free42 Code Attic
+#+AUTHOR:      Mitch Richling
+#+EMAIL:       http://www.mitchr.me/
+#+DATE:        2021-03-19
+#+DESCRIPTION: A place to put old code I don't use, but don't want to delete
+#+LANGUAGE:    en
+#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil
+#+HTML_HEAD: <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
+#+HTML_HEAD: <style>body { min-width: 500px; max-width: 1024px; }</style>
+#+HTML_HEAD: <style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
+#+HTML_HEAD: <style>h1,h2,h3 { line-height: 1.4em; }</style>
+#+HTML_HEAD: <style>h1.title { font-size: 3em; }</style>
+#+HTML_HEAD: <style>h4,h5,h6 { font-size: 1em; }</style>
+#+HTML_HEAD: <style>.org-src-container { border: 1px solid #ccc; box-shadow: 3px 3px 3px #eee; font-family: Lucida Console, monospace; font-size: 80%; margin: 0px; padding: 0px 0px; position: relative; }</style>
+#+HTML_HEAD: <style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
+#+HTML_HEAD: <style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
+#+HTML_HEAD: <style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
+#+HTML_LINK_HOME: https://www.mitchr.me/
+#+HTML_LINK_UP: https://richmit.github.io/hp42/
+#+EXPORT_FILE_NAME: ../docs/attic
+
+#+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
+|        <r> | <l>              |
+|  *Author:* | /{{{author}}}/ |
+| *Updated:* | /{{{time(%Y-%m-%d %H:%M:%S)}}}/ |
+#+ATTR_HTML: :align center
+Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
+
+#+TOC: headlines 5
+
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+#   00   #    10   #    20   #    30   #    40   #    50   #    60   #    70   #    80   #    90   #   100   #   110   #   120   #   130   #   140   #   150   #   160   #
+# 234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+
+* Metadata
+
+This home for this HTML file is: https://richmit.github.io/hp42/base.html
+
+Files related to this document may be found on github: https://github.com/richmit/hp42
+
+Directory contents:
+#+ATTR_HTML: :border 0 :frame none :rules none :align center
+   | =src=     | - | The org-mode file that generated this HTML document            |
+   | =src_42s= | - | Ready to convert source listings for 42s code in this document |
+   | =docs=    | - | This html document                                             |
+   | =bin=     | - | Importable RAW program files                                   |
+
+* Introduction
+
+This is where old code goes... ;)
+
+* Tiny Number Printing
+
+** =TNPR=: Tiny number printer
+
+#+begin_src hp42s :tangle ../src_42s/attic/tnpr.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TNPR)
+@@@@ DSC: Tiny Number PRint
+@@@@ IN:  Z: Y coordinate for upper left point of character -- Top of screen is 1
+@@@@      Y: X coordinate for upper left point of character -- Left of screen is 1
+@@@@      X: Character number -- integer in [0, 28]
+@@@@ OUT: No return
+@@@@ UPD: 2021-02-24
+@@@@ BUG: Characters can be *VERY* tiny in high resolution modes on DM42
+@@@@ Designed to print numbers:
+@@@@    101010b Binary      | 1234567 Decimal    | 123e+45 Float | 123/456 Rational | 123 i56 Complex
+@@@@    1A8F10h Hexadecimal | 123,456 Decimal    | 12×10^3 Float | 123456° Degrees  | 123 ∡56 Complex
+@@@@    154823o Octal       | -123456 Signed Dec | 1.34567 Float | 
+@@@@ Characters can be underlined
+@@@@ Characters are 3x5 pixels in size.  Underlined characters are 3x7.
+@@@@   - Stock HP-42s screen: 32 characters across.  Two full lines on the screen.
+@@@@ Non-Underlined Character numbers:
+@@@@     00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21  22 23 24 25 26  27  28  29 30  31
+@@@@      0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F  e  -  +  ×  /  ^ UNK  ,  .  °  b   o   h   i  ∡ SPC
+@@@@     48 49 50 51 52 53 54 55 56 57 65 66 67 68 69 70 16 45 43 01 00 94  -- 23 46 19 98 111 104 105 23  32
+@@@@  C   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y                    Y  Y  Y              Y  Y                 Y  Y   Y
+@@@@  R   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y                    Y  Y  Y              Y  Y               
+@@@@  B   Y  Y                                               Y  Y                               
+@@@@  O   Y  Y  Y  Y  Y  Y  Y  Y                             Y  Y                               
+@@@@  H   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y     Y  Y
+@@@@ Add 40 to the above character number for the underlined version
+LBL "TNPR"
+FUNC 30      @@## REQ:free42>=2.5.24
+L4STK        @@## REQ:free42>=3.0
+IP
+XEQ IND ST X
+R↓
+AGRAPH
+RTN
+LBL 00       @@@@ CHAR: 0
+"•μ•"        @@@@ #b11111 #b10001 #b11111
+RTN
+LBL 01       @@@@ CHAR: 1
+"£•←"        @@@@ #b10010 #b11111 #b10000
+RTN
+LBL 02       @@@@ CHAR: 2
+"ÜÑ∡"        @@@@ #b11101 #b10101 #b10111
+RTN
+LBL 03       @@@@ CHAR: 3
+"μÑ•"        @@@@ #b10001 #b10101 #b11111
+RTN
+LBL 04       @@@@ CHAR: 4
+"π▒•"        @@@@ #b00111 #b00100 #b11111
+RTN
+LBL 05       @@@@ CHAR: 5
+"∡ÑÜ"        @@@@ #b10111 #b10101 #b11101
+RTN
+LBL 06       @@@@ CHAR: 6
+"•ÑÜ"        @@@@ #b11111 #b10101 #b11101
+RTN
+LBL 07       @@@@ CHAR: 7
+"××•"        @@@@ #b00001 #b00001 #b11111
+RTN
+LBL 08       @@@@ CHAR: 8
+"•Ñ•"        @@@@ #b11111 #b10101 #b11111
+RTN
+LBL 09       @@@@ CHAR: 9
+"∡Ñ•"        @@@@ #b00111 #b00101 #b11111
+RTN
+LBL 10       @@@@ CHAR: A
+"•Σ•"        @@@@ #b11111 #b00101 #b11111
+RTN
+LBL 11       @@@@ CHAR: B
+"•Ñ[LF]"     @@@@ #b11111 #b10101 #b01010
+RTN
+LBL 12       @@@@ CHAR: C
+"↓μμ"        @@@@ #b01110 #b10001 #b10001
+RTN
+LBL 13       @@@@ CHAR: D
+"•μ↓"        @@@@ #b11111 #b10001 #b01110
+RTN
+LBL 14       @@@@ CHAR: E
+"•Ñμ"        @@@@ #b11111 #b10101 #b10001
+RTN
+LBL 15       @@@@ CHAR: F
+"•Σ×"        @@@@ #b11111 #b00101 #b00001
+RTN
+LBL 16       @@@@ CHAR: e
+"[LF]ÑÑ"     @@@@ #b01010 #b10101 #b10101
+RTN
+LBL 17       @@@@ CHAR: -
+"▒▒▒"        @@@@ #b00100 #b00100 #b00100
+RTN
+LBL 18       @@@@ CHAR: +
+"▒↓▒"        @@@@ #b01110 #b00100 #b01110
+RTN
+LBL 19       @@@@ CHAR: ×
+"[LF]▒[LF]"  @@@@ #b01010 #b00100 #b01010
+RTN
+LBL 20       @@@@ CHAR: /
+"ᴇ▒∫"        @@@@ #b11000 #b00100 #b00011
+RTN
+LBL 21       @@@@ CHAR: ^
+"√×√"        @@@@ #b00010 #b000010 #b00010
+RTN
+LBL 22       @@@@ CHAR: :
+"÷[LF]÷"     @@@@ #b00000 #b01010 #b00000
+"•••"        @@@@ #b11111 #b11111 #b11111
+RTN
+LBL 23       @@@@ CHAR: ,
+"←¿÷"        @@@@ #b10000 #b01000 #b00000
+RTN
+LBL 24       @@@@ CHAR: .
+"÷←÷"        @@@@ #b00000 #b10000 #b00000
+RTN
+LBL 25       @@@@ degrees
+"√Σ√"        @@@@ #b00010 #b00101 #b00010
+RTN
+LBL 26       @@@@ CHAR: b
+"•Å¿"        @@@@ #b11111 #b10100 #b01000
+RTN
+LBL 27       @@@@ CHAR: o
+"≠£≠"        @@@@ #b01100 #b10010 #b01100
+RTN
+LBL 28       @@@@ CHAR: h
+"•▒ᴇ"        @@@@ #b11111 #b10100 #b11000
+RTN
+LBL 29       @@@@ CHAR: i
+"÷Ü÷"        @@@@ #b00000 #b11101 #b00000
+RTN
+LBL 30       @@@@ CHAR: ∡
+"ᴇÅ£"        @@@@ #b11000 #b10100 #b10010
+RTN
+LBL 31       @@@@ CHAR: SPC
+"÷÷÷"        @@@@ #b00000 #b00000 #b00000
+RTN
+LBL 40       @@@@ CHAR: 0
+"_Q_"        @@@@ #b1011111 #b1010001 #b1011111
+RTN
+LBL 41       @@@@ CHAR: 1
+"R_P"        @@@@ #b1010010 #b1011111 #b1010000
+RTN
+LBL 42       @@@@ CHAR: 2
+"]UW"        @@@@ #b1011101 #b1010101 #b1010111
+RTN
+LBL 43       @@@@ CHAR: 3
+"QU_"        @@@@ #b1010001 #b1010101 #b1011111
+RTN
+LBL 44       @@@@ CHAR: 4
+"GD_"        @@@@ #b1000111 #b1000100 #b1011111
+RTN
+LBL 45       @@@@ CHAR: 5
+"WU]"        @@@@ #b1010111 #b1010101 #b1011101
+RTN
+LBL 46       @@@@ CHAR: 6
+"_U]"        @@@@ #b1011111 #b1010101 #b1011101
+RTN
+LBL 47       @@@@ CHAR: 7
+"AA_"        @@@@ #b1000001 #b1000001 #b1011111
+RTN
+LBL 48       @@@@ CHAR: 8
+"_U_"        @@@@ #b1011111 #b1010101 #b1011111
+RTN
+LBL 49       @@@@ CHAR: 9
+"GE_"        @@@@ #b1000111 #b1000101 #b1011111
+RTN
+LBL 50       @@@@ CHAR: A
+"_E_"        @@@@ #b1011111 #b1000101 #b1011111
+RTN
+LBL 51       @@@@ CHAR: B
+"_UJ"        @@@@ #b1011111 #b1010101 #b1001010
+RTN
+LBL 52       @@@@ CHAR: C
+"NQQ"        @@@@ #b1001110 #b1010001 #b1010001
+RTN
+LBL 53       @@@@ CHAR: D
+"_QN"        @@@@ #b1011111 #b1010001 #b1001110
+RTN
+LBL 54       @@@@ CHAR: E
+"_UQ"        @@@@ #b1011111 #b1010101 #b1010001
+RTN
+LBL 55       @@@@ CHAR: F
+"_EA"        @@@@ #b1011111 #b1000101 #b1000001
+RTN
+LBL 56       @@@@ CHAR: e
+"JUU"        @@@@ #b1001010 #b1010101 #b1010101
+RTN
+LBL 57       @@@@ CHAR: -
+"DDD"        @@@@ #b1000100 #b1000100 #b1000100
+RTN
+LBL 58       @@@@ CHAR: +
+"NDN"        @@@@ #b1001110 #b1000100 #b1001110
+RTN
+LBL 59       @@@@ CHAR: ×
+"JDJ"        @@@@ #b1001010 #b1000100 #b1001010
+RTN
+LBL 60       @@@@ CHAR: /
+"XDC"        @@@@ #b1011000 #b1000100 #b1000011
+RTN
+LBL 61       @@@@ CHAR: ^
+"BAB"        @@@@ #b1000010 #b1000001 #b1000010
+RTN
+LBL 62       @@@@ CHAR: :
+"@J@"        @@@@ #b1000000 #b1001010 #b1000000
+"___"        @@@@ #b1011111 #b1011111 #b1011111
+RTN
+LBL 63       @@@@ CHAR: ,
+"PH@"        @@@@ #b1010000 #b1001000 #b1000000
+RTN
+LBL 64       @@@@ CHAR: .
+"@P@"        @@@@ #b1000000 #b1010000 #b1000000
+RTN
+LBL 65       @@@@ degrees
+"BEB"        @@@@ #b1000010 #b1000101 #b1000010
+RTN
+LBL 66       @@@@ CHAR: b
+"_TH"        @@@@ #b1011111 #b1010100 #b1001000
+RTN
+LBL 67       @@@@ CHAR: o
+"LRL"        @@@@ #b1001100 #b1010010 #b1001100
+RTN
+LBL 68       @@@@ CHAR: h
+"_TX"        @@@@ #b1011111 #b1010100 #b1011000
+RTN
+LBL 69       @@@@ CHAR: i
+"@]@"        @@@@ #b1000000 #b1011101 #b1000000
+RTN
+LBL 70       @@@@ CHAR: ∡
+"XTR"        @@@@ #b1011000 #b1010100 #b1010010
+RTN
+LBL 71       @@@@ CHAR: SPC
+"@@@"        @@@@ #b1000000 #b1000000 #b1000000
+RTN
+END
+#+END_SRC
+
+** =PATN=: Test =TNPR= by printing all characters
+
+#+begin_src hp42s :tangle ../src_42s/attic/tnpr.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PATN)
+@@@@ DSC: Print All Tiny Number Characters
+LBL "PATN"
+CLLCD
+0.031
+STO 00
+LBL 00
+1
+RCL 00
+4
+×
+1
++
+RCL 00
+IP
+XEQ "TNPR"
+8
+RCL 00
+4
+×
+1
++
+RCL 00
+40
++
+IP
+XEQ "TNPR"
+ISG 00
+GTO 00
+RTN
+END
+#+END_SRC
+

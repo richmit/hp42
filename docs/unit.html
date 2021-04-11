@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-11 Sun 16:53 -->
+<!-- 2021-04-11 Sun 16:55 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Custom Unit Conversion Factors</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-11 16:53:10</i></td>
+<td class="org-left"><i>2021-04-11 16:55:24</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,21 +241,21 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org1d8e02c">1. Metadata</a></li>
-<li><a href="#orgc78fa1d">2. Introduction</a></li>
-<li><a href="#orgc71fe4a">3. Units</a>
+<li><a href="#org7067b66">1. Metadata</a></li>
+<li><a href="#orgc90796b">2. Introduction</a></li>
+<li><a href="#org212eaff">3. Units</a>
 <ul>
-<li><a href="#orgf2d0616">3.1. Conversion Factors</a></li>
-<li><a href="#org111fcdb">3.2. Code</a></li>
+<li><a href="#org5b4b66b">3.1. Conversion Factors</a></li>
+<li><a href="#org93bd0a7">3.2. Code</a></li>
 </ul>
 </li>
-<li><a href="#orgac0fb67">4. EOF</a></li>
+<li><a href="#orgd3f2c51">4. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org1d8e02c" class="outline-2">
-<h2 id="org1d8e02c"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org7067b66" class="outline-2">
+<h2 id="org7067b66"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/unit.html">https://richmit.github.io/hp42/unit.html</a>
@@ -307,8 +307,8 @@ Directory contents:
 </div>
 </div>
 
-<div id="outline-container-orgc78fa1d" class="outline-2">
-<h2 id="orgc78fa1d"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-orgc90796b" class="outline-2">
+<h2 id="orgc90796b"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 This application has a few unit conversions for temperatures; however, the focus is on a nice way to organize and recall various conversion factors I
@@ -318,19 +318,19 @@ frequently use.  That is to say, I don't really want to convert "in" to "cm", in
 <p>
 Aside from the <code>TEMP</code> menu, all of the menus have the same structure.  The first menu key is the "base" unit for that page.  Pressing any menu key will push
 a conversion factor for the given unit to the "base" unit to the stack.  For example, if the left most menu is "mm" then pressing the "in" button will push
-0.393700787402 to the stack &#x2013; the value you would multiply by to convert from inches to millimeters or divide by to convert from millimeters to inches.
+25.4 to the stack &#x2013; the value you would multiply by to convert from inches to millimeters or divide by to convert from millimeters to inches.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgc71fe4a" class="outline-2">
-<h2 id="orgc71fe4a"><span class="section-number-2">3</span> Units</h2>
+<div id="outline-container-org212eaff" class="outline-2">
+<h2 id="org212eaff"><span class="section-number-2">3</span> Units</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgf2d0616" class="outline-3">
-<h3 id="orgf2d0616"><span class="section-number-3">3.1</span> Conversion Factors</h3>
+<div id="outline-container-org5b4b66b" class="outline-3">
+<h3 id="org5b4b66b"><span class="section-number-3">3.1</span> Conversion Factors</h3>
 <div class="outline-text-3" id="text-3-1">
-<table id="orgb98b38f" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
+<table id="orge62b091" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
 
 
 <colgroup>
@@ -816,8 +816,8 @@ a conversion factor for the given unit to the "base" unit to the stack.  For exa
 </div>
 </div>
 
-<div id="outline-container-org111fcdb" class="outline-3">
-<h3 id="org111fcdb"><span class="section-number-3">3.2</span> Code</h3>
+<div id="outline-container-org93bd0a7" class="outline-3">
+<h3 id="org93bd0a7"><span class="section-number-3">3.2</span> Code</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"UNIT"</span> tbl <span style="color: #fa8072;">"stay"</span> <span style="color: #fa8072;">"up"</span> (<span style="color: #00ffff;">lambda</span> (row) (<span style="color: #00ffff;">cl-destructuring-bind</span> (menu cfactor desc) row
@@ -1179,8 +1179,8 @@ a conversion factor for the given unit to the "base" unit to the stack.  For exa
 </div>
 </div>
 
-<div id="outline-container-orgac0fb67" class="outline-2">
-<h2 id="orgac0fb67"><span class="section-number-2">4</span> EOF</h2>
+<div id="outline-container-orgd3f2c51" class="outline-2">
+<h2 id="orgd3f2c51"><span class="section-number-2">4</span> EOF</h2>
 <div class="outline-text-2" id="text-4">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1191,7 +1191,7 @@ a conversion factor for the given unit to the "base" unit to the stack.  For exa
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-11 Sun 16:53 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-11 Sun 16:55 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

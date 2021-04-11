@@ -159,19 +159,25 @@ a conversion factor for the given unit to the "base" unit to the stack.  For exa
 ** Code
 
 #+BEGIN_SRC elisp :var tbl=units :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/unit/unit.hp42s"
-(MJR-generate-42-menu-code "UNIT" tbl "stay" "up" (lambda (row) (cl-destructuring-bind (menu cfactor desc) row
-                                                                  (let ((print-desc 't))    ;; Set to NIL to not print description
-                                                                    (let* ((dlen (length desc))
-                                                                           (dsc1 (if (> dlen 0)
-                                                                                  (substring desc 0 (min dlen 15))))
-                                                                           (dsc2 (if (> dlen 14)
-                                                                                     (substring desc 15 (min dlen 22)))))
-                                                                      (mapconcat #'identity
-                                                                                 (cl-remove nil (flatten-list (list (split-string (message "%s" cfactor))
-                                                                                                                    (and print-desc dsc1 (message "\"%s\"" dsc1))
-                                                                                                                    (and print-desc dsc2 (message "├\"%s\"" dsc2))
-                                                                                                                    (and print-desc (or dsc1 dsc2) "AVIEW"))))
-                                                                                 "\n")))))))
+(MJR-generate-42-menu-code "UNIT" 
+                           tbl
+                           "stay"
+                           "up" 
+                           (lambda (row) 
+                             (cl-destructuring-bind (menu cfactor desc) row
+                               (let ((print-desc 't))    ;; Set to NIL to not print description
+                                 (let* ((dlen (length desc))
+                                        (dsc1 (if (> dlen 0)
+                                                  (substring desc 0 (min dlen 15))))
+                                        (dsc2 (if (> dlen 14)
+                                                  (substring desc 15 (min dlen 22)))))
+                                   (mapconcat #'identity
+                                              (cl-remove nil (flatten-list
+                                                              (list (split-string (message "%s" cfactor))
+                                                                    (and print-desc dsc1 (message "\"%s\"" dsc1))
+                                                                    (and print-desc dsc2 (message "├\"%s\"" dsc2))
+                                                                    (and print-desc (or dsc1 dsc2) "AVIEW"))))
+                                              "\n")))))))
 #+END_SRC
 
 #+RESULTS:

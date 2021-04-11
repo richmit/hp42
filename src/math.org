@@ -931,11 +931,48 @@ END
 
 * Polynomials
 
-** =QUADE=: Solve Quadratic Equation (Coef on Stack)
+** =POLY=: A collection of polynomial tools
+
+#+ATTR_HTML: :align center :frame box :rules all
+#+NAME:POLY
+| Menu  | Program |                              | Inputs           | Output              |
+|-------+---------+------------------------------+------------------+---------------------|
+| QUADE |      99 | Solve quadratic: Ax^2+Bx+C=0 | Z: A Y: B X: C   | Y: root 1 X: root 2 |
+| PEVL  |      98 | Evaluate polynomial P @ X    | Y: P matrix X: X | X: P(x)             |
+
+*** Code for Menu
+
+#+BEGIN_SRC elisp :var tbl=POLY :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+(MJR-generate-42-menu-code "POLY" tbl "stay" "exit" #'MJR-custom-x-gen)
+#+END_SRC
+
+#+RESULTS:
+#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:POLY)
+@@@@ DSC: Auto-generated menu program
+LBL "POLY"
+LBL 01            @@@@ Page 1 of menu POLY
+CLMENU
+"QUADE"
+KEY 1 XEQ 99
+"PEVL"
+KEY 2 XEQ 98
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 00 @@@@ Application Exit
+EXITALL
+RTN
+@@@@ Free labels start at: 2
+#+end_src
+
+*** Local functions for =POLY= menu
 
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:QUADE)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Solve quadratic equation: ax^2+bx+c=0
+@@@@ NAM: QUADE 99
 @@@@ IN:  Z: a
 @@@@      Y: b
 @@@@      X: c
@@ -944,7 +981,7 @@ END
 @@@@ TST: free42_3.0
 @@@@ BUG: No error checking
 @@@@ UPD: 2021-04-02
-LBL "QUADE"
+LBL 99
 FUNC 32              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 -4
@@ -969,21 +1006,18 @@ RCL ST Z
 RCL ST Z
 +
 RTN
-END
-#+END_SRC
 
-** =PLYE=: Evaluate a Polynomial (Coef in Matrix)
-
-#+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PLYE)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Evaluate a polynomial
+@@@@ NAM: PLYE 98
 @@@@ IN:  Y: Matrix with polynomial coefficients.  DIM of 1xn, nx1, whatever...
 @@@@      X: Value at which polynomial should be evaluated
 @@@@ OUT: Y: original polynomial matrix
 @@@@      X: value of polynomial evaluated at X
+@@@@ LBL: Used: 97
 @@@@ TST: free42_3.0
 @@@@ UPD: 2021-04-03
-LBL "PLYE"
+LBL 98
 FUNC 21              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 X<>Y
@@ -991,14 +1025,16 @@ LSTO "TMPM"
 INDEX "TMPM"
 WRAP
 0
-LBL 01
+LBL 97
 RCL× ST Z
 RCLEL
 +
 J+
 FC? 77
-GTO 32
+GTO 97
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 #+END_SRC
 
@@ -1024,112 +1060,158 @@ RTN
 END
 #+END_SRC
 
-* 3D Vector Menu
+* =VEC3=: 3D Vector Application
 
 This is a simple little application that makes working with 3D vectors less painfull.  
 
 #+ATTR_HTML: :align center :frame box :rules all
-|-------+---------------------------------------------------------------------|
-| Menu  |                                                                     |
-|-------+---------------------------------------------------------------------|
-| →V    | Put stack elements X, Y, & Z into a vector: [Z, Y, X]               |
-| V→    | Vector contents to stack. [A, B, C] => X: C, Y: B, Z: A             |
-| DOT   | Dot product                                                         |
-| CROSS | Cross product                                                       |
-| MAG   | Euculidian magnitude                                                |
-| VVIEW | View a vector one element at a time -- press =R/S= for next element |
-|-------+---------------------------------------------------------------------|
+#+NAME:VEC3
+| Menu  | Target |                                                                     |
+|-------+--------+---------------------------------------------------------------------|
+| →V    |     99 | Put stack elements X, Y, & Z into a vector: [Z, Y, X]               |
+| V→    |     98 | Vector contents to stack. [A, B, C] => X: C, Y: B, Z: A             |
+| DOT   |        | Dot product                                                         |
+| CROSS |        | Cross product                                                       |
+| MAG   |     97 | Euculidian magnitude                                                |
+| VVIEW |     96 | View a vector one element at a time -- press =R/S= for next element |
+|-------+--------+---------------------------------------------------------------------|
 
-#+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
+** Code for Menu
+
+#+BEGIN_SRC elisp :var tbl=VEC3 :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+(MJR-generate-42-menu-code "VEC3" tbl "stay" "exit" #'MJR-custom-x-gen)
+#+END_SRC
+
+#+RESULTS:
+#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:VEC3)
-@@@@ DSC: Handy menu making 3D vectors easy to manipulate
-@@@@ IN:  N/A
-@@@@ OUT: N/A
-@@@@ TST: free42_3.0
-@@@@ UPD: 2021-04-05
-LBL "3VEC"
-L4STK
-LBL 01
+@@@@ DSC: Auto-generated menu program
+LBL "VEC3"
+LBL 01            @@@@ Page 1 of menu VEC3
 CLMENU
 "→V"
-KEY 1 XEQ 02
+KEY 1 XEQ 99
 "V→"
-KEY 2 XEQ 03
+KEY 2 XEQ 98
 "DOT"
-KEY 3 XEQ 04
+KEY 3 XEQ 02
 "CROSS"
-KEY 4 XEQ 05
+KEY 4 XEQ 03
 "MAG"
-KEY 5 XEQ 06
+KEY 5 XEQ 97
 "VVIEW"
-KEY 6 XEQ 07
+KEY 6 XEQ 96
 KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 00
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 02               @@@@ Action for menu key →V
+LBL 02               @@@@ Action for menu key DOT
+DOT
+RTN
+LBL 03               @@@@ Action for menu key CROSS
+CROSS
+RTN
+@@@@ Free labels start at: 4
+#+end_src
+
+** Local functions for =VEC3=
+
+#+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Create a vector from stack contents
+@@@@ NAM: →V 99
+@@@@ IN:  Z: real number
+@@@@      Y: real number
+@@@@      X: real number
+@@@@ OUT: X: 1x3 matrix
+@@@@ LBL: Used: 51
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-04-03
+LBL 99
 FUNC 31
-3
-XEQ 81
+XEQ 95
 LSTO "TMPM"
 R↓
 INDEX "TMPM"
 WRAP
 J-
-LBL 92
+LBL 51
 STOEL
 R↓
 J-
 FC? 77
-GTO 92
+GTO 51
 RCL "TMPM"
 RTN
-LBL 03               @@@@ Action for menu key V→
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Put vector elements on stack
+@@@@ NAM: V→ 98
+@@@@ IN:  X: 1x3 matrix V
+@@@@ OUT: Z: First component of V
+@@@@      Y: Second component of V
+@@@@      X: Third component of V
+@@@@ LBL: Used: 52
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-04-03
+LBL 98
 FUNC 13
 LSTO "TMPM"
 R↓
 INDEX "TMPM"
 WRAP
-LBL 91
+LBL 52
 RCLEL
 J+
 FC? 77
-GTO 91
+GTO 52
 RTN
-LBL 04               @@@@ Action for menu key DOT
-FUNC 21
-DOT
-RTN
-LBL 05               @@@@ Action for menu key CROSS
-FUNC 21
-CROSS
-RTN
-LBL 06               @@@@ Action for menu key MAG
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Compute Euclidean norm of vector
+@@@@ NAM: MAG 97
+@@@@ IN:  X: 1x3 matrix V
+@@@@ OUT: Z: First component of V
+@@@@      Y: Second component of V
+@@@@      X: Third component of V
+@@@@ LBL: Used: 53
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-04-03
+LBL 97
 FUNC 11
 LSTO "TMPM"
 R↓
 INDEX "TMPM"
 WRAP
 0
-LBL 93
+LBL 53
 RCLEL
 X↑2
 +
 J+
 FC? 77
-GTO 93
-RTN
+GTO 53
 SQRT
-LBL 07               @@@@ Action for menu key "VVIEW"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: View elements of vector
+@@@@ NAM: VVIEW 96
+@@@@ IN:  X: 1x3 matrix V
+@@@@ OUT: N/A
+@@@@ LBL: Used: 53
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-04-03
+LBL 96
 FUNC 00
 LSTO "TMPM"
 INDEX "TMPM"
 WRAP
 1
-LBL 94
+LBL 54
 CLA
 ARCL ST X
 ├":"
@@ -1142,13 +1224,26 @@ STOP
 +
 J+
 FC? 77
-GTO 94
+GTO 54
 RTN
-LBL 81 @@@@ NEWVEC
-FUNC 11
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Make a 3D vector full of zeros
+@@@@ NAM: VVIEW 95
+@@@@ IN:  N/A
+@@@@ OUT: X: 1x3 Matrix
+@@@@ LBL: Used: 53
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-04-03
+LBL 95
+FUNC 01
 1
+3
 NEWMAT
 RTN
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 #+END_SRC
 

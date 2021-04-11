@@ -41,9 +41,11 @@ This home for this HTML file is: https://richmit.github.io/hp42/pgmforfun.html
 
 Files related to this document may be found on github: https://github.com/richmit/hp42
 
-   - =src= directory: Contains the org-mode file that generated this HTML document
-   - =docs= directory: Contains this html document
-   - =bin= directory: Contains raw program files
+Directory contents:
+   - =src=: The org-mode file that generated this HTML document
+   - =src_42s=: Ready to convert source listings for 42s code in this document
+   - =docs=: This html document
+   - =bin=: Importable RAW program files
 
 * Introduction
 
@@ -245,7 +247,7 @@ Sometimes we need to work with a simple function that takes an argument from the
 variables.  To work with such functions we can wrap them.  A generic solution might be to store the name of your simple function in the variable "IEqV", and
 then give "WRPF" to solver, integrator, or =FSPT= program.
 
-#+begin_src hp42s :tangle yes
+#+begin_src hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:WRPF)
 @@@@ DSC: Wrap a simple function inside an =MVAR= program
 LBL "WRPF"
@@ -258,7 +260,7 @@ END
 
 ** =PICF=: Interactively Query For =MVAR= Program, Variable, and Number of Returns
 
-#+begin_src hp42s :tangle yes
+#+begin_src hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PICF)
 @@@@ DSC: Pick an MVAR function and variable
 @@@@ IN:  X: integer
@@ -350,7 +352,7 @@ When not provided, the values for =LLIM=, =STEP=, & =EqD= default to 1.
 
 Note: Using =[SHIFT]= before =[LLIM]=, =[ULIM]=, and =[STEP]= menu keys will recall the current value to the stack instead of setting the value.
 
-#+begin_src hp42s :tangle yes
+#+begin_src hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FSPT)
 @@@@ DSC: Sums, Products, & Tables
 @@@@ IN:  N/A
@@ -643,7 +645,7 @@ If you already have =EqP=, =EqV=, =LLIM=, =ULIM=, & =STEP= set, then you can use
 
 ** =FSUM=: Sums
 
-#+BEGIN_SRC hp42s :tangle yes
+#+BEGIN_SRC hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FSUM)
 @@@@ DSC: Sum a function evaluated at regular intervals over a range
 @@@@ OUT: X: The sum
@@ -681,7 +683,7 @@ END
 
 ** =FPRD=: Products
 
-#+BEGIN_SRC hp42s :tangle yes
+#+BEGIN_SRC hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FPRD)
 @@@@ DSC: Product of a function evaluated at regular intervals over a range
 @@@@ OUT: X: The product
@@ -724,7 +726,7 @@ example if you have just plotted a function, =FSLV= makes it easy to find a root
 
 ** =FSLV=: Find a root
 
-#+BEGIN_SRC hp42s :tangle yes
+#+BEGIN_SRC hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FSLV)
 @@@@ DSC: Use SOLVE to find a root for EqV in EqP on [LLIM, ULIM]
 
@@ -756,7 +758,7 @@ END
 
 ** =FINT=: Integrate
 
-#+BEGIN_SRC hp42s :tangle yes
+#+BEGIN_SRC hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FINT)
 @@@@ DSC: Use INTEG to find a root for EqV in EqP on [LLIM, ULIM]
 @@@@ OUT: X: The integral
@@ -782,7 +784,7 @@ Sometimes you just need to quickly evaluate a function for several different inp
 I frequently use =VARMENU= to repeatedly evaluate a formula, with different input values.  Functionally that means typing in the value, and then hitting the
 variable button twice.  That's not super efficient when repeatedly changing the same variable.  That's where this little function comes in.  
 
-#+BEGIN_SRC hp42s :tangle yes
+#+BEGIN_SRC hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FEVL)
 @@@@ DSC: Evaluate EqP at X
 @@@@ OUT: X: EqP(x)
@@ -879,7 +881,7 @@ the current plot range or last zoom box region.
 
 ** =FPLT=: Plot functions
 
-#+begin_src hp42s :tangle yes
+#+begin_src hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (REF:FPLT)
 @@@@ DSC: Plot a MVAR function
 @@@@ GBL: EqP, EqV, LLIM, ULIM, STEP, YMIN, YMAX, YSTP
@@ -1803,7 +1805,7 @@ END
 
 ** =FVARM=: Global Variables Menu
 
-#+begin_src hp42s :tangle yes
+#+begin_src hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FVARM)
 @@@@ DSC: MVAR Program with all the global vartiables used by the F* programs
 @@@@ GBL: EqP, EqV, EqD, ACC, IEqV, LLIM, ULIM, STEP, YMIN, YMAX, & YSTP
@@ -1826,7 +1828,7 @@ END
 
 ** =FMENU=: Main menu for all apps
 
-#+begin_src hp42s :tangle yes
+#+begin_src hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FMENU)
 @@@@ DSC: Auto-generated menu program
 LBL "FMENU"

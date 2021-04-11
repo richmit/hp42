@@ -41,9 +41,11 @@ This home for this HTML file is: https://richmit.github.io/hp42/unit.html
 
 Files related to this document may be found on github: https://github.com/richmit/hp42
 
-   - =src= directory: Contains the org-mode file that generated this HTML document
-   - =docs= directory: Contains this html document
-   - =bin= directory: Contains raw program files
+Directory contents:
+   - =src=: The org-mode file that generated this HTML document
+   - =src_42s=: Ready to convert source listings for 42s code in this document
+   - =docs=: This html document
+   - =bin=: Importable RAW program files
 
 * Introduction
 
@@ -155,7 +157,7 @@ a conversion factor for the given unit to the "base" unit to the stack.  For exa
 
 ** Code
 
-#+BEGIN_SRC elisp :var tbl=units :colnames y :results output verbatum :wrap "src hp42s :tangle yes"
+#+BEGIN_SRC elisp :var tbl=units :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/unit/unit.hp42s"
 (MJR-generate-42-menu-code "UNIT" tbl "stay" "up" (lambda (row) (cl-destructuring-bind (menu cfactor desc) row
                                                                   (let ((print-desc 't))    ;; Set to NIL to not print description
                                                                     (let* ((dlen (length desc))
@@ -172,7 +174,7 @@ a conversion factor for the given unit to the "base" unit to the stack.  For exa
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle yes
+#+begin_src hp42s :tangle ../src_42s/unit/unit.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UNIT)
 @@@@ DSC: Auto-generated menu program
 LBL "UNIT"

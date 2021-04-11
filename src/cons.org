@@ -41,9 +41,11 @@ This home for this HTML file is: https://richmit.github.io/hp42/cons.html
 
 Files related to this document may be found on github: https://github.com/richmit/hp42
 
-   - =src= directory: Contains the org-mode file that generated this HTML document
-   - =docs= directory: Contains this html document
-   - =bin= directory: Contains raw program files
+Directory contents:
+   - =src=: The org-mode file that generated this HTML document
+   - =src_42s=: Ready to convert source listings for 42s code in this document
+   - =docs=: This html document
+   - =bin=: Importable RAW program files
 
 * Introduction
 
@@ -487,7 +489,7 @@ The generator code can be customized in a few ways:
 
 You must first define the =MJR-generate-42-menu-code= by evaluating the code block in the =hp42s-meta.org= file.
 
-#+BEGIN_SRC elisp :var tbl=constants :colnames y :results output verbatum :wrap "src hp42s :tangle yes"
+#+BEGIN_SRC elisp :var tbl=constants :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/cons/cons.hp42s"
 (MJR-generate-42-menu-code "CONS" tbl "exit" "up" (lambda (row) (cl-destructuring-bind (sym desc desc-long val uncertainty units cat) row
                                                                   (let ((print-desc 't)    ;; Set to NIL to not print description
                                                                         (print-unit 't))   ;; Set to NIL to not print units
@@ -509,7 +511,7 @@ You must first define the =MJR-generate-42-menu-code= by evaluating the code blo
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle yes
+#+begin_src hp42s :tangle ../src_42s/cons/cons.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CONS)
 @@@@ DSC: Auto-generated menu program
 LBL "CONS"

@@ -44,10 +44,11 @@ This home for this HTML file is: https://richmit.github.io/hp42/phil.html
 
 Files related to this document may be found on github: https://github.com/richmit/hp42
 
-   - =src= directory: Contains the org-mode file that generated this HTML document
-   - =docs= directory: Contains this html document
-   - =bin= directory: Contains raw program files
-
+Directory contents:
+   - =src=: The org-mode file that generated this HTML document
+   - =src_42s=: Ready to convert source listings for 42s code in this document
+   - =docs=: This html document
+   - =bin=: Importable RAW program files
 
 * Perforations
 
@@ -102,7 +103,7 @@ In addition a menu collecting them all together is provided: =PERFS=
 
 *** =CD→K=: Convert count & distance to kiusalas perforations
 
-#+begin_src hp42s :tangle yes
+#+begin_src hp42s :tangle ../src_42s/phil/phil.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CD2K)
 @@@@ DSC: Convert count & distance to kiusalas perforations
 @@@@ IN:  Y: Count
@@ -128,7 +129,7 @@ END
 
 *** =CK→D=: Convert count & kiusalas perforations to distance
 
-#+begin_src hp42s :tangle yes
+#+begin_src hp42s :tangle ../src_42s/phil/phil.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CK2D)
 @@@@ DSC: Convert count & kiusalas perforations to distance
 @@@@ IN:  Y: Count
@@ -154,7 +155,7 @@ END
 
 *** =CK→D=: Convert count & kiusalas perforations to distance
 
-#+begin_src hp42s :tangle yes
+#+begin_src hp42s :tangle ../src_42s/phil/phil.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CK2D)
 @@@@ DSC: Convert count & distance to/from perforations
 @@@@ IN:  Y: Count
@@ -180,7 +181,7 @@ END
 
 *** =K→P= & = =P→K=: Convert perfs to/from kiusalas
 
-#+begin_src hp42s :tangle yes
+#+begin_src hp42s :tangle ../src_42s/phil/phil.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:K2P) (ref:P2K)
 @@@@ DSC: Convert perfs to/from kiusalas
 @@@@ IN:  Y: perfs    _OR_ kiusalas
@@ -202,12 +203,12 @@ END
 
 ** Code for Menu
 
- #+BEGIN_SRC elisp :var tbl=PERF :colnames y :results output verbatum :wrap "src hp42s :tangle yes"
+ #+BEGIN_SRC elisp :var tbl=PERF :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/phil/phil.hp42s"
 (MJR-generate-42-menu-code "PERF" tbl "stay" "exit" #'MJR-custom-x-gen)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle yes
+#+begin_src hp42s :tangle ../src_42s/phil/phil.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PERF)
 @@@@ DSC: Menu for perferation tools
 @@@@ IN:  N/A
@@ -462,7 +463,7 @@ Note the coordinates may be entered in any order.
 
 ** Calculator Code
 
-#+begin_src hp42s :tangle yes
+#+begin_src hp42s :tangle ../src_42s/phil/phil.hp42s
 @@@@ Image Measurement for Stamp Collectors
 @@@@ IN:  N/A Menu Driven
 @@@@ OUT: N/A Menu Driven

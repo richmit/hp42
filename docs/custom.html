@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-05 Mon 18:43 -->
+<!-- 2021-04-10 Sat 23:23 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Custom Menus</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-05 18:43:29</i></td>
+<td class="org-left"><i>2021-04-10 23:23:22</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,27 +241,27 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org4d2a4af">1. Metadata</a></li>
-<li><a href="#orgb2dd303">2. Introduction</a>
+<li><a href="#org0387647">1. Metadata</a></li>
+<li><a href="#org7aac433">2. Introduction</a>
 <ul>
-<li><a href="#orgca89303">2.1. Customizing Custom Menu Table</a></li>
+<li><a href="#org5b563ea">2.1. Customizing Custom Menu Table</a></li>
 </ul>
 </li>
-<li><a href="#org20e6781">3. Custom Menus</a>
+<li><a href="#orge80c60e">3. Custom Menus</a>
 <ul>
-<li><a href="#org0a8b6f7">3.1. Menu Contents</a></li>
-<li><a href="#orgeb1e95c">3.2. Menu Code</a></li>
+<li><a href="#org606ac4a">3.1. Menu Contents</a></li>
+<li><a href="#orgbba2e7c">3.2. Menu Code</a></li>
 </ul>
 </li>
 <li><a href="#system-custom">4. Create system <code>CUSTOM</code> Menu</a></li>
-<li><a href="#org7d6aa78">5. <code>SPREF</code>: Set some of my personal prefrences</a></li>
-<li><a href="#orgfc8a885">6. EOF</a></li>
+<li><a href="#org3b24ac9">5. <code>SPREF</code>: Set some of my personal prefrences</a></li>
+<li><a href="#orga310a31">6. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org4d2a4af" class="outline-2">
-<h2 id="org4d2a4af"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org0387647" class="outline-2">
+<h2 id="org0387647"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/custom.html">https://richmit.github.io/hp42/custom.html</a>
@@ -271,16 +271,20 @@ This home for this HTML file is: <a href="https://richmit.github.io/hp42/custom.
 Files related to this document may be found on github: <a href="https://github.com/richmit/hp42">https://github.com/richmit/hp42</a>
 </p>
 
+<p>
+Directory contents:
+</p>
 <ul class="org-ul">
-<li><code>src</code> directory: Contains the org-mode file that generated this HTML document</li>
-<li><code>docs</code> directory: Contains this html document</li>
-<li><code>bin</code> directory: Contains raw program files</li>
+<li><code>src</code>: The org-mode file that generated this HTML document</li>
+<li><code>src_42s</code>: Ready to convert source listings for 42s code in this document</li>
+<li><code>docs</code>: This html document</li>
+<li><code>bin</code>: Importable RAW program files</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgb2dd303" class="outline-2">
-<h2 id="orgb2dd303"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-org7aac433" class="outline-2">
+<h2 id="org7aac433"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 The custom menu on the 42s is a wonderful thing, but it is also very limited.  It's just too small!!  And it is only one level deep!!  So instead of simply
@@ -294,14 +298,14 @@ The flow to create your custom CUST program:
 <ul class="org-ul">
 <li>Evaluate the "Generic menu generator" babel block in the <code>hp42s-meta.org</code> file.  This will define the function <code>MJR-generate-42-menu-code</code></li>
 <li>Evaluate the "For CUSTOM-type Menus" babel block in the <code>hp42s-meta.org</code> file.  This will define the function <code>MJR-custom-x-gen</code></li>
-<li>Define your menu in the <a href="#org0a8b6f7">Menu Contents</a> section.</li>
-<li>Evaluate the babel block in the <a href="#orgeb1e95c">Menu Code</a> section below.</li>
+<li>Define your menu in the <a href="#org606ac4a">Menu Contents</a> section.</li>
+<li>Evaluate the babel block in the <a href="#orgbba2e7c">Menu Code</a> section below.</li>
 <li>Load the program on your calculator</li>
 </ul>
 </div>
 
-<div id="outline-container-orgca89303" class="outline-3">
-<h3 id="orgca89303"><span class="section-number-3">2.1</span> Customizing Custom Menu Table</h3>
+<div id="outline-container-org5b563ea" class="outline-3">
+<h3 id="org5b563ea"><span class="section-number-3">2.1</span> Customizing Custom Menu Table</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 The first column (which I labeled Menu) describes the menu keys.  Colons are used to define a menu hierarchy.  For example "<code>top:mid:thingy</code>" means we have a
@@ -326,14 +330,14 @@ The other columns of the table are not used.
 </div>
 </div>
 
-<div id="outline-container-org20e6781" class="outline-2">
-<h2 id="org20e6781"><span class="section-number-2">3</span> Custom Menus</h2>
+<div id="outline-container-orge80c60e" class="outline-2">
+<h2 id="orge80c60e"><span class="section-number-2">3</span> Custom Menus</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org0a8b6f7" class="outline-3">
-<h3 id="org0a8b6f7"><span class="section-number-3">3.1</span> Menu Contents</h3>
+<div id="outline-container-org606ac4a" class="outline-3">
+<h3 id="org606ac4a"><span class="section-number-3">3.1</span> Menu Contents</h3>
 <div class="outline-text-3" id="text-3-1">
-<table id="orge041cfd" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
+<table id="org1632254" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
 
 
 <colgroup>
@@ -654,7 +658,7 @@ The other columns of the table are not used.
 </tr>
 
 <tr>
-<td class="org-left">MATH:SPT</td>
+<td class="org-left">MATH:FMENU</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><a href="https://richmit.github.io/hp42/pgmforfun.html">https://richmit.github.io/hp42/pgmforfun.html</a></td>
 </tr>
@@ -731,8 +735,8 @@ The other columns of the table are not used.
 </div>
 </div>
 
-<div id="outline-container-orgeb1e95c" class="outline-3">
-<h3 id="orgeb1e95c"><span class="section-number-3">3.2</span> Menu Code</h3>
+<div id="outline-container-orgbba2e7c" class="outline-3">
+<h3 id="orgbba2e7c"><span class="section-number-3">3.2</span> Menu Code</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 The menu program is generated via the following bit of elisp.  You must first define the <code>MJR-generate-42-menu-code</code> and <code>MJR-custom-x-gen</code> by evaluating the code blocks in the <code>hp42s-meta.org</code> file.
@@ -967,7 +971,7 @@ The menu program is generated via the following bit of elisp.  You must first de
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"POLY"</span>
 <span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">GTO</span> 64
-<span style="color: #fa8072;">"SPT"</span>
+<span style="color: #fa8072;">"FMENU"</span>
 <span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 65
 <span style="color: #fa8072;">"3VEC"</span>
 <span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 66
@@ -1148,8 +1152,8 @@ The menu program is generated via the following bit of elisp.  You must first de
 <span style="color: #00ffff;">LBL</span> 63               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key NCDF</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"NCDF"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 65               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key SPT</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"SPT"</span>
+<span style="color: #00ffff;">LBL</span> 65               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key FMENU</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FMENU"</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 66               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key 3VEC</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"3VEC"</span>
@@ -1183,8 +1187,7 @@ The menu program is generated via the following bit of elisp.  You must first de
 </div>
 </div>
 
-
-<div id="outline-container-orgef8e832" class="outline-2">
+<div id="outline-container-orgf1c6ab9" class="outline-2">
 <h2 id="system-custom"><span class="section-number-2">4</span> Create system <code>CUSTOM</code> Menu</h2>
 <div class="outline-text-2" id="text-system-custom">
 <p>
@@ -1193,7 +1196,7 @@ Sometimes our carefully built in <code>CUSTOM</code> menu is lost &#x2013; an er
 each key.
 </p>
 
-<table id="org82a4a8a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
+<table id="org08cbba2" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
 
 
 <colgroup>
@@ -1347,9 +1350,8 @@ Simply evaluate the followign lisp block, and the 42s program will be created.
 </div>
 </div>
 
-
-<div id="outline-container-org7d6aa78" class="outline-2">
-<h2 id="org7d6aa78"><span class="section-number-2">5</span> <code>SPREF</code>: Set some of my personal prefrences</h2>
+<div id="outline-container-org3b24ac9" class="outline-2">
+<h2 id="org3b24ac9"><span class="section-number-2">5</span> <code>SPREF</code>: Set some of my personal prefrences</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-SPREF" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SPREF)</span>
@@ -1384,8 +1386,8 @@ CL12    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">
 </div>
 </div>
 
-<div id="outline-container-orgfc8a885" class="outline-2">
-<h2 id="orgfc8a885"><span class="section-number-2">6</span> EOF</h2>
+<div id="outline-container-orga310a31" class="outline-2">
+<h2 id="orga310a31"><span class="section-number-2">6</span> EOF</h2>
 <div class="outline-text-2" id="text-6">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1396,7 +1398,7 @@ CL12    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-05 Mon 18:43 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-10 Sat 23:23 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

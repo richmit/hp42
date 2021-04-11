@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-10 Sat 23:06 -->
+<!-- 2021-04-10 Sat 23:23 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Base-N Tools</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-10 23:06:49</i></td>
+<td class="org-left"><i>2021-04-10 23:23:07</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,29 +241,29 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgeae4cce">1. Metadata</a></li>
-<li><a href="#orgb22d917">2. Introduction</a></li>
-<li><a href="#org5152410">3. Tiny Number Printing</a>
+<li><a href="#org64217b8">1. Metadata</a></li>
+<li><a href="#org8a79d97">2. Introduction</a></li>
+<li><a href="#org1c574ac">3. Tiny Number Printing</a>
 <ul>
-<li><a href="#orge217cad">3.1. <code>TNPR</code>: Tiny number printer</a></li>
-<li><a href="#orgcddd49f">3.2. <code>PATN</code>: Test <code>TNPR</code> by printing all characters</a></li>
+<li><a href="#org4b96d18">3.1. <code>TNPR</code>: Tiny number printer</a></li>
+<li><a href="#org2772a6f">3.2. <code>PATN</code>: Test <code>TNPR</code> by printing all characters</a></li>
 </ul>
 </li>
-<li><a href="#org5e1b723">4. Printing 64-bit Binary Numbers</a></li>
-<li><a href="#orge4ba32d">5. BASE-N Application</a>
+<li><a href="#orgd28e7bd">4. Printing 64-bit Binary Numbers</a></li>
+<li><a href="#orgcf3ac15">5. BASE-N Application</a>
 <ul>
-<li><a href="#orgd5a2a1a">5.1. Functionality &amp; Menu</a></li>
-<li><a href="#orga81ab3f">5.2. Menu Code</a></li>
-<li><a href="#org602920e">5.3. Application Local Subroutines</a></li>
+<li><a href="#org83b525e">5.1. Functionality &amp; Menu</a></li>
+<li><a href="#orgbbc4588">5.2. Menu Code</a></li>
+<li><a href="#orga41557b">5.3. Application Local Subroutines</a></li>
 </ul>
 </li>
-<li><a href="#org6a1e186">6. EOF</a></li>
+<li><a href="#org04e1796">6. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgeae4cce" class="outline-2">
-<h2 id="orgeae4cce"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org64217b8" class="outline-2">
+<h2 id="org64217b8"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/base.html">https://richmit.github.io/hp42/base.html</a>
@@ -273,16 +273,20 @@ This home for this HTML file is: <a href="https://richmit.github.io/hp42/base.ht
 Files related to this document may be found on github: <a href="https://github.com/richmit/hp42">https://github.com/richmit/hp42</a>
 </p>
 
+<p>
+Directory contents:
+</p>
 <ul class="org-ul">
-<li><code>src</code> directory: Contains the org-mode file that generated this HTML document</li>
-<li><code>docs</code> directory: Contains this html document</li>
-<li><code>bin</code> directory: Contains raw program files</li>
+<li><code>src</code>: The org-mode file that generated this HTML document</li>
+<li><code>src_42s</code>: Ready to convert source listings for 42s code in this document</li>
+<li><code>docs</code>: This html document</li>
+<li><code>bin</code>: Importable RAW program files</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgb22d917" class="outline-2">
-<h2 id="orgb22d917"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-org8a79d97" class="outline-2">
+<h2 id="org8a79d97"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 
 <div class="figure">
@@ -305,12 +309,12 @@ limited RAM.
 </div>
 </div>
 
-<div id="outline-container-org5152410" class="outline-2">
-<h2 id="org5152410"><span class="section-number-2">3</span> Tiny Number Printing</h2>
+<div id="outline-container-org1c574ac" class="outline-2">
+<h2 id="org1c574ac"><span class="section-number-2">3</span> Tiny Number Printing</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orge217cad" class="outline-3">
-<h3 id="orge217cad"><span class="section-number-3">3.1</span> <code>TNPR</code>: Tiny number printer</h3>
+<div id="outline-container-org4b96d18" class="outline-3">
+<h3 id="org4b96d18"><span class="section-number-3">3.1</span> <code>TNPR</code>: Tiny number printer</h3>
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-TNPR" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TNPR)</span>
@@ -546,8 +550,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-orgcddd49f" class="outline-3">
-<h3 id="orgcddd49f"><span class="section-number-3">3.2</span> <code>PATN</code>: Test <code>TNPR</code> by printing all characters</h3>
+<div id="outline-container-org2772a6f" class="outline-3">
+<h3 id="org2772a6f"><span class="section-number-3">3.2</span> <code>PATN</code>: Test <code>TNPR</code> by printing all characters</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-PATN" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PATN)</span>
@@ -587,8 +591,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org5e1b723" class="outline-2">
-<h2 id="org5e1b723"><span class="section-number-2">4</span> Printing 64-bit Binary Numbers</h2>
+<div id="outline-container-orgd28e7bd" class="outline-2">
+<h2 id="orgd28e7bd"><span class="section-number-2">4</span> Printing 64-bit Binary Numbers</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-BVIEW" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (BVIEW)</span>
@@ -771,14 +775,14 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-orge4ba32d" class="outline-2">
-<h2 id="orge4ba32d"><span class="section-number-2">5</span> BASE-N Application</h2>
+<div id="outline-container-orgcf3ac15" class="outline-2">
+<h2 id="orgcf3ac15"><span class="section-number-2">5</span> BASE-N Application</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orgd5a2a1a" class="outline-3">
-<h3 id="orgd5a2a1a"><span class="section-number-3">5.1</span> Functionality &amp; Menu</h3>
+<div id="outline-container-org83b525e" class="outline-3">
+<h3 id="org83b525e"><span class="section-number-3">5.1</span> Functionality &amp; Menu</h3>
 <div class="outline-text-3" id="text-5-1">
-<table id="orge8921d9" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+<table id="org6332155" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
 <colgroup>
@@ -1163,8 +1167,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-orga81ab3f" class="outline-3">
-<h3 id="orga81ab3f"><span class="section-number-3">5.2</span> Menu Code</h3>
+<div id="outline-container-orgbbc4588" class="outline-3">
+<h3 id="orgbbc4588"><span class="section-number-3">5.2</span> Menu Code</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 The menu program is generated via the following bit of elisp.  You must first define the <code>MJR-generate-42-menu-code</code> and <code>MJR-custom-x-gen</code> by evaluating the code blocks in the <code>hp42s-meta.org</code> file.
@@ -1439,8 +1443,8 @@ BWRAP
 </div>
 </div>
 
-<div id="outline-container-org602920e" class="outline-3">
-<h3 id="org602920e"><span class="section-number-3">5.3</span> Application Local Subroutines</h3>
+<div id="outline-container-orga41557b" class="outline-3">
+<h3 id="orga41557b"><span class="section-number-3">5.3</span> Application Local Subroutines</h3>
 <div class="outline-text-3" id="text-5-3">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -2209,8 +2213,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org6a1e186" class="outline-2">
-<h2 id="org6a1e186"><span class="section-number-2">6</span> EOF</h2>
+<div id="outline-container-org04e1796" class="outline-2">
+<h2 id="org04e1796"><span class="section-number-2">6</span> EOF</h2>
 <div class="outline-text-2" id="text-6">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -2221,7 +2225,7 @@ R&#8595;
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-10 Sat 23:06 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-10 Sat 23:23 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

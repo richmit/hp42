@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-05 Mon 18:44 -->
+<!-- 2021-04-10 Sat 23:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Repeated Measurements</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-05 18:44:52</i></td>
+<td class="org-left"><i>2021-04-10 23:24:10</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,29 +241,29 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgd410d3b">1. Metadata</a></li>
-<li><a href="#org7442b57">2. Introduction</a></li>
-<li><a href="#org6306fdc">3. Supported Methods</a></li>
-<li><a href="#org58757ba">4. Setup</a>
+<li><a href="#orgc5f8d94">1. Metadata</a></li>
+<li><a href="#orgc031a5e">2. Introduction</a></li>
+<li><a href="#orgbee853b">3. Supported Methods</a></li>
+<li><a href="#orgcf55b4d">4. Setup</a>
 <ul>
-<li><a href="#org2e4744f">4.1. Distribution</a></li>
-<li><a href="#orgdf5a900">4.2. Coverage Factors</a></li>
-<li><a href="#orgad3b4dd">4.3. Automatic Reporting</a></li>
+<li><a href="#orgb54cf5d">4.1. Distribution</a></li>
+<li><a href="#orgc4cfde4">4.2. Coverage Factors</a></li>
+<li><a href="#org4ffe94b">4.3. Automatic Reporting</a></li>
 </ul>
 </li>
-<li><a href="#orgc9be8ce">5. Reporting</a></li>
-<li><a href="#org33c3f79">6. Application Menu</a></li>
-<li><a href="#org9679d0d">7. Use</a></li>
-<li><a href="#org2b18023">8. Future</a></li>
-<li><a href="#orgfaa8c99">9. The Code</a></li>
-<li><a href="#org29bfcbb">10. Median</a></li>
-<li><a href="#org2a447cc">11. EOF</a></li>
+<li><a href="#org186b397">5. Reporting</a></li>
+<li><a href="#orgf9ef6c0">6. Application Menu</a></li>
+<li><a href="#org206e589">7. Use</a></li>
+<li><a href="#org2e9c873">8. Future</a></li>
+<li><a href="#org8dcbee0">9. The Code</a></li>
+<li><a href="#orgaae548c">10. Median</a></li>
+<li><a href="#orgaf60021">11. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgd410d3b" class="outline-2">
-<h2 id="orgd410d3b"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-orgc5f8d94" class="outline-2">
+<h2 id="orgc5f8d94"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This home for this HTML file is: <a href="https://richmit.github.io/hp42/meas.html">https://richmit.github.io/hp42/meas.html</a>
@@ -273,16 +273,20 @@ This home for this HTML file is: <a href="https://richmit.github.io/hp42/meas.ht
 Files related to this document may be found on github: <a href="https://github.com/richmit/hp42">https://github.com/richmit/hp42</a>
 </p>
 
+<p>
+Directory contents:
+</p>
 <ul class="org-ul">
-<li><code>src</code> directory: Contains the org-mode file that generated this HTML document</li>
-<li><code>docs</code> directory: Contains this html document</li>
-<li><code>bin</code> directory: Contains raw program files</li>
+<li><code>src</code>: The org-mode file that generated this HTML document</li>
+<li><code>src_42s</code>: Ready to convert source listings for 42s code in this document</li>
+<li><code>docs</code>: This html document</li>
+<li><code>bin</code>: Importable RAW program files</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org7442b57" class="outline-2">
-<h2 id="org7442b57"><span class="section-number-2">2</span> Introduction</h2>
+<div id="outline-container-orgc031a5e" class="outline-2">
+<h2 id="orgc031a5e"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 I frequently take repeated measurements, but don't feel the need to record all the measurements in my laboratory notebook.  For example, when working on my
@@ -292,8 +296,8 @@ more automated and less error prone.
 </div>
 </div>
 
-<div id="outline-container-org6306fdc" class="outline-2">
-<h2 id="org6306fdc"><span class="section-number-2">3</span> Supported Methods</h2>
+<div id="outline-container-orgbee853b" class="outline-2">
+<h2 id="orgbee853b"><span class="section-number-2">3</span> Supported Methods</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 When estimating &amp; reporting measurement uncertainty, two methods are most common.  The first assumes the measurements are statistically independent and
@@ -310,16 +314,16 @@ standard deviation, number of observations, sum, &amp; sum of squares.
 </div>
 </div>
 
-<div id="outline-container-org58757ba" class="outline-2">
-<h2 id="org58757ba"><span class="section-number-2">4</span> Setup</h2>
+<div id="outline-container-orgcf55b4d" class="outline-2">
+<h2 id="orgcf55b4d"><span class="section-number-2">4</span> Setup</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 The last menu provides configuration options.
 </p>
 </div>
 
-<div id="outline-container-org2e4744f" class="outline-3">
-<h3 id="org2e4744f"><span class="section-number-3">4.1</span> Distribution</h3>
+<div id="outline-container-orgb54cf5d" class="outline-3">
+<h3 id="orgb54cf5d"><span class="section-number-3">4.1</span> Distribution</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 The distribution to be used in reports is set via the first menu button &#x2013; the current selection is displayed in the menu label (N=Normal &amp; S=Square).  This
@@ -328,8 +332,8 @@ key cycles between normal and rectangular distributions when pressed.  Note that
 </div>
 </div>
 
-<div id="outline-container-orgdf5a900" class="outline-3">
-<h3 id="orgdf5a900"><span class="section-number-3">4.2</span> Coverage Factors</h3>
+<div id="outline-container-orgc4cfde4" class="outline-3">
+<h3 id="orgc4cfde4"><span class="section-number-3">4.2</span> Coverage Factors</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 The coverage factor used to compute the expanded uncertainty is set via the second menu key.  Repeatedly pressing this button will cycle through predefined
@@ -410,8 +414,8 @@ For errors with a rectangular distribution the following coverage factors are su
 </div>
 </div>
 
-<div id="outline-container-orgad3b4dd" class="outline-3">
-<h3 id="orgad3b4dd"><span class="section-number-3">4.3</span> Automatic Reporting</h3>
+<div id="outline-container-org4ffe94b" class="outline-3">
+<h3 id="org4ffe94b"><span class="section-number-3">4.3</span> Automatic Reporting</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 A report can be generated upon entering a specified number of measurements.  This is very handy when a batch of items needs to be measured, and one wishes to
@@ -422,8 +426,8 @@ as part of the menu label.  A dash (-) means no automatic reporting is configure
 </div>
 </div>
 
-<div id="outline-container-orgc9be8ce" class="outline-2">
-<h2 id="orgc9be8ce"><span class="section-number-2">5</span> Reporting</h2>
+<div id="outline-container-org186b397" class="outline-2">
+<h2 id="org186b397"><span class="section-number-2">5</span> Reporting</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 I find that most of the time I use units such that measurements integer values.  For example with paper thickness measurements I will use micrometers in a
@@ -443,10 +447,10 @@ Reports can be automatically generated upon entry of a configurable number of me
 </div>
 </div>
 
-<div id="outline-container-org33c3f79" class="outline-2">
-<h2 id="org33c3f79"><span class="section-number-2">6</span> Application Menu</h2>
+<div id="outline-container-orgf9ef6c0" class="outline-2">
+<h2 id="orgf9ef6c0"><span class="section-number-2">6</span> Application Menu</h2>
 <div class="outline-text-2" id="text-6">
-<table id="org6a6be2e" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+<table id="orga4286a8" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
 <colgroup>
@@ -603,8 +607,8 @@ Reports can be automatically generated upon entry of a configurable number of me
 </div>
 </div>
 
-<div id="outline-container-org9679d0d" class="outline-2">
-<h2 id="org9679d0d"><span class="section-number-2">7</span> Use</h2>
+<div id="outline-container-org206e589" class="outline-2">
+<h2 id="org206e589"><span class="section-number-2">7</span> Use</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 In use the application is quite like the built in statistics application in that <code>[M+]</code> &amp; <code>[M+]</code> add and delete measurements.  All measurements are stored in
@@ -628,8 +632,8 @@ one: <code>[M+]</code>) such that a report is automatically generated when a spe
 </div>
 </div>
 
-<div id="outline-container-org2b18023" class="outline-2">
-<h2 id="org2b18023"><span class="section-number-2">8</span> Future</h2>
+<div id="outline-container-org2e9c873" class="outline-2">
+<h2 id="org2e9c873"><span class="section-number-2">8</span> Future</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 Some things I might do some day&#x2026;
@@ -648,8 +652,8 @@ Some things I might do some day&#x2026;
 </div>
 </div>
 
-<div id="outline-container-orgfaa8c99" class="outline-2">
-<h2 id="orgfaa8c99"><span class="section-number-2">9</span> The Code</h2>
+<div id="outline-container-org8dcbee0" class="outline-2">
+<h2 id="org8dcbee0"><span class="section-number-2">9</span> The Code</h2>
 <div class="outline-text-2" id="text-9">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Repeated Measurements</span>
@@ -1174,14 +1178,15 @@ R&#8595;
 <span style="color: #00ffff;">X&#8800;0</span>?
 <span style="color: #00ffff;">AIP</span>
 R&#8595;
-RTNEND
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">END</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org29bfcbb" class="outline-2">
-<h2 id="org29bfcbb"><span class="section-number-2">10</span> Median</h2>
+<div id="outline-container-orgaae548c" class="outline-2">
+<h2 id="orgaae548c"><span class="section-number-2">10</span> Median</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 This function computes the median of MeDAT.  Someday I may integrate it into the main <code>MEAS</code> application.
@@ -1254,8 +1259,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org2a447cc" class="outline-2">
-<h2 id="org2a447cc"><span class="section-number-2">11</span> EOF</h2>
+<div id="outline-container-orgaf60021" class="outline-2">
+<h2 id="orgaf60021"><span class="section-number-2">11</span> EOF</h2>
 <div class="outline-text-2" id="text-11">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1266,7 +1271,7 @@ R&#8595;
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-05 Mon 18:44 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-10 Sat 23:24 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
 </div>
 </body>
 </html>

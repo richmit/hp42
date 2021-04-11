@@ -1,0 +1,264 @@
+LBL "KEPLE"
+MVAR "MA"
+MVAR "EA"
+MVAR "M"
+RCL "EA"
+SIN
+RCL× "E"
++/-
+RCL+ "EA"
+RCL- "MA"
+RTN
+END
+
+LBL "KIUS"
+MVAR "P"
+MVAR "K"
+100000
+RCL× "K"
+127
+÷
+RCL- "P"
+RTN
+END
+
+LBL "TVM"
+MVAR "N"
+MVAR "I"
+MVAR "PV"
+MVAR "PMT"
+MVAR "FV"
+MVAR "B1/E0"
+1
+ENTER
+ENTER
+RCL "I"
+%
+STO ST T
+RCL× "B1/E0"
++
+R↓
++
+RCL "N"
++/-
+Y↑X
+1
+X<>Y
+-
+LASTX
+RCL× "FV"
+R↓
+X<>Y
+÷
+×
+RCL× "PMT"
++
+RCL+ "PV"
+END
+
+LBL "EULI"
+MVAR "T"
+MVAR "Y"
+MVAR "X"
+RCL "T"
+RCL  "X"
+1
+-
+Y↑X
+1
+RCL- "T"
+RCL "Y"
+1
+-
+Y↑X
+×
+RTN
+END
+
+LBL "NORMD"
+MVAR "S"
+MVAR "M"
+MVAR "X"
+RCL "X"
+RCL- "M"
+RCL÷ "S"
+X↑2
+-2
+÷
+E↑X
+RCL÷ "S"
+2
+PI
+×
+SQRT
+÷
+RTN
+END
+
+LBL "FDIST"
+MVAR "D1"
+MVAR "D2"
+MVAR "X"
+RCL "D1"
+2
+÷
+RCL "D2"
+2
+÷
+XEQ "BETA"
+RCL× "X"
+RCL "D1"
+RCL× "X"
+RCL "D1"
+Y↑X
+RCL "D2"
+RCL "D2"
+Y↑X
+×
+RCL "D1"
+RCL× "X"
+RCL+ "D2"
+RCL "D1"
+RCL+ "D2"
+Y↑X
+÷
+SQRT
+X<>Y
+÷
+RTN
+END
+
+LBL "CHI2"
+MVAR "K"
+MVAR "X"
+RCL "K"
+2
+÷
+ENTER
+ENTER
+1
+-
+RCL "X"
+X<>Y
+Y↑X
+RCL "X"
+-2
+÷
+E↑X
+×
+2
+RCL ST Z
+Y↑X
+÷
+X<>Y
+GAMMA
+÷
+RTN
+END
+
+LBL "BETAF"
+MVAR "A"
+MVAR "B"
+MVAR "X"
+RCL "A"
+RCL "B"
+XEQ "BETA"
+RCL "X"
+-1
+RCL+ "A"
+Y↑X
+X<>Y
+÷
+1
+RCL "X"
+-
+RCL "B"
+1
+-
+Y↑X
+×
+RTN
+END
+
+LBL "LOGID"
+MVAR "S"
+MVAR "M"
+MVAR "X"
+RCL "M"
+RCL- "X"
+RCL÷ "S"
+E↑X
+ENTER
+ENTER
+1
++
+X↑2
+÷
+RCL÷ "S"
+RTN
+END
+
+LBL "STUTD"
+MVAR "V"
+MVAR "X"
+0.5
+RCL "V"
+2
+÷
+XEQ "BETA"
+RCL "V"
+SQRT
+×
+1
+RCL "X"
+X↑2
+RCL÷ "V"
++
+1
+RCL+ "V"
+-2
+÷
+Y↑X
+X<>Y
+÷
+RTN
+END
+
+LBL "WEIBD"
+MVAR "K"
+MVAR "L"
+MVAR "X"
+RCL "K"
+RCL÷ "L"
+RCL "X"
+RCL÷ "L"
+-1
+RCL+ "K"
+Y↑X
+×
+RCL "X"
+RCL÷ "L"
+RCL "K"
+Y↑X
++/-
+E↑X
+×
+RTN
+END
+
+LBL "EXPOD"
+MVAR "L"
+MVAR "X"
+RCL "L"
+RCL× "X"
++/-
+E↑X
+RCL× "L"
+RTN
+END
+
+LBL "NAME"
+MVAR "V"
+RTN
+END
+

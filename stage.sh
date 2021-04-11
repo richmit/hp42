@@ -24,7 +24,7 @@ while [ -n "$1" ]; do
     git add bin/$NAME/*.raw
   fi
   if [ -e src_42s/$NAME/ ]; then
-    git add src_42s/$NAME/*.raw
+    git add src_42s/$NAME/*.hp42s
   fi
   
   shift

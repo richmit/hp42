@@ -45,10 +45,11 @@ This home for this HTML file is: https://richmit.github.io/hp42/phil.html
 Files related to this document may be found on github: https://github.com/richmit/hp42
 
 Directory contents:
-   - =src=: The org-mode file that generated this HTML document
-   - =src_42s=: Ready to convert source listings for 42s code in this document
-   - =docs=: This html document
-   - =bin=: Importable RAW program files
+#+ATTR_HTML: :border 0 :frame none :rules none :align center
+   | =src=     | - | The org-mode file that generated this HTML document            |
+   | =src_42s= | - | Ready to convert source listings for 42s code in this document |
+   | =docs=    | - | This html document                                             |
+   | =bin=     | - | Importable RAW program files                                   |
 
 * Perforations
 
@@ -82,36 +83,67 @@ $$ P = \frac{100000}{127 K} $$
 
 ** Perf Application
 
-Several independent functions are provided:
-
 #+NAME:PERF
 | Menu | Program | Inputs                       | Output           |
 |------+---------+------------------------------+------------------|
-| CD→K |         | Y: count   X: Distance (mm)  | Kiusalas Perfs   |
-| CK→D |         | Y: count   X: Kiusalas Perfs | Distance (mm)    |
+| CD→K |      99 | Y: count   X: Distance (mm)  | Kiusalas Perfs   |
+| CK→D |      98 | Y: count   X: Kiusalas Perfs | Distance (mm)    |
 |------+---------+------------------------------+------------------|
-| CD→P |         | Y: count   X: Distance (mm)  | Perfs (perf/2cm) |
-| CP→D |         | Y: count   X: Perfs          | Distance (mm)    |
+| CD→P |      97 | Y: count   X: Distance (mm)  | Perfs (perf/2cm) |
+| CP→D |      97 | Y: count   X: Perfs          | Distance (mm)    |
 |------+---------+------------------------------+------------------|
-| P→K  |         | X: Perfs to Kiusalas         | Kiusalas Perfs   |
-| K→P  |         | X: Kiusalas to Perfs         | Perfs (perf/2cm) |
+| P→K  |      96 | X: Perfs to Kiusalas         | Kiusalas Perfs   |
+| K→P  |      96 | X: Kiusalas to Perfs         | Perfs (perf/2cm) |
 
-In addition a menu collecting them all together is provided: =PERFS=
+** Code for Menu
 
-** Code for Functions
+ #+BEGIN_SRC elisp :var tbl=PERF :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/phil/phil.hp42s"
+(MJR-generate-42-menu-code "PERF" tbl "stay" "exit" #'MJR-custom-x-gen)
+#+END_SRC
+
+#+RESULTS:
+#+begin_src hp42s :tangle ../src_42s/phil/phil.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PERF)
+@@@@ DSC: Auto-generated menu program
+LBL "PERF"
+LBL 01            @@@@ Page 1 of menu PERF
+CLMENU
+"CD→K"
+KEY 1 XEQ 99
+"CK→D"
+KEY 2 XEQ 98
+"CD→P"
+KEY 3 XEQ 97
+"CP→D"
+KEY 4 XEQ 97
+"P→K"
+KEY 5 XEQ 96
+"K→P"
+KEY 6 XEQ 96
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 00 @@@@ Application Exit
+EXITALL
+RTN
+@@@@ Free labels start at: 2
 #+end_src
 
-*** =CD→K=: Convert count & distance to kiusalas perforations
+
+
+** Code for Functions
 
 #+begin_src hp42s :tangle ../src_42s/phil/phil.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CD2K)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Convert count & distance to kiusalas perforations
+@@@@ NAM: CD→K 99
 @@@@ IN:  Y: Count
 @@@@      X: Distance (mm)
 @@@@ OUT: X: Kiusalas Perfs
 @@@@ UPD: 2021-04-05
 @@@@ TST: free42_3.0
-LBL "CD→K"
+LBL 99
 FUNC 21            @@## REQ:free42>=2.5.24
 L4STK              @@## REQ:free42>=3.0
 X<>Y
@@ -124,20 +156,16 @@ IP
 5000
 ×
 RTN
-END
-#+end_src
 
-*** =CK→D=: Convert count & kiusalas perforations to distance
-
-#+begin_src hp42s :tangle ../src_42s/phil/phil.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CK2D)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Convert count & kiusalas perforations to distance
+@@@@ NAM: CK→D 98
 @@@@ IN:  Y: Count
 @@@@      X: Kiusalas Perfs
 @@@@ OUT: X: Distance (mm)
 @@@@ UPD: 2021-04-05
 @@@@ TST: free42_3.0
-LBL "CK→D"
+LBL 98
 FUNC 21            @@## REQ:free42>=2.5.24
 L4STK              @@## REQ:free42>=3.0
 X<>Y
@@ -150,21 +178,17 @@ IP
 5000
 ÷
 RTN
-END
-#+end_src
 
-*** =CK→D=: Convert count & kiusalas perforations to distance
-
-#+begin_src hp42s :tangle ../src_42s/phil/phil.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CK2D)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Convert count & distance to/from perforations
+@@@@ NAM: CD→P 97
+@@@@ NAM: CP→D 97
 @@@@ IN:  Y: Count
 @@@@      X: Distance (mm) _OR_ Perfs
 @@@@ OUT: X: Perfs         _OR_ Distance (mm)
 @@@@ UPD: 2021-04-05
 @@@@ TST: free42_3.0
-LBL "CD→P"
-LBL "CP→D"
+LBL 97
 FUNC 21            @@## REQ:free42>=2.5.24
 L4STK              @@## REQ:free42>=3.0
 X<>Y
@@ -176,20 +200,16 @@ X<>Y
 20
 ×
 RTN
-END
-#+end_src
 
-*** =K→P= & = =P→K=: Convert perfs to/from kiusalas
-
-#+begin_src hp42s :tangle ../src_42s/phil/phil.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:K2P) (ref:P2K)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Convert perfs to/from kiusalas
+@@@@ NAM: K→P 96
+@@@@ NAM: P→K 96
 @@@@ IN:  Y: perfs    _OR_ kiusalas
 @@@@ OUT: X: kiusalas _OR_ perfs
 @@@@ UPD: 2021-04-05
 @@@@ TST: free42_3.0
-LBL "K→P"
-LBL "P→K"
+LBL 96
 FUNC 11            @@## REQ:free42>=2.5.24
 L4STK              @@## REQ:free42>=3.0
 127
@@ -198,65 +218,10 @@ L4STK              @@## REQ:free42>=3.0
 X<>Y
 ÷
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 #+END_SRC
-
-** Code for Menu
-
- #+BEGIN_SRC elisp :var tbl=PERF :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/phil/phil.hp42s"
-(MJR-generate-42-menu-code "PERF" tbl "stay" "exit" #'MJR-custom-x-gen)
-#+END_SRC
-
-#+RESULTS:
-#+begin_src hp42s :tangle ../src_42s/phil/phil.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PERF)
-@@@@ DSC: Menu for perferation tools
-@@@@ IN:  N/A
-@@@@ OUT: N/A
-@@@@ UPD: 2021-04-05
-LBL "PERF"
-LBL 01            @@@@ Page 1 of menu PERF
-CLMENU
-"CD→K"
-KEY 1 XEQ 02
-"CK→D"
-KEY 2 XEQ 03
-"CD→P"
-KEY 3 XEQ 04
-"CP→D"
-KEY 4 XEQ 05
-"P→K"
-KEY 5 XEQ 06
-"K→P"
-KEY 6 XEQ 07
-KEY 9 GTO 00
-MENU
-STOP
-GTO 01
-LBL 00
-EXITALL
-RTN
-LBL 02               @@@@ Action for menu key CD→K
-XEQ "CD→K"
-RTN
-LBL 03               @@@@ Action for menu key CK→D
-XEQ "CK→D"
-RTN
-LBL 04               @@@@ Action for menu key CD→P
-XEQ "CD→P"
-RTN
-LBL 05               @@@@ Action for menu key CP→D
-XEQ "CP→D"
-RTN
-LBL 06               @@@@ Action for menu key P→K
-XEQ "P→K"
-RTN
-LBL 07               @@@@ Action for menu key K→P
-XEQ "K→P"
-RTN
-@@@@ Free labels start at: 8
-END
-#+end_src
 
 * Image Measurements
 

@@ -23,6 +23,9 @@ while [ -n "$1" ]; do
   if [ -e bin/$NAME/ ]; then
     git add bin/$NAME/*.raw
   fi
+  if [ -e src_42s/$NAME/ ]; then
+    git add src_42s/$NAME/*.raw
+  fi
   
   shift
 done

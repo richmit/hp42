@@ -92,8 +92,10 @@ The top level menu will have "=foo=" & "=snoopy=".  "=snoopy=" is an /action/ bu
 The last two are /actions/ while the first is yet another menu containing "=foobar=".
 
 #+BEGIN_SRC elisp :results output verbatum
-(defun MJR-generate-42-menu-code (top-lab tbl leaf-function exit-function gen-code) ;; leaf-function "stay" or "exit", exit-function "exit" or "up"
+(defun MJR-generate-42-menu-code (top-lab tbl leaf-function exit-function gen-code)
+   ;; leaf-function "stay" or "exit", exit-function "exit" or "up"
   (let* ((no-local 't)
+         (allow-lleaf 't)
          (min-free-lab  2)
          (m-code "")
          (x-code ""))
@@ -134,7 +136,7 @@ The last two are /actions/ while the first is yet another menu containing "=foob
                                                     for page-key = (mod mkey-num 6)
                                                     for mkey-str = (if (vectorp mkey-elt) (aref mkey-elt 0) (cl-first mkey-elt))
                                                     for is-leaf  = (vectorp mkey-elt)
-                                                    for is-lleaf = (and (vectorp mkey-elt) (numberp (cl-second (aref mkey-elt 1))))
+                                                    for is-lleaf = (and allow-lleaf (vectorp mkey-elt) (numberp (cl-second (aref mkey-elt 1))))
                                                     when (= page-key 0)
                                                     do (progn (add-m-code (message "LBL %02d            @@@@ Page %d of menu %s" (nth page-num page-labs) (1+ page-num) (cl-first menu)))
                                                               (add-m-code "CLMENU"))

@@ -140,7 +140,7 @@ The other columns of the table are not used.
 |-----------------+------------------+-----------------------------------------------|
 | MATH:POLY       |                  | https://richmit.github.io/hp42/math.html      |
 | MATH:FMENU      |                  | https://richmit.github.io/hp42/pgmforfun.html |
-| MATH:3VEC       |                  | https://richmit.github.io/hp42/math.html      |
+| MATH:VEC3       |                  | https://richmit.github.io/hp42/math.html      |
 |-----------------+------------------+-----------------------------------------------|
 | PHIL:PERF       |                  | https://richmit.github.io/hp42/phil.html      |
 | PHIL:IMET       |                  | https://richmit.github.io/hp42/phil.html      |
@@ -193,8 +193,6 @@ CLMENU
 KEY 1 XEQ 09
 "MEAS"
 KEY 2 XEQ 10
-"OPT"
-KEY 3 GTO 11
 KEY 7 GTO 01
 KEY 8 GTO 01
 KEY 9 GTO 00
@@ -204,229 +202,209 @@ GTO 02
 LBL 03            @@@@ Page 1 of menu SFUN
 CLMENU
 "HYP"
-KEY 1 GTO 13
+KEY 1 GTO 12
 "L&P"
-KEY 2 GTO 14
+KEY 2 GTO 13
 "PERC"
-KEY 3 GTO 15
+KEY 3 GTO 14
 "PROB"
-KEY 4 GTO 16
+KEY 4 GTO 15
 "INT"
-KEY 5 GTO 17
+KEY 5 GTO 16
 "CPLX"
-KEY 6 GTO 18
-KEY 7 GTO 12
-KEY 8 GTO 12
+KEY 6 GTO 17
+KEY 7 GTO 11
+KEY 8 GTO 11
 KEY 9 GTO 01
 MENU
 STOP
 GTO 03
-LBL 12            @@@@ Page 2 of menu SFUN
+LBL 11            @@@@ Page 2 of menu SFUN
 CLMENU
 "TRIG"
-KEY 1 GTO 19
+KEY 1 GTO 18
 "ERR"
-KEY 2 GTO 20
+KEY 2 GTO 19
 KEY 7 GTO 03
 KEY 8 GTO 03
 KEY 9 GTO 01
 MENU
 STOP
-GTO 12
-LBL 13            @@@@ Page 1 of menu HYP
+GTO 11
+LBL 12            @@@@ Page 1 of menu HYP
 CLMENU
 "SINH"
-KEY 1 XEQ 21
+KEY 1 XEQ 20
 "COSH"
-KEY 2 XEQ 22
+KEY 2 XEQ 21
 "TANH"
-KEY 3 XEQ 23
+KEY 3 XEQ 22
 "ASINH"
-KEY 4 XEQ 24
+KEY 4 XEQ 23
 "ACOSH"
-KEY 5 XEQ 25
+KEY 5 XEQ 24
 "ATANH"
-KEY 6 XEQ 26
+KEY 6 XEQ 25
+KEY 9 GTO 03
+MENU
+STOP
+GTO 12
+LBL 13            @@@@ Page 1 of menu L&P
+CLMENU
+"lnYX"
+KEY 1 XEQ 27
+"Y√X"
+KEY 3 XEQ 28
+"Y↑X"
+KEY 4 XEQ 29
+KEY 7 GTO 26
+KEY 8 GTO 26
 KEY 9 GTO 03
 MENU
 STOP
 GTO 13
-LBL 14            @@@@ Page 1 of menu L&P
+LBL 26            @@@@ Page 2 of menu L&P
 CLMENU
-"lnYX"
-KEY 1 XEQ 28
-"Y√X"
-KEY 3 XEQ 29
-"Y↑X"
-KEY 4 XEQ 30
-KEY 7 GTO 27
-KEY 8 GTO 27
+"ln2"
+KEY 1 XEQ 30
+"2↑X"
+KEY 2 XEQ 31
+"LN"
+KEY 3 XEQ 32
+"EXP"
+KEY 4 XEQ 33
+"LOG"
+KEY 5 XEQ 34
+"10↑X"
+KEY 6 XEQ 35
+KEY 7 GTO 13
+KEY 8 GTO 13
+KEY 9 GTO 03
+MENU
+STOP
+GTO 26
+LBL 14            @@@@ Page 1 of menu PERC
+CLMENU
+"%T"
+KEY 1 XEQ 36
+"%CH"
+KEY 2 XEQ 37
+"%"
+KEY 3 XEQ 38
 KEY 9 GTO 03
 MENU
 STOP
 GTO 14
-LBL 27            @@@@ Page 2 of menu L&P
+LBL 15            @@@@ Page 1 of menu PROB
 CLMENU
-"ln2"
-KEY 1 XEQ 31
-"2↑X"
-KEY 2 XEQ 32
-"LN"
-KEY 3 XEQ 33
-"EXP"
-KEY 4 XEQ 34
-"LOG"
-KEY 5 XEQ 35
-"10↑X"
-KEY 6 XEQ 36
-KEY 7 GTO 14
-KEY 8 GTO 14
-KEY 9 GTO 03
-MENU
-STOP
-GTO 27
-LBL 15            @@@@ Page 1 of menu PERC
-CLMENU
-"%T"
-KEY 1 XEQ 37
-"%CH"
-KEY 2 XEQ 38
-"%"
-KEY 3 XEQ 39
+"COMB"
+KEY 1 XEQ 40
+"PERM"
+KEY 2 XEQ 41
+"GAMMA"
+KEY 4 XEQ 42
+"BETA"
+KEY 5 XEQ 43
+KEY 7 GTO 39
+KEY 8 GTO 39
 KEY 9 GTO 03
 MENU
 STOP
 GTO 15
-LBL 16            @@@@ Page 1 of menu PROB
+LBL 39            @@@@ Page 2 of menu PROB
 CLMENU
-"COMB"
-KEY 1 XEQ 41
-"PERM"
-KEY 2 XEQ 42
-"GAMMA"
-KEY 4 XEQ 43
-"BETA"
-KEY 5 XEQ 44
-KEY 7 GTO 40
-KEY 8 GTO 40
+"NPDF"
+KEY 1 XEQ 44
+"NCDF"
+KEY 2 XEQ 45
+KEY 7 GTO 15
+KEY 8 GTO 15
+KEY 9 GTO 03
+MENU
+STOP
+GTO 39
+LBL 16            @@@@ Page 1 of menu INT
+CLMENU
+"IDIV"
+KEY 1 XEQ 46
+"MOD"
+KEY 2 XEQ 47
+"GCD"
+KEY 3 XEQ 48
+"LCM"
+KEY 4 XEQ 49
+"FLOR"
+KEY 5 XEQ 50
+"CEIL"
+KEY 6 XEQ 51
 KEY 9 GTO 03
 MENU
 STOP
 GTO 16
-LBL 40            @@@@ Page 2 of menu PROB
+LBL 17            @@@@ Page 1 of menu CPLX
 CLMENU
-"NPDF"
-KEY 1 XEQ 45
-"NCDF"
-KEY 2 XEQ 46
-KEY 7 GTO 16
-KEY 8 GTO 16
-KEY 9 GTO 03
-MENU
-STOP
-GTO 40
-LBL 17            @@@@ Page 1 of menu INT
-CLMENU
-"IDIV"
-KEY 1 XEQ 47
-"MOD"
-KEY 2 XEQ 48
-"GCD"
-KEY 3 XEQ 49
-"LCM"
-KEY 4 XEQ 50
-"FLOR"
-KEY 5 XEQ 51
-"CEIL"
-KEY 6 XEQ 52
+"RPART"
+KEY 1 XEQ 52
+"IPART"
+KEY 2 XEQ 53
+"CONJ"
+KEY 3 XEQ 54
+"CABS"
+KEY 4 XEQ 55
+"CARG"
+KEY 5 XEQ 56
 KEY 9 GTO 03
 MENU
 STOP
 GTO 17
-LBL 18            @@@@ Page 1 of menu CPLX
+LBL 18            @@@@ Page 1 of menu TRIG
 CLMENU
-"RPART"
-KEY 1 XEQ 53
-"IPART"
-KEY 2 XEQ 54
-"CONJ"
-KEY 3 XEQ 55
-"CABS"
-KEY 4 XEQ 56
-"CARG"
-KEY 5 XEQ 57
-KEY 9 GTO 03
+"HYPOT"
+KEY 1 XEQ 57
+"ATN2"
+KEY 2 XEQ 58
+KEY 9 GTO 11
 MENU
 STOP
 GTO 18
-LBL 19            @@@@ Page 1 of menu TRIG
+LBL 19            @@@@ Page 1 of menu ERR
 CLMENU
-"HYPOT"
-KEY 1 XEQ 58
-"ATN2"
-KEY 2 XEQ 59
-KEY 9 GTO 12
+"ERF"
+KEY 1 XEQ 59
+"ERFC"
+KEY 2 XEQ 60
+"NPDF"
+KEY 4 XEQ 61
+"NCDF"
+KEY 5 XEQ 62
+KEY 9 GTO 11
 MENU
 STOP
 GTO 19
-LBL 20            @@@@ Page 1 of menu ERR
-CLMENU
-"ERF"
-KEY 1 XEQ 60
-"ERFC"
-KEY 2 XEQ 61
-"NPDF"
-KEY 4 XEQ 62
-"NCDF"
-KEY 5 XEQ 63
-KEY 9 GTO 12
-MENU
-STOP
-GTO 20
 LBL 04            @@@@ Page 1 of menu MATH
 CLMENU
 "POLY"
-KEY 1 GTO 64
+KEY 1 XEQ 63
 "FMENU"
-KEY 2 XEQ 65
-"3VEC"
-KEY 3 XEQ 66
+KEY 2 XEQ 64
+"VEC3"
+KEY 3 XEQ 65
 KEY 9 GTO 01
 MENU
 STOP
 GTO 04
-LBL 64            @@@@ Page 1 of menu POLY
-CLMENU
-"QEQ"
-KEY 1 XEQ 67
-"PLYE"
-KEY 2 XEQ 68
-KEY 9 GTO 04
-MENU
-STOP
-GTO 64
 LBL 05            @@@@ Page 1 of menu PHIL
 CLMENU
 "PERF"
-KEY 1 XEQ 69
+KEY 1 XEQ 66
 "IMET"
-KEY 2 XEQ 70
+KEY 2 XEQ 67
 "MEAS"
-KEY 3 XEQ 71
+KEY 3 XEQ 68
 KEY 9 GTO 01
 MENU
 STOP
 GTO 05
-LBL 11            @@@@ Page 1 of menu OPT
-CLMENU
-"SPREF"
-KEY 1 XEQ 72
-"MKCM"
-KEY 2 XEQ 73
-KEY 9 GTO 02
-MENU
-STOP
-GTO 11
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
@@ -445,157 +423,148 @@ RTN
 LBL 10               @@@@ Action for menu key MEAS
 XEQ "MEAS"
 RTN
-LBL 21               @@@@ Action for menu key SINH
+LBL 20               @@@@ Action for menu key SINH
 SINH
 RTN
-LBL 22               @@@@ Action for menu key COSH
+LBL 21               @@@@ Action for menu key COSH
 COSH
 RTN
-LBL 23               @@@@ Action for menu key TANH
+LBL 22               @@@@ Action for menu key TANH
 TANH
 RTN
-LBL 24               @@@@ Action for menu key ASINH
+LBL 23               @@@@ Action for menu key ASINH
 ASINH
 RTN
-LBL 25               @@@@ Action for menu key ACOSH
+LBL 24               @@@@ Action for menu key ACOSH
 ACOSH
 RTN
-LBL 26               @@@@ Action for menu key ATANH
+LBL 25               @@@@ Action for menu key ATANH
 ATANH
 RTN
-LBL 28               @@@@ Action for menu key lnYX
+LBL 27               @@@@ Action for menu key lnYX
 XEQ "lnYX"
 RTN
-LBL 29               @@@@ Action for menu key Y√X
+LBL 28               @@@@ Action for menu key Y√X
 XEQ "YROOT"
 RTN
-LBL 30               @@@@ Action for menu key Y↑X
+LBL 29               @@@@ Action for menu key Y↑X
 Y↑X
 RTN
-LBL 31               @@@@ Action for menu key ln2
+LBL 30               @@@@ Action for menu key ln2
 XEQ "ln2"
 RTN
-LBL 32               @@@@ Action for menu key 2↑X
+LBL 31               @@@@ Action for menu key 2↑X
 XEQ "2↑X"
 RTN
-LBL 33               @@@@ Action for menu key LN
+LBL 32               @@@@ Action for menu key LN
 LN
 RTN
-LBL 34               @@@@ Action for menu key EXP
+LBL 33               @@@@ Action for menu key EXP
 XEQ "EXP"
 RTN
-LBL 35               @@@@ Action for menu key LOG
+LBL 34               @@@@ Action for menu key LOG
 LOG
 RTN
-LBL 36               @@@@ Action for menu key 10↑X
+LBL 35               @@@@ Action for menu key 10↑X
 10↑X
 RTN
-LBL 37               @@@@ Action for menu key %T
+LBL 36               @@@@ Action for menu key %T
 XEQ "%T"
 RTN
-LBL 38               @@@@ Action for menu key %CH
+LBL 37               @@@@ Action for menu key %CH
 %CH
 RTN
-LBL 39               @@@@ Action for menu key %
+LBL 38               @@@@ Action for menu key %
 %
 RTN
-LBL 41               @@@@ Action for menu key COMB
+LBL 40               @@@@ Action for menu key COMB
 COMB
 RTN
-LBL 42               @@@@ Action for menu key PERM
+LBL 41               @@@@ Action for menu key PERM
 PERM
 RTN
-LBL 43               @@@@ Action for menu key GAMMA
+LBL 42               @@@@ Action for menu key GAMMA
 GAMMA
 RTN
-LBL 44               @@@@ Action for menu key BETA
+LBL 43               @@@@ Action for menu key BETA
 XEQ "BETA"
 RTN
-LBL 45               @@@@ Action for menu key NPDF
+LBL 44               @@@@ Action for menu key NPDF
 XEQ "NPDF"
 RTN
-LBL 46               @@@@ Action for menu key NCDF
+LBL 45               @@@@ Action for menu key NCDF
 XEQ "NCDF"
 RTN
-LBL 47               @@@@ Action for menu key IDIV
+LBL 46               @@@@ Action for menu key IDIV
 BASE÷
 RTN
-LBL 48               @@@@ Action for menu key MOD
+LBL 47               @@@@ Action for menu key MOD
 MOD
 RTN
-LBL 49               @@@@ Action for menu key GCD
+LBL 48               @@@@ Action for menu key GCD
 XEQ "GCD"
 RTN
-LBL 50               @@@@ Action for menu key LCM
+LBL 49               @@@@ Action for menu key LCM
 XEQ "LCM"
 RTN
-LBL 51               @@@@ Action for menu key FLOR
+LBL 50               @@@@ Action for menu key FLOR
 XEQ "FLOOR"
 RTN
-LBL 52               @@@@ Action for menu key CEIL
+LBL 51               @@@@ Action for menu key CEIL
 XEQ "CEIL"
 RTN
-LBL 53               @@@@ Action for menu key RPART
+LBL 52               @@@@ Action for menu key RPART
 XEQ "RPART"
 RTN
-LBL 54               @@@@ Action for menu key IPART
+LBL 53               @@@@ Action for menu key IPART
 XEQ "IPART"
 RTN
-LBL 55               @@@@ Action for menu key CONJ
+LBL 54               @@@@ Action for menu key CONJ
 XEQ "CONJ"
 RTN
-LBL 56               @@@@ Action for menu key CABS
+LBL 55               @@@@ Action for menu key CABS
 XEQ "CABS"
 RTN
-LBL 57               @@@@ Action for menu key CARG
+LBL 56               @@@@ Action for menu key CARG
 XEQ "CARG"
 RTN
-LBL 58               @@@@ Action for menu key HYPOT
+LBL 57               @@@@ Action for menu key HYPOT
 XEQ "HYPOT"
 RTN
-LBL 59               @@@@ Action for menu key ATN2
+LBL 58               @@@@ Action for menu key ATN2
 XEQ "ATAN2"
 RTN
-LBL 60               @@@@ Action for menu key ERF
+LBL 59               @@@@ Action for menu key ERF
 XEQ "ERF"
 RTN
-LBL 61               @@@@ Action for menu key ERFC
+LBL 60               @@@@ Action for menu key ERFC
 XEQ "ERFC"
 RTN
-LBL 62               @@@@ Action for menu key NPDF
+LBL 61               @@@@ Action for menu key NPDF
 XEQ "NPDF"
 RTN
-LBL 63               @@@@ Action for menu key NCDF
+LBL 62               @@@@ Action for menu key NCDF
 XEQ "NCDF"
 RTN
-LBL 65               @@@@ Action for menu key FMENU
+LBL 63               @@@@ Action for menu key POLY
+XEQ "POLY"
+RTN
+LBL 64               @@@@ Action for menu key FMENU
 XEQ "FMENU"
 RTN
-LBL 66               @@@@ Action for menu key 3VEC
-XEQ "3VEC"
+LBL 65               @@@@ Action for menu key VEC3
+XEQ "VEC3"
 RTN
-LBL 67               @@@@ Action for menu key QEQ
-XEQ "QUADE"
-RTN
-LBL 68               @@@@ Action for menu key PLYE
-XEQ "PLYE"
-RTN
-LBL 69               @@@@ Action for menu key PERF
+LBL 66               @@@@ Action for menu key PERF
 XEQ "PERF"
 RTN
-LBL 70               @@@@ Action for menu key IMET
+LBL 67               @@@@ Action for menu key IMET
 XEQ "IMET"
 RTN
-LBL 71               @@@@ Action for menu key MEAS
+LBL 68               @@@@ Action for menu key MEAS
 XEQ "MEAS"
 RTN
-LBL 72               @@@@ Action for menu key SPREF
-XEQ "SPREF"
-RTN
-LBL 73               @@@@ Action for menu key MKCM
-XEQ "MKCM"
-RTN
-@@@@ Free labels start at: 74
+@@@@ Free labels start at: 69
 END
 #+end_src
 

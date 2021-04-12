@@ -938,7 +938,7 @@ END
 | Menu  | Program |                              | Inputs           | Output              |
 |-------+---------+------------------------------+------------------+---------------------|
 | QUADE |      99 | Solve quadratic: Ax^2+Bx+C=0 | Z: A Y: B X: C   | Y: root 1 X: root 2 |
-| PEVL  |      98 | Evaluate polynomial P @ X    | Y: P matrix X: X | X: P(x)             |
+| EVAL  |      98 | Evaluate polynomial P @ X    | Y: P matrix X: X | X: P(x)             |
 
 *** Code for Menu
 
@@ -955,7 +955,7 @@ LBL 01            @@@@ Page 1 of menu POLY
 CLMENU
 "QUADE"
 KEY 1 XEQ 99
-"PEVL"
+"EVAL"
 KEY 2 XEQ 98
 KEY 9 GTO 00
 MENU
@@ -1053,9 +1053,18 @@ LBL "PWRP"
 MVAR "X"
 RCL "_PLY"
 RCL "X"
-XEQ "PLYE"
 X<>Y
-R↓
+LSTO "TMPM"
+INDEX "TMPM"
+WRAP
+0
+LBL 97
+RCL× ST Z
+RCLEL
++
+J+
+FC? 77
+GTO 97
 RTN
 END
 #+END_SRC

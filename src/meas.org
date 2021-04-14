@@ -37,7 +37,7 @@ Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 
 * Metadata
 
-This home for this HTML file is: https://richmit.github.io/hp42/meas.html
+The home for this HTML file is: https://richmit.github.io/hp42/meas.html
 
 Files related to this document may be found on github: https://github.com/richmit/hp42
 
@@ -49,38 +49,58 @@ Directory contents:
    | =bin=     | - | Importable RAW program files                                   |
 
 * Introduction
+:PROPERTIES:
+:CUSTOM_ID: introduction
+:END:
 
 I frequently take repeated measurements, but don't feel the need to record all the measurements in my laboratory notebook.  For example, when working on my
-stamp collection I will measure stamp thickness at 5 locations and use the average value.  The application described below is designed to make that process
-more automated and less error prone.
+stamp collection I will measure stamp thickness at 5 locations and use the average value.  Or at my electronics bench I may measure inductance 3 or 5 times,
+and use the midrange as the value.  The application described below is designed to make that process more automated and less error prone.
 
 * Supported Methods
 
-When estimating & reporting measurement uncertainty, two methods are most common.  The first assumes the measurements are statistically independent and
-normally distributed.  In this case the measurement is taken to be the mean, and the standard uncertainty (u) is defined as the population standard deviation.  The
-second method assumes a rectangular error distribution.  In this case the measurement is assumed to be the midrange=(max+min)/2, and the standard uncertainty is
-defined as u=(max-min)/(2*sqrt(3)).  In both schemes the standard uncertainty is frequently "expanded" by a factor (k) in order to provide a probabilistic uncertainty
-interval or confidence interval.
+The two most common methods for estimating & reporting measurement uncertainty are nicely documented in [[https://www.nist.gov/pml/nist-technical-note-1297][NIST Technical Note 1297]].  The first method assumes
+the non-systematic components of measurement errors are statistically independent and normally distributed.  In this case the measurement is taken to be the
+mean ($\mu$), and the standard uncertainty ($u$) is defined as the sample standard deviation ($s$).  The second method assumes a uniform error distribution --
+which I will refer to as /rectangular/ in this document in order to avoid confusion with $u$.  In this case the measurement is assumed to be the midrange
+($MR=(x_{max}+x_{min})/2$), and the standard uncertainty is defined as $u=(x_{max}-x_{min})/(2\sqrt(3))$.  The =MEAS= application supports both of these
+methods in addition to one based on rank statistics where the measurement is taken to be the median and the uncertainty is one half the interquartile range.
+While this last scheme is not easily related to a standard error distribution, it has found some popularity -- particularly in the life sciences.
 
-Other schemes are frequently used, and the application provides raw statistics to compute many of them: mean, midrange, range, standard deviation, population
-standard deviation, number of observations, sum, & sum of squares.
+Frequently the standard uncertainty is /expanded/ by a factor ($k$) in order to provide a probabilistic uncertainty interval or confidence interval.  The =MEAS=
+application supports only a fixed set of values for $k$ for automatic reporting.
+
+Finally, the application provides a number of raw statistics that might be useful for error analysis:
+  - Mean or arithmetic average ($\mu$)
+  - Midrange ($MR$)
+  - Range
+  - Standard deviation ($\sigma$)
+  - Population standard deviation ($s$)
+  - Number of observations ($N$)
+  - Sum
+  - Sum of squares
+  - First quartile ($Q_1$)
+  - Second quartile or median ($Md$ or $Q_2$)
+  - Third quartile ($Q_3$)
+  - Interquartile range ($IQR$)
 
 * Setup
 
 The last menu provides configuration options.
 
-** Distribution
+** Reporting Scheme
 
-The distribution to be used in reports is set via the first menu button -- the current selection is displayed in the menu label (N=Normal & S=Square).  This
-key cycles between normal and rectangular distributions when pressed.  Note that it also defaults the coverage factor (the second menu button)!
+The reporting scheme is set via the first menu button -- the current selection is displayed in the menu label (N=Normal, R=Rectangular, and Q=Quartiles).  This key
+cycles between the schemes when pressed.  Note that it also defaults the coverage factor (the second menu button)!
 
 ** Coverage Factors
 
 The coverage factor used to compute the expanded uncertainty is set via the second menu key.  Repeatedly pressing this button will cycle through predefined
-values appropriate for the already selected distribution.
+values appropriate for the already selected reporting scheme.
 
-This option is used both for reports and the expanded uncertainty computations on the second menu page (=[kuN]= & =[kuS]=).  It is not possible to set the
-coverage factor to an arbitrary value; however, the population standard deviation (=[PSD]=) and rectangular variance (=[SqVA]=)are in the third menu.
+This option is used both for reports and the expanded uncertainty computations elsewhere in the menus (=[kuN]=, =[kuR]=, & =[kuQ]=).  It is not possible to
+set the coverage factor to an arbitrary value; however, the sample standard deviation (=[SSD]=), rectangular variance (=[RtVA]=), and interquartile range
+(=[IQR]=) are all in the menus if you need more flexibility.
 
 For normally distributed errors the following coverage factors are supported.
 
@@ -91,13 +111,17 @@ For normally distributed errors the following coverage factors are supported.
 |        95.45 |               2 |
 |        99.73 |               3 |
 
+Note: This same set of coverage factors are also available when using the Quartile scheme; however, they are somewhat difficult to interpret from a probabilistic
+standpoint.
+
 For errors with a rectangular distribution the following coverage factors are supported.
 
 #+ATTR_HTML: :align center
-| Coverage Factor  | Key label |
-|-----------------+-----------|
-|               1 |           |
-|   1.73205080757 | √3        |
+|             <r> |
+| Coverage Factor |
+|-----------------|
+|               1 |
+|      $\sqrt(3)$ |
 
 ** Automatic Reporting
 
@@ -107,49 +131,82 @@ as part of the menu label.  A dash (-) means no automatic reporting is configure
 
 * Reporting
 
-I find that most of the time I use units such that measurements integer values.  For example with paper thickness measurements I will use micrometers in a
-range between 700 and 1100.  For other philatelic applications I may use millimeters with one or, rarely, two decimals.  For these applications it is possible
-to fit the measurement value, uncertainty, max, and min all on the screen at once assuming =FIX= has been set appropriately.  The report function attempts to
-use this compact reporting method if possible.  Otherwise it uses the first line for the measurement estimate and the second line for the expanded
-uncertainty.
+I find that most of the time I use units such that measurements have integer values.  For example with paper thickness measurements I will use micrometers in
+a range between 700 and 1100.  For other philatelic applications I may use millimeters with one or, rarely, two decimals.  For these applications it is
+possible to fit the measurement value, uncertainty, max, and min all on the screen at once assuming =FIX=, =SCI=, or =ENG= has been set correctly.  The report
+function attempts to use this compact reporting method if possible.  Otherwise it uses the first line for the measurement estimate and the second line for the
+expanded uncertainty.
 
-The measurement and expanded uncertainty are reported according to the selected of distribution and coverage factor.  See the setup menu.
+The measurement and expanded uncertainty are reported according to the selected reporting scheme and coverage factor.  See the setup menu.
 
 Reports can be automatically generated upon entry of a configurable number of measurements.  See the setup menu.
 
 * Application Menu
+:PROPERTIES:
+:CUSTOM_ID: menu
+:END:
 
 #+ATTR_HTML: :align center
-#+NAME: measm
-|------+-------------------------------+-----------------------------------------------------------------|
-| Menu | Description                   | Notes                                                           |
-|------+-------------------------------+-----------------------------------------------------------------|
-| M+   | Add a new measurement         |                                                                 |
-| M-   | Delete last measurement       |                                                                 |
-| ---  |                               |                                                                 |
-| REP  | Display Report                | Reports μ & kuN or MID & kuS depending on distribution          |
-| ---  |                               |                                                                 |
-| CLRM | Clear all measurements        |                                                                 |
-|------+-------------------------------+-----------------------------------------------------------------|
-| μ    | Arithmetic Mean               | Normal Errors: Measurement estimate                             |
-| kuN  | k*PSD                         | Normal Errors: Expanded uncertainty estimate                    |
-| MID  | (MAX+MIN)/2                   | Rectangular (Square) Errors: Measurement estimate               |
-| kuS  | k*RNG/2/SQRT(3)               | Rectangular (Square) Errors: Expanded uncertainty estimate      |
-| MIN  | Minimum value                 |                                                                 |
-| MAX  | Maximum value                 |                                                                 |
-|------+-------------------------------+-----------------------------------------------------------------|
-| SD   | Standard Deviation            |                                                                 |
-| PSD  | Population Standard Deviation | This is the one with n-1 on the bottom                          |
-| RNG  | Range                         | MAX-MIN                                                         |
-| SqVA | Rectangular (Square) Variance | (MAX-MIN)/(2*sqrt(3))                                           |
-| N    | Number of measurements        | Number of rows in MeDAT                                         |
-| SUMS | Y: Sum Squared X: Sum         |                                                                 |
-| ---  |                               |                                                                 |
-|------+-------------------------------+-----------------------------------------------------------------|
-| D=?  | Distribution                  | Cycle between N=Normal & S=Rectangular (Square).  Defaults k.   |
-| k=NN | Coverage Factor               | Cycle through predefined values for distribution                |
-| A=NN | Auto Report Count             | Automatically generate a report when N measurements are entered |
-|------+-------------------------------+-----------------------------------------------------------------|
+#+NAME: menu
+| MNU   | LL | Key   | Description                   | Notes                                                               |
+|-------+----+-------+-------------------------------+---------------------------------------------------------------------|
+| 70    | 98 | M+    | Add a new measurement         |                                                                     |
+| M-    | 97 | M-    | Delete last measurement       |                                                                     |
+| EDIT  | 38 | EDIT  | Edit MeDAT                    | Requires N>0 -- i.e. can't edit an empty MeDAT matrix!              |
+| REP   | 96 | REP   | Display Report                | The report format & content is controled by the settings.           |
+| ▒▒▒▒  |    | ▒▒▒▒  |                               |                                                                     |
+| CLRM  | 95 | CLRM  | Clear all measurements        |                                                                     |
+|-------+----+-------+-------------------------------+---------------------------------------------------------------------|
+| μ     | 94 | μ     | Arithmetic Mean               | Normal Errors: Measurement estimate                                 |
+| kuN   | 92 | kuN   | ERR: k*SSD                    | Normal Errors: Expanded uncertainty estimate                        |
+| MR    | 92 | MR    | Midrange                      | Rectangular Errors: Measurement estimate                            |
+| kuR   | 91 | kuR   | ERR: k*(MAX-MIN)/(2*sqrt(3))  | Rectangular Errors: Expanded uncertainty estimate                   |
+| MIN   | 89 | MIN   | Minimum value                 |                                                                     |
+| MAX   | 88 | MAX   | Maximum value                 |                                                                     |
+|-------+----+-------+-------------------------------+---------------------------------------------------------------------|
+| PSD   | 87 | PSD   | Population Standard Deviation | The one with n on the bottom. ;)    Requires N>0                    |
+| SSD   | 86 | SSD   | Sample Standard Deviation     | The one with n-1 on the bottom. ;)  Requires N>1                    |
+| RNG   | 85 | RNG   | Range: MAX-MIN                |                                                                     |
+| RtVA  | 90 | RtVA  | Rectangular Variance          | (MAX-MIN)/(2*sqrt(3))                                               |
+| N     | 84 | N     | Number of measurements        | Number of rows in MeDAT                                             |
+| SUMS  | 83 | SUMS  | Y: Sum Squared X: Sum         |                                                                     |
+|-------+----+-------+-------------------------------+---------------------------------------------------------------------|
+| Q25   | 35 | Q25   | First Quartile (25%)          | Requires N>2                                                        |
+| MED   | 77 | MED   | Median                        | Quartile Scheme: Measurement estimate. Requires N>2                 |
+| Q75   | 36 | Q75   | Third Quartile (75%)          | Requires N>2                                                        |
+| IQR   | 34 | IQR   | Interquartile range (Q75-Q25) | Requires N>2                                                        |
+| kuQ   | 46 | kuQ   | ERR: k*(Q75-Q25)/2            | Quartile Scheme: Expanded uncertainty estimate. Requires N>2        |
+| ▒▒▒▒  |    | ▒▒▒▒  |                               |                                                                     |
+|-------+----+-------+-------------------------------+---------------------------------------------------------------------|
+| 79    | 82 | S:?   | Reporting Scheme              | Cycle between N=Normal, R=Rectangular, & Q=Quartiles.  Default: N.  |
+| 48    | 81 | K:?   | Coverage Factor               | Cycle through predefined values for current reporting scheme        |
+| 78    | 80 | A:?   | Auto Report Count             | Automatically generate a report on N'th measurement entry           |
+| REP   | 96 | REP   | Display Report                | Duplicated on this page so you can see reports after option changes |
+| ▒▒▒▒  |    | ▒▒▒▒  |                               |                                                                     |
+| RESET | 39 | RESET | Delete data & set defaults    |                                                                     |
+|-------+----+-------+-------------------------------+---------------------------------------------------------------------|
+
+Notes:
+  - Please ignore the first two columns in the table -- they are used to auto-generate the menu code for the application.
+  - I use =PSD= & =SSD= to be explicit and avoid confusion with the 42s internal function =SDEV= (which is =PSD=)
+  - Method used for the first & third quartile:
+    - Q1 is the median of the lower half of the data while Q3 is the median of the upper half
+    - If N is odd, we do not include the median (the central value in the ordered list) in either half.
+    - If N is even, we split this data set exactly in half.
+
+* Global Variables
+
+Application state is maintained in a number of global variables.
+
+#+ATTR_HTML: :align center
+|----------+--------------------+---------------------------------------|
+| Variable | Description        |                                       |
+|----------+--------------------+---------------------------------------|
+| =MeDAT=  | Measurement Matrix | Feel free to edit this directly       |
+| =MeRSC=  | Reporting Scheme   | Use the setup menu to change this one |
+| =MeCFA=  | Coverage Factor    | Use the setup menu to change this one |
+| =MeTGN=  | Auto Report Count  | Use the setup menu to change this one |
+|----------+--------------------+---------------------------------------|
 
 * Use
 
@@ -158,46 +215,198 @@ a matrix named =MeDAT=.  Feel free to edit this matrix with the =MATRIX= menu.
 
 The =[REP]= key will generate a report.  Reports can also be generated automatically when a set number of measurements have been entered (see the setup menu).
 
-Menu page two & three compute various statistics useful for uncertainty reporting.  Page two has the most common statistics, and page three is more useful for
-custom uncertainty computations.
+Menu page two, three, & four compute various statistics useful for uncertainty reporting.  Page two has the most common statistics, page three is useful for
+custom uncertainty computations, and page four has rank based statistics.
 
-Menu page four is for setup.  The distribution impacts reporting (menu page one: =[REP]=).  The coverage factor impacts reporting (menu page one: =[REP]=) and
-and the expanded uncertainty computations (menu page two: =[kuN]= & =[kuS]=).  The automatic reporting option impacts the add measurement function (menu page
-one: =[M+]=) such that a report is automatically generated when a specified number of measurements have been entered.
+Menu page five is for setup.  The reporting scheme impacts reporting (menu page one: =[REP]=).  The coverage factor impacts reporting (menu page one: =[REP]=)
+and and the expanded uncertainty computations (menu page two & four: =[kuN]=, =[kuR]=, & =[kuQ]=).  The automatic reporting option impacts the add measurement
+function (menu page one: =[M+]=) such that a report is automatically generated when a specified number of measurements have been entered.
 
 * Future
 
 Some things I might do some day...
 
- - I stored all the data in a matrix because I was thinking about adding rank statistics and a graphics
  - A graphical representation showing the points and various confidence intervals would be cool
  - It would be neat to see a live dot plot of the measurements as they are being entered
  - Arbitrary k values
  - Support the larger screen when running on the DM42
- - Make the sub-functions perfect (i.e. minimally alter stack/last X)
- - Make the setup menu not alter the stack
+ - Drop the data into the built in statistics tool
+ - Add option to use "Tukey's hinges" for the first & third quartiles
+ - +Make the sub-functions perfect (i.e. minimally alter stack/last X)+
+ - +Add rank statistics+
+ - +Add the median & interquartile range reporting scheme used in biology+
+ - +Make the setup menu not alter the stack+
  - Add a printed report listing data and both normal & square estimates for all coverage factors
 
-* The Code
+* Code
+** Menu Code
+
+#+BEGIN_SRC elisp :var tbl=menu :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/meas/meas.hp42s"
+(MJR-generate-42-menu-code "MEAS" tbl "stay" "exit" 't #'MJR-custom-x-gen)
+#+END_SRC
+
+#+RESULTS:
+#+begin_src hp42s :tangle ../src_42s/meas/meas.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MEAS)
+@@@@ DSC: Auto-generated menu program
+LBL "MEAS"
+LBL 01            @@@@ Page 1 of menu MEAS
+CLMENU
+XEQ 70
+KEY 1 XEQ 98
+"M-"
+KEY 2 XEQ 97
+"EDIT"
+KEY 3 XEQ 38
+"REP"
+KEY 4 XEQ 96
+"CLRM"
+KEY 6 XEQ 95
+KEY 7 GTO 05
+KEY 8 GTO 02
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 02            @@@@ Page 2 of menu MEAS
+CLMENU
+"μ"
+KEY 1 XEQ 94
+"kuN"
+KEY 2 XEQ 92
+"MR"
+KEY 3 XEQ 92
+"kuR"
+KEY 4 XEQ 91
+"MIN"
+KEY 5 XEQ 89
+"MAX"
+KEY 6 XEQ 88
+KEY 7 GTO 01
+KEY 8 GTO 03
+KEY 9 GTO 00
+MENU
+STOP
+GTO 02
+LBL 03            @@@@ Page 3 of menu MEAS
+CLMENU
+"PSD"
+KEY 1 XEQ 87
+"SSD"
+KEY 2 XEQ 86
+"RNG"
+KEY 3 XEQ 85
+"RtVA"
+KEY 4 XEQ 90
+"N"
+KEY 5 XEQ 84
+"SUMS"
+KEY 6 XEQ 83
+KEY 7 GTO 02
+KEY 8 GTO 04
+KEY 9 GTO 00
+MENU
+STOP
+GTO 03
+LBL 04            @@@@ Page 4 of menu MEAS
+CLMENU
+"Q25"
+KEY 1 XEQ 35
+"MED"
+KEY 2 XEQ 77
+"Q75"
+KEY 3 XEQ 36
+"IQR"
+KEY 4 XEQ 34
+"kuQ"
+KEY 5 XEQ 46
+KEY 7 GTO 03
+KEY 8 GTO 05
+KEY 9 GTO 00
+MENU
+STOP
+GTO 04
+LBL 05            @@@@ Page 5 of menu MEAS
+CLMENU
+XEQ 79
+KEY 1 XEQ 82
+XEQ 48
+KEY 2 XEQ 81
+XEQ 78
+KEY 3 XEQ 80
+"REP"
+KEY 4 XEQ 96
+"RESET"
+KEY 6 XEQ 39
+KEY 7 GTO 04
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 05
+LBL 00 @@@@ Application Exit
+EXITALL
+RTN
+@@@@ Free labels start at: 6
+#+end_src
+
+** Local Subroutines
+:PROPERTIES:
+:CUSTOM_ID: localcode
+:END:
 
 #+begin_src hp42s :tangle ../src_42s/meas/meas.hp42s
-@@@@ Repeated Measurements
-@@@@ IN:  N/A
-@@@@ OUT: N/A
-@@@@ UPD: 2021-02-24
-@@@@ BUG: Settings menu messes with the stack
-@@@@ GBL: MeDAT -- Measurement Matrix
-@@@@ GBL: MeDST -- Error Distribution
-@@@@ GBL: MeCFA -- Coverage Factor
-@@@@ GBL: MeTGN -- Target Measurement Count (generates a report automatically)
-@@@@ TST: free42 3.0.2
-LBL "MEAS"
-@@@@ Initialize setup variables
+@@@@ LBL: Used: 30-52, 54-99
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: RESET: LABEL 39
+LBL 39
+CLV "MeDAT"
+CLV "MeCFA"
+CLV "MeRDM"
+CLV "MeREP"
+CLV "MeRSC"
+CLV "MeTGN"
+XEQ 49
+"MeDAT & Set"
+├"tings RESET"
+AVIEW
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: EDIT: LABEL 38
+LBL 38
+FUNC 00
+SF 25
+RCL "MeDAT"
+FC?C 25
+GTO 99
+R↓
+EDITN "MeDAT"
+"Enter data; R/S"
+├" to end"
+PROMPT
+EXITALL
+XEQ 47
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: M+: LABEL 70
+LBL 70
+FUNC 00
+XEQ 49
+"M+"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Set unset variables to defaults
+LBL 49
+FUNC 00
 0
 SF 25
-RCL "MeDST"
+RCL "MeRSC"
 FC?C 25
-STO "MeDST"
+STO "MeRSC"
 SF 25
 RCL "MeCFA"
 FC?C 25
@@ -206,216 +415,175 @@ SF 25
 RCL "MeTGN"
 FC?C 25
 STO "MeTGN"
-R↓
-@@@@ Menu Setup
-LBL 01               @@@@ Page 1 of menu MEAS
-CLMENU
-"M+"
-KEY 1 XEQ 05
-"M-"
-KEY 2 XEQ 06
-"REP"
-KEY 4 XEQ 07
-"CLRM"
-KEY 6 XEQ 08
-KEY 7 GTO 04
-KEY 8 GTO 02
-KEY 9 GTO 00
-MENU
-STOP
-GTO 01
-LBL 02               @@@@ Page 2 of menu MEAS
-CLMENU
-"μ"
-KEY 1 XEQ 09
-"kuN"
-KEY 2 XEQ 10
-"MID"
-KEY 3 XEQ 11
-"kuS"
-KEY 4 XEQ 12
-"MIN"
-KEY 5 XEQ 13
-"MAX"
-KEY 6 XEQ 14
-KEY 7 GTO 01
-KEY 8 GTO 03
-KEY 9 GTO 00
-MENU
-STOP
-GTO 02
-LBL 03               @@@@ Page 3 of menu MEAS
-CLMENU
-"SD"
-KEY 1 XEQ 15
-"PSD"
-KEY 2 XEQ 16
-"RNG"
-KEY 3 XEQ 17
-"SqVA"
-KEY 4 XEQ 35
-"N"
-KEY 5 XEQ 18
-"SUMS"
-KEY 6 XEQ 19
-KEY 7 GTO 02
-KEY 8 GTO 04
-KEY 9 GTO 00
-MENU
-STOP
-GTO 03
-LBL 04               @@@@ Page 4 of menu MEAS
-CLMENU
-XEQ 55
-KEY 2 XEQ 21
-XEQ 56
-KEY 3 XEQ 22
-KEY 7 GTO 03
-KEY 8 GTO 01
-KEY 9 GTO 00
-MENU
-STOP
-GTO 04
-LBL 00
-EXITALL
-RTN
-@@@@ Menu Actions
-LBL 05               @@@@ Action for menu key M+
-FUNC 00
-REAL?
-GTO 34
-"ERR: Bad Value"
-AVIEW
-RTN
-LBL 34
-SF 25                @@@@ Index & grow MeDAT
-INDEX "MeDAT"
-FS?C 25
-GTO 33
-1
-1
-DIM "MeDAT"
-INDEX "MeDAT"
-R↓
-R↓
-STOEL
-VIEW "MeDAT"
-RTN
-LBL 33               @@@@ MeDAT exists.  Grow it
-GROW
-J-
-J+
-WRAP
-STOEL                @@@@ Store element at new location
-XEQ 18
-RCL "MeTGN"
-X≠Y?
-GTO 43
-XEQ 07
-RTN
-LBL 43
-VIEW "MeDAT"
-RTN
-LBL 06               @@@@ Action for menu key M-
-FUNC 00
-SF 25                @@@@ Index & grow MeDAT
-INDEX "MeDAT"
+SF 25
+RCL "MeRDM"
 FC?C 25
-RTN                  @@@@ MeDAT is missing
-J-
-RCLEL
-DELR
-VIEW "MeDAT"
+STO "MeRDM"
+SF 25
+RCL "MeREP"
+FC?C 25
+STO "MeREP"
+R↓
 RTN
-LBL 07               @@@@ Action for menu key REP
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: A: LABEL 78
+LBL 78
 FUNC 00
+"A:"
+RCL "MeTGN"
+X=0?
+├"-"
+X≠0?
+AIP
+R↓
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: S: LABEL 79
+LBL 79
+FUNC 00
+"S:"
+RCL "MeRSC"
+50
++
+XEQ IND ST X
+R↓
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: k: LABEL 48
+LBL 48
+FUNC 00    
+"k:"
+RCL "MeCFA"
+65
++
+XEQ IND ST X
+R↓
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: A: ACTION 80
+@@@@ A can be 0 or in [3,99]
+LBL 80
+FUNC 00
+0
+X≤Y?
+R↓
+99
+X≥Y?
+R↓
+STO "MeTGN"
+X=0?
+RTN
+"WARN: Too"
+├" small:"
+3
+X>Y?
+├" Q"
+R↓
+2
+X>Y?
+├" & N"
+R↓
+3
+X>Y?
+AVIEW
+R↓
+R↓
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: k: ACTION 81
+LBL 81
+FUNC 00
+1
+RCL+ "MeCFA"
+RCL "MeRSC"
+1
+X=Y?
+GTO 58
+R↓
+R↓
+4
+GTO 57
+LBL 58
+R↓
+R↓
+2
+LBL 57
+MOD
+STO "MeCFA"
+R↓
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: S: ACTION 82
+LBL 82
+FUNC 00
+1
+RCL+ "MeRSC"
+3
+MOD
+STO "MeRSC"
+R↓
+0
+STO "MeCFA"
+R↓
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: PSD 87
+LBL 87
+FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
 GTO 99
-R↓
-RCL "MeDST"
-X=0?                 @@@@ IF-BEGIN
-GTO 39
-GTO 40
-LBL 39               @@@@ IF-THEN normal
-"μ="
-XEQ 09
-ARCL ST X
-├" "
-RCL "MeCFA"
-70
-+
-XEQ IND ST X
-├"×u="
-XEQ 10
-ARCL ST X
-GTO 41
-LBL 40               @@@@ IF-ELSE square
-"C="
-XEQ 11
-ARCL ST X
-├" "
-RCL "MeCFA"
-70
-+
-XEQ IND ST X
-├"×u="
-XEQ 12
-ARCL ST X
-LBL 41               @@@@ IF-END
-ALENG
-21
-X<Y?                 @@@@ Can we keep going with 4 value report?
-GTO 36
-├"[LF]↓="
-XEQ 13
-ARCL ST X
-├"  ↑="
-XEQ 14
-ARCL ST X
-ALENG
-41
-X<Y?                 @@@@ Can we keep going with 4 value report?
-GTO 36
-AVIEW
+XEQ 83
+XEQ 84
+X<>Y
+X↑2
+RCL÷ ST Y
+RCL÷ ST Y
+RCL ST Z
+RCL ST Z
+÷
+X<>Y
+-
+SQRT
 RTN
-LBL 36               @@@@ 2 value report
-RCL "MeDST"
-X=0?                 @@@@ IF-BEGIN
-GTO 37
-GTO 38
-LBL 37               @@@@ IF-THEN normal
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: M- 97
+LBL 97               @@@@ Action for menu key M-
+FUNC 00
+SF 25
+RCL "MeDAT"
+FC?C 25
+GTO 72               @@@@ MeDAT is missing
+DIM?
 R↓
-" μ="
-XEQ 09
-ARCL ST X
-├"[LF]"
-RCL "MeCFA"
-70
-+
-XEQ IND ST X
-├"×u="
-XEQ 10
-ARCL ST X
-GTO 39
-LBL 38               @@@@ IF-ELSE square
-R↓
-" C="
-XEQ 11
-ARCL ST X
-├"[LF]"
-RCL "MeCFA"
-70
-+
-XEQ IND ST X
-├"×u="
-XEQ 12
-ARCL ST X
-LBL 39               @@@@ IF-END
-AVIEW
+1
+X=Y?
+GTO 72               @@@@ MeDAT has only one row
+SF 25                @@@@ Index MeDAT
+INDEX "MeDAT"
+FC?C 25
+GTO 72               @@@@ MeDAT is missing
+J-
+RCLEL
+DELR
+XEQ 47
 RTN
-LBL 08               @@@@ Action for menu key CLRM
+LBL 72
+XEQ 95
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: CLRM 95
+LBL 95
 FUNC 00
 SF 25
 INDEX "MeDAT"
@@ -424,84 +592,231 @@ CF 25
 "MeDAT Cleared"
 AVIEW
 RTN
-LBL 09               @@@@ Action for menu key μ (mean)
-FUNC 01
-SF 25
-INDEX "MeDAT"
-FC?C 25
-GTO 99
-XEQ 19
-X<>Y
-R↓
-XEQ 18
-÷
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: M+ 98
+LBL 98
+FUNC 00
+REAL?
+GTO 56
+"ERR: Bad Value"
+AVIEW
 RTN
-LBL 10               @@@@ Action for menu key kuN (expanded uncertainty for normally distributed data)
-FUNC 01
-SF 25
+LBL 56
+SF 25                @@@@ Index & grow MeDAT
 INDEX "MeDAT"
+FS?C 25
+GTO 55
+1
+1
+DIM "MeDAT"
+INDEX "MeDAT"
+R↓
+R↓
+STOEL
+XEQ 47
+RTN
+LBL 55               @@@@ MeDAT exists.  Grow it
+GROW
+J-
+J+
+WRAP
+STOEL                @@@@ Store element at new location
+XEQ 84
+RCL "MeTGN"
+X≠Y?
+GTO 43
+XEQ 96
+RTN
+LBL 43
+XEQ 47
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: micro report
+LBL 47
+FUNC 00
+XEQ 84        
+"N="
+AIP
+AVIEW
+RCL "MeTGN"
+X≤Y?
+RTN
+ALENG
+8
+X<>Y
+-
+LBL 53
+├" "
+DSE ST X
+GTO 53
+├"Report in "
+R↓
+X<>Y
+-
+AIP
+AVIEW
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: REP 96
+LBL 96       
+FUNC 00
+SF 25
+RCL "MeDAT"
 FC?C 25
 GTO 99
-XEQ 16
+DIM?
+R↓
+RCL "MeRSC"
+30
++
+GTO IND ST X
+LBL 30               @@@@ Normal: line 1 of compact report 
+R↓
+2
+X>Y?
+GTO 75               @@@@ We require 2 points for a report!
+R↓
+R↓
+"μ="
+XEQ 94
+ARCL ST X
+├" "
 RCL "MeCFA"
-60
+65
 +
 XEQ IND ST X
-X<>Y
+├"×u="
+XEQ 93
+ARCL ST X
+GTO 44
+LBL 31               @@@@ Rectangular: line 1 of compact report 
 R↓
-×
-RTN
-LBL 11               @@@@ Action for menu key MID (midrange)
-FUNC 01
-SF 25
-INDEX "MeDAT"
-FC?C 25
-GTO 99
-XEQ 14
-XEQ 13
-+
 2
-÷
-RTN
-LBL 12               @@@@ Action for menu key kuS (expanded uncertainty for rectangular distributed data)
-FUNC 01
-SF 25
-INDEX "MeDAT"
-FC?C 25
-GTO 99
-XEQ 35
+X>Y?
+GTO 75               @@@@ We require 2 points for a report!
+R↓
+R↓
+"MR="
+XEQ 92
+ARCL ST X
+├"  "
 RCL "MeCFA"
-60
+65
 +
 XEQ IND ST X
-X<>Y
+├"×u="
+XEQ 91
+ARCL ST X
+GTO 44
+LBL 32               @@@@ Quartiles: line 1 of compact report 
 R↓
-×
-RTN
-LBL 35               @@@@ Action for menu key SqVA
-FUNC 0
-SF 25
-INDEX "MeDAT"
-FC?C 25
-GTO 99
-XEQ 17
-2
-÷
 3
-SQRT
-÷
+X>Y?
+GTO 75               @@@@ We require 3 points for a report!
+R↓
+R↓
+"Q2="
+XEQ 77
+ARCL ST X
+├"  "
+RCL "MeCFA"
+65
++
+XEQ IND ST X
+├"×u="
+XEQ 46
+ARCL ST X
+GTO 44
+LBL 44               @@@@  Finish up prototype 2 line report
+ALENG
+21
+X<Y?                 @@@@ Can we keep going with 4 value report?
+GTO 45               @@@@ Can't do 2-line as line 1 is too long...
+@@@@ Contineu to line 2 of compact report
+├"[LF]↓="
+XEQ 89
+ARCL ST X
+├"  ↑="
+XEQ 88
+ARCL ST X
+ALENG
+41
+X<Y?
+GTO 45               @@@@ Can't do compact report as line 2 was too long...
+AVIEW
 RTN
-LBL 13               @@@@ Action for menu key MIN
+LBL 45               @@@@ Long form report..
+RCL "MeRSC"
+40
++
+GTO IND ST X
+LBL 40               @@@@ Normal: long report
+R↓
+"μ="
+XEQ 94
+ARCL ST X
+├"[LF]"
+RCL "MeCFA"
+65
++
+XEQ IND ST X
+├"×u="
+XEQ 93
+ARCL ST X
+AVIEW
+RTN
+LBL 41               @@@@ Rectangular: long report
+R↓
+"MR="
+XEQ 92
+ARCL ST X
+├"[LF]"
+RCL "MeCFA"
+65
++
+XEQ IND ST X
+├"×u="
+XEQ 91
+ARCL ST X
+AVIEW
+RTN
+LBL 42               @@@@ Quartiles: long report
+R↓
+"Q2="
+XEQ 77
+ARCL ST X
+├"[LF]"
+RCL "MeCFA"
+65
++
+XEQ IND ST X
+├"×u="
+XEQ 46
+ARCL ST X
+AVIEW
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: MR (midrange) 92
+LBL 92
 FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
 GTO 99
-[MIN]
-X<>Y
-R↓
+XEQ 88
+XEQ 89
++
+2
+÷
 RTN
-LBL 14               @@@@ Action for menu key MAX
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: MAX 88
+LBL 88
 FUNC 01
 SF 25
 INDEX "MeDAT"
@@ -511,33 +826,103 @@ GTO 99
 X<>Y
 R↓
 RTN
-LBL 15               @@@@ Action for menu key SD
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: MIN 89
+LBL 89          
 FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
 GTO 99
-XEQ 19
-XEQ 18
+[MIN]
 X<>Y
-X↑2
-RCL÷ ST Y
-RCL÷ ST Y
-RCL ST Z
-RCL ST Z
-÷
-X<>Y
--
-SQRT
+R↓
 RTN
-LBL 16               @@@@ Action for menu key PSD
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: kuR 91
+LBL 91          
 FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
 GTO 99
-XEQ 19
-XEQ 18
+XEQ 90
+RCL "MeCFA"
+60
++
+XEQ IND ST X
+X<>Y
+R↓
+×
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: RtVA 90
+LBL 90           
+FUNC 0
+SF 25
+INDEX "MeDAT"
+FC?C 25
+GTO 99
+XEQ 85
+2
+÷
+3
+SQRT
+÷
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: RNG 85
+LBL 85       
+FUNC 01
+SF 25
+INDEX "MeDAT"
+FC?C 25
+GTO 99
+XEQ 88
+XEQ 89
+-
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: kuN 93
+LBL 93
+FUNC 01
+SF 25
+RCL "MeDAT"
+FC?C 25
+GTO 99
+DIM?
+R↓
+2
+XEQ 86
+RCL "MeCFA"
+60
++
+XEQ IND ST X
+X<>Y
+R↓
+×
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: SSD 86
+LBL 86
+FUNC 01
+SF 25
+RCL "MeDAT"
+FC?C 25
+GTO 99
+DIM?
+R↓
+2
+X>Y?
+GTO 75
+XEQ 83
+XEQ 84
 X<>Y
 X↑2
 RCL÷ ST Y
@@ -552,17 +937,46 @@ SQRT
 X<>Y
 R↓
 RTN
-LBL 17               @@@@ Action for menu key RNG
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: μ (mean) 94
+LBL 94
 FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
 GTO 99
-XEQ 14
-XEQ 13
--
+XEQ 83
+X<>Y
+R↓
+XEQ 84
+÷
 RTN
-LBL 18               @@@@ Action for menu key N
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: SUMS 83
+LBL 83
+FUNC 02
+SF 25
+INDEX "MeDAT"
+FC?C 25
+GTO 99
+0
+0
+LBL 33
+RCLEL
+STO+ ST Y
+X↑2
+STO+ ST Z
+R↓
+J+
+FC? 77
+GTO 33
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: N 84
+LBL 84        
 FUNC 01
 SF 25
 RCL "MeDAT"
@@ -574,163 +988,87 @@ LBL 54
 DIM?
 R↓
 RTN
-LBL 19               @@@@ Action for menu key SUMS
-FUNC 02
-SF 25
-INDEX "MeDAT"
-FC?C 25
-GTO 99
-0
-0
-LBL 32
-RCLEL
-STO+ ST Y
-X↑2
-STO+ ST Z
-R↓
-J+
-FC? 77
-GTO 32
-RTN
-LBL 20               @@@@ Action for menu key D:
-FUNC 00
-1
-RCL+ "MeDST"
-2
-MOD
-STO "MeDST"
-R↓
-0
-STO "MeCFA"
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: MED (median) 77
+@@@@ FAQ: Needs at least 3 values
+LBL 77
+FUNC 01
+XEQ 74
 R↓
 RTN
-LBL 21               @@@@ Action for menu key k:
-FUNC 00
-1
-RCL+ "MeCFA"
-RCL "MeDST"
-X=0?
-GTO 29
-GTO 30
-LBL 29
-4
-GTO 31
-LBL 30
-2
-LBL 31
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Q1 (First quartile) 35
+@@@@ FAQ: Needs at least 3 values
+LBL 35
+FUNC 01
+XEQ 74
+R↓
+R↓
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Q3 (Third quartile) 36
+@@@@ FAQ: Needs at least 3 values
+LBL 36
+FUNC 01
+XEQ 74
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: IQR (Interquartile Range) 34
+@@@@ FAQ: Needs at least 3 values
+LBL 34
+FUNC 01
+XEQ 74
 X<>Y
 R↓
-MOD
-STO "MeCFA"
+X<>Y
+-
+RTN
+    
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: kuQ (Quartiles uncertainty) 46
+@@@@ FAQ: Needs at least 3 values
+LBL 46
+FUNC 01
+XEQ 74
+X<>Y
 R↓
-RTN
-LBL 22               @@@@ Action for menu key A:
-FUNC 00
-1
-X≠Y?
-GTO 42
-"ERR: Bad Value"
-AVIEW
-RTN
-LBL 42
-R↓
-STO "MeTGN"
-RTN
-@@@@ Coverage values
-LBL 60               @@@@ Value for coverage factor 0
-1
-RTN
-LBL 61               @@@@ Value for coverage factor 1
-RCL "MeDST"
-X=0?
-GTO 24
-R↓
+X<>Y
+-
 2
-RTN
-LBL 24
-R↓
-3
-SQRT
-RTN
-LBL 62               @@@@ Value for coverage factor 2
-3
-RTN
-LBL 63               @@@@ Value for coverage factor 3
-4
-RTN
-@@@@ Coverage Names
-LBL 70               @@@@ Name for coverage factor 0
-├"1"
-RTN
-LBL 71               @@@@ Name for coverage factor 1
-RCL "MeDST"
-X=0?
-├"2"
-X≠0?
-├"√3"
-R↓
-RTN
-LBL 72               @@@@ Name for coverage factor 2
-├"3"
-RTN
-LBL 73               @@@@ Name for coverage factor 3
-├"4"
-RTN
-@@@@ distribution Names
-LBL 80               @@@@ Name for distribution 0
-├"N"
-RTN
-LBL 81               @@@@ Name for distribution 1
-├"S"
-RTN
-@@@@ Error States
-LBL 99               @@@@ ERROR message for missing MeDAT
-"ERR: No MeDAT"
-AVIEW
-RTN
-LBL 55
-FUNC 00
-"D:"
-RCL "MeDST"
-80
-+
-XEQ IND ST X
-R↓
-KEY 1 XEQ 20
-"k:"
+/
 RCL "MeCFA"
-70
+60
 +
 XEQ IND ST X
+X<>Y
 R↓
+×
 RTN
-LBL 56
-FUNC 00
-"A:"
-RCL "MeTGN"
-X=0?
-├"-"
-X≠0?
-AIP
-R↓
-RTN
-END
-#+end_src
 
-* Median
-
-This function computes the median of MeDAT.  Someday I may integrate it into the main =MEAS= application.
-
-#+begin_src hp42s :tangle ../src_42s/meas/meas.hp42s
-LBL "MEASM"
-RCL "MeDAT"
-STO "TMP"
-R↓
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: QUART (quartiles) 74
+@@@@ OUT: X: Q3 Y: Q2 Z: Q1
+@@@@ FAQ: Needs at least 3 values
+LBL 74
+FUNC 03
+L4STK
 SF 25
-INDEX "TMP"
+RCL "MeDAT"
 FC?C 25
 GTO 99
-LBL 44
+LSTO "TMP"
+DIM?
+R↓
+3
+X>Y?
+GTO 75
+R↓
+INDEX "TMP"
+LBL 71
 [MIN]
 R↓
 RCLIJ
@@ -738,34 +1076,65 @@ R↓
 R<>R
 J+
 FC? 77
-GTO 44
+GTO 71
+@@@@ Array is sorted now
 RCL "TMP"
-DIM?
-R↓
-ENTER
-ENTER
-2
-÷
+DIM?                 @@@@ ROWS=1 COLS 
+XEQ 76               @@@@ Q2 N
+X<>Y                 @@@@ N Q2
+RCL ST X             @@@@ N N Q2
+1
++                    @@@@ (N+1) N Q2
+2                    @@@@ 2 (N+1) N Q2
+÷                    @@@@ (N+1)/2 N Q2
+ENTER                @@@@ (N+1)/2 (N+1)/2 N Q2
 FP
 X=0?
-GTO 45
-"odd"
-R↓
-1
-+
-2
-÷
-IP
-1
-STOIJ
-RCLEL
+GTO 37
+@@@@ FRAC
+R↓                   @@@@ (N+1)/2 N Q2
+IP                   @@@@ IP((N+1)/2) N Q2
+1                    @@@@ 1 IP((N+1)/2) N Q2
+XEQ 76               @@@@ Q1 IP((N+1)/2) N Q2
+R↓                   @@@@ IP((N+1)/2) N Q2 Q1
+ISG ST X
+NOP                  @@@@ IP((N+1)/2)+1 N Q2 Q1
+XEQ 76               @@@@ Q3 N Q2 Q1
+X<>Y                 @@@@ N Q3 Q2 Q1
+R↓                   @@@@ Q3 Q2 Q1
 RTN
-LBL 45
-"even"
-R↓
-ENTER
+LBL 37
+@@@@ INT
+R↓                   @@@@ (N+1)/2 N Q2
+DSE ST X
+NOP                  @@@@ (N+1)/2-1 N Q2 
+1                    @@@@ 1 (N+1)/2-1 N Q2 
+XEQ 76               @@@@ Q1 (N+1)/2-1 N Q2
+R↓                   @@@@ (N+1)/2-1 N Q2 Q1
+ISG ST X
+NOP
+ISG ST X
+NOP                  @@@@ (N+1)/2+1 N Q2 Q1
+XEQ 76               @@@@ Q3 N Q2 Q1
+X<>Y                 @@@@ N Q3 Q2 Q1
+R↓                   @@@@ Q3 Q2 Q1
+RTN
+ 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: MED of indexed matrix on RANGE X: Lower Y: upper 
+LBL 76
+FUNC 11              @@@@ Really takes two, but we want to leave Y
++                    @@@@ upper+Lower
 2
-÷
+÷                    @@@@ (upper+Lower)/2
+RCL ST X             @@@@ (upper-Lower)/2 (upper-Lower)/2 
+FP                   @@@@ FP((upper-Lower)/2) (upper-Lower)/2  Lower
+X=0?
+GTO 73
+@@@@ Between
+R↓
+IP
+ENTER
 1
 STOIJ
 R↓
@@ -780,10 +1149,107 @@ R↓
 RCLEL
 +
 2
-÷
+/
 RTN
+LBL 73
+@@@@ On
+R↓
+1
+STOIJ
+R↓
+R↓
+RCLEL
+RTN
+        
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: "ERR: No MeDAT!" 99
+LBL 99
+@@@@ Not FUNC -- NOT A XEQ TARGET, but A GTO TARGET
+"ERR: No MeDAT!"
+AVIEW
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: "ERR: MeDAT Too Small!" 75
+LBL 75
+@@@@ Not FUNC -- NOT A XEQ TARGET, but A GTO TARGET
+"ERR: MeDAT "
+├"Too Small!"
+AVIEW
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Coverage values
+LBL 60               @@@@ Value for coverage factor 0
+FUNC 01
+1
+RTN
+LBL 61               @@@@ Value for coverage factor 1
+RCL "MeRSC"
+1
+X≠Y?
+GTO 59
+R↓
+3
+SQRT
+RTN
+LBL 59
+R↓
+R↓
+2
+RTN
+LBL 62               @@@@ Value for coverage factor 2
+3
+RTN
+LBL 63               @@@@ Value for coverage factor 3
+4
+RTN
+LBL 64               @@@@ Value for coverage factor 4
+999
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Coverage Names
+LBL 65               @@@@ Name for coverage factor 0
+├"1"
+RTN
+LBL 66               @@@@ Name for coverage factor 1
+RCL "MeRSC"
+1
+X=Y?
+├"√3"
+X≠Y?
+├"2"
+R↓
+R↓
+RTN
+LBL 67               @@@@ Name for coverage factor 2
+├"3"
+RTN
+LBL 68               @@@@ Name for coverage factor 3
+├"4"
+RTN
+LBL 69               @@@@ Name for coverage factor 4
+├"999"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: reporting scheme Names
+LBL 50               @@@@ Name for reporting scheme 0
+├"N"
+RTN
+LBL 51               @@@@ Name for reporting scheme 1
+├"R"
+RTN
+LBL 52               @@@@ Name for reporting scheme 2
+├"Q"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
-#+END_SRC
+#+end_src
+
+
 
 * WORKING                                                          :noexport:
 
@@ -799,6 +1265,8 @@ END
 #+END_SRC
 
 Code in this section is under construction.  Most likely broken.
+
+
 * EOF
 
 # End of document.

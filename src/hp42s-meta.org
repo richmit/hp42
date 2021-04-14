@@ -37,7 +37,7 @@ Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 
 * Metadata
 
-This home for this HTML file is: https://richmit.github.io/hp42/hp42s-meta.html
+The home for this HTML file is: https://richmit.github.io/hp42/hp42s-meta.html
 
 Files related to this document may be found on github: https://github.com/richmit/hp42
 
@@ -49,6 +49,9 @@ Directory contents:
    | =bin=     | - | Importable RAW program files                                   |
 
 * Introduction
+:PROPERTIES:
+:CUSTOM_ID: introduction
+:END:
 
 This org-mode document contains various tools (mostly for Emacs) that help me write programs for the 42s:
 
@@ -91,11 +94,12 @@ blank entry in the first column leaves a blank menu button.  A more complete exa
 The top level menu will have "=foo=" & "=snoopy=".  "=snoopy=" is an /action/ button while "=foo=" brings up a menu containing "=bar=", "=bill=", & "=ted=".
 The last two are /actions/ while the first is yet another menu containing "=foobar=".
 
-#+BEGIN_SRC elisp :results output verbatum
-(defun MJR-generate-42-menu-code (top-lab tbl leaf-function exit-function gen-code)
-   ;; leaf-function "stay" or "exit", exit-function "exit" or "up"
-  (let* ((no-local 't)
-         (allow-lleaf 't)
+#+BEGIN_SRC elisp :results silent
+(defun MJR-generate-42-menu-code (top-lab tbl leaf-function exit-function allow-local-labs gen-code)
+" leaf-function:    String:  stay, exit
+  exit-function:    String:  exit, up
+  allow-local-labs: Boolean: Do we recognize numbers for local lable targets"
+   (let* ((no-local 't)
          (min-free-lab  2)
          (m-code "")
          (x-code ""))
@@ -136,7 +140,7 @@ The last two are /actions/ while the first is yet another menu containing "=foob
                                                     for page-key = (mod mkey-num 6)
                                                     for mkey-str = (if (vectorp mkey-elt) (aref mkey-elt 0) (cl-first mkey-elt))
                                                     for is-leaf  = (vectorp mkey-elt)
-                                                    for is-lleaf = (and allow-lleaf (vectorp mkey-elt) (numberp (cl-second (aref mkey-elt 1))))
+                                                    for is-lleaf = (and allow-local-labs (vectorp mkey-elt) (numberp (cl-second (aref mkey-elt 1))))
                                                     when (= page-key 0)
                                                     do (progn (add-m-code (message "LBL %02d            @@@@ Page %d of menu %s" (nth page-num page-labs) (1+ page-num) (cl-first menu)))
                                                               (add-m-code "CLMENU"))
@@ -194,8 +198,6 @@ The last two are /actions/ while the first is yet another menu containing "=foob
         (princ "END"))))
 #+END_SRC
 
-#+RESULTS:
-
 ** For CUSTOM-type Menus
 
 This is a function for use as as the =gen-code= argument to =MJR-generate-42-menu-code=.  It generates a menu program that calls other programs or built in
@@ -216,7 +218,7 @@ If the menu is a number, then it will be =XEQ='ed to get the menu label.  If the
 an =END= will not be generated at the end of the listing -- this allows one to put the local subroutines later in the org-mode file and the whole thing will then be tangled
 together into one program.
 
-#+BEGIN_SRC elisp :colnames y :results output verbatum
+#+BEGIN_SRC elisp :results silent
 (defun MJR-custom-x-gen (row) (let ((blt-in  '("%" "%CH" "+" "+/-" "-" "1/X" "10↑X" "ABS" "ACOS" "ACOSH" "ADV" "AGRAPH" "AIP" "ALENG" "ALL" "ALLΣ" "AND" "AOFF" "AON" "ARCL" "AROT" "ASHF" "ASIN" "ASINH" "ASSIGN" "ASTO" "ATAN" "ATANH" "ATOX" "AVIEW"
                                                "BASE+" "BASE+/-" "BASE-" "BASE×" "BASE÷" "BEEP" "BEST" "BINM" "BIT?"  "BIT?"  "CF" "CLA" "CLD" "CLKEYS" "CLLCD" "CLMENU" "CLP" "CLRG" "CLST" "CLV" "CLX" "CLΣ" "COMB" "COMPLEX" "CORR" "COS" "COSH"
                                                "CPX?"  "CPXRES" "CROSS" "CUSTOM" "DECM" "DEG" "DELAY" "DELR" "DET" "DIM" "DIM?"  "DOT" "DSE" "EDIT" "EDITN" "END" "ENG" "ENTER" "EXITALL" "EXPF" "E↑X" "E↑X-1" "FC?"  "FC?C" "FCSTX" "FCSTY" "FIX"
@@ -235,8 +237,6 @@ together into one program.
                                     (message "XEQ \"%s\"" cm-lb))))
 #+END_SRC
 
-#+RESULTS:
-
 ** Template for empty menu code
 
 #+NAME: menu
@@ -246,12 +246,12 @@ together into one program.
 | b    |
 | c    |
 
-#+BEGIN_SRC elisp :var tbl=menu :colnames y :results output verbatum :wrap "src hp42s :tangle SOMEFILE"
-(MJR-generate-42-menu-code "PROG_NAME" tbl "stay" "up" (lambda (x) ""))
+#+BEGIN_SRC elisp :var tbl=menu :colnames y :results output verbatum :wrap "src hp42s :tangle no"
+(MJR-generate-42-menu-code "PROG_NAME" tbl "stay" "up" 't (lambda (x) ""))
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle SOMEFILE
+#+begin_src hp42s :tangle no
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PROG_NAME)
 @@@@ DSC: Auto-generated menu program
 LBL "PROG_NAME"
@@ -287,7 +287,7 @@ END
 
 ** Emacs function to insert charcters given a list of character codes
 
-#+BEGIN_SRC elisp :results output verbatum
+#+BEGIN_SRC elisp :results silent
 (defun MJR-ins42char (charn)
   "Insert free42 character at point."
   (interactive "sCharacter Number(s): ")
@@ -304,16 +304,13 @@ END
                                                                    ":" "ʏ"))))))
 #+END_SRC
 
-#+RESULTS:
-
-
 ** Emacs Mode for 42s Code
 
 This isn't really a proper mode for 42s code.  Just a quick hack with =define-generic-mode= to get some syntax highlighting -- which doesn't fully work as
 some of the characters in keywords are recognized as punctuation.  Still it makes listings a little better.  Someday I may take the time to write a real mode,
 but this works for now.
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC elisp :results silent
 (define-generic-mode 'hp42s-mode
                      '("@@@@" "@@")
                      '("%" "%CH" "+" "+/-" "-" "1/X" "10↑X" "ABS" "ACOS" "ACOSH" "ADV" "AGRAPH" "AIP" "ALENG" "ALL" "ALLΣ" "AND" "AOFF" "AON" "ARCL" "AROT" "ASHF" "ASIN" "ASINH" "ASSIGN" "ASTO" "ATAN" "ATANH" "ATOX" "AVIEW"
@@ -336,11 +333,6 @@ but this works for now.
                      nil
                      "Major mode for editing HP-42s programs")
 #+END_SRC
-
-#+RESULTS:
-#+begin_example
-hp42s-mode
-#+end_example
 
 ** yas templates
 
@@ -398,6 +390,27 @@ LBL $1    @@@@ IF-TRUE-BEGIN ($1)
 @@@@ True Code ($1)
 RTN       @@@@ IF-TRUE-END ($1)
 
+#+end_src
+
+** Export & Tangle from dired
+
+This will export to HTML and tangle all marked files in a dired buffer.
+
+#+begin_src elisp :results silent
+(defun MJR-dired-org-to-html-and-code ()
+  "Export to HTML and tangle current file or all marked files in dired-mode"
+  (interactive)
+  (if (not (equal major-mode 'dired-mode))
+      (message "MJR-dired-org-to-html-and-code: ERROR: Not in dired mode!!")
+      (let ((marked-files (dired-get-marked-files)))
+        (if (null marked-files)
+            (message "MJR-dired-org-to-html-and-code: ERROR: No marked files!!")
+            (mapc (lambda (f)
+                    (with-current-buffer (find-file-noselect f)
+                      (org-html-export-to-html)
+                      (org-babel-tangle)))
+                  marked-files)))
+            (message "dired-get-marked-files: Complete!")))
 #+end_src
 
 * Prepare Code For Conversion

@@ -1,4 +1,4 @@
-# -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
+># -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
 #+TITLE:       free42 Code Attic
 #+AUTHOR:      Mitch Richling
 #+EMAIL:       http://www.mitchr.me/
@@ -37,18 +37,14 @@ Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 
 * Metadata
 
-This home for this HTML file is: https://richmit.github.io/hp42/base.html
+The home for this HTML file is: https://richmit.github.io/hp42/base.html
 
 Files related to this document may be found on github: https://github.com/richmit/hp42
 
-Directory contents:
-#+ATTR_HTML: :border 0 :frame none :rules none :align center
-   | =src=     | - | The org-mode file that generated this HTML document            |
-   | =src_42s= | - | Ready to convert source listings for 42s code in this document |
-   | =docs=    | - | This html document                                             |
-   | =bin=     | - | Importable RAW program files                                   |
-
 * Introduction
+:PROPERTIES:
+:CUSTOM_ID: introduction
+:END:
 
 This is where old code goes... ;)
 
@@ -56,7 +52,7 @@ This is where old code goes... ;)
 
 ** =TNPR=: Tiny number printer
 
-#+begin_src hp42s :tangle ../src_42s/attic/tnpr.hp42s
+#+begin_src hp42s :tangle no
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TNPR)
 @@@@ DSC: Tiny Number PRint
 @@@@ IN:  Z: Y coordinate for upper left point of character -- Top of screen is 1
@@ -289,7 +285,7 @@ END
 
 ** =PATN=: Test =TNPR= by printing all characters
 
-#+begin_src hp42s :tangle ../src_42s/attic/tnpr.hp42s
+#+begin_src hp42s :tangle no
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PATN)
 @@@@ DSC: Print All Tiny Number Characters
 LBL "PATN"
@@ -323,3 +319,110 @@ RTN
 END
 #+END_SRC
 
+
+* =SGN=: Sign function
+
+#+BEGIN_SRC hp42s :tangle no
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SGN)
+@@@@ DSC: Sign function
+@@@@ IN:  X: a number
+@@@@ OUT: X:  0 when input was 0
+@@@@         -1 when input was negative
+@@@@          1 when input was positive
+@@@@ UPD: 2021-02-26
+@@@@ TST: free42_3.0
+LBL "SGN"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+ENTER
+ABS
+X≠0?
+GTO 01
+@@@@ zero
+0
+RTN
+LBL 01
+@@@@ Non-zero
+X<>Y
+REAL?
+GTO 02
+@@@@ Complex non-zero
+X<>Y
+÷
+RTN
+LBL 02
+@@@@ Real non-zero
+X<0?
+GTO 03
+@@@@ Real positive
+1
+RTN
+LBL 03
+@@@@ Real negative
+-1
+RTN
+END
+#+END_SRC
+
+* =FLOOR=: Floor
+
+#+BEGIN_SRC hp42s :tangle no
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FLOOR)
+@@@@ DSC: Floor
+@@@@ IN:  X: real number
+@@@@ OUT: X: floor(X)
+@@@@ UPD: 2021-02-23
+@@@@ TST: free42_3.0
+LBL "FLOOR"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+IP
+LASTX
+FP
+X<0?
+GTO 01
+R↓
+RTN
+LBL 01
+1
+-
+RTN
+END
+#+END_SRC
+
+* =CEIL=: Ceiling
+
+#+BEGIN_SRC hp42s :tangle no
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CEIL)
+@@@@ DSC: Ceiling
+@@@@ IN:  X: real number
+@@@@ OUT: X: ceil(X)
+@@@@ UPD: 2021-02-23
+@@@@ TST: free42_3.0
+LBL "CEIL"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+IP
+LASTX
+FP
+X>0?
+GTO 01
+R↓
+RTN
+LBL 01
+1
++
+RTN
+END
+#+END_SRC
+
+* EOF
+
+# End of document.
+
+# The following adds some space at the bottom of exported HTML
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />

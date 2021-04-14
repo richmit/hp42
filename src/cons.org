@@ -37,7 +37,7 @@ Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 
 * Metadata
 
-This home for this HTML file is: https://richmit.github.io/hp42/cons.html
+The home for this HTML file is: https://richmit.github.io/hp42/cons.html
 
 Files related to this document may be found on github: https://github.com/richmit/hp42
 
@@ -49,6 +49,9 @@ Directory contents:
    | =bin=     | - | Importable RAW program files                                   |
 
 * Introduction
+:PROPERTIES:
+:CUSTOM_ID: introduction
+:END:
 
 Several constants libraries are available for the 42s, and some of them are quite good.  Unfortunately nobody is going to make a constants library with just
 the constants I use. ;)
@@ -491,24 +494,29 @@ The generator code can be customized in a few ways:
 You must first define the =MJR-generate-42-menu-code= by evaluating the code block in the =hp42s-meta.org= file.
 
 #+BEGIN_SRC elisp :var tbl=constants :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/cons/cons.hp42s"
-(MJR-generate-42-menu-code "CONS" tbl "exit" "up" (lambda (row) (cl-destructuring-bind (sym desc desc-long val uncertainty units cat) row
-                                                                  (let ((print-desc 't)    ;; Set to NIL to not print description
-                                                                        (print-unit 't))   ;; Set to NIL to not print units
-                                                                    (let* ((dlen (length desc))
-                                                                           (ulen (length units))
-                                                                           (dsc1 (cond ((< dlen 15) (concat desc (if (and (< 0 ulen) print-unit) "[LF]")))
-                                                                                       ((>=  dlen 15) (substring desc 0 15))))
-                                                                           (dsc2 (if (> dlen 14)
-                                                                                     (if (< dlen 22)
-                                                                                         (concat (substring desc 15) (if (and (< 0 ulen) print-unit) "[LF]"))
-                                                                                         (substring desc 15 22)))))
-                                                                      (mapconcat #'identity
-                                                                                 (cl-remove nil (list (message "%s" val)
-                                                                                                      (and (< 0 dlen) print-desc      (message "\"%s\"" dsc1))
-                                                                                                      (and (< 0 dlen) print-desc dsc2 (message "├\"%s\"" dsc2))
-                                                                                                      (and (< 0 ulen) print-unit      (message "%s\"%s\"" (if (and (< 0 dlen) print-desc) "├" "") units))
-                                                                                                      "AVIEW"))
-                                                                                 "\n")))))))
+(MJR-generate-42-menu-code "CONS"
+                           tbl
+                           "exit"
+                           "up"
+                           't
+                           (lambda (row) (cl-destructuring-bind (sym desc desc-long val uncertainty units cat) row
+                                           (let ((print-desc 't)    ;; Set to NIL to not print description
+                                                 (print-unit 't))   ;; Set to NIL to not print units
+                                             (let* ((dlen (length desc))
+                                                    (ulen (length units))
+                                                    (dsc1 (cond ((< dlen 15) (concat desc (if (and (< 0 ulen) print-unit) "[LF]")))
+                                                                ((>=  dlen 15) (substring desc 0 15))))
+                                                    (dsc2 (if (> dlen 14)
+                                                              (if (< dlen 22)
+                                                                  (concat (substring desc 15) (if (and (< 0 ulen) print-unit) "[LF]"))
+                                                                  (substring desc 15 22)))))
+                                               (mapconcat #'identity
+                                                          (cl-remove nil (list (message "%s" val)
+                                                                               (and (< 0 dlen) print-desc      (message "\"%s\"" dsc1))
+                                                                               (and (< 0 dlen) print-desc dsc2 (message "├\"%s\"" dsc2))
+                                                                               (and (< 0 ulen) print-unit      (message "%s\"%s\"" (if (and (< 0 dlen) print-desc) "├" "") units))
+                                                                               "AVIEW"))
+                                                          "\n")))))))
 #+END_SRC
 
 #+RESULTS:

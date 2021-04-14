@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-10 Sat 23:23 -->
+<!-- 2021-04-14 Wed 17:01 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Custom Constants</title>
@@ -42,7 +42,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -54,7 +54,7 @@
     padding: 3px;
     border: 1px solid black;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-10 23:23:15</i></td>
+<td class="org-left"><i>2021-04-14 17:01:07</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,32 +241,32 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org590e10c">1. Metadata</a></li>
-<li><a href="#org6f061da">2. Introduction</a>
+<li><a href="#orgaadd3f1">1. Metadata</a></li>
+<li><a href="#introduction">2. Introduction</a>
 <ul>
-<li><a href="#org5d1ff0c">2.1. Customizing the Constants Table</a></li>
-<li><a href="#org1d25320">2.2. Customizing the Gen Code</a></li>
+<li><a href="#orge9e330d">2.1. Customizing the Constants Table</a></li>
+<li><a href="#org25fb1b8">2.2. Customizing the Gen Code</a></li>
 </ul>
 </li>
-<li><a href="#org359e2b8">3. Constants</a>
+<li><a href="#orgcb25527">3. Constants</a>
 <ul>
-<li><a href="#org7e36561">3.1. Constant Data (2018 NIST)</a></li>
-<li><a href="#orgd2d1820">3.2. Test Data</a></li>
-<li><a href="#org382d470">3.3. Constants Used</a></li>
-<li><a href="#orgc39b81f">3.4. Constants Not Used</a></li>
-<li><a href="#org04651ee">3.5. Code</a></li>
+<li><a href="#org7499373">3.1. Constant Data (2018 NIST)</a></li>
+<li><a href="#orgf15ae84">3.2. Test Data</a></li>
+<li><a href="#org84eb09f">3.3. Constants Used</a></li>
+<li><a href="#orgb7613c0">3.4. Constants Not Used</a></li>
+<li><a href="#org944df93">3.5. Code</a></li>
 </ul>
 </li>
-<li><a href="#orgf50ddc3">4. EOF</a></li>
+<li><a href="#orgb3c3c0d">4. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org590e10c" class="outline-2">
-<h2 id="org590e10c"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-orgaadd3f1" class="outline-2">
+<h2 id="orgaadd3f1"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-This home for this HTML file is: <a href="https://richmit.github.io/hp42/cons.html">https://richmit.github.io/hp42/cons.html</a>
+The home for this HTML file is: <a href="https://richmit.github.io/hp42/cons.html">https://richmit.github.io/hp42/cons.html</a>
 </p>
 
 <p>
@@ -276,29 +276,59 @@ Files related to this document may be found on github: <a href="https://github.c
 <p>
 Directory contents:
 </p>
-<ul class="org-ul">
-<li><code>src</code>: The org-mode file that generated this HTML document</li>
-<li><code>src_42s</code>: Ready to convert source listings for 42s code in this document</li>
-<li><code>docs</code>: This html document</li>
-<li><code>bin</code>: Importable RAW program files</li>
-</ul>
+<table border="0" cellspacing="0" cellpadding="6" rules="none" frame="none" align="center">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><code>src</code></td>
+<td class="org-left">-</td>
+<td class="org-left">The org-mode file that generated this HTML document</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>src_42s</code></td>
+<td class="org-left">-</td>
+<td class="org-left">Ready to convert source listings for 42s code in this document</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>docs</code></td>
+<td class="org-left">-</td>
+<td class="org-left">This html document</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>bin</code></td>
+<td class="org-left">-</td>
+<td class="org-left">Importable RAW program files</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
-<div id="outline-container-org6f061da" class="outline-2">
-<h2 id="org6f061da"><span class="section-number-2">2</span> Introduction</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-introduction" class="outline-2">
+<h2 id="introduction"><span class="section-number-2">2</span> Introduction</h2>
+<div class="outline-text-2" id="text-introduction">
 <p>
 Several constants libraries are available for the 42s, and some of them are quite good.  Unfortunately nobody is going to make a constants library with just
 the constants I use. ;)
 </p>
 
 <p>
-This Emacs org-file contains a bit of <a href="#org04651ee">lisp code</a> to write a 42s CONST program with the constants <b>you</b> want.
+This Emacs org-file contains a bit of <a href="#org944df93">lisp code</a> to write a 42s CONST program with the constants <b>you</b> want.
 </p>
 
 <p>
-The <a href="#org382d470">constants I use</a> are taken from the NIST 2018 constants DB.  As a reference I have included the <a href="#orgc39b81f">unused constants</a> from the NIST list.
+The <a href="#org84eb09f">constants I use</a> are taken from the NIST 2018 constants DB.  As a reference I have included the <a href="#orgb7613c0">unused constants</a> from the NIST list.
 </p>
 
 <p>
@@ -306,15 +336,15 @@ The flow to create your custom CONST program:
 </p>
 <ul class="org-ul">
 <li>Evaluate the "Generic menu generator" babel block in hp42s-meta.org.  This will define the function <code>MJR-generate-42-menu-code</code></li>
-<li>Put the constants you want into the table in the <a href="#org382d470">Constants Used</a> section below (see: <a href="#org5d1ff0c">Customizing the Constants Table</a>)</li>
-<li>Optional: Customize the generator code in the <a href="#org04651ee">Code</a> section below.  (see: <a href="#org1d25320">Customizing the Gen Code</a>)</li>
-<li>Evaluate the babel block in the <a href="#org04651ee">Code</a> section below.</li>
+<li>Put the constants you want into the table in the <a href="#org84eb09f">Constants Used</a> section below (see: <a href="#orge9e330d">Customizing the Constants Table</a>)</li>
+<li>Optional: Customize the generator code in the <a href="#org944df93">Code</a> section below.  (see: <a href="#org25fb1b8">Customizing the Gen Code</a>)</li>
+<li>Evaluate the babel block in the <a href="#org944df93">Code</a> section below.</li>
 <li>Load the program on your calculator</li>
 </ul>
 </div>
 
-<div id="outline-container-org5d1ff0c" class="outline-3">
-<h3 id="org5d1ff0c"><span class="section-number-3">2.1</span> Customizing the Constants Table</h3>
+<div id="outline-container-orge9e330d" class="outline-3">
+<h3 id="orge9e330d"><span class="section-number-3">2.1</span> Customizing the Constants Table</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 The "Menu" column describes the menu keys that will be assigned to the constant.  Colons are used to define a menu hierarchy.  For example "<code>top:mid:con1</code>"
@@ -335,19 +365,19 @@ and each constant consumes one label.
 
 <p>
 The "Desc" column is the source for the description printed by the <code>CONS</code> program. Make sure it is 22 chars or less. Note the description print can be
-suppressed (see: <a href="#org1d25320">Customizing the Gen Code</a>)
+suppressed (see: <a href="#org25fb1b8">Customizing the Gen Code</a>)
 </p>
 
 <p>
 The "Unit" column is the source for the second line printed by the <code>CONS</code> program.  Note I use an odd syntax for the units &#x2013; everything in front of the "<code>/</code>"
 is on the top of the fraction and everything after the "<code>/</code>" is on the bottom.  While incorrect syntax for an algebraic expression, it is handy and saves some
-space.  Note the units print can be suppressed (see: <a href="#org1d25320">Customizing the Gen Code</a>)
+space.  Note the units print can be suppressed (see: <a href="#org25fb1b8">Customizing the Gen Code</a>)
 </p>
 </div>
 </div>
 
-<div id="outline-container-org1d25320" class="outline-3">
-<h3 id="org1d25320"><span class="section-number-3">2.2</span> Customizing the Gen Code</h3>
+<div id="outline-container-org25fb1b8" class="outline-3">
+<h3 id="org25fb1b8"><span class="section-number-3">2.2</span> Customizing the Gen Code</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 The generator code can be customized in a few ways:
@@ -363,16 +393,16 @@ The generator code can be customized in a few ways:
 </div>
 </div>
 
-<div id="outline-container-org359e2b8" class="outline-2">
-<h2 id="org359e2b8"><span class="section-number-2">3</span> Constants</h2>
+<div id="outline-container-orgcb25527" class="outline-2">
+<h2 id="orgcb25527"><span class="section-number-2">3</span> Constants</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org7e36561" class="outline-3">
-<h3 id="org7e36561"><span class="section-number-3">3.1</span> Constant Data (2018 NIST)</h3>
+<div id="outline-container-org7499373" class="outline-3">
+<h3 id="org7499373"><span class="section-number-3">3.1</span> Constant Data (2018 NIST)</h3>
 </div>
 
-<div id="outline-container-orgd2d1820" class="outline-3">
-<h3 id="orgd2d1820"><span class="section-number-3">3.2</span> Test Data</h3>
+<div id="outline-container-orgf15ae84" class="outline-3">
+<h3 id="orgf15ae84"><span class="section-number-3">3.2</span> Test Data</h3>
 <div class="outline-text-3" id="text-3-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
@@ -466,10 +496,10 @@ The generator code can be customized in a few ways:
 </div>
 </div>
 
-<div id="outline-container-org382d470" class="outline-3">
-<h3 id="org382d470"><span class="section-number-3">3.3</span> Constants Used</h3>
+<div id="outline-container-org84eb09f" class="outline-3">
+<h3 id="org84eb09f"><span class="section-number-3">3.3</span> Constants Used</h3>
 <div class="outline-text-3" id="text-3-3">
-<table id="orgd40577d" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="org10a1ea0" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -938,8 +968,8 @@ The generator code can be customized in a few ways:
 </div>
 </div>
 
-<div id="outline-container-orgc39b81f" class="outline-3">
-<h3 id="orgc39b81f"><span class="section-number-3">3.4</span> Constants Not Used</h3>
+<div id="outline-container-orgb7613c0" class="outline-3">
+<h3 id="orgb7613c0"><span class="section-number-3">3.4</span> Constants Not Used</h3>
 <div class="outline-text-3" id="text-3-4">
 <table border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
@@ -4115,32 +4145,37 @@ The generator code can be customized in a few ways:
 </div>
 </div>
 
-<div id="outline-container-org04651ee" class="outline-3">
-<h3 id="org04651ee"><span class="section-number-3">3.5</span> Code</h3>
+<div id="outline-container-org944df93" class="outline-3">
+<h3 id="org944df93"><span class="section-number-3">3.5</span> Code</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 You must first define the <code>MJR-generate-42-menu-code</code> by evaluating the code block in the <code>hp42s-meta.org</code> file.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"CONS"</span> tbl <span style="color: #fa8072;">"exit"</span> <span style="color: #fa8072;">"up"</span> (<span style="color: #00ffff;">lambda</span> (row) (<span style="color: #00ffff;">cl-destructuring-bind</span> (sym desc desc-long val uncertainty units cat) row
-                                                                  (<span style="color: #00ffff;">let</span> ((print-desc 't)    <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Set to NIL to not print description</span>
-                                                                        (print-unit 't))   <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Set to NIL to not print units</span>
-                                                                    (<span style="color: #00ffff;">let*</span> ((dlen (length desc))
-                                                                           (ulen (length units))
-                                                                           (dsc1 (<span style="color: #00ffff;">cond</span> ((&lt; dlen 15) (concat desc (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">and</span> (&lt; 0 ulen) print-unit) <span style="color: #fa8072;">"[LF]"</span>)))
-                                                                                       ((&gt;=  dlen 15) (substring desc 0 15))))
-                                                                           (dsc2 (<span style="color: #00ffff;">if</span> (&gt; dlen 14)
-                                                                                     (<span style="color: #00ffff;">if</span> (&lt; dlen 22)
-                                                                                         (concat (substring desc 15) (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">and</span> (&lt; 0 ulen) print-unit) <span style="color: #fa8072;">"[LF]"</span>))
-                                                                                         (substring desc 15 22)))))
-                                                                      (mapconcat #'identity
-                                                                                 (cl-remove nil (list (message <span style="color: #fa8072;">"%s"</span> val)
-                                                                                                      (<span style="color: #00ffff;">and</span> (&lt; 0 dlen) print-desc      (message <span style="color: #fa8072;">"\"%s\""</span> dsc1))
-                                                                                                      (<span style="color: #00ffff;">and</span> (&lt; 0 dlen) print-desc dsc2 (message <span style="color: #fa8072;">"&#9500;\"%s\""</span> dsc2))
-                                                                                                      (<span style="color: #00ffff;">and</span> (&lt; 0 ulen) print-unit      (message <span style="color: #fa8072;">"%s\"%s\""</span> (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">and</span> (&lt; 0 dlen) print-desc) <span style="color: #fa8072;">"&#9500;"</span> <span style="color: #fa8072;">""</span>) units))
-                                                                                                      <span style="color: #fa8072;">"AVIEW"</span>))
-                                                                                 <span style="color: #fa8072;">"\n"</span>)))))))
+<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"CONS"</span>
+                           tbl
+                           <span style="color: #fa8072;">"exit"</span>
+                           <span style="color: #fa8072;">"up"</span>
+                           't
+                           (<span style="color: #00ffff;">lambda</span> (row) (<span style="color: #00ffff;">cl-destructuring-bind</span> (sym desc desc-long val uncertainty units cat) row
+                                           (<span style="color: #00ffff;">let</span> ((print-desc 't)    <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Set to NIL to not print description</span>
+                                                 (print-unit 't))   <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Set to NIL to not print units</span>
+                                             (<span style="color: #00ffff;">let*</span> ((dlen (length desc))
+                                                    (ulen (length units))
+                                                    (dsc1 (<span style="color: #00ffff;">cond</span> ((&lt; dlen 15) (concat desc (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">and</span> (&lt; 0 ulen) print-unit) <span style="color: #fa8072;">"[LF]"</span>)))
+                                                                ((&gt;=  dlen 15) (substring desc 0 15))))
+                                                    (dsc2 (<span style="color: #00ffff;">if</span> (&gt; dlen 14)
+                                                              (<span style="color: #00ffff;">if</span> (&lt; dlen 22)
+                                                                  (concat (substring desc 15) (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">and</span> (&lt; 0 ulen) print-unit) <span style="color: #fa8072;">"[LF]"</span>))
+                                                                  (substring desc 15 22)))))
+                                               (mapconcat #'identity
+                                                          (cl-remove nil (list (message <span style="color: #fa8072;">"%s"</span> val)
+                                                                               (<span style="color: #00ffff;">and</span> (&lt; 0 dlen) print-desc      (message <span style="color: #fa8072;">"\"%s\""</span> dsc1))
+                                                                               (<span style="color: #00ffff;">and</span> (&lt; 0 dlen) print-desc dsc2 (message <span style="color: #fa8072;">"&#9500;\"%s\""</span> dsc2))
+                                                                               (<span style="color: #00ffff;">and</span> (&lt; 0 ulen) print-unit      (message <span style="color: #fa8072;">"%s\"%s\""</span> (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">and</span> (&lt; 0 dlen) print-desc) <span style="color: #fa8072;">"&#9500;"</span> <span style="color: #fa8072;">""</span>) units))
+                                                                               <span style="color: #fa8072;">"AVIEW"</span>))
+                                                          <span style="color: #fa8072;">"\n"</span>)))))))
 </pre>
 </div>
 
@@ -4638,8 +4673,8 @@ You must first define the <code>MJR-generate-42-menu-code</code> by evaluating t
 </div>
 
 
-<div id="outline-container-orgf50ddc3" class="outline-2">
-<h2 id="orgf50ddc3"><span class="section-number-2">4</span> EOF</h2>
+<div id="outline-container-orgb3c3c0d" class="outline-2">
+<h2 id="orgb3c3c0d"><span class="section-number-2">4</span> EOF</h2>
 <div class="outline-text-2" id="text-4">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -4650,7 +4685,7 @@ You must first define the <code>MJR-generate-42-menu-code</code> by evaluating t
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-10 Sat 23:23 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-14 Wed 17:01 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-10 Sat 23:43 -->
+<!-- 2021-04-14 Wed 17:01 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Date Tools</title>
@@ -42,7 +42,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -54,7 +54,7 @@
     padding: 3px;
     border: 1px solid black;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-10 23:43:52</i></td>
+<td class="org-left"><i>2021-04-14 17:01:12</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,25 +241,25 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org4331c90">1. Metadata</a></li>
-<li><a href="#orgd183f75">2. Introduction</a></li>
-<li><a href="#org4947feb">3. Functionality</a>
+<li><a href="#orgb0af9df">1. Metadata</a></li>
+<li><a href="#introduction">2. Introduction</a></li>
+<li><a href="#orgd224e32">3. Functionality</a>
 <ul>
-<li><a href="#orge05ad1d">3.1. The main menu</a></li>
-<li><a href="#org1980581">3.2. Menu Code</a></li>
+<li><a href="#menu">3.1. The main menu</a></li>
+<li><a href="#org973c887">3.2. Menu Code</a></li>
 </ul>
 </li>
-<li><a href="#org4f6ec2e">4. App Code</a></li>
-<li><a href="#orge4dab05">5. EOF</a></li>
+<li><a href="#orgfff7a59">4. App Code</a></li>
+<li><a href="#org22991a7">5. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org4331c90" class="outline-2">
-<h2 id="org4331c90"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-orgb0af9df" class="outline-2">
+<h2 id="orgb0af9df"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-This home for this HTML file is: <a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a>
+The home for this HTML file is: <a href="https://richmit.github.io/hp42/date.html">https://richmit.github.io/hp42/date.html</a>
 </p>
 
 <p>
@@ -269,19 +269,48 @@ Files related to this document may be found on github: <a href="https://github.c
 <p>
 Directory contents:
 </p>
-<ul class="org-ul">
-<li><code>src</code>: The org-mode file that generated this HTML document</li>
-<li><code>src_42s</code>: Ready to convert source listings for 42s code in this document</li>
-<li><code>docs</code>: This html document</li>
-<li><code>bin</code>: Importable RAW program files</li>
-</ul>
+<table border="0" cellspacing="0" cellpadding="6" rules="none" frame="none" align="center">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><code>src</code></td>
+<td class="org-left">-</td>
+<td class="org-left">The org-mode file that generated this HTML document</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>src_42s</code></td>
+<td class="org-left">-</td>
+<td class="org-left">Ready to convert source listings for 42s code in this document</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>docs</code></td>
+<td class="org-left">-</td>
+<td class="org-left">This html document</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>bin</code></td>
+<td class="org-left">-</td>
+<td class="org-left">Importable RAW program files</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
-
-<div id="outline-container-orgd183f75" class="outline-2">
-<h2 id="orgd183f75"><span class="section-number-2">2</span> Introduction</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-introduction" class="outline-2">
+<h2 id="introduction"><span class="section-number-2">2</span> Introduction</h2>
+<div class="outline-text-2" id="text-introduction">
 <p>
 Aside from the date/time conversion routines, the rest is just wrappers for built in functions to make them print results when called from a program.  Why?  I
 wanted to put things like <code>DATE</code> in a nested custom menu, and have them print the date just as if I had directly put the function in a custom menu. ;) Now
@@ -290,14 +319,14 @@ that free42 has put these into a separate catalog menu, these are somewhat obsol
 </div>
 </div>
 
-<div id="outline-container-org4947feb" class="outline-2">
-<h2 id="org4947feb"><span class="section-number-2">3</span> Functionality</h2>
+<div id="outline-container-orgd224e32" class="outline-2">
+<h2 id="orgd224e32"><span class="section-number-2">3</span> Functionality</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orge05ad1d" class="outline-3">
-<h3 id="orge05ad1d"><span class="section-number-3">3.1</span> The main menu</h3>
-<div class="outline-text-3" id="text-3-1">
-<table id="org2c3468b" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-menu" class="outline-3">
+<h3 id="menu"><span class="section-number-3">3.1</span> The main menu</h3>
+<div class="outline-text-3" id="text-menu">
+<table id="orgf7f99d3" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -433,15 +462,15 @@ Notes: * Result is both printed and pushed to the stack
 </div>
 </div>
 
-<div id="outline-container-org1980581" class="outline-3">
-<h3 id="org1980581"><span class="section-number-3">3.2</span> Menu Code</h3>
+<div id="outline-container-org973c887" class="outline-3">
+<h3 id="org973c887"><span class="section-number-3">3.2</span> Menu Code</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 The menu code is generated by the following bit of elisp.  You must first define the <code>MJR-generate-42-menu-code</code> and <code>MJR-custom-x-gen</code> by evaluating the code blocks in the <code>hp42s-meta.org</code> file.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"DMENU"</span> tbl <span style="color: #fa8072;">"stay"</span> <span style="color: #fa8072;">"up"</span> #'MJR-custom-x-gen)
+<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"DMENU"</span> tbl <span style="color: #fa8072;">"stay"</span> <span style="color: #fa8072;">"up"</span> 't #'MJR-custom-x-gen)
 </pre>
 </div>
 
@@ -510,8 +539,8 @@ The menu code is generated by the following bit of elisp.  You must first define
 </div>
 </div>
 
-<div id="outline-container-org4f6ec2e" class="outline-2">
-<h2 id="org4f6ec2e"><span class="section-number-2">4</span> App Code</h2>
+<div id="outline-container-orgfff7a59" class="outline-2">
+<h2 id="orgfff7a59"><span class="section-number-2">4</span> App Code</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -731,8 +760,8 @@ The menu code is generated by the following bit of elisp.  You must first define
 </div>
 </div>
 
-<div id="outline-container-orge4dab05" class="outline-2">
-<h2 id="orge4dab05"><span class="section-number-2">5</span> EOF</h2>
+<div id="outline-container-org22991a7" class="outline-2">
+<h2 id="org22991a7"><span class="section-number-2">5</span> EOF</h2>
 <div class="outline-text-2" id="text-5">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -743,7 +772,7 @@ The menu code is generated by the following bit of elisp.  You must first define
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-10 Sat 23:43 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-14 Wed 17:01 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
 </div>
 </body>
 </html>

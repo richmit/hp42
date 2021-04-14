@@ -37,7 +37,7 @@ Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 
 * Metadata
 
-This home for this HTML file is: https://richmit.github.io/hp42/custom.html
+The home for this HTML file is: https://richmit.github.io/hp42/custom.html
 
 Files related to this document may be found on github: https://github.com/richmit/hp42
 
@@ -49,6 +49,9 @@ Directory contents:
    | =bin=     | - | Importable RAW program files                                   |
 
 * Introduction
+:PROPERTIES:
+:CUSTOM_ID: introduction
+:END:
 
 The custom menu on the 42s is a wonderful thing, but it is also very limited.  It's just too small!!  And it is only one level deep!!  So instead of simply
 assigning functions to the menu keys, how about assigning programs to the keys which present a hierarchical menu of functions?  Coding up such programs is
@@ -90,18 +93,7 @@ The other columns of the table are not used.
 | SFUN:HYP:ACOSH  |                  |                                               |
 | SFUN:HYP:ATANH  |                  |                                               |
 |-----------------+------------------+-----------------------------------------------|
-| SFUN:L&P:lnYX   |                  | https://richmit.github.io/hp42/math.html      |
-| SFUN:L&P:▒▒▒▒   |                  |                                               |
-| SFUN:L&P:Y√X    | YROOT            | https://richmit.github.io/hp42/math.html      |
-| SFUN:L&P:Y↑X    |                  |                                               |
-| SFUN:L&P:▒▒▒▒   |                  |                                               |
-| SFUN:L&P:▒▒▒▒   |                  |                                               |
-| SFUN:L&P:ln2    |                  | https://richmit.github.io/hp42/math.html      |
-| SFUN:L&P:2↑X    |                  | https://richmit.github.io/hp42/math.html      |
-| SFUN:L&P:LN     |                  |                                               |
-| SFUN:L&P:EXP    |                  |                                               |
-| SFUN:L&P:LOG    |                  |                                               |
-| SFUN:L&P:10↑X   |                  |                                               |
+| SFUN:L&P        | LPRT             | https://richmit.github.io/hp42/math.html      |
 |-----------------+------------------+-----------------------------------------------|
 | SFUN:PERC:%T    |                  | https://richmit.github.io/hp42/math.html      |
 | SFUN:PERC:%CH   |                  |                                               |
@@ -118,10 +110,9 @@ The other columns of the table are not used.
 |-----------------+------------------+-----------------------------------------------|
 | SFUN:INT:IDIV   | BASE÷            |                                               |
 | SFUN:INT:MOD    |                  |                                               |
+| SFUN:INT:▒▒▒▒   |                  |                                               |
 | SFUN:INT:GCD    |                  | https://richmit.github.io/hp42/math.html      |
 | SFUN:INT:LCM    |                  | https://richmit.github.io/hp42/math.html      |
-| SFUN:INT:FLOR   | FLOOR            | https://richmit.github.io/hp42/math.html      |
-| SFUN:INT:CEIL   |                  | https://richmit.github.io/hp42/math.html      |
 |-----------------+------------------+-----------------------------------------------|
 | SFUN:CPLX:RPART |                  | https://richmit.github.io/hp42/math.html      |
 | SFUN:CPLX:IPART |                  | https://richmit.github.io/hp42/math.html      |
@@ -129,8 +120,7 @@ The other columns of the table are not used.
 | SFUN:CPLX:CABS  |                  | https://richmit.github.io/hp42/math.html      |
 | SFUN:CPLX:CARG  |                  | https://richmit.github.io/hp42/math.html      |
 |-----------------+------------------+-----------------------------------------------|
-| SFUN:TRIG:HYPOT |                  | https://richmit.github.io/hp42/math.html      |
-| SFUN:TRIG:ATN2  | ATAN2            | https://richmit.github.io/hp42/math.html      |
+| SFUN:TRIG       | TRIG             | https://richmit.github.io/hp42/math.html      |
 |-----------------+------------------+-----------------------------------------------|
 | SFUN:ERR:ERF    |                  | https://richmit.github.io/hp42/math.html      |
 | SFUN:ERR:ERFC   |                  | https://richmit.github.io/hp42/math.html      |
@@ -159,7 +149,7 @@ The other columns of the table are not used.
 The menu program is generated via the following bit of elisp.  You must first define the =MJR-generate-42-menu-code= and =MJR-custom-x-gen= by evaluating the code blocks in the =hp42s-meta.org= file.
 
 #+BEGIN_SRC elisp :var tbl=cust :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/custom/custom.hp42s"
-(MJR-generate-42-menu-code "CUST" tbl "stay" "up" #'MJR-custom-x-gen)
+(MJR-generate-42-menu-code "CUST" tbl "stay" "up" 't #'MJR-custom-x-gen)
 #+END_SRC
 
 #+RESULTS:
@@ -204,7 +194,7 @@ CLMENU
 "HYP"
 KEY 1 GTO 12
 "L&P"
-KEY 2 GTO 13
+KEY 2 XEQ 13
 "PERC"
 KEY 3 GTO 14
 "PROB"
@@ -222,7 +212,7 @@ GTO 03
 LBL 11            @@@@ Page 2 of menu SFUN
 CLMENU
 "TRIG"
-KEY 1 GTO 18
+KEY 1 XEQ 18
 "ERR"
 KEY 2 GTO 19
 KEY 7 GTO 03
@@ -249,48 +239,14 @@ KEY 9 GTO 03
 MENU
 STOP
 GTO 12
-LBL 13            @@@@ Page 1 of menu L&P
-CLMENU
-"lnYX"
-KEY 1 XEQ 27
-"Y√X"
-KEY 3 XEQ 28
-"Y↑X"
-KEY 4 XEQ 29
-KEY 7 GTO 26
-KEY 8 GTO 26
-KEY 9 GTO 03
-MENU
-STOP
-GTO 13
-LBL 26            @@@@ Page 2 of menu L&P
-CLMENU
-"ln2"
-KEY 1 XEQ 30
-"2↑X"
-KEY 2 XEQ 31
-"LN"
-KEY 3 XEQ 32
-"EXP"
-KEY 4 XEQ 33
-"LOG"
-KEY 5 XEQ 34
-"10↑X"
-KEY 6 XEQ 35
-KEY 7 GTO 13
-KEY 8 GTO 13
-KEY 9 GTO 03
-MENU
-STOP
-GTO 26
 LBL 14            @@@@ Page 1 of menu PERC
 CLMENU
 "%T"
-KEY 1 XEQ 36
+KEY 1 XEQ 26
 "%CH"
-KEY 2 XEQ 37
+KEY 2 XEQ 27
 "%"
-KEY 3 XEQ 38
+KEY 3 XEQ 28
 KEY 9 GTO 03
 MENU
 STOP
@@ -298,45 +254,41 @@ GTO 14
 LBL 15            @@@@ Page 1 of menu PROB
 CLMENU
 "COMB"
-KEY 1 XEQ 40
+KEY 1 XEQ 30
 "PERM"
-KEY 2 XEQ 41
+KEY 2 XEQ 31
 "GAMMA"
-KEY 4 XEQ 42
+KEY 4 XEQ 32
 "BETA"
-KEY 5 XEQ 43
-KEY 7 GTO 39
-KEY 8 GTO 39
+KEY 5 XEQ 33
+KEY 7 GTO 29
+KEY 8 GTO 29
 KEY 9 GTO 03
 MENU
 STOP
 GTO 15
-LBL 39            @@@@ Page 2 of menu PROB
+LBL 29            @@@@ Page 2 of menu PROB
 CLMENU
 "NPDF"
-KEY 1 XEQ 44
+KEY 1 XEQ 34
 "NCDF"
-KEY 2 XEQ 45
+KEY 2 XEQ 35
 KEY 7 GTO 15
 KEY 8 GTO 15
 KEY 9 GTO 03
 MENU
 STOP
-GTO 39
+GTO 29
 LBL 16            @@@@ Page 1 of menu INT
 CLMENU
 "IDIV"
-KEY 1 XEQ 46
+KEY 1 XEQ 36
 "MOD"
-KEY 2 XEQ 47
+KEY 2 XEQ 37
 "GCD"
-KEY 3 XEQ 48
+KEY 4 XEQ 38
 "LCM"
-KEY 4 XEQ 49
-"FLOR"
-KEY 5 XEQ 50
-"CEIL"
-KEY 6 XEQ 51
+KEY 5 XEQ 39
 KEY 9 GTO 03
 MENU
 STOP
@@ -344,39 +296,29 @@ GTO 16
 LBL 17            @@@@ Page 1 of menu CPLX
 CLMENU
 "RPART"
-KEY 1 XEQ 52
+KEY 1 XEQ 40
 "IPART"
-KEY 2 XEQ 53
+KEY 2 XEQ 41
 "CONJ"
-KEY 3 XEQ 54
+KEY 3 XEQ 42
 "CABS"
-KEY 4 XEQ 55
+KEY 4 XEQ 43
 "CARG"
-KEY 5 XEQ 56
+KEY 5 XEQ 44
 KEY 9 GTO 03
 MENU
 STOP
 GTO 17
-LBL 18            @@@@ Page 1 of menu TRIG
-CLMENU
-"HYPOT"
-KEY 1 XEQ 57
-"ATN2"
-KEY 2 XEQ 58
-KEY 9 GTO 11
-MENU
-STOP
-GTO 18
 LBL 19            @@@@ Page 1 of menu ERR
 CLMENU
 "ERF"
-KEY 1 XEQ 59
+KEY 1 XEQ 45
 "ERFC"
-KEY 2 XEQ 60
+KEY 2 XEQ 46
 "NPDF"
-KEY 4 XEQ 61
+KEY 4 XEQ 47
 "NCDF"
-KEY 5 XEQ 62
+KEY 5 XEQ 48
 KEY 9 GTO 11
 MENU
 STOP
@@ -384,11 +326,11 @@ GTO 19
 LBL 04            @@@@ Page 1 of menu MATH
 CLMENU
 "POLY"
-KEY 1 XEQ 63
+KEY 1 XEQ 49
 "FMENU"
-KEY 2 XEQ 64
+KEY 2 XEQ 50
 "VEC3"
-KEY 3 XEQ 65
+KEY 3 XEQ 51
 KEY 9 GTO 01
 MENU
 STOP
@@ -396,11 +338,11 @@ GTO 04
 LBL 05            @@@@ Page 1 of menu PHIL
 CLMENU
 "PERF"
-KEY 1 XEQ 66
+KEY 1 XEQ 52
 "IMET"
-KEY 2 XEQ 67
+KEY 2 XEQ 53
 "MEAS"
-KEY 3 XEQ 68
+KEY 3 XEQ 54
 KEY 9 GTO 01
 MENU
 STOP
@@ -423,6 +365,12 @@ RTN
 LBL 10               @@@@ Action for menu key MEAS
 XEQ "MEAS"
 RTN
+LBL 13               @@@@ Action for menu key L&P
+XEQ "LPRT"
+RTN
+LBL 18               @@@@ Action for menu key TRIG
+XEQ "TRIG"
+RTN
 LBL 20               @@@@ Action for menu key SINH
 SINH
 RTN
@@ -441,130 +389,91 @@ RTN
 LBL 25               @@@@ Action for menu key ATANH
 ATANH
 RTN
-LBL 27               @@@@ Action for menu key lnYX
-XEQ "lnYX"
-RTN
-LBL 28               @@@@ Action for menu key Y√X
-XEQ "YROOT"
-RTN
-LBL 29               @@@@ Action for menu key Y↑X
-Y↑X
-RTN
-LBL 30               @@@@ Action for menu key ln2
-XEQ "ln2"
-RTN
-LBL 31               @@@@ Action for menu key 2↑X
-XEQ "2↑X"
-RTN
-LBL 32               @@@@ Action for menu key LN
-LN
-RTN
-LBL 33               @@@@ Action for menu key EXP
-XEQ "EXP"
-RTN
-LBL 34               @@@@ Action for menu key LOG
-LOG
-RTN
-LBL 35               @@@@ Action for menu key 10↑X
-10↑X
-RTN
-LBL 36               @@@@ Action for menu key %T
+LBL 26               @@@@ Action for menu key %T
 XEQ "%T"
 RTN
-LBL 37               @@@@ Action for menu key %CH
+LBL 27               @@@@ Action for menu key %CH
 %CH
 RTN
-LBL 38               @@@@ Action for menu key %
+LBL 28               @@@@ Action for menu key %
 %
 RTN
-LBL 40               @@@@ Action for menu key COMB
+LBL 30               @@@@ Action for menu key COMB
 COMB
 RTN
-LBL 41               @@@@ Action for menu key PERM
+LBL 31               @@@@ Action for menu key PERM
 PERM
 RTN
-LBL 42               @@@@ Action for menu key GAMMA
+LBL 32               @@@@ Action for menu key GAMMA
 GAMMA
 RTN
-LBL 43               @@@@ Action for menu key BETA
+LBL 33               @@@@ Action for menu key BETA
 XEQ "BETA"
 RTN
-LBL 44               @@@@ Action for menu key NPDF
+LBL 34               @@@@ Action for menu key NPDF
 XEQ "NPDF"
 RTN
-LBL 45               @@@@ Action for menu key NCDF
+LBL 35               @@@@ Action for menu key NCDF
 XEQ "NCDF"
 RTN
-LBL 46               @@@@ Action for menu key IDIV
+LBL 36               @@@@ Action for menu key IDIV
 BASE÷
 RTN
-LBL 47               @@@@ Action for menu key MOD
+LBL 37               @@@@ Action for menu key MOD
 MOD
 RTN
-LBL 48               @@@@ Action for menu key GCD
+LBL 38               @@@@ Action for menu key GCD
 XEQ "GCD"
 RTN
-LBL 49               @@@@ Action for menu key LCM
+LBL 39               @@@@ Action for menu key LCM
 XEQ "LCM"
 RTN
-LBL 50               @@@@ Action for menu key FLOR
-XEQ "FLOOR"
-RTN
-LBL 51               @@@@ Action for menu key CEIL
-XEQ "CEIL"
-RTN
-LBL 52               @@@@ Action for menu key RPART
+LBL 40               @@@@ Action for menu key RPART
 XEQ "RPART"
 RTN
-LBL 53               @@@@ Action for menu key IPART
+LBL 41               @@@@ Action for menu key IPART
 XEQ "IPART"
 RTN
-LBL 54               @@@@ Action for menu key CONJ
+LBL 42               @@@@ Action for menu key CONJ
 XEQ "CONJ"
 RTN
-LBL 55               @@@@ Action for menu key CABS
+LBL 43               @@@@ Action for menu key CABS
 XEQ "CABS"
 RTN
-LBL 56               @@@@ Action for menu key CARG
+LBL 44               @@@@ Action for menu key CARG
 XEQ "CARG"
 RTN
-LBL 57               @@@@ Action for menu key HYPOT
-XEQ "HYPOT"
-RTN
-LBL 58               @@@@ Action for menu key ATN2
-XEQ "ATAN2"
-RTN
-LBL 59               @@@@ Action for menu key ERF
+LBL 45               @@@@ Action for menu key ERF
 XEQ "ERF"
 RTN
-LBL 60               @@@@ Action for menu key ERFC
+LBL 46               @@@@ Action for menu key ERFC
 XEQ "ERFC"
 RTN
-LBL 61               @@@@ Action for menu key NPDF
+LBL 47               @@@@ Action for menu key NPDF
 XEQ "NPDF"
 RTN
-LBL 62               @@@@ Action for menu key NCDF
+LBL 48               @@@@ Action for menu key NCDF
 XEQ "NCDF"
 RTN
-LBL 63               @@@@ Action for menu key POLY
+LBL 49               @@@@ Action for menu key POLY
 XEQ "POLY"
 RTN
-LBL 64               @@@@ Action for menu key FMENU
+LBL 50               @@@@ Action for menu key FMENU
 XEQ "FMENU"
 RTN
-LBL 65               @@@@ Action for menu key VEC3
+LBL 51               @@@@ Action for menu key VEC3
 XEQ "VEC3"
 RTN
-LBL 66               @@@@ Action for menu key PERF
+LBL 52               @@@@ Action for menu key PERF
 XEQ "PERF"
 RTN
-LBL 67               @@@@ Action for menu key IMET
+LBL 53               @@@@ Action for menu key IMET
 XEQ "IMET"
 RTN
-LBL 68               @@@@ Action for menu key MEAS
+LBL 54               @@@@ Action for menu key MEAS
 XEQ "MEAS"
 RTN
-@@@@ Free labels start at: 69
+@@@@ Free labels start at: 55
 END
 #+end_src
 
@@ -579,29 +488,29 @@ each key.
 
 #+ATTR_HTML: :rules groups :frame box :align center
 #+NAME: custom
-| KEY# | ASSIGNment |
-|------+------------|
-|   01 | CUST       |
-|   02 | VirtV      |
-|   03 |            |
-|   04 |            |
-|   05 |            |
-|   06 |            |
-|------+------------|
-|   07 |            |
-|   08 |            |
-|   09 |            |
-|   10 |            |
-|   11 |            |
-|   12 |            |
-|------+------------|
-|   13 | SST        |
-|   14 | SST↑       |
-|   15 | SST→       |
-|   16 | GTO        |
-|   17 | VIEW       |
-|   18 | AVIEW      |
-|------+------------|
+| KEY# | ASSIGNment | Only On |
+|------+------------+---------|
+|    1 | CUST       |         |
+|    2 | VirtV      | DM42    |
+|    3 |            |         |
+|    4 |            |         |
+|    5 |            |         |
+|    6 |            |         |
+|------+------------+---------|
+|    7 |            |         |
+|    8 |            |         |
+|    9 |            |         |
+|   10 |            |         |
+|   11 |            |         |
+|   12 |            |         |
+|------+------------+---------|
+|   13 | SST        |         |
+|   14 | SST↑       |         |
+|   15 | SST→       |         |
+|   16 | GTO        |         |
+|   17 | VIEW       |         |
+|   18 | AVIEW      |         |
+|------+------------+---------|
 
 Simply evaluate the followign lisp block, and the 42s program will be created.
 
@@ -609,9 +518,14 @@ Simply evaluate the followign lisp block, and the 42s program will be created.
 (princ (message "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:%s)\n" "MKCM"))
 (princ "@@@@ DSC: Autogenerated menu program\n")
 (princ "LBL \"MKCM\"\n")
-(cl-loop for (da-key da-assignment da-note) in tbl
-         ;;when (not (zerop (length da-assignment)))
-         do (princ (message "ASSIGN \"%s\" TO %s\n" da-assignment da-key)))
+(princ "CLKEYS\n")
+(cl-loop for (da-key da-assignment da-pform) in tbl
+         for have-key = (not (zerop (length da-assignment)))
+         when (and have-key (string-equal da-pform "DM42"))
+         ;; Yea, yea, yea.  I use the existance of GrMod to guess if we are on a DM42
+         do (princ "SF 25\nRCL \"GrMod\"\nFS?C 25\n")
+         when have-key
+         do (princ (message "ASSIGN \"%s\" TO %02d\n" da-assignment da-key))))
 (princ "RTN\n")
 (princ "END\n")
 #+END_SRC
@@ -621,18 +535,12 @@ Simply evaluate the followign lisp block, and the 42s program will be created.
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MKCM)
 @@@@ DSC: Autogenerated menu program
 LBL "MKCM"
+CLKEYS
 ASSIGN "CUST" TO 01
+SF 25
+RCL "GrMod"
+FS?C 25
 ASSIGN "VirtV" TO 02
-ASSIGN "" TO 03
-ASSIGN "" TO 04
-ASSIGN "" TO 05
-ASSIGN "" TO 06
-ASSIGN "" TO 07
-ASSIGN "" TO 08
-ASSIGN "" TO 09
-ASSIGN "" TO 10
-ASSIGN "" TO 11
-ASSIGN "" TO 12
 ASSIGN "SST" TO 13
 ASSIGN "SST↑" TO 14
 ASSIGN "SST→" TO 15

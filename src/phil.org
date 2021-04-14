@@ -40,7 +40,7 @@ Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 
 * Metadata
 
-This home for this HTML file is: https://richmit.github.io/hp42/phil.html
+The home for this HTML file is: https://richmit.github.io/hp42/phil.html
 
 Files related to this document may be found on github: https://github.com/richmit/hp42
 
@@ -82,6 +82,9 @@ $$ P = \frac{20 (C - 1)}{D} $$
 $$ P = \frac{100000}{127 K} $$
 
 ** Perf Application
+:PROPERTIES:
+:CUSTOM_ID: menu-perf
+:END:
 
 #+NAME:PERF
 | Menu | Program | Inputs                       | Output           |
@@ -98,7 +101,7 @@ $$ P = \frac{100000}{127 K} $$
 ** Code for Menu
 
  #+BEGIN_SRC elisp :var tbl=PERF :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/phil/phil.hp42s"
-(MJR-generate-42-menu-code "PERF" tbl "stay" "exit" #'MJR-custom-x-gen)
+(MJR-generate-42-menu-code "PERF" tbl "stay" "exit" 't #'MJR-custom-x-gen)
 #+END_SRC
 
 #+RESULTS:
@@ -228,6 +231,9 @@ END
 Quick and dirty image analysis for stamp collectors for when you don't want to load an image up in ImageJ or GIMP, but still need to make some measurements.
 
 ** Summary of menu items
+:PROPERTIES:
+:CUSTOM_ID: menu-imet
+:END:
 
 #+ATTR_HTML: :align center
 #+NAME: menu
@@ -236,15 +242,17 @@ Quick and dirty image analysis for stamp collectors for when you don't want to l
 | LENGTH | Compute lengths                 | X: Real pixel count or complex pixel coordinate       |               |
 | ANGLE  | Compute angles                  | X: Complex Pixel coordinate                           |               |
 | AREA   | Compute area of rectangle       | X: Complex Pixel coordinate                           |               |
-|        |                                 |                                                       |               |
+| ▒▒▒▒   |                                 |                                                       |               |
 | CAL?   | Recall image calibration factor |                                                       | X: CAL factor |
 | CAL    | Store image calibration.        | X: Pixel count or complex pixel coordinate  Y: Length | X: CAL factor |
+|--------+---------------------------------+-------------------------------------------------------+---------------|
 | D→P    | Compute Perforations            | X: Pixel count or complex pixel coordinate            | X: Perfs      |
 | D→K    | Compute Kiusalas perforations   | X: Pixel count or complex pixel coordinate            | X: Perfs      |
-|        |                                 |                                                       |               |
+| ▒▒▒▒   |                                 |                                                       |               |
 | C:NN   | Set perf count (C)              | X: Integer count of perforations measured             |               |
 | D=mm   | Unites for distance             | Cycle through units: px mm mil um in cm               |               |
 | I=mm   | Image units (when D=px)         | Cycle through units: mm mil um in cm                  |               |
+|--------+---------------------------------+-------------------------------------------------------+---------------|
 
 ** Image Calibration
 
@@ -481,7 +489,7 @@ GTO 25
 10
 STO "IMETP"
 LBL 25       @@@@ IF-END
-ARCL ST X
+AIP
 R↓
 KEY 4 XEQ 11
 "D:"
@@ -733,6 +741,10 @@ END
 #+END_SRC
 
 Code in this section is under construction.  Most likely broken.
+
+TODO: Replace D>P & D>K with D<>P & P<>K
+
+
 * EOF
 
 # End of document.

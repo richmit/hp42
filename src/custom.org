@@ -132,15 +132,12 @@ The other columns of the table are not used.
 | MATH:FMENU      |                  | https://richmit.github.io/hp42/pgmforfun.html |
 | MATH:VEC3       |                  | https://richmit.github.io/hp42/math.html      |
 |-----------------+------------------+-----------------------------------------------|
-| PHIL:PERF       |                  | https://richmit.github.io/hp42/phil.html      |
-| PHIL:IMET       |                  | https://richmit.github.io/hp42/phil.html      |
-| PHIL:MEAS       |                  | https://richmit.github.io/hp42/meas.html      |
-|-----------------+------------------+-----------------------------------------------|
 | BASE            |                  | https://richmit.github.io/hp42/base.html      |
+| PHIL            |                  | https://richmit.github.io/hp42/phil.html      |
+| MEAS            |                  | https://richmit.github.io/hp42/meas.html      |
 | DATE            | DMENU            | https://richmit.github.io/hp42/date.html      |
 | CONS            |                  | https://richmit.github.io/hp42/cons.html      |
 | UNIT            |                  | https://richmit.github.io/hp42/unit.html      |
-| MEAS            |                  | https://richmit.github.io/hp42/meas.html      |
 | ▒▒▒▒            |                  |                                               |
 |-----------------+------------------+-----------------------------------------------|
 
@@ -163,13 +160,13 @@ CLMENU
 KEY 1 GTO 03
 "MATH"
 KEY 2 GTO 04
-"PHIL"
-KEY 3 GTO 05
 "BASE"
+KEY 3 XEQ 05
+"PHIL"
 KEY 4 XEQ 06
-"DATE"
+"MEAS"
 KEY 5 XEQ 07
-"CONS"
+"DATE"
 KEY 6 XEQ 08
 KEY 7 GTO 02
 KEY 8 GTO 02
@@ -179,9 +176,9 @@ STOP
 GTO 01
 LBL 02            @@@@ Page 2 of menu CUST
 CLMENU
-"UNIT"
+"CONS"
 KEY 1 XEQ 09
-"MEAS"
+"UNIT"
 KEY 2 XEQ 10
 KEY 7 GTO 01
 KEY 8 GTO 01
@@ -335,35 +332,26 @@ KEY 9 GTO 01
 MENU
 STOP
 GTO 04
-LBL 05            @@@@ Page 1 of menu PHIL
-CLMENU
-"PERF"
-KEY 1 XEQ 52
-"IMET"
-KEY 2 XEQ 53
-"MEAS"
-KEY 3 XEQ 54
-KEY 9 GTO 01
-MENU
-STOP
-GTO 05
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 06               @@@@ Action for menu key BASE
+LBL 05               @@@@ Action for menu key BASE
 XEQ "BASE"
 RTN
-LBL 07               @@@@ Action for menu key DATE
+LBL 06               @@@@ Action for menu key PHIL
+XEQ "PHIL"
+RTN
+LBL 07               @@@@ Action for menu key MEAS
+XEQ "MEAS"
+RTN
+LBL 08               @@@@ Action for menu key DATE
 XEQ "DMENU"
 RTN
-LBL 08               @@@@ Action for menu key CONS
+LBL 09               @@@@ Action for menu key CONS
 XEQ "CONS"
 RTN
-LBL 09               @@@@ Action for menu key UNIT
+LBL 10               @@@@ Action for menu key UNIT
 XEQ "UNIT"
-RTN
-LBL 10               @@@@ Action for menu key MEAS
-XEQ "MEAS"
 RTN
 LBL 13               @@@@ Action for menu key L&P
 XEQ "LPRT"
@@ -464,16 +452,7 @@ RTN
 LBL 51               @@@@ Action for menu key VEC3
 XEQ "VEC3"
 RTN
-LBL 52               @@@@ Action for menu key PERF
-XEQ "PERF"
-RTN
-LBL 53               @@@@ Action for menu key IMET
-XEQ "IMET"
-RTN
-LBL 54               @@@@ Action for menu key MEAS
-XEQ "MEAS"
-RTN
-@@@@ Free labels start at: 55
+@@@@ Free labels start at: 52
 END
 #+end_src
 

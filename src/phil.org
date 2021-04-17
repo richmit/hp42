@@ -206,7 +206,7 @@ To measure the length of a non-horizontal/vertical line, we provide a complex nu
 specifying a line from the origin, upper left image pixel at (0, 0), to the given coordinates.  Alternately one might think of the coordinates as the width &
 height of the line.  The signs of the coordinates are ignored -- i.e. the absolute value of each coordinate is used.
 
- #+begin_example
+#+begin_src text
                 * P2  -            (0, 0) *
                /      |                    \
               /       |                     \
@@ -215,7 +215,7 @@ height of the line.  The signs of the coordinates are ignored -- i.e. the absolu
            /          |                        \
       P1  *           -                         * (x, y)
           |--w--|
-#+end_example
+#+end_src
 
 To measure the length of a line segment given by two points, we simply enter both points as complex numbers and subtract them.  We then give the difference to
 the =[PX>D]= function.
@@ -366,13 +366,13 @@ Why?
 
 *** Example
 
- #+begin_example
+#+begin_src text
      P1 *    * P3                                       P1 *    * P3
         |    |              P1 *-----* P2                 /    /
         |    |      _OR_                     _OR_        /    /
         |    |              P3 *-----* P4               /    /
      P2 *    * P4                                   P2 *    * P4
- #+end_example
+#+end_src
 
   - Angle 1: =P1.x [ENTER] P1.y [COMPLEX] P2.x [ENTER] P2.y [COMPLEX] [-] [ANGLE] [STO 00]=
   - Angle 2: =P3.x [ENTER] P3.y [COMPLEX] P4.x [ENTER] P4.y [COMPLEX] [-] [ANGLE] [STO 00]=
@@ -388,7 +388,7 @@ coordinate system -- i.e. they measure distance to the right and down from the u
 millimeters; however, a few also add a grid system on top.  For example the Thirkell uses a 3mm grid.
 
 
- #+begin_example
+#+begin_src text
  +^^^^^^^^^^^^^^^^^^^^^^^^+
  (          * P3          )
  (   O *------------+     ) 
@@ -401,7 +401,7 @@ millimeters; however, a few also add a grid system on top.  For example the Thir
  (     +------------+     )    - Points above or to the left of O will have negative coordinates -- Ex: P3                                                          
  (                   P2 * )    - Points need not be inside the design -- Ex: P2 & P3                                                                                  
  +vvvvvvvvvvvvvvvvvvvvvvvv+
- #+end_example
+#+end_src
 
 When working with design coordinates you must first tell the application the coordinates of the /origin/ by entering a complex number representing the pixel
 coordinates of the upper left corner of the design and hitting the =[ORIG]= button.  If you shift press this button then it will display the current origin.
@@ -452,7 +452,7 @@ This is a handy tool that automates some common computations:
 It is called "=QUAD=" because it works with four points which will form the corners of a quadrilateral -- also "=QUAD=" avoid confusion with the built in
 command =RECT=.  Below is a picture of the geometric situation.
 
- #+begin_example
+#+begin_src text
         P1 *----------------* P2
           /                /      - Are P1-P2 & P4-P3 parallel?  i.e. is the angle between them zero?
          /                /       - Are P1-P4 & P2-P3 parallel?  i.e. is the angle between them zero?
@@ -461,7 +461,7 @@ command =RECT=.  Below is a picture of the geometric situation.
       /                /          
      /                /
  P4 *----------------* P3
- #+end_example
+#+end_src
 
 When using the =QUAD= tool, the first step is to input the corner coordinates via =[UL]=, =[UR]=, =[LR]=, & =[LL]=.
 

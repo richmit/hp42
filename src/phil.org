@@ -86,9 +86,9 @@ this calculator application with the digital microscope on my "stamp table" or w
 | QUAD:TALL  | 65 | QUAD:TALL  | Compute height (top, bottom, average)                     | Always       |
 | QUAD:▒▒▒▒  |    | QUAD:▒▒▒▒  |                                                           | N/A          |
 | QUAD:▒▒▒▒  |    | QUAD:▒▒▒▒  |                                                           | N/A          |
-| PERF:D<>P  | 96 | PERF:D<>P  | Convert between perforations & distance                          | Only if D=px |
-| PERF:P<>K  | 97 | PERF:P<>K  | Convert between perforations & Kiusalas                          | Never        |
-| PERF:87    | 98 | PERF:C:??  | Set perforation count (C)                                        | Never        |
+| PERF:D<>P  | 96 | PERF:D<>P  | Convert between perforations & distance                   | Only if D=px |
+| PERF:P<>K  | 97 | PERF:P<>K  | Convert between perforations & Kiusalas                   | Never        |
+| PERF:87    | 98 | PERF:C:??  | Set perforation count (C)                                 | Never        |
 | PERF:89    | 99 | PERF:D:??  | Cycle distance units: px mm mil um in cm                  | Never        |
 | PERF:86    | 88 | PERF:I:??  | Cycle image length units when D=px: mm mil um in cm       | Never        |
 | PERF:67    | 95 | PERF:CAL   | Set or display image calibration when when D=px           | Never        |
@@ -105,8 +105,8 @@ Notes:
   - Please ignore the first two columns in the table -- they are used to auto-generate the menu code for the application.
   - Image calibration is not required all the time -- see the last column of the table
   - In examples I will generally leave off key strokes to get to the correct menu.  i.e. I'll say =[PX>D]= instead of =[LENG] [PX>D]=
-  - Most functions don't drop the stack.  They just push results onto the stack.  
-  - Some functions, like =[PX>DC]=, may take one or two arguments depending upon what is on the stack when the function is executed.
+  - Parameter setting functions don't drop the stack.  Hitting =[SHIFT]= before one of these keys will report the current value.
+  - Functions like =[PX>DC]= that require a complex argument will do a =[COMPLEX]= when given real arguments.
 
 * =[CAL]=: Image Calibration
 
@@ -488,9 +488,9 @@ For an alternative approach see: [[Philatelic Application: Parallel Lines (Take 
 A typical US Washington-Franklin vertical coil has a paper width of about 21.5mm.  Because of the way the stamps were cut into coils, the flat sides should be
 absolutely parallel.
 
-Scenario: We have a Washington-Franklin vertical coil, and whish to verify that the flat edges are parallel.  We have a 2400 DPI scan.
+Scenario: We have a Washington-Franklin vertical coil, and wish to verify that the flat edges are parallel.  We have a 2400 DPI scan.
 
-Our first step is to identify two points in each edge.  The points should be seporated as far apart as possible.  Suppose this results in the
+Our first step is to identify two points in each edge.  The points should be separated as far apart as possible.  Suppose this results in the
 following:
 
 #+ATTR_HTML: :align center
@@ -503,7 +503,7 @@ following:
 | Lower left  | (149, 2132)  |
 |-------------+--------------|
 
-Note that we didn't try to line the points up horizontally -- our uper left poit is at 160 while our upper right point is at 122!
+Note that we didn't try to line the points up horizontally -- our upper left point is at 160 while our upper right point is at 122!
 
   - Calibration.  If we have not already calibrated, we need to do that first
     - =2400 25.4 [CAL]=

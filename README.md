@@ -10,6 +10,8 @@ Binary free42 programs are in the `bin` directory.
 
 Documentation (rendered `org-mode` files) may be found in the `docs` directory.
 
+The documentation is also published here: [Docs](https://richmit.github.io/hp42/)
+
 Have fun!
 
 -mitch

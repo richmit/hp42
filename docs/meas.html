@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-16 Fri 19:54 -->
+<!-- 2021-04-16 Fri 20:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Repeated Measurements</title>
@@ -251,7 +251,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-16 19:54:58</i></td>
+<td class="org-left"><i>2021-04-16 20:45:06</i></td>
 </tr>
 </tbody>
 </table>
@@ -263,34 +263,34 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org340a014">1. Metadata</a></li>
+<li><a href="#org42c1e95">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
-<li><a href="#orgc6494b3">3. Supported Methods</a></li>
-<li><a href="#org66ca60b">4. Setup</a>
+<li><a href="#org5431a34">3. Supported Methods</a></li>
+<li><a href="#org37cfb7c">4. Setup</a>
 <ul>
-<li><a href="#orgee288a4">4.1. Reporting Scheme</a></li>
-<li><a href="#org8373c89">4.2. Coverage Factors</a></li>
-<li><a href="#org0a5b87a">4.3. Automatic Reporting</a></li>
+<li><a href="#org97cdbea">4.1. Reporting Scheme</a></li>
+<li><a href="#org66fc13a">4.2. Coverage Factors</a></li>
+<li><a href="#org75a6814">4.3. Automatic Reporting</a></li>
 </ul>
 </li>
-<li><a href="#org9215acb">5. Reporting</a></li>
+<li><a href="#org55525ae">5. Reporting</a></li>
 <li><a href="#menu">6. Application Menu</a></li>
-<li><a href="#org8a42ebc">7. Global Variables</a></li>
-<li><a href="#org8a5677b">8. Use</a></li>
-<li><a href="#org60924bd">9. Future</a></li>
-<li><a href="#org9724502">10. Code</a>
+<li><a href="#org116db78">7. Global Variables</a></li>
+<li><a href="#orgeab29df">8. Use</a></li>
+<li><a href="#orgd728def">9. Future</a></li>
+<li><a href="#orgcee5de1">10. Code</a>
 <ul>
-<li><a href="#org359ba9e">10.1. Menu Code</a></li>
+<li><a href="#orga02d27f">10.1. Menu Code</a></li>
 <li><a href="#localcode">10.2. Local Subroutines</a></li>
 </ul>
 </li>
-<li><a href="#org94e13cc">11. EOF</a></li>
+<li><a href="#orgec4dc9e">11. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org340a014" class="outline-2">
-<h2 id="org340a014"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org42c1e95" class="outline-2">
+<h2 id="org42c1e95"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/meas.html">https://richmit.github.io/hp42/meas.html</a>
@@ -353,8 +353,8 @@ and use the midrange as the value.  The application described below is designed 
 </div>
 </div>
 
-<div id="outline-container-orgc6494b3" class="outline-2">
-<h2 id="orgc6494b3"><span class="section-number-2">3</span> Supported Methods</h2>
+<div id="outline-container-org5431a34" class="outline-2">
+<h2 id="org5431a34"><span class="section-number-2">3</span> Supported Methods</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 The two most common methods for estimating &amp; reporting measurement uncertainty are nicely documented in <a href="https://www.nist.gov/pml/nist-technical-note-1297">NIST Technical Note 1297</a>.  The first method assumes
@@ -363,7 +363,7 @@ mean (\(\mu\)), and the standard uncertainty (\(u\)) is defined as the sample st
 which I will refer to as <i>rectangular</i> in this document in order to avoid confusion with \(u\).  In this case the measurement is assumed to be the midrange
 (\(MR=(x_{max}+x_{min})/2\)), and the standard uncertainty is defined as \(u=(x_{max}-x_{min})/(2\sqrt(3))\).  The <code>MEAS</code> application supports both of these
 methods in addition to one based on rank statistics where the measurement is taken to be the median and the uncertainty is one half the interquartile range.
-While this last scheme is not easily related to a standard error distribution, it has found some popularity &#x2013; particularly in the life sciences.
+While this last scheme is not easily related to a standard probability distribution, it has found some popularity &#x2013; particularly in the life sciences.
 </p>
 
 <p>
@@ -391,16 +391,16 @@ Finally, the application provides a number of raw statistics that might be usefu
 </div>
 </div>
 
-<div id="outline-container-org66ca60b" class="outline-2">
-<h2 id="org66ca60b"><span class="section-number-2">4</span> Setup</h2>
+<div id="outline-container-org37cfb7c" class="outline-2">
+<h2 id="org37cfb7c"><span class="section-number-2">4</span> Setup</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 The last menu provides configuration options.
 </p>
 </div>
 
-<div id="outline-container-orgee288a4" class="outline-3">
-<h3 id="orgee288a4"><span class="section-number-3">4.1</span> Reporting Scheme</h3>
+<div id="outline-container-org97cdbea" class="outline-3">
+<h3 id="org97cdbea"><span class="section-number-3">4.1</span> Reporting Scheme</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 The reporting scheme is set via the first menu button &#x2013; the current selection is displayed in the menu label (N=Normal, R=Rectangular, and Q=Quartiles).  This key
@@ -409,8 +409,8 @@ cycles between the schemes when pressed.  Note that it also defaults the coverag
 </div>
 </div>
 
-<div id="outline-container-org8373c89" class="outline-3">
-<h3 id="org8373c89"><span class="section-number-3">4.2</span> Coverage Factors</h3>
+<div id="outline-container-org66fc13a" class="outline-3">
+<h3 id="org66fc13a"><span class="section-number-3">4.2</span> Coverage Factors</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 The coverage factor used to compute the expanded uncertainty is set via the second menu key.  Repeatedly pressing this button will cycle through predefined
@@ -492,8 +492,8 @@ For errors with a rectangular distribution the following coverage factors are su
 </div>
 </div>
 
-<div id="outline-container-org0a5b87a" class="outline-3">
-<h3 id="org0a5b87a"><span class="section-number-3">4.3</span> Automatic Reporting</h3>
+<div id="outline-container-org75a6814" class="outline-3">
+<h3 id="org75a6814"><span class="section-number-3">4.3</span> Automatic Reporting</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 A report can be generated upon entering a specified number of measurements.  This is very handy when a batch of items needs to be measured, and one wishes to
@@ -504,8 +504,8 @@ as part of the menu label.  A dash (-) means no automatic reporting is configure
 </div>
 </div>
 
-<div id="outline-container-org9215acb" class="outline-2">
-<h2 id="org9215acb"><span class="section-number-2">5</span> Reporting</h2>
+<div id="outline-container-org55525ae" class="outline-2">
+<h2 id="org55525ae"><span class="section-number-2">5</span> Reporting</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 I find that most of the time I use units such that measurements have integer values.  For example with paper thickness measurements I will use micrometers in
@@ -528,7 +528,7 @@ Reports can be automatically generated upon entry of a configurable number of me
 <div id="outline-container-menu" class="outline-2">
 <h2 id="menu"><span class="section-number-2">6</span> Application Menu</h2>
 <div class="outline-text-2" id="text-menu">
-<table id="org8dc4d10" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+<table id="org0aea4d4" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
 <colgroup>
@@ -581,7 +581,7 @@ Reports can be automatically generated upon entry of a configurable number of me
 <td class="org-right">96</td>
 <td class="org-left">REP</td>
 <td class="org-left">Display Report</td>
-<td class="org-left">The report format &amp; content is controled by the settings.</td>
+<td class="org-left">The report format &amp; content is controlled by the settings.</td>
 </tr>
 
 <tr>
@@ -814,8 +814,8 @@ Notes:
 </div>
 </div>
 
-<div id="outline-container-org8a42ebc" class="outline-2">
-<h2 id="org8a42ebc"><span class="section-number-2">7</span> Global Variables</h2>
+<div id="outline-container-org116db78" class="outline-2">
+<h2 id="org116db78"><span class="section-number-2">7</span> Global Variables</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Application state is maintained in a number of global variables.
@@ -867,8 +867,8 @@ Application state is maintained in a number of global variables.
 </div>
 </div>
 
-<div id="outline-container-org8a5677b" class="outline-2">
-<h2 id="org8a5677b"><span class="section-number-2">8</span> Use</h2>
+<div id="outline-container-orgeab29df" class="outline-2">
+<h2 id="orgeab29df"><span class="section-number-2">8</span> Use</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 In use the application is quite like the built in statistics application in that <code>[M+]</code> &amp; <code>[M+]</code> add and delete measurements.  All measurements are stored in
@@ -892,8 +892,8 @@ function (menu page one: <code>[M+]</code>) such that a report is automatically 
 </div>
 </div>
 
-<div id="outline-container-org60924bd" class="outline-2">
-<h2 id="org60924bd"><span class="section-number-2">9</span> Future</h2>
+<div id="outline-container-orgd728def" class="outline-2">
+<h2 id="orgd728def"><span class="section-number-2">9</span> Future</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 Some things I might do some day&#x2026;
@@ -915,12 +915,12 @@ Some things I might do some day&#x2026;
 </div>
 </div>
 
-<div id="outline-container-org9724502" class="outline-2">
-<h2 id="org9724502"><span class="section-number-2">10</span> Code</h2>
+<div id="outline-container-orgcee5de1" class="outline-2">
+<h2 id="orgcee5de1"><span class="section-number-2">10</span> Code</h2>
 <div class="outline-text-2" id="text-10">
 </div>
-<div id="outline-container-org359ba9e" class="outline-3">
-<h3 id="org359ba9e"><span class="section-number-3">10.1</span> Menu Code</h3>
+<div id="outline-container-orga02d27f" class="outline-3">
+<h3 id="orga02d27f"><span class="section-number-3">10.1</span> Menu Code</h3>
 <div class="outline-text-3" id="text-10-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"MEAS"</span> tbl <span style="color: #fa8072;">"stay"</span> <span style="color: #fa8072;">"exit"</span> 't #'MJR-custom-x-gen)
@@ -1937,8 +1937,8 @@ R&#8595;
 
 
 
-<div id="outline-container-org94e13cc" class="outline-2">
-<h2 id="org94e13cc"><span class="section-number-2">11</span> EOF</h2>
+<div id="outline-container-orgec4dc9e" class="outline-2">
+<h2 id="orgec4dc9e"><span class="section-number-2">11</span> EOF</h2>
 <div class="outline-text-2" id="text-11">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1949,7 +1949,7 @@ R&#8595;
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-16 Fri 19:54 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-16 Fri 20:45 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
 </div>
 </body>
 </html>

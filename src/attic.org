@@ -336,30 +336,9 @@ FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 ENTER
 ABS
-X≠0?
-GTO 01
-@@@@ zero
-0
+X=0?
 RTN
-LBL 01
-@@@@ Non-zero
-X<>Y
-REAL?
-GTO 02
-@@@@ Complex non-zero
-X<>Y
 ÷
-RTN
-LBL 02
-@@@@ Real non-zero
-X<0?
-GTO 03
-@@@@ Real positive
-1
-RTN
-LBL 03
-@@@@ Real negative
--1
 RTN
 END
 #+END_SRC

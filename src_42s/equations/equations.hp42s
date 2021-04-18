@@ -1,3 +1,4 @@
+LBL "MEQNS"
 LBL "KEPLE"
 MVAR "MA"
 MVAR "EA"
@@ -9,8 +10,6 @@ RCL× "E"
 RCL+ "EA"
 RCL- "MA"
 RTN
-END
-
 LBL "KIUS"
 MVAR "P"
 MVAR "K"
@@ -20,8 +19,6 @@ RCL× "K"
 ÷
 RCL- "P"
 RTN
-END
-
 LBL "TVM"
 MVAR "N"
 MVAR "I"
@@ -54,8 +51,6 @@ X<>Y
 RCL× "PMT"
 +
 RCL+ "PV"
-END
-
 LBL "EULI"
 MVAR "T"
 MVAR "Y"
@@ -73,8 +68,6 @@ RCL "Y"
 Y↑X
 ×
 RTN
-END
-
 LBL "NORMD"
 MVAR "S"
 MVAR "M"
@@ -93,8 +86,6 @@ PI
 SQRT
 ÷
 RTN
-END
-
 LBL "FDIST"
 MVAR "D1"
 MVAR "D2"
@@ -126,8 +117,6 @@ SQRT
 X<>Y
 ÷
 RTN
-END
-
 LBL "CHI2"
 MVAR "K"
 MVAR "X"
@@ -154,8 +143,6 @@ X<>Y
 GAMMA
 ÷
 RTN
-END
-
 LBL "BETAF"
 MVAR "A"
 MVAR "B"
@@ -178,8 +165,6 @@ RCL "B"
 Y↑X
 ×
 RTN
-END
-
 LBL "LOGID"
 MVAR "S"
 MVAR "M"
@@ -196,8 +181,6 @@ X↑2
 ÷
 RCL÷ "S"
 RTN
-END
-
 LBL "STUTD"
 MVAR "V"
 MVAR "X"
@@ -222,8 +205,6 @@ Y↑X
 X<>Y
 ÷
 RTN
-END
-
 LBL "WEIBD"
 MVAR "K"
 MVAR "L"
@@ -244,8 +225,6 @@ Y↑X
 E↑X
 ×
 RTN
-END
-
 LBL "EXPOD"
 MVAR "L"
 MVAR "X"
@@ -255,10 +234,27 @@ RCL× "X"
 E↑X
 RCL× "L"
 RTN
-END
-
-LBL "NAME"
-MVAR "V"
+LBL "CPOLY"
+MVAR "M"
+MVAR "X"
+RCL "M"
+LSTO "TMPM"
+INDEX "TMPM"
+R↓
+RCL "X"
+LBL 01
+RCLEL
+RCL- ST Y
+STOEL
+R↓
+J+
+FS? 77
+GTO 02
+I+
+GTO 01
+LBL 02
+RCL "TMPM"
+DET
 RTN
 END
 

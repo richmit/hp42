@@ -48,9 +48,25 @@ Directory contents:
    | =docs=    | - | This html document                                             |
    | =bin=     | - | Importable RAW program files                                   |
 
-* Equations
+* Introduction
 
-Here we have a few handy equations.  All of them have MVAR declariations so they work with the 42s' integrator and solver.
+Here we have a few handy equations.  All of them have MVAR declarations so they work with the 42s' integrator and solver.
+
+Note that this is one "program" containing "sub-programs" with global labels.  Why not just let each equation be an individual program?  RAM!  The DM42 chews
+up about half a kilobyte per program, and by combining them all into one program we save a ton of space.  Note that if =CLP= is used on *any* of the global
+labels, then all of the equations are deleted (i.e. the entire program is zapped).  That is a feature!  It makes it easy to delete all the equations at one
+time so they can all be reloaded when the Git repo is updated.
+
+* Master Program Label
+
+#+begin_src hp42s :tangle ../src_42s/equations/equations.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MEQNS)
+@@@@ DSC: Container Program for Equations
+@@@@ UPD: 2021-04-18
+LBL "MEQNS"
+#+END_SRC
+
+* Equations
 
 ** =KEPLE=: Kepler's Equation
 
@@ -74,7 +90,7 @@ RCL× "E"
 RCL+ "EA"
 RCL- "MA"
 RTN
-END
+@@@@ END
 #+END_SRC
 
 ** =KIUS=: Kiusalas Perfs
@@ -94,7 +110,7 @@ RCL× "K"
 ÷
 RCL- "P"
 RTN
-END
+@@@@ END
 #+END_SRC
 
 ** =TVM=: Time Value of Money Equation
@@ -141,7 +157,7 @@ X<>Y
 RCL× "PMT"
 +
 RCL+ "PV"
-END
+@@@@ END
 #+END_SRC
 
 ** =EULI=:Euler Integral
@@ -173,7 +189,7 @@ RCL "Y"
 Y↑X
 ×
 RTN
-END
+@@@@ END
 #+END_SRC
 
 ** =NORMD=: Normal Distribution PDF
@@ -208,7 +224,7 @@ PI
 SQRT
 ÷
 RTN
-END
+@@@@ END
 #+END_SRC
 
 ** =FDIST=: F Distribution PDF
@@ -252,7 +268,7 @@ SQRT
 X<>Y
 ÷
 RTN
-END
+@@@@ END
 #+END_SRC
 
 ** =CHI2=: Chi Square Distribution PDF
@@ -291,7 +307,7 @@ X<>Y
 GAMMA
 ÷
 RTN
-END
+@@@@ END
 #+END_SRC
 
 ** =BETAF=: Beta Distribution PDF
@@ -328,7 +344,7 @@ RCL "B"
 Y↑X
 ×
 RTN
-END
+@@@@ END
 #+END_SRC
 
 ** =LOGID=: Logistic Distribution PDF
@@ -361,7 +377,7 @@ X↑2
 ÷
 RCL÷ "S"
 RTN
-END
+@@@@ END
 #+END_SRC
 
 ** =STUTD=: Student's t Distribution PDF
@@ -400,7 +416,7 @@ Y↑X
 X<>Y
 ÷
 RTN
-END
+@@@@ END
 #+END_SRC
 
 ** =WEIBD=: Weibull Distribution PDF
@@ -437,7 +453,7 @@ Y↑X
 E↑X
 ×
 RTN
-END
+@@@@ END
 #+END_SRC
 
 ** =EXPOD=: Exponential Distribution PDF
@@ -463,6 +479,45 @@ RCL× "X"
 E↑X
 RCL× "L"
 RTN
+@@@@ END
+#+END_SRC
+
+** =CPOLY=: Evaluate Matrix Characteristic Polynomial
+
+$$\vert\mathbf{M}-X\cdot \mathbf{I}\vert$$
+
+Can be used with =SOLVE= to find eigenvalues.
+
+#+begin_src hp42s :tangle ../src_42s/equations/equations.hp42s
+LBL "CPOLY"
+MVAR "M"
+MVAR "X"
+RCL "M"
+LSTO "TMPM"
+INDEX "TMPM"
+R↓
+RCL "X"
+LBL 01
+RCLEL
+RCL- ST Y
+STOEL
+R↓
+J+
+FS? 77
+GTO 02
+I+
+GTO 01
+LBL 02
+RCL "TMPM"
+DET
+RTN
+@@@@ END
+#+END_SRC
+
+* Master Program END
+
+#+begin_src hp42s :tangle ../src_42s/equations/equations.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 #+END_SRC
 
@@ -480,17 +535,6 @@ END
 #+END_SRC
 
 Code in this section is under construction.  Most likely broken.
-
-** Formula Template
-
-$$FORMULA$$
-
-#+begin_src hp42s :tangle ../src_42s/equations/equations.hp42s
-LBL "NAME"
-MVAR "V"
-RTN
-END
-#+END_SRC
 
 * EOF
 

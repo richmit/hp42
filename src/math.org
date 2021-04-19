@@ -21,9 +21,9 @@
 #+EXPORT_FILE_NAME: ../docs/math
 
 #+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
-|        <r> | <l>              |
-|  *Author:* | /{{{author}}}/ |
-| *Updated:* | /{{{time(%Y-%m-%d %H:%M:%S)}}}/ |
+|          <r> | <l>                                          |
+|    *Author:* | /{{{author}}}/                               |
+|   *Updated:* | /{{{modification-time(%Y-%m-%d %H:%M:%S)}}}/ |
 #+ATTR_HTML: :align center
 Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 
@@ -607,7 +607,6 @@ END
 
 #+END_SRC
 
-
 * =TRIG=: Trigonometric Functions
 ** Menu
 :PROPERTIES:
@@ -616,28 +615,28 @@ END
 
 #+ATTR_HTML: :align center :frame box :rules all
 #+NAME:TRIG
-| Menu  | Lab | Description |
-|-------+-----+-------------|
-| SIN   |     |             |
-| COS   |     |             |
-| TAN   |     |             |
-| ASIN  |     |             |
-| ACOS  |     |             |
-| ATAN  |     |             |
-|-------+-----+-------------|
-| CSC   |  91 | 1/SIN(X)    |
-| SEC   |  92 | 1/COS(X)    |
-| COT   |  93 | 1/TAN(X)    |
-| ACSC  |  94 | SIN(1/X)    |
-| ASEC  |  95 | COS(1/X)    |
-| ACOT  |  96 | TAN(1/X)    |
-|-------+-----+-------------|
-| TAN2  |  97 |             |
-| HYPOT |  98 |             |
-| ▒▒▒▒  |     |             |
-| ▒▒▒▒  |     |             |
-| ▒▒▒▒  |     |             |
-| ▒▒▒▒  |     |             |
+| Menu  | Lab | Description                         |
+|-------+-----+-------------------------------------|
+| SIN   |     |                                     |
+| COS   |     |                                     |
+| TAN   |     |                                     |
+| ASIN  |     |                                     |
+| ACOS  |     |                                     |
+| ATAN  |     |                                     |
+|-------+-----+-------------------------------------|
+| CSC   |  91 | 1/SIN(X)                            |
+| SEC   |  92 | 1/COS(X)                            |
+| COT   |  93 | 1/TAN(X)                            |
+| ACSC  |  94 | SIN(1/X)                            |
+| ASEC  |  95 | COS(1/X)                            |
+| ACOT  |  96 | TAN(1/X)                            |
+|-------+-----+-------------------------------------|
+| TAN2  |  97 |                                     |
+| HYPOT |  98 |                                     |
+| HAV   |  90 | Haversine = 1/2-cos(X)/2            |
+| AHAV  |  89 | Inverse Haversine = 2*asin(sqrt(X)) |
+| ▒▒▒▒  |     |                                     |
+| ▒▒▒▒  |     |                                     |
 
 *** Menu Code
 #+BEGIN_SRC elisp :var tbl=TRIG :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
@@ -695,6 +694,10 @@ CLMENU
 KEY 1 XEQ 97
 "HYPOT"
 KEY 2 XEQ 98
+"HAV"
+KEY 3 XEQ 90
+"AHAV"
+KEY 4 XEQ 89
 KEY 7 GTO 02
 KEY 8 GTO 01
 KEY 9 GTO 00
@@ -727,8 +730,41 @@ RTN
 
 ** Local Functions
 
-
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Inverse Haversine
+@@@@ NAM: AHAV 89
+@@@@ IN:  X: number
+@@@@ OUT: X: ahav(X)=2*asin(sqrt(X))
+@@@@ UPD: 2021-04-18
+@@@@ TST: free42_3.0
+LBL 89
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+SQRT
+ASIN
+2
+×
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Haversine
+@@@@ NAM: HAV 90
+@@@@ IN:  X: number
+@@@@ OUT: X: hav(X)=1/2-cos(X)/2
+@@@@ UPD: 2021-04-18
+@@@@ TST: free42_3.0
+LBL 90
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+COS
+-2
+÷
+0.5
++
+RTN
+
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Hypot
 @@@@ NAM: HYPOT 98
@@ -881,7 +917,6 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 #+END_SRC
-
 
 * =LPRT=: Logs, Powers & Roots
 ** Menu
@@ -1178,8 +1213,122 @@ END
 
 #+END_SRC
 
-* Polynomials
+* Linear Algebra
+** Menu 
 
+** =NLA=: A collection of linear algebra tools
+
+#+ATTR_HTML: :align center :frame box :rules all
+#+NAME:NLA
+| Menu | Lab |                                            | Inputs        | Output             | Status     |
+|------+-----+--------------------------------------------+---------------+--------------------+------------|
+| IDEN |  99 | Create an nxn identity matrix              | X: N          | X: identity matrix | *COMPLETE* |
+| DIAG |  98 | Create diagonal matrix with given elements | X: VEC        | X: diagonal matrix | *COMPLETE* |
+| ROWB |  87 | Bind two matrixes top to bottom            | Y: MAT X: MAT | X: adjoined matrix | *TODO*     |
+| COLB |  86 | Bind two matrixes top to bottom            | Y: MAT X: MAT | X: adjoined matrix | *TODO*     |
+
+*** Code for Menu
+
+#+BEGIN_SRC elisp :var tbl=NLA :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+(MJR-generate-42-menu-code "NLA" tbl "stay" "exit" 't #'MJR-custom-x-gen)
+#+END_SRC
+
+#+RESULTS:
+#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:NLA)
+@@@@ DSC: Auto-generated menu program
+LBL "NLA"
+LBL 01            @@@@ Page 1 of menu NLA
+CLMENU
+"IDEN"
+KEY 1 XEQ 99
+"DIAG"
+KEY 2 XEQ 98
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 00 @@@@ Application Exit
+EXITALL
+RTN
+@@@@ Free labels start at: 2
+#+end_src
+
+** Local Functions
+
+#+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:IDEN)
+@@@@ DSC: Create an XxX identity matrix
+@@@@ IN:  X: Size of matrix to make
+@@@@ IN:  X: Identity matrix of size X
+@@@@ UPD: 2021-03-12
+LBL 99
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+ENTER
+NEWMAT
+LSTO "TMPM"
+INDEX "TMPM"
+1
+LBL 01
+STOEL
+J+
+FS? 77
+GTO 02
+I+
+GTO 01
+LBL 02
+RCL "TMPM"
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:DIAG)
+@@@@ DSC: Create diagonal matrix with given elements
+@@@@ IN:  X: Vector
+@@@@ IN:  X: diagonal matrix
+@@@@ UPD: 2021-03-12
+LBL "DIAG"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+LSTO "TMPM"
+INDEX "TMPM"
+DIM?
+×
+ENTER
+DIM "TMPM"
+1000
+÷
+1
++
+LSTO "I"
+LBL 01
+1
+RCL "I"
+STOIJ
+R↓
+R↓
+RCLEL
+0
+STOEL
+R↓
+RCL "I"
+RCL "I"
+STOIJ
+R↓
+R↓
+STOEL
+ISG "I"
+GTO 01
+RCL "TMPM"
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MMID)
+
+#+END_SRC
+
+
+* Polynomials
 ** =POLY=: A collection of polynomial tools
 
 #+ATTR_HTML: :align center :frame box :rules all

@@ -615,32 +615,32 @@ END
 
 #+ATTR_HTML: :align center :frame box :rules all
 #+NAME:TRIG
-| Menu  | Lab | Description                         |
-|-------+-----+-------------------------------------|
-| SIN   |     |                                     |
-| COS   |     |                                     |
-| TAN   |     |                                     |
-| ASIN  |     |                                     |
-| ACOS  |     |                                     |
-| ATAN  |     |                                     |
-|-------+-----+-------------------------------------|
-| CSC   |  91 | 1/SIN(X)                            |
-| SEC   |  92 | 1/COS(X)                            |
-| COT   |  93 | 1/TAN(X)                            |
-| ACSC  |  94 | SIN(1/X)                            |
-| ASEC  |  95 | COS(1/X)                            |
-| ACOT  |  96 | TAN(1/X)                            |
-|-------+-----+-------------------------------------|
-| TAN2  |  97 |                                     |
-| HYPOT |  98 |                                     |
-| HAV   |  90 | Haversine = 1/2-cos(X)/2            |
-| AHAV  |  89 | Inverse Haversine = 2*asin(sqrt(X)) |
-| ▒▒▒▒  |     |                                     |
-| ▒▒▒▒  |     |                                     |
+| Menu  | Description                         |
+|-------+-------------------------------------|
+| SIN   |                                     |
+| COS   |                                     |
+| TAN   |                                     |
+| ASIN  |                                     |
+| ACOS  |                                     |
+| ATAN  |                                     |
+|-------+-------------------------------------|
+| CSC   | 1/SIN(X)                            |
+| SEC   | 1/COS(X)                            |
+| COT   | 1/TAN(X)                            |
+| ACSC  | SIN(1/X)                            |
+| ASEC  | COS(1/X)                            |
+| ACOT  | TAN(1/X)                            |
+|-------+-------------------------------------|
+| TAN2  |                                     |
+| HYPOT |                                     |
+| HAV   | Haversine = 1/2-cos(X)/2            |
+| AHAV  | Inverse Haversine = 2*asin(sqrt(X)) |
+| ▒▒▒▒  |                                     |
+| ▒▒▒▒  |                                     |
 
 *** Menu Code
 #+BEGIN_SRC elisp :var tbl=TRIG :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
-(MJR-generate-42-menu-code "TRIG" tbl "stay" "exit" 't #'MJR-custom-x-gen)
+(MJR-generate-42-menu-code "TRIG" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
@@ -671,17 +671,17 @@ GTO 01
 LBL 02            @@@@ Page 2 of menu TRIG
 CLMENU
 "CSC"
-KEY 1 XEQ 91
+KEY 1 XEQ "CSC"
 "SEC"
-KEY 2 XEQ 92
+KEY 2 XEQ "SEC"
 "COT"
-KEY 3 XEQ 93
+KEY 3 XEQ "COT"
 "ACSC"
-KEY 4 XEQ 94
+KEY 4 XEQ "ACSC"
 "ASEC"
-KEY 5 XEQ 95
+KEY 5 XEQ "ASEC"
 "ACOT"
-KEY 6 XEQ 96
+KEY 6 XEQ "ACOT"
 KEY 7 GTO 01
 KEY 8 GTO 03
 KEY 9 GTO 00
@@ -691,13 +691,13 @@ GTO 02
 LBL 03            @@@@ Page 3 of menu TRIG
 CLMENU
 "TAN2"
-KEY 1 XEQ 97
+KEY 1 XEQ "TAN2"
 "HYPOT"
-KEY 2 XEQ 98
+KEY 2 XEQ "HYPOT"
 "HAV"
-KEY 3 XEQ 90
+KEY 3 XEQ "HAV"
 "AHAV"
-KEY 4 XEQ 89
+KEY 4 XEQ "AHAV"
 KEY 7 GTO 02
 KEY 8 GTO 01
 KEY 9 GTO 00
@@ -707,22 +707,22 @@ GTO 03
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 04               @@@@ Action for menu key SIN
+LBL 04    @@@@ Action for menu key SIN
 SIN
 RTN
-LBL 05               @@@@ Action for menu key COS
+LBL 05    @@@@ Action for menu key COS
 COS
 RTN
-LBL 06               @@@@ Action for menu key TAN
+LBL 06    @@@@ Action for menu key TAN
 TAN
 RTN
-LBL 07               @@@@ Action for menu key ASIN
+LBL 07    @@@@ Action for menu key ASIN
 ASIN
 RTN
-LBL 08               @@@@ Action for menu key ACOS
+LBL 08    @@@@ Action for menu key ACOS
 ACOS
 RTN
-LBL 09               @@@@ Action for menu key ATAN
+LBL 09    @@@@ Action for menu key ATAN
 ATAN
 RTN
 @@@@ Free labels start at: 10
@@ -734,12 +734,11 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Inverse Haversine
-@@@@ NAM: AHAV 89
 @@@@ IN:  X: number
 @@@@ OUT: X: ahav(X)=2*asin(sqrt(X))
 @@@@ UPD: 2021-04-18
 @@@@ TST: free42_3.0
-LBL 89
+LBL "AHAV"
 FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 SQRT
@@ -750,12 +749,11 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Haversine
-@@@@ NAM: HAV 90
 @@@@ IN:  X: number
 @@@@ OUT: X: hav(X)=1/2-cos(X)/2
 @@@@ UPD: 2021-04-18
 @@@@ TST: free42_3.0
-LBL 90
+LBL "HAV"
 FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 COS
@@ -767,13 +765,12 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Hypot
-@@@@ NAM: HYPOT 98
 @@@@ IN:  Y: number
 @@@@ IN:  X: number
 @@@@ OUT: X: sqrt(abs(x)^2+abs(y)^2)
 @@@@ UPD: 2021-02-23
 @@@@ TST: free42_3.0
-LBL 98
+LBL "HYPOT"
 FUNC 21              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 ABS
@@ -785,8 +782,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: 1/SIN(X)
-@@@@ NAM: CSC  91
-LBL 91
+LBL "CSC"
 FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 SIN
@@ -795,8 +791,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: 1/COS(X)
-@@@@ NAM: SEC  92
-LBL 92
+LBL "SEC"
 FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 COS
@@ -805,8 +800,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: 1/TAN(X)
-@@@@ NAM: COT  93
-LBL 93
+LBL "COT"
 FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 TAN
@@ -815,8 +809,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: SIN(1/X)
-@@@@ NAM: ACSC 94
-LBL 94
+LBL "ACSC"
 FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 1/X
@@ -825,8 +818,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: COS(1/X)
-@@@@ NAM: ASEC 95
-LBL 95
+LBL "ASEC"
 FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 1/X
@@ -835,8 +827,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: TAN(1/X)
-@@@@ NAM: ACOT 96
-LBL 96
+LBL "ACOT"
 FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 1/X
@@ -845,7 +836,6 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: ATAN2
-@@@@ NAM: ATAN2 97
 @@@@ IN:  Y: number
 @@@@ IN:  X: number
 @@@@ OUT: X: atan2(y, x)
@@ -861,7 +851,7 @@ RTN
 @@@@ TC:  atan(-1, 0) => -pi       =  -90°
 @@@@ TC:  atan( 0, 0) => ERROR
 @@@@ LBL: Used 81-85
-LBL 97
+LBL "TAN2"
 FUNC 21              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 X>0?
@@ -926,32 +916,32 @@ END
 
 #+ATTR_HTML: :align center :frame box :rules all
 #+NAME:LPRT
-| Menu | Lab | Description                                          |
-|------+-----+------------------------------------------------------|
-| lnYX |  99 | Base Y Logarithm of X                                |
-| ▒▒▒▒ |     |                                                      |
-| ln2  |  98 | Base 2 logarithm                                     |
-| LN   |     | Base 3 logarithm                                     |
-| LOG  |     | Base 10 logarithm                                    |
-| ▒▒▒▒ |     |                                                      |
-|------+-----+------------------------------------------------------|
-| Y↑X  |     | Raise Y to the power of X                            |
-| ▒▒▒▒ |     |                                                      |
-| 2↑X  |  97 | Raise 2 to the power of X                            |
-| EXP  |     | Raise e to the power of X                            |
-| 10↑X |     | Raise 10 to the power of X                           |
-| ▒▒▒▒ |     |                                                      |
-|------+-----+------------------------------------------------------|
-| Y√X  |  96 | Yth roots prefering real & pure imaginary answers    |
-| ▒▒▒▒ |     |                                                      |
-| 2√X  |  95 | Square root prefering real & pure imaginary answers  |
-| 3√X  |  94 | Cube root prefering real & pure imaginary answers    |
-| 5√X  |  93 | Fifth root prefering real & pure imaginary answers   |
-| 7√X  |  92 | Seventh root prefering real & pure imaginary answers |
+| Menu | Lab    | Description                                          |
+|------+--------+------------------------------------------------------|
+| lnYX | lnYX   | Base Y Logarithm of X                                |
+| ▒▒▒▒ |        |                                                      |
+| ln2  | ln2    | Base 2 logarithm                                     |
+| LN   |        | Base 3 logarithm                                     |
+| LOG  |        | Base 10 logarithm                                    |
+| ▒▒▒▒ |        |                                                      |
+|------+--------+------------------------------------------------------|
+| Y↑X  |        | Raise Y to the power of X                            |
+| ▒▒▒▒ |        |                                                      |
+| 2↑X  | LBL 97 | Raise 2 to the power of X                            |
+| EXP  |        | Raise e to the power of X                            |
+| 10↑X |        | Raise 10 to the power of X                           |
+| ▒▒▒▒ |        |                                                      |
+|------+--------+------------------------------------------------------|
+| Y√X  | YROOT  | Yth roots prefering real & pure imaginary answers    |
+| ▒▒▒▒ |        |                                                      |
+| 2√X  | LBL 95 | Square root prefering real & pure imaginary answers  |
+| 3√X  | LBL 94 | Cube root prefering real & pure imaginary answers    |
+| 5√X  | LBL 93 | Fifth root prefering real & pure imaginary answers   |
+| 7√X  | LBL 92 | Seventh root prefering real & pure imaginary answers |
 
 *** Menu Code
 #+BEGIN_SRC elisp :var tbl=LPRT :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
-(MJR-generate-42-menu-code "LPRT" tbl "stay" "exit" 't #'MJR-custom-x-gen)
+(MJR-generate-42-menu-code "LPRT" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
@@ -962,9 +952,9 @@ LBL "LPRT"
 LBL 01            @@@@ Page 1 of menu LPRT
 CLMENU
 "lnYX"
-KEY 1 XEQ 99
+KEY 1 XEQ "lnYX"
 "ln2"
-KEY 3 XEQ 98
+KEY 3 XEQ "ln2"
 "LN"
 KEY 4 XEQ 04
 "LOG"
@@ -982,9 +972,9 @@ KEY 1 XEQ 06
 "2↑X"
 KEY 3 XEQ 97
 "EXP"
-KEY 4 XEQ 07
+KEY 4 XEQ "EXP"
 "10↑X"
-KEY 5 XEQ 08
+KEY 5 XEQ 07
 KEY 7 GTO 01
 KEY 8 GTO 03
 KEY 9 GTO 00
@@ -994,7 +984,7 @@ GTO 02
 LBL 03            @@@@ Page 3 of menu LPRT
 CLMENU
 "Y√X"
-KEY 1 XEQ 96
+KEY 1 XEQ "YROOT"
 "2√X"
 KEY 3 XEQ 95
 "3√X"
@@ -1012,22 +1002,19 @@ GTO 03
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 04               @@@@ Action for menu key LN
+LBL 04    @@@@ Action for menu key LN
 LN
 RTN
-LBL 05               @@@@ Action for menu key LOG
+LBL 05    @@@@ Action for menu key LOG
 LOG
 RTN
-LBL 06               @@@@ Action for menu key Y↑X
+LBL 06    @@@@ Action for menu key Y↑X
 Y↑X
 RTN
-LBL 07               @@@@ Action for menu key EXP
-XEQ "EXP"
-RTN
-LBL 08               @@@@ Action for menu key 10↑X
+LBL 07    @@@@ Action for menu key 10↑X
 10↑X
 RTN
-@@@@ Free labels start at: 9
+@@@@ Free labels start at: 8
 #+end_src
 
 ** Local Functions
@@ -1035,13 +1022,12 @@ RTN
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Base Y Logarithm of X
-@@@@ NAM: lnXY 99
 @@@@ IN:  Y: logarithm base
 @@@@      X: number or matrix (element-wise)
 @@@@ OUT: X: log_y(x)
 @@@@ UPD: 2021-04-14
 @@@@ TST: free42_3.0
-LBL 99
+LBL "lnYX"
 FUNC 21              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 LN
@@ -1052,12 +1038,11 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Base 2 Logarithm
-@@@@ NAM: ln2 98
 @@@@ IN:  X: number or matrix (element-wise)
 @@@@ OUT: X: log_2(x)
 @@@@ UPD: 2021-02-23
 @@@@ TST: free42_3.0
-LBL 98
+LBL "ln2"
 FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 LN
@@ -1093,7 +1078,7 @@ LBL 95
 FUNC 11              @@## REQ:free42>=2.5.24
 2
 X<>Y
-XEQ 96
+XEQ "YROOT"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1108,7 +1093,7 @@ LBL 94
 FUNC 11              @@## REQ:free42>=2.5.24
 3
 X<>Y
-XEQ 96
+XEQ "YROOT"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1123,7 +1108,7 @@ LBL 93
 FUNC 11              @@## REQ:free42>=2.5.24
 5
 X<>Y
-XEQ 96
+XEQ "YROOT"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1138,12 +1123,11 @@ LBL 92
 FUNC 11              @@## REQ:free42>=2.5.24
 7
 X<>Y
-XEQ 96
+XEQ "YROOT"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Nth roots prefering real & pure imaginary answers
-@@@@ NAM: YROOT 96
 @@@@ IN:  Y: Number
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: Yth root of X
@@ -1153,7 +1137,7 @@ RTN
 @@@@ FAQ: Return is real when  Y is an even integer and X<0
 @@@@ TST: free42_3.0
 @@@@ UPD: 2021-02-23
-LBL 96
+LBL "YROOT"
 FUNC 21              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 REAL?
@@ -1222,15 +1206,15 @@ END
 #+NAME:NLA
 | Menu | Lab |                                            | Inputs        | Output             | Status     |
 |------+-----+--------------------------------------------+---------------+--------------------+------------|
-| IDEN |  99 | Create an nxn identity matrix              | X: N          | X: identity matrix | *COMPLETE* |
-| DIAG |  98 | Create diagonal matrix with given elements | X: VEC        | X: diagonal matrix | *COMPLETE* |
-| ROWB |  87 | Bind two matrixes top to bottom            | Y: MAT X: MAT | X: adjoined matrix | *TODO*     |
-| COLB |  86 | Bind two matrixes top to bottom            | Y: MAT X: MAT | X: adjoined matrix | *TODO*     |
+| IDEN | IDEN   | Create an nxn identity matrix              | X: N          | X: identity matrix | *COMPLETE* |
+| DIAG | DIAG   | Create diagonal matrix with given elements | X: VEC        | X: diagonal matrix | *COMPLETE* |
+| ROWB | BNDROW | Bind two matrixes top to bottom            | Y: MAT X: MAT | X: adjoined matrix | *TODO*     |
+| COLB | BNDCOL | Bind two matrixes top to bottom            | Y: MAT X: MAT | X: adjoined matrix | *TODO*     |
 
 *** Code for Menu
 
 #+BEGIN_SRC elisp :var tbl=NLA :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
-(MJR-generate-42-menu-code "NLA" tbl "stay" "exit" 't #'MJR-custom-x-gen)
+(MJR-generate-42-menu-code "NLA" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
@@ -1241,9 +1225,13 @@ LBL "NLA"
 LBL 01            @@@@ Page 1 of menu NLA
 CLMENU
 "IDEN"
-KEY 1 XEQ 99
+KEY 1 XEQ "IDEN"
 "DIAG"
-KEY 2 XEQ 98
+KEY 2 XEQ "DIAG"
+"ROWB"
+KEY 3 XEQ "BNDROW"
+"COLB"
+KEY 4 XEQ "BNDCOL"
 KEY 9 GTO 00
 MENU
 STOP
@@ -1262,7 +1250,7 @@ RTN
 @@@@ IN:  X: Size of matrix to make
 @@@@ IN:  X: Identity matrix of size X
 @@@@ UPD: 2021-03-12
-LBL 99
+LBL "IDEN"
 FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 ENTER
@@ -1335,34 +1323,17 @@ END
 #+NAME:POLY
 | Menu  | Program |                              | Inputs           | Output              |
 |-------+---------+------------------------------+------------------+---------------------|
-| QUADE |      99 | Solve quadratic: Ax^2+Bx+C=0 | Z: A Y: B X: C   | Y: root 1 X: root 2 |
-| EVAL  |      98 | Evaluate polynomial P @ X    | Y: P matrix X: X | X: P(x)             |
+| QUADE | QUADE   | Solve quadratic: Ax^2+Bx+C=0 | Z: A Y: B X: C   | Y: root 1 X: root 2 |
+| EVAL  | PEVAL   | Evaluate polynomial P @ X    | Y: P matrix X: X | X: P(x)             |
 
 *** Code for Menu
 
 #+BEGIN_SRC elisp :var tbl=POLY :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
-(MJR-generate-42-menu-code "POLY" tbl "stay" "exit" 't #'MJR-custom-x-gen)
+(MJR-generate-42-menu-code "POLY" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
 #+begin_src hp42s :tangle ../src_42s/math/math.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:POLY)
-@@@@ DSC: Auto-generated menu program
-LBL "POLY"
-LBL 01            @@@@ Page 1 of menu POLY
-CLMENU
-"QUADE"
-KEY 1 XEQ 99
-"EVAL"
-KEY 2 XEQ 98
-KEY 9 GTO 00
-MENU
-STOP
-GTO 01
-LBL 00 @@@@ Application Exit
-EXITALL
-RTN
-@@@@ Free labels start at: 2
 #+end_src
 
 *** Local functions for =POLY= menu
@@ -1370,7 +1341,6 @@ RTN
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Solve quadratic equation: ax^2+bx+c=0
-@@@@ NAM: QUADE 99
 @@@@ IN:  Z: a
 @@@@      Y: b
 @@@@      X: c
@@ -1379,7 +1349,7 @@ RTN
 @@@@ TST: free42_3.0
 @@@@ BUG: No error checking
 @@@@ UPD: 2021-04-02
-LBL 99
+LBL "QUADE"
 FUNC 32              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 -4
@@ -1407,7 +1377,6 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Evaluate a polynomial
-@@@@ NAM: PLYE 98
 @@@@ IN:  Y: Matrix with polynomial coefficients.  DIM of 1xn, nx1, whatever...
 @@@@      X: Value at which polynomial should be evaluated
 @@@@ OUT: Y: original polynomial matrix
@@ -1415,7 +1384,7 @@ RTN
 @@@@ LBL: Used: 97
 @@@@ TST: free42_3.0
 @@@@ UPD: 2021-04-03
-LBL 98
+LBL "PEVAL"
 FUNC 21              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 X<>Y
@@ -1475,18 +1444,18 @@ This is a simple little application that makes working with 3D vectors less pain
 #+NAME:VEC3
 | Menu  | Target |                                                                     |
 |-------+--------+---------------------------------------------------------------------|
-| →V    |     99 | Put stack elements X, Y, & Z into a vector: [Z, Y, X]               |
-| V→    |     98 | Vector contents to stack. [A, B, C] => X: C, Y: B, Z: A             |
+| →V    | LBL 99 | Put stack elements X, Y, & Z into a vector: [Z, Y, X]               |
+| V→    | LBL 98 | Vector contents to stack. [A, B, C] => X: C, Y: B, Z: A             |
 | DOT   |        | Dot product                                                         |
 | CROSS |        | Cross product                                                       |
-| MAG   |   FNRM | Euculidian magnitude                                                |
-| VVIEW |     96 | View a vector one element at a time -- press =R/S= for next element |
+| MAG   | FNRM   | Euculidian magnitude                                                |
+| VVIEW | LBL 96 | View a vector one element at a time -- press =R/S= for next element |
 |-------+--------+---------------------------------------------------------------------|
 
 ** Code for Menu
 
 #+BEGIN_SRC elisp :var tbl=VEC3 :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
-(MJR-generate-42-menu-code "VEC3" tbl "stay" "exit" 't #'MJR-custom-x-gen)
+(MJR-generate-42-menu-code "VEC3" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
@@ -1515,13 +1484,13 @@ GTO 01
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 02               @@@@ Action for menu key DOT
+LBL 02    @@@@ Action for menu key DOT
 DOT
 RTN
-LBL 03               @@@@ Action for menu key CROSS
+LBL 03    @@@@ Action for menu key CROSS
 CROSS
 RTN
-LBL 04               @@@@ Action for menu key MAG
+LBL 04    @@@@ Action for menu key MAG
 FNRM
 RTN
 @@@@ Free labels start at: 5

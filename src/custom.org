@@ -21,9 +21,9 @@
 #+EXPORT_FILE_NAME: ../docs/custom
 
 #+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
-|        <r> | <l>              |
-|  *Author:* | /{{{author}}}/ |
-| *Updated:* | /{{{time(%Y-%m-%d %H:%M:%S)}}}/ |
+|        <r> | <l>                                          |
+|  *Author:* | /{{{author}}}/                               |
+| *Updated:* | /{{{modification-time(%Y-%m-%d %H:%M:%S)}}}/ |
 #+ATTR_HTML: :align center
 Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 
@@ -146,7 +146,7 @@ The other columns of the table are not used.
 The menu program is generated via the following bit of elisp.  You must first define the =MJR-generate-42-menu-code= and =MJR-custom-x-gen= by evaluating the code blocks in the =hp42s-meta.org= file.
 
 #+BEGIN_SRC elisp :var tbl=cust :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/custom/custom.hp42s"
-(MJR-generate-42-menu-code "CUST" tbl "stay" "up" 't #'MJR-custom-x-gen)
+(MJR-generate-42-menu-code "CUST" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
@@ -161,13 +161,13 @@ KEY 1 GTO 03
 "MATH"
 KEY 2 GTO 04
 "BASE"
-KEY 3 XEQ 05
+KEY 3 XEQ "BASE"
 "PHIL"
-KEY 4 XEQ 06
+KEY 4 XEQ "PHIL"
 "MEAS"
-KEY 5 XEQ 07
+KEY 5 XEQ "MEAS"
 "DATE"
-KEY 6 XEQ 08
+KEY 6 XEQ "DMENU"
 KEY 7 GTO 02
 KEY 8 GTO 02
 KEY 9 GTO 00
@@ -177,9 +177,9 @@ GTO 01
 LBL 02            @@@@ Page 2 of menu CUST
 CLMENU
 "CONS"
-KEY 1 XEQ 09
+KEY 1 XEQ "CONS"
 "UNIT"
-KEY 2 XEQ 10
+KEY 2 XEQ "UNIT"
 KEY 7 GTO 01
 KEY 8 GTO 01
 KEY 9 GTO 00
@@ -189,145 +189,145 @@ GTO 02
 LBL 03            @@@@ Page 1 of menu SFUN
 CLMENU
 "HYP"
-KEY 1 GTO 12
+KEY 1 GTO 06
 "L&P"
-KEY 2 XEQ 13
+KEY 2 XEQ "LPRT"
 "PERC"
-KEY 3 GTO 14
+KEY 3 GTO 07
 "PROB"
-KEY 4 GTO 15
+KEY 4 GTO 08
 "INT"
-KEY 5 GTO 16
+KEY 5 GTO 09
 "CPLX"
-KEY 6 GTO 17
-KEY 7 GTO 11
-KEY 8 GTO 11
+KEY 6 GTO 10
+KEY 7 GTO 05
+KEY 8 GTO 05
 KEY 9 GTO 01
 MENU
 STOP
 GTO 03
-LBL 11            @@@@ Page 2 of menu SFUN
+LBL 05            @@@@ Page 2 of menu SFUN
 CLMENU
 "TRIG"
-KEY 1 XEQ 18
+KEY 1 XEQ "TRIG"
 "ERR"
-KEY 2 GTO 19
+KEY 2 GTO 11
 KEY 7 GTO 03
 KEY 8 GTO 03
 KEY 9 GTO 01
 MENU
 STOP
-GTO 11
-LBL 12            @@@@ Page 1 of menu HYP
+GTO 05
+LBL 06            @@@@ Page 1 of menu HYP
 CLMENU
 "SINH"
-KEY 1 XEQ 20
+KEY 1 XEQ 12
 "COSH"
-KEY 2 XEQ 21
+KEY 2 XEQ 13
 "TANH"
-KEY 3 XEQ 22
+KEY 3 XEQ 14
 "ASINH"
-KEY 4 XEQ 23
+KEY 4 XEQ 15
 "ACOSH"
-KEY 5 XEQ 24
+KEY 5 XEQ 16
 "ATANH"
-KEY 6 XEQ 25
+KEY 6 XEQ 17
 KEY 9 GTO 03
 MENU
 STOP
-GTO 12
-LBL 14            @@@@ Page 1 of menu PERC
+GTO 06
+LBL 07            @@@@ Page 1 of menu PERC
 CLMENU
 "%T"
-KEY 1 XEQ 26
+KEY 1 XEQ "%T"
 "%CH"
-KEY 2 XEQ 27
+KEY 2 XEQ 18
 "%"
-KEY 3 XEQ 28
+KEY 3 XEQ 19
 KEY 9 GTO 03
 MENU
 STOP
-GTO 14
-LBL 15            @@@@ Page 1 of menu PROB
+GTO 07
+LBL 08            @@@@ Page 1 of menu PROB
 CLMENU
 "COMB"
-KEY 1 XEQ 30
+KEY 1 XEQ 21
 "PERM"
-KEY 2 XEQ 31
+KEY 2 XEQ 22
 "GAMMA"
-KEY 4 XEQ 32
+KEY 4 XEQ 23
 "BETA"
-KEY 5 XEQ 33
-KEY 7 GTO 29
-KEY 8 GTO 29
+KEY 5 XEQ "BETA"
+KEY 7 GTO 20
+KEY 8 GTO 20
 KEY 9 GTO 03
 MENU
 STOP
-GTO 15
-LBL 29            @@@@ Page 2 of menu PROB
+GTO 08
+LBL 20            @@@@ Page 2 of menu PROB
 CLMENU
 "NPDF"
-KEY 1 XEQ 34
+KEY 1 XEQ "NPDF"
 "NCDF"
-KEY 2 XEQ 35
-KEY 7 GTO 15
-KEY 8 GTO 15
+KEY 2 XEQ "NCDF"
+KEY 7 GTO 08
+KEY 8 GTO 08
 KEY 9 GTO 03
 MENU
 STOP
-GTO 29
-LBL 16            @@@@ Page 1 of menu INT
+GTO 20
+LBL 09            @@@@ Page 1 of menu INT
 CLMENU
 "IDIV"
-KEY 1 XEQ 36
+KEY 1 XEQ 24
 "MOD"
-KEY 2 XEQ 37
+KEY 2 XEQ 25
 "GCD"
-KEY 4 XEQ 38
+KEY 4 XEQ "GCD"
 "LCM"
-KEY 5 XEQ 39
+KEY 5 XEQ "LCM"
 KEY 9 GTO 03
 MENU
 STOP
-GTO 16
-LBL 17            @@@@ Page 1 of menu CPLX
+GTO 09
+LBL 10            @@@@ Page 1 of menu CPLX
 CLMENU
 "RPART"
-KEY 1 XEQ 40
+KEY 1 XEQ "RPART"
 "IPART"
-KEY 2 XEQ 41
+KEY 2 XEQ "IPART"
 "CONJ"
-KEY 3 XEQ 42
+KEY 3 XEQ "CONJ"
 "CABS"
-KEY 4 XEQ 43
+KEY 4 XEQ "CABS"
 "CARG"
-KEY 5 XEQ 44
+KEY 5 XEQ "CARG"
 KEY 9 GTO 03
 MENU
 STOP
-GTO 17
-LBL 19            @@@@ Page 1 of menu ERR
+GTO 10
+LBL 11            @@@@ Page 1 of menu ERR
 CLMENU
 "ERF"
-KEY 1 XEQ 45
+KEY 1 XEQ "ERF"
 "ERFC"
-KEY 2 XEQ 46
+KEY 2 XEQ "ERFC"
 "NPDF"
-KEY 4 XEQ 47
+KEY 4 XEQ "NPDF"
 "NCDF"
-KEY 5 XEQ 48
-KEY 9 GTO 11
+KEY 5 XEQ "NCDF"
+KEY 9 GTO 05
 MENU
 STOP
-GTO 19
+GTO 11
 LBL 04            @@@@ Page 1 of menu MATH
 CLMENU
 "POLY"
-KEY 1 XEQ 49
+KEY 1 XEQ "POLY"
 "FMENU"
-KEY 2 XEQ 50
+KEY 2 XEQ "FMENU"
 "VEC3"
-KEY 3 XEQ 51
+KEY 3 XEQ "VEC3"
 KEY 9 GTO 01
 MENU
 STOP
@@ -335,125 +335,46 @@ GTO 04
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 05               @@@@ Action for menu key BASE
-XEQ "BASE"
-RTN
-LBL 06               @@@@ Action for menu key PHIL
-XEQ "PHIL"
-RTN
-LBL 07               @@@@ Action for menu key MEAS
-XEQ "MEAS"
-RTN
-LBL 08               @@@@ Action for menu key DATE
-XEQ "DMENU"
-RTN
-LBL 09               @@@@ Action for menu key CONS
-XEQ "CONS"
-RTN
-LBL 10               @@@@ Action for menu key UNIT
-XEQ "UNIT"
-RTN
-LBL 13               @@@@ Action for menu key L&P
-XEQ "LPRT"
-RTN
-LBL 18               @@@@ Action for menu key TRIG
-XEQ "TRIG"
-RTN
-LBL 20               @@@@ Action for menu key SINH
+LBL 12    @@@@ Action for menu key SINH
 SINH
 RTN
-LBL 21               @@@@ Action for menu key COSH
+LBL 13    @@@@ Action for menu key COSH
 COSH
 RTN
-LBL 22               @@@@ Action for menu key TANH
+LBL 14    @@@@ Action for menu key TANH
 TANH
 RTN
-LBL 23               @@@@ Action for menu key ASINH
+LBL 15    @@@@ Action for menu key ASINH
 ASINH
 RTN
-LBL 24               @@@@ Action for menu key ACOSH
+LBL 16    @@@@ Action for menu key ACOSH
 ACOSH
 RTN
-LBL 25               @@@@ Action for menu key ATANH
+LBL 17    @@@@ Action for menu key ATANH
 ATANH
 RTN
-LBL 26               @@@@ Action for menu key %T
-XEQ "%T"
-RTN
-LBL 27               @@@@ Action for menu key %CH
+LBL 18    @@@@ Action for menu key %CH
 %CH
 RTN
-LBL 28               @@@@ Action for menu key %
+LBL 19    @@@@ Action for menu key %
 %
 RTN
-LBL 30               @@@@ Action for menu key COMB
+LBL 21    @@@@ Action for menu key COMB
 COMB
 RTN
-LBL 31               @@@@ Action for menu key PERM
+LBL 22    @@@@ Action for menu key PERM
 PERM
 RTN
-LBL 32               @@@@ Action for menu key GAMMA
+LBL 23    @@@@ Action for menu key GAMMA
 GAMMA
 RTN
-LBL 33               @@@@ Action for menu key BETA
-XEQ "BETA"
-RTN
-LBL 34               @@@@ Action for menu key NPDF
-XEQ "NPDF"
-RTN
-LBL 35               @@@@ Action for menu key NCDF
-XEQ "NCDF"
-RTN
-LBL 36               @@@@ Action for menu key IDIV
+LBL 24    @@@@ Action for menu key IDIV
 BASE÷
 RTN
-LBL 37               @@@@ Action for menu key MOD
+LBL 25    @@@@ Action for menu key MOD
 MOD
 RTN
-LBL 38               @@@@ Action for menu key GCD
-XEQ "GCD"
-RTN
-LBL 39               @@@@ Action for menu key LCM
-XEQ "LCM"
-RTN
-LBL 40               @@@@ Action for menu key RPART
-XEQ "RPART"
-RTN
-LBL 41               @@@@ Action for menu key IPART
-XEQ "IPART"
-RTN
-LBL 42               @@@@ Action for menu key CONJ
-XEQ "CONJ"
-RTN
-LBL 43               @@@@ Action for menu key CABS
-XEQ "CABS"
-RTN
-LBL 44               @@@@ Action for menu key CARG
-XEQ "CARG"
-RTN
-LBL 45               @@@@ Action for menu key ERF
-XEQ "ERF"
-RTN
-LBL 46               @@@@ Action for menu key ERFC
-XEQ "ERFC"
-RTN
-LBL 47               @@@@ Action for menu key NPDF
-XEQ "NPDF"
-RTN
-LBL 48               @@@@ Action for menu key NCDF
-XEQ "NCDF"
-RTN
-LBL 49               @@@@ Action for menu key POLY
-XEQ "POLY"
-RTN
-LBL 50               @@@@ Action for menu key FMENU
-XEQ "FMENU"
-RTN
-LBL 51               @@@@ Action for menu key VEC3
-XEQ "VEC3"
-RTN
-@@@@ Free labels start at: 52
-END
+@@@@ Free labels start at: 26
 #+end_src
 
 * Create system =CUSTOM= Menu
@@ -527,7 +448,6 @@ ASSIGN "GTO" TO 16
 ASSIGN "XEQ" TO 17
 ASSIGN "VIEW" TO 18
 RTN
-END
 #+end_src
 
 * =SPREF=: Set some of my personal prefrences
@@ -559,8 +479,15 @@ CL12    @@@@ AM/PM mode
 4STK    @@@@ Four level stack
 EXITALL @@@@ Exit menus
 RTN
+#+END_SRC
+
+* END
+#+BEGIN_SRC hp42s :tangle ../src_42s/custom/custom.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 #+END_SRC
+
+
 
 * WORKING                                                          :noexport:
 

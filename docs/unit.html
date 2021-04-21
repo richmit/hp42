@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-14 Wed 17:01 -->
+<!-- 2021-04-20 Tue 22:26 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Custom Unit Conversion Factors</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-14 17:01:30</i></td>
+<td class="org-left"><i>2021-04-20 22:24:03</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,21 +241,21 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org2c4a90d">1. Metadata</a></li>
+<li><a href="#org6ef88a2">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
-<li><a href="#orgbd2c53a">3. Units</a>
+<li><a href="#org41a0832">3. Units</a>
 <ul>
-<li><a href="#org01c00c5">3.1. Conversion Factors</a></li>
-<li><a href="#orgbb4eba1">3.2. Code</a></li>
+<li><a href="#org675e725">3.1. Conversion Factors</a></li>
+<li><a href="#org479a41a">3.2. Code</a></li>
 </ul>
 </li>
-<li><a href="#org4c7a0fd">4. EOF</a></li>
+<li><a href="#orgd9b1be1">4. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org2c4a90d" class="outline-2">
-<h2 id="org2c4a90d"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org6ef88a2" class="outline-2">
+<h2 id="org6ef88a2"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/unit.html">https://richmit.github.io/hp42/unit.html</a>
@@ -323,14 +323,14 @@ a conversion factor for the given unit to the "base" unit to the stack.  For exa
 </div>
 </div>
 
-<div id="outline-container-orgbd2c53a" class="outline-2">
-<h2 id="orgbd2c53a"><span class="section-number-2">3</span> Units</h2>
+<div id="outline-container-org41a0832" class="outline-2">
+<h2 id="org41a0832"><span class="section-number-2">3</span> Units</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org01c00c5" class="outline-3">
-<h3 id="org01c00c5"><span class="section-number-3">3.1</span> Conversion Factors</h3>
+<div id="outline-container-org675e725" class="outline-3">
+<h3 id="org675e725"><span class="section-number-3">3.1</span> Conversion Factors</h3>
 <div class="outline-text-3" id="text-3-1">
-<table id="org74bb0a0" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
+<table id="org4e88f4e" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
 
 
 <colgroup>
@@ -828,16 +828,19 @@ a conversion factor for the given unit to the "base" unit to the stack.  For exa
 </div>
 </div>
 
-<div id="outline-container-orgbb4eba1" class="outline-3">
-<h3 id="orgbb4eba1"><span class="section-number-3">3.2</span> Code</h3>
+<div id="outline-container-org479a41a" class="outline-3">
+<h3 id="org479a41a"><span class="section-number-3">3.2</span> Code</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"UNIT"</span> 
+                           0
                            tbl
-                           <span style="color: #fa8072;">"stay"</span>
-                           <span style="color: #fa8072;">"up"</span> 
+                           0
                            nil
-                           (<span style="color: #00ffff;">lambda</span> (row) 
+                           'stay <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Change to 'exit to exit immediatly after a conversion factor is pushed to the stack</span>
+                           'up   <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Change to 'exit to have the application exit when [EXIT] is pressed</span>
+                           #'MJR-local-only-gen-lab
+                           (<span style="color: #00ffff;">lambda</span> (atrg target row) 
                              (<span style="color: #00ffff;">cl-destructuring-bind</span> (menu cfactor desc) row
                                (<span style="color: #00ffff;">let</span> ((print-desc 't))    <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Set to NIL to not print description</span>
                                  (<span style="color: #00ffff;">let*</span> ((dlen (length desc))
@@ -851,7 +854,7 @@ a conversion factor for the given unit to the "base" unit to the stack.  For exa
                                                                     (<span style="color: #00ffff;">and</span> print-desc dsc1 (message <span style="color: #fa8072;">"\"%s\""</span> dsc1))
                                                                     (<span style="color: #00ffff;">and</span> print-desc dsc2 (message <span style="color: #fa8072;">"&#9500;\"%s\""</span> dsc2))
                                                                     (<span style="color: #00ffff;">and</span> print-desc (<span style="color: #00ffff;">or</span> dsc1 dsc2) <span style="color: #fa8072;">"AVIEW"</span>))))
-                                              <span style="color: #fa8072;">"\n"</span>)))))))
+                                              <span style="color: #fa8072;">"\n"</span>))))))
 </pre>
 </div>
 
@@ -1154,291 +1157,291 @@ a conversion factor for the given unit to the "base" unit to the stack.  For exa
 <span style="color: #00ffff;">LBL</span> 00 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Application Exit</span>
 <span style="color: #00ffff;">EXITALL</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 15               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mm</span>
+<span style="color: #00ffff;">LBL</span> 15    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mm</span>
 1.0
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 16               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key Ang</span>
+<span style="color: #00ffff;">LBL</span> 16    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key Ang</span>
 1e-07
 <span style="color: #fa8072;">"Angstrom"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 17               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#956;m</span>
+<span style="color: #00ffff;">LBL</span> 17    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#956;m</span>
 0.001
 <span style="color: #fa8072;">"Micron"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 18               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mil</span>
+<span style="color: #00ffff;">LBL</span> 18    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mil</span>
 0.0254
 <span style="color: #fa8072;">"mil (1/1000 in)"</span>
 &#9500;<span style="color: #fa8072;">""</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 19               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key cm</span>
+<span style="color: #00ffff;">LBL</span> 19    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key cm</span>
 10
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 20               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key in</span>
+<span style="color: #00ffff;">LBL</span> 20    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key in</span>
 25.4
 <span style="color: #fa8072;">"Inch"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 21               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key cm</span>
+<span style="color: #00ffff;">LBL</span> 21    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key cm</span>
 1
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 22               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key in</span>
+<span style="color: #00ffff;">LBL</span> 22    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key in</span>
 25.4
 <span style="color: #fa8072;">"Intl Inch"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 23               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ft</span>
+<span style="color: #00ffff;">LBL</span> 23    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ft</span>
 304.8
 <span style="color: #fa8072;">"Intl Foot"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 24               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key m</span>
+<span style="color: #00ffff;">LBL</span> 24    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key m</span>
 100
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 25               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key yd</span>
+<span style="color: #00ffff;">LBL</span> 25    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key yd</span>
 914.4
 <span style="color: #fa8072;">"Intl Yard"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 26               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key km</span>
+<span style="color: #00ffff;">LBL</span> 26    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key km</span>
 1
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 27               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mi</span>
+<span style="color: #00ffff;">LBL</span> 27    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mi</span>
 1.609344
 <span style="color: #fa8072;">"Int Mile"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 28               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key us mi</span>
+<span style="color: #00ffff;">LBL</span> 28    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key us mi</span>
 1.60934721869
 <span style="color: #fa8072;">"US Mile"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 29               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key nmi</span>
+<span style="color: #00ffff;">LBL</span> 29    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key nmi</span>
 1.852
 <span style="color: #fa8072;">"Int Nautical mi"</span>
 &#9500;<span style="color: #fa8072;">""</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 30               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key m</span>
+<span style="color: #00ffff;">LBL</span> 30    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key m</span>
 0.001
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 31               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ft</span>
+<span style="color: #00ffff;">LBL</span> 31    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ft</span>
 0.0003048
 <span style="color: #fa8072;">"Intl Foot"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 32               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key hector</span>
+<span style="color: #00ffff;">LBL</span> 32    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key hector</span>
 1
 <span style="color: #fa8072;">"hector"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 33               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key acre</span>
+<span style="color: #00ffff;">LBL</span> 33    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key acre</span>
 0.40468564224
 <span style="color: #fa8072;">"Int Acre"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 34               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key m^2</span>
+<span style="color: #00ffff;">LBL</span> 34    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key m^2</span>
 0.0001
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 35               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key yd^2</span>
+<span style="color: #00ffff;">LBL</span> 35    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key yd^2</span>
 8.36127360001e-05
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 37               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key l</span>
+<span style="color: #00ffff;">LBL</span> 37    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key l</span>
 1
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 38               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key qt</span>
+<span style="color: #00ffff;">LBL</span> 38    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key qt</span>
 0.946352949997
 <span style="color: #fa8072;">"US Lq Quart"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 39               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key gal</span>
+<span style="color: #00ffff;">LBL</span> 39    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key gal</span>
 3.7854118
 <span style="color: #fa8072;">"US Lq Gal"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 40               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key cc</span>
+<span style="color: #00ffff;">LBL</span> 40    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key cc</span>
 0.001
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 41               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key tsp</span>
+<span style="color: #00ffff;">LBL</span> 41    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key tsp</span>
 1
 <span style="color: #fa8072;">"Teaspoon"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 42               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key tbsp</span>
+<span style="color: #00ffff;">LBL</span> 42    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key tbsp</span>
 4
 <span style="color: #fa8072;">"Tablespoon"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 43               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key flOZ</span>
+<span style="color: #00ffff;">LBL</span> 43    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key flOZ</span>
 8
 <span style="color: #fa8072;">"fl oz"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 44               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key cup</span>
+<span style="color: #00ffff;">LBL</span> 44    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key cup</span>
 16
 <span style="color: #fa8072;">"Cup"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 45               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key pint</span>
+<span style="color: #00ffff;">LBL</span> 45    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key pint</span>
 128
 <span style="color: #fa8072;">"Pint"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 46               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key qt</span>
+<span style="color: #00ffff;">LBL</span> 46    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key qt</span>
 256
 <span style="color: #fa8072;">"Quart"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 48               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key sec</span>
+<span style="color: #00ffff;">LBL</span> 48    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key sec</span>
 1
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 49               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key min</span>
+<span style="color: #00ffff;">LBL</span> 49    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key min</span>
 60
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 50               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key hour</span>
+<span style="color: #00ffff;">LBL</span> 50    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key hour</span>
 3600
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 51               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key day</span>
+<span style="color: #00ffff;">LBL</span> 51    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key day</span>
 86400
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 52               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key week</span>
+<span style="color: #00ffff;">LBL</span> 52    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key week</span>
 604800
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 53               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key year</span>
+<span style="color: #00ffff;">LBL</span> 53    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key year</span>
 31536000
 <span style="color: #fa8072;">"365 day year"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 54               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key day</span>
+<span style="color: #00ffff;">LBL</span> 54    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key day</span>
 1
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 55               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key year</span>
+<span style="color: #00ffff;">LBL</span> 55    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key year</span>
 365
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 56               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key greg</span>
+<span style="color: #00ffff;">LBL</span> 56    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key greg</span>
 365.2425
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 57               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key julian</span>
+<span style="color: #00ffff;">LBL</span> 57    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key julian</span>
 365.25
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 58               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key astro</span>
+<span style="color: #00ffff;">LBL</span> 58    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key astro</span>
 365.256363004
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 60               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kg</span>
+<span style="color: #00ffff;">LBL</span> 60    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kg</span>
 1
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 61               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key lb</span>
+<span style="color: #00ffff;">LBL</span> 61    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key lb</span>
 2.2046226218488
 <span style="color: #fa8072;">"Pound Int"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 62               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key g</span>
+<span style="color: #00ffff;">LBL</span> 62    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key g</span>
 1000.0
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 63               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ozWT</span>
+<span style="color: #00ffff;">LBL</span> 63    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ozWT</span>
 35.27396194958
 <span style="color: #fa8072;">"Ounce Weight"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 64               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ozTr</span>
+<span style="color: #00ffff;">LBL</span> 64    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ozTr</span>
 32.150746568628
 <span style="color: #fa8072;">"Ounce Troy"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 65               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key stone</span>
+<span style="color: #00ffff;">LBL</span> 65    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key stone</span>
 0.15747304441777
 <span style="color: #fa8072;">"UK Stone"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 66               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kg</span>
+<span style="color: #00ffff;">LBL</span> 66    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kg</span>
 1
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 67               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ton</span>
+<span style="color: #00ffff;">LBL</span> 67    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ton</span>
 0.001
 <span style="color: #fa8072;">"Metric Ton"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 68               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key US ton</span>
+<span style="color: #00ffff;">LBL</span> 68    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key US ton</span>
 907.184736885
 <span style="color: #fa8072;">"US (short) Ton"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 69               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key UK ton</span>
+<span style="color: #00ffff;">LBL</span> 69    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key UK ton</span>
 1016.04690531
 <span style="color: #fa8072;">"UK (long) Ton"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 70               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key N</span>
+<span style="color: #00ffff;">LBL</span> 70    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key N</span>
 1
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 71               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kgf</span>
+<span style="color: #00ffff;">LBL</span> 71    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kgf</span>
 9.80665
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 72               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key lbf</span>
+<span style="color: #00ffff;">LBL</span> 72    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key lbf</span>
 4.4482216153
 <span style="color: #fa8072;">"Int Pound Force"</span>
 &#9500;<span style="color: #fa8072;">""</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 73               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key m/s</span>
+<span style="color: #00ffff;">LBL</span> 73    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key m/s</span>
 1
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 74               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mph</span>
+<span style="color: #00ffff;">LBL</span> 74    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mph</span>
 0.44704
 <span style="color: #fa8072;">"Int Mi per hour"</span>
 &#9500;<span style="color: #fa8072;">""</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 75               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kph</span>
+<span style="color: #00ffff;">LBL</span> 75    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kph</span>
 0.2777777778
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 76               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key knot</span>
+<span style="color: #00ffff;">LBL</span> 76    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key knot</span>
 0.5144444444
 <span style="color: #fa8072;">"International"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 77               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key Pa</span>
+<span style="color: #00ffff;">LBL</span> 77    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key Pa</span>
 1
 <span style="color: #fa8072;">"N/m^2"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 78               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key bar</span>
+<span style="color: #00ffff;">LBL</span> 78    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key bar</span>
 100000
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 79               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key psi</span>
+<span style="color: #00ffff;">LBL</span> 79    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key psi</span>
 6894.7572932
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 80               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key atm</span>
+<span style="color: #00ffff;">LBL</span> 80    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key atm</span>
 101325
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 81               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mmHg</span>
+<span style="color: #00ffff;">LBL</span> 81    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mmHg</span>
 133.322
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 82               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key inHg</span>
+<span style="color: #00ffff;">LBL</span> 82    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key inHg</span>
 3386.389
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 83               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key watt</span>
+<span style="color: #00ffff;">LBL</span> 83    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key watt</span>
 1
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 84               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key BTU/h</span>
+<span style="color: #00ffff;">LBL</span> 84    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key BTU/h</span>
 0.2930710702
 <span style="color: #fa8072;">"International"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 85               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key hp</span>
+<span style="color: #00ffff;">LBL</span> 85    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key hp</span>
 735.49875
 <span style="color: #fa8072;">"Metric"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 86               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kcal/h</span>
+<span style="color: #00ffff;">LBL</span> 86    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kcal/h</span>
 1.163
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 87               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key J/h</span>
+<span style="color: #00ffff;">LBL</span> 87    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key J/h</span>
 0.0002777778
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 88               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key C&#8594;F</span>
+<span style="color: #00ffff;">LBL</span> 88    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key C&#8594;F</span>
 9
 <span style="color: #00ffff;">&#215;</span>
 5
@@ -1446,7 +1449,7 @@ a conversion factor for the given unit to the "base" unit to the stack.  For exa
 32
 <span style="color: #00ffff;">+</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 89               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key F&#8594;C</span>
+<span style="color: #00ffff;">LBL</span> 89    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key F&#8594;C</span>
 32
 <span style="color: #00ffff;">-</span>
 5
@@ -1454,11 +1457,11 @@ a conversion factor for the given unit to the "base" unit to the stack.  For exa
 9
 <span style="color: #00ffff;">&#247;</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 90               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key K&#8594;C</span>
+<span style="color: #00ffff;">LBL</span> 90    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key K&#8594;C</span>
 273.15
 <span style="color: #00ffff;">-</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 91               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key C&#8594;K</span>
+<span style="color: #00ffff;">LBL</span> 91    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key C&#8594;K</span>
 273.15
 <span style="color: #00ffff;">+</span>
 <span style="color: #00ffff;">RTN</span>
@@ -1470,8 +1473,8 @@ a conversion factor for the given unit to the "base" unit to the stack.  For exa
 </div>
 </div>
 
-<div id="outline-container-org4c7a0fd" class="outline-2">
-<h2 id="org4c7a0fd"><span class="section-number-2">4</span> EOF</h2>
+<div id="outline-container-orgd9b1be1" class="outline-2">
+<h2 id="orgd9b1be1"><span class="section-number-2">4</span> EOF</h2>
 <div class="outline-text-2" id="text-4">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1482,7 +1485,7 @@ a conversion factor for the given unit to the "base" unit to the stack.  For exa
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-14 Wed 17:01 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-20 Tue 22:26 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
 </div>
 </body>
 </html>

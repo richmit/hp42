@@ -21,9 +21,9 @@
 #+EXPORT_FILE_NAME: ../docs/unit
 
 #+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
-|        <r> | <l>              |
-|  *Author:* | /{{{author}}}/ |
-| *Updated:* | /{{{time(%Y-%m-%d %H:%M:%S)}}}/ |
+|        <r> | <l>                                          |
+|  *Author:* | /{{{author}}}/                               |
+| *Updated:* | /{{{modification-time(%Y-%m-%d %H:%M:%S)}}}/ |
 #+ATTR_HTML: :align center
 Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 
@@ -165,11 +165,14 @@ a conversion factor for the given unit to the "base" unit to the stack.  For exa
 
 #+BEGIN_SRC elisp :var tbl=units :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/unit/unit.hp42s"
 (MJR-generate-42-menu-code "UNIT" 
+                           0
                            tbl
-                           "stay"
-                           "up" 
+                           0
                            nil
-                           (lambda (row) 
+                           'stay ;; Change to 'exit to exit immediatly after a conversion factor is pushed to the stack
+                           'up   ;; Change to 'exit to have the application exit when [EXIT] is pressed
+                           #'MJR-local-only-gen-lab
+                           (lambda (atrg target row) 
                              (cl-destructuring-bind (menu cfactor desc) row
                                (let ((print-desc 't))    ;; Set to NIL to not print description
                                  (let* ((dlen (length desc))
@@ -183,7 +186,7 @@ a conversion factor for the given unit to the "base" unit to the stack.  For exa
                                                                     (and print-desc dsc1 (message "\"%s\"" dsc1))
                                                                     (and print-desc dsc2 (message "├\"%s\"" dsc2))
                                                                     (and print-desc (or dsc1 dsc2) "AVIEW"))))
-                                              "\n")))))))
+                                              "\n"))))))
 #+END_SRC
 
 #+RESULTS:
@@ -486,291 +489,291 @@ GTO 12
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 15               @@@@ Action for menu key mm
+LBL 15    @@@@ Action for menu key mm
 1.0
 RTN
-LBL 16               @@@@ Action for menu key Ang
+LBL 16    @@@@ Action for menu key Ang
 1e-07
 "Angstrom"
 AVIEW
 RTN
-LBL 17               @@@@ Action for menu key μm
+LBL 17    @@@@ Action for menu key μm
 0.001
 "Micron"
 AVIEW
 RTN
-LBL 18               @@@@ Action for menu key mil
+LBL 18    @@@@ Action for menu key mil
 0.0254
 "mil (1/1000 in)"
 ├""
 AVIEW
 RTN
-LBL 19               @@@@ Action for menu key cm
+LBL 19    @@@@ Action for menu key cm
 10
 RTN
-LBL 20               @@@@ Action for menu key in
+LBL 20    @@@@ Action for menu key in
 25.4
 "Inch"
 AVIEW
 RTN
-LBL 21               @@@@ Action for menu key cm
+LBL 21    @@@@ Action for menu key cm
 1
 RTN
-LBL 22               @@@@ Action for menu key in
+LBL 22    @@@@ Action for menu key in
 25.4
 "Intl Inch"
 AVIEW
 RTN
-LBL 23               @@@@ Action for menu key ft
+LBL 23    @@@@ Action for menu key ft
 304.8
 "Intl Foot"
 AVIEW
 RTN
-LBL 24               @@@@ Action for menu key m
+LBL 24    @@@@ Action for menu key m
 100
 RTN
-LBL 25               @@@@ Action for menu key yd
+LBL 25    @@@@ Action for menu key yd
 914.4
 "Intl Yard"
 AVIEW
 RTN
-LBL 26               @@@@ Action for menu key km
+LBL 26    @@@@ Action for menu key km
 1
 RTN
-LBL 27               @@@@ Action for menu key mi
+LBL 27    @@@@ Action for menu key mi
 1.609344
 "Int Mile"
 AVIEW
 RTN
-LBL 28               @@@@ Action for menu key us mi
+LBL 28    @@@@ Action for menu key us mi
 1.60934721869
 "US Mile"
 AVIEW
 RTN
-LBL 29               @@@@ Action for menu key nmi
+LBL 29    @@@@ Action for menu key nmi
 1.852
 "Int Nautical mi"
 ├""
 AVIEW
 RTN
-LBL 30               @@@@ Action for menu key m
+LBL 30    @@@@ Action for menu key m
 0.001
 RTN
-LBL 31               @@@@ Action for menu key ft
+LBL 31    @@@@ Action for menu key ft
 0.0003048
 "Intl Foot"
 AVIEW
 RTN
-LBL 32               @@@@ Action for menu key hector
+LBL 32    @@@@ Action for menu key hector
 1
 "hector"
 AVIEW
 RTN
-LBL 33               @@@@ Action for menu key acre
+LBL 33    @@@@ Action for menu key acre
 0.40468564224
 "Int Acre"
 AVIEW
 RTN
-LBL 34               @@@@ Action for menu key m^2
+LBL 34    @@@@ Action for menu key m^2
 0.0001
 RTN
-LBL 35               @@@@ Action for menu key yd^2
+LBL 35    @@@@ Action for menu key yd^2
 8.36127360001e-05
 RTN
-LBL 37               @@@@ Action for menu key l
+LBL 37    @@@@ Action for menu key l
 1
 RTN
-LBL 38               @@@@ Action for menu key qt
+LBL 38    @@@@ Action for menu key qt
 0.946352949997
 "US Lq Quart"
 AVIEW
 RTN
-LBL 39               @@@@ Action for menu key gal
+LBL 39    @@@@ Action for menu key gal
 3.7854118
 "US Lq Gal"
 AVIEW
 RTN
-LBL 40               @@@@ Action for menu key cc
+LBL 40    @@@@ Action for menu key cc
 0.001
 RTN
-LBL 41               @@@@ Action for menu key tsp
+LBL 41    @@@@ Action for menu key tsp
 1
 "Teaspoon"
 AVIEW
 RTN
-LBL 42               @@@@ Action for menu key tbsp
+LBL 42    @@@@ Action for menu key tbsp
 4
 "Tablespoon"
 AVIEW
 RTN
-LBL 43               @@@@ Action for menu key flOZ
+LBL 43    @@@@ Action for menu key flOZ
 8
 "fl oz"
 AVIEW
 RTN
-LBL 44               @@@@ Action for menu key cup
+LBL 44    @@@@ Action for menu key cup
 16
 "Cup"
 AVIEW
 RTN
-LBL 45               @@@@ Action for menu key pint
+LBL 45    @@@@ Action for menu key pint
 128
 "Pint"
 AVIEW
 RTN
-LBL 46               @@@@ Action for menu key qt
+LBL 46    @@@@ Action for menu key qt
 256
 "Quart"
 AVIEW
 RTN
-LBL 48               @@@@ Action for menu key sec
+LBL 48    @@@@ Action for menu key sec
 1
 RTN
-LBL 49               @@@@ Action for menu key min
+LBL 49    @@@@ Action for menu key min
 60
 RTN
-LBL 50               @@@@ Action for menu key hour
+LBL 50    @@@@ Action for menu key hour
 3600
 RTN
-LBL 51               @@@@ Action for menu key day
+LBL 51    @@@@ Action for menu key day
 86400
 RTN
-LBL 52               @@@@ Action for menu key week
+LBL 52    @@@@ Action for menu key week
 604800
 RTN
-LBL 53               @@@@ Action for menu key year
+LBL 53    @@@@ Action for menu key year
 31536000
 "365 day year"
 AVIEW
 RTN
-LBL 54               @@@@ Action for menu key day
+LBL 54    @@@@ Action for menu key day
 1
 RTN
-LBL 55               @@@@ Action for menu key year
+LBL 55    @@@@ Action for menu key year
 365
 RTN
-LBL 56               @@@@ Action for menu key greg
+LBL 56    @@@@ Action for menu key greg
 365.2425
 RTN
-LBL 57               @@@@ Action for menu key julian
+LBL 57    @@@@ Action for menu key julian
 365.25
 RTN
-LBL 58               @@@@ Action for menu key astro
+LBL 58    @@@@ Action for menu key astro
 365.256363004
 RTN
-LBL 60               @@@@ Action for menu key kg
+LBL 60    @@@@ Action for menu key kg
 1
 RTN
-LBL 61               @@@@ Action for menu key lb
+LBL 61    @@@@ Action for menu key lb
 2.2046226218488
 "Pound Int"
 AVIEW
 RTN
-LBL 62               @@@@ Action for menu key g
+LBL 62    @@@@ Action for menu key g
 1000.0
 RTN
-LBL 63               @@@@ Action for menu key ozWT
+LBL 63    @@@@ Action for menu key ozWT
 35.27396194958
 "Ounce Weight"
 AVIEW
 RTN
-LBL 64               @@@@ Action for menu key ozTr
+LBL 64    @@@@ Action for menu key ozTr
 32.150746568628
 "Ounce Troy"
 AVIEW
 RTN
-LBL 65               @@@@ Action for menu key stone
+LBL 65    @@@@ Action for menu key stone
 0.15747304441777
 "UK Stone"
 AVIEW
 RTN
-LBL 66               @@@@ Action for menu key kg
+LBL 66    @@@@ Action for menu key kg
 1
 RTN
-LBL 67               @@@@ Action for menu key ton
+LBL 67    @@@@ Action for menu key ton
 0.001
 "Metric Ton"
 AVIEW
 RTN
-LBL 68               @@@@ Action for menu key US ton
+LBL 68    @@@@ Action for menu key US ton
 907.184736885
 "US (short) Ton"
 AVIEW
 RTN
-LBL 69               @@@@ Action for menu key UK ton
+LBL 69    @@@@ Action for menu key UK ton
 1016.04690531
 "UK (long) Ton"
 AVIEW
 RTN
-LBL 70               @@@@ Action for menu key N
+LBL 70    @@@@ Action for menu key N
 1
 RTN
-LBL 71               @@@@ Action for menu key kgf
+LBL 71    @@@@ Action for menu key kgf
 9.80665
 RTN
-LBL 72               @@@@ Action for menu key lbf
+LBL 72    @@@@ Action for menu key lbf
 4.4482216153
 "Int Pound Force"
 ├""
 AVIEW
 RTN
-LBL 73               @@@@ Action for menu key m/s
+LBL 73    @@@@ Action for menu key m/s
 1
 RTN
-LBL 74               @@@@ Action for menu key mph
+LBL 74    @@@@ Action for menu key mph
 0.44704
 "Int Mi per hour"
 ├""
 AVIEW
 RTN
-LBL 75               @@@@ Action for menu key kph
+LBL 75    @@@@ Action for menu key kph
 0.2777777778
 RTN
-LBL 76               @@@@ Action for menu key knot
+LBL 76    @@@@ Action for menu key knot
 0.5144444444
 "International"
 AVIEW
 RTN
-LBL 77               @@@@ Action for menu key Pa
+LBL 77    @@@@ Action for menu key Pa
 1
 "N/m^2"
 AVIEW
 RTN
-LBL 78               @@@@ Action for menu key bar
+LBL 78    @@@@ Action for menu key bar
 100000
 RTN
-LBL 79               @@@@ Action for menu key psi
+LBL 79    @@@@ Action for menu key psi
 6894.7572932
 RTN
-LBL 80               @@@@ Action for menu key atm
+LBL 80    @@@@ Action for menu key atm
 101325
 RTN
-LBL 81               @@@@ Action for menu key mmHg
+LBL 81    @@@@ Action for menu key mmHg
 133.322
 RTN
-LBL 82               @@@@ Action for menu key inHg
+LBL 82    @@@@ Action for menu key inHg
 3386.389
 RTN
-LBL 83               @@@@ Action for menu key watt
+LBL 83    @@@@ Action for menu key watt
 1
 RTN
-LBL 84               @@@@ Action for menu key BTU/h
+LBL 84    @@@@ Action for menu key BTU/h
 0.2930710702
 "International"
 AVIEW
 RTN
-LBL 85               @@@@ Action for menu key hp
+LBL 85    @@@@ Action for menu key hp
 735.49875
 "Metric"
 AVIEW
 RTN
-LBL 86               @@@@ Action for menu key kcal/h
+LBL 86    @@@@ Action for menu key kcal/h
 1.163
 RTN
-LBL 87               @@@@ Action for menu key J/h
+LBL 87    @@@@ Action for menu key J/h
 0.0002777778
 RTN
-LBL 88               @@@@ Action for menu key C→F
+LBL 88    @@@@ Action for menu key C→F
 9
 ×
 5
@@ -778,7 +781,7 @@ LBL 88               @@@@ Action for menu key C→F
 32
 +
 RTN
-LBL 89               @@@@ Action for menu key F→C
+LBL 89    @@@@ Action for menu key F→C
 32
 -
 5
@@ -786,11 +789,11 @@ LBL 89               @@@@ Action for menu key F→C
 9
 ÷
 RTN
-LBL 90               @@@@ Action for menu key K→C
+LBL 90    @@@@ Action for menu key K→C
 273.15
 -
 RTN
-LBL 91               @@@@ Action for menu key C→K
+LBL 91    @@@@ Action for menu key C→K
 273.15
 +
 RTN

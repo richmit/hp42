@@ -21,9 +21,9 @@
 #+EXPORT_FILE_NAME: ../docs/base
 
 #+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
-|        <r> | <l>              |
-|  *Author:* | /{{{author}}}/ |
-| *Updated:* | /{{{time(%Y-%m-%d %H:%M:%S)}}}/ |
+|        <r> | <l>                                          |
+|  *Author:* | /{{{author}}}/                               |
+| *Updated:* | /{{{modification-time(%Y-%m-%d %H:%M:%S)}}}/ |
 #+ATTR_HTML: :align center
 Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 
@@ -65,232 +65,6 @@ issue and works just fine on a standard free42 screen.  The remainder of the fun
 manipulation tools in a single, hierarchical menu stricture.  So you only end up with two programs on your 42s -- important for the DM42 because of it's
 limited RAM.
 
-* =BVIEW=: Printing 64-bit Binary Numbers
-
-#+begin_src hp42s :tangle ../src_42s/base/base.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BVIEW)
-@@@@ DSC: Print binary numbers (up to 64-bit)
-@@@@ IN:  X: An integer
-@@@@ OUT: Nothing -- prints to screen
-@@@@ FLG: 81: TEMP: Set: We are on DM42;            Clear: We are not on DM42
-@@@@ FLG: 01: PREF: Reserved
-@@@@ FLG: 02: PREF: Set: BVIEW prints WSIZE digits; Clear: BVIEW prints 64 digits
-@@@@ FAQ: If XEQ while system BASE menu is active, returns to same menu.
-@@@@ BUG: Sometimes gets the system base menu to return to wrong. ;)
-@@@@ UPD: 2021-03-20
-LBL "BVIEW"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-0
-SF 25
-BIT?
-FS?C 25
-GTO 08
-R↓
-"ERR: Bad Int!"
-AVIEW
-RTN
-LBL 08
-R↓
-LSTO "X"
-20
-1
-FS? 68
-STO+ ST Y
-FS? 70
-STO+ ST Y
-FS? 71
-STO+ ST Y
-R↓             @@@@ 20:DECN 21:BINM 22:OCTM 23:HEXM
-LSTO "SBMD"
-R↓
-CF 81
-SF 25
-RCL "GrMod"
-FS?C 25
-SF 81
-FC? 81
-GTO 18
-@@@@ We are on a DM42
-0
-STO "GrMod"     @@@@ Set graphics mode to 42 classic on DM42
-R↓
-LBL 18
-CLLCD
-EXITALL
-63
-1000
-÷
-LSTO "CTR"
-LBL 00
-LBL 07
-@@@@ Figure out X&Y coordinates for digit
-RCL "CTR"            @@@@ IF
-IP
-32
-X>Y?
-GTO 01
-GTO 02
-LBL 01               @@@@ IF-THEN FIRST ROW
-1
-RCL "CTR"
-4
-×
-1
-+
-GTO 03
-LBL 02               @@@@ IF-ELSE SECOND ROW
-9
-RCL "CTR"
-32
--
-4
-×
-1
-+
-LBL 03               @@@@ IF-END
-@@@@ Figure out current bit value
-63
-RCL "CTR"            @@@@ IF-BEGIN
-IP
--
-WSIZE?
-X>Y?
-GTO 10
-GTO 11
-LBL 10               @@@@ IF-THEN
-R↓
-+/-                  @@@@ IF-BEGIN
-1
-X<>Y
-ROTXY
-RCL "X"
-AND
-X=0?
-GTO 15
-GTO 16
-LBL 15               @@@@ IF-THEN bit is 0
-R↓
-0
-GTO 17
-LBL 16               @@@@ IF-ELSE bit is 1
-R↓
-1
-LBL 17
-LSTO "CB"
-GTO 12
-LBL 11               @@@@ IF-ELSE
-R↓
-R↓
-@@@@ Bit beyond WSIZE padding character
-0
-LSTO "CB"
-FS? 02
-GTO 14
-LBL 12               @@@@ IF-END
-R↓
-@@@@ Figure out grouping
-RCL "CTR"            @@@@ IF-START grouping
-IP
-4
-÷
-IP
-2
-÷
-FP
-X=0?
-GTO 04
-GTO 05
-LBL 04               @@@@ IF-THEN
-R↓
-0
-GTO 06
-LBL 05               @@@@ IF-ELSE
-R↓
-5
-LBL 06               @@@@ IF-END
-@@@@ Compute digit character code
-RCL+ "CB"
-@@@@ Draw it
-XEQ 40
-LBL 14
-ISG  "CTR"
-GTO 00
-FC? 81
-GTO 19
-@@@@ On DM42.  Hack to keep screen clean
-GETKEY
-CLLCD
-"BVIEW FINISHED"
-AVIEW
-LBL 19
-XEQ IND "SBMD"
-@@@@ Recall original X
-RCL "X"
-RTN
-LBL 20
-DECM
-RTN
-LBL 21
-BINM
-RTN
-LBL 22
-RTN
-LBL 23
-HEXM
-RTN
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ DSC: tiny binary digit print
-@@@@ IN:  Z: Y coordinate for upper left point of character -- Top of screen is 1
-@@@@      Y: X coordinate for upper left point of character -- Left of screen is 1
-@@@@      X: Character number
-@@@@ OUT: No return
-@@@@ UPD: 2021-04-11
-@@@@ BUG: Characters can be *VERY* tiny in high resolution modes on DM42
-@@@@ Characters can be underlined
-@@@@ Characters are 3x5 pixels in size.  Underlined characters are 3x7.
-@@@@   - Stock HP-42s screen: 32 characters across.  Two full lines on the screen.
-@@@@ Non-Underlined Character numbers:
-@@@@     00 01  2  3
-@@@@      0  1 SPC 0
-@@@@ Add 5 to the above character number for the underlined version
-LBL 40
-FUNC 30      @@## REQ:free42>=2.5.24
-L4STK        @@## REQ:free42>=3.0
-IP
-30
-+
-XEQ IND ST X
-R↓
-AGRAPH
-RTN
-LBL 30       @@@@ CHAR: 0
-"•μ•"        @@@@ #b11111 #b10001 #b11111
-RTN
-LBL 31       @@@@ CHAR: 1
-"£•←"        @@@@ #b10010 #b11111 #b10000
-RTN
-LBL 32       @@@@ CHAR: SPC
-"÷÷÷"        @@@@ #b00000 #b00000 #b00000
-RTN
-LBL 33       @@@@ CHAR: 0
-"•[ESC]•"    @@@@ #b11111 #b11011 #b11111
-RTN
-LBL 35       @@@@ CHAR: 0
-"_Q_"        @@@@ #b1011111 #b1010001 #b1011111
-RTN
-LBL 36       @@@@ CHAR: 1
-"R_P"        @@@@ #b1010010 #b1011111 #b1010000
-RTN
-LBL 37       @@@@ CHAR: SPC
-"@@@"        @@@@ #b1000000 #b1000000 #b1000000
-RTN
-LBL 38       @@@@ CHAR: 0
-"_[_"        @@@@ #b1011111 #b1011011 #b1011111
-RTN
-END
-#+END_SRC
-
 * =BASE=: BASE-N Application
 ** Functionality & Menu
 :PROPERTIES:
@@ -301,77 +75,77 @@ END
 #+NAME: basem
 | Menu:SubMenu:Key | Program | Description                                     |
 |------------------+---------+-------------------------------------------------|
-| S&R:SLn          |      88 | Shift Y Left X Bits                             |
-| S&R:SRn          |      87 | Shift Y Right X Bits                            |
-| S&R:RLn          |      86 | Rotate Y Left by X bits                         |
-| S&R:RRn          |      85 | Rotate Y Right by X bits                        |
+| S&R:SLn          |         | Shift Y Left X Bits                             |
+| S&R:SRn          |         | Shift Y Right X Bits                            |
+| S&R:RLn          | RLn     | Rotate Y Left by X bits                         |
+| S&R:RRn          | RRn     | Rotate Y Right by X bits                        |
 | S&R:▒▒▒▒         |         |                                                 |
-| S&R:BVIEW        |      76 |                                                 |
+| S&R:BVIEW        |         |                                                 |
 |------------------+---------+-------------------------------------------------|
-| S&R:LJ           |      82 | Left Justify Bits                               |
-| S&R:RJ           |      83 | Right Justify Bits                              |
-| S&R:SHFXY        |      84 | Shift X by Y Bits (left when Y negative)        |
+| S&R:LJ           |         | Left Justify Bits                               |
+| S&R:RJ           |         | Right Justify Bits                              |
+| S&R:SHFXY        |         | Shift X by Y Bits (left when Y negative)        |
 | S&R:ROTXY        |         |                                                 |
 | S&R:▒▒▒▒         |         |                                                 |
-| S&R:BVIEW        |      76 |                                                 |
+| S&R:BVIEW        |         |                                                 |
 |------------------+---------+-------------------------------------------------|
-| S&R:SL           |      92 | Shift Left 1 Bit                                |
-| S&R:SR           |      91 | Shift Right 1 Bit                               |
-| S&R:RL           |      90 | Rotate Left 1 Bit                               |
-| S&R:RR           |      89 | Rotate Right 1 Bit                              |
+| S&R:SL           |         | Shift Left 1 Bit                                |
+| S&R:SR           |         | Shift Right 1 Bit                               |
+| S&R:RL           | RL      | Rotate Left 1 Bit                               |
+| S&R:RR           | RR      | Rotate Right 1 Bit                              |
 | S&R:▒▒▒▒         |         |                                                 |
-| S&R:BVIEW        |      76 |                                                 |
+| S&R:BVIEW        |         |                                                 |
 |------------------+---------+-------------------------------------------------|
-| BITS:GETB        |      93 | Return the Xth bit of Y                         |
-| BITS:SB          |      95 | Set the Xth bit of Y                            |
-| BITS:CB          |      94 | Clear the Xth bit in Y                          |
+| BITS:GETB        |         | Return the Xth bit of Y                         |
+| BITS:SB          | SETB    | Set the Xth bit of Y                            |
+| BITS:CB          | CLRB    | Clear the Xth bit in Y                          |
 | BITS:▒▒▒▒        |         |                                                 |
 | BITS:▒▒▒▒        |         |                                                 |
-| BITS:BVIEW       |      76 |                                                 |
+| BITS:BVIEW       |         |                                                 |
 |------------------+---------+-------------------------------------------------|
-| FUN:B#           |      99 | Count set bits                                  |
-| FUN:MSSB         |      79 | Position of the Most Significant Set Bit        |
-| FUN:LSSB         |      78 | Position of the Least Significant Set Bit       |
-| FUN:ILN2         |      80 | Integer base 2 log                              |
-| FUN:ISQRT        |      81 | Integer square root                             |
-| FUN:BVIEW        |      76 |                                                 |
+| FUN:B#           |         | Count set bits                                  |
+| FUN:MSSB         |         | Position of the Most Significant Set Bit        |
+| FUN:LSSB         |         | Position of the Least Significant Set Bit       |
+| FUN:ILN2         |         | Integer base 2 log                              |
+| FUN:ISQRT        |         | Integer square root                             |
+| FUN:BVIEW        |         |                                                 |
 |------------------+---------+-------------------------------------------------|
-| MASK:MSKL        |      96 | Create integer with left most X bits set        |
-| MASK:MSKR        |      97 | Create integer with right most X bits set       |
-| MASK:MSKn        |      98 | Create integer with Y set bits located at bit X |
+| MASK:MSKL        |         | Create integer with left most X bits set        |
+| MASK:MSKR        |         | Create integer with right most X bits set       |
+| MASK:MSKn        |         | Create integer with Y set bits located at bit X |
 | MASK:▒▒▒▒        |         |                                                 |
 | MASK:▒▒▒▒        |         |                                                 |
-| MASK:BVIEW       |      76 |                                                 |
+| MASK:BVIEW       |         |                                                 |
 |------------------+---------+-------------------------------------------------|
 | ARTH:AND         |         |                                                 |
 | ARTH:OR          |         |                                                 |
 | ARTH:XOR         |         |                                                 |
 | ARTH:NOT         |         |                                                 |
 | ARTH:NEG         | BASE+/- |                                                 |
-| ARTH:BVIEW       |      76 |                                                 |
+| ARTH:BVIEW       |         |                                                 |
 |------------------+---------+-------------------------------------------------|
-| ARTH:+           |   BASE+ |                                                 |
-| ARTH:-           |   BASE- |                                                 |
-| ARTH:×           |   BASE× |                                                 |
-| ARTH:÷           |   BASE÷ |                                                 |
+| ARTH:+           | BASE+   |                                                 |
+| ARTH:-           | BASE-   |                                                 |
+| ARTH:×           | BASE×   |                                                 |
+| ARTH:÷           | BASE÷   |                                                 |
 | ARTH:MOD         |         |                                                 |
-| ARTH:BVIEW       |      76 |                                                 |
+| ARTH:BVIEW       |         |                                                 |
 |------------------+---------+-------------------------------------------------|
-| BVIEW            |      76 |                                                 |
+| BVIEW            |         |                                                 |
 |------------------+---------+-------------------------------------------------|
-| 36               |    HEXM | Set current base to hexadecimal                 |
-| 37               |    DECM | Set current base to decimal                     |
-| 38               |    OCTM | Set current base to octal                       |
-| 39               |    BINM | Set current base to binary                      |
-| ▒▒▒▒             |       - |                                                 |
-| BMNU             |      75 | Switch to built in BASE menu                    |
+| LBL 92           | HEXM    | Set current base to hexadecimal                 |
+| LBL 93           | DECM    | Set current base to decimal                     |
+| LBL 94           | OCTM    | Set current base to octal                       |
+| LBL 95           | BINM    | Set current base to binary                      |
+| ▒▒▒▒             | -       |                                                 |
+| BMNU             | LBL 75  | Switch to built in BASE menu                    |
 |------------------+---------+-------------------------------------------------|
-| 77               |   WSIZE | Set WSIZE                                       |
-| 32               | BSIGNED | Toggle signed/unsigned mode                     |
-| 33               |   BWRAP | Toggle wrapped mode                             |
-| ▒▒▒▒             |       - |                                                 |
-| 35               |      74 | Toggle BVIEW TODO                               |
-| ▒▒▒▒             |       - |                                                 |
+| LBL 96           | WSIZE   | Set WSIZE                                       |
+| LBL 97           | BSIGNED | Toggle signed/unsigned mode                     |
+| LBL 98           | BWRAP   | Toggle wrapped mode                             |
+| ▒▒▒▒             | -       |                                                 |
+| LBL 99           | LBL 74  | Toggle BVIEW TODO                               |
+| ▒▒▒▒             | -       |                                                 |
 
 ** Menu Code
 
@@ -379,7 +153,7 @@ The menu program is generated via the following bit of elisp.  You must first de
 The skeleton was generated by the following code.  That skeleton has been fleshed out with some custom code.
 
 #+BEGIN_SRC elisp :var tbl=basem :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/base/base.hp42s"
-(MJR-generate-42-menu-code "BASE" tbl "stay" "up" 't #'MJR-custom-x-gen)
+(MJR-generate-42-menu-code "BASE" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
@@ -400,7 +174,7 @@ KEY 4 GTO 07
 "ARTH"
 KEY 5 GTO 08
 "BVIEW"
-KEY 6 XEQ 76
+KEY 6 XEQ "BVIEW"
 KEY 7 GTO 03
 KEY 8 GTO 02
 KEY 9 GTO 00
@@ -409,13 +183,13 @@ STOP
 GTO 01
 LBL 02            @@@@ Page 2 of menu BASE
 CLMENU
-XEQ 36
+XEQ 92
 KEY 1 XEQ 09
-XEQ 37
+XEQ 93
 KEY 2 XEQ 10
-XEQ 38
+XEQ 94
 KEY 3 XEQ 11
-XEQ 39
+XEQ 95
 KEY 4 XEQ 12
 "BMNU"
 KEY 6 XEQ 75
@@ -427,13 +201,13 @@ STOP
 GTO 02
 LBL 03            @@@@ Page 3 of menu BASE
 CLMENU
-XEQ 77
+XEQ 96
 KEY 1 XEQ 13
-XEQ 32
+XEQ 97
 KEY 2 XEQ 14
-XEQ 33
+XEQ 98
 KEY 3 XEQ 15
-XEQ 35
+XEQ 99
 KEY 5 XEQ 74
 KEY 7 GTO 02
 KEY 8 GTO 01
@@ -444,15 +218,15 @@ GTO 03
 LBL 04            @@@@ Page 1 of menu S&R
 CLMENU
 "SLn"
-KEY 1 XEQ 88
+KEY 1 XEQ "SLn"
 "SRn"
-KEY 2 XEQ 87
+KEY 2 XEQ "SRn"
 "RLn"
-KEY 3 XEQ 86
+KEY 3 XEQ "RLn"
 "RRn"
-KEY 4 XEQ 85
+KEY 4 XEQ "RRn"
 "BVIEW"
-KEY 6 XEQ 76
+KEY 6 XEQ "BVIEW"
 KEY 7 GTO 17
 KEY 8 GTO 16
 KEY 9 GTO 01
@@ -462,15 +236,15 @@ GTO 04
 LBL 16            @@@@ Page 2 of menu S&R
 CLMENU
 "LJ"
-KEY 1 XEQ 82
+KEY 1 XEQ "LJ"
 "RJ"
-KEY 2 XEQ 83
+KEY 2 XEQ "RJ"
 "SHFXY"
-KEY 3 XEQ 84
+KEY 3 XEQ "SHFXY"
 "ROTXY"
 KEY 4 XEQ 18
 "BVIEW"
-KEY 6 XEQ 76
+KEY 6 XEQ "BVIEW"
 KEY 7 GTO 04
 KEY 8 GTO 17
 KEY 9 GTO 01
@@ -480,15 +254,15 @@ GTO 16
 LBL 17            @@@@ Page 3 of menu S&R
 CLMENU
 "SL"
-KEY 1 XEQ 92
+KEY 1 XEQ "SL"
 "SR"
-KEY 2 XEQ 91
+KEY 2 XEQ "SR"
 "RL"
-KEY 3 XEQ 90
+KEY 3 XEQ "RL"
 "RR"
-KEY 4 XEQ 89
+KEY 4 XEQ "RR"
 "BVIEW"
-KEY 6 XEQ 76
+KEY 6 XEQ "BVIEW"
 KEY 7 GTO 16
 KEY 8 GTO 04
 KEY 9 GTO 01
@@ -498,13 +272,13 @@ GTO 17
 LBL 05            @@@@ Page 1 of menu BITS
 CLMENU
 "GETB"
-KEY 1 XEQ 93
+KEY 1 XEQ "GETB"
 "SB"
-KEY 2 XEQ 95
+KEY 2 XEQ "SETB"
 "CB"
-KEY 3 XEQ 94
+KEY 3 XEQ "CLRB"
 "BVIEW"
-KEY 6 XEQ 76
+KEY 6 XEQ "BVIEW"
 KEY 9 GTO 01
 MENU
 STOP
@@ -512,17 +286,17 @@ GTO 05
 LBL 06            @@@@ Page 1 of menu FUN
 CLMENU
 "B#"
-KEY 1 XEQ 99
+KEY 1 XEQ "B#"
 "MSSB"
-KEY 2 XEQ 79
+KEY 2 XEQ "MSSB"
 "LSSB"
-KEY 3 XEQ 78
+KEY 3 XEQ "LSSB"
 "ILN2"
-KEY 4 XEQ 80
+KEY 4 XEQ "ILN2"
 "ISQRT"
-KEY 5 XEQ 81
+KEY 5 XEQ "ISQRT"
 "BVIEW"
-KEY 6 XEQ 76
+KEY 6 XEQ "BVIEW"
 KEY 9 GTO 01
 MENU
 STOP
@@ -530,13 +304,13 @@ GTO 06
 LBL 07            @@@@ Page 1 of menu MASK
 CLMENU
 "MSKL"
-KEY 1 XEQ 96
+KEY 1 XEQ "MSKL"
 "MSKR"
-KEY 2 XEQ 97
+KEY 2 XEQ "MSKR"
 "MSKn"
-KEY 3 XEQ 98
+KEY 3 XEQ "MSKn"
 "BVIEW"
-KEY 6 XEQ 76
+KEY 6 XEQ "BVIEW"
 KEY 9 GTO 01
 MENU
 STOP
@@ -554,7 +328,7 @@ KEY 4 XEQ 23
 "NEG"
 KEY 5 XEQ 24
 "BVIEW"
-KEY 6 XEQ 76
+KEY 6 XEQ "BVIEW"
 KEY 7 GTO 19
 KEY 8 GTO 19
 KEY 9 GTO 01
@@ -574,7 +348,7 @@ KEY 4 XEQ 28
 "MOD"
 KEY 5 XEQ 29
 "BVIEW"
-KEY 6 XEQ 76
+KEY 6 XEQ "BVIEW"
 KEY 7 GTO 08
 KEY 8 GTO 08
 KEY 9 GTO 01
@@ -584,58 +358,58 @@ GTO 19
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 09               @@@@ Action for menu key 36
+LBL 09    @@@@ Action for menu key LBL 92
 HEXM
 RTN
-LBL 10               @@@@ Action for menu key 37
+LBL 10    @@@@ Action for menu key LBL 93
 DECM
 RTN
-LBL 11               @@@@ Action for menu key 38
+LBL 11    @@@@ Action for menu key LBL 94
 OCTM
 RTN
-LBL 12               @@@@ Action for menu key 39
+LBL 12    @@@@ Action for menu key LBL 95
 BINM
 RTN
-LBL 13               @@@@ Action for menu key 77
+LBL 13    @@@@ Action for menu key LBL 96
 WSIZE
 RTN
-LBL 14               @@@@ Action for menu key 32
+LBL 14    @@@@ Action for menu key LBL 97
 BSIGNED
 RTN
-LBL 15               @@@@ Action for menu key 33
+LBL 15    @@@@ Action for menu key LBL 98
 BWRAP
 RTN
-LBL 18               @@@@ Action for menu key ROTXY
+LBL 18    @@@@ Action for menu key ROTXY
 ROTXY
 RTN
-LBL 20               @@@@ Action for menu key AND
+LBL 20    @@@@ Action for menu key AND
 AND
 RTN
-LBL 21               @@@@ Action for menu key OR
+LBL 21    @@@@ Action for menu key OR
 OR
 RTN
-LBL 22               @@@@ Action for menu key XOR
+LBL 22    @@@@ Action for menu key XOR
 XOR
 RTN
-LBL 23               @@@@ Action for menu key NOT
+LBL 23    @@@@ Action for menu key NOT
 NOT
 RTN
-LBL 24               @@@@ Action for menu key NEG
+LBL 24    @@@@ Action for menu key NEG
 BASE+/-
 RTN
-LBL 25               @@@@ Action for menu key +
+LBL 25    @@@@ Action for menu key +
 BASE+
 RTN
-LBL 26               @@@@ Action for menu key -
+LBL 26    @@@@ Action for menu key -
 BASE-
 RTN
-LBL 27               @@@@ Action for menu key ×
+LBL 27    @@@@ Action for menu key ×
 BASE×
 RTN
-LBL 28               @@@@ Action for menu key ÷
+LBL 28    @@@@ Action for menu key ÷
 BASE÷
 RTN
-LBL 29               @@@@ Action for menu key MOD
+LBL 29    @@@@ Action for menu key MOD
 MOD
 RTN
 @@@@ Free labels start at: 30
@@ -646,13 +420,13 @@ RTN
 #+BEGIN_SRC hp42s :tangle ../src_42s/base/base.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Number of bits set
-@@@@ NAM: B# 99
 @@@@ IN:  X: an integer
 @@@@ OUT: X: Number of 1 bits in IP(X)
 @@@@ FAQ: Runtime complexity O(log_2(X))
 @@@@ LBL: Used 51-53
 @@@@ UPD: 2021-04-10
-LBL 99
+@@@@ LBL "B#"
+LBL "B#"
 FUNC 11    @@## REQ:free42>=2.5.24
 L4STK      @@## REQ:free42>=3.0
 IP
@@ -691,7 +465,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Create integer with Y set bits located at bit X
-@@@@ NAM: MSKn 98
+@@@@ NAM: MSKn "MSKn"
 @@@@ IN:  Y: An integer
 @@@@ IN:  X: An integer (LSB=0)
 @@@@ OUT: X: Integer with IP(X) least significant bits set
@@ -699,7 +473,7 @@ RTN
 @@@@ FAQ: Returns int with all 1 bits when X>=WSIZE?
 @@@@ LBL: Used 54-55
 @@@@ UPD: 2021-03-20
-LBL 98
+LBL "MSKn"
 FUNC 11                        @@## REQ:free42>=2.5.24
 L4STK                          @@## REQ:free42>=3.0
 IP
@@ -733,14 +507,14 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Create integer with right most X bits set
-@@@@ NAM: MSKR 97
+@@@@ NAM: MSKR "MSKR"
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer with IP(X) least significant bits set
 @@@@ FAQ: Returns int with all 0 bits when X<=0
 @@@@ FAQ: Returns int with all 1 bits when X>=WSIZE?
 @@@@ LBL: Used 56-57
 @@@@ UPD: 2021-03-20
-LBL 97
+LBL "MSKR"
 FUNC 11                        @@## REQ:free42>=2.5.24
 L4STK                          @@## REQ:free42>=3.0
 IP
@@ -769,14 +543,14 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Create integer with left most X bits set
-@@@@ NAM: MSKL 96
+@@@@ NAM: MSKL "MSKL"
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer with IP(X) most significant bits set
 @@@@ FAQ: Returns int with all 0 bits when X<=0
 @@@@ FAQ: Returns int with all 1 bits when X>=WSIZE?
 @@@@ LBL: Used 58-59
 @@@@ UPD: 2021-03-20
-LBL 96
+LBL "MSKL"
 FUNC 11                        @@## REQ:free42>=2.5.24
 L4STK                          @@## REQ:free42>=3.0
 IP
@@ -808,7 +582,6 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Set the Xth bit of Y
-@@@@ NAM: SETB 95
 @@@@ IN:  Y: An integer
 @@@@      X: An integer (0=LSB)
 @@@@ OUT: X: Integer with IP(X)th bit of Y set
@@ -816,7 +589,7 @@ RTN
 @@@@ BUG: When X out of range, the type Y is not error checked
 @@@@ LBL: Used 60-61
 @@@@ UPD: 2021-03-20
-LBL 95
+LBL "SETB"
 FUNC 21                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 IP
@@ -844,7 +617,6 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Clear the Xth bit in Y
-@@@@ NAM: CLRB 94
 @@@@ IN:  Y: An integer
 @@@@      X: An integer (0=LSB)
 @@@@ OUT: X: Integer with IP(X)th bit of Y set
@@ -852,7 +624,7 @@ RTN
 @@@@ BUG: When X out of range, the type Y is not error checked
 @@@@ LBL: Used 62-63
 @@@@ UPD: 2021-03-20
-LBL 94
+LBL "CLRB"
 FUNC 21                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 IP
@@ -881,7 +653,6 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Return the Xth bit of Y
-@@@@ NAM: GETB 93
 @@@@ IN:  Y: An integer
 @@@@      X: An integer (0=LSB)
 @@@@ OUT: The IP(X)th bit of Y
@@ -889,7 +660,7 @@ RTN
 @@@@ BUG: When X out of range, type Y is not error checked
 @@@@ LBL: Used 64-66
 @@@@ UPD: 2021-03-20
-LBL 93
+LBL "GETB"
 FUNC 21                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 @@@@ Return 0 if X negative
@@ -916,11 +687,10 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Shift Left 1 Bit
-@@@@ NAM: SL 92
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer shifted left 1 bit
 @@@@ UPD: 2021-03-20
-LBL 92
+LBL "SL"
 FUNC 11                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 -1
@@ -932,11 +702,10 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Shift Right 1 Bit
-@@@@ NAM: SR 91
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer shifted right 1 bit
 @@@@ UPD: 2021-03-20
-LBL 91
+LBL "SR"
 FUNC 11                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 1
@@ -948,10 +717,10 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Rotate Left 1 Bit
-@@@@ NAM: RL 90
+@@@@ NAM: RL "RL"
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer rotated left 1 bit
-LBL 90
+LBL "RL"
 FUNC 11                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 -1
@@ -960,10 +729,10 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Rotate Right 1 Bit
-@@@@ NAM: RR 89
+@@@@ NAM: RR "RR"
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer rotated right 1 bit
-LBL 89
+LBL "RR"
 FUNC 11                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 1
@@ -972,7 +741,6 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Shift Y Left X Bits
-@@@@ NAM: SLn 88
 @@@@ IN:  Y: An integer
 @@@@ IN:  X: An integer
 @@@@ OUT: X: X shifted left IP(Y) bit(s)
@@ -981,7 +749,7 @@ RTN
 @@@@ BUG: The type Y is not error checked when X<=0 or X>=WSIZE
 @@@@ LBL: Used 67-68
 @@@@ UPD: 2021-03-20
-LBL 88
+LBL "SLn"
 FUNC 21                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 IP
@@ -1019,7 +787,6 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Shift Y Right X Bits
-@@@@ NAM: SRn 87
 @@@@ IN:  Y: An integer
 @@@@ IN:  X: An integer
 @@@@ OUT: X: X shifted right IP(Y) bit(s)
@@ -1028,7 +795,7 @@ RTN
 @@@@ BUG: The type Y is not error checked when X<=0 or X>=WSIZE
 @@@@ LBL: Used 69-70
 @@@@ UPD: 2021-03-20
-LBL 87
+LBL "SRn"
 FUNC 21                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 IP
@@ -1065,7 +832,6 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Rotate Y Left by X bits
-@@@@ NAM: RLn 86
 @@@@ IN:  Y: An integer
 @@@@ IN:  X: An integer
 @@@@ OUT: X: X rotated left IP(Y) bit(s)
@@ -1073,7 +839,7 @@ RTN
 @@@@ BUG: The type Y is not error checked when X<=0
 @@@@ LBL: Used 71
 @@@@ UPD: 2021-03-20
-LBL 86
+LBL "RLn"
 FUNC 21                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 IP
@@ -1088,7 +854,6 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Rotate Y Right by X bits
-@@@@ NAM: RRn 85
 @@@@ IN:  Y: An integer
 @@@@ IN:  X: An integer
 @@@@ OUT: X: X rotated right ABS(IP(Y)) bit(s)
@@ -1096,7 +861,7 @@ RTN
 @@@@ BUG: The type Y is not error checked when X<=0
 @@@@ LBL: Used 72
 @@@@ UPD: 2021-03-20
-LBL 85
+LBL "RRn"
 FUNC 21                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 IP
@@ -1110,14 +875,13 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Shift X by Y Bits (left when Y negative)
-@@@@ NAM: SHFXY 84
 @@@@ IN:  Y: An integer
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer shifted by IP(Y) bit(s)
 @@@@ FAQ: Uses SLn & SLr.
 @@@@ LBL: Used 49-50
 @@@@ UPD: 2021-03-20
-LBL 84
+LBL "SHFXY"
 FUNC 21                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 IP
@@ -1126,22 +890,21 @@ GTO 49
 GTO 50
 LBL 49 @@@@ X negative -- shift left
 +/-
-XEQ 88
+XEQ "SLn"
 RTN
 LBL 50 @@@@ X non-negative -- shift right
-XEQ 87
+XEQ "SRn"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Right Justify Bits
-@@@@ NAM: RJ 83
 @@@@ IN:  X: an integer
 @@@@ OUT: Y: Number of shifts required to justify
 @@@@ OUT: X: Justified number
 @@@@ FAQ: Like the HP-16c's LJ funciton, but justifies in the other direction
 @@@@ LBL: Used 46-48
 @@@@ UPD: 2021-03-20
-LBL 83
+LBL "RJ"
 FUNC 12                        @@## REQ:free42>=2.5.24
 L4STK                          @@## REQ:free42>=3.0
 IP
@@ -1165,14 +928,13 @@ GTO 47
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Left Justify Bits
-@@@@ NAM: LJ 82
 @@@@ IN:  X: an integer
 @@@@ OUT: Y: Number of shifts required to justify
 @@@@ OUT: X: Justified number
 @@@@ FAQ: Just like the HP-16c's LJ funciton
 @@@@ LBL: Used 41-43
 @@@@ UPD: 2021-03-20
-LBL 82
+LBL "LJ"
 FUNC 12                        @@## REQ:free42>=2.5.24
 L4STK                          @@## REQ:free42>=3.0
 IP
@@ -1199,11 +961,11 @@ GTO 41
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Integer square root
-@@@@ NAM: ISQRT 81
+@@@@ NAM: ISQRT "ISQRT"
 @@@@ IN:  X: a non-negative real number
 @@@@ OUT: X: IP(SQRT(ABS(X)))
 @@@@ UPD: 2021-03-16
-LBL 81
+LBL "ISQRT"
 FUNC 11                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 ABS
@@ -1213,11 +975,11 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Integer base 2 log
-@@@@ NAM: ILN2 80
+@@@@ NAM: ILN2 "ILN2"
 @@@@ IN:  X: a positive real number
 @@@@ OUT: X: IP(log_2(ABS(X)))
 @@@@ UPD: 2021-03-16
-LBL 80
+LBL "ILN2"
 FUNC 11                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 ABS
@@ -1230,7 +992,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Position of the Most Significant Set Bit
-@@@@ NAM: MSSB 79
+@@@@ NAM: MSSB "MSSB"
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Position of MSSB in IP(X) or -1 if IP(X) was 0
 @@@@ USE: LJ
@@ -1238,7 +1000,7 @@ RTN
 @@@@ FAQ: Runtime Complexity O(WSIZE-log_2(X))
 @@@@ FAQ: Closely related to LJ program
 @@@@ LBL: Used 41-43
-LBL 79
+LBL "MSSB"
 FUNC 11                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 IP
@@ -1247,7 +1009,7 @@ GTO 44
 -1
 RTN
 LBL 44 @@@@ X not zero
-XEQ 82
+XEQ "LJ"
 1
 +
 WSIZE?
@@ -1257,13 +1019,13 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Position of the Least Significant Set Bit
-@@@@ NAM: LSSB 78
+@@@@ NAM: LSSB "LSSB"
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Position of LSSB in IP(X) or -1 if IP(X) was 0
 @@@@ UPD: 2021-03-16
 @@@@ FAQ: Runtime Complexity O(LSSB(X)) & LSSB<WSIZE
 @@@@ FAQ: Closely related to RJ program
-LBL 78
+LBL "LSSB"
 FUNC 11                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 IP
@@ -1272,12 +1034,12 @@ GTO 45
 -1
 RTN
 LBL 45 @@@@ X not zero
-XEQ 83
+XEQ "RJ"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ Menu Label: WSIZE
-LBL 77
+LBL 96
 "W:"
 WSIZE?
 AIP
@@ -1286,7 +1048,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ Menu Label: BSIGNED
-LBL 32
+LBL 97
 FS? 78
 "S:+/-"
 FC? 78
@@ -1295,7 +1057,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ Menu Label: BWRAP
-LBL 33
+LBL 98
 FS? 79
 "BWR•"
 FC? 79
@@ -1304,7 +1066,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ Menu Label: BVIEW 
-LBL 35
+LBL 99
 FC? 02
 "BVA•"
 FS? 02
@@ -1313,7 +1075,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ Menu Label: HEX
-LBL 36
+LBL 92
 "HEX"
 FS? 71
 ├"•"
@@ -1321,7 +1083,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ Menu Label: DEC
-LBL 37
+LBL 93
 "DEC"
 SF 81
 FS? 71
@@ -1336,7 +1098,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ Menu Label: OCT
-LBL 38
+LBL 94
 "OCT"
 SF 81
 FS? 71
@@ -1349,7 +1111,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ Menu Label: BIN
-LBL 39
+LBL 95
 "BIN"
 SF 81
 FC? 68
@@ -1379,10 +1141,218 @@ HEXM
 STOP
 RTN
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BVIEW)
+@@@@ DSC: Print binary numbers (up to 64-bit)
+@@@@ IN:  X: An integer
+@@@@ OUT: Nothing -- prints to screen
+@@@@ FLG: 81: TEMP: Set: We are on DM42;            Clear: We are not on DM42
+@@@@ FLG: 01: PREF: Reserved
+@@@@ FLG: 02: PREF: Set: BVIEW prints WSIZE digits; Clear: BVIEW prints 64 digits
+@@@@ FAQ: If XEQ while system BASE menu is active, returns to same menu.
+@@@@ BUG: Sometimes gets the system base menu to return to wrong. ;)
+@@@@ UPD: 2021-03-20
+LBL "BVIEW"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+0
+SF 25
+BIT?
+FS?C 25
+GTO 79
+R↓
+"ERR: Bad Int!"
+AVIEW
+RTN
+LBL 79
+R↓
+LSTO "X"
+20
+1
+FS? 68
+STO+ ST Y
+FS? 70
+STO+ ST Y
+FS? 71
+STO+ ST Y
+R↓             @@@@ 20:DECN 21:BINM 22:OCTM 23:HEXM
+LSTO "SBMD"
+R↓
+CF 81
+SF 25
+RCL "GrMod"
+FS?C 25
+SF 81
+FC? 81
+GTO 88
+@@@@ We are on a DM42
+0
+STO "GrMod"     @@@@ Set graphics mode to 42 classic on DM42
+R↓
+LBL 88
+CLLCD
+EXITALL
+63
+1000
+÷
+LSTO "CTR"
+LBL 91
+LBL 76  @@@@ TODO.  Not used?
+@@@@ Figure out X&Y coordinates for digit
+RCL "CTR"            @@@@ IF
+IP
+32
+X>Y?
+GTO 73
+GTO 83
+LBL 73               @@@@ IF-THEN FIRST ROW
+1
+RCL "CTR"
+4
+×
+1
++
+GTO 90
+LBL 83               @@@@ IF-ELSE SECOND ROW
+9
+RCL "CTR"
+32
+-
+4
+×
+1
++
+LBL 90               @@@@ IF-END
+@@@@ Figure out current bit value
+63
+RCL "CTR"            @@@@ IF-BEGIN
+IP
+-
+WSIZE?
+X>Y?
+GTO 80
+GTO 81
+LBL 80               @@@@ IF-THEN
+R↓
++/-                  @@@@ IF-BEGIN
+1
+X<>Y
+ROTXY
+RCL "X"
+AND
+X=0?
+GTO 85
+GTO 86
+LBL 85               @@@@ IF-THEN bit is 0
+R↓
+0
+GTO 87
+LBL 86               @@@@ IF-ELSE bit is 1
+R↓
+1
+LBL 87
+LSTO "CB"
+GTO 82
+LBL 81               @@@@ IF-ELSE
+R↓
+R↓
+@@@@ Bit beyond WSIZE padding character
+0
+LSTO "CB"
+FS? 02
+GTO 84
+LBL 82               @@@@ IF-END
+R↓
+@@@@ Figure out grouping
+RCL "CTR"            @@@@ IF-START grouping
+IP
+4
+÷
+IP
+2
+÷
+FP
+X=0?
+GTO 40
+GTO 39
+LBL 40               @@@@ IF-THEN
+R↓
+0
+GTO 77
+LBL 39               @@@@ IF-ELSE
+R↓
+2
+LBL 77               @@@@ IF-END
+@@@@ Compute digit character code
+RCL+ "CB"
+@@@@ Draw it
+XEQ 78
+LBL 84
+ISG  "CTR"
+GTO 91
+FC? 81
+GTO 89
+@@@@ On DM42.  Hack to keep screen clean
+GETKEY
+CLLCD
+"BVIEW FINISHED"
+AVIEW
+LBL 89
+RCL "SBMD"
+20
+X=Y?
+DECM
+R↓
+21
+X=Y?
+BINM
+R↓
+22
+X=Y?
+OCTM
+R↓
+23
+X=Y?
+HEXM
+R↓
+@@@@ Recall original X
+RCL "X"
+RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Menu Action BVIEW
-LBL 76
-XEQ "BVIEW"
+@@@@ DSC: tiny binary digit print
+@@@@ IN:  Z: Y coordinate for upper left point of character -- Top of screen is 1
+@@@@      Y: X coordinate for upper left point of character -- Left of screen is 1
+@@@@      X: Character number
+@@@@ OUT: No return
+@@@@ UPD: 2021-04-11
+@@@@ BUG: Characters can be *VERY* tiny in high resolution modes on DM42
+@@@@ Characters can be underlined
+@@@@ Characters are 3x5 pixels in size.  Underlined characters are 3x7.
+@@@@   - Stock HP-42s screen: 32 characters across.  Two full lines on the screen.
+@@@@ Non-Underlined Character numbers:
+@@@@     00 01
+@@@@      0  1
+@@@@ Add 2 to the above character number for the underlined version
+LBL 78
+FUNC 30      @@## REQ:free42>=2.5.24
+L4STK        @@## REQ:free42>=3.0
+IP
+35
++
+XEQ IND ST X
+R↓
+AGRAPH
+RTN
+LBL 35       @@@@ CHAR: 0
+"•μ•"        @@@@ #b11111 #b10001 #b11111
+RTN
+LBL 36       @@@@ CHAR: 1
+"£•←"        @@@@ #b10010 #b11111 #b10000
+RTN
+LBL 37       @@@@ CHAR: 0
+"_Q_"        @@@@ #b1011111 #b1010001 #b1011111
+RTN
+LBL 38       @@@@ CHAR: 1
+"R_P"        @@@@ #b1010010 #b1011111 #b1010000
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

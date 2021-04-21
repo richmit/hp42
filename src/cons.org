@@ -21,9 +21,9 @@
 #+EXPORT_FILE_NAME: ../docs/cons
 
 #+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
-|        <r> | <l>              |
-|  *Author:* | /{{{author}}}/ |
-| *Updated:* | /{{{time(%Y-%m-%d %H:%M:%S)}}}/ |
+|        <r> | <l>                                          |
+|  *Author:* | /{{{author}}}/                               |
+| *Updated:* | /{{{modification-time(%Y-%m-%d %H:%M:%S)}}}/ |
 #+ATTR_HTML: :align center
 Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 
@@ -93,8 +93,8 @@ The generator code can be customized in a few ways:
 
   - =print-desc= can be set to =NIL= to suppress printing the description
   - =print-unit= can be set to =NIL= to suppress printing the unit
-  - The ="exit"= argument to =MJR-generate-42-menu-code= can be set to ="stay"= if you prefer the menu to remain after a constant is recalled
-  - The ="up"= argument to =MJR-generate-42-menu-code= can be set to ="exit"= if you prefer the =[EXIT]= key to entirely exit the application instead of going up one menu level.
+  - The ='exit= argument to =MJR-generate-42-menu-code= can be set to ='stay= if you prefer the menu to remain after a constant is recalled
+  - The ='up= argument to =MJR-generate-42-menu-code= can be set to ='exit= if you prefer the =[EXIT]= key to entirely exit the application instead of going up one menu level.
 
 * Constants
 
@@ -494,12 +494,15 @@ The generator code can be customized in a few ways:
 You must first define the =MJR-generate-42-menu-code= by evaluating the code block in the =hp42s-meta.org= file.
 
 #+BEGIN_SRC elisp :var tbl=constants :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/cons/cons.hp42s"
-(MJR-generate-42-menu-code "CONS"
+(MJR-generate-42-menu-code "CONS" 
+                           0
                            tbl
-                           "exit"
-                           "up"
-                           't
-                           (lambda (row) (cl-destructuring-bind (sym desc desc-long val uncertainty units cat) row
+                           0
+                           nil
+                           'exit ;; Change to 'stay to prevent application exit after a constant is pushed to the stack
+                           'up   ;; Change to 'exit to have the application exit when [EXIT] is pressed
+                           #'MJR-local-only-gen-lab
+                           (lambda (atrg target row) (cl-destructuring-bind (sym desc desc-long val uncertainty units cat) row
                                            (let ((print-desc 't)    ;; Set to NIL to not print description
                                                  (print-unit 't))   ;; Set to NIL to not print units
                                              (let* ((dlen (length desc))
@@ -727,280 +730,280 @@ GTO 00
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 09               @@@@ Action for menu key h
+LBL 09    @@@@ Action for menu key h
 6.62607015e-34
 "Planck Constant"
 ├"[LF]"
 ├"J/Hz"
 AVIEW
 RTN
-LBL 10               @@@@ Action for menu key hbar
+LBL 10    @@@@ Action for menu key hbar
 1.054571817e-34
 "Dirac Constant[LF]"
 ├"J*s"
 AVIEW
 RTN
-LBL 11               @@@@ Action for menu key c
+LBL 11    @@@@ Action for menu key c
 299792458
 "Speed of Light[LF]"
 ├"m/s"
 AVIEW
 RTN
-LBL 12               @@@@ Action for menu key E0
+LBL 12    @@@@ Action for menu key E0
 8.8541878128e-12
 "Vac Ele Permitt"
 ├"ivity[LF]"
 ├"F/m"
 AVIEW
 RTN
-LBL 13               @@@@ Action for menu key μ0
-1.25663706212e-6
+LBL 13    @@@@ Action for menu key μ0
+1.25663706212e-06
 "Vac Mag Permeab"
 ├"ility[LF]"
 ├"N/A^2"
 AVIEW
 RTN
-LBL 14               @@@@ Action for menu key G
-6.67430e-11
+LBL 14    @@@@ Action for menu key G
+6.6743e-11
 "Gravitational C"
 ├"onstant"
 ├"m^3/kg*s^2"
 AVIEW
 RTN
-LBL 15               @@@@ Action for menu key tp
+LBL 15    @@@@ Action for menu key tp
 5.391247e-44
 "Planck Time[LF]"
 ├"s"
 AVIEW
 RTN
-LBL 16               @@@@ Action for menu key gacc
+LBL 16    @@@@ Action for menu key gacc
 9.80665
 "Earth Std Grav "
 ├"Accel[LF]"
 ├"m/s"
 AVIEW
 RTN
-LBL 17               @@@@ Action for menu key atm
+LBL 17    @@@@ Action for menu key atm
 101325
 "Standard Atmosp"
 ├"here[LF]"
 ├"Pa"
 AVIEW
 RTN
-LBL 18               @@@@ Action for menu key mN
+LBL 18    @@@@ Action for menu key mN
 5.0507837461e-27
 "Nuclear Magneto"
 ├"n[LF]"
 ├"J/*T"
 AVIEW
 RTN
-LBL 19               @@@@ Action for menu key μB
+LBL 19    @@@@ Action for menu key μB
 9.2740100783e-24
 "Bohr Magneton[LF]"
 ├"J/T"
 AVIEW
 RTN
-LBL 20               @@@@ Action for menu key e
+LBL 20    @@@@ Action for menu key e
 1.602176634e-19
 "Elementary Char"
 ├"ge[LF]"
 ├"C"
 AVIEW
 RTN
-LBL 21               @@@@ Action for menu key F0
+LBL 21    @@@@ Action for menu key F0
 2.067833848e-15
 "Mag flux quantu"
 ├"m[LF]"
 ├"Wb"
 AVIEW
 RTN
-LBL 22               @@@@ Action for menu key G0
-7.748091729e-5
+LBL 22    @@@@ Action for menu key G0
+7.748091729e-05
 "Conductance Qua"
 ├"ntum[LF]"
 ├"S"
 AVIEW
 RTN
-LBL 24               @@@@ Action for menu key mu
-1.66053906660e-27
+LBL 24    @@@@ Action for menu key mu
+1.6605390666e-27
 "Atomic Mass Uni"
 ├"t[LF]"
 ├"kg"
 AVIEW
 RTN
-LBL 25               @@@@ Action for menu key F
+LBL 25    @@@@ Action for menu key F
 96485.33212
 "Faraday[LF]"
 ├"C/mol"
 AVIEW
 RTN
-LBL 26               @@@@ Action for menu key Na
-6.02214076e23
+LBL 26    @@@@ Action for menu key Na
+6.02214076e+23
 "Avogadro's Numb"
 ├"er[LF]"
 ├"1/mol"
 AVIEW
 RTN
-LBL 27               @@@@ Action for menu key k
+LBL 27    @@@@ Action for menu key k
 1.380649e-23
 "Boltzmann Const"
 ├"ant[LF]"
 ├"J/K"
 AVIEW
 RTN
-LBL 28               @@@@ Action for menu key R
+LBL 28    @@@@ Action for menu key R
 8.314462618
 "Ideal Gas Const"
 ├"ant[LF]"
 ├"J/mol*K"
 AVIEW
 RTN
-LBL 29               @@@@ Action for menu key s
-5.670374419e-8
+LBL 29    @@@@ Action for menu key s
+5.670374419e-08
 "Stefan Constant"
 ├"[LF]"
 ├"W/m^2*K^4"
 AVIEW
 RTN
-LBL 30               @@@@ Action for menu key rc1
+LBL 30    @@@@ Action for menu key rc1
 3.741771852e-16
 "First Radiation"
 ├" Cnst[LF]"
 ├"W*m^2"
 AVIEW
 RTN
-LBL 31               @@@@ Action for menu key rc2
-1.438776877e-2
+LBL 31    @@@@ Action for menu key rc2
+0.01438776877
 "Second Radiatio"
 ├"n Cnst[LF]"
 ├"m*K"
 AVIEW
 RTN
-LBL 37               @@@@ Action for menu key a
-7.2973525693e-3
+LBL 37    @@@@ Action for menu key a
+0.0072973525693
 "Fine Structure"
 AVIEW
 RTN
-LBL 38               @@@@ Action for menu key Eh
+LBL 38    @@@@ Action for menu key Eh
 4.3597447222071e-18
 "Hartree Energy[LF]"
 ├"J"
 AVIEW
 RTN
-LBL 39               @@@@ Action for menu key Ry
+LBL 39    @@@@ Action for menu key Ry
 10973731.56816
 "Rydberg Constan"
 ├"t[LF]"
 ├"1/m"
 AVIEW
 RTN
-LBL 40               @@@@ Action for menu key pro
+LBL 40    @@@@ Action for menu key pro
 1.67262192369e-27
 "Proton Mass[LF]"
 ├"kg"
 AVIEW
 RTN
-LBL 41               @@@@ Action for menu key ele
+LBL 41    @@@@ Action for menu key ele
 9.1093837015e-31
 "Electron Mass[LF]"
 ├"kg"
 AVIEW
 RTN
-LBL 42               @@@@ Action for menu key neut
+LBL 42    @@@@ Action for menu key neut
 1.67492749804e-27
 "Neutron Mass[LF]"
 ├"kg"
 AVIEW
 RTN
-LBL 43               @@@@ Action for menu key muon
+LBL 43    @@@@ Action for menu key muon
 1.883531627e-28
 "Muon Mass[LF]"
 ├"kg"
 AVIEW
 RTN
-LBL 44               @@@@ Action for menu key pro
+LBL 44    @@@@ Action for menu key pro
 1.41060679736e-26
 "Proton Mag Mom[LF]"
 ├"J/T"
 AVIEW
 RTN
-LBL 45               @@@@ Action for menu key ele
+LBL 45    @@@@ Action for menu key ele
 -9.2847647043e-24
 "Electron Mag Mo"
 ├"m[LF]"
 ├"J/T"
 AVIEW
 RTN
-LBL 46               @@@@ Action for menu key neut
+LBL 46    @@@@ Action for menu key neut
 -9.6623651e-27
 "Neutron Mag Mom"
 ├"[LF]"
 ├"J/T"
 AVIEW
 RTN
-LBL 47               @@@@ Action for menu key muon
--4.49044830e-26
+LBL 47    @@@@ Action for menu key muon
+-4.4904483e-26
 "Muon Mag Mom[LF]"
 ├"J/T"
 AVIEW
 RTN
-LBL 48               @@@@ Action for menu key bohr
+LBL 48    @@@@ Action for menu key bohr
 5.29177210903e-11
 "Bohr Radius[LF]"
 ├"m"
 AVIEW
 RTN
-LBL 49               @@@@ Action for menu key ele
+LBL 49    @@@@ Action for menu key ele
 2.8179403262e-15
 "Electron Radius"
 ├"[LF]"
 ├"m"
 AVIEW
 RTN
-LBL 50               @@@@ Action for menu key std
+LBL 50    @@@@ Action for menu key std
 2.42631023867e-12
 "Compton Wavelen"
 ├"gth[LF]"
 ├"m"
 AVIEW
 RTN
-LBL 51               @@@@ Action for menu key pro
+LBL 51    @@@@ Action for menu key pro
 1.32140985539e-15
 "Proton Compton "
 ├"waveln[LF]"
 ├"m"
 AVIEW
 RTN
-LBL 52               @@@@ Action for menu key neut
+LBL 52    @@@@ Action for menu key neut
 1.31959090581e-15
 "Neutron Compton"
 ├" waveln"
 ├"m"
 AVIEW
 RTN
-LBL 53               @@@@ Action for menu key muon
-1.173444110e-14
+LBL 53    @@@@ Action for menu key muon
+1.17344411e-14
 "Nuon Compton wa"
 ├"veln[LF]"
 ├"m"
 AVIEW
 RTN
-LBL 54               @@@@ Action for menu key grat
+LBL 54    @@@@ Action for menu key grat
 1.618033988749894
 "Golden ratio"
 AVIEW
 RTN
-LBL 55               @@@@ Action for menu key emc
+LBL 55    @@@@ Action for menu key emc
 0.577215664901532
 "Eul-Masc"
 AVIEW
 RTN
-LBL 56               @@@@ Action for menu key omga
+LBL 56    @@@@ Action for menu key omga
 0.567143290409783
 "Omega"
 AVIEW
 RTN
-LBL 57               @@@@ Action for menu key lapl
+LBL 57    @@@@ Action for menu key lapl
 0.662743419349181
 "Laplace limit"
 AVIEW

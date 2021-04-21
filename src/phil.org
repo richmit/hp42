@@ -21,9 +21,9 @@
 #+EXPORT_FILE_NAME: ../docs/phil
 
 #+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
-|        <r> | <l>              |
-|  *Author:* | /{{{author}}}/ |
-| *Updated:* | /{{{time(%Y-%m-%d %H:%M:%S)}}}/ |
+|        <r> | <l>                                          |
+|  *Author:* | /{{{author}}}/                               |
+| *Updated:* | /{{{modification-time(%Y-%m-%d %H:%M:%S)}}}/ |
 #+ATTR_HTML: :align center
 Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 
@@ -65,41 +65,41 @@ this calculator application with the digital microscope on my "stamp table" or w
 
 #+ATTR_HTML: :align center
 #+NAME: PHIL
-| MS         | ML | Menu       | Description                                               | Require Cal? |
-|------------+----+------------+-----------------------------------------------------------+--------------|
-| 85         | 92 | ANGL       | Angle given complex pixel coordinate                      | Never        |
-| LENG:PX>D  | 91 | LENG:PX>D  | Length given real pixel count or complex pixel coordinate | Always       |
-| LENG:D>PX  | 66 | LENG:D>PX  | Pixel count given Length or complex coordinate            | Always       |
-| LENG:▒▒▒▒  |    | LENG:▒▒▒▒  |                                                           | N/A          |
-| LENG:▒▒▒▒  |    | LENG:▒▒▒▒  |                                                           | N/A          |
-| LENG:▒▒▒▒  |    | LENG:▒▒▒▒  |                                                           | N/A          |
-| LENG:CAL   | 95 | LENG:CAL   | Set or display image calibration                          | Never        |
-| QUAD:UL    | 57 | QUAD:UL    |                                                           | Never        |
-| QUAD:UR    | 58 | QUAD:UR    |                                                           | Never        |
-| QUAD:LR    | 59 | QUAD:LR    |                                                           | Never        |
-| QUAD:LL    | 60 | QUAD:LL    |                                                           | Never        |
-| QUAD:▒▒▒▒  |    | QUAD:▒▒▒▒  |                                                           | N/A          |
-| QUAD:CAL   | 95 | QUAD:CAL   | Set or display image calibration                          | Never        |
-| QUAD:∡TB   | 62 | QUAD:∡TB   | Compute angle difference between top an bottom sides      | Never        |
-| QUAD:∡LR   | 63 | QUAD:∡LR   | Compute angle difference between left an right sides      | Never        |
-| QUAD:WIDE  | 64 | QUAD:WIDE  | Compute width (left, right, average)                      | Always       |
-| QUAD:TALL  | 65 | QUAD:TALL  | Compute height (top, bottom, average)                     | Always       |
-| QUAD:▒▒▒▒  |    | QUAD:▒▒▒▒  |                                                           | N/A          |
-| QUAD:▒▒▒▒  |    | QUAD:▒▒▒▒  |                                                           | N/A          |
-| PERF:D<>P  | 96 | PERF:D<>P  | Convert between perforations & distance                   | Only if D=px |
-| PERF:P<>K  | 97 | PERF:P<>K  | Convert between perforations & Kiusalas                   | Never        |
-| PERF:87    | 98 | PERF:C:??  | Set perforation count (C)                                 | Never        |
-| PERF:89    | 99 | PERF:D:??  | Cycle distance units: px mm mil um in cm                  | Never        |
-| PERF:86    | 88 | PERF:I:??  | Cycle image length units when D=px: mm mil um in cm       | Never        |
-| PERF:67    | 95 | PERF:CAL   | Set or display image calibration when when D=px           | Never        |
-| DCRD:PX>DC | 75 | DCRD:PX>DC | Design Coordinate given complex pixel coordinate          | Always       |
-| DCRD:DC>PX | 49 | DCRD:DC>PX | Complex pixel coordinate given Design Coordinate          | Always       |
-| DCRD:T>MM  | 43 | DCRD:T>MM  | Thirkell grid (letter+number) to coord in millimeters     | Never        |
-| DCRD:MM>T  | 48 | DCRD:MM>T  | Coord in millimeters to Thirkell grid (letter+number)     | Never        |
-| DCRD:ORIG  | 90 | DCRD:ORIG  |                                                           | N/A          |
-| DCRD::CAL  | 95 | DCRD:CAL   | Set or display image calibration                          | Never        |
-| CAL        | 95 | CAL        | Set or display image calibration                          | Never        |
-|------------+----+------------+-----------------------------------------------------------+--------------|
+| MS          | ML     | Menu       | Description                                               | Require Cal? |
+|-------------+--------+------------+-----------------------------------------------------------+--------------|
+| LBL 85      | LBL 92 | ANGL       | Angle given complex pixel coordinate                      | Never        |
+| LENG:PX>D   | LBL 91 | LENG:PX>D  | Length given real pixel count or complex pixel coordinate | Always       |
+| LENG:D>PX   | LBL 66 | LENG:D>PX  | Pixel count given Length or complex coordinate            | Always       |
+| LENG:▒▒▒▒   |        | LENG:▒▒▒▒  |                                                           | N/A          |
+| LENG:▒▒▒▒   |        | LENG:▒▒▒▒  |                                                           | N/A          |
+| LENG:▒▒▒▒   |        | LENG:▒▒▒▒  |                                                           | N/A          |
+| LENG:CAL    | LBL 95 | LENG:CAL   | Set or display image calibration                          | Never        |
+| QUAD:UL     | LBL 57 | QUAD:UL    |                                                           | Never        |
+| QUAD:UR     | LBL 58 | QUAD:UR    |                                                           | Never        |
+| QUAD:LR     | LBL 59 | QUAD:LR    |                                                           | Never        |
+| QUAD:LL     | LBL 60 | QUAD:LL    |                                                           | Never        |
+| QUAD:▒▒▒▒   |        | QUAD:▒▒▒▒  |                                                           | N/A          |
+| QUAD:CAL    | LBL 95 | QUAD:CAL   | Set or display image calibration                          | Never        |
+| QUAD:∡TB    | LBL 62 | QUAD:∡TB   | Compute angle difference between top an bottom sides      | Never        |
+| QUAD:∡LR    | LBL 63 | QUAD:∡LR   | Compute angle difference between left an right sides      | Never        |
+| QUAD:WIDE   | LBL 64 | QUAD:WIDE  | Compute width (left, right, average)                      | Always       |
+| QUAD:TALL   | LBL 65 | QUAD:TALL  | Compute height (top, bottom, average)                     | Always       |
+| QUAD:▒▒▒▒   |        | QUAD:▒▒▒▒  |                                                           | N/A          |
+| QUAD:▒▒▒▒   |        | QUAD:▒▒▒▒  |                                                           | N/A          |
+| PERF:D<>P   | LBL 96 | PERF:D<>P  | Convert between perforations & distance                   | Only if D=px |
+| PERF:P<>K   |        | PERF:P<>K  | Convert between perforations & Kiusalas                   | Never        |
+| PERF:LBL 87 | LBL 98 | PERF:C:??  | Set perforation count (C)                                 | Never        |
+| PERF:LBL 89 | LBL 99 | PERF:D:??  | Cycle distance units: px mm mil um in cm                  | Never        |
+| PERF:LBL 86 | LBL 88 | PERF:I:??  | Cycle image length units when D=px: mm mil um in cm       | Never        |
+| PERF:LBL 67 | LBL 95 | PERF:CAL   | Set or display image calibration when when D=px           | Never        |
+| DCRD:PX>DC  | LBL 75 | DCRD:PX>DC | Design Coordinate given complex pixel coordinate          | Always       |
+| DCRD:DC>PX  | LBL 49 | DCRD:DC>PX | Complex pixel coordinate given Design Coordinate          | Always       |
+| DCRD:T>MM   |        | DCRD:T>MM  | Thirkell grid (letter+number) to coord in millimeters     | Never        |
+| DCRD:MM>T   |        | DCRD:MM>T  | Coord in millimeters to Thirkell grid (letter+number)     | Never        |
+| DCRD:ORIG   | LBL 90 | DCRD:ORIG  |                                                           | N/A          |
+| DCRD::CAL   | LBL 95 | DCRD:CAL   | Set or display image calibration                          | Never        |
+| CAL         | LBL 95 | CAL        | Set or display image calibration                          | Never        |
+|-------------+--------+------------+-----------------------------------------------------------+--------------|
 
 Notes:
   - Please ignore the first two columns in the table -- they are used to auto-generate the menu code for the application.
@@ -552,7 +552,7 @@ Our stamp is 18.553mm x 22.00mm -- and so it must be a flat plate stamp.
 ** Menu Code
 
 #+BEGIN_SRC elisp :var tbl=PHIL :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/phil/phil.hp42s"
-(MJR-generate-42-menu-code "PHIL" tbl "stay" "up" 't #'MJR-custom-x-gen)
+(MJR-generate-42-menu-code "PHIL" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
@@ -629,7 +629,7 @@ CLMENU
 "D<>P"
 KEY 1 XEQ 96
 "P<>K"
-KEY 2 XEQ 97
+KEY 2 XEQ "P<>K"
 XEQ 87
 KEY 3 XEQ 98
 XEQ 89
@@ -649,9 +649,9 @@ KEY 1 XEQ 75
 "DC>PX"
 KEY 2 XEQ 49
 "T>MM"
-KEY 3 XEQ 43
+KEY 3 XEQ "T>MM"
 "MM>T"
-KEY 4 XEQ 48
+KEY 4 XEQ "MM>T"
 "ORIG"
 KEY 5 XEQ 90
 KEY 9 GTO 01
@@ -942,8 +942,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: ACTION for FOO
-@@@@ NAM: DCRD:MM>T 48
-LBL 48
+LBL "MM>T"
 L4STK
 REAL?
 COMPLEX
@@ -987,8 +986,7 @@ AVIEW
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ NAM: DCRD:T>MM 43
-LBL 43
+LBL "T>MM"
 FUNC 01
 L4STK
 LBL 40
@@ -1188,8 +1186,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Action for menu key P<>K
-@@@@ NAM: P<>K 97
-LBL 97
+LBL "P<>K"
 FUNC 11            @@## REQ:free42>=2.5.24
 L4STK              @@## REQ:free42>=3.0
 127

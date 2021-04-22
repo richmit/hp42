@@ -86,13 +86,7 @@ The other columns of the table are not used.
 #+NAME: cust
 | Menu            | Function/Program |                                               |
 |-----------------+------------------+-----------------------------------------------|
-| SFUN:HYP:SINH   |                  |                                               |
-| SFUN:HYP:COSH   |                  |                                               |
-| SFUN:HYP:TANH   |                  |                                               |
-| SFUN:HYP:ASINH  |                  |                                               |
-| SFUN:HYP:ACOSH  |                  |                                               |
-| SFUN:HYP:ATANH  |                  |                                               |
-|-----------------+------------------+-----------------------------------------------|
+| SFUN:HYP        | HYPTRG           | https://richmit.github.io/hp42/math.html      |
 | SFUN:L&P        | LPRT             | https://richmit.github.io/hp42/math.html      |
 |-----------------+------------------+-----------------------------------------------|
 | SFUN:PERC:%T    |                  | https://richmit.github.io/hp42/math.html      |
@@ -114,19 +108,9 @@ The other columns of the table are not used.
 | SFUN:INT:GCD    |                  | https://richmit.github.io/hp42/math.html      |
 | SFUN:INT:LCM    |                  | https://richmit.github.io/hp42/math.html      |
 |-----------------+------------------+-----------------------------------------------|
-| SFUN:CPLX:RPART |                  | https://richmit.github.io/hp42/math.html      |
-| SFUN:CPLX:IPART |                  | https://richmit.github.io/hp42/math.html      |
-| SFUN:CPLX:CONJ  |                  | https://richmit.github.io/hp42/math.html      |
-| SFUN:CPLX:CABS  |                  | https://richmit.github.io/hp42/math.html      |
-| SFUN:CPLX:CARG  |                  | https://richmit.github.io/hp42/math.html      |
-|-----------------+------------------+-----------------------------------------------|
+| SFUN:CPLXF      |                  | https://richmit.github.io/hp42/math.html      |
 | SFUN:TRIG       | TRIG             | https://richmit.github.io/hp42/math.html      |
-|-----------------+------------------+-----------------------------------------------|
-| SFUN:ERR:ERF    |                  | https://richmit.github.io/hp42/math.html      |
-| SFUN:ERR:ERFC   |                  | https://richmit.github.io/hp42/math.html      |
-| SFUN:ERR:▒▒▒▒   |                  |                                               |
-| SFUN:ERR:NPDF   |                  | https://richmit.github.io/hp42/math.html      |
-| SFUN:ERR:NCDF   |                  | https://richmit.github.io/hp42/math.html      |
+| SFUN:ERR        | ERRFUN           | https://richmit.github.io/hp42/math.html      |
 |-----------------+------------------+-----------------------------------------------|
 | MATH:POLY       |                  | https://richmit.github.io/hp42/math.html      |
 | MATH:FMENU      |                  | https://richmit.github.io/hp42/pgmforfun.html |
@@ -189,17 +173,17 @@ GTO 02
 LBL 03            @@@@ Page 1 of menu SFUN
 CLMENU
 "HYP"
-KEY 1 GTO 06
+KEY 1 XEQ "HYPTRG"
 "L&P"
 KEY 2 XEQ "LPRT"
 "PERC"
-KEY 3 GTO 07
+KEY 3 GTO 06
 "PROB"
-KEY 4 GTO 08
+KEY 4 GTO 07
 "INT"
-KEY 5 GTO 09
-"CPLX"
-KEY 6 GTO 10
+KEY 5 GTO 08
+"CPLXF"
+KEY 6 XEQ "CPLXF"
 KEY 7 GTO 05
 KEY 8 GTO 05
 KEY 9 GTO 01
@@ -211,77 +195,59 @@ CLMENU
 "TRIG"
 KEY 1 XEQ "TRIG"
 "ERR"
-KEY 2 GTO 11
+KEY 2 XEQ "ERRFUN"
 KEY 7 GTO 03
 KEY 8 GTO 03
 KEY 9 GTO 01
 MENU
 STOP
 GTO 05
-LBL 06            @@@@ Page 1 of menu HYP
-CLMENU
-"SINH"
-KEY 1 XEQ 12
-"COSH"
-KEY 2 XEQ 13
-"TANH"
-KEY 3 XEQ 14
-"ASINH"
-KEY 4 XEQ 15
-"ACOSH"
-KEY 5 XEQ 16
-"ATANH"
-KEY 6 XEQ 17
-KEY 9 GTO 03
-MENU
-STOP
-GTO 06
-LBL 07            @@@@ Page 1 of menu PERC
+LBL 06            @@@@ Page 1 of menu PERC
 CLMENU
 "%T"
 KEY 1 XEQ "%T"
 "%CH"
-KEY 2 XEQ 18
+KEY 2 XEQ 09
 "%"
-KEY 3 XEQ 19
+KEY 3 XEQ 10
+KEY 9 GTO 03
+MENU
+STOP
+GTO 06
+LBL 07            @@@@ Page 1 of menu PROB
+CLMENU
+"COMB"
+KEY 1 XEQ 12
+"PERM"
+KEY 2 XEQ 13
+"GAMMA"
+KEY 4 XEQ 14
+"BETA"
+KEY 5 XEQ "BETA"
+KEY 7 GTO 11
+KEY 8 GTO 11
 KEY 9 GTO 03
 MENU
 STOP
 GTO 07
-LBL 08            @@@@ Page 1 of menu PROB
-CLMENU
-"COMB"
-KEY 1 XEQ 21
-"PERM"
-KEY 2 XEQ 22
-"GAMMA"
-KEY 4 XEQ 23
-"BETA"
-KEY 5 XEQ "BETA"
-KEY 7 GTO 20
-KEY 8 GTO 20
-KEY 9 GTO 03
-MENU
-STOP
-GTO 08
-LBL 20            @@@@ Page 2 of menu PROB
+LBL 11            @@@@ Page 2 of menu PROB
 CLMENU
 "NPDF"
 KEY 1 XEQ "NPDF"
 "NCDF"
 KEY 2 XEQ "NCDF"
-KEY 7 GTO 08
-KEY 8 GTO 08
+KEY 7 GTO 07
+KEY 8 GTO 07
 KEY 9 GTO 03
 MENU
 STOP
-GTO 20
-LBL 09            @@@@ Page 1 of menu INT
+GTO 11
+LBL 08            @@@@ Page 1 of menu INT
 CLMENU
 "IDIV"
-KEY 1 XEQ 24
+KEY 1 XEQ 15
 "MOD"
-KEY 2 XEQ 25
+KEY 2 XEQ 16
 "GCD"
 KEY 4 XEQ "GCD"
 "LCM"
@@ -289,37 +255,7 @@ KEY 5 XEQ "LCM"
 KEY 9 GTO 03
 MENU
 STOP
-GTO 09
-LBL 10            @@@@ Page 1 of menu CPLX
-CLMENU
-"RPART"
-KEY 1 XEQ "RPART"
-"IPART"
-KEY 2 XEQ "IPART"
-"CONJ"
-KEY 3 XEQ "CONJ"
-"CABS"
-KEY 4 XEQ "CABS"
-"CARG"
-KEY 5 XEQ "CARG"
-KEY 9 GTO 03
-MENU
-STOP
-GTO 10
-LBL 11            @@@@ Page 1 of menu ERR
-CLMENU
-"ERF"
-KEY 1 XEQ "ERF"
-"ERFC"
-KEY 2 XEQ "ERFC"
-"NPDF"
-KEY 4 XEQ "NPDF"
-"NCDF"
-KEY 5 XEQ "NCDF"
-KEY 9 GTO 05
-MENU
-STOP
-GTO 11
+GTO 08
 LBL 04            @@@@ Page 1 of menu MATH
 CLMENU
 "POLY"
@@ -335,46 +271,28 @@ GTO 04
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 12    @@@@ Action for menu key SINH
-SINH
-RTN
-LBL 13    @@@@ Action for menu key COSH
-COSH
-RTN
-LBL 14    @@@@ Action for menu key TANH
-TANH
-RTN
-LBL 15    @@@@ Action for menu key ASINH
-ASINH
-RTN
-LBL 16    @@@@ Action for menu key ACOSH
-ACOSH
-RTN
-LBL 17    @@@@ Action for menu key ATANH
-ATANH
-RTN
-LBL 18    @@@@ Action for menu key %CH
+LBL 09    @@@@ Action for menu key %CH
 %CH
 RTN
-LBL 19    @@@@ Action for menu key %
+LBL 10    @@@@ Action for menu key %
 %
 RTN
-LBL 21    @@@@ Action for menu key COMB
+LBL 12    @@@@ Action for menu key COMB
 COMB
 RTN
-LBL 22    @@@@ Action for menu key PERM
+LBL 13    @@@@ Action for menu key PERM
 PERM
 RTN
-LBL 23    @@@@ Action for menu key GAMMA
+LBL 14    @@@@ Action for menu key GAMMA
 GAMMA
 RTN
-LBL 24    @@@@ Action for menu key IDIV
+LBL 15    @@@@ Action for menu key IDIV
 BASE÷
 RTN
-LBL 25    @@@@ Action for menu key MOD
+LBL 16    @@@@ Action for menu key MOD
 MOD
 RTN
-@@@@ Free labels start at: 26
+@@@@ Free labels start at: 17
 #+end_src
 
 * Create system =CUSTOM= Menu

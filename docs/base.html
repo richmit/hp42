@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-20 Tue 22:25 -->
+<!-- 2021-04-21 Wed 23:44 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Base-N Tools</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-20 22:24:39</i></td>
+<td class="org-left"><i>2021-04-21 23:44:44</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,22 +241,22 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgb583509">1. Metadata</a></li>
+<li><a href="#org38f60fb">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
-<li><a href="#org6118b6e">3. <code>BASE</code>: BASE-N Application</a>
+<li><a href="#orgde50367">3. <code>BASE</code>: BASE-N Application</a>
 <ul>
 <li><a href="#menu">3.1. Functionality &amp; Menu</a></li>
-<li><a href="#org4ab3ac8">3.2. Menu Code</a></li>
-<li><a href="#org04d6ea2">3.3. Application Local Subroutines</a></li>
+<li><a href="#org76d9dfa">3.2. Menu Code</a></li>
+<li><a href="#org523c096">3.3. Application Local Subroutines</a></li>
 </ul>
 </li>
-<li><a href="#orge7b034f">4. EOF</a></li>
+<li><a href="#orgd6120c9">4. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgb583509" class="outline-2">
-<h2 id="orgb583509"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org38f60fb" class="outline-2">
+<h2 id="org38f60fb"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/base.html">https://richmit.github.io/hp42/base.html</a>
@@ -312,34 +312,35 @@ Directory contents:
 <h2 id="introduction"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-introduction">
 
-<div id="orge26aa24" class="figure">
+<div id="orgc12783b" class="figure">
 <p><img src="bviewSS.jpeg" alt="bviewSS.jpeg" align="center" />
 </p>
 </div>
 
 <p>
-When I'm doing embedded programming I use my HP-16c &amp; DM16 calculators all the time.  I love the DM42, but it has pretty limited base-n capabilities compared
-to the 16c.  The programs here significantly augment the 42's capabilities on this front, but they don't quite make the 42 as nice as the 16c.  In particular
-you still have to use the BASE menu to enter some hexadecimal digits.
+When I'm doing embedded programming I use my HP-16c &amp; DM16 calculators all the time.  The programs here augment the 42's capabilities with every function on
+the 16c that I use.  Functionality beyond the 16c includes comprehensive support for bit fields, better masks, integer square root &amp; logarithms, and more.
+Finally this software provides a <code>SHOW</code>-like function called <code>BVIEW</code> is capable of displaying a full 64-bit binary number on a standard 42s display.
 </p>
 
 <p>
-The 42 can deal with 64-bit binary numbers, but it can't display them &#x2013; when you try it displays them in hexadecimal.  The <code>BVIEW</code> program remedies this
-issue and works just fine on a standard free42 screen.  The remainder of the functionality is encapsulated into one program that presents a multitude of bit
-manipulation tools in a single, hierarchical menu stricture.  So you only end up with two programs on your 42s &#x2013; important for the DM42 because of it's
-limited RAM.
+Everything is encapsulated into a single program with multiple global labels so that most of the functionality can be called directly from other programs.
+</p>
+
+<p>
+The only thing that still bugs me is the annoying way the 42s requires one to enter hexadecimal digits.  Not much I can do about that&#x2026;
 </p>
 </div>
 </div>
 
-<div id="outline-container-org6118b6e" class="outline-2">
-<h2 id="org6118b6e"><span class="section-number-2">3</span> <code>BASE</code>: BASE-N Application</h2>
+<div id="outline-container-orgde50367" class="outline-2">
+<h2 id="orgde50367"><span class="section-number-2">3</span> <code>BASE</code>: BASE-N Application</h2>
 <div class="outline-text-2" id="text-3">
 </div>
 <div id="outline-container-menu" class="outline-3">
 <h3 id="menu"><span class="section-number-3">3.1</span> Functionality &amp; Menu</h3>
 <div class="outline-text-3" id="text-menu">
-<table id="orga0261f6" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+<table id="org6c88fb4" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
 <colgroup>
@@ -371,13 +372,13 @@ limited RAM.
 
 <tr>
 <td class="org-left">S&amp;R:RLn</td>
-<td class="org-left">RLn</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">Rotate Y Left by X bits</td>
 </tr>
 
 <tr>
 <td class="org-left">S&amp;R:RRn</td>
-<td class="org-left">RRn</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">Rotate Y Right by X bits</td>
 </tr>
 
@@ -397,7 +398,7 @@ limited RAM.
 <tr>
 <td class="org-left">S&amp;R:LJ</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">Left Justify Bits</td>
+<td class="org-left">Left Justify Bits.</td>
 </tr>
 
 <tr>
@@ -445,13 +446,13 @@ limited RAM.
 
 <tr>
 <td class="org-left">S&amp;R:RL</td>
-<td class="org-left">RL</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">Rotate Left 1 Bit</td>
 </tr>
 
 <tr>
 <td class="org-left">S&amp;R:RR</td>
-<td class="org-left">RR</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">Rotate Right 1 Bit</td>
 </tr>
 
@@ -484,6 +485,80 @@ limited RAM.
 <td class="org-left">BITS:CB</td>
 <td class="org-left">CLRB</td>
 <td class="org-left">Clear the Xth bit in Y</td>
+</tr>
+
+<tr>
+<td class="org-left">BITS:AB</td>
+<td class="org-left">ASNB</td>
+<td class="org-left">Assign X to the Yth bit of Z</td>
+</tr>
+
+<tr>
+<td class="org-left">BITS:▒▒▒▒</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">BITS:BVIEW</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">BITS:GY@X</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Return the Y bits of Z starting at bit X</td>
+</tr>
+
+<tr>
+<td class="org-left">BITS:SY@X</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Set Y bits of Z starting at bit X</td>
+</tr>
+
+<tr>
+<td class="org-left">BITS:CY@X</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Clear Y bits of Z starting at bit X</td>
+</tr>
+
+<tr>
+<td class="org-left">BITS:AZ@Y</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Assign LS Z bits of X to Z bits of T starting at Y</td>
+</tr>
+
+<tr>
+<td class="org-left">BITS:▒▒▒▒</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">BITS:BVIEW</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">BITS:POPRB</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Pop rightmost bits X bits off of Y</td>
+</tr>
+
+<tr>
+<td class="org-left">BITS:POPLB</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Pop leftmost bits X bits off of Y</td>
+</tr>
+
+<tr>
+<td class="org-left">BITS:▒▒▒▒</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
@@ -533,6 +608,43 @@ limited RAM.
 <td class="org-left">FUN:ISQRT</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Integer square root</td>
+</tr>
+
+<tr>
+<td class="org-left">FUN:BVIEW</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">FUN:REVNB</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Reverse rightmost X bits of Y</td>
+</tr>
+
+<tr>
+<td class="org-left">FUN:REVB</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Reverse bits of X</td>
+</tr>
+
+<tr>
+<td class="org-left">FUN:▒▒▒▒</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">FUN:▒▒▒▒</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">FUN:▒▒▒▒</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
@@ -724,7 +836,7 @@ limited RAM.
 <tr>
 <td class="org-left">LBL 99</td>
 <td class="org-left">LBL 74</td>
-<td class="org-left">Toggle BVIEW TODO</td>
+<td class="org-left">Toggle BVIEW padding</td>
 </tr>
 
 <tr>
@@ -737,8 +849,8 @@ limited RAM.
 </div>
 </div>
 
-<div id="outline-container-org4ab3ac8" class="outline-3">
-<h3 id="org4ab3ac8"><span class="section-number-3">3.2</span> Menu Code</h3>
+<div id="outline-container-org76d9dfa" class="outline-3">
+<h3 id="org76d9dfa"><span class="section-number-3">3.2</span> Menu Code</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 The menu program is generated via the following bit of elisp.  You must first define the <code>MJR-generate-42-menu-code</code> and <code>MJR-custom-x-gen</code> by evaluating the code blocks in the <code>hp42s-meta.org</code> file.
@@ -870,12 +982,48 @@ The skeleton was generated by the following code.  That skeleton has been fleshe
 <span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"SETB"</span>
 <span style="color: #fa8072;">"CB"</span>
 <span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"CLRB"</span>
+<span style="color: #fa8072;">"AB"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"ASNB"</span>
 <span style="color: #fa8072;">"BVIEW"</span>
 <span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"BVIEW"</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 20
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 19
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
 <span style="color: #00ffff;">GTO</span> 05
+<span style="color: #00ffff;">LBL</span> 19            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu BITS</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"GY@X"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"GY@X"</span>
+<span style="color: #fa8072;">"SY@X"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"SY@X"</span>
+<span style="color: #fa8072;">"CY@X"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"CY@X"</span>
+<span style="color: #fa8072;">"AZ@Y"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"AZ@Y"</span>
+<span style="color: #fa8072;">"BVIEW"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"BVIEW"</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 05
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 20
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 19
+<span style="color: #00ffff;">LBL</span> 20            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 3 of menu BITS</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"POPRB"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"POPRB"</span>
+<span style="color: #fa8072;">"POPLB"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"POPLB"</span>
+<span style="color: #fa8072;">"BVIEW"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"BVIEW"</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 19
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 05
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 20
 <span style="color: #00ffff;">LBL</span> 06            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu FUN</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"B#"</span>
@@ -890,10 +1038,26 @@ The skeleton was generated by the following code.  That skeleton has been fleshe
 <span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"ISQRT"</span>
 <span style="color: #fa8072;">"BVIEW"</span>
 <span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"BVIEW"</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 21
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 21
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
 <span style="color: #00ffff;">GTO</span> 06
+<span style="color: #00ffff;">LBL</span> 21            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu FUN</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"REVNB"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"REVNB"</span>
+<span style="color: #fa8072;">"REVB"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"REVB"</span>
+<span style="color: #fa8072;">"BVIEW"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"BVIEW"</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 06
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 06
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 21
 <span style="color: #00ffff;">LBL</span> 07            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu MASK</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"MSKL"</span>
@@ -911,35 +1075,35 @@ The skeleton was generated by the following code.  That skeleton has been fleshe
 <span style="color: #00ffff;">LBL</span> 08            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu ARTH</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"AND"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 20
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 23
 <span style="color: #fa8072;">"OR"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 21
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 24
 <span style="color: #fa8072;">"XOR"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 22
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 25
 <span style="color: #fa8072;">"NOT"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 23
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 26
 <span style="color: #fa8072;">"NEG"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 24
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 27
 <span style="color: #fa8072;">"BVIEW"</span>
 <span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 19
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 19
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 22
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 22
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
 <span style="color: #00ffff;">GTO</span> 08
-<span style="color: #00ffff;">LBL</span> 19            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu ARTH</span>
+<span style="color: #00ffff;">LBL</span> 22            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu ARTH</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"+"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 25
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 28
 <span style="color: #fa8072;">"-"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 26
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 29
 <span style="color: #fa8072;">"&#215;"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 27
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 30
 <span style="color: #fa8072;">"&#247;"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 28
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 31
 <span style="color: #fa8072;">"MOD"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 29
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 32
 <span style="color: #fa8072;">"BVIEW"</span>
 <span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"BVIEW"</span>
 <span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 08
@@ -947,7 +1111,7 @@ The skeleton was generated by the following code.  That skeleton has been fleshe
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> 19
+<span style="color: #00ffff;">GTO</span> 22
 <span style="color: #00ffff;">LBL</span> 00 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Application Exit</span>
 <span style="color: #00ffff;">EXITALL</span>
 <span style="color: #00ffff;">RTN</span>
@@ -975,52 +1139,52 @@ BWRAP
 <span style="color: #00ffff;">LBL</span> 18    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ROTXY</span>
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 20    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key AND</span>
+<span style="color: #00ffff;">LBL</span> 23    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key AND</span>
 <span style="color: #00ffff;">AND</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 21    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key OR</span>
+<span style="color: #00ffff;">LBL</span> 24    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key OR</span>
 <span style="color: #00ffff;">OR</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 22    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key XOR</span>
+<span style="color: #00ffff;">LBL</span> 25    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key XOR</span>
 XOR
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 23    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key NOT</span>
+<span style="color: #00ffff;">LBL</span> 26    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key NOT</span>
 <span style="color: #00ffff;">NOT</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 24    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key NEG</span>
+<span style="color: #00ffff;">LBL</span> 27    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key NEG</span>
 <span style="color: #00ffff;">BASE+/-</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 25    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key +</span>
+<span style="color: #00ffff;">LBL</span> 28    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key +</span>
 <span style="color: #00ffff;">BASE+</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 26    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key -</span>
+<span style="color: #00ffff;">LBL</span> 29    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key -</span>
 <span style="color: #00ffff;">BASE-</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 27    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#215;</span>
+<span style="color: #00ffff;">LBL</span> 30    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#215;</span>
 <span style="color: #00ffff;">BASE&#215;</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 28    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#247;</span>
+<span style="color: #00ffff;">LBL</span> 31    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#247;</span>
 <span style="color: #00ffff;">BASE&#247;</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 29    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key MOD</span>
+<span style="color: #00ffff;">LBL</span> 32    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key MOD</span>
 <span style="color: #00ffff;">MOD</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Free labels start at: 30</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Free labels start at: 33</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org04d6ea2" class="outline-3">
-<h3 id="org04d6ea2"><span class="section-number-3">3.3</span> Application Local Subroutines</h3>
+<div id="outline-container-org523c096" class="outline-3">
+<h3 id="org523c096"><span class="section-number-3">3.3</span> Application Local Subroutines</h3>
 <div class="outline-text-3" id="text-3-3">
 <div class="org-src-container">
-<pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ </span><span style="color: #ff7f24;">(ref:b#)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Number of bits set</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: an integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Number of 1 bits in IP(X)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Runtime complexity O(log_2(X))</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 51-53</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 70-72</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-10</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL "B#"</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"B#"</span>
@@ -1032,105 +1196,89 @@ XOR
 1
 <span style="color: #00ffff;">NOT</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NUM MASK CNT</span>
-<span style="color: #00ffff;">LBL</span> 51
+<span style="color: #00ffff;">LBL</span> 70
 <span style="color: #00ffff;">RCL ST</span> Y   <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">MASK NUM MASK CNT</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NUM MASK MASK CNT</span>
 <span style="color: #00ffff;">AND</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NUM_N MASK CNT</span>
 <span style="color: #00ffff;">LASTX</span>      <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NUM NUM_N MASK CNT</span>
 <span style="color: #00ffff;">X=Y</span>?
-<span style="color: #00ffff;">GTO</span> 52
+<span style="color: #00ffff;">GTO</span> 71
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Current bit was set: increment counter</span>
 R&#8595;         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NUM_N MASK CNT</span>
 1 
 <span style="color: #00ffff;">STO+ ST</span> T  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 NUM_N MASK CNT</span>
-<span style="color: #00ffff;">LBL</span> 52
+<span style="color: #00ffff;">LBL</span> 71
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Current bit was clear</span>
 R&#8595;         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NUM_N MASK CNT</span>
 <span style="color: #00ffff;">X=0</span>?
-<span style="color: #00ffff;">GTO</span> 53  
+<span style="color: #00ffff;">GTO</span> 72  
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Still have bits to check</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">MASK NUM_N CNT</span>
 -1
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NUM_N MASK CNT</span>
-<span style="color: #00ffff;">GTO</span> 51
-<span style="color: #00ffff;">LBL</span> 53
+<span style="color: #00ffff;">GTO</span> 70
+<span style="color: #00ffff;">LBL</span> 72
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">No bits left to check</span>
 R&#8595;         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">MASK CNT</span>
 R&#8595;         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CNT</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-MSKn" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MSKn)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Create integer with Y set bits located at bit X</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: MSKn "MSKn"</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer (LSB=0)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Integer with IP(X) least significant bits set</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Returns int with all 0 bits when X&lt;=0</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Returns int with all 1 bits when X&gt;=WSIZE?</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 54-55</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-20</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"MSKn"</span>
-<span style="color: #00ffff;">FUNC</span> 11                        <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">FUNC</span> 21                        <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>                          <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
-<span style="color: #00ffff;">IP</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
-<span style="color: #00ffff;">IP</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">All zeros case</span>
-<span style="color: #00ffff;">X&gt;0</span>?
-<span style="color: #00ffff;">GTO</span> 54
-0
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 54
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">All ones case</span>
-<span style="color: #00ffff;">WSIZE</span>?
-<span style="color: #00ffff;">X&gt;Y</span>?
-<span style="color: #00ffff;">GTO</span> 55
-0
-<span style="color: #00ffff;">NOT</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 55
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Some ones case</span>
-R&#8595;
-2
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MSKR"</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
-<span style="color: #00ffff;">Y&#8593;X</span>
-1
-<span style="color: #00ffff;">-</span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>
-<span style="color: #00ffff;">+/-</span>
-<span style="color: #00ffff;">ROTXY</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"SLn"</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-MSKL" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MSKL)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Create integer with left most X bits set</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Integer with IP(X) most significant bits set</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Returns int with all 0 bits when X&lt;=0</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Returns int with all 1 bits when X&gt;=WSIZE?</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-20</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"MSKL"</span>
+<span style="color: #00ffff;">FUNC</span> 11                        <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                          <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MSKR"</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"LJ"</span>
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-MSKR" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MSKR)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Create integer with right most X bits set</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: MSKR "MSKR"</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Integer with IP(X) least significant bits set</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Returns int with all 0 bits when X&lt;=0</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Returns int with all 1 bits when X&gt;=WSIZE?</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 56-57</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-20</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"MSKR"</span>
 <span style="color: #00ffff;">FUNC</span> 11                        <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>                          <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">All zeros case</span>
-<span style="color: #00ffff;">X&gt;0</span>?
-<span style="color: #00ffff;">GTO</span> 56
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">All zeros case?</span>
 0
+0&#8805;? ST Y
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 56
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">All ones case</span>
-<span style="color: #00ffff;">WSIZE</span>?
-<span style="color: #00ffff;">X&gt;Y</span>?
-<span style="color: #00ffff;">GTO</span> 57
+R&#8595;
 0
 <span style="color: #00ffff;">NOT</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">All ones case?</span>
+<span style="color: #00ffff;">XEQ</span> 67 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y&#8805;WSIZE?</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 57
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Some ones case</span>
 R&#8595;
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Some ones case</span>
 2
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">Y&#8593;X</span>
@@ -1138,73 +1286,27 @@ R&#8595;
 <span style="color: #00ffff;">-</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Create integer with left most X bits set</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: MSKL "MSKL"</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Integer with IP(X) most significant bits set</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Returns int with all 0 bits when X&lt;=0</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Returns int with all 1 bits when X&gt;=WSIZE?</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 58-59</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-20</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"MSKL"</span>
-<span style="color: #00ffff;">FUNC</span> 11                        <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>                          <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
-<span style="color: #00ffff;">IP</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">All zeros case</span>
-<span style="color: #00ffff;">X&gt;0</span>?
-<span style="color: #00ffff;">GTO</span> 58
-0
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 58
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">All ones case</span>
-<span style="color: #00ffff;">WSIZE</span>?
-<span style="color: #00ffff;">X&gt;Y</span>?
-<span style="color: #00ffff;">GTO</span> 59
-0
-<span style="color: #00ffff;">NOT</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 59
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Some ones case</span>
-R&#8595;
-<span style="color: #00ffff;">ENTER</span>
-2
-<span style="color: #00ffff;">X&lt;&gt;Y</span>
-<span style="color: #00ffff;">Y&#8593;X</span>
-1
-<span style="color: #00ffff;">-</span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>
-<span style="color: #00ffff;">ROTXY</span>
-<span style="color: #00ffff;">RTN</span>
-
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-SETB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SETB)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Set the Xth bit of Y</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
 <span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: An integer (0=LSB)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Integer with IP(X)th bit of Y set</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Y is returned unchanged  when X is out of range</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: When X out of range, the type Y is not error checked</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 60-61</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-20</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"SETB"</span>
 <span style="color: #00ffff;">FUNC</span> 21                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Do nothing if X negative</span>
-<span style="color: #00ffff;">X&#8805;0</span>?
-<span style="color: #00ffff;">GTO</span> 60
-R&#8595;
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Do nothing if X was negative</span>
+0&gt;? ST Y
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 60 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X is positive</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Do nothing if X&gt;= WSIZE</span>
-<span style="color: #00ffff;">WSIZE</span>?
-<span style="color: #00ffff;">X&gt;Y</span>?
-<span style="color: #00ffff;">GTO</span> 61
-R&#8595;
-R&#8595;
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Do nothing if X was &gt;= WSIZE</span>
+<span style="color: #00ffff;">XEQ</span> 67 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y&#8805;WSIZE?</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 61 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X is less than WSIZE</span>
-R&#8595;
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X must have been &gt;= 0 &amp; &lt; WSIZE</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
 1
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">+/-</span>
@@ -1212,34 +1314,28 @@ R&#8595;
 <span style="color: #00ffff;">OR</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-CLRB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (CLRB)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Clear the Xth bit in Y</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
 <span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: An integer (0=LSB)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Integer with IP(X)th bit of Y set</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Y is returned unchanged  when X is out of range</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: When X out of range, the type Y is not error checked</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 62-63</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-20</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"CLRB"</span>
 <span style="color: #00ffff;">FUNC</span> 21                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Do nothing if X negative</span>
-<span style="color: #00ffff;">X&#8805;0</span>?
-<span style="color: #00ffff;">GTO</span> 62
-R&#8595;
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">IP</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Do nothing if X was negative</span>
+0&gt;? ST Y
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 62 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X is positive</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Do nothing if X&gt;= WSIZE</span>
-<span style="color: #00ffff;">WSIZE</span>?
-<span style="color: #00ffff;">X&gt;Y</span>?
-<span style="color: #00ffff;">GTO</span> 63
-R&#8595;
-R&#8595;
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Do nothing if X was &gt;= WSIZE</span>
+<span style="color: #00ffff;">XEQ</span> 67 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y&#8805;WSIZE?</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 63 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X is less than WSIZE</span>
-R&#8595;
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X must have been &gt;= 0 &amp; &lt; WSIZE</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
 1
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">+/-</span>
@@ -1248,41 +1344,136 @@ R&#8595;
 <span style="color: #00ffff;">AND</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-GETB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (GETB)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Return the Xth bit of Y</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
 <span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: An integer (0=LSB)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: The IP(X)th bit of Y</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Returns 0 when X is out of range</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: When X out of range, type Y is not error checked</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 64-66</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 69</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-20</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"GETB"</span>
 <span style="color: #00ffff;">FUNC</span> 21                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Return 0 if X negative</span>
-<span style="color: #00ffff;">X&#8805;0</span>?
-<span style="color: #00ffff;">GTO</span> 64
 0
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Return 0 if X was negative</span>
+0&gt;? ST Y
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 64 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X is positive</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Return 0 if X&gt;= WSIZE</span>
-<span style="color: #00ffff;">WSIZE</span>?
-<span style="color: #00ffff;">X&gt;Y</span>?
-<span style="color: #00ffff;">GTO</span> 65
-0
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Return 0  if X was &gt;= WSIZE</span>
+<span style="color: #00ffff;">XEQ</span> 67 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y&#8805;WSIZE?</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 65 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X is less than WSIZE</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X must have been &gt;= 0 &amp; &lt; WSIZE</span>
 R&#8595;
 <span style="color: #00ffff;">BIT</span>?
-<span style="color: #00ffff;">GTO</span> 66
+<span style="color: #00ffff;">GTO</span> 69
 0
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 66
+<span style="color: #00ffff;">LBL</span> 69
 1
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-ASNB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ASNB)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Set the Yth bit of Z to X</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Z: An integer</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer (0=LSB)</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: An integer</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Set the IP(Y)th bit of IP(Z) to IP(X)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-20</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"ASNB"</span>
+<span style="color: #00ffff;">FUNC</span> 31                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">X=0</span>?
+<span style="color: #00ffff;">GTO</span> 54
+Rv
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"SETB"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 54
+Rv
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"CLRB"</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-GYaX" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (GYaX)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Return the Y bits of Z starting at bit X</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">EX:  Z: 111000 Y: 3 X: 2 -&gt; X: 110</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Z: An integer</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">Y: An integer</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: An integer (0=LSB)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: IP(Y) bits of IP(Z) starting at bit IP(X)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-21</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"GY@X"</span>
+<span style="color: #00ffff;">FUNC</span> 31                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">RCL ST</span> Z   <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Z     X     Y     Z</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X     Z     Y     Z</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"SRn"</span>  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SHF_Z Y     Z     Z</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y     SHF_Z Z     Z</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MSKR"</span> <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">MASK  SHF_Z Z     Z</span>
+<span style="color: #00ffff;">AND</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BITS  Z     Z     Z</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-CYaX" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (CYaX)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Clear Y bits of Z starting at bit X</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">EX:  Z: 111000 Y: 3 X: 2 -&gt; X: 100000</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Z: An integer</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">Y: An integer</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: An integer (0=LSB)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: IP(Z) with IP(Y) bits starting at bit IP(X) cleared</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-21</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"CY@X"</span>
+<span style="color: #00ffff;">FUNC</span> 31                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MSKn"</span>
+<span style="color: #00ffff;">NOT</span>
+<span style="color: #00ffff;">AND</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-SYaX" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SYaX)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Set Y bits of Z starting at bit X</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">EX:  Z: 111000 Y: 3 X: 2 -&gt; X: 111100</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Z: An integer</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">Y: An integer</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: An integer (0=LSB)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: IP(Z) with IP(Y) bits starting at bit IP(X) set</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-21</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"SY@X"</span>
+<span style="color: #00ffff;">FUNC</span> 31                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MSKn"</span>
+<span style="color: #00ffff;">OR</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-AZaY" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (AZaY)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Place Z bits of X into T starting at bit Y</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">EX:  T: 111000 Z: 3 Y: 2 X: 011 -&gt; X: 101100</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  T: An integer</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Z: An integer</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">Y: An integer</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: An integer (0=LSB)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: IP(Z) bits of IP(T) are set to IP(Z) bits of IP(X) starting at IP(Y)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-21</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"AZ@Y"</span>
+<span style="color: #00ffff;">FUNC</span> 41                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"TMPX"</span>
+Rv              <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">Y Z T T</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"TMPY"</span>
+Rv              <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">Z T T T</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"TMPZ"</span>     <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">Z T T T</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"TMPY"</span>      <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">Y Z T T</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MSKn"</span>
+<span style="color: #00ffff;">NOT</span>
+<span style="color: #00ffff;">AND</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TM T T T</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"TMPX"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"TMPZ"</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MSKR"</span>
+<span style="color: #00ffff;">AND</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"TMPY"</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"SLn"</span> 
+<span style="color: #00ffff;">OR</span>              <span style="color: #ffa500;">@@@@</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-SL" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SL)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Shift Left 1 Bit</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Integer shifted left 1 bit</span>
@@ -1292,12 +1483,12 @@ R&#8595;
 <span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 -1
 <span style="color: #00ffff;">ROTXY</span>
-1
+1 
 <span style="color: #00ffff;">NOT</span>
 <span style="color: #00ffff;">AND</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-SR" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SR)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Shift Right 1 Bit</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Integer shifted right 1 bit</span>
@@ -1312,9 +1503,8 @@ R&#8595;
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-RL" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (RL)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Rotate Left 1 Bit</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: RL "RL"</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Integer rotated left 1 bit</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"RL"</span>
@@ -1324,9 +1514,8 @@ R&#8595;
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-RR" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (RR)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Rotate Right 1 Bit</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: RR "RR"</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Integer rotated right 1 bit</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"RR"</span>
@@ -1336,45 +1525,38 @@ R&#8595;
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-SLn" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SLn)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Shift Y Left X Bits</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: X shifted left IP(Y) bit(s)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Y is returned unchanged when X is zero or negative</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: 0 is returned when X&gt;=WSIZE</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: The type Y is not error checked when X&lt;=0 or X&gt;=WSIZE</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 67-68</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: IP(Y) shifted left IP(Y) bit(s)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: IP(Y) is returned unchanged when IP(X) is zero or negative</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: 0 is returned when IP(X)&gt;=WSIZE</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-20</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"SLn"</span>
 <span style="color: #00ffff;">FUNC</span> 21                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
-<span style="color: #00ffff;">X&gt;0</span>?
-<span style="color: #00ffff;">GTO</span> 67
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X&lt;=0 =&gt; Return 0</span>
-R&#8595;
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">IP</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Return Y if X was negative</span>
+0&#8805;? ST Y
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 67
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X&gt;0</span>
-<span style="color: #00ffff;">WSIZE</span>?
-<span style="color: #00ffff;">X&gt;Y</span>?
-<span style="color: #00ffff;">GTO</span> 68
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X&gt;=WSIZE =&gt; Return 0</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
 0
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Return 0 if X was &gt;= WSIZE</span>
+<span style="color: #00ffff;">XEQ</span> 67 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y&#8805;WSIZE?</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 68
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X&gt;0 &amp; X&lt;WSIZE</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X must have been &gt; 0 &amp; &lt; WSIZE</span>
 R&#8595;
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
-<span style="color: #00ffff;">RCL ST</span> Y
+<span style="color: #00ffff;">RCL ST</span> Y  
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Rotate left X bits</span>
 <span style="color: #00ffff;">+/-</span>
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Zap the right most X bits</span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>
 2
-<span style="color: #00ffff;">X&lt;&gt;Y</span>  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Use X&lt;&gt;Y twice instead of "RCL ST Z" to minimize stack lift</span>
+<span style="color: #00ffff;">RCL ST</span> Z
 <span style="color: #00ffff;">Y&#8593;X</span>
 1
 <span style="color: #00ffff;">-</span>
@@ -1382,39 +1564,33 @@ R&#8595;
 <span style="color: #00ffff;">AND</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-SRn" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SRn)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Shift Y Right X Bits</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: X shifted right IP(Y) bit(s)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Y is returned unchanged when X is zero or negative</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: 0 is returned when X&gt;=WSIZE</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: The type Y is not error checked when X&lt;=0 or X&gt;=WSIZE</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 69-70</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: IP(Y) shifted right IP(X) bit(s)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: IP(Y) is returned unchanged when IP(X) is zero or negative</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: 0 is returned when IP(X)&gt;=WSIZE</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-20</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"SRn"</span>
 <span style="color: #00ffff;">FUNC</span> 21                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
-<span style="color: #00ffff;">X&gt;0</span>?
-<span style="color: #00ffff;">GTO</span> 69
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X&lt;=0 =&gt; Return Y</span>
-R&#8595;
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">IP</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Return Y if X was negative</span>
+0&#8805;? ST Y
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 69
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X&gt;-</span>
-<span style="color: #00ffff;">WSIZE</span>?
-<span style="color: #00ffff;">X&gt;Y</span>?
-<span style="color: #00ffff;">GTO</span> 70
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X&gt;= WSIZE =&gt; Return 0</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
 0
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Return 0 if X was &gt;= WSIZE</span>
+<span style="color: #00ffff;">XEQ</span> 67 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y&#8805;WSIZE?</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 70
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X&gt;0 &amp; X&lt;WSIZE</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X must have been &gt; 0 &amp; &lt; WSIZE</span>
 R&#8595;
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Zap the right most X bits</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">RCL ST</span> Y
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Zap the right most X bits</span>
 2
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">Y&#8593;X</span>
@@ -1427,79 +1603,77 @@ R&#8595;
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-RLn" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (RLn)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Rotate Y Left by X bits</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: X rotated left IP(Y) bit(s)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Y is returned unchanged when X is zero or negative</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: The type Y is not error checked when X&lt;=0</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 71</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-20</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"RLn"</span>
 <span style="color: #00ffff;">FUNC</span> 21                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
-<span style="color: #00ffff;">X&gt;0</span>?
-<span style="color: #00ffff;">GTO</span> 71
-R&#8595;
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Return Y if X was negative</span>
+0&#8805;? ST Y
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 71  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X is positive</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X was positive</span>
 <span style="color: #00ffff;">+/-</span>
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-RRn" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (RRn)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Rotate Y Right by X bits</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: X rotated right ABS(IP(Y)) bit(s)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Y is returned unchanged when X is zero or negative</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: The type Y is not error checked when X&lt;=0</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 72</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-20</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"RRn"</span>
 <span style="color: #00ffff;">FUNC</span> 21                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
-<span style="color: #00ffff;">X&gt;0</span>?
-<span style="color: #00ffff;">GTO</span> 72
-R&#8595;
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Return Y if X was negative</span>
+0&#8805;? ST Y
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 72  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X is positive</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X was positive</span>
 <span style="color: #00ffff;">ROTXY</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-SHFXY" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SHFXY)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Shift X by Y Bits (left when Y negative)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Integer shifted by IP(Y) bit(s)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Uses SLn &amp; SLr.</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 49-50</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 59</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-20</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"SHFXY"</span>
 <span style="color: #00ffff;">FUNC</span> 21                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
 <span style="color: #00ffff;">X&lt;0</span>?
-<span style="color: #00ffff;">GTO</span> 49
-<span style="color: #00ffff;">GTO</span> 50
-<span style="color: #00ffff;">LBL</span> 49 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X negative -- shift left</span>
+<span style="color: #00ffff;">GTO</span> 59
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X is non-negative -- shift right</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"SRn"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 59 
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X negative -- shift left</span>
 <span style="color: #00ffff;">+/-</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"SLn"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 50 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X non-negative -- shift right</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"SRn"</span>
-<span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-RJ" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (RJ)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Right Justify Bits</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: an integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Y: Number of shifts required to justify</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Justified number</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Like the HP-16c's LJ funciton, but justifies in the other direction</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 46-48</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 56-58</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-20</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"RJ"</span>
 <span style="color: #00ffff;">FUNC</span> 12                        <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
@@ -1507,29 +1681,29 @@ R&#8595;
 <span style="color: #00ffff;">IP</span>
 0
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
-<span style="color: #00ffff;">LBL</span> 47
+<span style="color: #00ffff;">LBL</span> 57
 0
 <span style="color: #00ffff;">BIT</span>?
-<span style="color: #00ffff;">GTO</span> 46
-<span style="color: #00ffff;">GTO</span> 48
-<span style="color: #00ffff;">LBL</span> 46   <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LSB is one -- DONE!</span>
+<span style="color: #00ffff;">GTO</span> 56
+<span style="color: #00ffff;">GTO</span> 58
+<span style="color: #00ffff;">LBL</span> 56   <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LSB is one -- DONE!</span>
 R&#8595;
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 48   <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LSB is zero</span>
+<span style="color: #00ffff;">LBL</span> 58   <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LSB is zero</span>
 R&#8595;
 1
 <span style="color: #00ffff;">STO+ ST</span> Z
 <span style="color: #00ffff;">ROTXY</span>
-<span style="color: #00ffff;">GTO</span> 47
+<span style="color: #00ffff;">GTO</span> 57
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-LJ" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (LJ)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Left Justify Bits</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: an integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Y: Number of shifts required to justify</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Justified number</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Just like the HP-16c's LJ funciton</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 41-43</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 64-66</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-20</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"LJ"</span>
 <span style="color: #00ffff;">FUNC</span> 12                        <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
@@ -1537,28 +1711,27 @@ R&#8595;
 <span style="color: #00ffff;">IP</span>
 0
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
-<span style="color: #00ffff;">LBL</span> 41
+<span style="color: #00ffff;">LBL</span> 64
 <span style="color: #00ffff;">WSIZE</span>?
 1
 <span style="color: #00ffff;">-</span>
 <span style="color: #00ffff;">BIT</span>?
-<span style="color: #00ffff;">GTO</span> 42
-<span style="color: #00ffff;">GTO</span> 43
-<span style="color: #00ffff;">LBL</span> 42   <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">MSB is one -- DONE!</span>
+<span style="color: #00ffff;">GTO</span> 65
+<span style="color: #00ffff;">GTO</span> 66
+<span style="color: #00ffff;">LBL</span> 65   <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">MSB is one -- DONE!</span>
 R&#8595;
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 43   <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">MSB is zero</span>
+<span style="color: #00ffff;">LBL</span> 66   <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">MSB is zero</span>
 R&#8595;
 1
 <span style="color: #00ffff;">STO+ ST</span> Z
 <span style="color: #00ffff;">+/-</span>
 <span style="color: #00ffff;">ROTXY</span>
-<span style="color: #00ffff;">GTO</span> 41
+<span style="color: #00ffff;">GTO</span> 64
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-ISQRT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ISQRT)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Integer square root</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: ISQRT "ISQRT"</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: a non-negative real number</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: IP(SQRT(ABS(X)))</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
@@ -1570,9 +1743,8 @@ R&#8595;
 <span style="color: #00ffff;">IP</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-ILN2" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ILN2)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Integer base 2 log</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: ILN2 "ILN2"</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: a positive real number</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: IP(log_2(ABS(X)))</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
@@ -1587,25 +1759,22 @@ R&#8595;
 <span style="color: #00ffff;">IP</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-MSSB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MSSB)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Position of the Most Significant Set Bit</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: MSSB "MSSB"</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Position of MSSB in IP(X) or -1 if IP(X) was 0</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">USE: LJ</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Runtime Complexity O(WSIZE-log_2(X))</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Closely related to LJ program</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used 41-43</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"MSSB"</span>
 <span style="color: #00ffff;">FUNC</span> 11                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
-<span style="color: #00ffff;">X&#8800;0</span>?
-<span style="color: #00ffff;">GTO</span> 44
 -1
+0&#8800;? ST Y
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 44 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X not zero</span>
+R&#8595;
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"LJ"</span>
 1
 <span style="color: #00ffff;">+</span>
@@ -1614,9 +1783,8 @@ R&#8595;
 <span style="color: #00ffff;">-</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-LSSB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (LSSB)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Position of the Least Significant Set Bit</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: LSSB "LSSB"</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Position of LSSB in IP(X) or -1 if IP(X) was 0</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-03-16</span>
@@ -1626,11 +1794,10 @@ R&#8595;
 <span style="color: #00ffff;">FUNC</span> 11                       <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
-<span style="color: #00ffff;">X&#8800;0</span>?
-<span style="color: #00ffff;">GTO</span> 45
 -1
+0&#8800;? ST Y
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 45 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X not zero</span>
+R&#8595;
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"RJ"</span>
 <span style="color: #00ffff;">RTN</span>
 
@@ -1736,6 +1903,120 @@ R&#8595;
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">HEXM</span>
 <span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Test if Y&lt;WSIZE</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: Y&#8805;WSIZE? 67</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">I/O: No stack change.  Uses Y</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">RET: YES if Y&#8805;WSIZE, NO otherwise</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-21</span>
+<span style="color: #00ffff;">LBL</span> 67
+<span style="color: #00ffff;">FUNC</span> 00
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">WSIZE</span>?
+<span style="color: #00ffff;">X&gt;Y</span>?
+<span style="color: #00ffff;">RTNNO</span>
+<span style="color: #00ffff;">RTNYES</span>
+
+<span id="coderef-REVBIT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (REVBIT)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Reverse Bits rightmost X bits of Y</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: REVBIT</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: An integer</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: An integer</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-21</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"REVNB"</span>
+<span style="color: #00ffff;">FUNC</span> 11
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">ENTER</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X X Y</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MSKR"</span>      <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">M X Y</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X M Y</span>
+1
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"MBC"</span>
+1000
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"CTR"</span>
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">M Y</span>
+<span style="color: #00ffff;">RCL ST</span> Y        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y M Y</span>
+<span style="color: #00ffff;">OR</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">N Y</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OLD NEW </span>
+<span style="color: #00ffff;">LBL</span> 51
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"CTR"</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CTR OLD NEW </span>
+<span style="color: #00ffff;">IP</span>
+<span style="color: #00ffff;">BIT</span>?
+<span style="color: #00ffff;">GTO</span> 52
+Rv
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"CTR"</span>
+<span style="color: #00ffff;">IP</span>
+<span style="color: #00ffff;">RCL-</span> <span style="color: #fa8072;">"MBC"</span>
+1
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">ROTXY</span>
+<span style="color: #00ffff;">NOT</span>
+<span style="color: #00ffff;">AND</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">ENTER</span>
+<span style="color: #00ffff;">LBL</span> 52
+R&#8595;
+<span style="color: #00ffff;">ISG</span> <span style="color: #fa8072;">"CTR"</span>
+<span style="color: #00ffff;">GTO</span> 51
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-REVBIT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (REVBIT)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Reverse all Bits of X</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: REVBIT</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: An integer</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: An integer</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-21</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"REVB"</span>
+<span style="color: #00ffff;">FUNC</span> 11
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">WSIZE</span>?
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"REVNB"</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-POPRB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (POPRB)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Shift rihtmost X bits off Y.</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: An integer (number of bits)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Y: Part of Y left</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: Part of Y shifted off</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"POPRB"</span>
+<span style="color: #00ffff;">FUNC</span> 22
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">RCL ST</span> Y     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y   X   Y   ?</span>
+<span style="color: #00ffff;">RCL ST</span> Y     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X   Y   X   Y</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"SRn"</span>    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LFT X   Y   Y</span>
+<span style="color: #00ffff;">RCL ST</span> Z     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y   LFT X   Y</span>
+<span style="color: #00ffff;">RCL ST</span> Z     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X   Y   LFT X</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MSKR"</span>   <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">MSK Y   LFT X</span>
+<span style="color: #00ffff;">AND</span>          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">POP LFT X   Y</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-POPLB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (POPLB)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Shift leftmost X bits off Y.</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: An integer</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: An integer (number of bits)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Y: Part of Y left</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: Part of Y shifted off</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"POPLB"</span>
+<span style="color: #00ffff;">FUNC</span> 22
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">RCL ST</span> Y     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y   X   Y   ?</span>
+<span style="color: #00ffff;">RCL ST</span> Y     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X   Y   X   Y</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"SLn"</span>    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LFT X   Y   Y</span>
+<span style="color: #00ffff;">RCL ST</span> Z     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y   LFT X   Y</span>
+<span style="color: #00ffff;">RCL ST</span> Z     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X   Y   LFT X</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MSKL"</span>   <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">MSK Y   LFT X</span>
+<span style="color: #00ffff;">AND</span>          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">PS  LFT X   Y</span>
+<span style="color: #00ffff;">RCL ST</span> Z
+<span style="color: #00ffff;">+/-</span>
+<span style="color: #00ffff;">ROTXY</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">POP LFT X   Y</span>
 <span style="color: #00ffff;">RTN</span>
 
 <span id="coderef-BVIEW" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (BVIEW)</span>
@@ -1869,13 +2150,13 @@ R&#8595;
 <span style="color: #00ffff;">&#247;</span>
 <span style="color: #00ffff;">FP</span>
 <span style="color: #00ffff;">X=0</span>?
-<span style="color: #00ffff;">GTO</span> 40
-<span style="color: #00ffff;">GTO</span> 39
-<span style="color: #00ffff;">LBL</span> 40               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-THEN</span>
+<span style="color: #00ffff;">GTO</span> 55
+<span style="color: #00ffff;">GTO</span> 68
+<span style="color: #00ffff;">LBL</span> 55               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-THEN</span>
 R&#8595;
 0
 <span style="color: #00ffff;">GTO</span> 77
-<span style="color: #00ffff;">LBL</span> 39               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-ELSE</span>
+<span style="color: #00ffff;">LBL</span> 68               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-ELSE</span>
 R&#8595;
 2
 <span style="color: #00ffff;">LBL</span> 77               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF-END</span>
@@ -1933,22 +2214,22 @@ R&#8595;
 <span style="color: #00ffff;">FUNC</span> 30      <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>        <span style="color: #ffa500;">@@</span><span style="color: #ff7f24;">## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
-35
+60
 <span style="color: #00ffff;">+</span>
 <span style="color: #00ffff;">XEQ IND ST</span> X
 R&#8595;
 <span style="color: #00ffff;">AGRAPH</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 35       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 0</span>
+<span style="color: #00ffff;">LBL</span> 60       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 0</span>
 <span style="color: #fa8072;">"&#8226;&#956;&#8226;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11111 #b10001 #b11111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 36       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 1</span>
+<span style="color: #00ffff;">LBL</span> 61       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 1</span>
 <span style="color: #fa8072;">"&#163;&#8226;&#8592;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b10010 #b11111 #b10000</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 37       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 0</span>
+<span style="color: #00ffff;">LBL</span> 62       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 0</span>
 <span style="color: #fa8072;">"_Q_"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011111 #b1010001 #b1011111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 38       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 1</span>
+<span style="color: #00ffff;">LBL</span> 63       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 1</span>
 <span style="color: #fa8072;">"R_P"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1010010 #b1011111 #b1010000</span>
 <span style="color: #00ffff;">RTN</span>
 
@@ -1960,8 +2241,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-orge7b034f" class="outline-2">
-<h2 id="orge7b034f"><span class="section-number-2">4</span> EOF</h2>
+<div id="outline-container-orgd6120c9" class="outline-2">
+<h2 id="orgd6120c9"><span class="section-number-2">4</span> EOF</h2>
 <div class="outline-text-2" id="text-4">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1972,7 +2253,7 @@ R&#8595;
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-20 Tue 22:25 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-21 Wed 23:44 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
 </div>
 </body>
 </html>

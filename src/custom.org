@@ -84,46 +84,28 @@ The other columns of the table are not used.
 
 #+ATTR_HTML: :rules groups :frame box :align center
 #+NAME: cust
-| Menu            | Function/Program |                                               |
-|-----------------+------------------+-----------------------------------------------|
-| SFUN:HYP        | HYPTRG           | https://richmit.github.io/hp42/math.html      |
-| SFUN:L&P        | LPRT             | https://richmit.github.io/hp42/math.html      |
-|-----------------+------------------+-----------------------------------------------|
-| SFUN:PERC:%T    |                  | https://richmit.github.io/hp42/math.html      |
-| SFUN:PERC:%CH   |                  |                                               |
-| SFUN:PERC:%     |                  |                                               |
-|-----------------+------------------+-----------------------------------------------|
-| SFUN:PROB:COMB  |                  |                                               |
-| SFUN:PROB:PERM  |                  |                                               |
-| SFUN:PROB:▒▒▒▒  |                  |                                               |
-| SFUN:PROB:GAMMA |                  |                                               |
-| SFUN:PROB:BETA  |                  | https://richmit.github.io/hp42/math.html      |
-| SFUN:PROB:▒▒▒▒  |                  |                                               |
-| SFUN:PROB:NPDF  |                  | https://richmit.github.io/hp42/math.html      |
-| SFUN:PROB:NCDF  |                  | https://richmit.github.io/hp42/math.html      |
-|-----------------+------------------+-----------------------------------------------|
-| SFUN:INT:IDIV   | BASE÷            |                                               |
-| SFUN:INT:MOD    |                  |                                               |
-| SFUN:INT:▒▒▒▒   |                  |                                               |
-| SFUN:INT:GCD    |                  | https://richmit.github.io/hp42/math.html      |
-| SFUN:INT:LCM    |                  | https://richmit.github.io/hp42/math.html      |
-|-----------------+------------------+-----------------------------------------------|
-| SFUN:CPLXF      |                  | https://richmit.github.io/hp42/math.html      |
-| SFUN:TRIG       | TRIG             | https://richmit.github.io/hp42/math.html      |
-| SFUN:ERR        | ERRFUN           | https://richmit.github.io/hp42/math.html      |
-|-----------------+------------------+-----------------------------------------------|
-| MATH:POLY       |                  | https://richmit.github.io/hp42/math.html      |
-| MATH:FMENU      |                  | https://richmit.github.io/hp42/pgmforfun.html |
-| MATH:VEC3       |                  | https://richmit.github.io/hp42/math.html      |
-|-----------------+------------------+-----------------------------------------------|
-| BASE            |                  | https://richmit.github.io/hp42/base.html      |
-| PHIL            |                  | https://richmit.github.io/hp42/phil.html      |
-| MEAS            |                  | https://richmit.github.io/hp42/meas.html      |
-| DATE            | DMENU            | https://richmit.github.io/hp42/date.html      |
-| CONS            |                  | https://richmit.github.io/hp42/cons.html      |
-| UNIT            |                  | https://richmit.github.io/hp42/unit.html      |
-| ▒▒▒▒            |                  |                                               |
-|-----------------+------------------+-----------------------------------------------|
+| Menu      | Function/Program |                                               |
+|-----------+------------------+-----------------------------------------------|
+| SFUN:TRIG | TRIG             | https://richmit.github.io/hp42/math.html      |
+| SFUN:HYP  | HYPTRG           | https://richmit.github.io/hp42/math.html      |
+| SFUN:L&P  | LPRT             | https://richmit.github.io/hp42/math.html      |
+| SFUN:PERC | PERCFN           | https://richmit.github.io/hp42/math.html      |
+| SFUN:BINO |                  | https://richmit.github.io/hp42/math.html      |
+| SFUN:INT  | INTFUN           | https://richmit.github.io/hp42/math.html      |
+| SFUN:CPLX | CPLXF            | https://richmit.github.io/hp42/math.html      |
+| SFUN:ERR  | ERRFUN           | https://richmit.github.io/hp42/math.html      |
+|-----------+------------------+-----------------------------------------------|
+| MATH:POLY |                  | https://richmit.github.io/hp42/math.html      |
+| MATH:FUNC | FMENU            | https://richmit.github.io/hp42/pgmforfun.html |
+| MATH:VEC3 |                  | https://richmit.github.io/hp42/math.html      |
+|-----------+------------------+-----------------------------------------------|
+| BASE      |                  | https://richmit.github.io/hp42/base.html      |
+| PHIL      |                  | https://richmit.github.io/hp42/phil.html      |
+| MEAS      |                  | https://richmit.github.io/hp42/meas.html      |
+| DATE      | DMENU            | https://richmit.github.io/hp42/date.html      |
+| CONS      |                  | https://richmit.github.io/hp42/cons.html      |
+| UNIT      |                  | https://richmit.github.io/hp42/unit.html      |
+|-----------+------------------+-----------------------------------------------|
 
 ** Menu Code
 
@@ -172,18 +154,18 @@ STOP
 GTO 02
 LBL 03            @@@@ Page 1 of menu SFUN
 CLMENU
+"TRIG"
+KEY 1 XEQ "TRIG"
 "HYP"
-KEY 1 XEQ "HYPTRG"
+KEY 2 XEQ "HYPTRG"
 "L&P"
-KEY 2 XEQ "LPRT"
+KEY 3 XEQ "LPRT"
 "PERC"
-KEY 3 GTO 06
-"PROB"
-KEY 4 GTO 07
+KEY 4 XEQ "PERCFN"
+"BINO"
+KEY 5 XEQ "BINO"
 "INT"
-KEY 5 GTO 08
-"CPLXF"
-KEY 6 XEQ "CPLXF"
+KEY 6 XEQ "INTFUN"
 KEY 7 GTO 05
 KEY 8 GTO 05
 KEY 9 GTO 01
@@ -192,8 +174,8 @@ STOP
 GTO 03
 LBL 05            @@@@ Page 2 of menu SFUN
 CLMENU
-"TRIG"
-KEY 1 XEQ "TRIG"
+"CPLX"
+KEY 1 XEQ "CPLXF"
 "ERR"
 KEY 2 XEQ "ERRFUN"
 KEY 7 GTO 03
@@ -202,65 +184,11 @@ KEY 9 GTO 01
 MENU
 STOP
 GTO 05
-LBL 06            @@@@ Page 1 of menu PERC
-CLMENU
-"%T"
-KEY 1 XEQ "%T"
-"%CH"
-KEY 2 XEQ 09
-"%"
-KEY 3 XEQ 10
-KEY 9 GTO 03
-MENU
-STOP
-GTO 06
-LBL 07            @@@@ Page 1 of menu PROB
-CLMENU
-"COMB"
-KEY 1 XEQ 12
-"PERM"
-KEY 2 XEQ 13
-"GAMMA"
-KEY 4 XEQ 14
-"BETA"
-KEY 5 XEQ "BETA"
-KEY 7 GTO 11
-KEY 8 GTO 11
-KEY 9 GTO 03
-MENU
-STOP
-GTO 07
-LBL 11            @@@@ Page 2 of menu PROB
-CLMENU
-"NPDF"
-KEY 1 XEQ "NPDF"
-"NCDF"
-KEY 2 XEQ "NCDF"
-KEY 7 GTO 07
-KEY 8 GTO 07
-KEY 9 GTO 03
-MENU
-STOP
-GTO 11
-LBL 08            @@@@ Page 1 of menu INT
-CLMENU
-"IDIV"
-KEY 1 XEQ 15
-"MOD"
-KEY 2 XEQ 16
-"GCD"
-KEY 4 XEQ "GCD"
-"LCM"
-KEY 5 XEQ "LCM"
-KEY 9 GTO 03
-MENU
-STOP
-GTO 08
 LBL 04            @@@@ Page 1 of menu MATH
 CLMENU
 "POLY"
 KEY 1 XEQ "POLY"
-"FMENU"
+"FUNC"
 KEY 2 XEQ "FMENU"
 "VEC3"
 KEY 3 XEQ "VEC3"
@@ -271,28 +199,7 @@ GTO 04
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 09    @@@@ Action for menu key %CH
-%CH
-RTN
-LBL 10    @@@@ Action for menu key %
-%
-RTN
-LBL 12    @@@@ Action for menu key COMB
-COMB
-RTN
-LBL 13    @@@@ Action for menu key PERM
-PERM
-RTN
-LBL 14    @@@@ Action for menu key GAMMA
-GAMMA
-RTN
-LBL 15    @@@@ Action for menu key IDIV
-BASE÷
-RTN
-LBL 16    @@@@ Action for menu key MOD
-MOD
-RTN
-@@@@ Free labels start at: 17
+@@@@ Free labels start at: 6
 #+end_src
 
 * Create system =CUSTOM= Menu

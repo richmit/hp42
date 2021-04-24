@@ -74,7 +74,7 @@ This org-mode file collects together a handful of mathematical stuff I find usef
 | CARG  | Complex argument of a number or matrix                                     |
 |-------+----------------------------------------------------------------------------|
 
-*** Menu Code
+** Menu Code
 
 #+BEGIN_SRC elisp :var tbl=CPLXF :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "CPLXF" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
@@ -107,7 +107,7 @@ RTN
 @@@@ Free labels start at: 2
 #+end_src
 
-** Local Functions
+** Functions
 
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RPART)
@@ -368,7 +368,56 @@ RTN
 END
 #+END_SRC
 
-* =%T=: Percentage of total (just like hp-12c button)
+* =PERCFN=: Percentages
+** Menu
+:PROPERTIES:
+:CUSTOM_ID: menu-percfn
+:END:
+
+#+ATTR_HTML: :align center :frame box :rules all
+#+NAME:PERCFN
+| Menu | Description                      |                  |                 |
+|------+----------------------------------+------------------+-----------------|
+| %T   | Percentage of total              | Y: TOTAL X: PART | X: % of Total   |
+| %CH  | percentage of change from Y to X | Y: OLD X: New    | X: % Change     |
+| %    | Percentage                       | Y: Y X: X        | Y: Y X: X% of Y |
+
+** Menu Code
+
+#+BEGIN_SRC elisp :var tbl=PERCFN :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+(MJR-generate-42-menu-code "PERCFN" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
+#+END_SRC
+
+#+RESULTS:
+#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PERCFN)
+@@@@ DSC: Auto-generated menu program
+LBL "PERCFN"
+LBL 01            @@@@ Page 1 of menu PERCFN
+CLMENU
+"%T"
+KEY 1 XEQ "%T"
+"%CH"
+KEY 2 XEQ 02
+"%"
+KEY 3 XEQ 03
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 00 @@@@ Application Exit
+EXITALL
+RTN
+LBL 02    @@@@ Action for menu key %CH
+%CH
+RTN
+LBL 03    @@@@ Action for menu key %
+%
+RTN
+@@@@ Free labels start at: 4
+#+end_src
+
+** Functions
 
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PTOT)
@@ -385,18 +434,203 @@ X<>Y
 100
 ×
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 #+END_SRC
 
-* =GCD=, =LCM=: Greatest Common Denominator & Least Common Multiple
+* =INTFUN=: Integer related functions
+** Menu
+:PROPERTIES:
+:CUSTOM_ID: menu-intfun
+:END:
 
-#+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
+#+ATTR_HTML: :align center :frame box :rules all
+#+NAME:INTFUN
+| Menu | LBL   | Description                                 |
+|------+-------+---------------------------------------------|
+| FLOR | FLOOR | Truncate toward negative infinity           |
+| CEIL |       | Truncate toward positive infinity           |
+| ROND | ROUND | Truncate toward nearest integer (even rule) |
+| TRUN | IP    | Truncate toward zero                        |
+|      |       |                                             |
+| FP   |       |                                             |
+|------+-------+---------------------------------------------|
+| GCD  |       | Greatest Common Denominator                 |
+| LCM  |       | Least Common Multiple                       |
+|      |       |                                             |
+|      |       |                                             |
+| DIV  | BASE÷ |                                             |
+| REM  | MOD   |                                             |
+|------+-------+---------------------------------------------|
+
+** Menu Code
+
+#+BEGIN_SRC elisp :var tbl=INTFUN :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+(MJR-generate-42-menu-code "INTFUN" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
+#+END_SRC
+
+#+RESULTS:
+#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:INTFUN)
+@@@@ DSC: Auto-generated menu program
+LBL "INTFUN"
+LBL 01            @@@@ Page 1 of menu INTFUN
+CLMENU
+"FLOR"
+KEY 1 XEQ "FLOOR"
+"CEIL"
+KEY 2 XEQ "CEIL"
+"ROND"
+KEY 3 XEQ "ROUND"
+"TRUN"
+KEY 4 XEQ 03
+"FP"
+KEY 6 XEQ 04
+KEY 7 GTO 02
+KEY 8 GTO 02
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 02            @@@@ Page 2 of menu INTFUN
+CLMENU
+"GCD"
+KEY 1 XEQ "GCD"
+"LCM"
+KEY 2 XEQ "LCM"
+"DIV"
+KEY 5 XEQ 05
+"REM"
+KEY 6 XEQ 06
+KEY 7 GTO 01
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 02
+LBL 00 @@@@ Application Exit
+EXITALL
+RTN
+LBL 03    @@@@ Action for menu key TRUN
+IP
+RTN
+LBL 04    @@@@ Action for menu key FP
+FP
+RTN
+LBL 05    @@@@ Action for menu key DIV
+BASE÷
+RTN
+LBL 06    @@@@ Action for menu key REM
+MOD
+RTN
+@@@@ Free labels start at: 7
+#+end_src
+
+** Functions
+
+#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ROUND)
+@@@@ DSC: Properly round to integer.  N.5 rounded to nearest even number.
+@@@@ IN:  X: real number
+@@@@ OUT: X: floor(X)
+@@@@ UPD: 2021-02-23
+@@@@ TST: free42_3.0
+@@@@ TC:  -2.0 -2 →Int
+@@@@ TC:  -1.6 -2 →Nearest
+@@@@ TC:  -1.5 -2 →Even
+@@@@ TC:  -1.4 -1 →Nearest
+@@@@ TC:  -1.0 -1 →Int
+@@@@ TC:  -1.6 -1 →Nearest
+@@@@ TC:  -0.5  0 Even Rule
+@@@@ TC:  -0.4  0 →Nearest
+@@@@ TC:   0.0  0 →Int
+@@@@ TC:   0.4  0 →Nearest
+@@@@ TC:   0.5  0 Even Rule
+@@@@ TC:   1.6  1 →Nearest
+@@@@ TC:   1.0  1 →Int
+@@@@ TC:   1.4  1 →Nearest
+@@@@ TC:   1.5  2 →Even
+@@@@ TC:   1.6  2 →Nearest
+@@@@ TC:   2.0  2 →Int
+LBL "ROUND"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+ENTER     @@@@ X        X
+FP        @@@@ FP       X
+ABS       @@@@ |FP|     X
+0.5       @@@@ 1/2      |FP|     X
+-         @@@@ |FP|-1/2 X
+X<>Y      @@@@ X        |FP|-1/2 X
+SIGN      @@@@ SGN      |FP|-1/2 X 
+LASTX     @@@@ X        SGN      |FP|-1/2 X 
+IP        @@@@ IP(X)    SGN      |FP|-1/2 X 
+0=? ST Z
+GTO 92
+0<? ST Z
++
+RTN
+LBL 92 
+@@@@ FP=1/2
+XEQ 93 @@@@ ODD?
++
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: RETYES if X is odd, RTNNO otherwise
+LBL 93 @@@@ ODD?
+FUNC 00
+L4STK
+2
+÷
+FP
+X=0?
+RTNNO
+RTNYES
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FLOOR)
+@@@@ DSC: Floor -- Round toward negative infinity
+@@@@ IN:  X: real number
+@@@@ OUT: X: floor(X)
+@@@@ UPD: 2021-02-23
+@@@@ TST: free42_3.0
+LBL "FLOOR"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+FP
+LASTX
+IP
+0≤? ST Y
+RTN
+1
+-
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CEIL)
+@@@@ DSC: Ceiling -- Round toward positive infinity
+@@@@ IN:  X: real number
+@@@@ OUT: X: ceil(X)
+@@@@ UPD: 2021-02-23
+@@@@ TST: free42_3.0
+LBL "CEIL"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+FP
+LASTX
+IP
+0≥? ST Y
+RTN
+1
++
+RTN
+
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:GCD)
 @@@@ DSC: GCD
 @@@@ IN:  Y: real number
 @@@@      X: real number
 @@@@ OUT: X: GCD(|IP(X)|, |IP(X)|)
-@@@@ LBL: 01
+@@@@ LBL: 91
 @@@@ UPD: 2021-04-22
 @@@@ TST: free42_3.0
 LBL "GCD"
@@ -409,11 +643,11 @@ ABS
 IP
 X>Y?
 X<>Y
-LBL 01
+LBL 91
 STO ST Z
 MOD
 X>0?
-GTO 01
+GTO 91
 R↓
 RTN
 
@@ -423,41 +657,94 @@ RTN
 @@@@      X: real number
 @@@@ OUT: X: LCM(|IP(X)|, |IP(X)|)
 @@@@ USE: GCD
-@@@@ LBL: 02-03
 @@@@ UPD: 2021-04-22
 @@@@ TST: free42_3.0
 LBL "LCM"
 FUNC 21              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
-ABS
-IP
-X≠0?
-GTO 02
-0
-RTN
-LBL 02
-LSTO "TMPX"
-X<>Y
-ABS
-IP
-X≠0?
-GTO 03
-0
-RTN
-LBL 03
-LSTO "TMPY"
-XEQ "GCD"
-RCL "TMPX"
-X<>Y
-÷
-RCL× "TMPY"
+ABS                  @@@@ |X|             Y
+IP                   @@@@ IP(|X|)         Y
+X=0?                                      
+RTN                                       
+X<>Y                 @@@@ Y               IP(|X|) 
+ABS                  @@@@ |Y|             IP(|X|) 
+IP                   @@@@ IP(|Y|)         IP(|X|) 
+X=0?                                      
+RTN                                       
+RCL ST Y             @@@@ IP(|X|)         IP(|Y|)         IP(|X|) 
+RCL ST Y             @@@@ IP(|Y|)         IP(|X|)         IP(|Y|)         IP(|X|) 
+×                    @@@@ IP(|Y|)*IP(|X|) IP(|Y|)         IP(|X|) 
+RCL ST Z             @@@@ IP(|X|)         IP(|Y|)*IP(|X|) IP(|Y|)         IP(|X|) 
+RCL ST Z             @@@@ IP(|Y|)         IP(|X|)         IP(|Y|)*IP(|X|) IP(|Y|)
+XEQ "GCD"            @@@@ GCD             IP(|Y|)*IP(|X|) IP(|Y|)         IP(|Y|)
+÷                    @@@@ LCM             IP(|Y|)         IP(|Y|)         IP(|Y|)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 #+END_SRC
 
-* =BETA=: The Beta Function
+* =BINO=: Binomials, Factorals, Beta, etc...
+** Menu
+:PROPERTIES:
+:CUSTOM_ID: menu-bino
+:END:
+
+#+ATTR_HTML: :align center :frame box :rules all
+#+NAME:BINO
+| Menu | LBL   | Description |
+|------+-------+-------------|
+| COMB |       |             |
+| PERM |       |             |
+| !    | FACT  | Factoral    |
+| ▒▒▒▒ |       |             |
+| GAM  | GAMMA |             |
+| BETA |       |             |
+|------+-------+-------------|
+
+*** Menu Code
+
+#+BEGIN_SRC elisp :var tbl=BINO :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+(MJR-generate-42-menu-code "BINO" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
+#+END_SRC
+
+#+RESULTS:
+#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BINO)
+@@@@ DSC: Auto-generated menu program
+LBL "BINO"
+LBL 01            @@@@ Page 1 of menu BINO
+CLMENU
+"COMB"
+KEY 1 XEQ 02
+"PERM"
+KEY 2 XEQ 03
+"!"
+KEY 3 XEQ "FACT"
+"GAM"
+KEY 5 XEQ 04
+"BETA"
+KEY 6 XEQ "BETA"
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 00 @@@@ Application Exit
+EXITALL
+RTN
+LBL 02    @@@@ Action for menu key COMB
+COMB
+RTN
+LBL 03    @@@@ Action for menu key PERM
+PERM
+RTN
+LBL 04    @@@@ Action for menu key GAM
+GAMMA
+RTN
+@@@@ Free labels start at: 5
+#+end_src
+
+** Functions
 
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BETA)
@@ -481,13 +768,32 @@ RCL ST Z
 GAMMA
 ÷
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FACT)
+@@@@ DSC: Factoral function
+@@@@ IN:  X: Number
+@@@@ OUT: X: X! = Gamma(X+1)
+@@@@ FAQ: Returns an error if X is not an integer
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-04-23
+LBL "FACT"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+ENTER
+FP
+X≠0?
+RTNERR 5
+R↓
+1
++
+GAMMA
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 #+END_SRC
 
-#+END_SRC
-
-* =NPDF=, =NCDF=, =ERF=, =ERFC=: Error & Standard Normal Functions
-
+* =ERRFUN=: Error & Standard Normal Functions
 ** Menu
 :PROPERTIES:
 :CUSTOM_ID: menu-errfun
@@ -504,7 +810,7 @@ END
 | NCDF | Standard Normal Cumulative Distribution FUnction |
 | ▒▒▒▒ |                                                  |
 
-*** Menu Code
+** Menu Code
 
 #+BEGIN_SRC elisp :var tbl=ERRFUN :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "ERRFUN" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
@@ -535,7 +841,7 @@ RTN
 @@@@ Free labels start at: 2
 #+end_src
 
-** Local Functions
+** Functions
 
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:NPDF)
@@ -694,8 +1000,6 @@ END
 
 
 
-
-
 * =HYPTRG=: Hyperbolic Trigonometric Functions
 ** Menu
 :PROPERTIES:
@@ -721,7 +1025,7 @@ END
 | ACOTH | TANH(1/X)   |
 |-------+-------------|
 
-*** Menu Code
+** Menu Code
 
 #+BEGIN_SRC elisp :var tbl=HYPTRG :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "HYPTRG" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
@@ -796,7 +1100,7 @@ RTN
 @@@@ Free labels start at: 9
 #+end_src
 
-** Local Functions
+** Functions
 
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
 
@@ -889,7 +1193,7 @@ END
 | ▒▒▒▒  |                                     |
 | ▒▒▒▒  |                                     |
 
-*** Menu Code
+** Menu Code
 #+BEGIN_SRC elisp :var tbl=TRIG :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "TRIG" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
@@ -979,7 +1283,7 @@ RTN
 @@@@ Free labels start at: 10
 #+end_src
 
-** Local Functions
+** Functions
 
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
 
@@ -1190,7 +1494,7 @@ END
 | 5√X  | LBL 93 | Fifth root prefering real & pure imaginary answers   |
 | 7√X  | LBL 92 | Seventh root prefering real & pure imaginary answers |
 
-*** Menu Code
+** Menu Code
 #+BEGIN_SRC elisp :var tbl=LPRT :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "LPRT" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
@@ -1268,7 +1572,7 @@ RTN
 @@@@ Free labels start at: 8
 #+end_src
 
-** Local Functions
+** Functions
 
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1449,24 +1753,28 @@ END
 #+END_SRC
 
 * =NLA=: Linear Algebra
+** Menu
+:PROPERTIES:
+:CUSTOM_ID: menu-nla
+:END:
 
 #+ATTR_HTML: :align center :frame box :rules all
 #+NAME:NLA
-| Menu  | Lab    |                                            | Inputs         | Output               | Status     |
-|-------+--------+--------------------------------------------+----------------+----------------------+------------|
-| IDEN  | IDEN   | Create an nxn identity matrix              | X: N           | X: identity matrix   | *COMPLETE* |
-| DIAG  | DIAG   | Create diagonal matrix with given elements | X: VEC         | X: diagonal matrix   | *COMPLETE* |
-| ROWB  | BNDROW | Bind two matrices top to bottom            | Y: MAT X: MAT  | X: adjoined matrix   | *TODO*     |
-| COLB  | BNDCOL | Bind two matrices top to bottom            | Y: MAT X: MAT  | X: adjoined matrix   | *TODO*     |
-| RREF  | RREF   | Reduced Row Echelon Form                   | X: MAT         | X: Reduced matrix    | *TODO*     |
-| EIGN  | EIGN   | Find all eigenvalues of a matrix           | X: MAT         | X: Eigenvalue matrix | *TODO*     |
-| QR    | MATFQR | QR Factorization                           | X: MAT         | X: QR Matrix         | *TODO*     |
-| LU    | MATFLU | LU Factorization                           | X: MAT         | Y: P X: LU           | *TODO*     |
-| GUT   | MATGUT | Extract Upper Triangular part of matrix    | X: MAT         | X: U                 | *TODO*     |
-| GDIAG | MATGDI | Extract Diagonal part of matrix            | X: MAT         | X: D                 | *TODO*     |
-| GLT   | MATGLT | Extract Upper Triangular part of matrix    | X: MAT         | X: L                 | *TODO*     |
-| PERM  | MATPRM | Permute the rows of a matrix               | Y: MAT X: PERM | X: Permuted matrix   | *TODO*     |
-| CPLY  | MCPOLY | Characteristic Polynomial of a matrix      | X: MAT         | X: Polynomial matrix | *TODO*     |
+| Menu | Lab    |                                            | Inputs | Output             | Status     |
+|------+--------+--------------------------------------------+--------+--------------------+------------|
+| IDEN | IDEN   | Create an nxn identity matrix              | X: N   | X: identity matrix | *COMPLETE* |
+| DIAG | DIAG   | Create diagonal matrix with given elements | X: VEC | X: diagonal matrix | *COMPLETE* |
+|      |        |                                            |        |                    |            |
+|      |        |                                            |        |                    |            |
+|      |        |                                            |        |                    |            |
+|      |        |                                            |        |                    |            |
+|------+--------+--------------------------------------------+--------+--------------------+------------|
+| MAT  | LBL 98 | Store/Recall Current CPOLY matrix          |        |                    |            |
+| X    | LBL 97 | Store/Recall current value of "X"          |        |                    |            |
+|      |        |                                            |        |                    |            |
+|      |        |                                            |        |                    |            |
+|      |        |                                            |        |                    |            |
+| EVCP | CPOLY  | Evaluate Characteristic polynomial         |        |                    |            |
 
 ** Code for Menu
 
@@ -1485,27 +1793,40 @@ CLMENU
 KEY 1 XEQ "IDEN"
 "DIAG"
 KEY 2 XEQ "DIAG"
-"ROWB"
-KEY 3 XEQ "BNDROW"
-"COLB"
-KEY 4 XEQ "BNDCOL"
+KEY 7 GTO 02
+KEY 8 GTO 02
 KEY 9 GTO 00
 MENU
 STOP
 GTO 01
+LBL 02            @@@@ Page 2 of menu NLA
+CLMENU
+"MAT"
+KEY 1 XEQ 98
+"X"
+KEY 2 XEQ 97
+"EVCP"
+KEY 6 XEQ "CPOLY"
+KEY 7 GTO 01
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 02
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-@@@@ Free labels start at: 2
+@@@@ Free labels start at: 3
 #+end_src
 
-** Local Functions
+** Functions
 
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:IDEN)
 @@@@ DSC: Create an XxX identity matrix
 @@@@ IN:  X: Size of matrix to make
-@@@@ IN:  X: Identity matrix of size X
+@@@@ OUT: X: Identity matrix of size X
+@@@@ LBL: 21-22
 @@@@ UPD: 2021-03-12
 LBL "IDEN"
 FUNC 11              @@## REQ:free42>=2.5.24
@@ -1515,22 +1836,22 @@ NEWMAT
 LSTO "TMPM"
 INDEX "TMPM"
 1
-LBL 01
+LBL 21
 STOEL
 J+
 FS? 77
-GTO 02
+GTO 22
 I+
-GTO 01
-LBL 02
+GTO 21
+LBL 22
 RCL "TMPM"
 RTN
-END
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:DIAG)
 @@@@ DSC: Create diagonal matrix with given elements
 @@@@ IN:  X: Vector
 @@@@ IN:  X: diagonal matrix
+@@@@ LBL: 23
 @@@@ UPD: 2021-03-12
 LBL "DIAG"
 FUNC 11              @@## REQ:free42>=2.5.24
@@ -1546,7 +1867,7 @@ DIM "TMPM"
 1
 +
 LSTO "I"
-LBL 01
+LBL 23
 1
 RCL "I"
 STOIJ
@@ -1563,51 +1884,86 @@ R↓
 R↓
 STOEL
 ISG "I"
-GTO 01
+GTO 23
 RCL "TMPM"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CPOLY)
+@@@@ DSC: Evaluate Chararstic Polynomial of a Matrix: DET(M-X*I)
+@@@@ I/O: N/A MVAR program
+@@@@ VAR: CPM a square matrix
+@@@@ VAR: X a real or complex number
+@@@@ LAB: 24-25
+@@@@ FAQ: Can be used 
+@@@@ UPD: 2021-04-23
+LBL "CPOLY"
+MVAR "CPM"
+MVAR "X"
+RCL "CPM"
+LSTO "TMPM"
+INDEX "TMPM"
+R↓
+RCL "X"
+LBL 24
+RCLEL
+RCL- ST Y
+STOEL
+R↓
+J+
+FS? 77
+GTO 25
+I+
+GTO 24
+LBL 25
+RCL "TMPM"
+DET
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Store/Recall variable "CPM"
+LBL 98 
+FS? 64
+RCL "CPM"
+STO "CPM"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Store/Recall variable "X"
+LBL 97
+FS? 64
+RCL "X"
+STO "X"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MMID)
-
 #+END_SRC
 
-* Polynomials
-** =POLY=: A collection of polynomial tools
+* =POLY=: A collection of polynomial tools
+** Menu
+:PROPERTIES:
+:CUSTOM_ID: menu-poly
+:END:
 
 #+ATTR_HTML: :align center :frame box :rules all
 #+NAME:POLY
-| Menu  | Program      |                                              | Inputs               | Output                     | Status     |
-|-------+--------------+----------------------------------------------+----------------------+----------------------------+------------|
-| QUADE | QUADE        | Solve quadratic: Ax^2+Bx+C=0                 | Z: A Y: B X: C       | Y: root 1 X: root 2        | *complete* |
-| SOLVE | PLYSLV       | Find all roots of a polynomial               | X: P                 | X: root matrix             | *TODO*     |
-| EVAL  | PEVAL        | Evaluate polynomial P @ X                    | Y: P  X: X           | X: P(x)                    | *complete* |
-| NORM  | PLYN1        | Bound on roots (r a root => abs(r)<B)        | X: P                 | X: B                       | *TODO*     |
-| ▒▒▒▒  |              |                                              |                      |                            |            |
-| ▒▒▒▒  |              |                                              |                      |                            |            |
-|-------+--------------+----------------------------------------------+----------------------+----------------------------+------------|
-| ROOTL | PLYLRT       | Find a root via Laguerre method              | Y: P  X: guess       | Y: 1      X: root          | *TODO*     |
-| ROOTB | PLYBRT       | Find a root via Bisection method             | Z: P Y: LLIM X: ULIM | Y: Status X: root'ish      | *TODO*     |
-| ROOTN | PLYRRT       | Find a root via Newton method                | Y: P  X: guess       | Y: Status X: root'ish      | *TODO*     |
-| ▒▒▒▒  |              |                                              |                      |                            |            |
-| ▒▒▒▒  |              |                                              |                      |                            |            |
-| EVALD | PEVALD       | Evaluate polynomial and two derivatives at X | Y: P  X: X           | Z: P''(X) Y: P'(X) X: P(X) | *TODO*     |
-|-------+--------------+----------------------------------------------+----------------------+----------------------------+------------|
-| ÷     | PLY÷         | Polynomial Division                          | Y: P1 X: P2          | Y: P1 MOD P2 X: P1/P2      | *TODO*     |
-| ×     | PLY×         | Multiply Polynomials                         | Y: P1 X: P2          | X: P1*P2                   | *TODO*     |
-| -     | PLY-         | Subtract Polynomials                         | Y: P1 X: P2          | X: P1-P2                   | *TODO*     |
-| +     | PLY+         | Add Polynomials                              | Y: P1 X: P2          | X: P1+P2                   | *TODO*     |
-| NEG   | PLYNEG       | Negate Polynomial                            | X: P                 | X: -P                      | *TODO*     |
-| M÷    | PLYS÷        | Synthentic (monomial) division               | Y: P  X: R           | X: P/(x-R)                 | *TODO*     |
-|-------+--------------+----------------------------------------------+----------------------+----------------------------+------------|
-| PLY   | LBL TODO-PLY | Set/Recall Wrapped Polynomial                | X: P                 | N/A                        | *TODO*     |
-| X     | LBL TODO-X   | Set/Recall X                                 | X: X                 | N/A                        | *TODO*     |
-| ▒▒▒▒  |              |                                              |                      |                            |            |
-| ▒▒▒▒  |              |                                              |                      |                            |            |
-| ▒▒▒▒  |              |                                              |                      |                            |            |
-| EVAL  | PWRP         | Evaluate wrapped polynomial at X             | N/A                  | X: P("X")                  | *TODO*     |
+| Menu  | Program |                                   | Inputs         | Output              | Status     |
+|-------+---------+-----------------------------------+----------------+---------------------+------------|
+| QUADE | QUADE   | Solve quadratic: Ax^2+Bx+C=0      | Z: A Y: B X: C | Y: root 1 X: root 2 | *complete* |
+| EVAL  | PEVAL   | Evaluate polynomial P @ X         | Y: P  X: X     | X: P(x)             | *complete* |
+| ▒▒▒▒  |         |                                   |                |                     |            |
+| ▒▒▒▒  |         |                                   |                |                     |            |
+| ▒▒▒▒  |         |                                   |                |                     |            |
+| ▒▒▒▒  |         |                                   |                |                     |            |
+|-------+---------+-----------------------------------+----------------+---------------------+------------|
+| POLY  | LBL 98  | Store/Recall Current Polynomial   |                |                     |            |
+| X     | LBL 97  | Store/Recall current value of "X" |                |                     |            |
+| ▒▒▒▒  |         |                                   |                |                     |            |
+| ▒▒▒▒  |         |                                   |                |                     |            |
+| ▒▒▒▒  |         |                                   |                |                     |            |
+| EVAL  | PWRP    | Evaluate wrapped polynomial at X  | N/A            | X: P("X")           | *TODO*     |
 
-*** Code for Menu
+** Code for Menu
 
 #+BEGIN_SRC elisp :var tbl=POLY :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "POLY" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
@@ -1615,9 +1971,42 @@ END
 
 #+RESULTS:
 #+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:POLY)
+@@@@ DSC: Auto-generated menu program
+LBL "POLY"
+LBL 01            @@@@ Page 1 of menu POLY
+CLMENU
+"QUADE"
+KEY 1 XEQ "QUADE"
+"EVAL"
+KEY 2 XEQ "PEVAL"
+KEY 7 GTO 02
+KEY 8 GTO 02
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 02            @@@@ Page 2 of menu POLY
+CLMENU
+"POLY"
+KEY 1 XEQ 98
+"X"
+KEY 2 XEQ 97
+"EVAL"
+KEY 6 XEQ "PWRP"
+KEY 7 GTO 01
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 02
+LBL 00 @@@@ Application Exit
+EXITALL
+RTN
+@@@@ Free labels start at: 3
 #+end_src
 
-*** Local functions for =POLY= menu
+** Local functions 
 
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1641,7 +2030,7 @@ X↑2
 +
 SQRT
 2
-RCLx ST T
+RCL× ST T
 ÷
 LASTX
 RCL ST Z
@@ -1662,7 +2051,7 @@ RTN
 @@@@      X: Value at which polynomial should be evaluated
 @@@@ OUT: Y: original polynomial matrix
 @@@@      X: value of polynomial evaluated at X
-@@@@ LBL: Used: 97
+@@@@ LBL: 91
 @@@@ TST: free42_3.0
 @@@@ UPD: 2021-04-03
 LBL "PEVAL"
@@ -1673,53 +2062,59 @@ LSTO "TMPM"
 INDEX "TMPM"
 WRAP
 0
-LBL 97
+LBL 91
 RCL× ST Z
 RCLEL
 +
 J+
 FC? 77
-GTO 97
+GTO 91
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PWRP)
+@@@@ DSC: Make a polynomial stored in a matrix into a =MVAR= function
+@@@@ IN:  X: N/A
+@@@@ OUT: X: N/A
+@@@@ GLB: WRPP -- Store a polynomial matrix in this variable
+@@@@ TST: free42_3.0
+@@@@ FAQ: Allows one to use SOLVER & INTEG on polynomials
+@@@@ USE: PEVAL
+@@@@ UPD: 2021-04-03
+LBL "PWRP"
+MVAR "X"
+RCL "WRPP"
+RCL "X"
+XEQ "PEVAL"
+RTN
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Store/Recall variable "WRPP"
+LBL 98 
+FS? 64
+RCL "WRPP"
+STO "WRPP"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Store/Recall variable "X"
+LBL 97
+FS? 64
+RCL "X"
+STO "X"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 #+END_SRC
 
-** =PWRP=: Wrap a Matrix Polynomial in a =MVAR= Function
-
-#+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PWRP)
-@@@@ DSC: Make a polynomial stored in a matrix into a =MVAR= function
-@@@@ IN:  X: N/A
-@@@@ OUT: X: N/A
-@@@@ GLB: _PLY -- Store a polynomial matrix in this variable
-@@@@ TST: free42_3.0
-@@@@ FAQ: Allows one to use SOLVER & INTEG on polynomials
-@@@@ UPD: 2021-04-03
-LBL "PWRP"
-MVAR "X"
-RCL "_PLY"
-RCL "X"
-X<>Y
-LSTO "TMPM"
-INDEX "TMPM"
-WRAP
-0
-LBL 97
-RCL× ST Z
-RCLEL
-+
-J+
-FC? 77
-GTO 97
-RTN
-END
-#+END_SRC
-
 * =VEC3=: 3D Real Vector Application
 
 This is a simple little application that makes working with 3D vectors less painfull.  
+** Menu
+:PROPERTIES:
+:CUSTOM_ID: menu-vec3
+:END:
 
 #+ATTR_HTML: :align center :frame box :rules all
 #+NAME:VEC3
@@ -1777,7 +2172,7 @@ RTN
 @@@@ Free labels start at: 5
 #+end_src
 
-** Local functions for =VEC3=
+** Local functions
 
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

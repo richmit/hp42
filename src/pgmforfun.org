@@ -55,29 +55,49 @@ Directory contents:
 
 $$\mathrm{Plots} \;\;\;\;\;\;\; \mathrm{Sums} \;\; \sum_{n=1}^{15}\frac{1}{n^2} \;\;\;\;\;\;\; \mathrm{Products} \;\; \prod_{n=1}^{15}\frac{1}{n^2} \;\;\;\;\;\;\; \mathrm{Integrals} \;\; \int_{1}^{15}\frac{1}{x^2}dx \;\;\;\;\;\;\; \mathrm{Roots} $$
 
-This is an odd collection of programs that work with =MVAR=-type programs (equations).  I was inspired to do this when the =PGMENU= function was added to
-free42.  My current plans include the following programs:
+This is a collection of programs that work with =MVAR=-type programs (equations).  I was inspired to do this when the =PGMENU= function was added to free42.
 
 #+ATTR_HTML: :align center
-|---------+------------------------------------------------------------------+------------|
-| Program | Description                                                      | Status     |
-|---------+------------------------------------------------------------------+------------|
-| =FSPT=  | Interactive application for computing Sums, Products, and Tables | *Complete* |
-| =FPLT=  | Interactive application for plotting a function                  | *Complete* |
-|---------+------------------------------------------------------------------+------------|
-| =FSLV=  | Solve EqP for EqV in [LLIM, ULIM]                                | *Complete* |
-| =FINT=  | Integrate EqP for EqV in [LLIM, ULIM]                            | *Complete* |
-| =FSUM=  | Sum EqP for values of EqV from LLIM to ULIM stepping by STEP     | *Complete* |
-| =FPRD=  | Product EqP for values of EqV from LLIM to ULIM stepping by STEP | *Complete* |
-|---------+------------------------------------------------------------------+------------|
-| =PICF=  | Interactive application to select and describe an =MVAR= program | *Complete* |
-| =WRPF=  | Wrap a simple function inside an =MVAR= program                  | *Complete* |
-|---------+------------------------------------------------------------------+------------|
-| =FVARM= | MVAR program with all the global variables for these apps        | *Complete* |
-| =FMENU= | Menu program orginizeing these apps                              | *Complete* |
-|---------+------------------------------------------------------------------+------------|
+** Functionality & the Main Menu
+:PROPERTIES:
+:CUSTOM_ID: menu-fmenu
+:END:
 
-My thinking for such programs is that they share a framework and common  principals.
+#+ATTR_HTML: :align center :frame box :rules all
+#+NAME:FMENU
+| MSTR   | LBL    | Menu  | Description                                                      |
+|--------+--------+-------+------------------------------------------------------------------|
+| FSPT   |        | FSPT  | Interactive application for computing Sums, Products, and Tables |
+| LBL 99 |        | FPLT  | Interactive application for plotting a function (DM42 Specific)  |
+| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
+| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
+| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
+| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
+|--------+--------+-------+------------------------------------------------------------------|
+| EVAL   | FEVL   | EVAL  | Evaluate EqV on X                                                |
+| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
+| SOLVE  | FSLV   | SOLVE | Solve EqP for EqV in [LLIM, ULIM]                                |
+| INTG   | FINT   | INTG  | Integrate EqP for EqV in [LLIM, ULIM]                            |
+| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
+| SUM    | FSUM   | SUM   | Sum EqP for values of EqV from LLIM to ULIM stepping by STEP     |
+| PROD   | FPRD   | PROD  | Product EqP for values of EqV from LLIM to ULIM stepping by STEP |
+|--------+--------+-------+------------------------------------------------------------------|
+| PICF   |        | PICF  | Interactive application to select and describe an =MVAR= program |
+| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
+| FVARM  |        | FVARM | MVAR program with all the global variables for these apps        |
+| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
+| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
+| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
+|--------+--------+-------+------------------------------------------------------------------|
+| FUN    | LBL 98 | FUN   | Store/Recall Current wrapped simple function                     |
+| X      | LBL 97 | X     | Store/Recall current value of "X"                                |
+| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
+| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
+| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
+| SFWRP  |        | SFWRP | Evaluate currently wrapped simple function                       |
+|--------+--------+-------+------------------------------------------------------------------|
+
+** Organizing Principles
 
 All the top level programs use =PICF= to collect information about the =MVAR= program to be used.  The collected information is housed in three global
 variables:
@@ -117,154 +137,99 @@ If a second variable is used, then similar variables are used; however, we have 
 
 If an accuracy is required, then we use the variable =ACC=.
 
-* Test Functions
-A few =MVAR= functions to test with
+* =FMENU=: Main menu for all apps
+** Menu Code
 
-#+begin_src hp42s :tangle ../src_42s/pgmforfun/testfun.hp42s
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFS)
-@@@@ DSC: SIGN
-LBL "TFS"
-MVAR "X"
-RCL "X"
-1
--
-SIGN
-5
-×
-RTN
-END
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFE)
-@@@@ DSC: Exponential
-LBL "TFE"
-MVAR "X"
-RCL "X"
-E↑X
-RTN
-END
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFL)
-@@@@ DSC: Linear M*X+B
-LBL "TFL"
-MVAR "X"
-MVAR "M"
-MVAR "B"
-RCL "X"
-RCL× "M"
-RCL+ "B"
-RTN
-END
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFQ)
-@@@@ DSC: A quadratic with zeros at 0 and 1
-LBL "TFQ"
-MVAR "X"
-RCL "X"
-1
--
-RCL "X"
-×
-RTN
-END
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFC)
-@@@@ DSC: A cubic with zeros at -1, 0.9, and 1
-LBL "TFC"
-MVAR "X"
-RCL "X"
-1
--
-RCL "X"
-1
-+
-×
-RCL "X"
-.9
--
-×
-RTN
-END
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFO)
-@@@@ DSC: A function that with increasing frequency approaching zero
-LBL "TFO"
-MVAR "X"
-RCL "X"
-ABS
-0.001
-+
-1/X
-SIN
-RTN
-END
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFI)
-@@@@ DSC: A function that has many undefined regions
-@@@@ FAQ: Good test to make sure we don't connect across known discontinuities
-LBL "TFI"
-MVAR "X"
-RCL "X"
-2
-MOD
-IP
-1/X
-5
-×
-RTN
-END
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFM)
-@@@@ DSC: A function that has many step discontinuities
-LBL "TFM"
-MVAR "X"
-RCL "X"
-2
-MOD
-IP
-.5
--
-10
-×
-RTN
-END
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFF)
-@@@@ DSC: A function flips between 1 and -1 each call
-@@@@ FAQ: Worst case performance for connecting dots
-LBL "TFF"
-MVAR "X"
-5
-FS?C 85
-RTN
-SF 85
--5
-RTN
-END
+#+BEGIN_SRC elisp :var tbl=FMENU :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s"
+(MJR-generate-42-menu-code "FMENU" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
-* Utility Functions
-
-** =WRPF=: Wrap simple functions with =MVAR= program
-
-Sometimes we need to work with a simple function that takes an argument from the stack and returns one or more values to the stack -- i.e. non "MVAR"
-variables.  To work with such functions we can wrap them.  A generic solution might be to store the name of your simple function in the variable "IEqV", and
-then give "WRPF" to solver, integrator, or =FSPT= program.
-
+#+RESULTS:
 #+begin_src hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:WRPF)
-@@@@ DSC: Wrap a simple function inside an =MVAR= program
-LBL "WRPF"
-MVAR "X"
-RCL "X"
-XEQ IND "IEqV"
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FMENU)
+@@@@ DSC: Auto-generated menu program
+LBL "FMENU"
+LBL 01            @@@@ Page 1 of menu FMENU
+CLMENU
+"FSPT"
+KEY 1 XEQ "FSPT"
+XEQ 99
+KEY 2 XEQ ""
+KEY 7 GTO 05
+KEY 8 GTO 02
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 02            @@@@ Page 2 of menu FMENU
+CLMENU
+"EVAL"
+KEY 1 XEQ "EVAL"
+"SOLVE"
+KEY 3 XEQ 06
+"INTG"
+KEY 4 XEQ "INTG"
+"SUM"
+KEY 6 XEQ 07
+KEY 7 GTO 01
+KEY 8 GTO 03
+KEY 9 GTO 00
+MENU
+STOP
+GTO 02
+LBL 03            @@@@ Page 3 of menu FMENU
+CLMENU
+"PROD"
+KEY 1 XEQ "PROD"
+"PICF"
+KEY 2 XEQ "PICF"
+"FVARM"
+KEY 4 XEQ "FVARM"
+KEY 7 GTO 02
+KEY 8 GTO 04
+KEY 9 GTO 00
+MENU
+STOP
+GTO 03
+LBL 04            @@@@ Page 4 of menu FMENU
+CLMENU
+"FUN"
+KEY 2 XEQ "FUN"
+"X"
+KEY 3 XEQ "X"
+KEY 7 GTO 03
+KEY 8 GTO 05
+KEY 9 GTO 00
+MENU
+STOP
+GTO 04
+LBL 05            @@@@ Page 5 of menu FMENU
+CLMENU
+"SFWRP"
+KEY 1 XEQ "SFWRP"
+KEY 7 GTO 04
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 05
+LBL 00 @@@@ Application Exit
+EXITALL
 RTN
-END
-#+END_SRC
+LBL 06    @@@@ Action for menu key SOLVE
+SOLVE
+RTN
+LBL 07    @@@@ Action for menu key SUM
+SUM
+RTN
+@@@@ Free labels start at: 8
+#+end_src
 
-** =PICF=: Interactively Query For =MVAR= Program, Variable, and Number of Returns
+** Functions
 
 #+begin_src hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
+@@@@ LBL: 80-87, 97-98
+
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PICF)
 @@@@ DSC: Pick an MVAR function and variable
 @@@@ IN:  X: integer
@@ -282,10 +247,10 @@ CLV "EqP"
 CLV "EqV"
 CLV "EqD"
 X≠0?
-GTO 08
+GTO 87
 1
 STO "EqD"
-LBL 08
+LBL 87
 EXITALL
 PGMMENU
 "Pick Function"
@@ -303,24 +268,24 @@ EXITALL
 SF 25
 RCL "EqD"
 FS?C 25
-GTO 07
+GTO 86
 "Select Return"
 ├" Count"
 AVIEW
 CLMENU
 "1"
-KEY 1 XEQ 02
+KEY 1 XEQ 82
 "2"
-KEY 2 XEQ 03
+KEY 2 XEQ 83
 "3"
-KEY 3 XEQ 04
+KEY 3 XEQ 84
 "4"
-KEY 4 XEQ 05
+KEY 4 XEQ 85
 MENU
 STOP
 EXITALL
 STO "EqD"
-LBL 07
+LBL 86
 "F: "
 ARCL "EqP"
 ├"("
@@ -329,18 +294,192 @@ ARCL "EqV"
 ARCL "EqD"
 AVIEW
 RTN
-LBL 02
+LBL 82
 1
 RTN
-LBL 03
+LBL 83
 2
 RTN
-LBL 04
+LBL 84
 3
 RTN
-LBL 05
+LBL 85
 4
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FPRD)
+@@@@ DSC: Product of a function evaluated at regular intervals over a range
+@@@@ OUT: X: The product
+@@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP
+@@@@ FAQ: Faster than product in FSPT
+@@@@ FAQ: EqD is ignored -- only last function value is summed
+@@@@ UPD: 2021-04-06
+@@@@ REQ: REQ:free42>=3.0
+LBL "FPRD"
+FUNC 01
+1
+LSTO "Prd"
+@@@@ Step through independent variable values and do product
+RCL "LLIM"
+STO IND "EqV"
+LBL 80
+@@@@ Evaluate function
+SF 25
+XEQ IND "EqP"
+FC?C 25
+RTNERR 2
+STO× "Prd"
+@@@@ Increment independent variable
+RCL "STEP"
+RCL+ IND "EqV"
+STO IND "EqV"
+RCL "ULIM"
+X≥Y?
+GTO 80
+@@@@ All done, put Prd on stack
+RCL "Prd"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FSUM)
+@@@@ DSC: Sum a function evaluated at regular intervals over a range
+@@@@ OUT: X: The sum
+@@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP
+@@@@ FAQ: Faster than sum in FSPT
+@@@@ FAQ: EqD is ignored -- only last function value is summed
+@@@@ UPD: 2021-04-06
+@@@@ REQ: REQ:free42>=3.0
+LBL "FSUM"
+FUNC 01
+0
+LSTO "Sum"
+@@@@ Step through independent variable values and do sum
+RCL "LLIM"
+STO IND "EqV"
+LBL 81
+@@@@ Evaluate function
+SF 25
+XEQ IND "EqP"
+FC?C 25
+RTNERR 2
+STO+ "Sum"
+@@@@ Increment independent variable
+RCL "STEP"
+RCL+ IND "EqV"
+STO IND "EqV"
+RCL "ULIM"
+X≥Y?
+GTO 81
+@@@@ All done, put Sum on stack
+RCL "Sum"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FSLV)
+@@@@ DSC: Use SOLVE to find a root for EqV in EqP on [LLIM, ULIM]
+@@@@ OUT: T: Code indicating solver exit reason
+@@@@         0 Found a root
+@@@@         1 Sign Reversal
+@@@@         2 Extremum
+@@@@         3 Bad Guess or Guesses
+@@@@         3 Constant?
+@@@@ OUT: Z: EqP evaluated at X
+@@@@ OUT: Y: Previous best guess
+@@@@ OUT: X: Final best guess -- a root if we are lucky
+@@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP
+@@@@ FAQ: Faster than product in FSPT
+@@@@ FAQ: EqD is ignored -- only last function value is summed
+@@@@ GBL: EqP, EqV, LLIM, ULIM
+@@@@ UPD: 2021-04-06
+@@@@ REQ: REQ:free42>=3.0
+LBL "FSLV"
+FUNC 04
+PGMSLV IND "EqP"
+RCL "LLIM"
+STO IND "EqV"
+RCL "ULIM"
+SOLVE IND "EqV"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FINT)
+@@@@ DSC: Use INTEG to find a root for EqV in EqP on [LLIM, ULIM]
+@@@@ OUT: X: The integral
+@@@@ FAQ: No error checking is done on ACC, LLIM, ULIM, STEP, EqV, or EqP
+@@@@ FAQ: EqD is ignored -- only last function value is summed
+@@@@ GBL: EqP, EqV, LLIM, ULIM, ACC
+@@@@ UPD: 2021-04-06
+@@@@ REQ: REQ:free42>=3.0
+LBL "FINT"
+FUNC 03
+PGMINT IND "EqP"
+INTEG IND "EqV"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FEVL)
+@@@@ DSC: Evaluate EqP at X
+@@@@ OUT: X: EqP(x)
+@@@@ FAQ: No error checking is done on EqV or EqP
+@@@@ GBL: EqP, EqV
+@@@@ UPD: 2021-04-09
+@@@@ REQ: REQ:free42>=3.0
+LBL "FEVL"
+STO IND "EqV"
+XEQ IND "EqP"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FVARM)
+@@@@ DSC: MVAR Program with all the global vartiables used by the F* programs
+@@@@ GBL: EqP, EqV, EqD, ACC, WFUN, LLIM, ULIM, STEP, YMIN, YMAX, & YSTP
+@@@@ UPD: 2021-04-06
+LBL "FVARM"
+MVAR "LLIM"
+MVAR "ULIM"
+MVAR "STEP"
+MVAR "YMIN"
+MVAR "YMAX"
+MVAR "YSTP"
+MVAR "EqP"
+MVAR "EqV"
+MVAR "EqD"
+MVAR "ACC"
+MVAR "WFUN"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SFWRP)
+@@@@ DSC: Wrap a simple function inside an =MVAR= program
+LBL "SFWRP"
+MVAR "WFUN"
+MVAR "X"
+RCL "X"
+XEQ IND "WFUN"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Store/Recall variable "WFUN"
+LBL 98 
+FS? 64
+RCL "WFUN"
+STO "WFUN"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Store/Recall variable "X"
+LBL 97
+FS? 64
+RCL "X"
+STO "X"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ LBL for FPLT menu
+LBL 99
+CLA
+SF 25
+RCL "GrMod"
+FC?C 25
+RTNNO
+"FPLT"
+RTNYES
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 #+END_SRC
 
@@ -643,167 +782,7 @@ RTN
 END
 #+end_src
 
-* Programmatic Sums & Products
-
-If you already have =EqP=, =EqV=, =LLIM=, =ULIM=, & =STEP= set, then you can use these programs.  These will be faster than the interactive version because they are optimized into tighter loops and because they don't provide any progress updates.
-
-** =FSUM=: Sums
-
-#+BEGIN_SRC hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FSUM)
-@@@@ DSC: Sum a function evaluated at regular intervals over a range
-@@@@ OUT: X: The sum
-@@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP
-@@@@ FAQ: Faster than sum in FSPT
-@@@@ FAQ: EqD is ignored -- only last function value is summed
-@@@@ UPD: 2021-04-06
-@@@@ REQ: REQ:free42>=3.0
-LBL "FSUM"
-FUNC 01
-0
-LSTO "Sum"
-@@@@ Step through independent variable values and do sum
-RCL "LLIM"
-STO IND "EqV"
-LBL 24
-@@@@ Evaluate function
-SF 25
-XEQ IND "EqP"
-FC?C 25
-RTNERR 2
-STO+ "Sum"
-@@@@ Increment independent variable
-RCL "STEP"
-RCL+ IND "EqV"
-STO IND "EqV"
-RCL "ULIM"
-X≥Y?
-GTO 24
-@@@@ All done, put Sum on stack
-RCL "Sum"
-RTN
-END
-#+END_SRC
-
-** =FPRD=: Products
-
-#+BEGIN_SRC hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FPRD)
-@@@@ DSC: Product of a function evaluated at regular intervals over a range
-@@@@ OUT: X: The product
-@@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP
-@@@@ FAQ: Faster than product in FSPT
-@@@@ FAQ: EqD is ignored -- only last function value is summed
-@@@@ UPD: 2021-04-06
-@@@@ REQ: REQ:free42>=3.0
-LBL "FPRD"
-FUNC 01
-1
-LSTO "Prd"
-@@@@ Step through independent variable values and do product
-RCL "LLIM"
-STO IND "EqV"
-LBL 24
-@@@@ Evaluate function
-SF 25
-XEQ IND "EqP"
-FC?C 25
-RTNERR 2
-STO× "Prd"
-@@@@ Increment independent variable
-RCL "STEP"
-RCL+ IND "EqV"
-STO IND "EqV"
-RCL "ULIM"
-X≥Y?
-GTO 24
-@@@@ All done, put Prd on stack
-RCL "Prd"
-RTN
-END
-#+END_SRC
-
-* Roots & Integrals
-
-Why?  These are built in!  True, but these make it easy to do an integration or find a root when =EqP=, =EqV=, =LLIM=, =ULIM=, & =STEP= are already set.  For
-example if you have just plotted a function, =FSLV= makes it easy to find a root in the plot range.
-
-** =FSLV=: Find a root
-
-#+BEGIN_SRC hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FSLV)
-@@@@ DSC: Use SOLVE to find a root for EqV in EqP on [LLIM, ULIM]
-
-@@@@ OUT: T: Code indicating solver exit reason
-@@@@         0 Found a root
-@@@@         1 Sign Reversal
-@@@@         2 Extremum
-@@@@         3 Bad Guess or Guesses
-@@@@         3 Constant?
-@@@@ OUT: Z: EqP evaluated at X
-@@@@ OUT: Y: Previous best guess
-@@@@ OUT: X: Final best guess -- a root if we are lucky
-@@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP
-@@@@ FAQ: Faster than product in FSPT
-@@@@ FAQ: EqD is ignored -- only last function value is summed
-@@@@ GBL: EqP, EqV, LLIM, ULIM
-@@@@ UPD: 2021-04-06
-@@@@ REQ: REQ:free42>=3.0
-LBL "FSLV"
-FUNC 04
-PGMSLV IND "EqP"
-RCL "LLIM"
-STO IND "EqV"
-RCL "ULIM"
-SOLVE IND "EqV"
-RTN
-END
-#+END_SRC
-
-** =FINT=: Integrate
-
-#+BEGIN_SRC hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FINT)
-@@@@ DSC: Use INTEG to find a root for EqV in EqP on [LLIM, ULIM]
-@@@@ OUT: X: The integral
-@@@@ FAQ: No error checking is done on ACC, LLIM, ULIM, STEP, EqV, or EqP
-@@@@ FAQ: EqD is ignored -- only last function value is summed
-@@@@ GBL: EqP, EqV, LLIM, ULIM, ACC
-@@@@ UPD: 2021-04-06
-@@@@ REQ: REQ:free42>=3.0
-LBL "FINT"
-FUNC 03
-PGMINT IND "EqP"
-INTEG IND "EqV"
-RTN
-END
-#+END_SRC
-
-* Evaluation
-
-Sometimes you just need to quickly evaluate a function for several different input values.  
-
-** =FEVL=: Quickly Evaluate A Function
-
-I frequently use =VARMENU= to repeatedly evaluate a formula, with different input values.  Functionally that means typing in the value, and then hitting the
-variable button twice.  That's not super efficient when repeatedly changing the same variable.  That's where this little function comes in.  
-
-#+BEGIN_SRC hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FEVL)
-@@@@ DSC: Evaluate EqP at X
-@@@@ OUT: X: EqP(x)
-@@@@ FAQ: No error checking is done on EqV or EqP
-@@@@ GBL: EqP, EqV
-@@@@ UPD: 2021-04-09
-@@@@ REQ: REQ:free42>=3.0
-LBL "FEVL"
-STO IND "EqV"
-XEQ IND "EqP"
-RTN
-END
-#+END_SRC
-
-* Plots
+* =FPLT=: Interactive Plotting
 
 Features:
    - Designed for high resolution mode of DM42
@@ -883,7 +862,7 @@ the current plot range or last zoom box region.
 | =[.]=     | Toggle connected dots in graph                       |
 |-----------+------------------------------------------------------|
 
-** =FPLT=: Plot functions
+** Code
 
 #+begin_src hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (REF:FPLT)
@@ -1805,122 +1784,131 @@ RTN
 END
 #+end_src
 
-* Menus
+* Test Functions
+A few =MVAR= functions to test with
 
-** =FVARM=: Global Variables Menu
+#+begin_src hp42s :tangle ../src_42s/pgmforfun/testfun.hp42s
 
-#+begin_src hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FVARM)
-@@@@ DSC: MVAR Program with all the global vartiables used by the F* programs
-@@@@ GBL: EqP, EqV, EqD, ACC, IEqV, LLIM, ULIM, STEP, YMIN, YMAX, & YSTP
-@@@@ UPD: 2021-04-06
-LBL "FVARM"
-MVAR "LLIM"
-MVAR "ULIM"
-MVAR "STEP"
-MVAR "YMIN"
-MVAR "YMAX"
-MVAR "YSTP"
-MVAR "EqP"
-MVAR "EqV"
-MVAR "EqD"
-MVAR "ACC"
-MVAR "IEqV"
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFS)
+@@@@ DSC: SIGN
+LBL "TFS"
+MVAR "X"
+RCL "X"
+1
+-
+SIGN
+5
+×
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFE)
+@@@@ DSC: Exponential
+LBL "TFE"
+MVAR "X"
+RCL "X"
+E↑X
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFL)
+@@@@ DSC: Linear M*X+B
+LBL "TFL"
+MVAR "X"
+MVAR "M"
+MVAR "B"
+RCL "X"
+RCL× "M"
+RCL+ "B"
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFQ)
+@@@@ DSC: A quadratic with zeros at 0 and 1
+LBL "TFQ"
+MVAR "X"
+RCL "X"
+1
+-
+RCL "X"
+×
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFC)
+@@@@ DSC: A cubic with zeros at -1, 0.9, and 1
+LBL "TFC"
+MVAR "X"
+RCL "X"
+1
+-
+RCL "X"
+1
++
+×
+RCL "X"
+.9
+-
+×
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFO)
+@@@@ DSC: A function that with increasing frequency approaching zero
+LBL "TFO"
+MVAR "X"
+RCL "X"
+ABS
+0.001
++
+1/X
+SIN
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFI)
+@@@@ DSC: A function that has many undefined regions
+@@@@ FAQ: Good test to make sure we don't connect across known discontinuities
+LBL "TFI"
+MVAR "X"
+RCL "X"
+2
+MOD
+IP
+1/X
+5
+×
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFM)
+@@@@ DSC: A function that has many step discontinuities
+LBL "TFM"
+MVAR "X"
+RCL "X"
+2
+MOD
+IP
+.5
+-
+10
+×
+RTN
+END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFF)
+@@@@ DSC: A function flips between 1 and -1 each call
+@@@@ FAQ: Worst case performance for connecting dots
+LBL "TFF"
+MVAR "X"
+5
+FS?C 85
+RTN
+SF 85
+-5
 RTN
 END
 #+END_SRC
-
-** =FMENU=: Main menu for all apps
-
-#+begin_src hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ DSC: Auto-generated menu program
-LBL "FMENU"
-LBL 01            @@@@ Page 1 of menu FMENU
-CLMENU
-"FSPT"
-KEY 1 XEQ 03
-"FPLT"
-KEY 2 XEQ 04
-"EVAL"
-KEY 3 XEQ 05
-@@@@ "RSV1"
-@@@@ KEY 4 XEQ 06
-"PICF"
-KEY 5 XEQ 07
-"VARS"
-KEY 6 XEQ 08
-KEY 7 GTO 02
-KEY 8 GTO 02
-KEY 9 GTO 00
-MENU
-STOP
-GTO 01
-LBL 02            @@@@ Page 2 of menu FMENU
-CLMENU
-"FSLV"
-KEY 1 XEQ 09
-"FINT"
-KEY 2 XEQ 10
-"FSUM"
-KEY 3 XEQ 11
-"FPRD"
-KEY 4 XEQ 12
-"PICF"
-KEY 5 XEQ 13
-"VARS"
-KEY 6 XEQ 14
-KEY 7 GTO 01
-KEY 8 GTO 01
-KEY 9 GTO 00
-MENU
-STOP
-GTO 02
-LBL 00 @@@@ Application Exit
-EXITALL
-RTN
-LBL 03               @@@@ Action for menu key FSPT
-XEQ "FSPT"
-RTN
-LBL 04               @@@@ Action for menu key FPLT
-XEQ "FPLT"
-RTN
-LBL 05               @@@@ Action for menu key FEVL
-XEQ "FEVL"
-RTN
-LBL 06               @@@@ Action for menu key RSV1
-XEQ "RSV1"
-RTN
-LBL 07               @@@@ Action for menu key PICF
-1
-XEQ "PICF"
-RTN
-LBL 08               @@@@ Action for menu key VARS
-VARMENU "FVARM"
-STOP
-RTN
-LBL 09               @@@@ Action for menu key FSLV
-XEQ "FSLV"
-RTN
-LBL 10               @@@@ Action for menu key FINT
-XEQ "FINT"
-RTN
-LBL 11               @@@@ Action for menu key FSUM
-XEQ "FSUM"
-RTN
-LBL 12               @@@@ Action for menu key FPRD
-XEQ "FPRD"
-RTN
-LBL 13               @@@@ Action for menu key PICF
-1
-XEQ "PICF"
-RTN
-LBL 14               @@@@ Action for menu key VARS
-VARMENU "FVARM"
-STOP
-RTN
-END
-#+end_src
 
 * WORKING                                                          :noexport:
 

@@ -343,57 +343,6 @@ RTN
 END
 #+END_SRC
 
-* =FLOOR=: Floor
-
-#+BEGIN_SRC hp42s :tangle no
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FLOOR)
-@@@@ DSC: Floor
-@@@@ IN:  X: real number
-@@@@ OUT: X: floor(X)
-@@@@ UPD: 2021-02-23
-@@@@ TST: free42_3.0
-LBL "FLOOR"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-IP
-LASTX
-FP
-X<0?
-GTO 01
-R↓
-RTN
-LBL 01
-1
--
-RTN
-END
-#+END_SRC
-
-* =CEIL=: Ceiling
-
-#+BEGIN_SRC hp42s :tangle no
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CEIL)
-@@@@ DSC: Ceiling
-@@@@ IN:  X: real number
-@@@@ OUT: X: ceil(X)
-@@@@ UPD: 2021-02-23
-@@@@ TST: free42_3.0
-LBL "CEIL"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-IP
-LASTX
-FP
-X>0?
-GTO 01
-R↓
-RTN
-LBL 01
-1
-+
-RTN
-END
-#+END_SRC
 
 * EOF
 

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-20 Tue 22:25 -->
+<!-- 2021-04-25 Sun 18:13 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Programming Tools</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-20 22:24:22</i></td>
+<td class="org-left"><i>2021-04-25 15:31:49</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,43 +241,45 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org88cd844">1. Metadata</a></li>
+<li><a href="#org5a2e493">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
 <li><a href="#menu-gen">3. Generating 42s menu code</a>
 <ul>
-<li><a href="#orgf4d9ef4">3.1. Generic menu generator</a></li>
-<li><a href="#org721b8c5">3.2. For CUSTOM-type Menus</a></li>
-<li><a href="#org9655e01">3.3. Always generate local lables</a></li>
-<li><a href="#org475f00b">3.4. Test Table For <code>MJR-generate-42-menu-code</code></a></li>
+<li><a href="#org0f0bb1e">3.1. Generic menu generator</a></li>
+<li><a href="#org93fd792">3.2. For CUSTOM-type Menus</a></li>
+<li><a href="#orga9b77ce">3.3. Always generate local lables</a></li>
+<li><a href="#orgfda88ec">3.4. Test Table For <code>MJR-generate-42-menu-code</code></a></li>
 </ul>
 </li>
-<li><a href="#org9cd26d0">4. Emacs Helper Stuff</a>
+<li><a href="#orgbc5a249">4. Emacs Helper Stuff</a>
 <ul>
-<li><a href="#org4e42f67">4.1. Emacs function to insert charcters given a list of character codes</a></li>
-<li><a href="#org6bbef69">4.2. Emacs Mode for 42s Code</a></li>
-<li><a href="#org4e3762f">4.3. yas templates</a></li>
-<li><a href="#orgb85b2c4">4.4. Export &amp; Tangle from dired</a></li>
+<li><a href="#orgd82519e">4.1. Emacs function to insert charcters given a list of character codes</a></li>
+<li><a href="#org7158618">4.2. Emacs Mode for 42s Code</a></li>
+<li><a href="#orgc2ddc19">4.3. yas templates</a></li>
+<li><a href="#org7a082de">4.4. Export &amp; Tangle from dired</a></li>
 </ul>
 </li>
-<li><a href="#orgc72a469">5. Prepare Code For Conversion</a></li>
-<li><a href="#org5dab7a6">6. free42 Notes</a>
+<li><a href="#orgf361608">5. Prepare Code For Conversion</a></li>
+<li><a href="#org784576b">6. Prepare Marked Region for Code Conversion</a></li>
+<li><a href="#org9bd34d3">7. Tangle &amp; Load Tangled File</a></li>
+<li><a href="#org1af7d18">8. free42 Notes</a>
 <ul>
-<li><a href="#org7ba0a99">6.1. Character Set</a></li>
-<li><a href="#orgd1d972a">6.2. Date format</a></li>
+<li><a href="#orgf233ca2">8.1. Character Set</a></li>
+<li><a href="#org4c58a34">8.2. Date format</a></li>
 </ul>
 </li>
-<li><a href="#org489beea">7. DM 42 Notes</a>
+<li><a href="#org122dc06">9. DM 42 Notes</a>
 <ul>
-<li><a href="#org01564f1">7.1. Display</a></li>
+<li><a href="#orge09474a">9.1. Display</a></li>
 </ul>
 </li>
-<li><a href="#orgf6df28f">8. EOF</a></li>
+<li><a href="#org7132213">10. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org88cd844" class="outline-2">
-<h2 id="org88cd844"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org5a2e493" class="outline-2">
+<h2 id="org5a2e493"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/hp42s-meta.html">https://richmit.github.io/hp42/hp42s-meta.html</a>
@@ -355,8 +357,8 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
 <div class="outline-text-2" id="text-menu-gen">
 </div>
 
-<div id="outline-container-orgf4d9ef4" class="outline-3">
-<h3 id="orgf4d9ef4"><span class="section-number-3">3.1</span> Generic menu generator</h3>
+<div id="outline-container-org0f0bb1e" class="outline-3">
+<h3 id="org0f0bb1e"><span class="section-number-3">3.1</span> Generic menu generator</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 This code will read an org-mode table describing a menu, and generate 42s code to implement the menu.  The only limitation on menu depth and size are the
@@ -726,8 +728,8 @@ programs are good examples.  Note that if all the lables are generated, then the
 </div>
 </div>
 
-<div id="outline-container-org721b8c5" class="outline-3">
-<h3 id="org721b8c5"><span class="section-number-3">3.2</span> For CUSTOM-type Menus</h3>
+<div id="outline-container-org93fd792" class="outline-3">
+<h3 id="org93fd792"><span class="section-number-3">3.2</span> For CUSTOM-type Menus</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 These functions are usefull for CUSTOM-type menus &#x2013; that is menus that call other programs or built in functions.  I use this as a way to add heirachy to the
@@ -802,8 +804,8 @@ together into one program.
 </div>
 </div>
 
-<div id="outline-container-org9655e01" class="outline-3">
-<h3 id="org9655e01"><span class="section-number-3">3.3</span> Always generate local lables</h3>
+<div id="outline-container-orga9b77ce" class="outline-3">
+<h3 id="orga9b77ce"><span class="section-number-3">3.3</span> Always generate local lables</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 This function is handy when you want to always generate local labels.
@@ -816,10 +818,10 @@ This function is handy when you want to always generate local labels.
 </div>
 </div>
 
-<div id="outline-container-org475f00b" class="outline-3">
-<h3 id="org475f00b"><span class="section-number-3">3.4</span> Test Table For <code>MJR-generate-42-menu-code</code></h3>
+<div id="outline-container-orgfda88ec" class="outline-3">
+<h3 id="orgfda88ec"><span class="section-number-3">3.4</span> Test Table For <code>MJR-generate-42-menu-code</code></h3>
 <div class="outline-text-3" id="text-3-4">
-<table id="orgbc58212" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+<table id="orgca5800b" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
 <colgroup>
@@ -955,12 +957,12 @@ This function is handy when you want to always generate local labels.
 </div>
 </div>
 
-<div id="outline-container-org9cd26d0" class="outline-2">
-<h2 id="org9cd26d0"><span class="section-number-2">4</span> Emacs Helper Stuff</h2>
+<div id="outline-container-orgbc5a249" class="outline-2">
+<h2 id="orgbc5a249"><span class="section-number-2">4</span> Emacs Helper Stuff</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org4e42f67" class="outline-3">
-<h3 id="org4e42f67"><span class="section-number-3">4.1</span> Emacs function to insert charcters given a list of character codes</h3>
+<div id="outline-container-orgd82519e" class="outline-3">
+<h3 id="orgd82519e"><span class="section-number-3">4.1</span> Emacs function to insert charcters given a list of character codes</h3>
 <div class="outline-text-3" id="text-4-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-ins42char</span> (charn)
@@ -982,8 +984,8 @@ This function is handy when you want to always generate local labels.
 </div>
 </div>
 
-<div id="outline-container-org6bbef69" class="outline-3">
-<h3 id="org6bbef69"><span class="section-number-3">4.2</span> Emacs Mode for 42s Code</h3>
+<div id="outline-container-org7158618" class="outline-3">
+<h3 id="org7158618"><span class="section-number-3">4.2</span> Emacs Mode for 42s Code</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 This isn't really a proper mode for 42s code.  Just a quick hack with <code>define-generic-mode</code> to get some syntax highlighting &#x2013; which doesn't fully work as
@@ -1018,8 +1020,8 @@ but this works for now.
 </div>
 </div>
 
-<div id="outline-container-org4e3762f" class="outline-3">
-<h3 id="org4e3762f"><span class="section-number-3">4.3</span> yas templates</h3>
+<div id="outline-container-orgc2ddc19" class="outline-3">
+<h3 id="orgc2ddc19"><span class="section-number-3">4.3</span> yas templates</h3>
 <div class="outline-text-3" id="text-4-3">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #b0c4de;">echo</span> <span style="color: #fa8072;">''</span>
@@ -1080,8 +1082,8 @@ RTN       @@@@ IF-TRUE-END (<span style="color: #00ffff;">$</span><span style="c
 </div>
 </div>
 
-<div id="outline-container-orgb85b2c4" class="outline-3">
-<h3 id="orgb85b2c4"><span class="section-number-3">4.4</span> Export &amp; Tangle from dired</h3>
+<div id="outline-container-org7a082de" class="outline-3">
+<h3 id="org7a082de"><span class="section-number-3">4.4</span> Export &amp; Tangle from dired</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 This will export to HTML and tangle all marked files in a dired buffer.
@@ -1108,8 +1110,8 @@ This will export to HTML and tangle all marked files in a dired buffer.
 </div>
 </div>
 
-<div id="outline-container-orgc72a469" class="outline-2">
-<h2 id="orgc72a469"><span class="section-number-2">5</span> Prepare Code For Conversion</h2>
+<div id="outline-container-orgf361608" class="outline-2">
+<h2 id="orgf361608"><span class="section-number-2">5</span> Prepare Code For Conversion</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 I include comments like <code>@@##</code> that I use like compiler directives in C.  They provide a way to remove lines of code that are incompatible or unnecessary for
@@ -1195,7 +1197,8 @@ This function cleans up tangled (C-c C-v t) code so that it can be cleanly paste
   (<span style="color: #00ffff;">while</span> (re-search-forward <span style="color: #fa8072;">"^END$"</span> nil t)
     (replace-match <span style="color: #fa8072;">"END\n"</span>))
   <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Save the buffer</span>
-  (save-buffer)
+  (<span style="color: #00ffff;">if</span> (buffer-file-name)
+      (save-buffer))
   <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Report our status</span>
   (<span style="color: #00ffff;">if</span> MJR-target-free42-version
       (message <span style="color: #fa8072;">"MJR-process-tangled-42s-code (%s): Tangle complete. Zapped %d loc too old, and %d loc too new."</span> (buffer-name) zap-loc-too-old zap-loc-too-new)
@@ -1215,13 +1218,47 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-org5dab7a6" class="outline-2">
-<h2 id="org5dab7a6"><span class="section-number-2">6</span> free42 Notes</h2>
+<div id="outline-container-org784576b" class="outline-2">
+<h2 id="org784576b"><span class="section-number-2">6</span> Prepare Marked Region for Code Conversion</h2>
 <div class="outline-text-2" id="text-6">
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-copy-42s-code-in-region</span> ()
+  <span style="color: #f08080;">"Copy region and prepare it for paste into free42"</span>
+  (<span style="color: #00ffff;">interactive</span>)
+  (<span style="color: #00ffff;">let</span> ((pmin (min (point) (mark)))
+        (pmax (max (point) (mark))))
+    (<span style="color: #00ffff;">if</span> (&lt; pmin pmax)
+        (<span style="color: #00ffff;">progn</span> (kill-ring-save (min (point) (mark)) (max (point) (mark)))
+               (<span style="color: #00ffff;">with-temp-buffer</span>  (yank)
+                                  (MJR-process-tangled-42s-code)
+                                  (kill-ring-save (point-min) (point-max)))))))
+</pre>
 </div>
-<div id="outline-container-org7ba0a99" class="outline-3">
-<h3 id="org7ba0a99"><span class="section-number-3">6.1</span> Character Set</h3>
-<div class="outline-text-3" id="text-6-1">
+</div>
+</div>
+
+<div id="outline-container-org9bd34d3" class="outline-2">
+<h2 id="org9bd34d3"><span class="section-number-2">7</span> Tangle &amp; Load Tangled File</h2>
+<div class="outline-text-2" id="text-7">
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-tangle-and-load</span> ()
+  <span style="color: #f08080;">""</span>
+  (<span style="color: #00ffff;">interactive</span>)
+  (org-babel-tangle)
+  (<span style="color: #00ffff;">if</span> (re-search-backward <span style="color: #fa8072;">":tangle[[:blank:]]+</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">(</span><span style="color: #fa8072;">[</span><span style="color: #fa8072;">^</span><span style="color: #fa8072;">[:blank:]]+</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">)</span><span style="color: #fa8072;">$"</span> nil t)
+      (find-file (match-string 1))))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1af7d18" class="outline-2">
+<h2 id="org1af7d18"><span class="section-number-2">8</span> free42 Notes</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-orgf233ca2" class="outline-3">
+<h3 id="orgf233ca2"><span class="section-number-3">8.1</span> Character Set</h3>
+<div class="outline-text-3" id="text-8-1">
 <div class="org-src-container">
 <pre class="src src-text">  0 &#247;
   1 &#215;
@@ -1358,9 +1395,9 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-orgd1d972a" class="outline-3">
-<h3 id="orgd1d972a"><span class="section-number-3">6.2</span> Date format</h3>
-<div class="outline-text-3" id="text-6-2">
+<div id="outline-container-org4c58a34" class="outline-3">
+<h3 id="org4c58a34"><span class="section-number-3">8.2</span> Date format</h3>
+<div class="outline-text-3" id="text-8-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
@@ -1402,13 +1439,13 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-org489beea" class="outline-2">
-<h2 id="org489beea"><span class="section-number-2">7</span> DM 42 Notes</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-org122dc06" class="outline-2">
+<h2 id="org122dc06"><span class="section-number-2">9</span> DM 42 Notes</h2>
+<div class="outline-text-2" id="text-9">
 </div>
-<div id="outline-container-org01564f1" class="outline-3">
-<h3 id="org01564f1"><span class="section-number-3">7.1</span> Display</h3>
-<div class="outline-text-3" id="text-7-1">
+<div id="outline-container-orge09474a" class="outline-3">
+<h3 id="orge09474a"><span class="section-number-3">9.1</span> Display</h3>
+<div class="outline-text-3" id="text-9-1">
 <p>
 GrMod is a read write variable.
 </p>
@@ -1425,9 +1462,9 @@ ResX &amp; ResY are read only variables that have the display resolution
 </div>
 </div>
 
-<div id="outline-container-orgf6df28f" class="outline-2">
-<h2 id="orgf6df28f"><span class="section-number-2">8</span> EOF</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-org7132213" class="outline-2">
+<h2 id="org7132213"><span class="section-number-2">10</span> EOF</h2>
+<div class="outline-text-2" id="text-10">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1437,7 +1474,7 @@ ResX &amp; ResY are read only variables that have the display resolution
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-20 Tue 22:25 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-25 Sun 18:13 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
 </div>
 </body>
 </html>

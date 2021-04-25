@@ -552,7 +552,8 @@ This function cleans up tangled (C-c C-v t) code so that it can be cleanly paste
   (while (re-search-forward "^END$" nil t)
     (replace-match "END\n"))
   ;; Save the buffer
-  (save-buffer)
+  (if (buffer-file-name)
+      (save-buffer))
   ;; Report our status
   (if MJR-target-free42-version
       (message "MJR-process-tangled-42s-code (%s): Tangle complete. Zapped %d loc too old, and %d loc too new." (buffer-name) zap-loc-too-old zap-loc-too-new)
@@ -564,6 +565,32 @@ The above function must be added to the tangle-hook like this:
 
 #+BEGIN_SRC elisp :results output silent
 (add-hook 'org-babel-post-tangle-hook 'MJR-process-tangled-42s-code)
+#+END_SRC
+
+* Prepare Marked Region for Code Conversion
+
+#+BEGIN_SRC elisp :results output silent
+(defun MJR-copy-42s-code-in-region ()
+  "Copy region and prepare it for paste into free42"
+  (interactive)
+  (let ((pmin (min (point) (mark)))
+        (pmax (max (point) (mark))))
+    (if (< pmin pmax)
+        (progn (kill-ring-save (min (point) (mark)) (max (point) (mark)))
+               (with-temp-buffer  (yank)
+                                  (MJR-process-tangled-42s-code)
+                                  (kill-ring-save (point-min) (point-max)))))))
+#+END_SRC
+
+* Tangle & Load Tangled File
+
+#+BEGIN_SRC elisp :results output silent
+(defun MJR-tangle-and-load ()
+  ""
+  (interactive)
+  (org-babel-tangle)
+  (if (re-search-backward ":tangle[[:blank:]]+\\([^[:blank:]]+\\)$" nil t)
+      (find-file (match-string 1))))
 #+END_SRC
 
 * free42 Notes

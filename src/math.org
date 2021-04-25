@@ -998,8 +998,6 @@ RTN
 END
 #+END_SRC
 
-
-
 * =HYPTRG=: Hyperbolic Trigonometric Functions
 ** Menu
 :PROPERTIES:
@@ -1762,19 +1760,33 @@ END
 #+NAME:NLA
 | Menu | Lab    |                                            | Inputs | Output             | Status     |
 |------+--------+--------------------------------------------+--------+--------------------+------------|
-| IDEN | IDEN   | Create an nxn identity matrix              | X: N   | X: identity matrix | *COMPLETE* |
-| DIAG | DIAG   | Create diagonal matrix with given elements | X: VEC | X: diagonal matrix | *COMPLETE* |
-|      |        |                                            |        |                    |            |
-|      |        |                                            |        |                    |            |
+| IDEN | MATIDN | Create an nxn identity matrix              | X: N   | X: identity matrix | *COMPLETE* |
+| DIAG | MATDIG | Create diagonal matrix with given elements | X: VEC | X: diagonal matrix | *COMPLETE* |
+| TR   | MATTR  | Compute the trace of a matrix              | X: M   | X: trace           | *COMPLETE* |
+| CPLY | MCPOLY | Compute matrix Characteristic polynomial   | X: M   | X: polynomial      | *COMPLETE* |
 |      |        |                                            |        |                    |            |
 |      |        |                                            |        |                    |            |
 |------+--------+--------------------------------------------+--------+--------------------+------------|
-| MAT  | LBL 98 | Store/Recall Current CPOLY matrix          |        |                    |            |
-| X    | LBL 97 | Store/Recall current value of "X"          |        |                    |            |
+| MAT  | LBL 98 | Store/Recall Current CPOLY matrix          |        |                    | *COMPLETE* |
+| X    | LBL 97 | Store/Recall current value of "X"          |        |                    | *COMPLETE* |
 |      |        |                                            |        |                    |            |
 |      |        |                                            |        |                    |            |
 |      |        |                                            |        |                    |            |
-| EVCP | CPOLY  | Evaluate Characteristic polynomial         |        |                    |            |
+| EVCP | EQCPLY | Evaluate Characteristic polynomial         |        |                    | *COMPLETE* |
+
+** Notes on individual programs
+
+*** =CPLY=: Characteristic polynomial
+
+=CPLY= uses the Faddeev–LeVerrier algorithm to compute the characteristic polynomial of a matrix.  The polynomial is a matrix of coefficients suitable for use
+by the polynomials tools found later on this page.
+
+One can find the eigenvalues of a matrix by using =PR1ST= & =PRNXT= to solve the characteristic polynomial.  
+
+*** =EQCPLY=: Characteristic polynomial as an =MVAR= program
+
+The =EQCPLY= function is an =MVAR= function that directly computes values of the characteristic polynomial.  It is horribly inefficient, but it can be used by
+the built in solver to find real eigenvalues or to plot the characteristic polynomial (See: file:pgmforfun.org).
 
 ** Code for Menu
 
@@ -1790,9 +1802,13 @@ LBL "NLA"
 LBL 01            @@@@ Page 1 of menu NLA
 CLMENU
 "IDEN"
-KEY 1 XEQ "IDEN"
+KEY 1 XEQ "MATIDN"
 "DIAG"
-KEY 2 XEQ "DIAG"
+KEY 2 XEQ "MATDIG"
+"TR"
+KEY 3 XEQ "MATTR"
+"CPLY"
+KEY 4 XEQ "MCPOLY"
 KEY 7 GTO 02
 KEY 8 GTO 02
 KEY 9 GTO 00
@@ -1806,7 +1822,7 @@ KEY 1 XEQ 98
 "X"
 KEY 2 XEQ 97
 "EVCP"
-KEY 6 XEQ "CPOLY"
+KEY 6 XEQ "EQCPLY"
 KEY 7 GTO 01
 KEY 8 GTO 01
 KEY 9 GTO 00
@@ -1822,13 +1838,99 @@ RTN
 ** Functions
 
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:IDEN)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MCPOLY)
+@@@@ DSC: Compute matrix Characteristic polynomial
+@@@@ IN:  X: Matrix
+@@@@ OUT: X: Characteristic polynomial
+@@@@ LBL: 21-22
+@@@@ UPD: 2021-03-12
+LBL "MCPOLY"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+LSTO "TMPA"
+DIM?
+Rv
+XEQ "MATIDN"
+LSTO "TMPM"
+DIM?
+Rv
+LSTO "J"
+1
++
+LSTO "JP1"
+ISG "JP1"
+NOP
+1
+X<>Y
+NEWMAT
+LSTO "TMPP"
+Rv
+0           @@@@ p_{n-1}
+LBL 28 
+RCL "TMPA"  @@@@ A               p_{n-1}
+RCL "TMPM"  @@@@ M               A        p_{n-1}
+RCL  ST Z   @@@@ p_{n-1}         M        A        p_{n-1}
+XEQ 96      @@@@ M-I*p_{n-1}     A        p_{n-1}
+×           @@@@ A*(M-I*p_{n-1}) p_{n-1}
+LSTO "TMPM"
+XEQ "MATTR" @@@@ A*(M-I*p_{n-1}) p_{n-1}
+RCL "JP1"
+RCL "J"
+-           @@@@ IDX             A*(M-I*p_{n-1})
+X<>Y        @@@@ A*(M-I*p_{n-1}) IDX             
+RCL ST Y    @@@@ IDX             A*(M-I*p_{n-1}) IDX
+1
+-           @@@@ IDX-1           A*(M-I*p_{n-1}) IDX             
+÷           @@@@ p_n              IDX             
+X<>Y        @@@@ IDX             p_n                          
+1           @@@@ 1               IDX             p_n                          
+X<>Y        @@@@ IDX             1               p_n                          
+INDEX "TMPP"
+STOIJ
+Rv
+Rv
+STOEL      
+DSE "J"
+GTO 28
+LBL 24
+INDEX "TMPP"
+-1
+STOEL
+RCL "TMPP"
++/-
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MATTR)
+@@@@ DSC: Compute matrix trace (sum of the diagonal elements)
+@@@@ IN:  X: Matrix
+@@@@ OUT: X: trace
+@@@@ LBL: 21-22
+@@@@ UPD: 2021-03-12
+LBL "MATTR"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+LSTO "TMPM"
+INDEX "TMPM"
+R↓
+0
+LBL 27
+RCLEL
++
+J+
+FS? 77
+GTO 26
+I+
+GTO 27
+LBL 26
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (MATIDN)
 @@@@ DSC: Create an XxX identity matrix
 @@@@ IN:  X: Size of matrix to make
 @@@@ OUT: X: Identity matrix of size X
 @@@@ LBL: 21-22
 @@@@ UPD: 2021-03-12
-LBL "IDEN"
+LBL "MATIDN"
 FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 ENTER
@@ -1847,13 +1949,13 @@ LBL 22
 RCL "TMPM"
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:DIAG)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MATDIG)
 @@@@ DSC: Create diagonal matrix with given elements
 @@@@ IN:  X: Vector
 @@@@ IN:  X: diagonal matrix
 @@@@ LBL: 23
 @@@@ UPD: 2021-03-12
-LBL "DIAG"
+LBL "MATDIG"
 FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 LSTO "TMPM"
@@ -1888,7 +1990,7 @@ GTO 23
 RCL "TMPM"
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CPOLY)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:EQCPLY)
 @@@@ DSC: Evaluate Chararstic Polynomial of a Matrix: DET(M-X*I)
 @@@@ I/O: N/A MVAR program
 @@@@ VAR: CPM a square matrix
@@ -1896,15 +1998,30 @@ RTN
 @@@@ LAB: 24-25
 @@@@ FAQ: Can be used 
 @@@@ UPD: 2021-04-23
-LBL "CPOLY"
+LBL "EQCPLY"
 MVAR "CPM"
 MVAR "X"
 RCL "CPM"
+RCL "X"
+XEQ 96 @@@@ MYMXI
+DET
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Compute Y-X*I  (Y a square matrix and X a number)
+@@@@ IN:  Y: M
+@@@@ IN:  X: X
+@@@@ OUT: X: Y-X*I
+@@@@ LAB: 24-25
+@@@@ UPD: 2021-04-23
+LBL 96 @@@@ MYMXI
+FUNC 21
+L4STK
+X<>Y
 LSTO "TMPM"
 INDEX "TMPM"
 R↓
-RCL "X"
-LBL 24
+LBL 29
 RCLEL
 RCL- ST Y
 STOEL
@@ -1913,10 +2030,9 @@ J+
 FS? 77
 GTO 25
 I+
-GTO 24
+GTO 29
 LBL 25
 RCL "TMPM"
-DET
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1947,21 +2063,78 @@ END
 
 #+ATTR_HTML: :align center :frame box :rules all
 #+NAME:POLY
-| Menu  | Program |                                   | Inputs         | Output              | Status     |
-|-------+---------+-----------------------------------+----------------+---------------------+------------|
-| QUADE | QUADE   | Solve quadratic: Ax^2+Bx+C=0      | Z: A Y: B X: C | Y: root 1 X: root 2 | *complete* |
-| EVAL  | PEVAL   | Evaluate polynomial P @ X         | Y: P  X: X     | X: P(x)             | *complete* |
-| ▒▒▒▒  |         |                                   |                |                     |            |
-| ▒▒▒▒  |         |                                   |                |                     |            |
-| ▒▒▒▒  |         |                                   |                |                     |            |
-| ▒▒▒▒  |         |                                   |                |                     |            |
-|-------+---------+-----------------------------------+----------------+---------------------+------------|
-| POLY  | LBL 98  | Store/Recall Current Polynomial   |                |                     |            |
-| X     | LBL 97  | Store/Recall current value of "X" |                |                     |            |
-| ▒▒▒▒  |         |                                   |                |                     |            |
-| ▒▒▒▒  |         |                                   |                |                     |            |
-| ▒▒▒▒  |         |                                   |                |                     |            |
-| EVAL  | PWRP    | Evaluate wrapped polynomial at X  | N/A            | X: P("X")           | *TODO*     |
+| Menu  | LBL    | Description                          | Inputs                         | Output                     |
+|-------+--------+--------------------------------------+--------------------------------+----------------------------|
+| VIEW  | VPOLY  | View the coeffients of a polynomial  | X: P                           | N/A                        |
+| EVAL  | PEVAL  | Evaluate polynomial P @ X            | Y: P  X: X                     | X: P(X)                    |
+| EVAL1 | PEVL1  | Evaluate polynomial P & P' @ X       | Y: P  X: X                     | Y: P(X) X: P'(x)           |
+| EVAL2 | PEVL2  | Evaluate polynomial P, P', & P'' @ X | Y: P  X: X                     | Z: P(X) Y: P''(x) Y: P'(x) |
+| ▒▒▒▒  |        |                                      |                                |                            |
+| QUADE | QUADE  | Solve quadratic: Ax^2+Bx+C=0         | Z: A Y: B X: C                 | Y: root_1 X: root_2        |
+|-------+--------+--------------------------------------+--------------------------------+----------------------------|
+| DFALT | PDEFLT | Deflate polynomial                   | Y: P X: R                      | X: P/(X-R)                 |
+| LGRR  | PLGRR  | Use Laguerre's Method to find a root | T: P Z: GUESS Y: ACC X: MAXITR | Z: Status y: P_Val X: root |
+| ▒▒▒▒  |        |                                      |                                |                            |
+| R1ST  | PR1ST  | Find a root                          | X: P                           | Z: OPoly Y: DPoly X: root  |
+| RNXT  | PRNXT  | Find next root                       | Z: OPoly Y: DPoly X: GUESS     | Z: OPoly Y: DPoly X: root  |
+| ▒▒▒▒  |        |                                      |                                |                            |
+|-------+--------+--------------------------------------+--------------------------------+----------------------------|
+| POLY  | LBL 98 | Store/Recall Current Polynomial      |                                |                            |
+| X     | LBL 97 | Store/Recall current value of "X"    |                                |                            |
+| ▒▒▒▒  |        |                                      |                                |                            |
+| ▒▒▒▒  |        |                                      |                                |                            |
+| ▒▒▒▒  |        |                                      |                                |                            |
+| EVAL  | PWRP   | Evaluate wrapped polynomial at X     | N/A                            | X: P("X")                  |
+
+A polynomial is represented as 1xn matrix of coefficients.  The first element of the matrix is the coefficient on the highest
+degree.
+
+** Notes for individual programs
+
+*** =PEVAL=, =PEVL1=, & =PEVL2=: Evaluating Polynomials
+
+These functions efficiently evaluate a polynomial (and its first and/or second derivative).  They are handy for simply evaluating a polynomial repeatedly;
+however, they are more tuned for use as subroutines in other programs -- ex: solvers.  Note that the last page of the main menu provides a more efficient way
+to repeatedly evaluate a polynomial.
+
+*** =PWRP=: Wrapping a polynomial matrix in an =MVAR= function
+
+Simply store the polynomial into the global variable "=WRPP=", and then feed =PWRP= to things like the built in solver/integrator and similar tools (See:
+file:pgmforfun.org).
+
+*** =QUADE=: Solving Quadratic Equations
+
+This function is *not* like the others. It doesn't take a matrix, but expects the coefficients to be on the stack.
+
+*** =PR1ST= & =PRNXT=: Finding the roots of a polynomial
+
+These two programs provide a way to find all the roots of a polynomial.  They work on real or complex polynomials, and finds both real and complex roots.
+
+These functions use the global variable =ACC= to specify how close to zero the polynomial must be to accept a root.  If =ACC= is not set, then 1e-15 is used.
+
+The first function, =PR1ST=, is used to find an initial root of a polynomial.  It only takes a polynomial.  It will almost always find a root; however, it is
+/possible/ for it to fail and return an error.  When it fails, I suggest running the function again to see if it will find a root -- it uses a random initial
+guess each time it runs.  When it finds a root, it returns the original polynomial, the polynomial with the located root removed (deflated), and a root.  This output 
+is precisely what is needed to find more roots.
+
+The second function, =PRNXT=, finds the *next* root of the polynomial.  It requires three arguments (original polynomial, deflated polynomial, and a guess).
+This is precisely what the =PR1ST= function returns.  =PRNXT= also returns the original polynomial, the polynomial with the located root removed, and a new
+root.  So you can feed =PRNXT= the return of =PR1ST= or =PRNXT=.  
+
+A common question: Why is the original polynomial required by =PRNXT=, and not just the deflated one?  A series of polynomial deflations leads to a deflated
+polynomial with some round off error.  So wen =PRNXT= finds a root of the deflated polynomial, it then uses that root as the initial guess to =PLGRR= on the
+original polynomial.  This significantly reduces round-off error, and /almost/ always works -- it is /possible/ that it may converge to a root we already
+found.  Currently =PRNXT= dosen't check for this case -- that is on my todo list.
+
+In summary, to find all the roots of a polynomial: Put the polynomial on the stack, and press =PR1ST= to get the first root.  Then hit =PRNXT= until you have
+found all the roots.
+
+Alternately, with a bit more round off error, you can just repeatedly use =PR1ST= on the deflated polynomial that =PR1ST= returns.
+
+*** =PLGRR=: Search for a polynomial root
+
+This is designed to be used by other programs.  It takes a polynomial, a guess, a tolerance, and a maximum number of iterations.  If the tolerance is
+negative, then the function will always preform the maximum number of iterations.  This is useful for "refining" a root.
 
 ** Code for Menu
 
@@ -1976,11 +2149,17 @@ END
 LBL "POLY"
 LBL 01            @@@@ Page 1 of menu POLY
 CLMENU
-"QUADE"
-KEY 1 XEQ "QUADE"
+"VIEW"
+KEY 1 XEQ "VPOLY"
 "EVAL"
 KEY 2 XEQ "PEVAL"
-KEY 7 GTO 02
+"EVAL1"
+KEY 3 XEQ "PEVL1"
+"EVAL2"
+KEY 4 XEQ "PEVL2"
+"QUADE"
+KEY 6 XEQ "QUADE"
+KEY 7 GTO 03
 KEY 8 GTO 02
 KEY 9 GTO 00
 MENU
@@ -1988,28 +2167,44 @@ STOP
 GTO 01
 LBL 02            @@@@ Page 2 of menu POLY
 CLMENU
+"PDEFLT"
+KEY 1 XEQ "PDEFLT"
+"PLGRR"
+KEY 2 XEQ "PLGRR"
+"PR1ST"
+KEY 4 XEQ "PR1ST"
+"PRNXT"
+KEY 5 XEQ "PRNXT"
+KEY 7 GTO 01
+KEY 8 GTO 03
+KEY 9 GTO 00
+MENU
+STOP
+GTO 02
+LBL 03            @@@@ Page 3 of menu POLY
+CLMENU
 "POLY"
 KEY 1 XEQ 98
 "X"
 KEY 2 XEQ 97
 "EVAL"
 KEY 6 XEQ "PWRP"
-KEY 7 GTO 01
+KEY 7 GTO 02
 KEY 8 GTO 01
 KEY 9 GTO 00
 MENU
 STOP
-GTO 02
+GTO 03
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-@@@@ Free labels start at: 3
+@@@@ Free labels start at: 4
 #+end_src
 
 ** Local functions 
 
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:QUADE)
 @@@@ DSC: Solve quadratic equation: ax^2+bx+c=0
 @@@@ IN:  Z: a
 @@@@      Y: b
@@ -2045,30 +2240,368 @@ RCL ST Z
 +
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PEVAL)
 @@@@ DSC: Evaluate a polynomial
 @@@@ IN:  Y: Matrix with polynomial coefficients.  DIM of 1xn, nx1, whatever...
 @@@@      X: Value at which polynomial should be evaluated
-@@@@ OUT: Y: original polynomial matrix
-@@@@      X: value of polynomial evaluated at X
+@@@@ OUT: X: value of polynomial evaluated at X
 @@@@ LBL: 91
 @@@@ TST: free42_3.0
 @@@@ UPD: 2021-04-03
 LBL "PEVAL"
 FUNC 21              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
-X<>Y
+X<>Y          @@@@ P X
 LSTO "TMPM"
 INDEX "TMPM"
 WRAP
-0
+0             @@@@ PV P X
 LBL 91
-RCL× ST Z
-RCLEL
-+
+RCL× ST Z     @@@@ PV*X P X
+RCLEL         @@@@ Coef PV*X P X
++             @@@@ PV=Coef+PV*X P X
 J+
 FC? 77
 GTO 91
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PEVL1)
+@@@@ DSC: Evaluate a polynomial and it's first derivative
+@@@@ IN:  Y: Matrix with polynomial coefficients.  DIM of 1xn, nx1, whatever...
+@@@@      X: Value at which polynomial & derivative should be evaluated
+@@@@ OUT: Y: value of polynomial evaluated at X
+@@@@      X: value of polynomial's derivative evaluated at X
+@@@@ LBL: 91
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-04-03
+LBL "PEVL1"
+FUNC 22              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+X<>Y          @@@@ P       X
+LSTO "TMPM"
+INDEX "TMPM"
+R↓            @@@@ X
+WRAP
+0             @@@@ PV      X
+0             @@@@ DV      PV       X
+LBL 92
+RCL× ST Z     @@@@ DV*X    PV       X
+RCL+ ST Y     @@@@ DV*X+PV PV       X
+X<>Y          @@@@ PV      DV*X+PV  X
+RCL× ST Z     @@@@ PV*X    DV*X+PV  X
+RCLEL         @@@@ C       PV*X     DV*X+PV  X
++             @@@@ C+PV*X  DV*X+PV  X
+X<>Y          @@@@ DV*X+PV C+PV*X   X
+J+
+FC? 77
+GTO 92
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PEVL2)
+@@@@ DSC: Evaluate a polynomial and it's first two derivatives
+@@@@ IN:  Y: Matrix with polynomial coefficients.  DIM of 1xn, nx1, whatever...
+@@@@      X: Value at which polynomial & derivative should be evaluated
+@@@@ OUT: Z: value of polynomial evaluated at X
+@@@@      Y: value of polynomial's first derivative evaluated at X
+@@@@      X: value of polynomial's second derivative evaluated at X
+@@@@ LBL: 91
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-04-03
+LBL "PEVL2"
+FUNC 23              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+LSTO "TMPX"   @@@@ X       P
+R↓            @@@@ P
+LSTO "TMPM"
+INDEX "TMPM"
+R↓            @@@@ 
+WRAP
+0             @@@@ PV      
+0             @@@@ DV       PV       
+0             @@@@ DDV      DV       PV       
+LBL 93
+RCL× "TMPX"   @@@@ DDV*X    DV       PV       
+RCL+ ST Y     @@@@ DDV*X+DV DV       PV       
+X<>Y          @@@@ DV       DDV*X+DV PV       
+RCL× "TMPX"   @@@@ DV*X     DDV*X+DV PV       
+RCL+ ST Z     @@@@ DV*X+PV  DDV*X+DV PV       
+X<>Y          @@@@ DDV*X+DV DV*X+PV  PV       
+RCL ST Z      @@@@ PV       DDV*X+DV DV*X+PV  PV       
+RCL× "TMPX"   @@@@ PV*X     DDV*X+DV DV*X+PV  PV       
+RCLEL         @@@@ C        PV*X     DDV*X+DV DV*X+PV
++             @@@@ C+PV*X   DDV*X+DV DV*X+PV
+STO ST T      @@@@ C+PV*X   DDV*X+DV DV*X+PV  C+PV*X   
+R↓            @@@@ DDV*X+DV DV*X+PV  C+PV*X   
+J+
+FC? 77
+GTO 93
+2
+×
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PDEFLT)
+@@@@ DSC: Deflate polynomial
+@@@@ IN:  Y: Matrix with polynomial coefficients.  DIM of 1xn, nx1, whatever...
+@@@@      X: Root
+@@@@ OUT: X: Deflated polynomial
+@@@@ LBL: 96
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-04-03
+LBL "PDEFLT"
+FUNC 21              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+REAL?
+GTO 88
+X<>Y
+XEQ 89 @@@@ MAT2C
+X<>Y
+LBL 88
+X<>Y          @@@@ P R
+LSTO "TMPM"
+INDEX "TMPM"
+WRAP
+R↓            @@@@ R
++/-
+0             @@@@ LC R
+LBL 96
+RCL× ST Y     @@@@ LC*R R
+RCLEL         @@@@ C LC*R R
+X<>Y          @@@@ LC*R C R
+-             @@@@ C-LC*R  R
+STOEL         
+J+
+FC? 77
+GTO 96
+RCL "TMPM"
+DIM?
+×
+1
+-
+1
+X<>Y
+DIM "TMPM"
+RCL "TMPM"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Make matrix complex
+@@@@ NAM: MAT2C 89
+@@@@ IN:  X: Matrix
+@@@@ OUT: X: Matrix
+@@@@ LBL: MAT2C
+LBL 89
+FUNC 11
+L4STK
+LSTO "TMPM"
+INDEX "TMPM"
+RCLEL
+REAL?
+GTO 87
+R↓
+RTN
+LBL 87
+R↓
+ENTER
+DIM?
+NEWMAT
+COMPLEX
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:VPOLY)
+@@@@ DSC: View elements of polynomial
+@@@@ IN:  X: polynomial matrix
+@@@@ OUT: N/A
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-04-03
+LBL "VPOLY"
+FUNC 00
+LSTO "TMPM"
+INDEX "TMPM"
+WRAP
+DIM?
+×
+LBL 90
+"X^"
+AIP
+├":"
+RCLEL
+ARCL ST X
+R↓
+AVIEW
+STOP
+1
+-
+J+
+FC? 77
+GTO 90
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PR1ST)
+@@@@ DSC: Find a root
+@@@@ IN:  X: Polynomial
+@@@@ OUT: Z: Origional Polynomial
+@@@@      Y: Deflated Polynomial
+@@@@      X: Root
+@@@@ FAQ: If set, the global variable ACC is used to set accuracy
+LBL "PR1ST"
+FUNC 13
+L4STK
+XEQ 81 @@@@ PLYBAD
+RTNERR 5
+LSTO "TMPP" @@@@ P
+RAN
+RAN
+COMPLEX      @@@@ Guss Poly
+SF 25
+RCL "ACC"
+FC?C 25
+1e-15        @@@@ Tol  Guss Poly
+50           @@@@ Itr  Tol  Guss  Poly
+XEQ "PLGRR"  @@@@ Root Pval Stat
+0≠? ST Z
+RTNERR 6
+RCL "TMPP"   @@@@ Poly Root Pval Stat
+RCL "TMPP"   @@@@ Poly Poly Root Pval
+RCL ST Z     @@@@ Root Poly Poly Root
+XEQ "PDEFLT" @@@@ DPly Poly Root
+RCL ST Z     @@@@ Root DPly Poly Root
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PRNXT)
+@@@@ DSC: Find a another/next root
+@@@@ in:  Z: Origional Polynomial
+@@@@      Y: Deflated Polynomial
+@@@@      X: Guess
+@@@@ OUT: Z: Origional Polynomial
+@@@@      Y: Deflated Polynomial or 0 if fully deflated
+@@@@      X: Root
+@@@@ FAQ: If set, the global variable ACC is used to set accuracy
+LBL "PRNXT"
+FUNC 33
+L4STK
+RCL ST Z     @@@@ Poly Gues DPly Poly
+LSTO "TMPP"
+Rv           @@@@ Gues DPly Poly
+RCL ST Y     @@@@ DPLY Gues DPly Poly
+LSTO "TMPDP"
+XEQ 81 @@@@ PLYBAD
+RTNERR 5
+Rv           @@@@ Gues DPly Poly
+SF 25
+RCL "ACC"
+FC?C 25
+1e-15        @@@@ Tol  Gues DPly Poly
+50           @@@@ Itr  Tol  Gues DPly
+XEQ "PLGRR"  @@@@ Root Pval Stat
+0≠? ST Z
+RTNERR 6
+RCL "TMPP"   @@@@ Poly Root Pval Stat
+X<>Y         @@@@ Root Poly Pval Stat
+-1           @@@@ -1   Root Poly Pval
+5            @@@@ 5    -1   Root Poly
+XEQ "PLGRR"  @@@@ Root Pval Stat
+RCL ST X     @@@@ Root Root Pval Stat
+RCL "TMPDP"  @@@@ DPly Root Root Pval
+X<>Y         @@@@ Root DPly Root Pval
+XEQ "PDEFLT" @@@@ DPly Root Pval
+RCL "TMPP"   @@@@ Poly DPly Root Pval
+X<>Y         @@@@ DPly Poly Root Pval
+RCL ST Z     @@@@ Root DPly Poly Root
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: RTNNO if X is not a polynomial of degree>0
+@@@@ NAM: PLYBAD 81
+@@@@ IN:  X: Polynomial
+@@@@ OUT: N/A
+LBL 81
+FUNC 00
+MAT?
+GTO 82
+RTNYES
+LBL 82
+DIM?
+×
+2
+X>Y?
+RTNYES
+RTNNO
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PLGRR)
+@@@@ DSC: Use Laguerre's method to find a polynomial root
+@@@@ IN:  T: Polynomial
+@@@@      Z: Guess
+@@@@      Y: Tolerance
+@@@@      X: Maximum Iteration
+@@@@ OUT: Z: Reason for exit
+@@@@         0 = A solution has been found.
+@@@@         3 = Bad guess was used.
+@@@@      Y: P(X)
+@@@@      X: Root
+LBL "PLGRR"
+FUNC 43
+L4STK
+LSTO "TMPI"      @@@@ ITR   TOL   GUESS POLY
+R↓               @@@@ TOL   GUESS POLY
+LSTO "TMPT"
+R↓               @@@@ GUESS POLY
+LSTO "TMPG"      
+R↓               @@@@ POLY
+LSTO "TMPP"
+DIM?                       
+×                @@@@ N
+LSTO "TMPN"
+1
+-                @@@@ N-1
+LSTO "TMPNM1"
+R↓
+LBL 94
+RCL "TMPP"
+RCL "TMPG"
+XEQ "PEVL2"      @@@@ P''         P'     P        ?
+RCL ST Z
+ABS              @@@@ |P|         P''    P'       P   
+X<? "TMPT"
+GTO 95
+R↓               @@@@ P''         P'     P        ?
+RCL÷ ST Y        @@@@ P''/P'      P'     P        ?
+R↓               @@@@ P'          P      ?        P''/P'  
+÷                @@@@ -N=P/P'     ?      P''/P'   P''/P' 
+X<>Y             @@@@ ?           -N     P''/P'   P''/P' 
+R↓               @@@@ -N          P''/P' P''/P'   ?
++/-              @@@@ N           P''/P' P''/P'   ?
+X<>Y             @@@@ P''/P'      N      P''/P'   ?
+RCL× ST Y        @@@@ -L          N      P''/P'   ?
+RCL× "TMPN"      @@@@ -L*n        N      P''/P'   ?
+RCL÷ "TMPNM1"    @@@@ -L*n/(n-1)  N      P''/P'   ?
+1
++                @@@@ 1-L*n/(n-1) N      P''/P'   P''/P'  
+SQRT
+RCL× "TMPNM1"
+RCL÷ "TMPN"
+RCL "TMPN"
+1/X
++  
+1/X
+×                @@@@ LD          P''/P'   P''/P'  
+STO+ "TMPG"
+DSE "TMPI"
+GTO 94
+@@@@ EXIT: Max iter
+3                @@@@ 3      LD       P''/P'   ?
+RCL "TMPP"       @@@@ POLY   3        LD       ?
+RCL "TMPG"       @@@@ G      POLY     3        ?
+XEQ "PEVAL"      @@@@ P      3        ?        ?
+RCL "TMPG"       @@@@ G      P        3        ?
+RTN
+LBL 95           @@@@ |P|    P''      P'       P   
+@@@@ EXIT: Found root
+R↓               @@@@ P''    P'       P   
+R↓               @@@@ P'     P   
+R↓               @@@@ P   
+0
+X<>Y             @@@@ P      0
+RCL "TMPG"       @@@@ Root   Pval     0
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PWRP)
@@ -2086,7 +2619,6 @@ RCL "WRPP"
 RCL "X"
 XEQ "PEVAL"
 RTN
-
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ Store/Recall variable "WRPP"

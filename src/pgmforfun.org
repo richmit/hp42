@@ -97,6 +97,34 @@ This is a collection of programs that work with =MVAR=-type programs (equations)
 | SFWRP  |        | SFWRP | Evaluate currently wrapped simple function                       |
 |--------+--------+-------+------------------------------------------------------------------|
 
+** Notes Regarding Some Individual Programs
+
+*** =FEVL=: Evaluating the current equation
+
+I frequently use =VARMENU= to repeatedly evaluate a formula, with different input values.  Functionally that means typing in the value, and then hitting the
+variable button twice.  That's not super efficient when repeatedly changing the same variable.  That's where this little function comes in!
+
+*** =PICF=: Selecting a =MVAR= program
+
+This little function is at the center of all the tools on this page.  It queries for an =MVAR= program, lets you set constants, pick an independent variable,
+and describe the number of returns from the function.  See the section [[Organizing Principles][Organizing Principles]] for more about the global variables used to house this data.
+
+*** =SFWRP=: Wrap a simple function 
+
+This =MVAR= program allows one to wrap a simple function for use with tools that need an =MVAR= program.  For example, if you have a program for =SECH= you
+can use this program to wrap =SECH= allowing you to use the built in solver & integrator or programs like =FPLT=.
+
+To use this program simply put the name of the simple function into the variable =WFUN=.  Note you can do that in the =FUN= button on the last page of the main menu.
+
+*** =FSLV= & =FINT=: Apply the built in =SOLVE= & =INTG= tools to the current =EqP=
+
+These are handy little functions that allow one to apply the built in solver and integration capabilities of the 42s to the program currently active function.
+
+*** =FPRD= & =FSUM=: Non-interactive Sums & Products
+
+These programs are well suited for use by other programs.  They print no status, and are significantly faster than the interactive tool =FSPT=.  Note that
+they do not support the =LN= transform capability of =FSPT=.
+
 ** Organizing Principles
 
 All the top level programs use =PICF= to collect information about the =MVAR= program to be used.  The collected information is housed in three global

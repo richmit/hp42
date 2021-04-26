@@ -67,8 +67,8 @@ This is a collection of programs that work with =MVAR=-type programs (equations)
 #+NAME:FMENU
 | MSTR   | LBL    | Menu  | Description                                                      |
 |--------+--------+-------+------------------------------------------------------------------|
-| FSPT   |        | FSPT  | Interactive application for computing Sums, Products, and Tables |
-| LBL 99 |        | FPLT  | Interactive application for plotting a function (DM42 Specific)  |
+| SPT    | FSPT   | SPT   | Interactive application for computing Sums, Products, and Tables |
+| LBL 99 | FPLT   | PLOT  | Interactive application for plotting a function (DM42 Specific)  |
 | ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
 | ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
 | ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
@@ -169,7 +169,7 @@ If an accuracy is required, then we use the variable =ACC=.
 ** Menu Code
 
 #+BEGIN_SRC elisp :var tbl=FMENU :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/pgmforfun/pgmforfun.hp42s"
-(MJR-generate-42-menu-code "FMENU" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
+(MJR-generate-42-menu-code "FMENU" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
@@ -179,10 +179,10 @@ If an accuracy is required, then we use the variable =ACC=.
 LBL "FMENU"
 LBL 01            @@@@ Page 1 of menu FMENU
 CLMENU
-"FSPT"
+"SPT"
 KEY 1 XEQ "FSPT"
 XEQ 99
-KEY 2 XEQ ""
+KEY 2 XEQ "FPLT"
 KEY 7 GTO 05
 KEY 8 GTO 02
 KEY 9 GTO 00
@@ -192,13 +192,13 @@ GTO 01
 LBL 02            @@@@ Page 2 of menu FMENU
 CLMENU
 "EVAL"
-KEY 1 XEQ "EVAL"
+KEY 1 XEQ "FEVL"
 "SOLVE"
-KEY 3 XEQ 06
+KEY 3 XEQ "FSLV"
 "INTG"
-KEY 4 XEQ "INTG"
+KEY 4 XEQ "FINT"
 "SUM"
-KEY 6 XEQ 07
+KEY 6 XEQ "FSUM"
 KEY 7 GTO 01
 KEY 8 GTO 03
 KEY 9 GTO 00
@@ -208,7 +208,7 @@ GTO 02
 LBL 03            @@@@ Page 3 of menu FMENU
 CLMENU
 "PROD"
-KEY 1 XEQ "PROD"
+KEY 1 XEQ "FPRD"
 "PICF"
 KEY 2 XEQ "PICF"
 "FVARM"
@@ -222,9 +222,9 @@ GTO 03
 LBL 04            @@@@ Page 4 of menu FMENU
 CLMENU
 "FUN"
-KEY 2 XEQ "FUN"
+KEY 2 XEQ 98
 "X"
-KEY 3 XEQ "X"
+KEY 3 XEQ 97
 KEY 7 GTO 03
 KEY 8 GTO 05
 KEY 9 GTO 00
@@ -244,13 +244,7 @@ GTO 05
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 06    @@@@ Action for menu key SOLVE
-SOLVE
-RTN
-LBL 07    @@@@ Action for menu key SUM
-SUM
-RTN
-@@@@ Free labels start at: 8
+@@@@ Free labels start at: 6
 #+end_src
 
 ** Functions
@@ -504,7 +498,7 @@ SF 25
 RCL "GrMod"
 FC?C 25
 RTNNO
-"FPLT"
+"PLOT"
 RTNYES
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

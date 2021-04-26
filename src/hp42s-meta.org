@@ -586,11 +586,15 @@ The above function must be added to the tangle-hook like this:
 
 #+BEGIN_SRC elisp :results output silent
 (defun MJR-tangle-and-load ()
-  ""
+  "Tangles current file and attempts to load the tangled file.
+The tangled file is determiend by looking backward for a :tangle argument."
   (interactive)
-  (org-babel-tangle)
-  (if (re-search-backward ":tangle[[:blank:]]+\\([^[:blank:]]+\\)$" nil t)
-      (find-file (match-string 1))))
+  (save-excursion (org-babel-tangle)
+                  (if (re-search-backward ":tangle[[:blank:]]+\\([^[:blank:]]+\\)$" nil t)
+                      (let ((file-name (match-string 1)))
+                        (if (or (string-equal "yes" file-name) (string-equal "no" file-name))
+                            (message "No explicit tangle file specified")
+                            (find-file file-name))))))
 #+END_SRC
 
 * free42 Notes

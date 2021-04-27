@@ -766,20 +766,20 @@ RTN
 LBL "AZ@Y"
 FUNC 41                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
-LSTO "TMPX"
+LSTO "_X"
 Rv              @@@@  Y Z T T
-LSTO "TMPY"
+LSTO "_Y"
 Rv              @@@@  Z T T T
-LSTO "TMPZ"     @@@@  Z T T T
-RCL "TMPY"      @@@@  Y Z T T
+LSTO "_Z"     @@@@  Z T T T
+RCL "_Y"      @@@@  Y Z T T
 XEQ "MSKn"
 NOT
 AND             @@@@ TM T T T
-RCL "TMPX"
-RCL "TMPZ"
+RCL "_X"
+RCL "_Z"
 XEQ "MSKR"
 AND
-RCL "TMPY"
+RCL "_Y"
 XEQ "SLn" 
 OR              @@@@
 RTN
@@ -1246,24 +1246,24 @@ XEQ "MSKR"      @@@@ M X Y
 X<>Y            @@@@ X M Y
 1
 -
-LSTO "MBC"
+LSTO "_MBC"
 1000
 ÷
-LSTO "CTR"
+LSTO "_CTR"
 R↓              @@@@ M Y
 RCL ST Y        @@@@ Y M Y
 OR              @@@@ N Y
 X<>Y            @@@@ OLD NEW 
 LBL 51
-RCL "CTR"       @@@@ CTR OLD NEW 
+RCL "_CTR"       @@@@ CTR OLD NEW 
 IP
 BIT?
 GTO 52
 Rv
 X<>Y
-RCL "CTR"
+RCL "_CTR"
 IP
-RCL- "MBC"
+RCL- "_MBC"
 1
 X<>Y
 ROTXY
@@ -1273,7 +1273,7 @@ X<>Y
 ENTER
 LBL 52
 R↓
-ISG "CTR"
+ISG "_CTR"
 GTO 51
 X<>Y
 RTN
@@ -1354,7 +1354,7 @@ AVIEW
 RTN
 LBL 79
 R↓
-LSTO "X"
+LSTO "_X"
 20
 1
 FS? 68
@@ -1364,7 +1364,7 @@ STO+ ST Y
 FS? 71
 STO+ ST Y
 R↓             @@@@ 20:DECN 21:BINM 22:OCTM 23:HEXM
-LSTO "SBMD"
+LSTO "_SBMD"
 R↓
 CF 81
 SF 25
@@ -1383,11 +1383,11 @@ EXITALL
 63
 1000
 ÷
-LSTO "CTR"
+LSTO "_CTR"
 LBL 91
 LBL 76  @@@@ TODO.  Not used?
 @@@@ Figure out X&Y coordinates for digit
-RCL "CTR"            @@@@ IF
+RCL "_CTR"            @@@@ IF
 IP
 32
 X>Y?
@@ -1395,7 +1395,7 @@ GTO 73
 GTO 83
 LBL 73               @@@@ IF-THEN FIRST ROW
 1
-RCL "CTR"
+RCL "_CTR"
 4
 ×
 1
@@ -1403,7 +1403,7 @@ RCL "CTR"
 GTO 90
 LBL 83               @@@@ IF-ELSE SECOND ROW
 9
-RCL "CTR"
+RCL "_CTR"
 32
 -
 4
@@ -1413,7 +1413,7 @@ RCL "CTR"
 LBL 90               @@@@ IF-END
 @@@@ Figure out current bit value
 63
-RCL "CTR"            @@@@ IF-BEGIN
+RCL "_CTR"            @@@@ IF-BEGIN
 IP
 -
 WSIZE?
@@ -1426,7 +1426,7 @@ R↓
 1
 X<>Y
 ROTXY
-RCL "X"
+RCL "_X"
 AND
 X=0?
 GTO 85
@@ -1439,20 +1439,20 @@ LBL 86               @@@@ IF-ELSE bit is 1
 R↓
 1
 LBL 87
-LSTO "CB"
+LSTO "_CB"
 GTO 82
 LBL 81               @@@@ IF-ELSE
 R↓
 R↓
 @@@@ Bit beyond WSIZE padding character
 0
-LSTO "CB"
+LSTO "_CB"
 FS? 02
 GTO 84
 LBL 82               @@@@ IF-END
 R↓
 @@@@ Figure out grouping
-RCL "CTR"            @@@@ IF-START grouping
+RCL "_CTR"            @@@@ IF-START grouping
 IP
 4
 ÷
@@ -1472,11 +1472,11 @@ R↓
 2
 LBL 77               @@@@ IF-END
 @@@@ Compute digit character code
-RCL+ "CB"
+RCL+ "_CB"
 @@@@ Draw it
 XEQ 78
 LBL 84
-ISG  "CTR"
+ISG  "_CTR"
 GTO 91
 FC? 81
 GTO 89
@@ -1486,7 +1486,7 @@ CLLCD
 "BVIEW FINISHED"
 AVIEW
 LBL 89
-RCL "SBMD"
+RCL "_SBMD"
 20
 X=Y?
 DECM
@@ -1504,8 +1504,9 @@ X=Y?
 HEXM
 R↓
 @@@@ Recall original X
-RCL "X"
+RCL "_X"
 RTN
+
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: tiny binary digit print
 @@@@ IN:  Z: Y coordinate for upper left point of character -- Top of screen is 1

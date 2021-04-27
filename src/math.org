@@ -1854,11 +1854,11 @@ XEQ "MATIDN"
 LSTO "_M"
 DIM?
 Rv
-LSTO "J"
+LSTO "_J"
 1
 +
-LSTO "JP1"
-ISG "JP1"
+LSTO "_JP1"
+ISG "_JP1"
 NOP
 1
 X<>Y
@@ -1874,8 +1874,8 @@ XEQ 96      @@@@ M-I*p_{n-1}     A        p_{n-1}
 ×           @@@@ A*(M-I*p_{n-1}) p_{n-1}
 LSTO "_M"
 XEQ "MATTR" @@@@ A*(M-I*p_{n-1}) p_{n-1}
-RCL "JP1"
-RCL "J"
+RCL "_JP1"
+RCL "_J"
 -           @@@@ IDX             A*(M-I*p_{n-1})
 X<>Y        @@@@ A*(M-I*p_{n-1}) IDX             
 RCL ST Y    @@@@ IDX             A*(M-I*p_{n-1}) IDX
@@ -1890,7 +1890,7 @@ STOIJ
 Rv
 Rv
 STOEL      
-DSE "J"
+DSE "_J"
 GTO 28
 LBL 24
 INDEX "_P"
@@ -1968,10 +1968,10 @@ DIM "_M"
 ÷
 1
 +
-LSTO "I"
+LSTO "_I"
 LBL 23
 1
-RCL "I"
+RCL "_I"
 STOIJ
 R↓
 R↓
@@ -1979,13 +1979,13 @@ RCLEL
 0
 STOEL
 R↓
-RCL "I"
-RCL "I"
+RCL "_I"
+RCL "_I"
 STOIJ
 R↓
 R↓
 STOEL
-ISG "I"
+ISG "_I"
 GTO 23
 RCL "_M"
 RTN

@@ -1847,11 +1847,11 @@ RTN
 LBL "MCPOLY"
 FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
-LSTO "TMPA"
+LSTO "_A"
 DIM?
 Rv
 XEQ "MATIDN"
-LSTO "TMPM"
+LSTO "_M"
 DIM?
 Rv
 LSTO "J"
@@ -1863,16 +1863,16 @@ NOP
 1
 X<>Y
 NEWMAT
-LSTO "TMPP"
+LSTO "_P"
 Rv
 0           @@@@ p_{n-1}
 LBL 28 
-RCL "TMPA"  @@@@ A               p_{n-1}
-RCL "TMPM"  @@@@ M               A        p_{n-1}
+RCL "_A"  @@@@ A               p_{n-1}
+RCL "_M"  @@@@ M               A        p_{n-1}
 RCL  ST Z   @@@@ p_{n-1}         M        A        p_{n-1}
 XEQ 96      @@@@ M-I*p_{n-1}     A        p_{n-1}
 ×           @@@@ A*(M-I*p_{n-1}) p_{n-1}
-LSTO "TMPM"
+LSTO "_M"
 XEQ "MATTR" @@@@ A*(M-I*p_{n-1}) p_{n-1}
 RCL "JP1"
 RCL "J"
@@ -1885,7 +1885,7 @@ RCL ST Y    @@@@ IDX             A*(M-I*p_{n-1}) IDX
 X<>Y        @@@@ IDX             p_n                          
 1           @@@@ 1               IDX             p_n                          
 X<>Y        @@@@ IDX             1               p_n                          
-INDEX "TMPP"
+INDEX "_P"
 STOIJ
 Rv
 Rv
@@ -1893,10 +1893,10 @@ STOEL
 DSE "J"
 GTO 28
 LBL 24
-INDEX "TMPP"
+INDEX "_P"
 -1
 STOEL
-RCL "TMPP"
+RCL "_P"
 +/-
 RTN
 
@@ -1909,8 +1909,8 @@ RTN
 LBL "MATTR"
 FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
-LSTO "TMPM"
-INDEX "TMPM"
+LSTO "_M"
+INDEX "_M"
 R↓
 0
 LBL 27
@@ -1935,8 +1935,8 @@ FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 ENTER
 NEWMAT
-LSTO "TMPM"
-INDEX "TMPM"
+LSTO "_M"
+INDEX "_M"
 1
 LBL 21
 STOEL
@@ -1946,7 +1946,7 @@ GTO 22
 I+
 GTO 21
 LBL 22
-RCL "TMPM"
+RCL "_M"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MATDIG)
@@ -1958,12 +1958,12 @@ RTN
 LBL "MATDIG"
 FUNC 11              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
-LSTO "TMPM"
-INDEX "TMPM"
+LSTO "_M"
+INDEX "_M"
 DIM?
 ×
 ENTER
-DIM "TMPM"
+DIM "_M"
 1000
 ÷
 1
@@ -1987,7 +1987,7 @@ R↓
 STOEL
 ISG "I"
 GTO 23
-RCL "TMPM"
+RCL "_M"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:EQCPLY)
@@ -2018,8 +2018,8 @@ LBL 96 @@@@ MYMXI
 FUNC 21
 L4STK
 X<>Y
-LSTO "TMPM"
-INDEX "TMPM"
+LSTO "_M"
+INDEX "_M"
 R↓
 LBL 29
 RCLEL
@@ -2032,7 +2032,7 @@ GTO 25
 I+
 GTO 29
 LBL 25
-RCL "TMPM"
+RCL "_M"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -2065,19 +2065,26 @@ END
 #+NAME:POLY
 | Menu  | LBL    | Description                          | Inputs                         | Output                     |
 |-------+--------+--------------------------------------+--------------------------------+----------------------------|
-| VIEW  | VPOLY  | View the coeffients of a polynomial  | X: P                           | N/A                        |
-| EVAL  | PEVAL  | Evaluate polynomial P @ X            | Y: P  X: X                     | X: P(X)                    |
-| EVAL1 | PEVL1  | Evaluate polynomial P & P' @ X       | Y: P  X: X                     | Y: P(X) X: P'(x)           |
-| EVAL2 | PEVL2  | Evaluate polynomial P, P', & P'' @ X | Y: P  X: X                     | Z: P(X) Y: P''(x) Y: P'(x) |
+| NEW   | NEWPLY | Create a polynomial of degree X      | X: N                           | X: P                       |
 | ▒▒▒▒  |        |                                      |                                |                            |
-| QUADE | QUADE  | Solve quadratic: Ax^2+Bx+C=0         | Z: A Y: B X: C                 | Y: root_1 X: root_2        |
+| EDIT  | LBL 78 | Edit a polynomial                    | X: P                           | X:P                        |
+| ▒▒▒▒  |        |                                      |                                |                            |
+| ▒▒▒▒  |        |                                      |                                |                            |
+| VIEW  | VPOLY  | View  a polynomial                   | X: P                           | N/A                        |
 |-------+--------+--------------------------------------+--------------------------------+----------------------------|
-| DFALT | PDEFLT | Deflate polynomial                   | Y: P X: R                      | X: P/(X-R)                 |
-| LGRR  | PLGRR  | Use Laguerre's Method to find a root | T: P Z: GUESS Y: ACC X: MAXITR | Z: Status y: P_Val X: root |
-| ▒▒▒▒  |        |                                      |                                |                            |
+| SLV2  | P2SLV  | Solve quadratic polynomial           | X: P                           | Y: root_1 X: root_2        |
+| SLV1  | P1SLV  | Solve linear polynomial              | X: P                           | X: root                    |
 | R1ST  | PR1ST  | Find a root                          | X: P                           | Z: OPoly Y: DPoly X: root  |
 | RNXT  | PRNXT  | Find next root                       | Z: OPoly Y: DPoly X: GUESS     | Z: OPoly Y: DPoly X: root  |
 | ▒▒▒▒  |        |                                      |                                |                            |
+| VIEW  | VPOLY  | View the coeffients of a polynomial  | X: P                           | N/A                        |
+|-------+--------+--------------------------------------+--------------------------------+----------------------------|
+| DFALT | PDEFLT | Deflate polynomial                   | Y: P X: R                      | Y: Remainder X: P/(X-R)    |
+| EVAL  | PEVAL  | Evaluate polynomial P @ X            | Y: P  X: X                     | X: P(X)                    |
+| EVAL1 | PEVL1  | Evaluate polynomial P & P' @ X       | Y: P  X: X                     | Y: P(X) X: P'(x)           |
+| EVAL2 | PEVL2  | Evaluate polynomial P, P', & P'' @ X | Y: P  X: X                     | Z: P(X) Y: P''(x) Y: P'(x) |
+| LGRR  | PLGRR  | Root search  (Laguerre's Method)     | T: P Z: GUESS Y: ACC X: MAXITR | Z: Status y: P_Val X: root |
+| VIEW  | VPOLY  | View the coeffients of a polynomial  | X: P                           | N/A                        |
 |-------+--------+--------------------------------------+--------------------------------+----------------------------|
 | POLY  | LBL 98 | Store/Recall Current Polynomial      |                                |                            |
 | X     | LBL 97 | Store/Recall current value of "X"    |                                |                            |
@@ -2101,10 +2108,6 @@ to repeatedly evaluate a polynomial.
 
 Simply store the polynomial into the global variable "=WRPP=", and then feed =PWRP= to things like the built in solver/integrator and similar tools (See:
 file:pgmforfun.org).
-
-*** =QUADE=: Solving Quadratic Equations
-
-This function is *not* like the others. It doesn't take a matrix, but expects the coefficients to be on the stack.
 
 *** =PR1ST= & =PRNXT=: Finding the roots of a polynomial
 
@@ -2149,17 +2152,13 @@ negative, then the function will always preform the maximum number of iterations
 LBL "POLY"
 LBL 01            @@@@ Page 1 of menu POLY
 CLMENU
+"NEW"
+KEY 1 XEQ "NEWPLY"
+"EDIT"
+KEY 3 XEQ 78
 "VIEW"
-KEY 1 XEQ "VPOLY"
-"EVAL"
-KEY 2 XEQ "PEVAL"
-"EVAL1"
-KEY 3 XEQ "PEVL1"
-"EVAL2"
-KEY 4 XEQ "PEVL2"
-"QUADE"
-KEY 6 XEQ "QUADE"
-KEY 7 GTO 03
+KEY 6 XEQ "VPOLY"
+KEY 7 GTO 04
 KEY 8 GTO 02
 KEY 9 GTO 00
 MENU
@@ -2167,14 +2166,16 @@ STOP
 GTO 01
 LBL 02            @@@@ Page 2 of menu POLY
 CLMENU
-"PDEFLT"
-KEY 1 XEQ "PDEFLT"
-"PLGRR"
-KEY 2 XEQ "PLGRR"
-"PR1ST"
-KEY 4 XEQ "PR1ST"
-"PRNXT"
-KEY 5 XEQ "PRNXT"
+"SLV2"
+KEY 1 XEQ "P2SLV"
+"SLV1"
+KEY 2 XEQ "P1SLV"
+"R1ST"
+KEY 3 XEQ "PR1ST"
+"RNXT"
+KEY 4 XEQ "PRNXT"
+"VIEW"
+KEY 6 XEQ "VPOLY"
 KEY 7 GTO 01
 KEY 8 GTO 03
 KEY 9 GTO 00
@@ -2183,61 +2184,138 @@ STOP
 GTO 02
 LBL 03            @@@@ Page 3 of menu POLY
 CLMENU
+"DFALT"
+KEY 1 XEQ "PDEFLT"
+"EVAL"
+KEY 2 XEQ "PEVAL"
+"EVAL1"
+KEY 3 XEQ "PEVL1"
+"EVAL2"
+KEY 4 XEQ "PEVL2"
+"LGRR"
+KEY 5 XEQ "PLGRR"
+"VIEW"
+KEY 6 XEQ "VPOLY"
+KEY 7 GTO 02
+KEY 8 GTO 04
+KEY 9 GTO 00
+MENU
+STOP
+GTO 03
+LBL 04            @@@@ Page 4 of menu POLY
+CLMENU
 "POLY"
 KEY 1 XEQ 98
 "X"
 KEY 2 XEQ 97
 "EVAL"
 KEY 6 XEQ "PWRP"
-KEY 7 GTO 02
+KEY 7 GTO 03
 KEY 8 GTO 01
 KEY 9 GTO 00
 MENU
 STOP
-GTO 03
+GTO 04
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-@@@@ Free labels start at: 4
+@@@@ Free labels start at: 5
 #+end_src
 
 ** Local functions 
 
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:QUADE)
-@@@@ DSC: Solve quadratic equation: ax^2+bx+c=0
-@@@@ IN:  Z: a
-@@@@      Y: b
-@@@@      X: c
-@@@@ OUT: Y: root_1 (-b-sqrt(b^2-4ac))/(2a)
-@@@@      X: root_2 (-b+sqrt(b^2-4ac))/(2a)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:NEWPLY)
+@@@@ DSC: Create a new polynomial of degree X
+@@@@ IN:  X: degree
+@@@@ OUT: X: polynomial
 @@@@ TST: free42_3.0
-@@@@ BUG: No error checking
-@@@@ UPD: 2021-04-02
-LBL "QUADE"
-FUNC 32              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
--4
-RCL× ST T
-×
-RCL ST Y
-X↑2
-+
-SQRT
-2
-RCL× ST T
-÷
-LASTX
-RCL ST Z
-+/-
+@@@@ UPD: 2021-04-26
+LBL "NEWPLY"
+FUNC 11
+L4STK
+1
 X<>Y
-÷
-RCL ST X
-RCL ST Z
--
-RCL ST Z
-RCL ST Z
+1
 +
+NEWMAT
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Edit a polynomial in the matrix editor
+@@@@ IN:  X: polynomial
+@@@@ OUT: X: polynomial
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-04-26
+LBL 78 
+FUNC 11
+EDIT
+"Enter data; R/S"
+├" to end"
+PROMPT
+EXITALL
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:P2SLV)
+@@@@ DSC: Solve quadratic polynomial
+@@@@ IN:  X: Polynomial matrix
+@@@@ OUT: Y: root_1
+@@@@      X: root_2
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-04-26
+LBL "P2SLV"
+FUNC 12              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+LSTO "_M"  
+R↓
+INDEX "_M"  
+WRAP
+LBL 77
+RCLEL
+J+
+FC? 77
+GTO 77
+RCL ST Z     @@@@  a                     c                     b                     a
+ABS          @@@@  |a|                   c                     b                     a
+X=0?
+RTNERR 3
+Rv           @@@@  a                     c                     b                     a
+2            @@@@  2                     c                     b                      a
+RCL× ST T    @@@@  2a                    c                     b                      a
+Rv           @@@@  c                     b                     a                     2a                    
+RCL÷ ST T    @@@@  c/(2a)                b                     a                     2a                    
+X<>Y         @@@@  b                     c/(2a)                a                     2a                    
+RCL÷ ST T    @@@@  b/(2a)                c/(2a)                a                     2a                    
++/-          @@@@  -B                    C                     a                     2a                    
+ENTER        @@@@  -B                   -B                     C                      a
+X↑2          @@@@  B^2                  -B                     C                      a
+RCL- ST Z    @@@@  B^2-C                -B                     C                      a
+RCL- ST Z    @@@@  B^2-2C               -B                     C                      a
+SQRT         @@@@  √(B^2-2C)            -B                     C                      a
+RCL ST Y     @@@@  -B                    √(B^2-2C)            -B                      C
+RCL- ST Y    @@@@  -B-√(B^2-2C)          √(B^2-2C)            -B                      C
+RCL ST Z     @@@@  -B                   -B-√(B^2-2C)          √(B^2-2C)              -B                     
+RCL+ ST Z    @@@@  -B+√(B^2-2C)         -B-√(B^2-2C)          √(B^2-2C)              -B                     
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:P1SLV)
+@@@@ DSC: Solve linear polynomial
+@@@@ IN:  X: Polynomial matrix
+@@@@ OUT: X: root
+@@@@ TST: free42_3.0
+@@@@ UPD: 2021-04-26
+LBL "P1SLV"
+FUNC 11              @@## REQ:free42>=2.5.24
+L4STK                @@## REQ:free42>=3.0
+LSTO "_M"  
+R↓
+INDEX "_M"  
+WRAP
+RCLEL  @@@@ a_1
+J+
+RCLEL  @@@@ a_0
+÷
++/-
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PEVAL)
@@ -2252,8 +2330,8 @@ LBL "PEVAL"
 FUNC 21              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 X<>Y          @@@@ P X
-LSTO "TMPM"
-INDEX "TMPM"
+LSTO "_M"  
+INDEX "_M"  
 WRAP
 0             @@@@ PV P X
 LBL 91
@@ -2278,8 +2356,8 @@ LBL "PEVL1"
 FUNC 22              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 X<>Y          @@@@ P       X
-LSTO "TMPM"
-INDEX "TMPM"
+LSTO "_M"  
+INDEX "_M"  
 R↓            @@@@ X
 WRAP
 0             @@@@ PV      X
@@ -2310,24 +2388,24 @@ RTN
 LBL "PEVL2"
 FUNC 23              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
-LSTO "TMPX"   @@@@ X       P
+LSTO "_X"     @@@@ X       P
 R↓            @@@@ P
-LSTO "TMPM"
-INDEX "TMPM"
+LSTO "_M"  
+INDEX "_M"  
 R↓            @@@@ 
 WRAP
 0             @@@@ PV      
 0             @@@@ DV       PV       
 0             @@@@ DDV      DV       PV       
 LBL 93
-RCL× "TMPX"   @@@@ DDV*X    DV       PV       
+RCL× "_X"     @@@@ DDV*X    DV       PV       
 RCL+ ST Y     @@@@ DDV*X+DV DV       PV       
 X<>Y          @@@@ DV       DDV*X+DV PV       
-RCL× "TMPX"   @@@@ DV*X     DDV*X+DV PV       
+RCL× "_X"     @@@@ DV*X     DDV*X+DV PV       
 RCL+ ST Z     @@@@ DV*X+PV  DDV*X+DV PV       
 X<>Y          @@@@ DDV*X+DV DV*X+PV  PV       
 RCL ST Z      @@@@ PV       DDV*X+DV DV*X+PV  PV       
-RCL× "TMPX"   @@@@ PV*X     DDV*X+DV DV*X+PV  PV       
+RCL× "_X"     @@@@ PV*X     DDV*X+DV DV*X+PV  PV       
 RCLEL         @@@@ C        PV*X     DDV*X+DV DV*X+PV
 +             @@@@ C+PV*X   DDV*X+DV DV*X+PV
 STO ST T      @@@@ C+PV*X   DDV*X+DV DV*X+PV  C+PV*X   
@@ -2343,12 +2421,13 @@ RTN
 @@@@ DSC: Deflate polynomial
 @@@@ IN:  Y: Matrix with polynomial coefficients.  DIM of 1xn, nx1, whatever...
 @@@@      X: Root
-@@@@ OUT: X: Deflated polynomial
+@@@@ OUT: Y: Remainder (a number)
+@@@@      X: Deflated polynomial
 @@@@ LBL: 96
 @@@@ TST: free42_3.0
 @@@@ UPD: 2021-04-03
 LBL "PDEFLT"
-FUNC 21              @@## REQ:free42>=2.5.24
+FUNC 22              @@## REQ:free42>=2.5.24
 L4STK                @@## REQ:free42>=3.0
 REAL?
 GTO 88
@@ -2357,8 +2436,8 @@ XEQ 89 @@@@ MAT2C
 X<>Y
 LBL 88
 X<>Y          @@@@ P R
-LSTO "TMPM"
-INDEX "TMPM"
+LSTO "_M"  
+INDEX "_M"  
 WRAP
 R↓            @@@@ R
 +/-
@@ -2372,15 +2451,17 @@ STOEL
 J+
 FC? 77
 GTO 96
-RCL "TMPM"
-DIM?
-×
-1
--
-1
-X<>Y
-DIM "TMPM"
-RCL "TMPM"
+RCL "_M"      @@@@ REM
+DIM?          @@@@ m n REM
+×             @@@@ N REM
+1             @@@@ 1 N REM
+-             @@@@ N-1 REM
+1             @@@@ 1 N-1 REM
+X<>Y          @@@@ N-1 1 REM
+DIM "_M"  
+Rv
+Rv            @@@@ REM
+RCL "_M"      @@@@ P REM
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -2392,8 +2473,8 @@ RTN
 LBL 89
 FUNC 11
 L4STK
-LSTO "TMPM"
-INDEX "TMPM"
+LSTO "_M"  
+INDEX "_M"  
 RCLEL
 REAL?
 GTO 87
@@ -2415,8 +2496,8 @@ RTN
 @@@@ UPD: 2021-04-03
 LBL "VPOLY"
 FUNC 00
-LSTO "TMPM"
-INDEX "TMPM"
+LSTO "_M"  
+INDEX "_M"  
 WRAP
 DIM?
 ×
@@ -2448,7 +2529,7 @@ FUNC 13
 L4STK
 XEQ 81 @@@@ PLYBAD
 RTNERR 5
-LSTO "TMPP" @@@@ P
+LSTO "_P"   @@@@ P
 RAN
 RAN
 COMPLEX      @@@@ Guss Poly
@@ -2460,10 +2541,12 @@ FC?C 25
 XEQ "PLGRR"  @@@@ Root Pval Stat
 0≠? ST Z
 RTNERR 6
-RCL "TMPP"   @@@@ Poly Root Pval Stat
-RCL "TMPP"   @@@@ Poly Poly Root Pval
+RCL "_P"     @@@@ Poly Root Pval Stat
+RCL "_P"     @@@@ Poly Poly Root Pval
 RCL ST Z     @@@@ Root Poly Poly Root
-XEQ "PDEFLT" @@@@ DPly Poly Root
+XEQ "PDEFLT" @@@@ DPly Rem  Poly Root
+X<>Y         @@@@ Rem  DPly Poly Root
+Rv           @@@@ DPly Poly Root
 RCL ST Z     @@@@ Root DPly Poly Root
 RTN
 
@@ -2480,10 +2563,10 @@ LBL "PRNXT"
 FUNC 33
 L4STK
 RCL ST Z     @@@@ Poly Gues DPly Poly
-LSTO "TMPP"
+LSTO "_P"  
 Rv           @@@@ Gues DPly Poly
 RCL ST Y     @@@@ DPLY Gues DPly Poly
-LSTO "TMPDP"
+LSTO "_DP"  
 XEQ 81 @@@@ PLYBAD
 RTNERR 5
 Rv           @@@@ Gues DPly Poly
@@ -2495,16 +2578,20 @@ FC?C 25
 XEQ "PLGRR"  @@@@ Root Pval Stat
 0≠? ST Z
 RTNERR 6
-RCL "TMPP"   @@@@ Poly Root Pval Stat
+RCL "_P"     @@@@ Poly Root Pval Stat
 X<>Y         @@@@ Root Poly Pval Stat
 -1           @@@@ -1   Root Poly Pval
 5            @@@@ 5    -1   Root Poly
 XEQ "PLGRR"  @@@@ Root Pval Stat
 RCL ST X     @@@@ Root Root Pval Stat
-RCL "TMPDP"  @@@@ DPly Root Root Pval
+RCL "_DP"    @@@@ DPly Root Root Pval
 X<>Y         @@@@ Root DPly Root Pval
-XEQ "PDEFLT" @@@@ DPly Root Pval
-RCL "TMPP"   @@@@ Poly DPly Root Pval
+XEQ "PDEFLT" @@@@ DPly Rem  Root Pval
+X<>Y
+Rv           @@@@ DPly Root Pval
+@@@@ TODO: Should check if |Rem| is near zero.  If it is not, then we probably converged to a previously found root and removed from DPly. It is also possible
+@@@@ TODO: that we we might have diverged, but that is super unlikely.  In fact, both cases are quite unlikely.  Still good software should check.
+RCL "_P"     @@@@ Poly DPly Root Pval
 X<>Y         @@@@ DPly Poly Root Pval
 RCL ST Z     @@@@ Root DPly Poly Root
 RTN
@@ -2541,29 +2628,31 @@ RTNNO
 LBL "PLGRR"
 FUNC 43
 L4STK
-LSTO "TMPI"      @@@@ ITR   TOL   GUESS POLY
+LSTO "_I"        @@@@ ITR   TOL   GUESS POLY
 R↓               @@@@ TOL   GUESS POLY
-LSTO "TMPT"
+LSTO "_T"  
 R↓               @@@@ GUESS POLY
-LSTO "TMPG"      
+LSTO "_G"        
 R↓               @@@@ POLY
-LSTO "TMPP"
+LSTO "_P"  
 DIM?                       
 ×                @@@@ N
-LSTO "TMPN"
+LSTO "_N"  
+@@@@ TODO: Check N>1.  Another status: 4 = polynomial is constant
 1
 -                @@@@ N-1
-LSTO "TMPNM1"
+LSTO "_NM1"  
 R↓
 LBL 94
-RCL "TMPP"
-RCL "TMPG"
+RCL "_P"  
+RCL "_G"  
 XEQ "PEVL2"      @@@@ P''         P'     P        ?
 RCL ST Z
 ABS              @@@@ |P|         P''    P'       P   
-X<? "TMPT"
+X<? "_T"  
 GTO 95
 R↓               @@@@ P''         P'     P        ?
+@@@@ TODO: Check P' for /0.  Another status: 5 = Iteration failed due to division by zero
 RCL÷ ST Y        @@@@ P''/P'      P'     P        ?
 R↓               @@@@ P'          P      ?        P''/P'  
 ÷                @@@@ -N=P/P'     ?      P''/P'   P''/P' 
@@ -2572,27 +2661,27 @@ R↓               @@@@ -N          P''/P' P''/P'   ?
 +/-              @@@@ N           P''/P' P''/P'   ?
 X<>Y             @@@@ P''/P'      N      P''/P'   ?
 RCL× ST Y        @@@@ -L          N      P''/P'   ?
-RCL× "TMPN"      @@@@ -L*n        N      P''/P'   ?
-RCL÷ "TMPNM1"    @@@@ -L*n/(n-1)  N      P''/P'   ?
+RCL× "_N"        @@@@ -L*n        N      P''/P'   ?
+RCL÷ "_NM1"      @@@@ -L*n/(n-1)  N      P''/P'   ?
 1
 +                @@@@ 1-L*n/(n-1) N      P''/P'   P''/P'  
 SQRT
-RCL× "TMPNM1"
-RCL÷ "TMPN"
-RCL "TMPN"
+RCL× "_NM1"  
+RCL÷ "_N"  
+RCL "_N"  
 1/X
 +  
 1/X
 ×                @@@@ LD          P''/P'   P''/P'  
-STO+ "TMPG"
-DSE "TMPI"
+STO+ "_G"  
+DSE "_I"  
 GTO 94
 @@@@ EXIT: Max iter
 3                @@@@ 3      LD       P''/P'   ?
-RCL "TMPP"       @@@@ POLY   3        LD       ?
-RCL "TMPG"       @@@@ G      POLY     3        ?
+RCL "_P"         @@@@ POLY   3        LD       ?
+RCL "_G"         @@@@ G      POLY     3        ?
 XEQ "PEVAL"      @@@@ P      3        ?        ?
-RCL "TMPG"       @@@@ G      P        3        ?
+RCL "_G"         @@@@ G      P        3        ?
 RTN
 LBL 95           @@@@ |P|    P''      P'       P   
 @@@@ EXIT: Found root
@@ -2601,7 +2690,7 @@ R↓               @@@@ P'     P
 R↓               @@@@ P   
 0
 X<>Y             @@@@ P      0
-RCL "TMPG"       @@@@ Root   Pval     0
+RCL "_G"         @@@@ Root   Pval     0
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PWRP)
@@ -2635,6 +2724,18 @@ FS? 64
 RCL "X"
 STO "X"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Is a number very close to zero
+@@@@ NAM: ZEROISH 80
+LBL 80
+FUNC 11
+L4STK
+ABS
+1e-10
+X>Y?
+RTNYES
+RTNNO
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
@@ -2720,9 +2821,9 @@ RTN
 LBL 99
 FUNC 31
 XEQ 95
-LSTO "TMPM"
+LSTO "_M"  
 R↓
-INDEX "TMPM"
+INDEX "_M"  
 WRAP
 J-
 LBL 51
@@ -2731,7 +2832,7 @@ R↓
 J-
 FC? 77
 GTO 51
-RCL "TMPM"
+RCL "_M"  
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -2746,9 +2847,9 @@ RTN
 @@@@ UPD: 2021-04-03
 LBL 98
 FUNC 13
-LSTO "TMPM"
+LSTO "_M"  
 R↓
-INDEX "TMPM"
+INDEX "_M"  
 WRAP
 LBL 52
 RCLEL
@@ -2767,8 +2868,8 @@ RTN
 @@@@ UPD: 2021-04-03
 LBL 96
 FUNC 00
-LSTO "TMPM"
-INDEX "TMPM"
+LSTO "_M"  
+INDEX "_M"  
 WRAP
 1
 LBL 54
@@ -2807,6 +2908,244 @@ RTN
 END
 #+END_SRC
 
+* =STATR=: Statistics Registers
+** Menu
+:PROPERTIES:
+:CUSTOM_ID: menu-statr
+:END:
+
+#+ATTR_HTML: :align center :frame box :rules all
+#+NAME:STATR
+| Menu    | Code                                                                      |
+|---------+---------------------------------------------------------------------------|
+| Σx      | FUNC 01; L4STK; ΣREG?;  0; +; RCL IND ST X; "Σx=";       ARCL ST X; AVIEW |
+| Σx↑2    | FUNC 01; L4STK; ΣREG?;  1; +; RCL IND ST X; "Σx^2=";     ARCL ST X; AVIEW |
+| Σy      | FUNC 01; L4STK; ΣREG?;  2; +; RCL IND ST X; "Σy=";       ARCL ST X; AVIEW |
+| Σy↑2    | FUNC 01; L4STK; ΣREG?;  3; +; RCL IND ST X; "Σy^2=";     ARCL ST X; AVIEW |
+| Σxy     | FUNC 01; L4STK; ΣREG?;  4; +; RCL IND ST X; "Σxy=";      ARCL ST X; AVIEW |
+| n       | FUNC 01; L4STK; ΣREG?;  5; +; RCL IND ST X; "n=";        ARCL ST X; AVIEW |
+| Σlnx    | FUNC 01; L4STK; ΣREG?;  6; +; RCL IND ST X; "Σlnx=";     ARCL ST X; AVIEW |
+| Σlnx↑2  | FUNC 01; L4STK; ΣREG?;  7; +; RCL IND ST X; "Σ(lnx)^2="; ARCL ST X; AVIEW |
+| Σlny    | FUNC 01; L4STK; ΣREG?;  8; +; RCL IND ST X; "Σlny=";     ARCL ST X; AVIEW |
+| Σlny↑2  | FUNC 01; L4STK; ΣREG?;  9; +; RCL IND ST X; "Σ(lny)^2="; ARCL ST X; AVIEW |
+| Σlnxlny | FUNC 01; L4STK; ΣREG?; 10; +; RCL IND ST X; "Σlnxlny=";  ARCL ST X; AVIEW |
+| Σxlny   | FUNC 01; L4STK; ΣREG?; 11; +; RCL IND ST X; "Σxlny=";    ARCL ST X; AVIEW |
+| Σylnx   | FUNC 01; L4STK; ΣREG?; 12; +; RCL IND ST X; "Σylnx=";    ARCL ST X; AVIEW |
+
+** Code
+
+#+BEGIN_SRC elisp :var tbl=STATR :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+(MJR-generate-42-menu-code "STATR" 0 tbl 0 nil 'stay 'up #'MJR-local-only-gen-lab (lambda (atrg target row) 
+                                                                                    (cl-destructuring-bind (menu prog) row
+                                                                                      (mapconcat #'string-trim-left 
+                                                                                                 (split-string prog ";") "\n"))))
+#+END_SRC
+
+#+RESULTS:
+#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:STATR)
+@@@@ DSC: Auto-generated menu program
+LBL "STATR"
+LBL 01            @@@@ Page 1 of menu STATR
+CLMENU
+"Σx"
+KEY 1 XEQ 04
+"Σx↑2"
+KEY 2 XEQ 05
+"Σy"
+KEY 3 XEQ 06
+"Σy↑2"
+KEY 4 XEQ 07
+"Σxy"
+KEY 5 XEQ 08
+"n"
+KEY 6 XEQ 09
+KEY 7 GTO 03
+KEY 8 GTO 02
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 02            @@@@ Page 2 of menu STATR
+CLMENU
+"Σlnx"
+KEY 1 XEQ 10
+"Σlnx↑2"
+KEY 2 XEQ 11
+"Σlny"
+KEY 3 XEQ 12
+"Σlny↑2"
+KEY 4 XEQ 13
+"Σlnxlny"
+KEY 5 XEQ 14
+"Σxlny"
+KEY 6 XEQ 15
+KEY 7 GTO 01
+KEY 8 GTO 03
+KEY 9 GTO 00
+MENU
+STOP
+GTO 02
+LBL 03            @@@@ Page 3 of menu STATR
+CLMENU
+"Σylnx"
+KEY 1 XEQ 16
+KEY 7 GTO 02
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 03
+LBL 00 @@@@ Application Exit
+EXITALL
+RTN
+LBL 04    @@@@ Action for menu key Σx
+FUNC 01
+L4STK
+ΣREG?
+0
++
+RCL IND ST X
+"Σx="
+ARCL ST X
+AVIEW
+RTN
+LBL 05    @@@@ Action for menu key Σx↑2
+FUNC 01
+L4STK
+ΣREG?
+1
++
+RCL IND ST X
+"Σx^2="
+ARCL ST X
+AVIEW
+RTN
+LBL 06    @@@@ Action for menu key Σy
+FUNC 01
+L4STK
+ΣREG?
+2
++
+RCL IND ST X
+"Σy="
+ARCL ST X
+AVIEW
+RTN
+LBL 07    @@@@ Action for menu key Σy↑2
+FUNC 01
+L4STK
+ΣREG?
+3
++
+RCL IND ST X
+"Σy^2="
+ARCL ST X
+AVIEW
+RTN
+LBL 08    @@@@ Action for menu key Σxy
+FUNC 01
+L4STK
+ΣREG?
+4
++
+RCL IND ST X
+"Σxy="
+ARCL ST X
+AVIEW
+RTN
+LBL 09    @@@@ Action for menu key n
+FUNC 01
+L4STK
+ΣREG?
+5
++
+RCL IND ST X
+"n="
+ARCL ST X
+AVIEW
+RTN
+LBL 10    @@@@ Action for menu key Σlnx
+FUNC 01
+L4STK
+ΣREG?
+6
++
+RCL IND ST X
+"Σlnx="
+ARCL ST X
+AVIEW
+RTN
+LBL 11    @@@@ Action for menu key Σlnx↑2
+FUNC 01
+L4STK
+ΣREG?
+7
++
+RCL IND ST X
+"Σ(lnx)^2="
+ARCL ST X
+AVIEW
+RTN
+LBL 12    @@@@ Action for menu key Σlny
+FUNC 01
+L4STK
+ΣREG?
+8
++
+RCL IND ST X
+"Σlny="
+ARCL ST X
+AVIEW
+RTN
+LBL 13    @@@@ Action for menu key Σlny↑2
+FUNC 01
+L4STK
+ΣREG?
+9
++
+RCL IND ST X
+"Σ(lny)^2="
+ARCL ST X
+AVIEW
+RTN
+LBL 14    @@@@ Action for menu key Σlnxlny
+FUNC 01
+L4STK
+ΣREG?
+10
++
+RCL IND ST X
+"Σlnxlny="
+ARCL ST X
+AVIEW
+RTN
+LBL 15    @@@@ Action for menu key Σxlny
+FUNC 01
+L4STK
+ΣREG?
+11
++
+RCL IND ST X
+"Σxlny="
+ARCL ST X
+AVIEW
+RTN
+LBL 16    @@@@ Action for menu key Σylnx
+FUNC 01
+L4STK
+ΣREG?
+12
++
+RCL IND ST X
+"Σylnx="
+ARCL ST X
+AVIEW
+RTN
+@@@@ Free labels start at: 17
+END
+#+end_src
+
 * WORKING                                                          :noexport:
 
 #+BEGIN_SRC text
@@ -2832,3 +3171,5 @@ Code in this section is under construction.  Most likely broken.
 #+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 #+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 #+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+
+

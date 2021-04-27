@@ -340,7 +340,7 @@ RTN
 LBL "FPRD"
 FUNC 01
 1
-LSTO "Prd"
+LSTO "_PROD"
 @@@@ Step through independent variable values and do product
 RCL "LLIM"
 STO IND "EqV"
@@ -350,7 +350,7 @@ SF 25
 XEQ IND "EqP"
 FC?C 25
 RTNERR 2
-STO× "Prd"
+STO× "_PROD"
 @@@@ Increment independent variable
 RCL "STEP"
 RCL+ IND "EqV"
@@ -359,7 +359,7 @@ RCL "ULIM"
 X≥Y?
 GTO 80
 @@@@ All done, put Prd on stack
-RCL "Prd"
+RCL "_PROD"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FSUM)
@@ -373,7 +373,7 @@ RTN
 LBL "FSUM"
 FUNC 01
 0
-LSTO "Sum"
+LSTO "_SUM"
 @@@@ Step through independent variable values and do sum
 RCL "LLIM"
 STO IND "EqV"
@@ -383,7 +383,7 @@ SF 25
 XEQ IND "EqP"
 FC?C 25
 RTNERR 2
-STO+ "Sum"
+STO+ "_SUM"
 @@@@ Increment independent variable
 RCL "STEP"
 RCL+ IND "EqV"
@@ -392,7 +392,7 @@ RCL "ULIM"
 X≥Y?
 GTO 81
 @@@@ All done, put Sum on stack
-RCL "Sum"
+RCL "_SUM"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FSLV)
@@ -688,7 +688,7 @@ FS? 85
 0
 FC? 85
 1
-LSTO "SoP"
+LSTO "_SORP"
 GTO 23
 LBL 21
 @@@@ Table
@@ -699,9 +699,9 @@ RCL "EqD"
 FS? 83
 +
 NEWMAT
-LSTO "TMAT"
+LSTO "_TMAT"
 R↓    @@@@ Drop matrix off stack to save RAM
-INDEX "TMAT"
+INDEX "_TMAT"
 GROW
 LBL 23
 @@@@ Step through independent variable values and do sum, product, or table
@@ -718,7 +718,7 @@ FC? 84
 GTO 32
 @@@@  Doing a table: Setup CTR for loop later
 RCL "EqD"
-LSTO "CTR"
+LSTO "_CTR"
 @@@@  Doing a table:  Store independent variable if FS? 83
 FC? 83
 GTO 32
@@ -751,9 +751,9 @@ GTO 29
 AVIEW
 LBL 29
 FS? 85
-STO+ "SoP"
+STO+ "_SORP"
 FC? 85
-STO× "SoP"
+STO× "_SORP"
 GTO 28
 LBL 26
 @@@@ Table
@@ -770,7 +770,7 @@ LBL 31
 STOEL
 J+
 R↓
-DSE "CTR"
+DSE "_CTR"
 GTO 30
 LBL 28
 @@@@ Increment independent variable
@@ -791,12 +791,12 @@ FS? 85
 "SUM: "
 FC? 85
 "PROD: "
-RCL "SoP"
+RCL "_SORP"
 GTO 18
 LBL 33
 @@@@ Table
 CLA
-RCL "TMAT"
+RCL "_TMAT"
 LBL 18
 ARCL ST X
 AVIEW
@@ -901,7 +901,6 @@ the current plot range or last zoom box region.
 @@@@ FRE: LBL: 79-99
 @@@@ REQ: REQ:free42>=3.0
 @@@@ UPD: 2021-04-09
-
 LBL "FPLT"
 FC? 04
 3
@@ -1154,14 +1153,14 @@ RCL "ResX"
 IP
 1
 -
-LSTO "I"
+LSTO "_CTR"
 LBL 15
 RCL "ResY"
 2
 ÷                             @@@@ Yctr
 9
 -
-RCL "I"
+RCL "_CTR"
 14
 ×                             @@@@ X coord
 "@`px|~├~|xp`@"               @@@@ Draw up triangle
@@ -1172,7 +1171,7 @@ X<>Y
 +
 X<>Y
 AGRAPH
-DSE "I"                       @@@@ Loopity doopity do
+DSE "_CTR"                       @@@@ Loopity doopity do
 GTO 15
 GTO 20               @@@@ Jump past axis and grid drawing for autoscale redraw
 LBL 17
@@ -1269,7 +1268,7 @@ LBL 20
 SF 82
 @@@@ Init LASTY
 0
-LSTO "LASTY"
+LSTO "_LASTY"
 R↓
 @@@@ Loop across screen
 RCL "ResX"
@@ -1277,9 +1276,9 @@ RCL "ResX"
 ÷
 1
 +
-LSTO "XICUR"
+LSTO "_XICUR"
 LBL 41
-RCL "XICUR"
+RCL "_XICUR"
 IP
 XEQ 47
 STO IND "EqV"
@@ -1290,19 +1289,19 @@ GTO 29
 FC? 82
 GTO 43
 @@@@ Setup YPMIN & YPMAX
-LSTO "YPMAX"
-LSTO "YPMIN"
+LSTO "_YPMAX"
+LSTO "_YPMIN"
 CF 82
 LBL 43
 @@@@ Update YPMIN & YPMAX if required.
-RCL "YPMAX"
+RCL "_YPMAX"
 X<>Y
 X>Y?
-LSTO "YPMAX"
-RCL "YPMIN"
+LSTO "_YPMAX"
+RCL "_YPMIN"
 X<>Y
 X<Y?
-LSTO "YPMIN"
+LSTO "_YPMIN"
 FC? 83
 GTO 78
 @@@@ Draw autoscale progress bar
@@ -1311,7 +1310,7 @@ RCL "ResY"
 ÷
 1
 -
-RCL "XICUR"
+RCL "_XICUR"
 AGRAPH
 R↓
 R↓
@@ -1322,7 +1321,7 @@ XEQ 56
 XEQ 55
 GTO 29
 @@@@ DRAW FAT PIXEL
-RCL "XICUR"
+RCL "_XICUR"
 XEQ 51              @@@ XICUR YICUR
 R↓
 @@@@ Do we draw lines?
@@ -1332,76 +1331,76 @@ GTO 19
 FS? 83
 GTO 19
 @@@@ Do we have a last point?
-RCL "LASTY"
+RCL "_LASTY"
 X=0?
 GTO 19
 @@@@ Yep & Yep.  We draw a line!
 X<>Y
-RCL "XICUR"  @@@@ xi  newy lasty
+RCL "_XICUR"  @@@@ xi  newy lasty
 XEQ 40
 LBL 19
 @@@@ Save last Y
 R↓
-LSTO "LASTY"
+LSTO "_LASTY"
 GTO 42
 LBL 29  @@@@ Bad Y target
 0
-LSTO "LASTY"
+LSTO "_LASTY"
 @@@@ Backend of loop
 LBL 42
-ISG "XICUR"
+ISG "_XICUR"
 GTO 41
 @@@@ Done with graph.
 @@@@ Setup zoom box
 10
-LSTO "FPZSPD"
+LSTO "_FPZSP"
 1
-LSTO "ZBTOP"
-LSTO "ZBLFT"
+LSTO "_ZBTOP"
+LSTO "_ZBLFT"
 RCL "ResY"
-LSTO "ZBBOT"
+LSTO "_ZBBOT"
 RCL "ResX"
-LSTO "ZBRGT"
+LSTO "_ZBRGT"
 @@@@ Do we redraw with autoscale?
 FS?C 83
 GTO 68
 @@@@ graph UI
 LBL 16
-RCL "FPZSPD"
-LSTO "CTR"
+RCL "_FPZSP"
+LSTO "_CTR"
 LBL 52
-RCL "ZBRGT"
-RCL "CTR"
+RCL "_ZBRGT"
+RCL "_CTR"
 +
 XEQ 48
-DSE "CTR"
+DSE "_CTR"
 GTO 52
-RCL "FPZSPD"
-LSTO "CTR"
+RCL "_FPZSP"
+LSTO "_CTR"
 LBL 53
-RCL "ZBBOT"
-RCL "CTR"
+RCL "_ZBBOT"
+RCL "_CTR"
 +
 XEQ 58
-DSE "CTR"
+DSE "_CTR"
 GTO 53
-RCL "FPZSPD"
-LSTO "CTR"
+RCL "_FPZSP"
+LSTO "_CTR"
 LBL 54
-RCL "ZBTOP"
-RCL "CTR"
+RCL "_ZBTOP"
+RCL "_CTR"
 -
 XEQ 58
-DSE "CTR"
+DSE "_CTR"
 GTO 54
-RCL "FPZSPD"
-LSTO "CTR"
+RCL "_FPZSP"
+LSTO "_CTR"
 LBL 59
-RCL "ZBLFT"
-RCL "CTR"
+RCL "_ZBLFT"
+RCL "_CTR"
 -
 XEQ 48
-DSE "CTR"
+DSE "_CTR"
 GTO 59
 LBL 44
 GETKEY1
@@ -1469,20 +1468,20 @@ XEQ 04
 GTO 07
 LBL 68               @@@@ Autoscale Y
 1
-RCL "ZBLFT"
+RCL "_ZBLFT"
 -
 ABS
 RCL "ResX"
-RCL "ZBRGT"
+RCL "_ZBRGT"
 -
 ABS
 +
 X=0?
 GTO 14
 @@@@ Zoom box has been set
-RCL "ZBLFT"
+RCL "_ZBLFT"
 XEQ 47
-RCL "ZBRGT"
+RCL "_ZBRGT"
 XEQ 47
 STO "ULIM"
 X<>Y
@@ -1491,11 +1490,11 @@ SF 83
 GTO 07
 LBL 14
 @@@@ No zoom box
-RCL "YPMAX"
+RCL "_YPMAX"
 -5
 RCL× "YWID"
 +
-RCL "YPMIN"
+RCL "_YPMIN"
 5
 RCL× "YWID"
 +
@@ -1510,69 +1509,69 @@ SF 03
 GTO 07
 LBL 65               @@@@ 37 + set speed fast
 10
-LSTO "FPZSPD"
+LSTO "_FPZSP"
 GTO 16
 LBL 66               @@@@ 32 - set speed slow
 1
-LSTO "FPZSPD"
+LSTO "_FPZSP"
 GTO 16
 LBL 61               @@@@ LEFT REDO
-RCL "ZBRGT"
+RCL "_ZBRGT"
 -2
-RCL× "FPZSPD"
+RCL× "_FPZSP"
 +
-RCL "FPZSPD"
-RCL+ "ZBLFT"
+RCL "_FPZSP"
+RCL+ "_ZBLFT"
 X<Y?
-LSTO "ZBLFT"
+LSTO "_ZBLFT"
 XEQ 47
 STO "ZLLIM"
 GTO 16
 LBL 62               @@@@ RIGHT REDO
-RCL "ZBLFT"
+RCL "_ZBLFT"
 2
-RCL× "FPZSPD"
+RCL× "_FPZSP"
 +
-RCL "FPZSPD"
+RCL "_FPZSP"
 +/-
-RCL+ "ZBRGT"
+RCL+ "_ZBRGT"
 X>Y?
-LSTO "ZBRGT"
+LSTO "_ZBRGT"
 XEQ 47
 STO "ZULIM"
 GTO 16
 LBL 63               @@@@ TOP REDO
-RCL "ZBBOT"
+RCL "_ZBBOT"
 -2
-RCL× "FPZSPD"
+RCL× "_FPZSP"
 +                    @@@@ Upper_limit
-RCL "FPZSPD"
-RCL+ "ZBTOP"         @@@ New_ZBTOP Lower_limit
+RCL "_FPZSP"
+RCL+ "_ZBTOP"         @@@ New_ZBTOP Lower_limit
 X<Y?
-LSTO "ZBTOP"
+LSTO "_ZBTOP"
 GTO 16
 LBL 64               @@@@ BOT REDO
-RCL "ZBTOP"
+RCL "_ZBTOP"
 2
-RCL× "FPZSPD"
+RCL× "_FPZSP"
 +                    @@@@ Lower_limit
-RCL "FPZSPD"
+RCL "_FPZSP"
 +/-
-RCL+ "ZBBOT"         @@@ New_ZBBOT Lower_limit
+RCL+ "_ZBBOT"         @@@ New_ZBBOT Lower_limit
 X>Y?
-LSTO "ZBBOT"
+LSTO "_ZBBOT"
 GTO 16
 LBL 73
-RCL "ZBTOP"
+RCL "_ZBTOP"
 XEQ 57
-RCL "ZBBOT"
+RCL "_ZBBOT"
 XEQ 57
 STO "YMIN"
 R↓
 STO "YMAX"
-RCL "ZBRGT"
+RCL "_ZBRGT"
 XEQ 47
-RCL "ZBLFT"
+RCL "_ZBLFT"
 XEQ 47
 STO "LLIM"
 X<>Y
@@ -1583,7 +1582,7 @@ RTN
 LBL 40  @@@@ Draw Line
 FUNC 00
 @@@@ xi newy lasty
-LSTO "XNUE"
+LSTO "_XNUE"
 R↓              @@@@ yn yo
 RCL ST Y        @@@@ yo yn yo
 RCL- ST Y       @@@@ yo-yn yn yo
@@ -1594,28 +1593,28 @@ RTN @@@@ Pts too close, no line to draw
 @@@@ We are drawing a line!
 R↓
 R↓              @@@@ yn yo
-LSTO "YNUE"
+LSTO "_YNUE"
 X<>Y
-LSTO "YOLD"     @@@@ yo yn
+LSTO "_YOLD"     @@@@ yo yn
 +
 2
 ÷
 IP
-LSTO "YCTR"
+LSTO "_YCTR"
 @@@@ CTR -> OLD Y
-RCL "XNUE"
+RCL "_XNUE"
 1
 -
-RCL "YOLD"
-RCL "YCTR"
+RCL "_YOLD"
+RCL "_YCTR"
 XEQ 70
 @@@@ CTR -> NEW Y
 R↓
 R↓
 R↓
-RCL "XNUE"
-RCL "YNUE"
-RCL "YCTR"
+RCL "_XNUE"
+RCL "_YNUE"
+RCL "_YCTR"
 XEQ 70
 R↓
 R↓

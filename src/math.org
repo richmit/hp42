@@ -1760,10 +1760,10 @@ END
 #+NAME:NLA
 | Menu | Lab    |                                            | Inputs | Output             |
 |------+--------+--------------------------------------------+--------+--------------------|
-| IDEN | MATIDN | Create an nxn identity matrix              | X: N   | X: identity matrix |
-| DIAG | MATDIG | Create diagonal matrix with given elements | X: VEC | X: diagonal matrix |
-| TR   | MATTR  | Compute the trace of a matrix              | X: M   | X: trace           |
-| CPLY | MCPOLY | Compute matrix Characteristic polynomial   | X: M   | X: polynomial      |
+| IDEN | MXIDN  | Create an nxn identity matrix              | X: N   | X: identity matrix |
+| DIAG | MXDIAG | Create diagonal matrix with given elements | X: VEC | X: diagonal matrix |
+| TR   | MXTR   | Compute the trace of a matrix              | X: M   | X: trace           |
+| CPLY | MXCPLY | Compute matrix Characteristic polynomial   | X: M   | X: polynomial      |
 |      |        |                                            |        |                    |
 | EDIT | LBL 96 |                                            |        |                    |
 |------+--------+--------------------------------------------+--------+--------------------|
@@ -1776,9 +1776,9 @@ END
 
 ** Notes on individual programs
 
-*** =MCPOLY=: Characteristic polynomial
+*** =MXCPLY=: Characteristic polynomial
 
-=MCPOLY= uses the Faddeev–LeVerrier algorithm to compute the characteristic polynomial of a matrix.  The polynomial is a matrix of coefficients suitable for use
+=MXCPLY= uses the Faddeev–LeVerrier algorithm to compute the characteristic polynomial of a matrix.  The polynomial is a matrix of coefficients suitable for use
 by the polynomials tools found later on this page.
 
 One can find the eigenvalues of a matrix by using =PR1ST= & =PRNXT= to solve the characteristic polynomial.  
@@ -1802,13 +1802,13 @@ LBL "NLA"
 LBL 01            @@@@ Page 1 of menu NLA
 CLMENU
 "IDEN"
-KEY 1 XEQ "MATIDN"
+KEY 1 XEQ "MXIDN"
 "DIAG"
-KEY 2 XEQ "MATDIG"
+KEY 2 XEQ "MXDIAG"
 "TR"
-KEY 3 XEQ "MATTR"
+KEY 3 XEQ "MXTR"
 "CPLY"
-KEY 4 XEQ "MCPOLY"
+KEY 4 XEQ "MXCPLY"
 "EDIT"
 KEY 6 XEQ 96
 KEY 7 GTO 02
@@ -1840,19 +1840,20 @@ RTN
 ** Functions
 
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MCPOLY)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MXCPLY)
 @@@@ DSC: Compute matrix Characteristic polynomial
 @@@@ IN:  X: Matrix
 @@@@ OUT: X: Characteristic polynomial
 @@@@ LBL: 28
 @@@@ FAQ: Dosen't use INDEX
 @@@@ UPD: 2021-04-27
-LBL "MCPOLY"
+@@@@ TC:  [[1,2,3][4,5,6][7,8,10]] => [1, -16, -12, 3]
+LBL "MXCPLY"
 FUNC 11         @@## REQ:free42>=2.5.24 
 L4STK           @@## REQ:free42>=3.0    
 LSTO "_A"
 DIM?
-XEQ "MATIDN"
+XEQ "MXIDN"
 LSTO "_M"
 LSTO "_I"
 R↓
@@ -1878,7 +1879,7 @@ RCL× ST T       @@@@ I*p_{n-1}       M        A         p_{n-1}
 -               @@@@ M-I*p_{n-1}     A        p_{n-1}
 ×               @@@@ A*(M-I*p_{n-1}) p_{n-1}
 LSTO "_M"
-XEQ "MATTR"     @@@@ A*(M-I*p_{n-1}) p_{n-1}
+XEQ "MXTR"     @@@@ A*(M-I*p_{n-1}) p_{n-1}
 RCL "_CTR"
 ÷               @@@@ p_n             p_{n-1}
 STOEL
@@ -1891,13 +1892,14 @@ RCL "_P"
 +/-
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MATTR)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MXTR)
 @@@@ DSC: Compute matrix trace (sum of the diagonal elements)
 @@@@ IN:  X: Matrix
 @@@@ OUT: X: trace
 @@@@ FAQ: Dosen't use INDEX
 @@@@ UPD: 2021-04-27
-LBL "MATTR"
+@@@@ TC:  [[1,2,3][4,5,6][7,8,10]] => 16
+LBL "MXTR"
 FUNC 11         @@## REQ:free42>=2.5.24 
 L4STK           @@## REQ:free42>=3.0    
 LSTO "_M"       @@@@ M           -- M is an nxn matrix
@@ -1922,29 +1924,29 @@ RSUM            @@@@ X   1+n 1   -- X is now a 1x1 matrix with the sum of the di
 DET             @@@@ TR          -- DET of a 1x1 matrix is matrix element
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (MATIDN)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (MXIDN)
 @@@@ DSC: Create an XxX identity matrix
 @@@@ IN:  X: Size of matrix to make
 @@@@ OUT: X: Identity matrix of size X
 @@@@ FAQ: Dosen't use INDEX
 @@@@ UPD: 2021-04-27
-LBL "MATIDN"
+LBL "MXIDN"
 FUNC 11         @@## REQ:free42>=2.5.24 
 L4STK           @@## REQ:free42>=3.0    
 1
 NEWMAT          @@@@ X is an nx1 zero matrix 
 SIGN            @@@@ X is now a constant matrix filled with 1s
-XEQ "MATDIG"
+XEQ "MXDIAG"
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MATDIG)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MXDIAG)
 @@@@ DSC: Create diagonal matrix with given elements
 @@@@ IN:  X: matrix
 @@@@ IN:  X: diagonal matrix
 @@@@ FAQ: Dosen't use INDEX
 @@@@ FAQ: Uses all elements of X -- even if it is not 1xn or nx1
 @@@@ UPD: 2021-04-27
-LBL "MATDIG"
+LBL "MXDIAG"
 FUNC 11         @@## REQ:free42>=2.5.24 
 L4STK           @@## REQ:free42>=3.0    
 LSTO "_M"       @@@@ D
@@ -1985,7 +1987,7 @@ RCL "X"
 RCL "CPM"
 DIM?
 R↓
-XEQ "MATIDN"
+XEQ "MXIDN"
 ×
 -
 DET
@@ -2492,6 +2494,7 @@ RTN
 @@@@      Y: Deflated Polynomial
 @@@@      X: Root
 @@@@ FAQ: If set, the global variable ACC is used to set accuracy
+@@@@ TC:  [1, -16, -12, 3] => -0.90574, 0.1982, 16.70749
 LBL "PR1ST"
 FUNC 13
 L4STK

@@ -688,7 +688,7 @@ FS? 85
 0
 FC? 85
 1
-LSTO "_SORP"
+LSTO "_SOP"
 GTO 23
 LBL 21
 @@@@ Table
@@ -751,9 +751,9 @@ GTO 29
 AVIEW
 LBL 29
 FS? 85
-STO+ "_SORP"
+STO+ "_SOP"
 FC? 85
-STO× "_SORP"
+STO× "_SOP"
 GTO 28
 LBL 26
 @@@@ Table
@@ -791,7 +791,7 @@ FS? 85
 "SUM: "
 FC? 85
 "PROD: "
-RCL "_SORP"
+RCL "_SOP"
 GTO 18
 LBL 33
 @@@@ Table
@@ -901,6 +901,7 @@ the current plot range or last zoom box region.
 @@@@ FRE: LBL: 79-99
 @@@@ REQ: REQ:free42>=3.0
 @@@@ UPD: 2021-04-09
+
 LBL "FPLT"
 FC? 04
 3
@@ -1153,14 +1154,14 @@ RCL "ResX"
 IP
 1
 -
-LSTO "_CTR"
+LSTO "_I"
 LBL 15
 RCL "ResY"
 2
 ÷                             @@@@ Yctr
 9
 -
-RCL "_CTR"
+RCL "_I"
 14
 ×                             @@@@ X coord
 "@`px|~├~|xp`@"               @@@@ Draw up triangle
@@ -1171,7 +1172,7 @@ X<>Y
 +
 X<>Y
 AGRAPH
-DSE "_CTR"                       @@@@ Loopity doopity do
+DSE "_I"                       @@@@ Loopity doopity do
 GTO 15
 GTO 20               @@@@ Jump past axis and grid drawing for autoscale redraw
 LBL 17
@@ -1353,7 +1354,7 @@ GTO 41
 @@@@ Done with graph.
 @@@@ Setup zoom box
 10
-LSTO "_FPZSP"
+LSTO "_ZSPD"
 1
 LSTO "_ZBTOP"
 LSTO "_ZBLFT"
@@ -1366,7 +1367,7 @@ FS?C 83
 GTO 68
 @@@@ graph UI
 LBL 16
-RCL "_FPZSP"
+RCL "_ZSPD"
 LSTO "_CTR"
 LBL 52
 RCL "_ZBRGT"
@@ -1375,7 +1376,7 @@ RCL "_CTR"
 XEQ 48
 DSE "_CTR"
 GTO 52
-RCL "_FPZSP"
+RCL "_ZSPD"
 LSTO "_CTR"
 LBL 53
 RCL "_ZBBOT"
@@ -1384,7 +1385,7 @@ RCL "_CTR"
 XEQ 58
 DSE "_CTR"
 GTO 53
-RCL "_FPZSP"
+RCL "_ZSPD"
 LSTO "_CTR"
 LBL 54
 RCL "_ZBTOP"
@@ -1393,7 +1394,7 @@ RCL "_CTR"
 XEQ 58
 DSE "_CTR"
 GTO 54
-RCL "_FPZSP"
+RCL "_ZSPD"
 LSTO "_CTR"
 LBL 59
 RCL "_ZBLFT"
@@ -1509,18 +1510,18 @@ SF 03
 GTO 07
 LBL 65               @@@@ 37 + set speed fast
 10
-LSTO "_FPZSP"
+LSTO "_ZSPD"
 GTO 16
 LBL 66               @@@@ 32 - set speed slow
 1
-LSTO "_FPZSP"
+LSTO "_ZSPD"
 GTO 16
 LBL 61               @@@@ LEFT REDO
 RCL "_ZBRGT"
 -2
-RCL× "_FPZSP"
+RCL× "_ZSPD"
 +
-RCL "_FPZSP"
+RCL "_ZSPD"
 RCL+ "_ZBLFT"
 X<Y?
 LSTO "_ZBLFT"
@@ -1530,9 +1531,9 @@ GTO 16
 LBL 62               @@@@ RIGHT REDO
 RCL "_ZBLFT"
 2
-RCL× "_FPZSP"
+RCL× "_ZSPD"
 +
-RCL "_FPZSP"
+RCL "_ZSPD"
 +/-
 RCL+ "_ZBRGT"
 X>Y?
@@ -1543,9 +1544,9 @@ GTO 16
 LBL 63               @@@@ TOP REDO
 RCL "_ZBBOT"
 -2
-RCL× "_FPZSP"
+RCL× "_ZSPD"
 +                    @@@@ Upper_limit
-RCL "_FPZSP"
+RCL "_ZSPD"
 RCL+ "_ZBTOP"         @@@ New_ZBTOP Lower_limit
 X<Y?
 LSTO "_ZBTOP"
@@ -1553,9 +1554,9 @@ GTO 16
 LBL 64               @@@@ BOT REDO
 RCL "_ZBTOP"
 2
-RCL× "_FPZSP"
+RCL× "_ZSPD"
 +                    @@@@ Lower_limit
-RCL "_FPZSP"
+RCL "_ZSPD"
 +/-
 RCL+ "_ZBBOT"         @@@ New_ZBBOT Lower_limit
 X>Y?

@@ -367,6 +367,108 @@ This function is handy when you want to always generate local labels.
 (MJR-generate-42-menu-code "PROG_NAME" 0 tbl 1 nil 'stay 'up #'MJR-local-only-gen-lab nil) ;;#'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
+#+RESULTS:
+#+begin_src hp42s :tangle no
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PROG_NAME)
+@@@@ DSC: Auto-generated menu program
+LBL "PROG_NAME"
+LBL 01            @@@@ Page 1 of menu PROG_NAME
+CLMENU
+"a"
+KEY 1 XEQ 03
+"TAN"
+KEY 2 XEQ 04
+"TAN"
+KEY 3 XEQ 05
+"c"
+KEY 4 GTO 06
+"i"
+KEY 5 XEQ 07
+"j"
+KEY 6 XEQ 08
+KEY 7 GTO 02
+KEY 8 GTO 02
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 02            @@@@ Page 2 of menu PROG_NAME
+CLMENU
+"n"
+KEY 1 GTO 09
+"p"
+KEY 2 XEQ 10
+KEY 7 GTO 01
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 02
+LBL 06            @@@@ Page 1 of menu c
+CLMENU
+"d"
+KEY 1 XEQ 11
+"e"
+KEY 2 XEQ 12
+"f"
+KEY 3 GTO 13
+KEY 9 GTO 01
+MENU
+STOP
+GTO 06
+LBL 13            @@@@ Page 1 of menu f
+CLMENU
+"h"
+KEY 2 XEQ 14
+KEY 9 GTO 06
+MENU
+STOP
+GTO 13
+LBL 09            @@@@ Page 1 of menu n
+CLMENU
+"m"
+KEY 1 XEQ 15
+KEY 9 GTO 02
+MENU
+STOP
+GTO 09
+LBL 00 @@@@ Application Exit
+EXITALL
+RTN
+LBL 03    @@@@ Action for menu key a
+@@@@ TODO: Code for a!
+RTN
+LBL 04    @@@@ Action for menu key TAN
+@@@@ TODO: Code for TAN!
+RTN
+LBL 05    @@@@ Action for menu key TAN
+@@@@ TODO: Code for TAN!
+RTN
+LBL 07    @@@@ Action for menu key i
+@@@@ TODO: Code for i!
+RTN
+LBL 08    @@@@ Action for menu key j
+@@@@ TODO: Code for j!
+RTN
+LBL 10    @@@@ Action for menu key p
+@@@@ TODO: Code for p!
+RTN
+LBL 11    @@@@ Action for menu key d
+@@@@ TODO: Code for d!
+RTN
+LBL 12    @@@@ Action for menu key e
+@@@@ TODO: Code for e!
+RTN
+LBL 14    @@@@ Action for menu key h
+@@@@ TODO: Code for h!
+RTN
+LBL 15    @@@@ Action for menu key m
+@@@@ TODO: Code for m!
+RTN
+@@@@ Free labels start at: 16
+END
+#+end_src
+
 * Emacs Helper Stuff
 
 ** Emacs function to insert charcters given a list of character codes

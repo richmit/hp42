@@ -1758,27 +1758,27 @@ END
 
 #+ATTR_HTML: :align center :frame box :rules all
 #+NAME:NLA
-| Menu | Lab    |                                            | Inputs | Output             | Status     |
-|------+--------+--------------------------------------------+--------+--------------------+------------|
-| IDEN | MATIDN | Create an nxn identity matrix              | X: N   | X: identity matrix | *COMPLETE* |
-| DIAG | MATDIG | Create diagonal matrix with given elements | X: VEC | X: diagonal matrix | *COMPLETE* |
-| TR   | MATTR  | Compute the trace of a matrix              | X: M   | X: trace           | *COMPLETE* |
-| CPLY | MCPOLY | Compute matrix Characteristic polynomial   | X: M   | X: polynomial      | *COMPLETE* |
-|      |        |                                            |        |                    |            |
-|      |        |                                            |        |                    |            |
-|------+--------+--------------------------------------------+--------+--------------------+------------|
-| MAT  | LBL 98 | Store/Recall Current CPOLY matrix          |        |                    | *COMPLETE* |
-| X    | LBL 97 | Store/Recall current value of "X"          |        |                    | *COMPLETE* |
-|      |        |                                            |        |                    |            |
-|      |        |                                            |        |                    |            |
-|      |        |                                            |        |                    |            |
-| EVCP | EQCPLY | Evaluate Characteristic polynomial         |        |                    | *COMPLETE* |
+| Menu | Lab    |                                            | Inputs | Output             |
+|------+--------+--------------------------------------------+--------+--------------------|
+| IDEN | MATIDN | Create an nxn identity matrix              | X: N   | X: identity matrix |
+| DIAG | MATDIG | Create diagonal matrix with given elements | X: VEC | X: diagonal matrix |
+| TR   | MATTR  | Compute the trace of a matrix              | X: M   | X: trace           |
+| CPLY | MCPOLY | Compute matrix Characteristic polynomial   | X: M   | X: polynomial      |
+|      |        |                                            |        |                    |
+| EDIT | LBL 96 |                                            |        |                    |
+|------+--------+--------------------------------------------+--------+--------------------|
+| MAT  | LBL 98 | Store/Recall Current CPOLY matrix          |        |                    |
+| X    | LBL 97 | Store/Recall current value of "X"          |        |                    |
+|      |        |                                            |        |                    |
+|      |        |                                            |        |                    |
+|      |        |                                            |        |                    |
+| EVCP | EQCPLY | Evaluate Characteristic polynomial         |        |                    |
 
 ** Notes on individual programs
 
-*** =CPLY=: Characteristic polynomial
+*** =MCPOLY=: Characteristic polynomial
 
-=CPLY= uses the Faddeev–LeVerrier algorithm to compute the characteristic polynomial of a matrix.  The polynomial is a matrix of coefficients suitable for use
+=MCPOLY= uses the Faddeev–LeVerrier algorithm to compute the characteristic polynomial of a matrix.  The polynomial is a matrix of coefficients suitable for use
 by the polynomials tools found later on this page.
 
 One can find the eigenvalues of a matrix by using =PR1ST= & =PRNXT= to solve the characteristic polynomial.  
@@ -1809,6 +1809,8 @@ KEY 2 XEQ "MATDIG"
 KEY 3 XEQ "MATTR"
 "CPLY"
 KEY 4 XEQ "MCPOLY"
+"EDIT"
+KEY 6 XEQ 96
 KEY 7 GTO 02
 KEY 8 GTO 02
 KEY 9 GTO 00
@@ -1842,60 +1844,49 @@ RTN
 @@@@ DSC: Compute matrix Characteristic polynomial
 @@@@ IN:  X: Matrix
 @@@@ OUT: X: Characteristic polynomial
-@@@@ LBL: 21-22
-@@@@ UPD: 2021-03-12
+@@@@ LBL: 28
+@@@@ FAQ: Dosen't use INDEX
+@@@@ UPD: 2021-04-27
 LBL "MCPOLY"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24 
+L4STK           @@## REQ:free42>=3.0    
 LSTO "_A"
 DIM?
-Rv
 XEQ "MATIDN"
 LSTO "_M"
-DIM?
-Rv
-LSTO "_J"
+LSTO "_I"
+R↓
 1
 +
-LSTO "_JP1"
-ISG "_JP1"
-NOP
 1
 X<>Y
 NEWMAT
 LSTO "_P"
-Rv
-0           @@@@ p_{n-1}
-LBL 28 
-RCL "_A"  @@@@ A               p_{n-1}
-RCL "_M"  @@@@ M               A        p_{n-1}
-RCL  ST Z   @@@@ p_{n-1}         M        A        p_{n-1}
-XEQ 96      @@@@ M-I*p_{n-1}     A        p_{n-1}
-×           @@@@ A*(M-I*p_{n-1}) p_{n-1}
-LSTO "_M"
-XEQ "MATTR" @@@@ A*(M-I*p_{n-1}) p_{n-1}
-RCL "_JP1"
-RCL "_J"
--           @@@@ IDX             A*(M-I*p_{n-1})
-X<>Y        @@@@ A*(M-I*p_{n-1}) IDX             
-RCL ST Y    @@@@ IDX             A*(M-I*p_{n-1}) IDX
-1
--           @@@@ IDX-1           A*(M-I*p_{n-1}) IDX             
-÷           @@@@ p_n              IDX             
-X<>Y        @@@@ IDX             p_n                          
-1           @@@@ 1               IDX             p_n                          
-X<>Y        @@@@ IDX             1               p_n                          
 INDEX "_P"
-STOIJ
-Rv
-Rv
-STOEL      
-DSE "_J"
-GTO 28
-LBL 24
-INDEX "_P"
+R↓
 -1
 STOEL
+J+
++/-
+LSTO "_CTR"
+0               @@@@ p_{n-1}
+LBL 28
+RCL "_A"        @@@@ A               p_{n-1}
+RCL "_M"        @@@@ M               A        p_{n-1}
+RCL "_I"        @@@@ I               M        A         p_{n-1}
+RCL× ST T       @@@@ I*p_{n-1}       M        A         p_{n-1}
+-               @@@@ M-I*p_{n-1}     A        p_{n-1}
+×               @@@@ A*(M-I*p_{n-1}) p_{n-1}
+LSTO "_M"
+XEQ "MATTR"     @@@@ A*(M-I*p_{n-1}) p_{n-1}
+RCL "_CTR"
+÷               @@@@ p_n             p_{n-1}
+STOEL
+ISG "_CTR"
+NOP
+J+
+FC? 77
+GTO 28
 RCL "_P"
 +/-
 RTN
@@ -1904,89 +1895,76 @@ RTN
 @@@@ DSC: Compute matrix trace (sum of the diagonal elements)
 @@@@ IN:  X: Matrix
 @@@@ OUT: X: trace
-@@@@ LBL: 21-22
-@@@@ UPD: 2021-03-12
+@@@@ FAQ: Dosen't use INDEX
+@@@@ UPD: 2021-04-27
 LBL "MATTR"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-LSTO "_M"
-INDEX "_M"
-R↓
-0
-LBL 27
-RCLEL
-+
-J+
-FS? 77
-GTO 26
-I+
-GTO 27
-LBL 26
+FUNC 11         @@## REQ:free42>=2.5.24 
+L4STK           @@## REQ:free42>=3.0    
+LSTO "_M"       @@@@ M           -- M is an nxn matrix
+DIM?            @@@@ n n M
+1               @@@@ 1 n n M
++               @@@@ 1+n n M
+DIM "_M"        @@@@ 1+n n M     -- M is now an nx(n+1) matrix with original diag in first column
+1               @@@@ 1 1+n n M
+1               @@@@ 1 1 1+n n M
+NEWMAT          @@@@ P 1+n n M   -- P is a 1x1 zero matrix
+SIGN            @@@@ P 1+n n M   -- P is a 1x1 identity matrix
+LSTO "_P"
+R↓              @@@@ 1+n n M     -- P is a 1x1 matrix e_1
+1               @@@@ 1   1+n n   -- P is a 1x1 matrix e_1
+X<>Y            @@@@ 1+n 1   n   -- P is a 1x1 matrix e_1
+DIM "_P"        @@@@ 1+n 1       -- P is now an 1x(1+n) e_1 row matrix
+RCL "_P"        @@@@ P   1+n 1
+RCL "_M"        @@@@ M   P   1+n 
+TRANS           @@@@ X   P   1+n -- X is now an (n+1)xn matrix with original diag in first row
+×               @@@@ X   1+n 1   -- X is now an 1xn matrix with original diag in first row
+RSUM            @@@@ X   1+n 1   -- X is now a 1x1 matrix with the sum of the diag
+DET             @@@@ TR          -- DET of a 1x1 matrix is matrix element
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (MATIDN)
 @@@@ DSC: Create an XxX identity matrix
 @@@@ IN:  X: Size of matrix to make
 @@@@ OUT: X: Identity matrix of size X
-@@@@ LBL: 21-22
-@@@@ UPD: 2021-03-12
+@@@@ FAQ: Dosen't use INDEX
+@@@@ UPD: 2021-04-27
 LBL "MATIDN"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-ENTER
-NEWMAT
-LSTO "_M"
-INDEX "_M"
+FUNC 11         @@## REQ:free42>=2.5.24 
+L4STK           @@## REQ:free42>=3.0    
 1
-LBL 21
-STOEL
-J+
-FS? 77
-GTO 22
-I+
-GTO 21
-LBL 22
-RCL "_M"
+NEWMAT          @@@@ X is an nx1 zero matrix 
+SIGN            @@@@ X is now a constant matrix filled with 1s
+XEQ "MATDIG"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MATDIG)
 @@@@ DSC: Create diagonal matrix with given elements
-@@@@ IN:  X: Vector
+@@@@ IN:  X: matrix
 @@@@ IN:  X: diagonal matrix
-@@@@ LBL: 23
-@@@@ UPD: 2021-03-12
+@@@@ FAQ: Dosen't use INDEX
+@@@@ FAQ: Uses all elements of X -- even if it is not 1xn or nx1
+@@@@ UPD: 2021-04-27
 LBL "MATDIG"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-LSTO "_M"
-INDEX "_M"
-DIM?
-×
-ENTER
-DIM "_M"
-1000
-÷
-1
-+
-LSTO "_I"
-LBL 23
-1
-RCL "_I"
-STOIJ
-R↓
-R↓
-RCLEL
-0
-STOEL
-R↓
-RCL "_I"
-RCL "_I"
-STOIJ
-R↓
-R↓
-STOEL
-ISG "_I"
+FUNC 11         @@## REQ:free42>=2.5.24 
+L4STK           @@## REQ:free42>=3.0    
+LSTO "_M"       @@@@ D
+DIM?            @@@@ n m
+×               @@@@ N
+1               @@@@ 1 N
+X=Y?
 GTO 23
+                @@@@ non 1x1 case
+RCL+ ST Y       @@@@ N+1 N
+X<>Y            @@@@ N N+1
+DIM "_M"        @@@@ N N+1      -- M is now an (N+1)xN matrix with D on first row
+RCL "_M"        @@@@ M N N+1
+TRANS           @@@@ M N N+1    -- M is now an Nx(N+1) matrix with D on first column
+STO "_M"
+R↓              @@@@ 1 N+1  N
+ENTER
+DIM "_M"        @@@@ 1 N+1  N  -- M is now an NxN matrix with D on the diagonal
+LBL 23          @@@@ 1 N+1  N  -- due to the resize reshuffle
+                @@@ All done.  Return
 RCL "_M"
 RTN
 
@@ -1997,42 +1975,20 @@ RTN
 @@@@ VAR: X a real or complex number
 @@@@ LAB: 24-25
 @@@@ FAQ: Can be used 
-@@@@ UPD: 2021-04-23
+@@@@ FAQ: Dosen't use INDEX
+@@@@ UPD: 2021-04-27
 LBL "EQCPLY"
 MVAR "CPM"
 MVAR "X"
 RCL "CPM"
 RCL "X"
-XEQ 96 @@@@ MYMXI
+RCL "CPM"
+DIM?
+R↓
+XEQ "MATIDN"
+×
+-
 DET
-RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ DSC: Compute Y-X*I  (Y a square matrix and X a number)
-@@@@ IN:  Y: M
-@@@@ IN:  X: X
-@@@@ OUT: X: Y-X*I
-@@@@ LAB: 24-25
-@@@@ UPD: 2021-04-23
-LBL 96 @@@@ MYMXI
-FUNC 21
-L4STK
-X<>Y
-LSTO "_M"
-INDEX "_M"
-R↓
-LBL 29
-RCLEL
-RCL- ST Y
-STOEL
-R↓
-J+
-FS? 77
-GTO 25
-I+
-GTO 29
-LBL 25
-RCL "_M"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -2050,6 +2006,18 @@ FS? 64
 RCL "X"
 STO "X"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Edit matrix
+LBL 96
+FUNC 11
+EDIT
+"Enter data; R/S"
+├" to end"
+PROMPT
+EXITALL
+RTN
+END
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END

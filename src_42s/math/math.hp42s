@@ -996,6 +996,8 @@ KEY 2 XEQ "MATDIG"
 KEY 3 XEQ "MATTR"
 "CPLY"
 KEY 4 XEQ "MCPOLY"
+"EDIT"
+KEY 6 XEQ 96
 KEY 7 GTO 02
 KEY 8 GTO 02
 KEY 9 GTO 00
@@ -1024,53 +1026,41 @@ FUNC 11
 L4STK
 LSTO "_A"
 DIM?
-Rv
 XEQ "MATIDN"
 LSTO "_M"
-DIM?
-Rv
-LSTO "_J"
+LSTO "_I"
+R↓
 1
 +
-LSTO "_JP1"
-ISG "_JP1"
-NOP
 1
 X<>Y
 NEWMAT
 LSTO "_P"
-Rv
+INDEX "_P"
+R↓
+-1
+STOEL
+J+
++/-
+LSTO "_CTR"
 0
 LBL 28
 RCL "_A"
 RCL "_M"
-RCL  ST Z
-XEQ 96
+RCL "_I"
+RCL× ST T
+-
 ×
 LSTO "_M"
 XEQ "MATTR"
-RCL "_JP1"
-RCL "_J"
--
-X<>Y
-RCL ST Y
-1
--
+RCL "_CTR"
 ÷
-X<>Y
-1
-X<>Y
-INDEX "_P"
-STOIJ
-Rv
-Rv
 STOEL
-DSE "_J"
+ISG "_CTR"
+NOP
+J+
+FC? 77
 GTO 28
-LBL 24
-INDEX "_P"
--1
-STOEL
 RCL "_P"
 +/-
 RTN
@@ -1078,69 +1068,54 @@ LBL "MATTR"
 FUNC 11
 L4STK
 LSTO "_M"
-INDEX "_M"
-R↓
-0
-LBL 27
-RCLEL
+DIM?
+1
 +
-J+
-FS? 77
-GTO 26
-I+
-GTO 27
-LBL 26
+DIM "_M"
+1
+1
+NEWMAT
+SIGN
+LSTO "_P"
+R↓
+1
+X<>Y
+DIM "_P"
+RCL "_P"
+RCL "_M"
+TRANS
+×
+RSUM
+DET
 RTN
 LBL "MATIDN"
 FUNC 11
 L4STK
-ENTER
-NEWMAT
-LSTO "_M"
-INDEX "_M"
 1
-LBL 21
-STOEL
-J+
-FS? 77
-GTO 22
-I+
-GTO 21
-LBL 22
-RCL "_M"
+NEWMAT
+SIGN
+XEQ "MATDIG"
 RTN
 LBL "MATDIG"
 FUNC 11
 L4STK
 LSTO "_M"
-INDEX "_M"
 DIM?
 ×
+1
+X=Y?
+GTO 23
+RCL+ ST Y
+X<>Y
+DIM "_M"
+RCL "_M"
+TRANS
+STO "_M"
+R↓
 ENTER
 DIM "_M"
-1000
-÷
-1
-+
-LSTO "_I"
 LBL 23
-1
-RCL "_I"
-STOIJ
-R↓
-R↓
-RCLEL
-0
-STOEL
-R↓
-RCL "_I"
-RCL "_I"
-STOIJ
-R↓
-R↓
-STOEL
-ISG "_I"
-GTO 23
+                @@@ All done.  Return
 RCL "_M"
 RTN
 LBL "EQCPLY"
@@ -1148,28 +1123,13 @@ MVAR "CPM"
 MVAR "X"
 RCL "CPM"
 RCL "X"
-XEQ 96
+RCL "CPM"
+DIM?
+R↓
+XEQ "MATIDN"
+×
+-
 DET
-RTN
-LBL 96
-FUNC 21
-L4STK
-X<>Y
-LSTO "_M"
-INDEX "_M"
-R↓
-LBL 29
-RCLEL
-RCL- ST Y
-STOEL
-R↓
-J+
-FS? 77
-GTO 25
-I+
-GTO 29
-LBL 25
-RCL "_M"
 RTN
 LBL 98
 FS? 64
@@ -1181,6 +1141,16 @@ FS? 64
 RCL "X"
 STO "X"
 RTN
+LBL 96
+FUNC 11
+EDIT
+"Enter data; R/S"
+├" to end"
+PROMPT
+EXITALL
+RTN
+END
+
 END
 
 LBL "POLY"

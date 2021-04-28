@@ -18,7 +18,7 @@ if [ -e bin -a -e src_42s ]; then
     cp bin/*/*.raw ~/winHome/OneDrive/Downloads/42s/
 
     echo "Contents of OneDrive:"
-    ls -lG ~/winHome/OneDrive/Downloads/42s/ | grep -v 'total' | sed 's/^/        /'
+    ls -lGh ~/winHome/OneDrive/Downloads/42s/ | grep -v 'total' | sed 's/^.*richmit /        /'
   else
     echo "ERROR: Could not find bin/ALL.raw.  Generate it!"
   fi

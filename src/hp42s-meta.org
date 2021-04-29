@@ -119,8 +119,11 @@ provided function via the =gen-target-code= argument.  This allows the *entire* 
 programs are good examples.  Note that if all the lables are generated, then the resulting program is ended with an =END= instruction.  
 
 # This
-# mode of operation supports an "liberate programming" methodology where one can /tangle/ code blocks in the org-document together to produce a complete
+# mode of operation supports an "litterate programming" methodology where one can /tangle/ code blocks in the org-document together to produce a complete
 # program.
+
+Note the Unicode point 166 (the "¦" character) is automatically converted to the pipe character ("|").  This lets you include the 42s pipe symbol in org-mode
+tables.
 
 =MJR-generate-42-menu-code= arguments:
  - =top-lab=                 :: The global label to use for the generated program
@@ -274,7 +277,8 @@ programs are good examples.  Note that if all the lables are generated, then the
       (gen-mnu numeric-lbl-start 
                (1+ numeric-lbl-start)
                (prc-mnu (append (list top-lab) (cl-loop for row in tbl
-                                                        for row-strs = (mapcar (lambda (x) (message "%s" x)) row)
+                                                        for row-strs = (mapcar (lambda (x) (replace-regexp-in-string "¦" "|" (message "%s" x) 't 't)) 
+                                                                               row)
                                                         for n from 0
                                                         for menu-parts = (split-string 
                                                                           (nth menu-alpha-column row-strs) 

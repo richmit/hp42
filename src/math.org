@@ -85,7 +85,7 @@ This org-mode file collects together a handful of mathematical stuff I find usef
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CPLXF)
 @@@@ DSC: Auto-generated menu program
 LBL "CPLXF"
-LBL 01            @@@@ Page 1 of menu CPLXF
+LBL 01          @@@@ Page 1 of menu CPLXF
 CLMENU
 "RPART"
 KEY 1 XEQ "RPART"
@@ -101,7 +101,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 00 @@@@ Application Exit
+LBL 00          @@@@ Application Exit
 EXITALL
 RTN
 @@@@ Free labels start at: 2
@@ -115,26 +115,26 @@ RTN
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: rpart(x)
 @@@@ LBL: 10-14
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-22
 LBL "RPART"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 ENTER
-XEQ 80 @@@@ ATYP
+XEQ 80          @@@@ ATYP
 10
 +
 GTO IND ST X
 LBL 10
-RTNERR 4             @@## REQ:free42>=2.5.24
-LBL 11               @@@@ Real Number
-LBL 12               @@@@ Real Matrix
+RTNERR 4        @@## REQ:free42>=2.5.24
+LBL 11          @@@@ Real Number
+LBL 12          @@@@ Real Matrix
 R↓
 RTN
-LBL 13               @@@@ Complex Number
-LBL 14               @@@@ Complex Matrix
+LBL 13          @@@@ Complex Number
+LBL 14          @@@@ Complex Matrix
 R↓
-XEQ 90 @@@@ C→R&I
+XEQ 90          @@@@ C→R&I
 X<>Y
 RTN
 
@@ -143,56 +143,56 @@ RTN
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: ipart(x)
 @@@@ LBL: 20-24
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-22
 LBL "IPART"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 ENTER
-XEQ 80 @@@@ ATYP
+XEQ 80          @@@@ ATYP
 20
 +
 GTO IND ST X
 LBL 20
-RTNERR 4             @@## REQ:free42>=2.5.24
-LBL 21               @@@@ Real Number
+RTNERR 4        @@## REQ:free42>=2.5.24
+LBL 21          @@@@ Real Number
 0
 RTN
-LBL 22               @@@@ Real Matrix
+LBL 22          @@@@ Real Matrix
 R↓
 DIM?
 NEWMAT
 RTN
-LBL 23               @@@@ Complex Number
-LBL 24               @@@@ Complex Matrix
+LBL 23          @@@@ Complex Number
+LBL 24          @@@@ Complex Matrix
 R↓
-XEQ 90 @@@@ C→R&I
+XEQ 90          @@@@ C→R&I
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CONJ)
 @@@@ DSC: Complex Conjugate
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: conj(x)
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ LBL: 30-34
 @@@@ BUG: Fails on alpha string matrix
 @@@@ UPD: 2021-04-22
 LBL "CONJ"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 ENTER
-XEQ 80 @@@@ ATYP
+XEQ 80          @@@@ ATYP
 30
 +
 GTO IND ST X
 LBL 30
-RTNERR 4             @@## REQ:free42>=2.5.24
-LBL 31               @@@@ Real Number
-LBL 32               @@@@ Real Matrix
+RTNERR 4        @@## REQ:free42>=2.5.24
+LBL 31          @@@@ Real Number
+LBL 32          @@@@ Real Matrix
 R↓
 RTN
-LBL 33               @@@@ Complex Number
-LBL 34               @@@@ Complex Matrix
+LBL 33          @@@@ Complex Number
+LBL 34          @@@@ Complex Matrix
 R↓
 COMPLEX
 +/-
@@ -208,24 +208,24 @@ RTN
 @@@@ BUG: Returns 0 for real 0 input
 @@@@ UPD: 2021-04-22
 LBL "CABS"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 ENTER
-XEQ 80 @@@@ ATYP
+XEQ 80          @@@@ ATYP
 40
 +
 GTO IND ST X
 LBL 40
-RTNERR 4             @@## REQ:free42>=2.5.24
-LBL 41               @@@@ Real Number
-LBL 42               @@@@ Real Matrix
+RTNERR 4        @@## REQ:free42>=2.5.24
+LBL 41          @@@@ Real Number
+LBL 42          @@@@ Real Matrix
 R↓
 ABS
 RTN
-LBL 43               @@@@ Complex Number
-LBL 44               @@@@ Complex Matrix
+LBL 43          @@@@ Complex Number
+LBL 44          @@@@ Complex Matrix
 R↓
-XEQ 92 @@@@ C→M&A
+XEQ 92          @@@@ C→M&A
 X<>Y
 RTN
 
@@ -238,27 +238,27 @@ RTN
 @@@@ BUG: Returns 0 for real 0 input
 @@@@ UPD: 2021-04-22
 LBL "CARG"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 ENTER
-XEQ 80 @@@@ ATYP
+XEQ 80          @@@@ ATYP
 50
 +
 GTO IND ST X
 LBL 50
-RTNERR 4             @@## REQ:free42>=2.5.24
-LBL 51               @@@@ Real Number
+RTNERR 4        @@## REQ:free42>=2.5.24
+LBL 51          @@@@ Real Number
 0
 RTN
-LBL 52               @@@@ Real Matrix
+LBL 52          @@@@ Real Matrix
 R↓
 DIM?
 NEWMAT
 RTN
-LBL 53               @@@@ Complex Number
-LBL 54               @@@@ Complex Matrix
+LBL 53          @@@@ Complex Number
+LBL 54          @@@@ Complex Matrix
 R↓
-XEQ 92 @@@@ C→M&A
+XEQ 92          @@@@ C→M&A
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -268,11 +268,11 @@ RTN
 @@@@ OUT: Y: Real Part of X
 @@@@      X: Imaginary Part of X
 @@@@ LBL: 91
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-22
 LBL 90
-FUNC 12              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 12         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 ENTER
 FS? 73
 GTO 91
@@ -293,11 +293,11 @@ RTN
 @@@@ OUT: Y: Magnitude of X
 @@@@      X: Complex Argument (angle) of X
 @@@@ LBL: 93
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-22
 LBL 92
-FUNC 12              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 12         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 ENTER
 FS? 73
 GTO 93
@@ -320,19 +320,19 @@ RTN
 @@@@         3 if input X was a complex number
 @@@@         4 if input X was a complex matrix
 @@@@         0 if none of the above are true
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ FAQ: Even on free42<2.5.24 or a real 42s, X, Y, & Z are preserved. T & Last X not so much.
 @@@@ BUG: A 2 will be returned for a real matrix containing strings
 @@@@ BUG: In infinite stack mode with an empty stack 2 will be returned as X=0 when we do L4STK
 @@@@ LBL: 81-88
 @@@@ UPD: 2021-02-23
 LBL 80
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 MAT?
 GTO 81
 GTO 82
-LBL 81               @@@@ Matrix
+LBL 81          @@@@ Matrix
 CLA
 ARCL ST X
 67
@@ -340,27 +340,27 @@ POSA
 X>0?
 GTO 87
 GTO 88
-LBL 87               @@@@ Complex Matrix
+LBL 87          @@@@ Complex Matrix
 4
 RTN
-LBL 88               @@@@ Real/String Matrix
+LBL 88          @@@@ Real/String Matrix
 2
 RTN
-LBL 82               @@@@ Not matrix
+LBL 82          @@@@ Not matrix
 REAL?
 GTO 83
 GTO 84
-LBL 83               @@@@ Real number
+LBL 83          @@@@ Real number
 1
 RTN
-LBL 84               @@@@ Not matrix or real
+LBL 84          @@@@ Not matrix or real
 CPX?
 GTO 85
 GTO 86
-LBL 85               @@@@ Complex number
+LBL 85          @@@@ Complex number
 3
 RTN
-LBL 86               @@@@ Not matrix, real, or complex
+LBL 86          @@@@ Not matrix, real, or complex
 0
 RTN
 
@@ -393,7 +393,7 @@ END
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PERCFN)
 @@@@ DSC: Auto-generated menu program
 LBL "PERCFN"
-LBL 01            @@@@ Page 1 of menu PERCFN
+LBL 01          @@@@ Page 1 of menu PERCFN
 CLMENU
 "%T"
 KEY 1 XEQ "%T"
@@ -405,13 +405,13 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 00 @@@@ Application Exit
+LBL 00          @@@@ Application Exit
 EXITALL
 RTN
-LBL 02    @@@@ Action for menu key %CH
+LBL 02          @@@@ Action for menu key %CH
 %CH
 RTN
-LBL 03    @@@@ Action for menu key %
+LBL 03          @@@@ Action for menu key %
 %
 RTN
 @@@@ Free labels start at: 4
@@ -427,8 +427,8 @@ RTN
 @@@@ OUT: X: 100*X/Y
 @@@@ UPD: 2021-03-12
 LBL "%T"
-FUNC 21              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 21         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 X<>Y
 ÷
 100
@@ -475,7 +475,7 @@ END
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:INTFUN)
 @@@@ DSC: Auto-generated menu program
 LBL "INTFUN"
-LBL 01            @@@@ Page 1 of menu INTFUN
+LBL 01          @@@@ Page 1 of menu INTFUN
 CLMENU
 "FLOR"
 KEY 1 XEQ "FLOOR"
@@ -493,7 +493,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02            @@@@ Page 2 of menu INTFUN
+LBL 02          @@@@ Page 2 of menu INTFUN
 CLMENU
 "GCD"
 KEY 1 XEQ "GCD"
@@ -509,19 +509,19 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 00 @@@@ Application Exit
+LBL 00          @@@@ Application Exit
 EXITALL
 RTN
-LBL 03    @@@@ Action for menu key TRUN
+LBL 03          @@@@ Action for menu key TRUN
 IP
 RTN
-LBL 04    @@@@ Action for menu key FP
+LBL 04          @@@@ Action for menu key FP
 FP
 RTN
-LBL 05    @@@@ Action for menu key DIV
+LBL 05          @@@@ Action for menu key DIV
 BASE÷
 RTN
-LBL 06    @@@@ Action for menu key REM
+LBL 06          @@@@ Action for menu key REM
 MOD
 RTN
 @@@@ Free labels start at: 7
@@ -536,7 +536,7 @@ RTN
 @@@@ IN:  X: real number
 @@@@ OUT: X: floor(X)
 @@@@ UPD: 2021-02-23
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ TC:  -2.0 -2 →Int
 @@@@ TC:  -1.6 -2 →Nearest
 @@@@ TC:  -1.5 -2 →Even
@@ -555,17 +555,17 @@ RTN
 @@@@ TC:   1.6  2 →Nearest
 @@@@ TC:   2.0  2 →Int
 LBL "ROUND"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-ENTER     @@@@ X        X
-FP        @@@@ FP       X
-ABS       @@@@ |FP|     X
-0.5       @@@@ 1/2      |FP|     X
--         @@@@ |FP|-1/2 X
-X<>Y      @@@@ X        |FP|-1/2 X
-SIGN      @@@@ SGN      |FP|-1/2 X 
-LASTX     @@@@ X        SGN      |FP|-1/2 X 
-IP        @@@@ IP(X)    SGN      |FP|-1/2 X 
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
+ENTER           @@@@ X        X
+FP              @@@@ FP       X
+ABS             @@@@ |FP|     X
+0.5             @@@@ 1/2      |FP|     X
+-               @@@@ |FP|-1/2 X
+X<>Y            @@@@ X        |FP|-1/2 X
+SIGN            @@@@ SGN      |FP|-1/2 X 
+LASTX           @@@@ X        SGN      |FP|-1/2 X 
+IP              @@@@ IP(X)    SGN      |FP|-1/2 X 
 0=? ST Z
 GTO 92
 0<? ST Z
@@ -573,13 +573,13 @@ GTO 92
 RTN
 LBL 92 
 @@@@ FP=1/2
-XEQ 93 @@@@ ODD?
+XEQ 93          @@@@ ODD?
 +
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: RETYES if X is odd, RTNNO otherwise
-LBL 93 @@@@ ODD?
+LBL 93          @@@@ ODD?
 FUNC 00
 L4STK
 2
@@ -594,10 +594,10 @@ RTNYES
 @@@@ IN:  X: real number
 @@@@ OUT: X: floor(X)
 @@@@ UPD: 2021-02-23
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 LBL "FLOOR"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 FP
 LASTX
 IP
@@ -612,10 +612,10 @@ RTN
 @@@@ IN:  X: real number
 @@@@ OUT: X: ceil(X)
 @@@@ UPD: 2021-02-23
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 LBL "CEIL"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 FP
 LASTX
 IP
@@ -632,10 +632,10 @@ RTN
 @@@@ OUT: X: GCD(|IP(X)|, |IP(X)|)
 @@@@ LBL: 91
 @@@@ UPD: 2021-04-22
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 LBL "GCD"
-FUNC 21              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 21         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 ABS
 IP
 X<>Y
@@ -658,26 +658,26 @@ RTN
 @@@@ OUT: X: LCM(|IP(X)|, |IP(X)|)
 @@@@ USE: GCD
 @@@@ UPD: 2021-04-22
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 LBL "LCM"
-FUNC 21              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-ABS                  @@@@ |X|             Y
-IP                   @@@@ IP(|X|)         Y
+FUNC 21         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
+ABS             @@@@ |X|             Y
+IP              @@@@ IP(|X|)         Y
 X=0?                                      
 RTN                                       
-X<>Y                 @@@@ Y               IP(|X|) 
-ABS                  @@@@ |Y|             IP(|X|) 
-IP                   @@@@ IP(|Y|)         IP(|X|) 
+X<>Y            @@@@ Y               IP(|X|) 
+ABS             @@@@ |Y|             IP(|X|) 
+IP              @@@@ IP(|Y|)         IP(|X|) 
 X=0?                                      
 RTN                                       
-RCL ST Y             @@@@ IP(|X|)         IP(|Y|)         IP(|X|) 
-RCL ST Y             @@@@ IP(|Y|)         IP(|X|)         IP(|Y|)         IP(|X|) 
-×                    @@@@ IP(|Y|)*IP(|X|) IP(|Y|)         IP(|X|) 
-RCL ST Z             @@@@ IP(|X|)         IP(|Y|)*IP(|X|) IP(|Y|)         IP(|X|) 
-RCL ST Z             @@@@ IP(|Y|)         IP(|X|)         IP(|Y|)*IP(|X|) IP(|Y|)
-XEQ "GCD"            @@@@ GCD             IP(|Y|)*IP(|X|) IP(|Y|)         IP(|Y|)
-÷                    @@@@ LCM             IP(|Y|)         IP(|Y|)         IP(|Y|)
+RCL ST Y        @@@@ IP(|X|)         IP(|Y|)         IP(|X|) 
+RCL ST Y        @@@@ IP(|Y|)         IP(|X|)         IP(|Y|)         IP(|X|) 
+×               @@@@ IP(|Y|)*IP(|X|) IP(|Y|)         IP(|X|) 
+RCL ST Z        @@@@ IP(|X|)         IP(|Y|)*IP(|X|) IP(|Y|)         IP(|X|) 
+RCL ST Z        @@@@ IP(|Y|)         IP(|X|)         IP(|Y|)*IP(|X|) IP(|Y|)
+XEQ "GCD"       @@@@ GCD             IP(|Y|)*IP(|X|) IP(|Y|)         IP(|Y|)
+÷               @@@@ LCM             IP(|Y|)         IP(|Y|)         IP(|Y|)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -713,7 +713,7 @@ END
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BINO)
 @@@@ DSC: Auto-generated menu program
 LBL "BINO"
-LBL 01            @@@@ Page 1 of menu BINO
+LBL 01          @@@@ Page 1 of menu BINO
 CLMENU
 "COMB"
 KEY 1 XEQ 02
@@ -729,16 +729,16 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 00 @@@@ Application Exit
+LBL 00          @@@@ Application Exit
 EXITALL
 RTN
-LBL 02    @@@@ Action for menu key COMB
+LBL 02          @@@@ Action for menu key COMB
 COMB
 RTN
-LBL 03    @@@@ Action for menu key PERM
+LBL 03          @@@@ Action for menu key PERM
 PERM
 RTN
-LBL 04    @@@@ Action for menu key GAM
+LBL 04          @@@@ Action for menu key GAM
 GAMMA
 RTN
 @@@@ Free labels start at: 5
@@ -752,11 +752,11 @@ RTN
 @@@@ IN:  Y: Number
 @@@@ IN:  X: Number
 @@@@ OUT: X: beta(x, y) = beta(y, x)
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-02-23
 LBL "BETA"
-FUNC 21              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 21         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 RCL ST Y
 GAMMA
 RCL ST Y
@@ -774,11 +774,11 @@ RTN
 @@@@ IN:  X: Number
 @@@@ OUT: X: X! = Gamma(X+1)
 @@@@ FAQ: Returns an error if X is not an integer
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-23
 LBL "FACT"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 ENTER
 FP
 X≠0?
@@ -821,7 +821,7 @@ END
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ERRFUN)
 @@@@ DSC: Auto-generated menu program
 LBL "ERRFUN"
-LBL 01            @@@@ Page 1 of menu ERRFUN
+LBL 01          @@@@ Page 1 of menu ERRFUN
 CLMENU
 "ERF"
 KEY 1 XEQ "ERF"
@@ -835,7 +835,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 00 @@@@ Application Exit
+LBL 00          @@@@ Application Exit
 EXITALL
 RTN
 @@@@ Free labels start at: 2
@@ -849,24 +849,24 @@ RTN
 @@@@ IN:  X: real number
 @@@@ OUT: X: Standard Normal PDF value at X
 @@@@ UPD: 2021-04-22
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ TC:  -2 0.05399096651318805195056
 @@@@ TC:  -1 0.2419707245191433497978
 @@@@ TC:   0 0.3989422804014326779399
 @@@@ TC:   1 0.2419707245191433497978
 @@@@ TC:   2 0.05399096651318805195056
 LBL "NPDF"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-X↑2   @@@@ X^2
--2    @@@@ -2                     X^2
-÷     @@@@ -X^2/2
-E↑X   @@@@ EXP(-X^2/2)
-2     @@@@ 2                      EXP(-X^2/2)
-PI    @@@@ PI                     2             EXP(-X^2/2)
-×     @@@@ PI*2                   EXP(-X^2/2)
-SQRT  @@@@ SQRT(PI*2)             EXP(-X^2/2)
-÷     @@@@ EXP(-X^2/2)/SQRT(PI*2) 
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
+X↑2             @@@@ X^2
+-2              @@@@ -2                     X^2
+÷               @@@@ -X^2/2
+E↑X             @@@@ EXP(-X^2/2)
+2               @@@@ 2                      EXP(-X^2/2)
+PI              @@@@ PI                     2             EXP(-X^2/2)
+×               @@@@ PI*2                   EXP(-X^2/2)
+SQRT            @@@@ SQRT(PI*2)             EXP(-X^2/2)
+÷               @@@@ EXP(-X^2/2)/SQRT(PI*2) 
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:NCDF)
@@ -877,63 +877,63 @@ RTN
 @@@@ FAQ: No dependancies, variables, loops, or branches
 @@@@ REF: Zelen & Severo (1964)
 @@@@ UPD: 2021-04-22
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ TC:  -2 0.02275013194817920720028
 @@@@ TC:  -1 0.1586552539314570514148 
 @@@@ TC:   0 0.5                      
 @@@@ TC:   1 0.8413447460685429485852 
 @@@@ TC:   2 0.9772498680518207927997 
 LBL "NCDF"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-0.2316419      @@@@ b0                     X             ?           ?
-RCL× ST Y      @@@@ b0*X                   X             ?           ?
-1              @@@@ 1                      b0*X          X           ?           
-+              @@@@ 1+b0*X                 X             ?           ?
-1/X            @@@@ 1/(1+b0*X)             X             ?           ?
-               @@@@ T                      X             ?           ?
-X<>Y           @@@@ X                      T             ?           ?
-X↑2            @@@@ X^2                    T             ?           ?
--2             @@@@ -2                     X^2           ?           ?
-÷              @@@@ -X^2/2                 T             ?           ?
-E↑X            @@@@ EXP(-X^2/2)            T             ?           ?
-2              @@@@ 2                      EXP(-X^2/2)   T           ?
-PI             @@@@ PI                     2             EXP(-X^2/2) T
-×              @@@@ PI*2                   EXP(-X^2/2)   T           T
-SQRT           @@@@ SQRT(PI*2)             EXP(-X^2/2)   T           T
-÷              @@@@ EXP(-X^2/2)/SQRT(PI*2) T             T           T
-               @@@@ N                      T             T           T
-RCL  ST Y      @@@@ T                      N             T           T
-×              @@@@ NT                     T             T           T
-0.319381530    @@@@ b1                     NT            T           T
-RCL× ST Y      @@@@ PR                     NT            T           T
-RCL ST Z       @@@@ T                      PR            NT          T
-STO× ST Z      @@@@ T                      PR            NT^2        T
-R↓             @@@@ PR                     NT^2          T           T
--0.356563782   @@@@ b2                     PR            NT^2        T
-RCL× ST Z      @@@@ NT                     PR            NT^2        T
-+              @@@@ PR                     NT^2          T           T
-RCL ST Z       @@@@ T                      PR            NT^2        T
-STO× ST Z      @@@@ T                      PR            NT^3        T
-R↓             @@@@ PR                     NT^3          T           T
-1.781477937    @@@@ b3                     PR            NT^3        T
-RCL× ST Z      @@@@ NT                     PR            NT^3        T
-+              @@@@ PR                     NT^3          T           T
-RCL ST Z       @@@@ T                      PR            NT^3        T
-STO× ST Z      @@@@ T                      PR            NT^4        T
-R↓             @@@@ PR                     NT^4          T           T
--1.821255978   @@@@ b4                     PR            NT^4        T
-RCL× ST Z      @@@@ NT                     PR            NT^4        T
-+              @@@@ PR                     NT^4          T           T
-RCL ST Z       @@@@ T                      PR            NT^4        T
-STO× ST Z      @@@@ T                      PR            NT^5        T
-R↓             @@@@ PR                     NT^5          T           T
-1.330274429    @@@@ b5                     PR            NT^5        T
-RCL× ST Z      @@@@ NT                     PR            NT^5        T
-+              @@@@ PR                     NT^5          T           T
-1              @@@@ 1                      PR            NT^5        T
-X<>Y           @@@@ PR                     1             NT^5        T
--              @@@@ 1-PR                   NT^5          T           T
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
+0.2316419       @@@@ b0                     X             ?           ?
+RCL× ST Y       @@@@ b0*X                   X             ?           ?
+1               @@@@ 1                      b0*X          X           ?           
++               @@@@ 1+b0*X                 X             ?           ?
+1/X             @@@@ 1/(1+b0*X)             X             ?           ?
+                @@@@ T                      X             ?           ?
+X<>Y            @@@@ X                      T             ?           ?
+X↑2             @@@@ X^2                    T             ?           ?
+-2              @@@@ -2                     X^2           ?           ?
+÷               @@@@ -X^2/2                 T             ?           ?
+E↑X             @@@@ EXP(-X^2/2)            T             ?           ?
+2               @@@@ 2                      EXP(-X^2/2)   T           ?
+PI              @@@@ PI                     2             EXP(-X^2/2) T
+×               @@@@ PI*2                   EXP(-X^2/2)   T           T
+SQRT            @@@@ SQRT(PI*2)             EXP(-X^2/2)   T           T
+÷               @@@@ EXP(-X^2/2)/SQRT(PI*2) T             T           T
+                @@@@ N                      T             T           T
+RCL  ST Y       @@@@ T                      N             T           T
+×               @@@@ NT                     T             T           T
+0.319381530     @@@@ b1                     NT            T           T
+RCL× ST Y       @@@@ PR                     NT            T           T
+RCL ST Z        @@@@ T                      PR            NT          T
+STO× ST Z       @@@@ T                      PR            NT^2        T
+R↓              @@@@ PR                     NT^2          T           T
+-0.356563782    @@@@ b2                     PR            NT^2        T
+RCL× ST Z       @@@@ NT                     PR            NT^2        T
++               @@@@ PR                     NT^2          T           T
+RCL ST Z        @@@@ T                      PR            NT^2        T
+STO× ST Z       @@@@ T                      PR            NT^3        T
+R↓              @@@@ PR                     NT^3          T           T
+1.781477937     @@@@ b3                     PR            NT^3        T
+RCL× ST Z       @@@@ NT                     PR            NT^3        T
++               @@@@ PR                     NT^3          T           T
+RCL ST Z        @@@@ T                      PR            NT^3        T
+STO× ST Z       @@@@ T                      PR            NT^4        T
+R↓              @@@@ PR                     NT^4          T           T
+-1.821255978    @@@@ b4                     PR            NT^4        T
+RCL× ST Z       @@@@ NT                     PR            NT^4        T
++               @@@@ PR                     NT^4          T           T
+RCL ST Z        @@@@ T                      PR            NT^4        T
+STO× ST Z       @@@@ T                      PR            NT^5        T
+R↓              @@@@ PR                     NT^5          T           T
+1.330274429     @@@@ b5                     PR            NT^5        T
+RCL× ST Z       @@@@ NT                     PR            NT^5        T
++               @@@@ PR                     NT^5          T           T
+1               @@@@ 1                      PR            NT^5        T
+X<>Y            @@@@ PR                     1             NT^5        T
+-               @@@@ 1-PR                   NT^5          T           T
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ERF)
@@ -943,14 +943,14 @@ RTN
 @@@@ USE: NCDF
 @@@@ LBL: Use: 11-12
 @@@@ UPD: 2021-03-30
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ TC: -1 -0.8427007929497148693412
 @@@@ TC:  0  0.0
 @@@@ TC:  1  0.8427007929497148693412
 @@@@ TC:  2  0.9953222650189527341621
 LBL "ERF"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 ENTER
 ENTER
 2
@@ -980,14 +980,14 @@ RTN
 @@@@ OUT: X: erfc(X)
 @@@@ USE: ERF
 @@@@ UPD: 2021-03-30
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ TC: -1 1.842700792949714869341
 @@@@ TC:  0 1.0
 @@@@ TC:  1 0.1572992070502851306588
 @@@@ TC:  2 0.004677734981047265837931
 LBL "ERFC"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 XEQ "ERF"
 1
 X<>Y
@@ -1034,7 +1034,7 @@ END
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:HYPTRG)
 @@@@ DSC: Auto-generated menu program
 LBL "HYPTRG"
-LBL 01            @@@@ Page 1 of menu HYPTRG
+LBL 01          @@@@ Page 1 of menu HYPTRG
 CLMENU
 "SINH"
 KEY 1 XEQ 03
@@ -1054,7 +1054,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02            @@@@ Page 2 of menu HYPTRG
+LBL 02          @@@@ Page 2 of menu HYPTRG
 CLMENU
 "CSCH"
 KEY 1 XEQ "CSCH"
@@ -1074,25 +1074,25 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 00 @@@@ Application Exit
+LBL 00          @@@@ Application Exit
 EXITALL
 RTN
-LBL 03    @@@@ Action for menu key SINH
+LBL 03          @@@@ Action for menu key SINH
 SINH
 RTN
-LBL 04    @@@@ Action for menu key COSH
+LBL 04          @@@@ Action for menu key COSH
 COSH
 RTN
-LBL 05    @@@@ Action for menu key TANH
+LBL 05          @@@@ Action for menu key TANH
 TANH
 RTN
-LBL 06    @@@@ Action for menu key ASINH
+LBL 06          @@@@ Action for menu key ASINH
 ASINH
 RTN
-LBL 07    @@@@ Action for menu key ACOSH
+LBL 07          @@@@ Action for menu key ACOSH
 ACOSH
 RTN
-LBL 08    @@@@ Action for menu key ATANH
+LBL 08          @@@@ Action for menu key ATANH
 ATANH
 RTN
 @@@@ Free labels start at: 9
@@ -1105,8 +1105,8 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: 1/SIN(X)
 LBL "CSCH"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 SINH
 1/X
 RTN
@@ -1114,8 +1114,8 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: 1/COS(X)
 LBL "SECH"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 COSH
 1/X
 RTN
@@ -1123,8 +1123,8 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: 1/TAN(X)
 LBL "COTH"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 TANH
 1/X
 RTN
@@ -1132,8 +1132,8 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: SIN(1/X)
 LBL "ACSCH"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 1/X
 ASINH
 RTN
@@ -1141,8 +1141,8 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: COS(1/X)
 LBL "ASECH"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 1/X
 ACOSH
 RTN
@@ -1150,8 +1150,8 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: TAN(1/X)
 LBL "ACOTH"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 1/X
 ATANH
 RTN
@@ -1201,7 +1201,7 @@ END
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TRIG)
 @@@@ DSC: Auto-generated menu program
 LBL "TRIG"
-LBL 01            @@@@ Page 1 of menu TRIG
+LBL 01          @@@@ Page 1 of menu TRIG
 CLMENU
 "SIN"
 KEY 1 XEQ 04
@@ -1221,7 +1221,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02            @@@@ Page 2 of menu TRIG
+LBL 02          @@@@ Page 2 of menu TRIG
 CLMENU
 "CSC"
 KEY 1 XEQ "CSC"
@@ -1241,7 +1241,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 03            @@@@ Page 3 of menu TRIG
+LBL 03          @@@@ Page 3 of menu TRIG
 CLMENU
 "TAN2"
 KEY 1 XEQ "TAN2"
@@ -1257,25 +1257,25 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 03
-LBL 00 @@@@ Application Exit
+LBL 00          @@@@ Application Exit
 EXITALL
 RTN
-LBL 04    @@@@ Action for menu key SIN
+LBL 04          @@@@ Action for menu key SIN
 SIN
 RTN
-LBL 05    @@@@ Action for menu key COS
+LBL 05          @@@@ Action for menu key COS
 COS
 RTN
-LBL 06    @@@@ Action for menu key TAN
+LBL 06          @@@@ Action for menu key TAN
 TAN
 RTN
-LBL 07    @@@@ Action for menu key ASIN
+LBL 07          @@@@ Action for menu key ASIN
 ASIN
 RTN
-LBL 08    @@@@ Action for menu key ACOS
+LBL 08          @@@@ Action for menu key ACOS
 ACOS
 RTN
-LBL 09    @@@@ Action for menu key ATAN
+LBL 09          @@@@ Action for menu key ATAN
 ATAN
 RTN
 @@@@ Free labels start at: 10
@@ -1290,10 +1290,10 @@ RTN
 @@@@ IN:  X: number
 @@@@ OUT: X: ahav(X)=2*asin(sqrt(X))
 @@@@ UPD: 2021-04-18
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 LBL "AHAV"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 SQRT
 ASIN
 2
@@ -1305,10 +1305,10 @@ RTN
 @@@@ IN:  X: number
 @@@@ OUT: X: hav(X)=1/2-cos(X)/2
 @@@@ UPD: 2021-04-18
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 LBL "HAV"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 COS
 -2
 ÷
@@ -1322,10 +1322,10 @@ RTN
 @@@@ IN:  X: number
 @@@@ OUT: X: sqrt(abs(x)^2+abs(y)^2)
 @@@@ UPD: 2021-02-23
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 LBL "HYPOT"
-FUNC 21              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 21         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 ABS
 X<>Y
 ABS
@@ -1336,8 +1336,8 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: 1/SIN(X)
 LBL "CSC"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 SIN
 1/X
 RTN
@@ -1345,8 +1345,8 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: 1/COS(X)
 LBL "SEC"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 COS
 1/X
 RTN
@@ -1354,8 +1354,8 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: 1/TAN(X)
 LBL "COT"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 TAN
 1/X
 RTN
@@ -1363,8 +1363,8 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: SIN(1/X)
 LBL "ACSC"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 1/X
 ASIN
 RTN
@@ -1372,8 +1372,8 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: COS(1/X)
 LBL "ASEC"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 1/X
 ACOS
 RTN
@@ -1381,8 +1381,8 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: TAN(1/X)
 LBL "ACOT"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 1/X
 ATAN
 RTN
@@ -1394,7 +1394,7 @@ RTN
 @@@@ OUT: X: atan2(y, x)
 @@@@ BUG: Only works in RAD mode
 @@@@ UPD: 2021-02-23
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ TC:  atan( 1, 1) =>  pi/4     =   45°
 @@@@ TC:  atan(-1, 1) => -pi/4     =  -45°
 @@@@ TC:  atan( 1,-1) =>  3*pi/4   =  135°
@@ -1405,8 +1405,8 @@ RTN
 @@@@ TC:  atan( 0, 0) => ERROR
 @@@@ LBL: Used 81-85
 LBL "TAN2"
-FUNC 21              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 21         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 X>0?
 GTO 81
 X=0?
@@ -1502,7 +1502,7 @@ END
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:LPRT)
 @@@@ DSC: Auto-generated menu program
 LBL "LPRT"
-LBL 01            @@@@ Page 1 of menu LPRT
+LBL 01          @@@@ Page 1 of menu LPRT
 CLMENU
 "lnYX"
 KEY 1 XEQ "lnYX"
@@ -1518,7 +1518,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02            @@@@ Page 2 of menu LPRT
+LBL 02          @@@@ Page 2 of menu LPRT
 CLMENU
 "Y↑X"
 KEY 1 XEQ 06
@@ -1534,7 +1534,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 03            @@@@ Page 3 of menu LPRT
+LBL 03          @@@@ Page 3 of menu LPRT
 CLMENU
 "Y√X"
 KEY 1 XEQ "YROOT"
@@ -1552,19 +1552,19 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 03
-LBL 00 @@@@ Application Exit
+LBL 00          @@@@ Application Exit
 EXITALL
 RTN
-LBL 04    @@@@ Action for menu key LN
+LBL 04          @@@@ Action for menu key LN
 LN
 RTN
-LBL 05    @@@@ Action for menu key LOG
+LBL 05          @@@@ Action for menu key LOG
 LOG
 RTN
-LBL 06    @@@@ Action for menu key Y↑X
+LBL 06          @@@@ Action for menu key Y↑X
 Y↑X
 RTN
-LBL 07    @@@@ Action for menu key 10↑X
+LBL 07          @@@@ Action for menu key 10↑X
 10↑X
 RTN
 @@@@ Free labels start at: 8
@@ -1579,10 +1579,10 @@ RTN
 @@@@      X: number or matrix (element-wise)
 @@@@ OUT: X: log_y(x)
 @@@@ UPD: 2021-04-14
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 LBL "lnYX"
-FUNC 21              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 21         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 LN
 X<>Y
 LN
@@ -1594,10 +1594,10 @@ RTN
 @@@@ IN:  X: number or matrix (element-wise)
 @@@@ OUT: X: log_2(x)
 @@@@ UPD: 2021-02-23
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 LBL "ln2"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 LN
 2
 LN
@@ -1610,10 +1610,10 @@ RTN
 @@@@ IN:  X: number or matrix (element-wise)
 @@@@ OUT: X: 2^X
 @@@@ UPD: 2021-02-23
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 LBL 97
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 2
 X<>Y
 Y^X
@@ -1625,10 +1625,10 @@ RTN
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: root of X
 @@@@ FAQ: See XYROOT for details
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-14
 LBL 95
-FUNC 11              @@## REQ:free42>=2.5.24
+FUNC 11         @@## REQ:free42>=2.5.24
 2
 X<>Y
 XEQ "YROOT"
@@ -1640,10 +1640,10 @@ RTN
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: root of X
 @@@@ FAQ: See XYROOT for details
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-14
 LBL 94
-FUNC 11              @@## REQ:free42>=2.5.24
+FUNC 11         @@## REQ:free42>=2.5.24
 3
 X<>Y
 XEQ "YROOT"
@@ -1655,10 +1655,10 @@ RTN
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: root of X
 @@@@ FAQ: See XYROOT for details
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-14
 LBL 93
-FUNC 11              @@## REQ:free42>=2.5.24
+FUNC 11         @@## REQ:free42>=2.5.24
 5
 X<>Y
 XEQ "YROOT"
@@ -1670,10 +1670,10 @@ RTN
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: root of X
 @@@@ FAQ: See XYROOT for details
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-14
 LBL 92
-FUNC 11              @@## REQ:free42>=2.5.24
+FUNC 11         @@## REQ:free42>=2.5.24
 7
 X<>Y
 XEQ "YROOT"
@@ -1688,11 +1688,11 @@ RTN
 @@@@ BUG: Real integers are not recognized in complex form. i.e. 0+2i ≠ 2
 @@@@ FAQ: Return is pure imaginary when Y is an odd integer and X<0
 @@@@ FAQ: Return is real when  Y is an even integer and X<0
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-02-23
 LBL "YROOT"
-FUNC 21              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 21         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 REAL?
 GTO 81
 GTO 84
@@ -1799,7 +1799,7 @@ the built in solver to find real eigenvalues or to plot the characteristic polyn
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:NLA)
 @@@@ DSC: Auto-generated menu program
 LBL "NLA"
-LBL 01            @@@@ Page 1 of menu NLA
+LBL 01          @@@@ Page 1 of menu NLA
 CLMENU
 "IDEN"
 KEY 1 XEQ "MXIDN"
@@ -1817,7 +1817,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02            @@@@ Page 2 of menu NLA
+LBL 02          @@@@ Page 2 of menu NLA
 CLMENU
 "MAT"
 KEY 1 XEQ 98
@@ -1831,7 +1831,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 00 @@@@ Application Exit
+LBL 00          @@@@ Application Exit
 EXITALL
 RTN
 @@@@ Free labels start at: 3
@@ -1845,7 +1845,7 @@ RTN
 @@@@ IN:  X: Matrix
 @@@@ OUT: X: Characteristic polynomial
 @@@@ LBL: 28
-@@@@ FAQ: Dosen't use INDEX
+@@@@ FAQ: Uses INDEX
 @@@@ UPD: 2021-04-27
 @@@@ TC:  [[1,2,3][4,5,6][7,8,10]] => [1, -16, -12, 3]
 LBL "MXCPLY"
@@ -1879,7 +1879,7 @@ RCL× ST T       @@@@ I*p_{n-1}       M        A         p_{n-1}
 -               @@@@ M-I*p_{n-1}     A        p_{n-1}
 ×               @@@@ A*(M-I*p_{n-1}) p_{n-1}
 LSTO "_M"
-XEQ "MXTR"     @@@@ A*(M-I*p_{n-1}) p_{n-1}
+XEQ "MXTR"      @@@@ A*(M-I*p_{n-1}) p_{n-1}
 RCL "_CTR"
 ÷               @@@@ p_n             p_{n-1}
 STOEL
@@ -1930,6 +1930,8 @@ RTN
 @@@@ OUT: X: Identity matrix of size X
 @@@@ FAQ: Dosen't use INDEX
 @@@@ UPD: 2021-04-27
+@@@@ REF: https://forum.swissmicros.com/viewtopic.php?f=19&t=2958
+@@@@ FAQ: This code is longer, but easier to understand -- for me anyhow.
 LBL "MXIDN"
 FUNC 11         @@## REQ:free42>=2.5.24 
 L4STK           @@## REQ:free42>=3.0    
@@ -1946,6 +1948,8 @@ RTN
 @@@@ FAQ: Dosen't use INDEX
 @@@@ FAQ: Uses all elements of X -- even if it is not 1xn or nx1
 @@@@ UPD: 2021-04-27
+@@@@ REF: https://forum.swissmicros.com/viewtopic.php?f=19&t=2958
+@@@@ FAQ: This code is longer, but easier to understand -- for me anyhow.
 LBL "MXDIAG"
 FUNC 11         @@## REQ:free42>=2.5.24 
 L4STK           @@## REQ:free42>=3.0    
@@ -2036,10 +2040,10 @@ END
 | Menu  | LBL    | Description                          | Inputs                         | Output                     |
 |-------+--------+--------------------------------------+--------------------------------+----------------------------|
 | NEW   | NEWPLY | Create a polynomial of degree X      | X: N                           | X: P                       |
+| INTRP | PINTRP | Create interpolateing polynomial     | Y: XDAT X: YDAT                | X: P                       |
+| ▒▒▒▒  |        |                                      |                                |                            |
 | ▒▒▒▒  |        |                                      |                                |                            |
 | EDIT  | LBL 78 | Edit a polynomial                    | X: P                           | X:P                        |
-| ▒▒▒▒  |        |                                      |                                |                            |
-| ▒▒▒▒  |        |                                      |                                |                            |
 | VIEW  | VPOLY  | View  a polynomial                   | X: P                           | N/A                        |
 |-------+--------+--------------------------------------+--------------------------------+----------------------------|
 | SLV2  | P2SLV  | Solve quadratic polynomial           | X: P                           | Y: root_1 X: root_2        |
@@ -2120,7 +2124,7 @@ negative, then the function will always preform the maximum number of iterations
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:POLY)
 @@@@ DSC: Auto-generated menu program
 LBL "POLY"
-LBL 01            @@@@ Page 1 of menu POLY
+LBL 01          @@@@ Page 1 of menu POLY
 CLMENU
 "NEW"
 KEY 1 XEQ "NEWPLY"
@@ -2134,7 +2138,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02            @@@@ Page 2 of menu POLY
+LBL 02          @@@@ Page 2 of menu POLY
 CLMENU
 "SLV2"
 KEY 1 XEQ "P2SLV"
@@ -2152,7 +2156,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 03            @@@@ Page 3 of menu POLY
+LBL 03          @@@@ Page 3 of menu POLY
 CLMENU
 "DFALT"
 KEY 1 XEQ "PDEFLT"
@@ -2172,7 +2176,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 03
-LBL 04            @@@@ Page 4 of menu POLY
+LBL 04          @@@@ Page 4 of menu POLY
 CLMENU
 "POLY"
 KEY 1 XEQ 98
@@ -2186,7 +2190,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 04
-LBL 00 @@@@ Application Exit
+LBL 00          @@@@ Application Exit
 EXITALL
 RTN
 @@@@ Free labels start at: 5
@@ -2195,15 +2199,71 @@ RTN
 ** Local functions 
 
 #+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PINTRP)
+@@@@ DSC: Create an interpolateing polynomial
+@@@@ IN:  Y: X data matrix
+@@@@      X: Y data matrix
+@@@@ OUT: X: interpolateing polynomial
+@@@@ TST: free42_3.0.2.2
+@@@@ UPD: 2021-04-28
+@@@@ FAQ: X & Y must have the same number of elements, but dimintions may differ.
+@@@@ FAQ: Explicitly constructs the vandermonde matrix, and solves the system
+@@@@ FAQ: Uses INDEX
+@@@@ TC:  xdat:[ 1, 2, 3, 4] ydat:[1, -1, 1, -1] => [-4/3 10 -68/3 15] = [-1.33.. 10 -22.66.. 15]
+@@@@ TC:  xdat:[-1, 0, 1, 2] ydat:[-2, 3, -24, -77] => [1, -16, -12, 3]  
+LBL "PINTRP"
+FUNC 21         @@## REQ:free42>=2.5.24 
+L4STK           @@## REQ:free42>=3.0    
+LSTO "_YDAT"    @@@@ YDAT XDAT
+DIM?
+×
+1
+DIM "_YDAT"     @@@@ 1 N XDAT -- YDAT is now an Nx1 matrix
+Rv              @@@@ N XDAT
+Rv              @@@@ XDAT
+LSTO "_XDAT"    @@@@ XDAT
+XEQ "MXDIAG"    @@@@ MUL      -- nxn diag matrix
+LSTO "_MUL"     @@@@ MUL
+DIM?            @@@@ N N
+Rv
+1               @@@@ 1 N
+NEWMAT          @@@@ TPL      -- TPL is an nx1 zero matrix
+SIGN            @@@@ TPL      -- TPL is now an NX1 1 matrix
+LSTO "_TPL"     @@@@ TPL
+DIM?            @@@@ 1 N
+Rv              @@@@ N
+ENTER           @@@@ N N
+NEWMAT          @@@@ VM       -- VM is an NXN zero matrix
+LSTO "_VM"      @@@@ VM
+DIM?            @@@@ N N
+Rv              @@@@ N
+INDEX "_VM"
+1               @@@@ 1 N
+X<>Y            @@@@ N 1
+STOIJ
+LBL 79
+RCL "_TPL"
+PUTM
+RCL "_MUL"
+X<>Y
+×
+STO "_TPL"
+J-
+FC? 77
+GTO 79
+RCL "_YDAT"     @@@@ YDAT
+RCL÷ "_VM"      @@@@ POLY
+RTN
+
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:NEWPLY)
 @@@@ DSC: Create a new polynomial of degree X
 @@@@ IN:  X: degree
 @@@@ OUT: X: polynomial
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-26
 LBL "NEWPLY"
-FUNC 11
-L4STK
+FUNC 11         @@## REQ:free42>=2.5.24 
+L4STK           @@## REQ:free42>=3.0    
 1
 X<>Y
 1
@@ -2215,10 +2275,11 @@ RTN
 @@@@ DSC: Edit a polynomial in the matrix editor
 @@@@ IN:  X: polynomial
 @@@@ OUT: X: polynomial
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-26
 LBL 78 
-FUNC 11
+FUNC 11         @@## REQ:free42>=2.5.24 
+L4STK           @@## REQ:free42>=3.0    
 EDIT
 "Enter data; R/S"
 ├" to end"
@@ -2231,11 +2292,12 @@ RTN
 @@@@ IN:  X: Polynomial matrix
 @@@@ OUT: Y: root_1
 @@@@      X: root_2
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
+@@@@ FAQ: Uses INDEX
 @@@@ UPD: 2021-04-26
 LBL "P2SLV"
-FUNC 12              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 12         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 LSTO "_M"  
 R↓
 INDEX "_M"  
@@ -2245,45 +2307,46 @@ RCLEL
 J+
 FC? 77
 GTO 77
-RCL ST Z     @@@@  a                     c                     b                     a
-ABS          @@@@  |a|                   c                     b                     a
+RCL ST Z        @@@@  a                     c                     b                     a
+ABS             @@@@  |a|                   c                     b                     a
 X=0?
 RTNERR 3
-Rv           @@@@  a                     c                     b                     a
-2            @@@@  2                     c                     b                      a
-RCL× ST T    @@@@  2a                    c                     b                      a
-Rv           @@@@  c                     b                     a                     2a                    
-RCL÷ ST T    @@@@  c/(2a)                b                     a                     2a                    
-X<>Y         @@@@  b                     c/(2a)                a                     2a                    
-RCL÷ ST T    @@@@  b/(2a)                c/(2a)                a                     2a                    
-+/-          @@@@  -B                    C                     a                     2a                    
-ENTER        @@@@  -B                   -B                     C                      a
-X↑2          @@@@  B^2                  -B                     C                      a
-RCL- ST Z    @@@@  B^2-C                -B                     C                      a
-RCL- ST Z    @@@@  B^2-2C               -B                     C                      a
-SQRT         @@@@  √(B^2-2C)            -B                     C                      a
-RCL ST Y     @@@@  -B                    √(B^2-2C)            -B                      C
-RCL- ST Y    @@@@  -B-√(B^2-2C)          √(B^2-2C)            -B                      C
-RCL ST Z     @@@@  -B                   -B-√(B^2-2C)          √(B^2-2C)              -B                     
-RCL+ ST Z    @@@@  -B+√(B^2-2C)         -B-√(B^2-2C)          √(B^2-2C)              -B                     
+Rv              @@@@  a                     c                     b                     a
+2               @@@@  2                     c                     b                      a
+RCL× ST T       @@@@  2a                    c                     b                      a
+Rv              @@@@  c                     b                     a                     2a                    
+RCL÷ ST T       @@@@  c/(2a)                b                     a                     2a                    
+X<>Y            @@@@  b                     c/(2a)                a                     2a                    
+RCL÷ ST T       @@@@  b/(2a)                c/(2a)                a                     2a                    
++/-             @@@@  -B                    C                     a                     2a                    
+ENTER           @@@@  -B                   -B                     C                      a
+X↑2             @@@@  B^2                  -B                     C                      a
+RCL- ST Z       @@@@  B^2-C                -B                     C                      a
+RCL- ST Z       @@@@  B^2-2C               -B                     C                      a
+SQRT            @@@@  √(B^2-2C)            -B                     C                      a
+RCL ST Y        @@@@  -B                    √(B^2-2C)            -B                      C
+RCL- ST Y       @@@@  -B-√(B^2-2C)          √(B^2-2C)            -B                      C
+RCL ST Z        @@@@  -B                   -B-√(B^2-2C)          √(B^2-2C)              -B                     
+RCL+ ST Z       @@@@  -B+√(B^2-2C)         -B-√(B^2-2C)          √(B^2-2C)              -B                     
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:P1SLV)
 @@@@ DSC: Solve linear polynomial
 @@@@ IN:  X: Polynomial matrix
 @@@@ OUT: X: root
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
+@@@@ FAQ: Uses INDEX
 @@@@ UPD: 2021-04-26
 LBL "P1SLV"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 LSTO "_M"  
 R↓
 INDEX "_M"  
 WRAP
-RCLEL  @@@@ a_1
+RCLEL           @@@@ a_1
 J+
-RCLEL  @@@@ a_0
+RCLEL           @@@@ a_0
 ÷
 +/-
 RTN
@@ -2294,20 +2357,21 @@ RTN
 @@@@      X: Value at which polynomial should be evaluated
 @@@@ OUT: X: value of polynomial evaluated at X
 @@@@ LBL: 91
-@@@@ TST: free42_3.0
+@@@@ FAQ: Uses INDEX
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-03
 LBL "PEVAL"
-FUNC 21              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-X<>Y          @@@@ P X
+FUNC 21         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
+X<>Y            @@@@ P X
 LSTO "_M"  
 INDEX "_M"  
 WRAP
-0             @@@@ PV P X
+0               @@@@ PV P X
 LBL 91
-RCL× ST Z     @@@@ PV*X P X
-RCLEL         @@@@ Coef PV*X P X
-+             @@@@ PV=Coef+PV*X P X
+RCL× ST Z       @@@@ PV*X P X
+RCLEL           @@@@ Coef PV*X P X
++               @@@@ PV=Coef+PV*X P X
 J+
 FC? 77
 GTO 91
@@ -2320,26 +2384,27 @@ RTN
 @@@@ OUT: Y: value of polynomial evaluated at X
 @@@@      X: value of polynomial's derivative evaluated at X
 @@@@ LBL: 91
-@@@@ TST: free42_3.0
+@@@@ FAQ: Uses INDEX
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-03
 LBL "PEVL1"
-FUNC 22              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-X<>Y          @@@@ P       X
+FUNC 22         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
+X<>Y            @@@@ P       X
 LSTO "_M"  
 INDEX "_M"  
-R↓            @@@@ X
+R↓              @@@@ X
 WRAP
-0             @@@@ PV      X
-0             @@@@ DV      PV       X
+0               @@@@ PV      X
+0               @@@@ DV      PV       X
 LBL 92
-RCL× ST Z     @@@@ DV*X    PV       X
-RCL+ ST Y     @@@@ DV*X+PV PV       X
-X<>Y          @@@@ PV      DV*X+PV  X
-RCL× ST Z     @@@@ PV*X    DV*X+PV  X
-RCLEL         @@@@ C       PV*X     DV*X+PV  X
-+             @@@@ C+PV*X  DV*X+PV  X
-X<>Y          @@@@ DV*X+PV C+PV*X   X
+RCL× ST Z       @@@@ DV*X    PV       X
+RCL+ ST Y       @@@@ DV*X+PV PV       X
+X<>Y            @@@@ PV      DV*X+PV  X
+RCL× ST Z       @@@@ PV*X    DV*X+PV  X
+RCLEL           @@@@ C       PV*X     DV*X+PV  X
++               @@@@ C+PV*X  DV*X+PV  X
+X<>Y            @@@@ DV*X+PV C+PV*X   X
 J+
 FC? 77
 GTO 92
@@ -2353,33 +2418,34 @@ RTN
 @@@@      Y: value of polynomial's first derivative evaluated at X
 @@@@      X: value of polynomial's second derivative evaluated at X
 @@@@ LBL: 91
-@@@@ TST: free42_3.0
+@@@@ FAQ: Uses INDEX
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-03
 LBL "PEVL2"
-FUNC 23              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-LSTO "_X"     @@@@ X       P
-R↓            @@@@ P
+FUNC 23         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
+LSTO "_X"       @@@@ X       P
+R↓              @@@@ P
 LSTO "_M"  
 INDEX "_M"  
-R↓            @@@@ 
+R↓              @@@@ 
 WRAP
-0             @@@@ PV      
-0             @@@@ DV       PV       
-0             @@@@ DDV      DV       PV       
+0               @@@@ PV      
+0               @@@@ DV       PV       
+0               @@@@ DDV      DV       PV       
 LBL 93
-RCL× "_X"     @@@@ DDV*X    DV       PV       
-RCL+ ST Y     @@@@ DDV*X+DV DV       PV       
-X<>Y          @@@@ DV       DDV*X+DV PV       
-RCL× "_X"     @@@@ DV*X     DDV*X+DV PV       
-RCL+ ST Z     @@@@ DV*X+PV  DDV*X+DV PV       
-X<>Y          @@@@ DDV*X+DV DV*X+PV  PV       
-RCL ST Z      @@@@ PV       DDV*X+DV DV*X+PV  PV       
-RCL× "_X"     @@@@ PV*X     DDV*X+DV DV*X+PV  PV       
-RCLEL         @@@@ C        PV*X     DDV*X+DV DV*X+PV
-+             @@@@ C+PV*X   DDV*X+DV DV*X+PV
-STO ST T      @@@@ C+PV*X   DDV*X+DV DV*X+PV  C+PV*X   
-R↓            @@@@ DDV*X+DV DV*X+PV  C+PV*X   
+RCL× "_X"       @@@@ DDV*X    DV       PV       
+RCL+ ST Y       @@@@ DDV*X+DV DV       PV       
+X<>Y            @@@@ DV       DDV*X+DV PV       
+RCL× "_X"       @@@@ DV*X     DDV*X+DV PV       
+RCL+ ST Z       @@@@ DV*X+PV  DDV*X+DV PV       
+X<>Y            @@@@ DDV*X+DV DV*X+PV  PV       
+RCL ST Z        @@@@ PV       DDV*X+DV DV*X+PV  PV       
+RCL× "_X"       @@@@ PV*X     DDV*X+DV DV*X+PV  PV       
+RCLEL           @@@@ C        PV*X     DDV*X+DV DV*X+PV
++               @@@@ C+PV*X   DDV*X+DV DV*X+PV
+STO ST T        @@@@ C+PV*X   DDV*X+DV DV*X+PV  C+PV*X   
+R↓              @@@@ DDV*X+DV DV*X+PV  C+PV*X   
 J+
 FC? 77
 GTO 93
@@ -2394,44 +2460,45 @@ RTN
 @@@@ OUT: Y: Remainder (a number)
 @@@@      X: Deflated polynomial
 @@@@ LBL: 96
-@@@@ TST: free42_3.0
+@@@@ FAQ: Uses INDEX
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-03
 LBL "PDEFLT"
-FUNC 22              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 22         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
 REAL?
 GTO 88
 X<>Y
-XEQ 89 @@@@ MAT2C
+XEQ 89          @@@@ MAT2C
 X<>Y
 LBL 88
-X<>Y          @@@@ P R
+X<>Y            @@@@ P R
 LSTO "_M"  
 INDEX "_M"  
 WRAP
-R↓            @@@@ R
+R↓              @@@@ R
 +/-
-0             @@@@ LC R
+0               @@@@ LC R
 LBL 96
-RCL× ST Y     @@@@ LC*R R
-RCLEL         @@@@ C LC*R R
-X<>Y          @@@@ LC*R C R
--             @@@@ C-LC*R  R
+RCL× ST Y       @@@@ LC*R R
+RCLEL           @@@@ C LC*R R
+X<>Y            @@@@ LC*R C R
+-               @@@@ C-LC*R  R
 STOEL         
 J+
 FC? 77
 GTO 96
-RCL "_M"      @@@@ REM
-DIM?          @@@@ m n REM
-×             @@@@ N REM
-1             @@@@ 1 N REM
--             @@@@ N-1 REM
-1             @@@@ 1 N-1 REM
-X<>Y          @@@@ N-1 1 REM
+RCL "_M"        @@@@ REM
+DIM?            @@@@ m n REM
+×               @@@@ N REM
+1               @@@@ 1 N REM
+-               @@@@ N-1 REM
+1               @@@@ 1 N-1 REM
+X<>Y            @@@@ N-1 1 REM
 DIM "_M"  
 Rv
-Rv            @@@@ REM
-RCL "_M"      @@@@ P REM
+Rv              @@@@ REM
+RCL "_M"        @@@@ P REM
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -2439,6 +2506,7 @@ RTN
 @@@@ NAM: MAT2C 89
 @@@@ IN:  X: Matrix
 @@@@ OUT: X: Matrix
+@@@@ FAQ: Uses INDEX
 @@@@ LBL: MAT2C
 LBL 89
 FUNC 11
@@ -2462,7 +2530,8 @@ RTN
 @@@@ DSC: View elements of polynomial
 @@@@ IN:  X: polynomial matrix
 @@@@ OUT: N/A
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
+@@@@ FAQ: Uses INDEX
 @@@@ UPD: 2021-04-03
 LBL "VPOLY"
 FUNC 00
@@ -2498,27 +2567,27 @@ RTN
 LBL "PR1ST"
 FUNC 13
 L4STK
-XEQ 81 @@@@ PLYBAD
+XEQ 81          @@@@ PLYBAD
 RTNERR 5
-LSTO "_P"   @@@@ P
+LSTO "_P"       @@@@ P
 RAN
 RAN
-COMPLEX      @@@@ Guss Poly
+COMPLEX         @@@@ Guss Poly
 SF 25
 RCL "ACC"
 FC?C 25
-1e-15        @@@@ Tol  Guss Poly
-50           @@@@ Itr  Tol  Guss  Poly
-XEQ "PLGRR"  @@@@ Root Pval Stat
+1e-15           @@@@ Tol  Guss Poly
+50              @@@@ Itr  Tol  Guss  Poly
+XEQ "PLGRR"     @@@@ Root Pval Stat
 0≠? ST Z
 RTNERR 6
-RCL "_P"     @@@@ Poly Root Pval Stat
-RCL "_P"     @@@@ Poly Poly Root Pval
-RCL ST Z     @@@@ Root Poly Poly Root
-XEQ "PDEFLT" @@@@ DPly Rem  Poly Root
-X<>Y         @@@@ Rem  DPly Poly Root
-Rv           @@@@ DPly Poly Root
-RCL ST Z     @@@@ Root DPly Poly Root
+RCL "_P"        @@@@ Poly Root Pval Stat
+RCL "_P"        @@@@ Poly Poly Root Pval
+RCL ST Z        @@@@ Root Poly Poly Root
+XEQ "PDEFLT"    @@@@ DPly Rem  Poly Root
+X<>Y            @@@@ Rem  DPly Poly Root
+Rv              @@@@ DPly Poly Root
+RCL ST Z        @@@@ Root DPly Poly Root
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PRNXT)
@@ -2533,38 +2602,38 @@ RTN
 LBL "PRNXT"
 FUNC 33
 L4STK
-RCL ST Z     @@@@ Poly Gues DPly Poly
+RCL ST Z        @@@@ Poly Gues DPly Poly
 LSTO "_P"  
-Rv           @@@@ Gues DPly Poly
-RCL ST Y     @@@@ DPLY Gues DPly Poly
+Rv              @@@@ Gues DPly Poly
+RCL ST Y        @@@@ DPLY Gues DPly Poly
 LSTO "_DP"  
-XEQ 81 @@@@ PLYBAD
+XEQ 81          @@@@ PLYBAD
 RTNERR 5
-Rv           @@@@ Gues DPly Poly
+Rv              @@@@ Gues DPly Poly
 SF 25
 RCL "ACC"
 FC?C 25
-1e-15        @@@@ Tol  Gues DPly Poly
-50           @@@@ Itr  Tol  Gues DPly
-XEQ "PLGRR"  @@@@ Root Pval Stat
+1e-15           @@@@ Tol  Gues DPly Poly
+50              @@@@ Itr  Tol  Gues DPly
+XEQ "PLGRR"     @@@@ Root Pval Stat
 0≠? ST Z
 RTNERR 6
-RCL "_P"     @@@@ Poly Root Pval Stat
-X<>Y         @@@@ Root Poly Pval Stat
--1           @@@@ -1   Root Poly Pval
-5            @@@@ 5    -1   Root Poly
-XEQ "PLGRR"  @@@@ Root Pval Stat
-RCL ST X     @@@@ Root Root Pval Stat
-RCL "_DP"    @@@@ DPly Root Root Pval
-X<>Y         @@@@ Root DPly Root Pval
-XEQ "PDEFLT" @@@@ DPly Rem  Root Pval
+RCL "_P"        @@@@ Poly Root Pval Stat
+X<>Y            @@@@ Root Poly Pval Stat
+-1              @@@@ -1   Root Poly Pval
+5               @@@@ 5    -1   Root Poly
+XEQ "PLGRR"     @@@@ Root Pval Stat
+RCL ST X        @@@@ Root Root Pval Stat
+RCL "_DP"       @@@@ DPly Root Root Pval
+X<>Y            @@@@ Root DPly Root Pval
+XEQ "PDEFLT"    @@@@ DPly Rem  Root Pval
 X<>Y
-Rv           @@@@ DPly Root Pval
+Rv              @@@@ DPly Root Pval
 @@@@ TODO: Should check if |Rem| is near zero.  If it is not, then we probably converged to a previously found root and removed from DPly. It is also possible
 @@@@ TODO: that we we might have diverged, but that is super unlikely.  In fact, both cases are quite unlikely.  Still good software should check.
-RCL "_P"     @@@@ Poly DPly Root Pval
-X<>Y         @@@@ DPly Poly Root Pval
-RCL ST Z     @@@@ Root DPly Poly Root
+RCL "_P"        @@@@ Poly DPly Root Pval
+X<>Y            @@@@ DPly Poly Root Pval
+RCL ST Z        @@@@ Root DPly Poly Root
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -2599,43 +2668,43 @@ RTNNO
 LBL "PLGRR"
 FUNC 43
 L4STK
-LSTO "_I"        @@@@ ITR   TOL   GUESS POLY
-R↓               @@@@ TOL   GUESS POLY
+LSTO "_I"       @@@@ ITR   TOL   GUESS POLY
+R↓              @@@@ TOL   GUESS POLY
 LSTO "_T"  
-R↓               @@@@ GUESS POLY
+R↓              @@@@ GUESS POLY
 LSTO "_G"        
-R↓               @@@@ POLY
+R↓              @@@@ POLY
 LSTO "_P"  
 DIM?                       
-×                @@@@ N
+×               @@@@ N
 LSTO "_N"  
 @@@@ TODO: Check N>1.  Another status: 4 = polynomial is constant
 1
--                @@@@ N-1
+-               @@@@ N-1
 LSTO "_NM1"  
 R↓
 LBL 94
 RCL "_P"  
 RCL "_G"  
-XEQ "PEVL2"      @@@@ P''         P'     P        ?
+XEQ "PEVL2"     @@@@ P''         P'     P        ?
 RCL ST Z
-ABS              @@@@ |P|         P''    P'       P   
+ABS             @@@@ |P|         P''    P'       P   
 X<? "_T"  
 GTO 95
-R↓               @@@@ P''         P'     P        ?
+R↓              @@@@ P''         P'     P        ?
 @@@@ TODO: Check P' for /0.  Another status: 5 = Iteration failed due to division by zero
-RCL÷ ST Y        @@@@ P''/P'      P'     P        ?
-R↓               @@@@ P'          P      ?        P''/P'  
-÷                @@@@ -N=P/P'     ?      P''/P'   P''/P' 
-X<>Y             @@@@ ?           -N     P''/P'   P''/P' 
-R↓               @@@@ -N          P''/P' P''/P'   ?
-+/-              @@@@ N           P''/P' P''/P'   ?
-X<>Y             @@@@ P''/P'      N      P''/P'   ?
-RCL× ST Y        @@@@ -L          N      P''/P'   ?
-RCL× "_N"        @@@@ -L*n        N      P''/P'   ?
-RCL÷ "_NM1"      @@@@ -L*n/(n-1)  N      P''/P'   ?
+RCL÷ ST Y       @@@@ P''/P'      P'     P        ?
+R↓              @@@@ P'          P      ?        P''/P'  
+÷               @@@@ -N=P/P'     ?      P''/P'   P''/P' 
+X<>Y            @@@@ ?           -N     P''/P'   P''/P' 
+R↓              @@@@ -N          P''/P' P''/P'   ?
++/-             @@@@ N           P''/P' P''/P'   ?
+X<>Y            @@@@ P''/P'      N      P''/P'   ?
+RCL× ST Y       @@@@ -L          N      P''/P'   ?
+RCL× "_N"       @@@@ -L*n        N      P''/P'   ?
+RCL÷ "_NM1"     @@@@ -L*n/(n-1)  N      P''/P'   ?
 1
-+                @@@@ 1-L*n/(n-1) N      P''/P'   P''/P'  
++               @@@@ 1-L*n/(n-1) N      P''/P'   P''/P'  
 SQRT
 RCL× "_NM1"  
 RCL÷ "_N"  
@@ -2643,25 +2712,25 @@ RCL "_N"
 1/X
 +  
 1/X
-×                @@@@ LD          P''/P'   P''/P'  
+×               @@@@ LD          P''/P'   P''/P'  
 STO+ "_G"  
 DSE "_I"  
 GTO 94
 @@@@ EXIT: Max iter
-3                @@@@ 3      LD       P''/P'   ?
-RCL "_P"         @@@@ POLY   3        LD       ?
-RCL "_G"         @@@@ G      POLY     3        ?
-XEQ "PEVAL"      @@@@ P      3        ?        ?
-RCL "_G"         @@@@ G      P        3        ?
+3               @@@@ 3      LD       P''/P'   ?
+RCL "_P"        @@@@ POLY   3        LD       ?
+RCL "_G"        @@@@ G      POLY     3        ?
+XEQ "PEVAL"     @@@@ P      3        ?        ?
+RCL "_G"        @@@@ G      P        3        ?
 RTN
-LBL 95           @@@@ |P|    P''      P'       P   
+LBL 95          @@@@ |P|    P''      P'       P   
 @@@@ EXIT: Found root
-R↓               @@@@ P''    P'       P   
-R↓               @@@@ P'     P   
-R↓               @@@@ P   
+R↓              @@@@ P''    P'       P   
+R↓              @@@@ P'     P   
+R↓              @@@@ P   
 0
-X<>Y             @@@@ P      0
-RCL "_G"         @@@@ Root   Pval     0
+X<>Y            @@@@ P      0
+RCL "_G"        @@@@ Root   Pval     0
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PWRP)
@@ -2669,7 +2738,7 @@ RTN
 @@@@ IN:  X: N/A
 @@@@ OUT: X: N/A
 @@@@ GLB: WRPP -- Store a polynomial matrix in this variable
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ FAQ: Allows one to use SOLVER & INTEG on polynomials
 @@@@ USE: PEVAL
 @@@@ UPD: 2021-04-03
@@ -2743,7 +2812,7 @@ This is a simple little application that makes working with 3D vectors less pain
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:VEC3)
 @@@@ DSC: Auto-generated menu program
 LBL "VEC3"
-LBL 01            @@@@ Page 1 of menu VEC3
+LBL 01          @@@@ Page 1 of menu VEC3
 CLMENU
 "→V"
 KEY 1 XEQ 99
@@ -2761,16 +2830,16 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 00 @@@@ Application Exit
+LBL 00          @@@@ Application Exit
 EXITALL
 RTN
-LBL 02    @@@@ Action for menu key DOT
+LBL 02          @@@@ Action for menu key DOT
 DOT
 RTN
-LBL 03    @@@@ Action for menu key CROSS
+LBL 03          @@@@ Action for menu key CROSS
 CROSS
 RTN
-LBL 04    @@@@ Action for menu key MAG
+LBL 04          @@@@ Action for menu key MAG
 FNRM
 RTN
 @@@@ Free labels start at: 5
@@ -2787,7 +2856,8 @@ RTN
 @@@@      X: real number
 @@@@ OUT: X: 1x3 matrix
 @@@@ LBL: Used: 51
-@@@@ TST: free42_3.0
+@@@@ FAQ: Uses INDEX
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-03
 LBL 99
 FUNC 31
@@ -2814,7 +2884,8 @@ RTN
 @@@@      Y: Second component of V
 @@@@      X: Third component of V
 @@@@ LBL: Used: 52
-@@@@ TST: free42_3.0
+@@@@ FAQ: Uses INDEX
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-03
 LBL 98
 FUNC 13
@@ -2835,7 +2906,8 @@ RTN
 @@@@ IN:  X: 1x3 matrix V
 @@@@ OUT: N/A
 @@@@ LBL: Used: 53
-@@@@ TST: free42_3.0
+@@@@ FAQ: Uses INDEX
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-03
 LBL 96
 FUNC 00
@@ -2865,7 +2937,7 @@ RTN
 @@@@ IN:  N/A
 @@@@ OUT: X: 1x3 Matrix
 @@@@ LBL: Used: 53
-@@@@ TST: free42_3.0
+@@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-03
 LBL 95
 FUNC 01
@@ -2873,7 +2945,6 @@ FUNC 01
 3
 NEWMAT
 RTN
-
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
@@ -2917,7 +2988,7 @@ END
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:STATR)
 @@@@ DSC: Auto-generated menu program
 LBL "STATR"
-LBL 01            @@@@ Page 1 of menu STATR
+LBL 01          @@@@ Page 1 of menu STATR
 CLMENU
 "Σx"
 KEY 1 XEQ 04
@@ -2937,7 +3008,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02            @@@@ Page 2 of menu STATR
+LBL 02          @@@@ Page 2 of menu STATR
 CLMENU
 "Σlnx"
 KEY 1 XEQ 10
@@ -2957,7 +3028,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 03            @@@@ Page 3 of menu STATR
+LBL 03          @@@@ Page 3 of menu STATR
 CLMENU
 "Σylnx"
 KEY 1 XEQ 16
@@ -2967,10 +3038,10 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 03
-LBL 00 @@@@ Application Exit
+LBL 00          @@@@ Application Exit
 EXITALL
 RTN
-LBL 04    @@@@ Action for menu key Σx
+LBL 04          @@@@ Action for menu key Σx
 FUNC 01
 L4STK
 ΣREG?
@@ -2981,7 +3052,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 05    @@@@ Action for menu key Σx↑2
+LBL 05          @@@@ Action for menu key Σx↑2
 FUNC 01
 L4STK
 ΣREG?
@@ -2992,7 +3063,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 06    @@@@ Action for menu key Σy
+LBL 06          @@@@ Action for menu key Σy
 FUNC 01
 L4STK
 ΣREG?
@@ -3003,7 +3074,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 07    @@@@ Action for menu key Σy↑2
+LBL 07          @@@@ Action for menu key Σy↑2
 FUNC 01
 L4STK
 ΣREG?
@@ -3014,7 +3085,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 08    @@@@ Action for menu key Σxy
+LBL 08          @@@@ Action for menu key Σxy
 FUNC 01
 L4STK
 ΣREG?
@@ -3025,7 +3096,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 09    @@@@ Action for menu key n
+LBL 09          @@@@ Action for menu key n
 FUNC 01
 L4STK
 ΣREG?
@@ -3036,7 +3107,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 10    @@@@ Action for menu key Σlnx
+LBL 10          @@@@ Action for menu key Σlnx
 FUNC 01
 L4STK
 ΣREG?
@@ -3047,7 +3118,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 11    @@@@ Action for menu key Σlnx↑2
+LBL 11          @@@@ Action for menu key Σlnx↑2
 FUNC 01
 L4STK
 ΣREG?
@@ -3058,7 +3129,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 12    @@@@ Action for menu key Σlny
+LBL 12          @@@@ Action for menu key Σlny
 FUNC 01
 L4STK
 ΣREG?
@@ -3069,7 +3140,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 13    @@@@ Action for menu key Σlny↑2
+LBL 13          @@@@ Action for menu key Σlny↑2
 FUNC 01
 L4STK
 ΣREG?
@@ -3080,7 +3151,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 14    @@@@ Action for menu key Σlnxlny
+LBL 14          @@@@ Action for menu key Σlnxlny
 FUNC 01
 L4STK
 ΣREG?
@@ -3091,7 +3162,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 15    @@@@ Action for menu key Σxlny
+LBL 15          @@@@ Action for menu key Σxlny
 FUNC 01
 L4STK
 ΣREG?
@@ -3102,7 +3173,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 16    @@@@ Action for menu key Σylnx
+LBL 16          @@@@ Action for menu key Σylnx
 FUNC 01
 L4STK
 ΣREG?
@@ -3142,5 +3213,6 @@ Code in this section is under construction.  Most likely broken.
 #+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 #+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 #+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+
 
 

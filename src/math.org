@@ -3188,6 +3188,67 @@ RTN
 END
 #+end_src
 
+* =KSFUN=: Everything Else
+** Menu
+:PROPERTIES:
+:CUSTOM_ID: menu-ksfun
+:END:
+
+#+ATTR_HTML: :align center :frame box :rules all
+#+NAME:KSFUN
+| Menu | Description       | IN   | OUT            |
+|------+-------------------+------+----------------|
+| ¦¦   | Parallel Operator | Y  X | X: 1/(1/X+1/Y) |
+
+** Menu Code
+
+#+BEGIN_SRC elisp :var tbl=KSFUN :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+(MJR-generate-42-menu-code "KSFUN" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
+#+END_SRC
+
+#+RESULTS:
+#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:KSFUN)
+@@@@ DSC: Auto-generated menu program
+LBL "KSFUN"
+LBL 01            @@@@ Page 1 of menu KSFUN
+CLMENU
+"||"
+KEY 1 XEQ "||"
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 00 @@@@ Application Exit
+EXITALL
+RTN
+@@@@ Free labels start at: 2
+#+end_src
+
+** Functions
+
+#+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:||)
+@@@@ DSC: Parallel Operator
+@@@@ IN:  Y: A Number
+@@@@ IN:  X: A Number
+@@@@ OUT: X: 1/(1/X+1/Y)
+@@@@ UPD: 2021-04-28
+LBL "||"
+FUNC 21         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
+1/X
+X<>Y
+1/X
++
+1/X
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+END
+#+END_SRC
+
+
 * WORKING                                                          :noexport:
 
 #+BEGIN_SRC text

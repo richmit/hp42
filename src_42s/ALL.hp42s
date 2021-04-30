@@ -354,7 +354,7 @@ FUNC 11
 L4STK
 IP
 0
-0≥? ST Y
+XEQ 44 @@@ 0≥Y?
 RTN
 R↓
 0
@@ -373,7 +373,7 @@ FUNC 21
 L4STK
 IP
 X<>Y
-0>? ST Y
+XEQ 43 @@@ 0>Y?
 RTN
 XEQ 67
 RTN
@@ -390,7 +390,7 @@ L4STK
 IP
 X<>Y
 IP
-0>? ST Y
+XEQ 43 @@@ 0>Y?
 RTN
 XEQ 67
 RTN
@@ -406,7 +406,7 @@ LBL "GETB"
 FUNC 21
 L4STK
 0
-0>? ST Y
+XEQ 43 @@@ 0>Y?
 RTN
 XEQ 67
 RTN
@@ -423,11 +423,11 @@ FUNC 31
 L4STK
 X=0?
 GTO 54
-Rv
+R↓
 XEQ "SETB"
 RTN
 LBL 54
-Rv
+R↓
 XEQ "CLRB"
 RTN
 LBL "GY@X"
@@ -457,9 +457,9 @@ LBL "AZ@Y"
 FUNC 41
 L4STK
 LSTO "_X"
-Rv
+R↓
 LSTO "_Y"
-Rv
+R↓
 LSTO "_Z"
 RCL "_Y"
 XEQ "MSKn"
@@ -509,7 +509,7 @@ L4STK
 IP
 X<>Y
 IP
-0≥? ST Y
+XEQ 44 @@@ 0≥Y?
 RTN
 X<>Y
 0
@@ -534,7 +534,7 @@ L4STK
 IP
 X<>Y
 IP
-0≥? ST Y
+XEQ 44 @@@ 0≥Y?
 RTN
 X<>Y
 0
@@ -558,7 +558,7 @@ FUNC 21
 L4STK
 IP
 X<>Y
-0≥? ST Y
+XEQ 44 @@@ 0≥Y?
 RTN
 X<>Y
 +/-
@@ -569,7 +569,7 @@ FUNC 21
 L4STK
 IP
 X<>Y
-0≥? ST Y
+XEQ 44 @@@ 0≥Y?
 RTN
 X<>Y
 ROTXY
@@ -653,7 +653,7 @@ FUNC 11
 L4STK
 IP
 -1
-0=? ST Y
+XEQ  42 @@@ 0=Y?
 RTN
 R↓
 XEQ "LJ"
@@ -668,11 +668,29 @@ FUNC 11
 L4STK
 IP
 -1
-0=? ST Y
+XEQ  42 @@@ 0=Y?
 RTN
 R↓
 XEQ "RJ"
 RTN
+LBL 42   @@@ 0=Y?
+FUNC 00
+X<>Y
+X=0?
+RTNYES
+RTNNO
+LBL 43   @@@ 0>Y?
+FUNC 00
+X<>Y
+X<0?
+RTNYES
+RTNNO
+LBL 44   @@@ 0≥Y?
+FUNC 00
+X<>Y
+X≤0?
+RTNYES
+RTNNO
 LBL 96
 "W:"
 WSIZE?
@@ -776,7 +794,7 @@ RCL "_CTR"
 IP
 BIT?
 GTO 52
-Rv
+R↓
 X<>Y
 RCL "_CTR"
 IP
@@ -2673,24 +2691,24 @@ DIM?
 ×
 1
 DIM "_YDAT"
-Rv
-Rv
+R↓
+R↓
 LSTO "_XDAT"
 XEQ "MXDIAG"
 LSTO "_MUL"
 DIM?
-Rv
+R↓
 1
 NEWMAT
 SIGN
 LSTO "_TPL"
 DIM?
-Rv
+R↓
 ENTER
 NEWMAT
 LSTO "_VM"
 DIM?
-Rv
+R↓
 INDEX "_VM"
 1
 X<>Y
@@ -2742,10 +2760,10 @@ RCL ST Z
 ABS
 X=0?
 RTNERR 3
-Rv
+R↓
 2
 RCL× ST T
-Rv
+R↓
 RCL÷ ST T
 X<>Y
 RCL÷ ST T
@@ -2875,8 +2893,8 @@ DIM?
 1
 X<>Y
 DIM "_M"
-Rv
-Rv
+R↓
+R↓
 RCL "_M"
 RTN
 LBL 89
@@ -2940,7 +2958,7 @@ RCL "_P"
 RCL ST Z
 XEQ "PDEFLT"
 X<>Y
-Rv
+R↓
 RCL ST Z
 RTN
 LBL "PRNXT"
@@ -2948,20 +2966,22 @@ FUNC 33
 L4STK
 RCL ST Z
 LSTO "_P"
-Rv
+R↓
 RCL ST Y
 LSTO "_DP"
 XEQ 81
 RTNERR 5
-Rv
+R↓
 SF 25
 RCL "ACC"
 FC?C 25
 1e-15
 50
 XEQ "PLGRR"
-0≠? ST Z
+RCL ST Z
+X≠0?
 RTNERR 6
+R↓
 RCL "_P"
 X<>Y
 -1
@@ -2972,7 +2992,7 @@ RCL "_DP"
 X<>Y
 XEQ "PDEFLT"
 X<>Y
-Rv
+R↓
 RCL "_P"
 X<>Y
 RCL ST Z
@@ -3011,8 +3031,7 @@ RCL "_P"
 RCL "_G"
 XEQ "PEVL2"
 RCL ST Z
-ABS
-X<? "_T"
+XEQ 76
 GTO 95
 R↓
 RCL÷ ST Y
@@ -3052,6 +3071,13 @@ R↓
 X<>Y
 RCL "_G"
 RTN
+LBL 76
+FUNC 00
+ABS
+RCL "_T"
+X>Y?
+RTNYES
+RTNNO
 LBL "PWRP"
 MVAR "X"
 RCL "WRPP"

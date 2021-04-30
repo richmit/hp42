@@ -206,7 +206,7 @@ To measure the length of a non-horizontal/vertical line, we provide a complex nu
 specifying a line from the origin, upper left image pixel at (0, 0), to the given coordinates.  Alternately one might think of the coordinates as the width &
 height of the line.  The signs of the coordinates are ignored -- i.e. the absolute value of each coordinate is used.
 
-#+begin_src text
+#+begin_src text :eval never
                 * P2  -            (0, 0) *
                /      |                    \
               /       |                     \
@@ -303,7 +303,7 @@ Below is an illustration of how to measure distance and count perforations.  Fir
 measure the distance between them.  The first distance in the illustration measures the distance between "perf bottoms".  Take careful note of how we count
 -- the number of "bottoms" in this case.
 
-#+begin_src text
+#+begin_src text :eval never
 ##                                                                                                              ##
 ##      | . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . |     ##
 ##      |. . . . . . . . . . . . . . . . . . . . . . C = 4 . . . . . . . . . . . . . . . . . . . . . . . .|     ##
@@ -366,7 +366,7 @@ Why?
 
 *** Example
 
-#+begin_src text
+#+begin_src text :eval never
      P1 *    * P3                                       P1 *    * P3
         |    |              P1 *-----* P2                 /    /
         |    |      _OR_                     _OR_        /    /
@@ -388,7 +388,7 @@ coordinate system -- i.e. they measure distance to the right and down from the u
 millimeters; however, a few also add a grid system on top.  For example the Thirkell uses a 3mm grid.
 
 
-#+begin_src text
+#+begin_src text :eval never
  +^^^^^^^^^^^^^^^^^^^^^^^^+
  (          * P3          )
  (   O *------------+     ) 
@@ -452,7 +452,7 @@ This is a handy tool that automates some common computations:
 It is called "=QUAD=" because it works with four points which will form the corners of a quadrilateral -- also "=QUAD=" avoid confusion with the built in
 command =RECT=.  Below is a picture of the geometric situation.
 
-#+begin_src text
+#+begin_src text :eval never
         P1 *----------------* P2
           /                /      - Are P1-P2 & P4-P3 parallel?  i.e. is the angle between them zero?
          /                /       - Are P1-P4 & P2-P3 parallel?  i.e. is the angle between them zero?
@@ -551,12 +551,12 @@ Our stamp is 18.553mm x 22.00mm -- and so it must be a flat plate stamp.
 * Code
 ** Menu Code
 
-#+BEGIN_SRC elisp :var tbl=PHIL :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/phil/phil.hp42s"
+#+BEGIN_SRC elisp :var tbl=PHIL :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/phil/phil.hp42s"
 (MJR-generate-42-menu-code "PHIL" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle ../src_42s/phil/phil.hp42s
+#+begin_src hp42s :eval never :tangle ../src_42s/phil/phil.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PHIL)
 @@@@ DSC: Auto-generated menu program
 LBL "PHIL"
@@ -666,7 +666,7 @@ RTN
 
 ** Local Functions
 
-#+begin_src hp42s :tangle ../src_42s/phil/phil.hp42s
+#+begin_src hp42s :eval never :tangle ../src_42s/phil/phil.hp42s
 @@@@ GBL: PhilIC -- Image calibration factor.  Set via CAL
 @@@@      PhilIU -- Units for Image distances used by D→P & D→K.  Set via I:UNIT Default: mm
 @@@@      PhilDU -- Units for Distance used by D→P & D→K.  Set via D:UNIT Default: mm
@@ -1426,7 +1426,7 @@ END
 
 * WORKING                                                          :noexport:
 
-#+BEGIN_SRC text
+#+BEGIN_SRC text :eval never
 :::::::::::::::::::::::'##:::::'##::::'###::::'########::'##::: ##:'####:'##::: ##::'######::::::::::::::::::::::::
 ::::::::::::::::::::::: ##:'##: ##:::'## ##::: ##.... ##: ###:: ##:. ##:: ###:: ##:'##... ##:::::::::::::::::::::::
 ::::::::::::::::::::::: ##: ##: ##::'##:. ##:: ##:::: ##: ####: ##:: ##:: ####: ##: ##:::..::::::::::::::::::::::::

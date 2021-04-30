@@ -302,7 +302,7 @@ tables.
 
 ** For CUSTOM-type Menus
 
-These functions are usefull for CUSTOM-type menus -- that is menus that call other programs or built in functions.  I use this as a way to add heirachy to the
+These functions are useful for CUSTOM-type menus -- that is menus that call other programs or built in functions.  I use this as a way to add hierarchy to the
 built in CUSTOM menu.  Example:
 
 #+ATTR_HTML: :align center
@@ -316,9 +316,9 @@ In the first line "=LN=" is the menu name and function called.  In the second li
 line "=MYPROG=" is the name of a program -- the code below figures out if a thing is a built in function or a program and uses =XEQ= for programs.  Note that
 I may have missed a built in function, so you may have to add one to the list. ;)
 
-If the menu is a number, then it will be =XEQ='ed to get the menu label.  If the prog is a number, then it will be =XEQ='ed directly.  If any menu or prog is a number, then
-an =END= will not be generated at the end of the listing -- this allows one to put the local subroutines later in the org-mode file and the whole thing will then be tangled
-together into one program.
+If the menu is of the for "LBL NN", then it will be =XEQ='ed to get the menu label.  If the prog is of the form "LBL NN", then it will be =XEQ='ed directly.
+If any menu or prog is a label, then an =END= will not be generated at the end of the listing -- this allows one to put the local subroutines later in
+the org-mode file and the whole thing will then be tangled together into one program.
 
 #+BEGIN_SRC elisp :results silent
 (defun MJR-is-42-builtin (astring) (cl-position astring '("%" "%CH" "+" "+/-" "-" "1/X" "10↑X" "ABS" "ACOS" "ACOSH" "ADV" "AGRAPH" "AIP" "ALENG" "ALL" "ALLΣ" "AND" "AOFF" "AON" "ARCL" "AROT" "ASHF" "ASIN" "ASINH" "ASSIGN" "ASTO" "ATAN" "ATANH" "ATOX" "AVIEW"
@@ -367,12 +367,12 @@ This function is handy when you want to always generate local labels.
 | n:LBL 89 | n:m    |      |     12 | N      | N:LBL 79 |
 | LBL 88   | p      |      |     13 | O      | LBL 73   |
 
-#+BEGIN_SRC elisp :var tbl=menu :colnames y :results output verbatum :wrap "src hp42s :tangle no"
+#+BEGIN_SRC elisp :var tbl=menu :colnames y :results output verbatum :wrap "src hp42s :eval never :eval never :tangle no"
 (MJR-generate-42-menu-code "PROG_NAME" 0 tbl 1 nil 'stay 'up #'MJR-local-only-gen-lab nil) ;;#'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle no
+#+begin_src hp42s :eval never :eval never :tangle no
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PROG_NAME)
 @@@@ DSC: Auto-generated menu program
 LBL "PROG_NAME"
@@ -526,13 +526,13 @@ but this works for now.
 
 ** yas templates
 
-#+BEGIN_SRC sh :results output verbatum :wrap src snippet
+#+BEGIN_SRC sh :results output verbatum :wrap "src snippet :eval never"
 echo ''
 for f in ~/core/yasnippet/hp42s-mode/*; do cat $f; echo ''; done
 #+END_SRC
 
 #+RESULTS:
-#+begin_src snippet
+#+begin_src snippet :eval never
 
 # -*- mode: snippet -*-
 # name: if-then-end
@@ -588,7 +588,7 @@ This will export to HTML and tangle all marked files in a dired buffer.
 
 #+begin_src elisp :results silent
 (defun MJR-dired-org-to-html-and-code ()
-  "Export to HTML and tangle current file or all marked files in dired-mode"
+  "Evaluate all code blocks, export to HTML, and tangle current file or all marked files in dired-mode"
   (interactive)
   (if (not (equal major-mode 'dired-mode))
       (message "MJR-dired-org-to-html-and-code: ERROR: Not in dired mode!!")
@@ -597,6 +597,7 @@ This will export to HTML and tangle all marked files in a dired buffer.
             (message "MJR-dired-org-to-html-and-code: ERROR: No marked files!!")
             (mapc (lambda (f)
                     (with-current-buffer (find-file-noselect f)
+                      (MJR-org-babel-execute-buffer)
                       (org-html-export-to-html)
                       (org-babel-tangle)))
                   marked-files)))
@@ -706,7 +707,7 @@ The tangled file is determiend by looking backward for a :tangle argument."
 * free42 Notes
 ** Character Set
 
-#+BEGIN_SRC text
+#+BEGIN_SRC text :eval never
    0 ÷
    1 ×
    2 √
@@ -879,7 +880,7 @@ ResX & ResY are read only variables that have the display resolution
 
 * WORKING                                                          :noexport:
 
-#+BEGIN_SRC text
+#+BEGIN_SRC text :eval never
 :::::::::::::::::::::::'##:::::'##::::'###::::'########::'##::: ##:'####:'##::: ##::'######::::::::::::::::::::::::
 ::::::::::::::::::::::: ##:'##: ##:::'## ##::: ##.... ##: ###:: ##:. ##:: ###:: ##:'##... ##:::::::::::::::::::::::
 ::::::::::::::::::::::: ##: ##: ##::'##:. ##:: ##:::: ##: ####: ##:: ##:: ####: ##: ##:::..::::::::::::::::::::::::

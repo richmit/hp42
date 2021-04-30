@@ -493,7 +493,7 @@ The generator code can be customized in a few ways:
 
 You must first define the =MJR-generate-42-menu-code= by evaluating the code block in the =hp42s-meta.org= file.
 
-#+BEGIN_SRC elisp :var tbl=constants :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/cons/cons.hp42s"
+#+BEGIN_SRC elisp :var tbl=constants :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/cons/cons.hp42s"
 (MJR-generate-42-menu-code "CONS" 
                            0
                            tbl
@@ -523,7 +523,7 @@ You must first define the =MJR-generate-42-menu-code= by evaluating the code blo
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle ../src_42s/cons/cons.hp42s
+#+begin_src hp42s :eval never :tangle ../src_42s/cons/cons.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CONS)
 @@@@ DSC: Auto-generated menu program
 LBL "CONS"
@@ -1012,10 +1012,9 @@ RTN
 END
 #+end_src
 
-
 * WORKING                                                          :noexport:
 
-#+BEGIN_SRC text
+#+BEGIN_SRC text :eval never
 :::::::::::::::::::::::'##:::::'##::::'###::::'########::'##::: ##:'####:'##::: ##::'######::::::::::::::::::::::::
 ::::::::::::::::::::::: ##:'##: ##:::'## ##::: ##.... ##: ###:: ##:. ##:: ###:: ##:'##... ##:::::::::::::::::::::::
 ::::::::::::::::::::::: ##: ##: ##::'##:. ##:: ##:::: ##: ####: ##:: ##:: ####: ##: ##:::..::::::::::::::::::::::::

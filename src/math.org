@@ -76,16 +76,16 @@ This org-mode file collects together a handful of mathematical stuff I find usef
 
 ** Menu Code
 
-#+BEGIN_SRC elisp :var tbl=CPLXF :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+#+BEGIN_SRC elisp :var tbl=CPLXF :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "CPLXF" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CPLXF)
 @@@@ DSC: Auto-generated menu program
 LBL "CPLXF"
-LBL 01          @@@@ Page 1 of menu CPLXF
+LBL 01            @@@@ Page 1 of menu CPLXF
 CLMENU
 "RPART"
 KEY 1 XEQ "RPART"
@@ -101,7 +101,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 00          @@@@ Application Exit
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
 @@@@ Free labels start at: 2
@@ -109,7 +109,7 @@ RTN
 
 ** Functions
 
-#+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
+#+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RPART)
 @@@@ DSC: Real part
 @@@@ IN:  X: Number or numeric matrix (element-wise)
@@ -384,16 +384,16 @@ END
 
 ** Menu Code
 
-#+BEGIN_SRC elisp :var tbl=PERCFN :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+#+BEGIN_SRC elisp :var tbl=PERCFN :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "PERCFN" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PERCFN)
 @@@@ DSC: Auto-generated menu program
 LBL "PERCFN"
-LBL 01          @@@@ Page 1 of menu PERCFN
+LBL 01            @@@@ Page 1 of menu PERCFN
 CLMENU
 "%T"
 KEY 1 XEQ "%T"
@@ -405,13 +405,13 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 00          @@@@ Application Exit
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 02          @@@@ Action for menu key %CH
+LBL 02    @@@@ Action for menu key %CH
 %CH
 RTN
-LBL 03          @@@@ Action for menu key %
+LBL 03    @@@@ Action for menu key %
 %
 RTN
 @@@@ Free labels start at: 4
@@ -419,7 +419,7 @@ RTN
 
 ** Functions
 
-#+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
+#+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PTOT)
 @@@@ DSC: Percentage of total (just like hp-12c button)
 @@@@ IN:  Y: Real Number -- Total
@@ -466,16 +466,16 @@ END
 
 ** Menu Code
 
-#+BEGIN_SRC elisp :var tbl=INTFUN :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+#+BEGIN_SRC elisp :var tbl=INTFUN :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "INTFUN" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:INTFUN)
 @@@@ DSC: Auto-generated menu program
 LBL "INTFUN"
-LBL 01          @@@@ Page 1 of menu INTFUN
+LBL 01            @@@@ Page 1 of menu INTFUN
 CLMENU
 "FLOR"
 KEY 1 XEQ "FLOOR"
@@ -493,7 +493,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02          @@@@ Page 2 of menu INTFUN
+LBL 02            @@@@ Page 2 of menu INTFUN
 CLMENU
 "GCD"
 KEY 1 XEQ "GCD"
@@ -509,19 +509,19 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 00          @@@@ Application Exit
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 03          @@@@ Action for menu key TRUN
+LBL 03    @@@@ Action for menu key TRUN
 IP
 RTN
-LBL 04          @@@@ Action for menu key FP
+LBL 04    @@@@ Action for menu key FP
 FP
 RTN
-LBL 05          @@@@ Action for menu key DIV
+LBL 05    @@@@ Action for menu key DIV
 BASE÷
 RTN
-LBL 06          @@@@ Action for menu key REM
+LBL 06    @@@@ Action for menu key REM
 MOD
 RTN
 @@@@ Free labels start at: 7
@@ -529,7 +529,7 @@ RTN
 
 ** Functions
 
-#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ROUND)
 @@@@ DSC: Properly round to integer.  N.5 rounded to nearest even number.
 @@@@ IN:  X: real number
@@ -703,16 +703,16 @@ END
 
 *** Menu Code
 
-#+BEGIN_SRC elisp :var tbl=BINO :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+#+BEGIN_SRC elisp :var tbl=BINO :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "BINO" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BINO)
 @@@@ DSC: Auto-generated menu program
 LBL "BINO"
-LBL 01          @@@@ Page 1 of menu BINO
+LBL 01            @@@@ Page 1 of menu BINO
 CLMENU
 "COMB"
 KEY 1 XEQ 02
@@ -728,16 +728,16 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 00          @@@@ Application Exit
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 02          @@@@ Action for menu key COMB
+LBL 02    @@@@ Action for menu key COMB
 COMB
 RTN
-LBL 03          @@@@ Action for menu key PERM
+LBL 03    @@@@ Action for menu key PERM
 PERM
 RTN
-LBL 04          @@@@ Action for menu key GAM
+LBL 04    @@@@ Action for menu key GAM
 GAMMA
 RTN
 @@@@ Free labels start at: 5
@@ -745,7 +745,7 @@ RTN
 
 ** Functions
 
-#+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
+#+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BETA)
 @@@@ DSC: beta function
 @@@@ IN:  Y: Number
@@ -811,16 +811,16 @@ END
 
 ** Menu Code
 
-#+BEGIN_SRC elisp :var tbl=ERRFUN :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+#+BEGIN_SRC elisp :var tbl=ERRFUN :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "ERRFUN" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ERRFUN)
 @@@@ DSC: Auto-generated menu program
 LBL "ERRFUN"
-LBL 01          @@@@ Page 1 of menu ERRFUN
+LBL 01            @@@@ Page 1 of menu ERRFUN
 CLMENU
 "ERF"
 KEY 1 XEQ "ERF"
@@ -834,7 +834,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 00          @@@@ Application Exit
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
 @@@@ Free labels start at: 2
@@ -842,7 +842,7 @@ RTN
 
 ** Functions
 
-#+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
+#+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:NPDF)
 @@@@ DSC: Standard Normal PDF
 @@@@ IN:  X: real number
@@ -1024,16 +1024,16 @@ END
 
 ** Menu Code
 
-#+BEGIN_SRC elisp :var tbl=HYPTRG :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+#+BEGIN_SRC elisp :var tbl=HYPTRG :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "HYPTRG" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:HYPTRG)
 @@@@ DSC: Auto-generated menu program
 LBL "HYPTRG"
-LBL 01          @@@@ Page 1 of menu HYPTRG
+LBL 01            @@@@ Page 1 of menu HYPTRG
 CLMENU
 "SINH"
 KEY 1 XEQ 03
@@ -1053,7 +1053,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02          @@@@ Page 2 of menu HYPTRG
+LBL 02            @@@@ Page 2 of menu HYPTRG
 CLMENU
 "CSCH"
 KEY 1 XEQ "CSCH"
@@ -1073,25 +1073,25 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 00          @@@@ Application Exit
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 03          @@@@ Action for menu key SINH
+LBL 03    @@@@ Action for menu key SINH
 SINH
 RTN
-LBL 04          @@@@ Action for menu key COSH
+LBL 04    @@@@ Action for menu key COSH
 COSH
 RTN
-LBL 05          @@@@ Action for menu key TANH
+LBL 05    @@@@ Action for menu key TANH
 TANH
 RTN
-LBL 06          @@@@ Action for menu key ASINH
+LBL 06    @@@@ Action for menu key ASINH
 ASINH
 RTN
-LBL 07          @@@@ Action for menu key ACOSH
+LBL 07    @@@@ Action for menu key ACOSH
 ACOSH
 RTN
-LBL 08          @@@@ Action for menu key ATANH
+LBL 08    @@@@ Action for menu key ATANH
 ATANH
 RTN
 @@@@ Free labels start at: 9
@@ -1099,7 +1099,7 @@ RTN
 
 ** Functions
 
-#+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
+#+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: 1/SIN(X)
@@ -1191,16 +1191,16 @@ END
 | ▒▒▒▒  |                                     |
 
 ** Menu Code
-#+BEGIN_SRC elisp :var tbl=TRIG :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+#+BEGIN_SRC elisp :var tbl=TRIG :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "TRIG" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TRIG)
 @@@@ DSC: Auto-generated menu program
 LBL "TRIG"
-LBL 01          @@@@ Page 1 of menu TRIG
+LBL 01            @@@@ Page 1 of menu TRIG
 CLMENU
 "SIN"
 KEY 1 XEQ 04
@@ -1220,7 +1220,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02          @@@@ Page 2 of menu TRIG
+LBL 02            @@@@ Page 2 of menu TRIG
 CLMENU
 "CSC"
 KEY 1 XEQ "CSC"
@@ -1240,7 +1240,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 03          @@@@ Page 3 of menu TRIG
+LBL 03            @@@@ Page 3 of menu TRIG
 CLMENU
 "TAN2"
 KEY 1 XEQ "TAN2"
@@ -1256,25 +1256,25 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 03
-LBL 00          @@@@ Application Exit
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 04          @@@@ Action for menu key SIN
+LBL 04    @@@@ Action for menu key SIN
 SIN
 RTN
-LBL 05          @@@@ Action for menu key COS
+LBL 05    @@@@ Action for menu key COS
 COS
 RTN
-LBL 06          @@@@ Action for menu key TAN
+LBL 06    @@@@ Action for menu key TAN
 TAN
 RTN
-LBL 07          @@@@ Action for menu key ASIN
+LBL 07    @@@@ Action for menu key ASIN
 ASIN
 RTN
-LBL 08          @@@@ Action for menu key ACOS
+LBL 08    @@@@ Action for menu key ACOS
 ACOS
 RTN
-LBL 09          @@@@ Action for menu key ATAN
+LBL 09    @@@@ Action for menu key ATAN
 ATAN
 RTN
 @@@@ Free labels start at: 10
@@ -1282,7 +1282,7 @@ RTN
 
 ** Functions
 
-#+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
+#+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Inverse Haversine
@@ -1492,16 +1492,16 @@ END
 | 7√X  | LBL 92 | Seventh root prefering real & pure imaginary answers |
 
 ** Menu Code
-#+BEGIN_SRC elisp :var tbl=LPRT :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+#+BEGIN_SRC elisp :var tbl=LPRT :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "LPRT" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:LPRT)
 @@@@ DSC: Auto-generated menu program
 LBL "LPRT"
-LBL 01          @@@@ Page 1 of menu LPRT
+LBL 01            @@@@ Page 1 of menu LPRT
 CLMENU
 "lnYX"
 KEY 1 XEQ "lnYX"
@@ -1517,7 +1517,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02          @@@@ Page 2 of menu LPRT
+LBL 02            @@@@ Page 2 of menu LPRT
 CLMENU
 "Y↑X"
 KEY 1 XEQ 06
@@ -1533,7 +1533,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 03          @@@@ Page 3 of menu LPRT
+LBL 03            @@@@ Page 3 of menu LPRT
 CLMENU
 "Y√X"
 KEY 1 XEQ "YROOT"
@@ -1551,19 +1551,19 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 03
-LBL 00          @@@@ Application Exit
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 04          @@@@ Action for menu key LN
+LBL 04    @@@@ Action for menu key LN
 LN
 RTN
-LBL 05          @@@@ Action for menu key LOG
+LBL 05    @@@@ Action for menu key LOG
 LOG
 RTN
-LBL 06          @@@@ Action for menu key Y↑X
+LBL 06    @@@@ Action for menu key Y↑X
 Y↑X
 RTN
-LBL 07          @@@@ Action for menu key 10↑X
+LBL 07    @@@@ Action for menu key 10↑X
 10↑X
 RTN
 @@@@ Free labels start at: 8
@@ -1571,7 +1571,7 @@ RTN
 
 ** Functions
 
-#+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
+#+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Base Y Logarithm of X
 @@@@ IN:  Y: logarithm base
@@ -1789,16 +1789,16 @@ the built in solver to find real eigenvalues or to plot the characteristic polyn
 
 ** Code for Menu
 
-#+BEGIN_SRC elisp :var tbl=NLA :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+#+BEGIN_SRC elisp :var tbl=NLA :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "NLA" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:NLA)
 @@@@ DSC: Auto-generated menu program
 LBL "NLA"
-LBL 01          @@@@ Page 1 of menu NLA
+LBL 01            @@@@ Page 1 of menu NLA
 CLMENU
 "IDEN"
 KEY 1 XEQ "MXIDN"
@@ -1816,7 +1816,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02          @@@@ Page 2 of menu NLA
+LBL 02            @@@@ Page 2 of menu NLA
 CLMENU
 "MAT"
 KEY 1 XEQ 98
@@ -1830,7 +1830,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 00          @@@@ Application Exit
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
 @@@@ Free labels start at: 3
@@ -1838,7 +1838,7 @@ RTN
 
 ** Functions
 
-#+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
+#+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MXCPLY)
 @@@@ DSC: Compute matrix Characteristic polynomial
 @@@@ IN:  X: Matrix
@@ -2114,21 +2114,23 @@ negative, then the function will always preform the maximum number of iterations
 
 ** Code for Menu
 
-#+BEGIN_SRC elisp :var tbl=POLY :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+#+BEGIN_SRC elisp :var tbl=POLY :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "POLY" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:POLY)
 @@@@ DSC: Auto-generated menu program
 LBL "POLY"
-LBL 01          @@@@ Page 1 of menu POLY
+LBL 01            @@@@ Page 1 of menu POLY
 CLMENU
 "NEW"
 KEY 1 XEQ "NEWPLY"
+"INTRP"
+KEY 2 XEQ "PINTRP"
 "EDIT"
-KEY 3 XEQ 78
+KEY 5 XEQ 78
 "VIEW"
 KEY 6 XEQ "VPOLY"
 KEY 7 GTO 04
@@ -2137,7 +2139,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02          @@@@ Page 2 of menu POLY
+LBL 02            @@@@ Page 2 of menu POLY
 CLMENU
 "SLV2"
 KEY 1 XEQ "P2SLV"
@@ -2155,7 +2157,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 03          @@@@ Page 3 of menu POLY
+LBL 03            @@@@ Page 3 of menu POLY
 CLMENU
 "DFALT"
 KEY 1 XEQ "PDEFLT"
@@ -2175,7 +2177,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 03
-LBL 04          @@@@ Page 4 of menu POLY
+LBL 04            @@@@ Page 4 of menu POLY
 CLMENU
 "POLY"
 KEY 1 XEQ 98
@@ -2189,7 +2191,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 04
-LBL 00          @@@@ Application Exit
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
 @@@@ Free labels start at: 5
@@ -2197,7 +2199,7 @@ RTN
 
 ** Local functions 
 
-#+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
+#+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PINTRP)
 @@@@ DSC: Create an interpolateing polynomial
 @@@@ IN:  Y: X data matrix
@@ -2813,16 +2815,16 @@ This is a simple little application that makes working with 3D vectors less pain
 
 ** Code for Menu
 
-#+BEGIN_SRC elisp :var tbl=VEC3 :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+#+BEGIN_SRC elisp :var tbl=VEC3 :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "VEC3" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:VEC3)
 @@@@ DSC: Auto-generated menu program
 LBL "VEC3"
-LBL 01          @@@@ Page 1 of menu VEC3
+LBL 01            @@@@ Page 1 of menu VEC3
 CLMENU
 "→V"
 KEY 1 XEQ 99
@@ -2840,16 +2842,16 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 00          @@@@ Application Exit
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 02          @@@@ Action for menu key DOT
+LBL 02    @@@@ Action for menu key DOT
 DOT
 RTN
-LBL 03          @@@@ Action for menu key CROSS
+LBL 03    @@@@ Action for menu key CROSS
 CROSS
 RTN
-LBL 04          @@@@ Action for menu key MAG
+LBL 04    @@@@ Action for menu key MAG
 FNRM
 RTN
 @@@@ Free labels start at: 5
@@ -2857,7 +2859,7 @@ RTN
 
 ** Local functions
 
-#+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
+#+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Create a vector from stack contents
 @@@@ NAM: →V 99
@@ -2986,7 +2988,7 @@ END
 
 ** Code
 
-#+BEGIN_SRC elisp :var tbl=STATR :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+#+BEGIN_SRC elisp :var tbl=STATR :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "STATR" 0 tbl 0 nil 'stay 'up #'MJR-local-only-gen-lab (lambda (atrg target row) 
                                                                                     (cl-destructuring-bind (menu prog) row
                                                                                       (mapconcat #'string-trim-left 
@@ -2994,11 +2996,11 @@ END
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:STATR)
 @@@@ DSC: Auto-generated menu program
 LBL "STATR"
-LBL 01          @@@@ Page 1 of menu STATR
+LBL 01            @@@@ Page 1 of menu STATR
 CLMENU
 "Σx"
 KEY 1 XEQ 04
@@ -3018,7 +3020,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02          @@@@ Page 2 of menu STATR
+LBL 02            @@@@ Page 2 of menu STATR
 CLMENU
 "Σlnx"
 KEY 1 XEQ 10
@@ -3038,7 +3040,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 03          @@@@ Page 3 of menu STATR
+LBL 03            @@@@ Page 3 of menu STATR
 CLMENU
 "Σylnx"
 KEY 1 XEQ 16
@@ -3048,10 +3050,10 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 03
-LBL 00          @@@@ Application Exit
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 04          @@@@ Action for menu key Σx
+LBL 04    @@@@ Action for menu key Σx
 FUNC 01
 L4STK
 ΣREG?
@@ -3062,7 +3064,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 05          @@@@ Action for menu key Σx↑2
+LBL 05    @@@@ Action for menu key Σx↑2
 FUNC 01
 L4STK
 ΣREG?
@@ -3073,7 +3075,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 06          @@@@ Action for menu key Σy
+LBL 06    @@@@ Action for menu key Σy
 FUNC 01
 L4STK
 ΣREG?
@@ -3084,7 +3086,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 07          @@@@ Action for menu key Σy↑2
+LBL 07    @@@@ Action for menu key Σy↑2
 FUNC 01
 L4STK
 ΣREG?
@@ -3095,7 +3097,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 08          @@@@ Action for menu key Σxy
+LBL 08    @@@@ Action for menu key Σxy
 FUNC 01
 L4STK
 ΣREG?
@@ -3106,7 +3108,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 09          @@@@ Action for menu key n
+LBL 09    @@@@ Action for menu key n
 FUNC 01
 L4STK
 ΣREG?
@@ -3117,7 +3119,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 10          @@@@ Action for menu key Σlnx
+LBL 10    @@@@ Action for menu key Σlnx
 FUNC 01
 L4STK
 ΣREG?
@@ -3128,7 +3130,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 11          @@@@ Action for menu key Σlnx↑2
+LBL 11    @@@@ Action for menu key Σlnx↑2
 FUNC 01
 L4STK
 ΣREG?
@@ -3139,7 +3141,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 12          @@@@ Action for menu key Σlny
+LBL 12    @@@@ Action for menu key Σlny
 FUNC 01
 L4STK
 ΣREG?
@@ -3150,7 +3152,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 13          @@@@ Action for menu key Σlny↑2
+LBL 13    @@@@ Action for menu key Σlny↑2
 FUNC 01
 L4STK
 ΣREG?
@@ -3161,7 +3163,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 14          @@@@ Action for menu key Σlnxlny
+LBL 14    @@@@ Action for menu key Σlnxlny
 FUNC 01
 L4STK
 ΣREG?
@@ -3172,7 +3174,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 15          @@@@ Action for menu key Σxlny
+LBL 15    @@@@ Action for menu key Σxlny
 FUNC 01
 L4STK
 ΣREG?
@@ -3183,7 +3185,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 16          @@@@ Action for menu key Σylnx
+LBL 16    @@@@ Action for menu key Σylnx
 FUNC 01
 L4STK
 ΣREG?
@@ -3212,12 +3214,12 @@ END
 
 ** Menu Code
 
-#+BEGIN_SRC elisp :var tbl=KSFUN :colnames y :results output verbatum :wrap "src hp42s :tangle ../src_42s/math/math.hp42s"
+#+BEGIN_SRC elisp :var tbl=KSFUN :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "KSFUN" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :tangle ../src_42s/math/math.hp42s
+#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:KSFUN)
 @@@@ DSC: Auto-generated menu program
 LBL "KSFUN"
@@ -3237,7 +3239,7 @@ RTN
 
 ** Functions
 
-#+BEGIN_SRC hp42s :tangle ../src_42s/math/math.hp42s
+#+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:||)
 @@@@ DSC: Parallel Operator
 @@@@ IN:  Y: A Number
@@ -3258,10 +3260,9 @@ RTN
 END
 #+END_SRC
 
-
 * WORKING                                                          :noexport:
 
-#+BEGIN_SRC text
+#+BEGIN_SRC text :eval never
 :::::::::::::::::::::::'##:::::'##::::'###::::'########::'##::: ##:'####:'##::: ##::'######::::::::::::::::::::::::
 ::::::::::::::::::::::: ##:'##: ##:::'## ##::: ##.... ##: ###:: ##:. ##:: ###:: ##:'##... ##:::::::::::::::::::::::
 ::::::::::::::::::::::: ##: ##: ##::'##:. ##:: ##:::: ##: ####: ##:: ##:: ####: ##: ##:::..::::::::::::::::::::::::

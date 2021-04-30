@@ -57,35 +57,202 @@ Directory contents:
 
 This org-mode file collects together a handful of mathematical stuff I find useful.  I keep this stuff in my [[https://richmit.github.io/hp42/math.html][custom menu]].
 
-* =CPLXF=: Complex Number Functions
+* =SFUN=: Simple Functions
 ** Menu
 :PROPERTIES:
-:CUSTOM_ID: menu-cplxf
+:CUSTOM_ID: menu-sfun
 :END:
 
 #+ATTR_HTML: :align center :frame box :rules all
-#+NAME:CPLXF
-| Menu  | Description                                                                |
-|-------+----------------------------------------------------------------------------|
-| RPART | Real Part of anumber or matrix                                             |
-| IPART | Imaginary Part of a number or matrix                                       |
-| CONJ  | Complex conjugate of a number or matrix                                    |
-| CABS  | Magnitude of a number or matrix (built in =ABS= fails on a complex matrix) |
-| CARG  | Complex argument of a number or matrix                                     |
-|-------+----------------------------------------------------------------------------|
+#+NAME:SFUN
+| Menu       |        | Description                                                                |                  |                 |
+|------------+--------+----------------------------------------------------------------------------+------------------+-----------------|
+| L&P:lnYX   | lnYX   | Base Y Logarithm of X                                                      |                  |                 |
+| L&P:▒▒▒▒   |        |                                                                            |                  |                 |
+| L&P:ln2    | ln2    | Base 2 logarithm                                                           |                  |                 |
+| L&P:LN     |        | Base 3 logarithm                                                           |                  |                 |
+| L&P:LOG    |        | Base 10 logarithm                                                          |                  |                 |
+| L&P:▒▒▒▒   |        |                                                                            |                  |                 |
+| L&P:Y↑X    |        | Raise Y to the power of X                                                  |                  |                 |
+| L&P:▒▒▒▒   |        |                                                                            |                  |                 |
+| L&P:2↑X    | LBL 58 | Raise 2 to the power of X                                                  |                  |                 |
+| L&P:EXP    |        | Raise e to the power of X                                                  |                  |                 |
+| L&P:10↑X   |        | Raise 10 to the power of X                                                 |                  |                 |
+| L&P:▒▒▒▒   |        |                                                                            |                  |                 |
+| L&P:Y√X    | YROOT  | Yth roots prefering real & pure imaginary answers                          |                  |                 |
+| L&P:▒▒▒▒   |        |                                                                            |                  |                 |
+| L&P:2√X    | LBL 57 | Square root prefering real & pure imaginary answers                        |                  |                 |
+| L&P:3√X    | LBL 56 | Cube root prefering real & pure imaginary answers                          |                  |                 |
+| L&P:5√X    | LBL 55 | Fifth root prefering real & pure imaginary answers                         |                  |                 |
+| L&P:7√X    | LBL 54 | Seventh root prefering real & pure imaginary answers                       |                  |                 |
+|------------+--------+----------------------------------------------------------------------------+------------------+-----------------|
+| CPLX:RPART |        | Real Part of anumber or matrix                                             |                  |                 |
+| CPLX:IPART |        | Imaginary Part of a number or matrix                                       |                  |                 |
+| CPLX:CONJ  |        | Complex conjugate of a number or matrix                                    |                  |                 |
+| CPLX:CABS  |        | Magnitude of a number or matrix (built in =ABS= fails on a complex matrix) |                  |                 |
+| CPLX:CARG  |        | Complex argument of a number or matrix                                     |                  |                 |
+|------------+--------+----------------------------------------------------------------------------+------------------+-----------------|
+| TRIG:SIN   |        |                                                                            |                  |                 |
+| TRIG:COS   |        |                                                                            |                  |                 |
+| TRIG:TAN   |        |                                                                            |                  |                 |
+| TRIG:ASIN  |        |                                                                            |                  |                 |
+| TRIG:ACOS  |        |                                                                            |                  |                 |
+| TRIG:ATAN  |        |                                                                            |                  |                 |
+| TRIG:CSC   |        | 1/SIN(X)                                                                   |                  |                 |
+| TRIG:SEC   |        | 1/COS(X)                                                                   |                  |                 |
+| TRIG:COT   |        | 1/TAN(X)                                                                   |                  |                 |
+| TRIG:ACSC  |        | SIN(1/X)                                                                   |                  |                 |
+| TRIG:ASEC  |        | COS(1/X)                                                                   |                  |                 |
+| TRIG:ACOT  |        | TAN(1/X)                                                                   |                  |                 |
+| TRIG:TAN2  |        |                                                                            |                  |                 |
+| TRIG:HYPOT |        |                                                                            |                  |                 |
+| TRIG:HAV   |        | Haversine = 1/2-cos(X)/2                                                   |                  |                 |
+| TRIG:AHAV  |        | Inverse Haversine = 2*asin(sqrt(X))                                        |                  |                 |
+| TRIG:▒▒▒▒  |        |                                                                            |                  |                 |
+| TRIG:▒▒▒▒  |        |                                                                            |                  |                 |
+|------------+--------+----------------------------------------------------------------------------+------------------+-----------------|
+| HYP:SINH   |        |                                                                            |                  |                 |
+| HYP:COSH   |        |                                                                            |                  |                 |
+| HYP:TANH   |        |                                                                            |                  |                 |
+| HYP:ASINH  |        |                                                                            |                  |                 |
+| HYP:ACOSH  |        |                                                                            |                  |                 |
+| HYP:ATANH  |        |                                                                            |                  |                 |
+| HYP:CSCH   |        | 1/SINH(X)                                                                  |                  |                 |
+| HYP:SECH   |        | 1/COSH(X)                                                                  |                  |                 |
+| HYP:COTH   |        | 1/TANH(X)                                                                  |                  |                 |
+| HYP:ACSCH  |        | SINH(1/X)                                                                  |                  |                 |
+| HYP:ASECH  |        | COSH(1/X)                                                                  |                  |                 |
+| HYP:ACOTH  |        | TANH(1/X)                                                                  |                  |                 |
+|------------+--------+----------------------------------------------------------------------------+------------------+-----------------|
+| PERC:%T    |        | Percentage of total                                                        | Y: TOTAL X: PART | X: % of Total   |
+| PERC:%CH   |        | percentage of change from Y to X                                           | Y: OLD X: New    | X: % Change     |
+| PERC:%     |        | Percentage                                                                 | Y: Y X: X        | Y: Y X: X% of Y |
+|------------+--------+----------------------------------------------------------------------------+------------------+-----------------|
+| INT:FLOR   | FLOOR  | Truncate toward negative infinity                                          |                  |                 |
+| INT:CEIL   |        | Truncate toward positive infinity                                          |                  |                 |
+| INT:ROND   | ROUND  | Truncate toward nearest integer (even rule)                                |                  |                 |
+| INT:TRUN   | IP     | Truncate toward zero                                                       |                  |                 |
+| INT:▒▒▒▒   |        |                                                                            |                  |                 |
+| INT:FP     |        |                                                                            |                  |                 |
+| INT:GCD    |        | Greatest Common Denominator                                                |                  |                 |
+| INT:LCM    |        | Least Common Multiple                                                      |                  |                 |
+| INT:▒▒▒▒   |        |                                                                            |                  |                 |
+| INT:▒▒▒▒   |        |                                                                            |                  |                 |
+| INT:DIV    | BASE÷  |                                                                            |                  |                 |
+| INT:REM    | MOD    |                                                                            |                  |                 |
+|------------+--------+----------------------------------------------------------------------------+------------------+-----------------|
+| BINO:COMB  |        |                                                                            |                  |                 |
+| BINO:PERM  |        |                                                                            |                  |                 |
+| BINO:!     | N!     |                                                                            |                  |                 |
+| BINO:▒▒▒▒  |        |                                                                            |                  |                 |
+| BINO:GAM   | GAMMA  |                                                                            |                  |                 |
+| BINO:BETA  |        | Beta function                                                              |                  |                 |
+|------------+--------+----------------------------------------------------------------------------+------------------+-----------------|
+| ERR:ERF    |        | Error Function                                                             |                  |                 |
+| ERR:ERFC   |        | Complementary Error Function                                               |                  |                 |
+| ERR:▒▒▒▒   |        |                                                                            |                  |                 |
+| ERR:NPDF   |        | Standard Normal Probablity Density FUnction                                |                  |                 |
+| ERR:NCDF   |        | Standard Normal Cumulative Distribution FUnction                           |                  |                 |
+| ERR:▒▒▒▒   |        |                                                                            |                  |                 |
+|------------+--------+----------------------------------------------------------------------------+------------------+-----------------|
+| MISC:¦¦    |        | Parallel Operator                                                          | Y  X             | X: 1/(1/X+1/Y)  |
 
 ** Menu Code
 
-#+BEGIN_SRC elisp :var tbl=CPLXF :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
-(MJR-generate-42-menu-code "CPLXF" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
+#+BEGIN_SRC elisp :var tbl=SFUN :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
+(MJR-generate-42-menu-code "SFUN" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
 #+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CPLXF)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SFUN)
 @@@@ DSC: Auto-generated menu program
-LBL "CPLXF"
-LBL 01            @@@@ Page 1 of menu CPLXF
+LBL "SFUN"
+LBL 01            @@@@ Page 1 of menu SFUN
+CLMENU
+"L&P"
+KEY 1 GTO 03
+"CPLX"
+KEY 2 GTO 04
+"TRIG"
+KEY 3 GTO 05
+"HYP"
+KEY 4 GTO 06
+"PERC"
+KEY 5 GTO 07
+"INT"
+KEY 6 GTO 08
+KEY 7 GTO 02
+KEY 8 GTO 02
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 02            @@@@ Page 2 of menu SFUN
+CLMENU
+"BINO"
+KEY 1 GTO 09
+"ERR"
+KEY 2 GTO 10
+"MISC"
+KEY 3 GTO 11
+KEY 7 GTO 01
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 02
+LBL 03            @@@@ Page 1 of menu L&P
+CLMENU
+"lnYX"
+KEY 1 XEQ "lnYX"
+"ln2"
+KEY 3 XEQ "ln2"
+"LN"
+KEY 4 XEQ 14
+"LOG"
+KEY 5 XEQ 15
+KEY 7 GTO 13
+KEY 8 GTO 12
+KEY 9 GTO 01
+MENU
+STOP
+GTO 03
+LBL 12            @@@@ Page 2 of menu L&P
+CLMENU
+"Y↑X"
+KEY 1 XEQ 16
+"2↑X"
+KEY 3 XEQ 58
+"EXP"
+KEY 4 XEQ "EXP"
+"10↑X"
+KEY 5 XEQ 17
+KEY 7 GTO 03
+KEY 8 GTO 13
+KEY 9 GTO 01
+MENU
+STOP
+GTO 12
+LBL 13            @@@@ Page 3 of menu L&P
+CLMENU
+"Y√X"
+KEY 1 XEQ "YROOT"
+"2√X"
+KEY 3 XEQ 57
+"3√X"
+KEY 4 XEQ 56
+"5√X"
+KEY 5 XEQ 55
+"7√X"
+KEY 6 XEQ 54
+KEY 7 GTO 12
+KEY 8 GTO 03
+KEY 9 GTO 01
+MENU
+STOP
+GTO 13
+LBL 04            @@@@ Page 1 of menu CPLX
 CLMENU
 "RPART"
 KEY 1 XEQ "RPART"
@@ -97,44 +264,304 @@ KEY 3 XEQ "CONJ"
 KEY 4 XEQ "CABS"
 "CARG"
 KEY 5 XEQ "CARG"
-KEY 9 GTO 00
+KEY 9 GTO 01
 MENU
 STOP
-GTO 01
+GTO 04
+LBL 05            @@@@ Page 1 of menu TRIG
+CLMENU
+"SIN"
+KEY 1 XEQ 20
+"COS"
+KEY 2 XEQ 21
+"TAN"
+KEY 3 XEQ 22
+"ASIN"
+KEY 4 XEQ 23
+"ACOS"
+KEY 5 XEQ 24
+"ATAN"
+KEY 6 XEQ 25
+KEY 7 GTO 19
+KEY 8 GTO 18
+KEY 9 GTO 01
+MENU
+STOP
+GTO 05
+LBL 18            @@@@ Page 2 of menu TRIG
+CLMENU
+"CSC"
+KEY 1 XEQ "CSC"
+"SEC"
+KEY 2 XEQ "SEC"
+"COT"
+KEY 3 XEQ "COT"
+"ACSC"
+KEY 4 XEQ "ACSC"
+"ASEC"
+KEY 5 XEQ "ASEC"
+"ACOT"
+KEY 6 XEQ "ACOT"
+KEY 7 GTO 05
+KEY 8 GTO 19
+KEY 9 GTO 01
+MENU
+STOP
+GTO 18
+LBL 19            @@@@ Page 3 of menu TRIG
+CLMENU
+"TAN2"
+KEY 1 XEQ "TAN2"
+"HYPOT"
+KEY 2 XEQ "HYPOT"
+"HAV"
+KEY 3 XEQ "HAV"
+"AHAV"
+KEY 4 XEQ "AHAV"
+KEY 7 GTO 18
+KEY 8 GTO 05
+KEY 9 GTO 01
+MENU
+STOP
+GTO 19
+LBL 06            @@@@ Page 1 of menu HYP
+CLMENU
+"SINH"
+KEY 1 XEQ 27
+"COSH"
+KEY 2 XEQ 28
+"TANH"
+KEY 3 XEQ 29
+"ASINH"
+KEY 4 XEQ 30
+"ACOSH"
+KEY 5 XEQ 31
+"ATANH"
+KEY 6 XEQ 32
+KEY 7 GTO 26
+KEY 8 GTO 26
+KEY 9 GTO 01
+MENU
+STOP
+GTO 06
+LBL 26            @@@@ Page 2 of menu HYP
+CLMENU
+"CSCH"
+KEY 1 XEQ "CSCH"
+"SECH"
+KEY 2 XEQ "SECH"
+"COTH"
+KEY 3 XEQ "COTH"
+"ACSCH"
+KEY 4 XEQ "ACSCH"
+"ASECH"
+KEY 5 XEQ "ASECH"
+"ACOTH"
+KEY 6 XEQ "ACOTH"
+KEY 7 GTO 06
+KEY 8 GTO 06
+KEY 9 GTO 01
+MENU
+STOP
+GTO 26
+LBL 07            @@@@ Page 1 of menu PERC
+CLMENU
+"%T"
+KEY 1 XEQ "%T"
+"%CH"
+KEY 2 XEQ 33
+"%"
+KEY 3 XEQ 34
+KEY 9 GTO 01
+MENU
+STOP
+GTO 07
+LBL 08            @@@@ Page 1 of menu INT
+CLMENU
+"FLOR"
+KEY 1 XEQ "FLOOR"
+"CEIL"
+KEY 2 XEQ "CEIL"
+"ROND"
+KEY 3 XEQ "ROUND"
+"TRUN"
+KEY 4 XEQ 36
+"FP"
+KEY 6 XEQ 37
+KEY 7 GTO 35
+KEY 8 GTO 35
+KEY 9 GTO 01
+MENU
+STOP
+GTO 08
+LBL 35            @@@@ Page 2 of menu INT
+CLMENU
+"GCD"
+KEY 1 XEQ "GCD"
+"LCM"
+KEY 2 XEQ "LCM"
+"DIV"
+KEY 5 XEQ 38
+"REM"
+KEY 6 XEQ 39
+KEY 7 GTO 08
+KEY 8 GTO 08
+KEY 9 GTO 01
+MENU
+STOP
+GTO 35
+LBL 09            @@@@ Page 1 of menu BINO
+CLMENU
+"COMB"
+KEY 1 XEQ 40
+"PERM"
+KEY 2 XEQ 41
+"!"
+KEY 3 XEQ 42
+"GAM"
+KEY 5 XEQ 43
+"BETA"
+KEY 6 XEQ "BETA"
+KEY 9 GTO 02
+MENU
+STOP
+GTO 09
+LBL 10            @@@@ Page 1 of menu ERR
+CLMENU
+"ERF"
+KEY 1 XEQ "ERF"
+"ERFC"
+KEY 2 XEQ "ERFC"
+"NPDF"
+KEY 4 XEQ "NPDF"
+"NCDF"
+KEY 5 XEQ "NCDF"
+KEY 9 GTO 02
+MENU
+STOP
+GTO 10
+LBL 11            @@@@ Page 1 of menu MISC
+CLMENU
+"||"
+KEY 1 XEQ "||"
+KEY 9 GTO 02
+MENU
+STOP
+GTO 11
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-@@@@ Free labels start at: 2
+LBL 14    @@@@ Action for menu key LN
+LN
+RTN
+LBL 15    @@@@ Action for menu key LOG
+LOG
+RTN
+LBL 16    @@@@ Action for menu key Y↑X
+Y↑X
+RTN
+LBL 17    @@@@ Action for menu key 10↑X
+10↑X
+RTN
+LBL 20    @@@@ Action for menu key SIN
+SIN
+RTN
+LBL 21    @@@@ Action for menu key COS
+COS
+RTN
+LBL 22    @@@@ Action for menu key TAN
+TAN
+RTN
+LBL 23    @@@@ Action for menu key ASIN
+ASIN
+RTN
+LBL 24    @@@@ Action for menu key ACOS
+ACOS
+RTN
+LBL 25    @@@@ Action for menu key ATAN
+ATAN
+RTN
+LBL 27    @@@@ Action for menu key SINH
+SINH
+RTN
+LBL 28    @@@@ Action for menu key COSH
+COSH
+RTN
+LBL 29    @@@@ Action for menu key TANH
+TANH
+RTN
+LBL 30    @@@@ Action for menu key ASINH
+ASINH
+RTN
+LBL 31    @@@@ Action for menu key ACOSH
+ACOSH
+RTN
+LBL 32    @@@@ Action for menu key ATANH
+ATANH
+RTN
+LBL 33    @@@@ Action for menu key %CH
+%CH
+RTN
+LBL 34    @@@@ Action for menu key %
+%
+RTN
+LBL 36    @@@@ Action for menu key TRUN
+IP
+RTN
+LBL 37    @@@@ Action for menu key FP
+FP
+RTN
+LBL 38    @@@@ Action for menu key DIV
+BASE÷
+RTN
+LBL 39    @@@@ Action for menu key REM
+MOD
+RTN
+LBL 40    @@@@ Action for menu key COMB
+COMB
+RTN
+LBL 41    @@@@ Action for menu key PERM
+PERM
+RTN
+LBL 42    @@@@ Action for menu key !
+N!
+RTN
+LBL 43    @@@@ Action for menu key GAM
+GAMMA
+RTN
+@@@@ Free labels start at: 44
 #+end_src
 
 ** Functions
+*** Complex Numbers
 
 #+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RPART)
 @@@@ DSC: Real part
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: rpart(x)
-@@@@ LBL: 10-14
+@@@@ LBL: 69-72
 @@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-22
 LBL "RPART"
 FUNC 11         @@## REQ:free42>=2.5.24
 L4STK           @@## REQ:free42>=3.0
 ENTER
-XEQ 80          @@@@ ATYP
-10
+XEQ 89          @@@@ ATYP
+X=0?
+RTNERR 4        @@## REQ:free42>=2.5.24
+1/X             @@## REQ:free42<2.5.24
+68
 +
 GTO IND ST X
-LBL 10
-RTNERR 4        @@## REQ:free42>=2.5.24
-LBL 11          @@@@ Real Number
-LBL 12          @@@@ Real Matrix
+LBL 69          @@@@ Real Number
+LBL 70          @@@@ Real Matrix
 R↓
 RTN
-LBL 13          @@@@ Complex Number
-LBL 14          @@@@ Complex Matrix
+LBL 71          @@@@ Complex Number
+LBL 72          @@@@ Complex Matrix
 R↓
-XEQ 90          @@@@ C→R&I
+XEQ 98          @@@@ C→R&I
 X<>Y
 RTN
 
@@ -142,31 +569,32 @@ RTN
 @@@@ DSC: Imaginary Part
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: ipart(x)
-@@@@ LBL: 20-24
+@@@@ LBL: 73-76
 @@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-22
 LBL "IPART"
 FUNC 11         @@## REQ:free42>=2.5.24
 L4STK           @@## REQ:free42>=3.0
 ENTER
-XEQ 80          @@@@ ATYP
-20
+XEQ 89          @@@@ ATYP
+X=0?
+RTNERR 4        @@## REQ:free42>=2.5.24
+1/X             @@## REQ:free42<2.5.24
+72
 +
 GTO IND ST X
-LBL 20
-RTNERR 4        @@## REQ:free42>=2.5.24
-LBL 21          @@@@ Real Number
+LBL 73          @@@@ Real Number
 0
 RTN
-LBL 22          @@@@ Real Matrix
+LBL 74          @@@@ Real Matrix
 R↓
 DIM?
 NEWMAT
 RTN
-LBL 23          @@@@ Complex Number
-LBL 24          @@@@ Complex Matrix
+LBL 75          @@@@ Complex Number
+LBL 76          @@@@ Complex Matrix
 R↓
-XEQ 90          @@@@ C→R&I
+XEQ 98          @@@@ C→R&I
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CONJ)
@@ -174,25 +602,26 @@ RTN
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: conj(x)
 @@@@ TST: free42_3.0.2
-@@@@ LBL: 30-34
+@@@@ LBL: 77-80
 @@@@ BUG: Fails on alpha string matrix
 @@@@ UPD: 2021-04-22
 LBL "CONJ"
 FUNC 11         @@## REQ:free42>=2.5.24
 L4STK           @@## REQ:free42>=3.0
 ENTER
-XEQ 80          @@@@ ATYP
-30
+XEQ 89          @@@@ ATYP
+X=0?
+RTNERR 4        @@## REQ:free42>=2.5.24
+1/X             @@## REQ:free42<2.5.24
+76
 +
 GTO IND ST X
-LBL 30
-RTNERR 4        @@## REQ:free42>=2.5.24
-LBL 31          @@@@ Real Number
-LBL 32          @@@@ Real Matrix
+LBL 77          @@@@ Real Number
+LBL 78          @@@@ Real Matrix
 R↓
 RTN
-LBL 33          @@@@ Complex Number
-LBL 34          @@@@ Complex Matrix
+LBL 79          @@@@ Complex Number
+LBL 80          @@@@ Complex Matrix
 R↓
 COMPLEX
 +/-
@@ -204,28 +633,29 @@ RTN
 @@@@ IN:  X: Number or numeric matrix (element-wise) -- built in ABS won't work with a complex matrix
 @@@@ OUT: X: |x|
 @@@@ TST: CPXRES free42_3.0
-@@@@ LBL: 40-44
+@@@@ LBL: 81-84
 @@@@ BUG: Returns 0 for real 0 input
 @@@@ UPD: 2021-04-22
 LBL "CABS"
 FUNC 11         @@## REQ:free42>=2.5.24
 L4STK           @@## REQ:free42>=3.0
 ENTER
-XEQ 80          @@@@ ATYP
-40
+XEQ 89          @@@@ ATYP
+X=0?
+RTNERR 4        @@## REQ:free42>=2.5.24
+1/X             @@## REQ:free42<2.5.24
+80
 +
 GTO IND ST X
-LBL 40
-RTNERR 4        @@## REQ:free42>=2.5.24
-LBL 41          @@@@ Real Number
-LBL 42          @@@@ Real Matrix
+LBL 81          @@@@ Real Number
+LBL 82          @@@@ Real Matrix
 R↓
 ABS
 RTN
-LBL 43          @@@@ Complex Number
-LBL 44          @@@@ Complex Matrix
+LBL 83          @@@@ Complex Number
+LBL 84          @@@@ Complex Matrix
 R↓
-XEQ 92          @@@@ C→M&A
+XEQ 98          @@@@ C→M&A
 X<>Y
 RTN
 
@@ -234,52 +664,53 @@ RTN
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: arg(x)
 @@@@ TST: CPXRES free42_3.0
-@@@@ LBL: 50-54
+@@@@ LBL: 85-88
 @@@@ BUG: Returns 0 for real 0 input
 @@@@ UPD: 2021-04-22
 LBL "CARG"
 FUNC 11         @@## REQ:free42>=2.5.24
 L4STK           @@## REQ:free42>=3.0
 ENTER
-XEQ 80          @@@@ ATYP
-50
+XEQ 89          @@@@ ATYP
+X=0?
+RTNERR 4        @@## REQ:free42>=2.5.24
+1/X             @@## REQ:free42<2.5.24
+84
 +
 GTO IND ST X
-LBL 50
-RTNERR 4        @@## REQ:free42>=2.5.24
-LBL 51          @@@@ Real Number
+LBL 85          @@@@ Real Number
 0
 RTN
-LBL 52          @@@@ Real Matrix
+LBL 86          @@@@ Real Matrix
 R↓
 DIM?
 NEWMAT
 RTN
-LBL 53          @@@@ Complex Number
-LBL 54          @@@@ Complex Matrix
+LBL 87          @@@@ Complex Number
+LBL 88          @@@@ Complex Matrix
 R↓
-XEQ 92          @@@@ C→M&A
+XEQ 98          @@@@ C→M&A
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Complex Number -> Real Part & Imaginary Part
-@@@@ NAM: C→R&I 90
+@@@@ NAM: C→R&I 98
 @@@@ IN:  X: Complex Number or Complex Matrix
 @@@@ OUT: Y: Real Part of X
 @@@@      X: Imaginary Part of X
-@@@@ LBL: 91
+@@@@ LBL: 97
 @@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-22
-LBL 90
+LBL 98
 FUNC 12         @@## REQ:free42>=2.5.24
 L4STK           @@## REQ:free42>=3.0
 ENTER
 FS? 73
-GTO 91
+GTO 97
 @@@@ RECT MODE
 COMPLEX
 RTN
-LBL 91
+LBL 97
 @@@@ POLAR MODE
 RECT
 COMPLEX
@@ -288,32 +719,32 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Complex Number -> Magnitude & Argument (angle)
-@@@@ NAM: C→M&A 92
+@@@@ NAM: C→M&A 98
 @@@@ IN:  X: Complex Number or Complex Matrix
 @@@@ OUT: Y: Magnitude of X
 @@@@      X: Complex Argument (angle) of X
-@@@@ LBL: 93
+@@@@ LBL: 99
 @@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-22
-LBL 92
+LBL 98
 FUNC 12         @@## REQ:free42>=2.5.24
 L4STK           @@## REQ:free42>=3.0
 ENTER
 FS? 73
-GTO 93
+GTO 99
 @@@@ RECT MODE
 POLAR
 COMPLEX
 RECT
 RTN
-LBL 93
+LBL 99
 @@@@ POLAR MODE
 COMPLEX
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ATYP)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Arithmetic Type
-@@@@ NAM: ATYP 80
+@@@@ NAM: ATYP 89
 @@@@ IN:  X: an object
 @@@@ OUT: X: 1 if input X was a real number
 @@@@         2 if input X was a real matrix
@@ -324,100 +755,48 @@ RTN
 @@@@ FAQ: Even on free42<2.5.24 or a real 42s, X, Y, & Z are preserved. T & Last X not so much.
 @@@@ BUG: A 2 will be returned for a real matrix containing strings
 @@@@ BUG: In infinite stack mode with an empty stack 2 will be returned as X=0 when we do L4STK
-@@@@ LBL: 81-88
+@@@@ LBL: 90-97
 @@@@ UPD: 2021-02-23
-LBL 80
+LBL 89
 FUNC 11         @@## REQ:free42>=2.5.24
 L4STK           @@## REQ:free42>=3.0
 MAT?
-GTO 81
-GTO 82
-LBL 81          @@@@ Matrix
+GTO 90
+GTO 91
+LBL 90          @@@@ Matrix
 CLA
 ARCL ST X
 67
 POSA
 X>0?
-GTO 87
-GTO 88
-LBL 87          @@@@ Complex Matrix
+GTO 96
+GTO 97
+LBL 96          @@@@ Complex Matrix
 4
 RTN
-LBL 88          @@@@ Real/String Matrix
+LBL 97          @@@@ Real/String Matrix
 2
 RTN
-LBL 82          @@@@ Not matrix
+LBL 91          @@@@ Not matrix
 REAL?
-GTO 83
-GTO 84
-LBL 83          @@@@ Real number
+GTO 92
+GTO 93
+LBL 92          @@@@ Real number
 1
 RTN
-LBL 84          @@@@ Not matrix or real
+LBL 93          @@@@ Not matrix or real
 CPX?
-GTO 85
-GTO 86
-LBL 85          @@@@ Complex number
+GTO 94
+GTO 95
+LBL 94          @@@@ Complex number
 3
 RTN
-LBL 86          @@@@ Not matrix, real, or complex
+LBL 95          @@@@ Not matrix, real, or complex
 0
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-END
 #+END_SRC
 
-* =PERCFN=: Percentages
-** Menu
-:PROPERTIES:
-:CUSTOM_ID: menu-percfn
-:END:
-
-#+ATTR_HTML: :align center :frame box :rules all
-#+NAME:PERCFN
-| Menu | Description                      |                  |                 |
-|------+----------------------------------+------------------+-----------------|
-| %T   | Percentage of total              | Y: TOTAL X: PART | X: % of Total   |
-| %CH  | percentage of change from Y to X | Y: OLD X: New    | X: % Change     |
-| %    | Percentage                       | Y: Y X: X        | Y: Y X: X% of Y |
-
-** Menu Code
-
-#+BEGIN_SRC elisp :var tbl=PERCFN :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
-(MJR-generate-42-menu-code "PERCFN" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
-#+END_SRC
-
-#+RESULTS:
-#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PERCFN)
-@@@@ DSC: Auto-generated menu program
-LBL "PERCFN"
-LBL 01            @@@@ Page 1 of menu PERCFN
-CLMENU
-"%T"
-KEY 1 XEQ "%T"
-"%CH"
-KEY 2 XEQ 02
-"%"
-KEY 3 XEQ 03
-KEY 9 GTO 00
-MENU
-STOP
-GTO 01
-LBL 00 @@@@ Application Exit
-EXITALL
-RTN
-LBL 02    @@@@ Action for menu key %CH
-%CH
-RTN
-LBL 03    @@@@ Action for menu key %
-%
-RTN
-@@@@ Free labels start at: 4
-#+end_src
-
-** Functions
+*** Percentages
 
 #+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PTOT)
@@ -434,100 +813,9 @@ X<>Y
 100
 ×
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-END
 #+END_SRC
 
-* =INTFUN=: Integer related functions
-** Menu
-:PROPERTIES:
-:CUSTOM_ID: menu-intfun
-:END:
-
-#+ATTR_HTML: :align center :frame box :rules all
-#+NAME:INTFUN
-| Menu | LBL   | Description                                 |
-|------+-------+---------------------------------------------|
-| FLOR | FLOOR | Truncate toward negative infinity           |
-| CEIL |       | Truncate toward positive infinity           |
-| ROND | ROUND | Truncate toward nearest integer (even rule) |
-| TRUN | IP    | Truncate toward zero                        |
-|      |       |                                             |
-| FP   |       |                                             |
-|------+-------+---------------------------------------------|
-| GCD  |       | Greatest Common Denominator                 |
-| LCM  |       | Least Common Multiple                       |
-|      |       |                                             |
-|      |       |                                             |
-| DIV  | BASE÷ |                                             |
-| REM  | MOD   |                                             |
-|------+-------+---------------------------------------------|
-
-** Menu Code
-
-#+BEGIN_SRC elisp :var tbl=INTFUN :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
-(MJR-generate-42-menu-code "INTFUN" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
-#+END_SRC
-
-#+RESULTS:
-#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:INTFUN)
-@@@@ DSC: Auto-generated menu program
-LBL "INTFUN"
-LBL 01            @@@@ Page 1 of menu INTFUN
-CLMENU
-"FLOR"
-KEY 1 XEQ "FLOOR"
-"CEIL"
-KEY 2 XEQ "CEIL"
-"ROND"
-KEY 3 XEQ "ROUND"
-"TRUN"
-KEY 4 XEQ 03
-"FP"
-KEY 6 XEQ 04
-KEY 7 GTO 02
-KEY 8 GTO 02
-KEY 9 GTO 00
-MENU
-STOP
-GTO 01
-LBL 02            @@@@ Page 2 of menu INTFUN
-CLMENU
-"GCD"
-KEY 1 XEQ "GCD"
-"LCM"
-KEY 2 XEQ "LCM"
-"DIV"
-KEY 5 XEQ 05
-"REM"
-KEY 6 XEQ 06
-KEY 7 GTO 01
-KEY 8 GTO 01
-KEY 9 GTO 00
-MENU
-STOP
-GTO 02
-LBL 00 @@@@ Application Exit
-EXITALL
-RTN
-LBL 03    @@@@ Action for menu key TRUN
-IP
-RTN
-LBL 04    @@@@ Action for menu key FP
-FP
-RTN
-LBL 05    @@@@ Action for menu key DIV
-BASE÷
-RTN
-LBL 06    @@@@ Action for menu key REM
-MOD
-RTN
-@@@@ Free labels start at: 7
-#+end_src
-
-** Functions
+*** Integers
 
 #+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ROUND)
@@ -566,19 +854,19 @@ SIGN            @@@@ SGN      |FP|-1/2 X
 LASTX           @@@@ X        SGN      |FP|-1/2 X 
 IP              @@@@ IP(X)    SGN      |FP|-1/2 X 
 0=? ST Z   @@## TODO: Memory leak in free42 < 3.0.3
-GTO 92
+GTO 67
 0<? ST Z   @@## TODO: Memory leak in free42 < 3.0.3
 +
 RTN
-LBL 92 
+LBL 67 
 @@@@ FP=1/2
-XEQ 93          @@@@ ODD?
+XEQ 68          @@@@ ODD?
 +
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: RETYES if X is odd, RTNNO otherwise
-LBL 93          @@@@ ODD?
+LBL 68          @@@@ ODD?
 FUNC 00
 L4STK
 2
@@ -629,7 +917,7 @@ RTN
 @@@@ IN:  Y: real number
 @@@@      X: real number
 @@@@ OUT: X: GCD(|IP(X)|, |IP(X)|)
-@@@@ LBL: 91
+@@@@ LBL: 66
 @@@@ UPD: 2021-04-22
 @@@@ TST: free42_3.0.2
 LBL "GCD"
@@ -642,11 +930,11 @@ ABS
 IP
 X>Y?
 X<>Y
-LBL 91
+LBL 66
 STO ST Z
 MOD
 X>0?
-GTO 91
+GTO 66
 R↓
 RTN
 
@@ -678,72 +966,9 @@ RCL ST Z        @@@@ IP(|Y|)         IP(|X|)         IP(|Y|)*IP(|X|) IP(|Y|)
 XEQ "GCD"       @@@@ GCD             IP(|Y|)*IP(|X|) IP(|Y|)         IP(|Y|)
 ÷               @@@@ LCM             IP(|Y|)         IP(|Y|)         IP(|Y|)
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-END
 #+END_SRC
 
-* =BINO=: Binomials, Factorals, Beta, etc...
-** Menu
-:PROPERTIES:
-:CUSTOM_ID: menu-bino
-:END:
-
-#+ATTR_HTML: :align center :frame box :rules all
-#+NAME:BINO
-| Menu | LBL   | Description |
-|------+-------+-------------|
-| COMB |       |             |
-| PERM |       |             |
-| !    | FACT  | Factoral    |
-| ▒▒▒▒ |       |             |
-| GAM  | GAMMA |             |
-| BETA |       |             |
-|------+-------+-------------|
-
-*** Menu Code
-
-#+BEGIN_SRC elisp :var tbl=BINO :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
-(MJR-generate-42-menu-code "BINO" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
-#+END_SRC
-
-#+RESULTS:
-#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BINO)
-@@@@ DSC: Auto-generated menu program
-LBL "BINO"
-LBL 01            @@@@ Page 1 of menu BINO
-CLMENU
-"COMB"
-KEY 1 XEQ 02
-"PERM"
-KEY 2 XEQ 03
-"!"
-KEY 3 XEQ "FACT"
-"GAM"
-KEY 5 XEQ 04
-"BETA"
-KEY 6 XEQ "BETA"
-KEY 9 GTO 00
-MENU
-STOP
-GTO 01
-LBL 00 @@@@ Application Exit
-EXITALL
-RTN
-LBL 02    @@@@ Action for menu key COMB
-COMB
-RTN
-LBL 03    @@@@ Action for menu key PERM
-PERM
-RTN
-LBL 04    @@@@ Action for menu key GAM
-GAMMA
-RTN
-@@@@ Free labels start at: 5
-#+end_src
-
-** Functions
+*** Binomials, Factorals, Beta, etc...
 
 #+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BETA)
@@ -767,80 +992,9 @@ RCL ST Z
 GAMMA
 ÷
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FACT)
-@@@@ DSC: Factoral function
-@@@@ IN:  X: Number
-@@@@ OUT: X: X! = Gamma(X+1)
-@@@@ FAQ: Returns an error if X is not an integer
-@@@@ TST: free42_3.0.2
-@@@@ UPD: 2021-04-23
-LBL "FACT"
-FUNC 11         @@## REQ:free42>=2.5.24
-L4STK           @@## REQ:free42>=3.0
-ENTER
-FP
-X≠0?
-RTNERR 5
-R↓
-1
-+
-GAMMA
-RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-END
 #+END_SRC
 
-* =ERRFUN=: Error & Standard Normal Functions
-** Menu
-:PROPERTIES:
-:CUSTOM_ID: menu-errfun
-:END:
-
-#+ATTR_HTML: :align center :frame box :rules all
-#+NAME:ERRFUN
-| Menu | Description                                      |
-|------+--------------------------------------------------|
-| ERF  | Error Function                                   |
-| ERFC | Complementary Error Function                     |
-| ▒▒▒▒ |                                                  |
-| NPDF | Standard Normal Probablity Density FUnction      |
-| NCDF | Standard Normal Cumulative Distribution FUnction |
-| ▒▒▒▒ |                                                  |
-
-** Menu Code
-
-#+BEGIN_SRC elisp :var tbl=ERRFUN :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
-(MJR-generate-42-menu-code "ERRFUN" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
-#+END_SRC
-
-#+RESULTS:
-#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ERRFUN)
-@@@@ DSC: Auto-generated menu program
-LBL "ERRFUN"
-LBL 01            @@@@ Page 1 of menu ERRFUN
-CLMENU
-"ERF"
-KEY 1 XEQ "ERF"
-"ERFC"
-KEY 2 XEQ "ERFC"
-"NPDF"
-KEY 4 XEQ "NPDF"
-"NCDF"
-KEY 5 XEQ "NCDF"
-KEY 9 GTO 00
-MENU
-STOP
-GTO 01
-LBL 00 @@@@ Application Exit
-EXITALL
-RTN
-@@@@ Free labels start at: 2
-#+end_src
-
-** Functions
+*** Error & Standard Normal Functions
 
 #+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:NPDF)
@@ -940,7 +1094,7 @@ RTN
 @@@@ IN:  X: real number
 @@@@ OUT: X: erf(X)
 @@@@ USE: NCDF
-@@@@ LBL: Use: 11-12
+@@@@ LBL: Use: 64-65
 @@@@ UPD: 2021-03-30
 @@@@ TST: free42_3.0.2
 @@@@ TC: -1 -0.8427007929497148693412
@@ -963,13 +1117,13 @@ XEQ "NCDF"
 -
 X<>Y
 X<0?
-GTO 11
-GTO 12
-LBL 11
+GTO 64
+GTO 65
+LBL 64
 R↓
 +/-
 RTN
-LBL 12
+LBL 65
 R↓
 RTN
 
@@ -992,112 +1146,9 @@ XEQ "ERF"
 X<>Y
 -
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-END
 #+END_SRC
 
-* =HYPTRG=: Hyperbolic Trigonometric Functions
-** Menu
-:PROPERTIES:
-:CUSTOM_ID: menu-hyptrg
-:END:
-
-#+ATTR_HTML: :align center :frame box :rules all
-#+NAME:HYPTRG
-| Menu  | Description |
-|-------+-------------|
-| SINH  |             |
-| COSH  |             |
-| TANH  |             |
-| ASINH |             |
-| ACOSH |             |
-| ATANH |             |
-|-------+-------------|
-| CSCH  | 1/SINH(X)   |
-| SECH  | 1/COSH(X)   |
-| COTH  | 1/TANH(X)   |
-| ACSCH | SINH(1/X)   |
-| ASECH | COSH(1/X)   |
-| ACOTH | TANH(1/X)   |
-|-------+-------------|
-
-** Menu Code
-
-#+BEGIN_SRC elisp :var tbl=HYPTRG :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
-(MJR-generate-42-menu-code "HYPTRG" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
-#+END_SRC
-
-#+RESULTS:
-#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:HYPTRG)
-@@@@ DSC: Auto-generated menu program
-LBL "HYPTRG"
-LBL 01            @@@@ Page 1 of menu HYPTRG
-CLMENU
-"SINH"
-KEY 1 XEQ 03
-"COSH"
-KEY 2 XEQ 04
-"TANH"
-KEY 3 XEQ 05
-"ASINH"
-KEY 4 XEQ 06
-"ACOSH"
-KEY 5 XEQ 07
-"ATANH"
-KEY 6 XEQ 08
-KEY 7 GTO 02
-KEY 8 GTO 02
-KEY 9 GTO 00
-MENU
-STOP
-GTO 01
-LBL 02            @@@@ Page 2 of menu HYPTRG
-CLMENU
-"CSCH"
-KEY 1 XEQ "CSCH"
-"SECH"
-KEY 2 XEQ "SECH"
-"COTH"
-KEY 3 XEQ "COTH"
-"ACSCH"
-KEY 4 XEQ "ACSCH"
-"ASECH"
-KEY 5 XEQ "ASECH"
-"ACOTH"
-KEY 6 XEQ "ACOTH"
-KEY 7 GTO 01
-KEY 8 GTO 01
-KEY 9 GTO 00
-MENU
-STOP
-GTO 02
-LBL 00 @@@@ Application Exit
-EXITALL
-RTN
-LBL 03    @@@@ Action for menu key SINH
-SINH
-RTN
-LBL 04    @@@@ Action for menu key COSH
-COSH
-RTN
-LBL 05    @@@@ Action for menu key TANH
-TANH
-RTN
-LBL 06    @@@@ Action for menu key ASINH
-ASINH
-RTN
-LBL 07    @@@@ Action for menu key ACOSH
-ACOSH
-RTN
-LBL 08    @@@@ Action for menu key ATANH
-ATANH
-RTN
-@@@@ Free labels start at: 9
-#+end_src
-
-** Functions
+*** Hyperbolic Trigonometric Functions
 
 #+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 
@@ -1154,136 +1205,11 @@ L4STK           @@## REQ:free42>=3.0
 1/X
 ATANH
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-END
 #+END_SRC
 
-* =TRIG=: Trigonometric Functions
-** Menu
-:PROPERTIES:
-:CUSTOM_ID: menu-trig
-:END:
-
-#+ATTR_HTML: :align center :frame box :rules all
-#+NAME:TRIG
-| Menu  | Description                         |
-|-------+-------------------------------------|
-| SIN   |                                     |
-| COS   |                                     |
-| TAN   |                                     |
-| ASIN  |                                     |
-| ACOS  |                                     |
-| ATAN  |                                     |
-|-------+-------------------------------------|
-| CSC   | 1/SIN(X)                            |
-| SEC   | 1/COS(X)                            |
-| COT   | 1/TAN(X)                            |
-| ACSC  | SIN(1/X)                            |
-| ASEC  | COS(1/X)                            |
-| ACOT  | TAN(1/X)                            |
-|-------+-------------------------------------|
-| TAN2  |                                     |
-| HYPOT |                                     |
-| HAV   | Haversine = 1/2-cos(X)/2            |
-| AHAV  | Inverse Haversine = 2*asin(sqrt(X)) |
-| ▒▒▒▒  |                                     |
-| ▒▒▒▒  |                                     |
-
-** Menu Code
-#+BEGIN_SRC elisp :var tbl=TRIG :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
-(MJR-generate-42-menu-code "TRIG" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
-#+END_SRC
-
-#+RESULTS:
-#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TRIG)
-@@@@ DSC: Auto-generated menu program
-LBL "TRIG"
-LBL 01            @@@@ Page 1 of menu TRIG
-CLMENU
-"SIN"
-KEY 1 XEQ 04
-"COS"
-KEY 2 XEQ 05
-"TAN"
-KEY 3 XEQ 06
-"ASIN"
-KEY 4 XEQ 07
-"ACOS"
-KEY 5 XEQ 08
-"ATAN"
-KEY 6 XEQ 09
-KEY 7 GTO 03
-KEY 8 GTO 02
-KEY 9 GTO 00
-MENU
-STOP
-GTO 01
-LBL 02            @@@@ Page 2 of menu TRIG
-CLMENU
-"CSC"
-KEY 1 XEQ "CSC"
-"SEC"
-KEY 2 XEQ "SEC"
-"COT"
-KEY 3 XEQ "COT"
-"ACSC"
-KEY 4 XEQ "ACSC"
-"ASEC"
-KEY 5 XEQ "ASEC"
-"ACOT"
-KEY 6 XEQ "ACOT"
-KEY 7 GTO 01
-KEY 8 GTO 03
-KEY 9 GTO 00
-MENU
-STOP
-GTO 02
-LBL 03            @@@@ Page 3 of menu TRIG
-CLMENU
-"TAN2"
-KEY 1 XEQ "TAN2"
-"HYPOT"
-KEY 2 XEQ "HYPOT"
-"HAV"
-KEY 3 XEQ "HAV"
-"AHAV"
-KEY 4 XEQ "AHAV"
-KEY 7 GTO 02
-KEY 8 GTO 01
-KEY 9 GTO 00
-MENU
-STOP
-GTO 03
-LBL 00 @@@@ Application Exit
-EXITALL
-RTN
-LBL 04    @@@@ Action for menu key SIN
-SIN
-RTN
-LBL 05    @@@@ Action for menu key COS
-COS
-RTN
-LBL 06    @@@@ Action for menu key TAN
-TAN
-RTN
-LBL 07    @@@@ Action for menu key ASIN
-ASIN
-RTN
-LBL 08    @@@@ Action for menu key ACOS
-ACOS
-RTN
-LBL 09    @@@@ Action for menu key ATAN
-ATAN
-RTN
-@@@@ Free labels start at: 10
-#+end_src
-
-** Functions
+**** =TRIG=: Trigonometric Functions
 
 #+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
-
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Inverse Haversine
 @@@@ IN:  X: number
@@ -1402,18 +1328,18 @@ RTN
 @@@@ TC:  atan( 1, 0) =>  pi       =   90°
 @@@@ TC:  atan(-1, 0) => -pi       =  -90°
 @@@@ TC:  atan( 0, 0) => ERROR
-@@@@ LBL: Used 81-85
+@@@@ LBL: Used 59-63
 LBL "TAN2"
 FUNC 21         @@## REQ:free42>=2.5.24
 L4STK           @@## REQ:free42>=3.0
 X>0?
-GTO 81
+GTO 59
 X=0?
-GTO 82
+GTO 60
 @@@@ X<0
 X<>Y
 X<0?
-GTO 83
+GTO 61
 @@@@ X<0 & Y>=0
 X<>Y
 ÷
@@ -1421,7 +1347,7 @@ ATAN
 PI
 +
 RTN
-LBL 83
+LBL 61
 @@@@ X<0 & Y<0
 X<>Y
 ÷
@@ -1429,148 +1355,35 @@ ATAN
 PI
 -
 RTN
-LBL 82
+LBL 60
 X<>Y
 X=0?
-GTO 84
+GTO 62
 X>0?
-GTO 85
+GTO 63
 @@@@ X=0 & Y<0
 PI
 -2
 ÷
 RTN
-LBL 85
+LBL 63
 @@@@ X=0 & Y>0
 PI
 2
 ÷
 RTN
-LBL 84
+LBL 62
 @@@@ X=0 & Y=0 ERROR 0/0
 ÷
 RTN
-LBL 81
+LBL 59
 @@@@ X>0
 ÷
 ATAN
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-END
 #+END_SRC
 
-* =LPRT=: Logs, Powers & Roots
-** Menu
-:PROPERTIES:
-:CUSTOM_ID: menu-lprt
-:END:
-
-#+ATTR_HTML: :align center :frame box :rules all
-#+NAME:LPRT
-| Menu | Lab    | Description                                          |
-|------+--------+------------------------------------------------------|
-| lnYX | lnYX   | Base Y Logarithm of X                                |
-| ▒▒▒▒ |        |                                                      |
-| ln2  | ln2    | Base 2 logarithm                                     |
-| LN   |        | Base 3 logarithm                                     |
-| LOG  |        | Base 10 logarithm                                    |
-| ▒▒▒▒ |        |                                                      |
-|------+--------+------------------------------------------------------|
-| Y↑X  |        | Raise Y to the power of X                            |
-| ▒▒▒▒ |        |                                                      |
-| 2↑X  | LBL 97 | Raise 2 to the power of X                            |
-| EXP  |        | Raise e to the power of X                            |
-| 10↑X |        | Raise 10 to the power of X                           |
-| ▒▒▒▒ |        |                                                      |
-|------+--------+------------------------------------------------------|
-| Y√X  | YROOT  | Yth roots prefering real & pure imaginary answers    |
-| ▒▒▒▒ |        |                                                      |
-| 2√X  | LBL 95 | Square root prefering real & pure imaginary answers  |
-| 3√X  | LBL 94 | Cube root prefering real & pure imaginary answers    |
-| 5√X  | LBL 93 | Fifth root prefering real & pure imaginary answers   |
-| 7√X  | LBL 92 | Seventh root prefering real & pure imaginary answers |
-
-** Menu Code
-#+BEGIN_SRC elisp :var tbl=LPRT :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
-(MJR-generate-42-menu-code "LPRT" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
-#+END_SRC
-
-#+RESULTS:
-#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:LPRT)
-@@@@ DSC: Auto-generated menu program
-LBL "LPRT"
-LBL 01            @@@@ Page 1 of menu LPRT
-CLMENU
-"lnYX"
-KEY 1 XEQ "lnYX"
-"ln2"
-KEY 3 XEQ "ln2"
-"LN"
-KEY 4 XEQ 04
-"LOG"
-KEY 5 XEQ 05
-KEY 7 GTO 03
-KEY 8 GTO 02
-KEY 9 GTO 00
-MENU
-STOP
-GTO 01
-LBL 02            @@@@ Page 2 of menu LPRT
-CLMENU
-"Y↑X"
-KEY 1 XEQ 06
-"2↑X"
-KEY 3 XEQ 97
-"EXP"
-KEY 4 XEQ "EXP"
-"10↑X"
-KEY 5 XEQ 07
-KEY 7 GTO 01
-KEY 8 GTO 03
-KEY 9 GTO 00
-MENU
-STOP
-GTO 02
-LBL 03            @@@@ Page 3 of menu LPRT
-CLMENU
-"Y√X"
-KEY 1 XEQ "YROOT"
-"2√X"
-KEY 3 XEQ 95
-"3√X"
-KEY 4 XEQ 94
-"5√X"
-KEY 5 XEQ 93
-"7√X"
-KEY 6 XEQ 92
-KEY 7 GTO 02
-KEY 8 GTO 01
-KEY 9 GTO 00
-MENU
-STOP
-GTO 03
-LBL 00 @@@@ Application Exit
-EXITALL
-RTN
-LBL 04    @@@@ Action for menu key LN
-LN
-RTN
-LBL 05    @@@@ Action for menu key LOG
-LOG
-RTN
-LBL 06    @@@@ Action for menu key Y↑X
-Y↑X
-RTN
-LBL 07    @@@@ Action for menu key 10↑X
-10↑X
-RTN
-@@@@ Free labels start at: 8
-#+end_src
-
-** Functions
-
+*** Logs, Powers & Roots
 #+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Base Y Logarithm of X
@@ -1605,12 +1418,12 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Raise 2 to the power of X
-@@@@ NAM: 2↑X 97
+@@@@ NAM: 2↑X 58
 @@@@ IN:  X: number or matrix (element-wise)
 @@@@ OUT: X: 2^X
 @@@@ UPD: 2021-02-23
 @@@@ TST: free42_3.0.2
-LBL 97
+LBL 58
 FUNC 11         @@## REQ:free42>=2.5.24
 L4STK           @@## REQ:free42>=3.0
 2
@@ -1620,13 +1433,13 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Square root prefering real & pure imaginary answers 
-@@@@ NAM: ROOT2 95  
+@@@@ NAM: ROOT2 57  
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: root of X
 @@@@ FAQ: See XYROOT for details
 @@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-14
-LBL 95
+LBL 57
 FUNC 11         @@## REQ:free42>=2.5.24
 2
 X<>Y
@@ -1635,13 +1448,13 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Cube root prefering real & pure imaginary answers   
-@@@@ NAM: ROOT3 94  
+@@@@ NAM: ROOT3 56  
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: root of X
 @@@@ FAQ: See XYROOT for details
 @@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-14
-LBL 94
+LBL 56
 FUNC 11         @@## REQ:free42>=2.5.24
 3
 X<>Y
@@ -1650,13 +1463,13 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Fifth root prefering real & pure imaginary answers  
-@@@@ NAM: ROOT5 93  
+@@@@ NAM: ROOT5 55  
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: root of X
 @@@@ FAQ: See XYROOT for details
 @@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-14
-LBL 93
+LBL 55
 FUNC 11         @@## REQ:free42>=2.5.24
 5
 X<>Y
@@ -1665,13 +1478,13 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Seventh root prefering real & pure imaginary answers
-@@@@ NAM: ROOT7 92  
+@@@@ NAM: ROOT7 54  
 @@@@ IN:  X: Number or numeric matrix (element-wise)
 @@@@ OUT: X: root of X
 @@@@ FAQ: See XYROOT for details
 @@@@ TST: free42_3.0.2
 @@@@ UPD: 2021-04-14
-LBL 92
+LBL 54
 FUNC 11         @@## REQ:free42>=2.5.24
 7
 X<>Y
@@ -1693,60 +1506,83 @@ LBL "YROOT"
 FUNC 21         @@## REQ:free42>=2.5.24
 L4STK           @@## REQ:free42>=3.0
 REAL?
-GTO 81
-GTO 84
-LBL 81
+GTO 48
+GTO 51
+LBL 48
 @@@@ X is real
 X≥0?
-GTO 84
+GTO 51
 @@@@ X is negative, real
 RCL ST Y
 REAL?
-GTO 82
-GTO 83
-LBL 82
+GTO 49
+GTO 50
+LBL 49
 @@@@ X is negative, real; Y is real
 FP
 X≠0?
-GTO 83
+GTO 50
 @@@@ X is negative, real; Y is real integer
 R↓
 ABS
 RCL ST Y
 X<>Y
-XEQ 84
+XEQ 51
 +/-
 X<>Y
 2
 ÷
 FP
 X=0?
-GTO 86
-GTO 85
-LBL 86
+GTO 53
+GTO 52
+LBL 53
 @@@@ X is negative, real; Y is real integer even
 R↓
 -1
 SQRT
 ×
 RTN
-LBL 85
+LBL 52
 @@@@ X is negative, real; Y is real integer odd
 R↓
 RTN
-LBL 83
+LBL 50
 @@@@ Not special case.  Stack: Y X Y
 R↓
-LBL 84
+LBL 51
 @@@@ Not special case.  Stack: X Y
 X<>Y
 1/X
 Y↑X
 RTN
+#+END_SRC
 
+*** Everything Else
+
+#+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:||)
+@@@@ DSC: Parallel Operator
+@@@@ IN:  Y: A Number
+@@@@ IN:  X: A Number
+@@@@ OUT: X: 1/(1/X+1/Y)
+@@@@ UPD: 2021-04-28
+LBL "||"
+FUNC 21         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
+1/X
+X<>Y
+1/X
++
+1/X
+RTN
+#+END_SRC
+
+** The end of =SFUN=
+
+#+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
-
 #+END_SRC
 
 * =NLA=: Linear Algebra
@@ -2022,7 +1858,6 @@ EDIT
 PROMPT
 EXITALL
 RTN
-END
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
@@ -3200,65 +3035,6 @@ RTN
 END
 #+end_src
 
-* =KSFUN=: Everything Else
-** Menu
-:PROPERTIES:
-:CUSTOM_ID: menu-ksfun
-:END:
-
-#+ATTR_HTML: :align center :frame box :rules all
-#+NAME:KSFUN
-| Menu | Description       | IN   | OUT            |
-|------+-------------------+------+----------------|
-| ¦¦   | Parallel Operator | Y  X | X: 1/(1/X+1/Y) |
-
-** Menu Code
-
-#+BEGIN_SRC elisp :var tbl=KSFUN :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
-(MJR-generate-42-menu-code "KSFUN" 0 tbl 0 nil 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
-#+END_SRC
-
-#+RESULTS:
-#+begin_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:KSFUN)
-@@@@ DSC: Auto-generated menu program
-LBL "KSFUN"
-LBL 01            @@@@ Page 1 of menu KSFUN
-CLMENU
-"||"
-KEY 1 XEQ "||"
-KEY 9 GTO 00
-MENU
-STOP
-GTO 01
-LBL 00 @@@@ Application Exit
-EXITALL
-RTN
-@@@@ Free labels start at: 2
-#+end_src
-
-** Functions
-
-#+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:||)
-@@@@ DSC: Parallel Operator
-@@@@ IN:  Y: A Number
-@@@@ IN:  X: A Number
-@@@@ OUT: X: 1/(1/X+1/Y)
-@@@@ UPD: 2021-04-28
-LBL "||"
-FUNC 21         @@## REQ:free42>=2.5.24
-L4STK           @@## REQ:free42>=3.0
-1/X
-X<>Y
-1/X
-+
-1/X
-RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-END
-#+END_SRC
 
 * WORKING                                                          :noexport:
 

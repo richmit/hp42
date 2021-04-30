@@ -86,16 +86,7 @@ The other columns of the table are not used.
 #+NAME: cust
 | Menu      | Function/Program |                                               |
 |-----------+------------------+-----------------------------------------------|
-| SFUN:TRIG | TRIG             | https://richmit.github.io/hp42/math.html      |
-| SFUN:HYP  | HYPTRG           | https://richmit.github.io/hp42/math.html      |
-| SFUN:L&P  | LPRT             | https://richmit.github.io/hp42/math.html      |
-| SFUN:PERC | PERCFN           | https://richmit.github.io/hp42/math.html      |
-| SFUN:BINO |                  | https://richmit.github.io/hp42/math.html      |
-| SFUN:CPLX | CPLXF            | https://richmit.github.io/hp42/math.html      |
-| SFUN:INT  | INTFUN           | https://richmit.github.io/hp42/math.html      |
-| SFUN:ERR  | ERRFUN           | https://richmit.github.io/hp42/math.html      |
-| SFUN:ERR  | ERRFUN           | https://richmit.github.io/hp42/math.html      |
-| SFUN:MISC | KSFUN            | https://richmit.github.io/hp42/math.html      |
+| SFUN      |                  | https://richmit.github.io/hp42/math.html      |
 |-----------+------------------+-----------------------------------------------|
 | MATH:POLY |                  | https://richmit.github.io/hp42/math.html      |
 | MATH:FUNC | FMENU            | https://richmit.github.io/hp42/pgmforfun.html |
@@ -126,9 +117,9 @@ LBL "CUST"
 LBL 01            @@@@ Page 1 of menu CUST
 CLMENU
 "SFUN"
-KEY 1 GTO 03
+KEY 1 XEQ "SFUN"
 "MATH"
-KEY 2 GTO 04
+KEY 2 GTO 03
 "BASE"
 KEY 3 XEQ "BASE"
 "PHIL"
@@ -155,43 +146,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 03            @@@@ Page 1 of menu SFUN
-CLMENU
-"TRIG"
-KEY 1 XEQ "TRIG"
-"HYP"
-KEY 2 XEQ "HYPTRG"
-"L&P"
-KEY 3 XEQ "LPRT"
-"PERC"
-KEY 4 XEQ "PERCFN"
-"BINO"
-KEY 5 XEQ "BINO"
-"CPLX"
-KEY 6 XEQ "CPLXF"
-KEY 7 GTO 05
-KEY 8 GTO 05
-KEY 9 GTO 01
-MENU
-STOP
-GTO 03
-LBL 05            @@@@ Page 2 of menu SFUN
-CLMENU
-"INT"
-KEY 1 XEQ "INTFUN"
-"ERR"
-KEY 2 XEQ "ERRFUN"
-"ERR"
-KEY 3 XEQ "ERRFUN"
-"MISC"
-KEY 4 XEQ "KSFUN"
-KEY 7 GTO 03
-KEY 8 GTO 03
-KEY 9 GTO 01
-MENU
-STOP
-GTO 05
-LBL 04            @@@@ Page 1 of menu MATH
+LBL 03            @@@@ Page 1 of menu MATH
 CLMENU
 "POLY"
 KEY 1 XEQ "POLY"
@@ -204,11 +159,11 @@ KEY 4 XEQ "NLA"
 KEY 9 GTO 01
 MENU
 STOP
-GTO 04
+GTO 03
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-@@@@ Free labels start at: 6
+@@@@ Free labels start at: 4
 #+end_src
 
 * Create system =CUSTOM= Menu

@@ -192,7 +192,7 @@ tables.
                                 (rec-key-labs     nil)
                                 (rec-pag-labs     nil))
                            (if (= parent-lbl numeric-lbl-start)
-                               (add-m-code (message "LBL \"%s\"" (cl-first menu))))
+                               (add-m-code (format "LBL \"%s\"" (cl-first menu))))
                            (cl-loop for mkey-elt in (cdr menu)
                                     for mkey-num from 0
                                     for page-num = (truncate (/ mkey-num 6))
@@ -213,29 +213,29 @@ tables.
                                                             (and (not (string-empty-p auto-trg))
                                                                  (if (string-match-p "^LBL [0-9][0-9]$" auto-trg)
                                                                      (substring auto-trg 4)
-                                                                     (message "\"%s\"" auto-trg)))))
-                                    ;;do (print (message "mkey-str: %s    auto-trg: %s    mkey-trg: %s" mkey-str auto-trg mkey-trg))
+                                                                     (format "\"%s\"" auto-trg)))))
+                                    ;;do (print (format "mkey-str: %s    auto-trg: %s    mkey-trg: %s" mkey-str auto-trg mkey-trg))
                                     when (= page-key 0)
-                                    do (progn (add-m-code (message "LBL %02d            @@@@ Page %d of menu %s"
+                                    do (progn (add-m-code (format "LBL %02d            @@@@ Page %d of menu %s"
                                                                    (nth page-num page-labs)
                                                                    (1+ page-num)
                                                                    (cl-first menu)))
                                               (add-m-code "CLMENU"))
                                     when (not (or (string-empty-p mkey-str) (string-equal mkey-str "▒▒▒▒")))
                                     do (progn (if (string-match-p "^LBL [0-9][0-9]$" mkey-str)
-                                                  (progn (add-m-code (message "XEQ %s" (substring mkey-str 4)))
+                                                  (progn (add-m-code (format "XEQ %s" (substring mkey-str 4)))
                                                          (setq no-local nil))
-                                                  (add-m-code (message "\"%s\"" mkey-str)))
+                                                  (add-m-code (format "\"%s\"" mkey-str)))
                                               (if (or (not is-leaf) (not mkey-trg))
-                                                  (add-m-code (message "KEY %d %s %02d" 
+                                                  (add-m-code (format "KEY %d %s %02d" 
                                                                        (1+ page-key) 
                                                                        (if is-leaf "XEQ" "GTO") 
                                                                        min-free-lab))
                                                   (progn 
-                                                    (add-m-code (message "KEY %d XEQ %s" (1+ page-key) mkey-trg))
+                                                    (add-m-code (format "KEY %d XEQ %s" (1+ page-key) mkey-trg))
                                                     (setq no-local nil)))
                                               (if (and (not mkey-trg) is-leaf)
-                                                  (progn (add-x-code (message 
+                                                  (progn (add-x-code (format 
                                                                       "LBL %02d    @@@@ Action for menu key %s" 
                                                                       min-free-lab
                                                                       mkey-str))
@@ -244,7 +244,7 @@ tables.
                                                                                   auto-trg 
                                                                                   mkey-trg
                                                                                   (aref mkey-elt 1)))
-                                                             (add-x-code (message "@@@@ TODO: Code for %s!" 
+                                                             (add-x-code (format "@@@@ TODO: Code for %s!" 
                                                                                   mkey-str)))
                                                          (add-x-code "RTN")))
                                               (push min-free-lab rec-key-labs)
@@ -253,22 +253,22 @@ tables.
                                               (push (nth page-num page-labs) rec-pag-labs))
                                     when (or (= page-key 5) (= mkey-num (1- num-menu-keys)))
                                     do (progn (if (< 1 num-menu-page)
-                                                  (progn (add-m-code (message "KEY 7 GTO %02d" 
+                                                  (progn (add-m-code (format "KEY 7 GTO %02d" 
                                                                               (nth (mod (1- page-num) 
                                                                                         num-menu-page) 
                                                                                    page-labs)))
-                                                         (add-m-code (message "KEY 8 GTO %02d"
+                                                         (add-m-code (format "KEY 8 GTO %02d"
                                                                               (nth (mod (1+ page-num) 
                                                                                         num-menu-page) 
                                                                                    page-labs)))))
                                               (if (string-equal menu-exit-behavior "up")
-                                                  (add-m-code (message "KEY 9 GTO %02d" parent-lbl))
-                                                  (add-m-code (message "KEY 9 GTO %02d" 0)))
+                                                  (add-m-code (format "KEY 9 GTO %02d" parent-lbl))
+                                                  (add-m-code (format "KEY 9 GTO %02d" 0)))
                                               (add-m-code "MENU")
                                               (add-m-code "STOP")
                                               (if (string-equal after-leaf-action "stay")
-                                                  (add-m-code (message "GTO %02d" (nth page-num page-labs)))
-                                                  (add-m-code (message "GTO %02d" 0)))))
+                                                  (add-m-code (format "GTO %02d" (nth page-num page-labs)))
+                                                  (add-m-code (format "GTO %02d" 0)))))
                            (cl-loop for mkey-elt in (cdr menu)
                                     for m-lab in (reverse rec-key-labs)
                                     for p-lab in (reverse rec-pag-labs)
@@ -277,7 +277,7 @@ tables.
       (gen-mnu numeric-lbl-start 
                (1+ numeric-lbl-start)
                (prc-mnu (append (list top-lab) (cl-loop for row in tbl
-                                                        for row-strs = (mapcar (lambda (x) (replace-regexp-in-string "¦" "|" (message "%s" x) 't 't)) 
+                                                        for row-strs = (mapcar (lambda (x) (replace-regexp-in-string "¦" "|" (format "%s" x) 't 't)) 
                                                                                row)
                                                         for n from 0
                                                         for menu-parts = (split-string 
@@ -286,16 +286,16 @@ tables.
                                                         do (setf (car (last menu-parts))
                                                                  (vector (car (last menu-parts)) row-strs))
                                                         collect menu-parts))))
-      (add-m-code "LBL 00 @@@@ Application Exit")
+      (add-m-code (format "LBL %02d @@@@ Application Exit" numeric-lbl-start))
       (add-m-code "EXITALL")
       (add-m-code "RTN") 
       (if (< 100 min-free-lab)
           (error "ERROR: Too many local labels: %d" min-free-lab)))
-    (princ (message "%s (ref:%s)\n" (make-string 80 ?@)  top-lab))
-    (princ (message "@@@@ DSC: Auto-generated menu program\n"))
+    (princ (format "%s (ref:%s)\n" (make-string 80 ?@)  top-lab))
+    (princ (format "@@@@ DSC: Auto-generated menu program\n"))
     (princ m-code)
     (princ x-code)
-    (princ (message "@@@@ Free labels start at: %d\n" min-free-lab))
+    (princ (format "@@@@ Free labels start at: %d\n" min-free-lab))
     (if no-local
         (princ "END"))))
 #+END_SRC

@@ -580,7 +580,8 @@ L4STK                          @@## REQ:free42>=3.0
 IP
 @@@@ All zeros case?
 0
-0≥? ST Y
+0≥? ST Y           @@## REQ:free42>=3.0.3 
+XEQ 44 @@@ 0≥Y?    @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
 RTN
 R↓
 0
@@ -611,7 +612,8 @@ L4STK                         @@## REQ:free42>=3.0
 IP
 X<>Y
 @@@@ Do nothing if X was negative
-0>? ST Y
+0>? ST Y           @@## REQ:free42>=3.0.3 
+XEQ 43 @@@ 0>Y?    @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
 RTN
 @@@@ Do nothing if X was >= WSIZE
 XEQ 67 @@@@ Y≥WSIZE?
@@ -640,7 +642,8 @@ IP
 X<>Y
 IP
 @@@@ Do nothing if X was negative
-0>? ST Y
+0>? ST Y           @@## REQ:free42>=3.0.3 
+XEQ 43 @@@ 0>Y?    @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
 RTN
 @@@@ Do nothing if X was >= WSIZE
 XEQ 67 @@@@ Y≥WSIZE?
@@ -669,7 +672,8 @@ FUNC 21                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 0
 @@@@ Return 0 if X was negative
-0>? ST Y
+0>? ST Y           @@## REQ:free42>=3.0.3 
+XEQ 43 @@@ 0>Y?    @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
 RTN
 @@@@ Return 0  if X was >= WSIZE
 XEQ 67 @@@@ Y≥WSIZE?
@@ -696,11 +700,11 @@ FUNC 31                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 X=0?
 GTO 54
-Rv
+R↓
 XEQ "SETB"
 RTN
 LBL 54
-Rv
+R↓
 XEQ "CLRB"
 RTN
 
@@ -767,9 +771,9 @@ LBL "AZ@Y"
 FUNC 41                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 LSTO "_X"
-Rv              @@@@  Y Z T T
+R↓              @@@@  Y Z T T
 LSTO "_Y"
-Rv              @@@@  Z T T T
+R↓              @@@@  Z T T T
 LSTO "_Z"     @@@@  Z T T T
 RCL "_Y"      @@@@  Y Z T T
 XEQ "MSKn"
@@ -851,7 +855,8 @@ IP
 X<>Y
 IP
 @@@@ Return Y if X was negative
-0≥? ST Y
+0≥? ST Y           @@## REQ:free42>=3.0.3 
+XEQ 44 @@@ 0≥Y?    @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
 RTN
 X<>Y
 0
@@ -890,7 +895,8 @@ IP
 X<>Y
 IP
 @@@@ Return Y if X was negative
-0≥? ST Y
+0≥? ST Y           @@## REQ:free42>=3.0.3 
+XEQ 44 @@@ 0≥Y?    @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
 RTN
 X<>Y
 0
@@ -927,7 +933,8 @@ L4STK                         @@## REQ:free42>=3.0
 IP
 X<>Y
 @@@@ Return Y if X was negative
-0≥? ST Y
+0≥? ST Y           @@## REQ:free42>=3.0.3 
+XEQ 44 @@@ 0≥Y?    @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
 RTN
 X<>Y
 @@@@ X was positive
@@ -948,7 +955,8 @@ L4STK                         @@## REQ:free42>=3.0
 IP
 X<>Y
 @@@@ Return Y if X was negative
-0≥? ST Y
+0≥? ST Y           @@## REQ:free42>=3.0.3 
+XEQ 44 @@@ 0≥Y?    @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
 RTN
 X<>Y
 @@@@ X was positive
@@ -1083,7 +1091,8 @@ FUNC 11                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 IP
 -1
-0=? ST Y
+0=? ST Y          @@## REQ:free42>=3.0.3 
+XEQ  42 @@@ 0=Y?  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
 RTN
 R↓
 XEQ "LJ"
@@ -1106,12 +1115,32 @@ FUNC 11                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 IP
 -1
-0=? ST Y
+0=? ST Y          @@## REQ:free42>=3.0.3 
+XEQ  42 @@@ 0=Y?  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
 RTN
 R↓
 XEQ "RJ"
 RTN
-
+                      @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+LBL 42   @@@ 0=Y?     @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+FUNC 00               @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+X<>Y                  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+X=0?                  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+RTNYES                @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+RTNNO                 @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+LBL 43   @@@ 0>Y?     @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+FUNC 00               @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+X<>Y                  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+X<0?                  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+RTNYES                @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+RTNNO                 @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+LBL 44   @@@ 0≥Y?     @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+FUNC 00               @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+X<>Y                  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+X≤0?                  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+RTNYES                @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+RTNNO                 @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+                      @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ Menu Label: WSIZE
 LBL 96
@@ -1259,7 +1288,7 @@ RCL "_CTR"       @@@@ CTR OLD NEW
 IP
 BIT?
 GTO 52
-Rv
+R↓
 X<>Y
 RCL "_CTR"
 IP

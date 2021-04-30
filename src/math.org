@@ -530,7 +530,6 @@ RTN
 ** Functions
 
 #+begin_src hp42s :tangle ../src_42s/math/math.hp42s
-
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ROUND)
 @@@@ DSC: Properly round to integer.  N.5 rounded to nearest even number.
 @@@@ IN:  X: real number
@@ -566,9 +565,9 @@ X<>Y            @@@@ X        |FP|-1/2 X
 SIGN            @@@@ SGN      |FP|-1/2 X 
 LASTX           @@@@ X        SGN      |FP|-1/2 X 
 IP              @@@@ IP(X)    SGN      |FP|-1/2 X 
-0=? ST Z
+0=? ST Z   @@## TODO: Memory leak in free42 < 3.0.3
 GTO 92
-0<? ST Z
+0<? ST Z   @@## TODO: Memory leak in free42 < 3.0.3
 +
 RTN
 LBL 92 
@@ -601,7 +600,7 @@ L4STK           @@## REQ:free42>=3.0
 FP
 LASTX
 IP
-0≤? ST Y
+0≤? ST Y   @@## TODO: Memory leak in free42 < 3.0.3
 RTN
 1
 -
@@ -619,7 +618,7 @@ L4STK           @@## REQ:free42>=3.0
 FP
 LASTX
 IP
-0≥? ST Y
+0≥? ST Y   @@## TODO: Memory leak in free42 < 3.0.3
 RTN
 1
 +
@@ -2219,24 +2218,24 @@ DIM?
 ×
 1
 DIM "_YDAT"     @@@@ 1 N XDAT -- YDAT is now an Nx1 matrix
-Rv              @@@@ N XDAT
-Rv              @@@@ XDAT
+R↓              @@@@ N XDAT
+R↓              @@@@ XDAT
 LSTO "_XDAT"    @@@@ XDAT
 XEQ "MXDIAG"    @@@@ MUL      -- nxn diag matrix
 LSTO "_MUL"     @@@@ MUL
 DIM?            @@@@ N N
-Rv
+R↓
 1               @@@@ 1 N
 NEWMAT          @@@@ TPL      -- TPL is an nx1 zero matrix
 SIGN            @@@@ TPL      -- TPL is now an NX1 1 matrix
 LSTO "_TPL"     @@@@ TPL
 DIM?            @@@@ 1 N
-Rv              @@@@ N
+R↓              @@@@ N
 ENTER           @@@@ N N
 NEWMAT          @@@@ VM       -- VM is an NXN zero matrix
 LSTO "_VM"      @@@@ VM
 DIM?            @@@@ N N
-Rv              @@@@ N
+R↓              @@@@ N
 INDEX "_VM"
 1               @@@@ 1 N
 X<>Y            @@@@ N 1
@@ -2311,10 +2310,10 @@ RCL ST Z        @@@@  a                     c                     b             
 ABS             @@@@  |a|                   c                     b                     a
 X=0?
 RTNERR 3
-Rv              @@@@  a                     c                     b                     a
+R↓              @@@@  a                     c                     b                     a
 2               @@@@  2                     c                     b                      a
 RCL× ST T       @@@@  2a                    c                     b                      a
-Rv              @@@@  c                     b                     a                     2a                    
+R↓              @@@@  c                     b                     a                     2a                    
 RCL÷ ST T       @@@@  c/(2a)                b                     a                     2a                    
 X<>Y            @@@@  b                     c/(2a)                a                     2a                    
 RCL÷ ST T       @@@@  b/(2a)                c/(2a)                a                     2a                    
@@ -2496,8 +2495,8 @@ DIM?            @@@@ m n REM
 1               @@@@ 1 N-1 REM
 X<>Y            @@@@ N-1 1 REM
 DIM "_M"  
-Rv
-Rv              @@@@ REM
+R↓
+R↓              @@@@ REM
 RCL "_M"        @@@@ P REM
 RTN
 
@@ -2579,14 +2578,14 @@ FC?C 25
 1e-15           @@@@ Tol  Guss Poly
 50              @@@@ Itr  Tol  Guss  Poly
 XEQ "PLGRR"     @@@@ Root Pval Stat
-0≠? ST Z
+0≠? ST Z   @@## TODO: Memory leak in free42 < 3.0.3
 RTNERR 6
 RCL "_P"        @@@@ Poly Root Pval Stat
 RCL "_P"        @@@@ Poly Poly Root Pval
 RCL ST Z        @@@@ Root Poly Poly Root
 XEQ "PDEFLT"    @@@@ DPly Rem  Poly Root
 X<>Y            @@@@ Rem  DPly Poly Root
-Rv              @@@@ DPly Poly Root
+R↓              @@@@ DPly Poly Root
 RCL ST Z        @@@@ Root DPly Poly Root
 RTN
 
@@ -2604,20 +2603,23 @@ FUNC 33
 L4STK
 RCL ST Z        @@@@ Poly Gues DPly Poly
 LSTO "_P"  
-Rv              @@@@ Gues DPly Poly
+R↓              @@@@ Gues DPly Poly
 RCL ST Y        @@@@ DPLY Gues DPly Poly
 LSTO "_DP"  
 XEQ 81          @@@@ PLYBAD
 RTNERR 5
-Rv              @@@@ Gues DPly Poly
+R↓              @@@@ Gues DPly Poly
 SF 25
 RCL "ACC"
 FC?C 25
 1e-15           @@@@ Tol  Gues DPly Poly
 50              @@@@ Itr  Tol  Gues DPly
 XEQ "PLGRR"     @@@@ Root Pval Stat
-0≠? ST Z
+RCL ST Z        @@@@ Root Pval Stat                   @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+X≠0?                                                  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+0≠? ST Z                                              @@## REQ:free42>=3.0.3
 RTNERR 6
+R↓              @@@@ Root Pval Stat                   @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
 RCL "_P"        @@@@ Poly Root Pval Stat
 X<>Y            @@@@ Root Poly Pval Stat
 -1              @@@@ -1   Root Poly Pval
@@ -2628,7 +2630,7 @@ RCL "_DP"       @@@@ DPly Root Root Pval
 X<>Y            @@@@ Root DPly Root Pval
 XEQ "PDEFLT"    @@@@ DPly Rem  Root Pval
 X<>Y
-Rv              @@@@ DPly Root Pval
+R↓              @@@@ DPly Root Pval
 @@@@ TODO: Should check if |Rem| is near zero.  If it is not, then we probably converged to a previously found root and removed from DPly. It is also possible
 @@@@ TODO: that we we might have diverged, but that is super unlikely.  In fact, both cases are quite unlikely.  Still good software should check.
 RCL "_P"        @@@@ Poly DPly Root Pval
@@ -2688,8 +2690,9 @@ RCL "_P"
 RCL "_G"  
 XEQ "PEVL2"     @@@@ P''         P'     P        ?
 RCL ST Z
-ABS             @@@@ |P|         P''    P'       P   
-X<? "_T"  
+ABS             @@@@ |P|         P''    P'       P    @@## REQ:free42>=3.0.3
+X<? "_T"                                              @@## REQ:free42>=3.0.3
+XEQ 76                                                @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
 GTO 95
 R↓              @@@@ P''         P'     P        ?
 @@@@ TODO: Check P' for /0.  Another status: 5 = Iteration failed due to division by zero
@@ -2732,6 +2735,13 @@ R↓              @@@@ P
 X<>Y            @@@@ P      0
 RCL "_G"        @@@@ Root   Pval     0
 RTN
+LBL 76   @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+FUNC 00  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+ABS      @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+RCL "_T" @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+X>Y?     @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+RTNYES   @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+RTNNO    @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PWRP)
 @@@@ DSC: Make a polynomial stored in a matrix into a =MVAR= function

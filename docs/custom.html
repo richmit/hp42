@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-30 Fri 22:49 -->
+<!-- 2021-05-01 Sat 13:13 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Custom Menus</title>
@@ -241,28 +241,28 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org39849a2">1. Metadata</a></li>
+<li><a href="#orgc787b8a">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a>
 <ul>
-<li><a href="#org571b8bf">2.1. Customizing Custom Menu Table</a></li>
+<li><a href="#orgf5769d4">2.1. Customizing Custom Menu Table</a></li>
 </ul>
 </li>
-<li><a href="#org46b3d38">3. Custom Menus</a>
+<li><a href="#org29a7cbe">3. Custom Menus</a>
 <ul>
-<li><a href="#org031fec6">3.1. Menu Contents</a></li>
-<li><a href="#org7118ee1">3.2. Menu Code</a></li>
+<li><a href="#orga98091a">3.1. Menu Contents</a></li>
+<li><a href="#orgbf3ef56">3.2. Menu Code</a></li>
 </ul>
 </li>
 <li><a href="#system-custom">4. Create system <code>CUSTOM</code> Menu</a></li>
-<li><a href="#org3cdee3e">5. <code>SPREF</code>: Set some of my personal prefrences</a></li>
-<li><a href="#org5e25b4e">6. END</a></li>
-<li><a href="#org3fde0c8">7. EOF</a></li>
+<li><a href="#org1dae8bd">5. <code>SPREF</code>: Set some of my personal prefrences</a></li>
+<li><a href="#org9a6fcbe">6. END</a></li>
+<li><a href="#org0bbf955">7. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org39849a2" class="outline-2">
-<h2 id="org39849a2"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-orgc787b8a" class="outline-2">
+<h2 id="orgc787b8a"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/custom.html">https://richmit.github.io/hp42/custom.html</a>
@@ -329,14 +329,14 @@ The flow to create your custom CUST program:
 <ul class="org-ul">
 <li>Evaluate the "Generic menu generator" babel block in the <code>hp42s-meta.org</code> file.  This will define the function <code>MJR-generate-42-menu-code</code></li>
 <li>Evaluate the "For CUSTOM-type Menus" babel block in the <code>hp42s-meta.org</code> file.  This will define the function <code>MJR-custom-x-gen</code></li>
-<li>Define your menu in the <a href="#org031fec6">Menu Contents</a> section.</li>
-<li>Evaluate the babel block in the <a href="#org7118ee1">Menu Code</a> section below.</li>
+<li>Define your menu in the <a href="#orga98091a">Menu Contents</a> section.</li>
+<li>Evaluate the babel block in the <a href="#orgbf3ef56">Menu Code</a> section below.</li>
 <li>Load the program on your calculator</li>
 </ul>
 </div>
 
-<div id="outline-container-org571b8bf" class="outline-3">
-<h3 id="org571b8bf"><span class="section-number-3">2.1</span> Customizing Custom Menu Table</h3>
+<div id="outline-container-orgf5769d4" class="outline-3">
+<h3 id="orgf5769d4"><span class="section-number-3">2.1</span> Customizing Custom Menu Table</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 The first column (which I labeled Menu) describes the menu keys.  Colons are used to define a menu hierarchy.  For example "<code>top:mid:thingy</code>" means we have a
@@ -361,14 +361,14 @@ The other columns of the table are not used.
 </div>
 </div>
 
-<div id="outline-container-org46b3d38" class="outline-2">
-<h2 id="org46b3d38"><span class="section-number-2">3</span> Custom Menus</h2>
+<div id="outline-container-org29a7cbe" class="outline-2">
+<h2 id="org29a7cbe"><span class="section-number-2">3</span> Custom Menus</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org031fec6" class="outline-3">
-<h3 id="org031fec6"><span class="section-number-3">3.1</span> Menu Contents</h3>
+<div id="outline-container-orga98091a" class="outline-3">
+<h3 id="orga98091a"><span class="section-number-3">3.1</span> Menu Contents</h3>
 <div class="outline-text-3" id="text-3-1">
-<table id="orgcc15c97" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
+<table id="org3686fa3" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
 
 
 <colgroup>
@@ -464,8 +464,8 @@ The other columns of the table are not used.
 </div>
 </div>
 
-<div id="outline-container-org7118ee1" class="outline-3">
-<h3 id="org7118ee1"><span class="section-number-3">3.2</span> Menu Code</h3>
+<div id="outline-container-orgbf3ef56" class="outline-3">
+<h3 id="orgbf3ef56"><span class="section-number-3">3.2</span> Menu Code</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 The menu program is generated via the following bit of elisp.  You must first define the <code>MJR-generate-42-menu-code</code> and <code>MJR-custom-x-gen</code> by evaluating the code blocks in the <code>hp42s-meta.org</code> file.
@@ -547,7 +547,7 @@ Sometimes our carefully built in <code>CUSTOM</code> menu is lost &#x2013; an er
 each key.
 </p>
 
-<table id="org42ba4fd" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
+<table id="orge33a4dc" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
 
 
 <colgroup>
@@ -736,8 +736,8 @@ Simply evaluate the followign lisp block, and the 42s program will be created.
 </div>
 </div>
 
-<div id="outline-container-org3cdee3e" class="outline-2">
-<h2 id="org3cdee3e"><span class="section-number-2">5</span> <code>SPREF</code>: Set some of my personal prefrences</h2>
+<div id="outline-container-org1dae8bd" class="outline-2">
+<h2 id="org1dae8bd"><span class="section-number-2">5</span> <code>SPREF</code>: Set some of my personal prefrences</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-SPREF" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SPREF)</span>
@@ -771,8 +771,8 @@ CL12    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">
 </div>
 </div>
 
-<div id="outline-container-org5e25b4e" class="outline-2">
-<h2 id="org5e25b4e"><span class="section-number-2">6</span> END</h2>
+<div id="outline-container-org9a6fcbe" class="outline-2">
+<h2 id="org9a6fcbe"><span class="section-number-2">6</span> END</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -782,8 +782,8 @@ CL12    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">
 </div>
 </div>
 
-<div id="outline-container-org3fde0c8" class="outline-2">
-<h2 id="org3fde0c8"><span class="section-number-2">7</span> EOF</h2>
+<div id="outline-container-org0bbf955" class="outline-2">
+<h2 id="org0bbf955"><span class="section-number-2">7</span> EOF</h2>
 <div class="outline-text-2" id="text-7">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -794,7 +794,7 @@ CL12    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-30 Fri 22:49 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-01 Sat 13:13 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
 </div>
 </body>
 </html>

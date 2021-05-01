@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-29 Thu 21:30 -->
+<!-- 2021-05-01 Sat 09:57 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Programming Tools</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-29 21:30:55</i></td>
+<td class="org-left"><i>2021-05-01 09:21:46</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,46 +241,45 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org1105d39">1. Metadata</a></li>
+<li><a href="#org3c37929">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
 <li><a href="#menu-gen">3. Generating 42s menu code</a>
 <ul>
-<li><a href="#org0c2baf3">3.1. Generic menu generator</a></li>
-<li><a href="#orgfad636e">3.2. For CUSTOM-type Menus</a></li>
-<li><a href="#orga98266c">3.3. Always generate local lables</a></li>
-<li><a href="#orge89ff11">3.4. Test Table For <code>MJR-generate-42-menu-code</code></a></li>
+<li><a href="#orge44aacf">3.1. Generic menu generator</a></li>
+<li><a href="#org19d7aa7">3.2. For CUSTOM-type Menus</a></li>
+<li><a href="#orgdd868ae">3.3. Always generate local lables</a></li>
 </ul>
 </li>
-<li><a href="#orge11c713">4. Emacs Helper Stuff</a>
+<li><a href="#org8b83d82">4. Emacs Helper Stuff</a>
 <ul>
-<li><a href="#org6f77ba0">4.1. Emacs function to insert charcters given a list of character codes</a></li>
-<li><a href="#org05ede63">4.2. Emacs Mode for 42s Code</a></li>
-<li><a href="#org820d54a">4.3. yas templates</a></li>
-<li><a href="#orgb08a94a">4.4. Export &amp; Tangle from dired</a></li>
+<li><a href="#org3f0f061">4.1. Emacs function to insert charcters given a list of character codes</a></li>
+<li><a href="#org849375a">4.2. Emacs Mode for 42s Code</a></li>
+<li><a href="#orgc575048">4.3. yas templates</a></li>
+<li><a href="#orgef8ac6c">4.4. Export &amp; Tangle from dired</a></li>
 </ul>
 </li>
-<li><a href="#org5547154">5. Prepare Code For Conversion</a></li>
-<li><a href="#org5a97bc3">6. Prepare Marked Region for Code Conversion</a></li>
-<li><a href="#org37bf3cb">7. Tangle &amp; Load Tangled File</a></li>
-<li><a href="#org55837ee">8. free42 Notes</a>
+<li><a href="#org6a16e90">5. Prepare Code For Conversion</a></li>
+<li><a href="#org98db17b">6. Prepare Marked Region for Code Conversion</a></li>
+<li><a href="#orgedb4f09">7. Tangle &amp; Load Tangled File</a></li>
+<li><a href="#org87e4771">8. free42 Notes</a>
 <ul>
-<li><a href="#org10ace19">8.1. Character Set</a></li>
-<li><a href="#orgb36b082">8.2. Date format</a></li>
-<li><a href="#org6e70d2f">8.3. Stats registers</a></li>
+<li><a href="#org54a1d36">8.1. Character Set</a></li>
+<li><a href="#org1646fe1">8.2. Date format</a></li>
+<li><a href="#org3c013ed">8.3. Stats registers</a></li>
 </ul>
 </li>
-<li><a href="#org714d4d9">9. DM 42 Notes</a>
+<li><a href="#orgdd048df">9. DM 42 Notes</a>
 <ul>
-<li><a href="#org829bcc4">9.1. Display</a></li>
+<li><a href="#org68b4e31">9.1. Display</a></li>
 </ul>
 </li>
-<li><a href="#orgf214273">10. EOF</a></li>
+<li><a href="#orga69bda3">10. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org1105d39" class="outline-2">
-<h2 id="org1105d39"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org3c37929" class="outline-2">
+<h2 id="org3c37929"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/hp42s-meta.html">https://richmit.github.io/hp42/hp42s-meta.html</a>
@@ -358,8 +357,8 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
 <div class="outline-text-2" id="text-menu-gen">
 </div>
 
-<div id="outline-container-org0c2baf3" class="outline-3">
-<h3 id="org0c2baf3"><span class="section-number-3">3.1</span> Generic menu generator</h3>
+<div id="outline-container-orge44aacf" class="outline-3">
+<h3 id="orge44aacf"><span class="section-number-3">3.1</span> Generic menu generator</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 This code will read an org-mode table describing a menu, and generate 42s code to implement the menu.  The only limitation on menu depth and size are the
@@ -624,7 +623,7 @@ tables.
                                 (rec-key-labs     nil)
                                 (rec-pag-labs     nil))
                            (<span style="color: #00ffff;">if</span> (= parent-lbl numeric-lbl-start)
-                               (add-m-code (message <span style="color: #fa8072;">"LBL \"%s\""</span> (cl-first menu))))
+                               (add-m-code (format <span style="color: #fa8072;">"LBL \"%s\""</span> (cl-first menu))))
                            (<span style="color: #00ffff;">cl-loop</span> for mkey-elt in (cdr menu)
                                     for mkey-num from 0
                                     for page-num = (truncate (/ mkey-num 6))
@@ -645,29 +644,29 @@ tables.
                                                             (<span style="color: #00ffff;">and</span> (not (string-empty-p auto-trg))
                                                                  (<span style="color: #00ffff;">if</span> (string-match-p <span style="color: #fa8072;">"^LBL [0-9][0-9]$"</span> auto-trg)
                                                                      (substring auto-trg 4)
-                                                                     (message <span style="color: #fa8072;">"\"%s\""</span> auto-trg)))))
-                                    <span style="color: #ffa500;">;;</span><span style="color: #ff7f24;">do (print (message "mkey-str: %s    auto-trg: %s    mkey-trg: %s" mkey-str auto-trg mkey-trg))</span>
+                                                                     (format <span style="color: #fa8072;">"\"%s\""</span> auto-trg)))))
+                                    <span style="color: #ffa500;">;;</span><span style="color: #ff7f24;">do (print (format "mkey-str: %s    auto-trg: %s    mkey-trg: %s" mkey-str auto-trg mkey-trg))</span>
                                     when (= page-key 0)
-                                    do (<span style="color: #00ffff;">progn</span> (add-m-code (message <span style="color: #fa8072;">"LBL %02d            @@@@ Page %d of menu %s"</span>
+                                    do (<span style="color: #00ffff;">progn</span> (add-m-code (format <span style="color: #fa8072;">"LBL %02d            @@@@ Page %d of menu %s"</span>
                                                                    (nth page-num page-labs)
                                                                    (1+ page-num)
                                                                    (cl-first menu)))
                                               (add-m-code <span style="color: #fa8072;">"CLMENU"</span>))
                                     when (not (<span style="color: #00ffff;">or</span> (string-empty-p mkey-str) (string-equal mkey-str <span style="color: #fa8072;">"&#9618;&#9618;&#9618;&#9618;"</span>)))
                                     do (<span style="color: #00ffff;">progn</span> (<span style="color: #00ffff;">if</span> (string-match-p <span style="color: #fa8072;">"^LBL [0-9][0-9]$"</span> mkey-str)
-                                                  (<span style="color: #00ffff;">progn</span> (add-m-code (message <span style="color: #fa8072;">"XEQ %s"</span> (substring mkey-str 4)))
+                                                  (<span style="color: #00ffff;">progn</span> (add-m-code (format <span style="color: #fa8072;">"XEQ %s"</span> (substring mkey-str 4)))
                                                          (<span style="color: #00ffff;">setq</span> no-local nil))
-                                                  (add-m-code (message <span style="color: #fa8072;">"\"%s\""</span> mkey-str)))
+                                                  (add-m-code (format <span style="color: #fa8072;">"\"%s\""</span> mkey-str)))
                                               (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">or</span> (not is-leaf) (not mkey-trg))
-                                                  (add-m-code (message <span style="color: #fa8072;">"KEY %d %s %02d"</span> 
+                                                  (add-m-code (format <span style="color: #fa8072;">"KEY %d %s %02d"</span> 
                                                                        (1+ page-key) 
                                                                        (<span style="color: #00ffff;">if</span> is-leaf <span style="color: #fa8072;">"XEQ"</span> <span style="color: #fa8072;">"GTO"</span>) 
                                                                        min-free-lab))
                                                   (<span style="color: #00ffff;">progn</span> 
-                                                    (add-m-code (message <span style="color: #fa8072;">"KEY %d XEQ %s"</span> (1+ page-key) mkey-trg))
+                                                    (add-m-code (format <span style="color: #fa8072;">"KEY %d XEQ %s"</span> (1+ page-key) mkey-trg))
                                                     (<span style="color: #00ffff;">setq</span> no-local nil)))
                                               (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">and</span> (not mkey-trg) is-leaf)
-                                                  (<span style="color: #00ffff;">progn</span> (add-x-code (message 
+                                                  (<span style="color: #00ffff;">progn</span> (add-x-code (format 
                                                                       <span style="color: #fa8072;">"LBL %02d    @@@@ Action for menu key %s"</span> 
                                                                       min-free-lab
                                                                       mkey-str))
@@ -676,7 +675,7 @@ tables.
                                                                                   auto-trg 
                                                                                   mkey-trg
                                                                                   (aref mkey-elt 1)))
-                                                             (add-x-code (message <span style="color: #fa8072;">"@@@@ TODO: Code for %s!"</span> 
+                                                             (add-x-code (format <span style="color: #fa8072;">"@@@@ TODO: Code for %s!"</span> 
                                                                                   mkey-str)))
                                                          (add-x-code <span style="color: #fa8072;">"RTN"</span>)))
                                               (<span style="color: #00ffff;">push</span> min-free-lab rec-key-labs)
@@ -685,22 +684,22 @@ tables.
                                               (<span style="color: #00ffff;">push</span> (nth page-num page-labs) rec-pag-labs))
                                     when (<span style="color: #00ffff;">or</span> (= page-key 5) (= mkey-num (1- num-menu-keys)))
                                     do (<span style="color: #00ffff;">progn</span> (<span style="color: #00ffff;">if</span> (&lt; 1 num-menu-page)
-                                                  (<span style="color: #00ffff;">progn</span> (add-m-code (message <span style="color: #fa8072;">"KEY 7 GTO %02d"</span> 
+                                                  (<span style="color: #00ffff;">progn</span> (add-m-code (format <span style="color: #fa8072;">"KEY 7 GTO %02d"</span> 
                                                                               (nth (mod (1- page-num) 
                                                                                         num-menu-page) 
                                                                                    page-labs)))
-                                                         (add-m-code (message <span style="color: #fa8072;">"KEY 8 GTO %02d"</span>
+                                                         (add-m-code (format <span style="color: #fa8072;">"KEY 8 GTO %02d"</span>
                                                                               (nth (mod (1+ page-num) 
                                                                                         num-menu-page) 
                                                                                    page-labs)))))
                                               (<span style="color: #00ffff;">if</span> (string-equal menu-exit-behavior <span style="color: #fa8072;">"up"</span>)
-                                                  (add-m-code (message <span style="color: #fa8072;">"KEY 9 GTO %02d"</span> parent-lbl))
-                                                  (add-m-code (message <span style="color: #fa8072;">"KEY 9 GTO %02d"</span> 0)))
+                                                  (add-m-code (format <span style="color: #fa8072;">"KEY 9 GTO %02d"</span> parent-lbl))
+                                                  (add-m-code (format <span style="color: #fa8072;">"KEY 9 GTO %02d"</span> 0)))
                                               (add-m-code <span style="color: #fa8072;">"MENU"</span>)
                                               (add-m-code <span style="color: #fa8072;">"STOP"</span>)
                                               (<span style="color: #00ffff;">if</span> (string-equal after-leaf-action <span style="color: #fa8072;">"stay"</span>)
-                                                  (add-m-code (message <span style="color: #fa8072;">"GTO %02d"</span> (nth page-num page-labs)))
-                                                  (add-m-code (message <span style="color: #fa8072;">"GTO %02d"</span> 0)))))
+                                                  (add-m-code (format <span style="color: #fa8072;">"GTO %02d"</span> (nth page-num page-labs)))
+                                                  (add-m-code (format <span style="color: #fa8072;">"GTO %02d"</span> 0)))))
                            (<span style="color: #00ffff;">cl-loop</span> for mkey-elt in (cdr menu)
                                     for m-lab in (reverse rec-key-labs)
                                     for p-lab in (reverse rec-pag-labs)
@@ -709,7 +708,7 @@ tables.
       (gen-mnu numeric-lbl-start 
                (1+ numeric-lbl-start)
                (prc-mnu (append (list top-lab) (<span style="color: #00ffff;">cl-loop</span> for row in tbl
-                                                        for row-strs = (mapcar (<span style="color: #00ffff;">lambda</span> (x) (replace-regexp-in-string <span style="color: #fa8072;">"&#166;"</span> <span style="color: #fa8072;">"|"</span> (message <span style="color: #fa8072;">"%s"</span> x) 't 't)) 
+                                                        for row-strs = (mapcar (<span style="color: #00ffff;">lambda</span> (x) (replace-regexp-in-string <span style="color: #fa8072;">"&#166;"</span> <span style="color: #fa8072;">"|"</span> (format <span style="color: #fa8072;">"%s"</span> x) 't 't)) 
                                                                                row)
                                                         for n from 0
                                                         for menu-parts = (split-string 
@@ -718,16 +717,16 @@ tables.
                                                         do (<span style="color: #00ffff;">setf</span> (car (last menu-parts))
                                                                  (vector (car (last menu-parts)) row-strs))
                                                         collect menu-parts))))
-      (add-m-code <span style="color: #fa8072;">"LBL 00 @@@@ Application Exit"</span>)
+      (add-m-code (format <span style="color: #fa8072;">"LBL %02d @@@@ Application Exit"</span> numeric-lbl-start))
       (add-m-code <span style="color: #fa8072;">"EXITALL"</span>)
       (add-m-code <span style="color: #fa8072;">"RTN"</span>) 
       (<span style="color: #00ffff;">if</span> (&lt; 100 min-free-lab)
           (<span style="color: #ffc0cb; font-weight: bold;">error</span> <span style="color: #fa8072;">"ERROR: Too many local labels: %d"</span> min-free-lab)))
-    (princ (message <span style="color: #fa8072;">"%s (ref:%s)\n"</span> (make-string 80 ?@)  top-lab))
-    (princ (message <span style="color: #fa8072;">"@@@@ DSC: Auto-generated menu program\n"</span>))
+    (princ (format <span style="color: #fa8072;">"%s (ref:%s)\n"</span> (make-string 80 ?@)  top-lab))
+    (princ (format <span style="color: #fa8072;">"@@@@ DSC: Auto-generated menu program\n"</span>))
     (princ m-code)
     (princ x-code)
-    (princ (message <span style="color: #fa8072;">"@@@@ Free labels start at: %d\n"</span> min-free-lab))
+    (princ (format <span style="color: #fa8072;">"@@@@ Free labels start at: %d\n"</span> min-free-lab))
     (<span style="color: #00ffff;">if</span> no-local
         (princ <span style="color: #fa8072;">"END"</span>))))
 </pre>
@@ -735,8 +734,8 @@ tables.
 </div>
 </div>
 
-<div id="outline-container-orgfad636e" class="outline-3">
-<h3 id="orgfad636e"><span class="section-number-3">3.2</span> For CUSTOM-type Menus</h3>
+<div id="outline-container-org19d7aa7" class="outline-3">
+<h3 id="org19d7aa7"><span class="section-number-3">3.2</span> For CUSTOM-type Menus</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 These functions are useful for CUSTOM-type menus &#x2013; that is menus that call other programs or built in functions.  I use this as a way to add hierarchy to the
@@ -811,8 +810,8 @@ the org-mode file and the whole thing will then be tangled together into one pro
 </div>
 </div>
 
-<div id="outline-container-orga98266c" class="outline-3">
-<h3 id="orga98266c"><span class="section-number-3">3.3</span> Always generate local lables</h3>
+<div id="outline-container-orgdd868ae" class="outline-3">
+<h3 id="orgdd868ae"><span class="section-number-3">3.3</span> Always generate local lables</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 This function is handy when you want to always generate local labels.
@@ -824,254 +823,14 @@ This function is handy when you want to always generate local labels.
 </div>
 </div>
 </div>
-
-<div id="outline-container-orge89ff11" class="outline-3">
-<h3 id="orge89ff11"><span class="section-number-3">3.4</span> Test Table For <code>MJR-generate-42-menu-code</code></h3>
-<div class="outline-text-3" id="text-3-4">
-<table id="org8b2f4bd" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-right" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">Menu 1</th>
-<th scope="col" class="org-left">Menu 2</th>
-<th scope="col" class="org-left">Targ</th>
-<th scope="col" class="org-right">Data 1</th>
-<th scope="col" class="org-left">Data 2</th>
-<th scope="col" class="org-left">Menu 2</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">a</td>
-<td class="org-left">a</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-right">1</td>
-<td class="org-left">A</td>
-<td class="org-left">A</td>
-</tr>
-
-<tr>
-<td class="org-left">TAN</td>
-<td class="org-left">TAN</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-right">2</td>
-<td class="org-left">B</td>
-<td class="org-left">B</td>
-</tr>
-
-<tr>
-<td class="org-left">TAN</td>
-<td class="org-left">TAN</td>
-<td class="org-left">COS</td>
-<td class="org-right">3.14</td>
-<td class="org-left">B</td>
-<td class="org-left">B</td>
-</tr>
-
-<tr>
-<td class="org-left">c:d</td>
-<td class="org-left">c:d</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-right">3</td>
-<td class="org-left">D</td>
-<td class="org-left">C:D</td>
-</tr>
-
-<tr>
-<td class="org-left">c:e</td>
-<td class="org-left">c:e</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-right">4</td>
-<td class="org-left">E</td>
-<td class="org-left">C:D</td>
-</tr>
-
-<tr>
-<td class="org-left">c:f:</td>
-<td class="org-left">c:f:</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-right">5</td>
-<td class="org-left">G</td>
-<td class="org-left">C:F:</td>
-</tr>
-
-<tr>
-<td class="org-left">c:f:h</td>
-<td class="org-left">c:f:h</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-right">6</td>
-<td class="org-left">H</td>
-<td class="org-left">C:F:H</td>
-</tr>
-
-<tr>
-<td class="org-left">i</td>
-<td class="org-left">i</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-right">7</td>
-<td class="org-left">I</td>
-<td class="org-left">I</td>
-</tr>
-
-<tr>
-<td class="org-left">j</td>
-<td class="org-left">j</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-right">8</td>
-<td class="org-left">I</td>
-<td class="org-left">J</td>
-</tr>
-
-<tr>
-<td class="org-left">n:LBL 89</td>
-<td class="org-left">n:m</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-right">12</td>
-<td class="org-left">N</td>
-<td class="org-left">N:LBL 79</td>
-</tr>
-
-<tr>
-<td class="org-left">LBL 88</td>
-<td class="org-left">p</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-right">13</td>
-<td class="org-left">O</td>
-<td class="org-left">LBL 73</td>
-</tr>
-</tbody>
-</table>
-
-<div class="org-src-container">
-<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"PROG_NAME"</span> 0 tbl 1 nil 'stay 'up #'MJR-local-only-gen-lab nil) <span style="color: #ffa500;">;;</span><span style="color: #ff7f24;">#'MJR-custom-gen-lab #'MJR-custom-gen-sub)</span>
-</pre>
 </div>
 
-<div class="org-src-container">
-<pre class="src src-hp42s"><span id="coderef-PROG_NAME" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PROG_NAME)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Auto-generated menu program</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"PROG_NAME"</span>
-<span style="color: #00ffff;">LBL</span> 01            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu PROG_NAME</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"a"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 03
-<span style="color: #fa8072;">"TAN"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 04
-<span style="color: #fa8072;">"TAN"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 05
-<span style="color: #fa8072;">"c"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">GTO</span> 06
-<span style="color: #fa8072;">"i"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 07
-<span style="color: #fa8072;">"j"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 08
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 02
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 02
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> 01
-<span style="color: #00ffff;">LBL</span> 02            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu PROG_NAME</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"n"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">GTO</span> 09
-<span style="color: #fa8072;">"p"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 10
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 01
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 01
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> 02
-<span style="color: #00ffff;">LBL</span> 06            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu c</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"d"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 11
-<span style="color: #fa8072;">"e"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 12
-<span style="color: #fa8072;">"f"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">GTO</span> 13
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 01
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> 06
-<span style="color: #00ffff;">LBL</span> 13            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu f</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"h"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 14
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 06
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> 13
-<span style="color: #00ffff;">LBL</span> 09            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu n</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"m"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 15
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 02
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> 09
-<span style="color: #00ffff;">LBL</span> 00 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Application Exit</span>
-<span style="color: #00ffff;">EXITALL</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 03    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key a</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TODO: Code for a!</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 04    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key TAN</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TODO: Code for TAN!</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 05    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key TAN</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TODO: Code for TAN!</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 07    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key i</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TODO: Code for i!</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 08    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key j</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TODO: Code for j!</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 10    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key p</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TODO: Code for p!</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 11    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key d</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TODO: Code for d!</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 12    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key e</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TODO: Code for e!</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 14    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key h</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TODO: Code for h!</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 15    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key m</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TODO: Code for m!</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Free labels start at: 16</span>
-<span style="color: #00ffff;">END</span>
-</pre>
-</div>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orge11c713" class="outline-2">
-<h2 id="orge11c713"><span class="section-number-2">4</span> Emacs Helper Stuff</h2>
+<div id="outline-container-org8b83d82" class="outline-2">
+<h2 id="org8b83d82"><span class="section-number-2">4</span> Emacs Helper Stuff</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org6f77ba0" class="outline-3">
-<h3 id="org6f77ba0"><span class="section-number-3">4.1</span> Emacs function to insert charcters given a list of character codes</h3>
+<div id="outline-container-org3f0f061" class="outline-3">
+<h3 id="org3f0f061"><span class="section-number-3">4.1</span> Emacs function to insert charcters given a list of character codes</h3>
 <div class="outline-text-3" id="text-4-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-ins42char</span> (charn)
@@ -1093,8 +852,8 @@ This function is handy when you want to always generate local labels.
 </div>
 </div>
 
-<div id="outline-container-org05ede63" class="outline-3">
-<h3 id="org05ede63"><span class="section-number-3">4.2</span> Emacs Mode for 42s Code</h3>
+<div id="outline-container-org849375a" class="outline-3">
+<h3 id="org849375a"><span class="section-number-3">4.2</span> Emacs Mode for 42s Code</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 This isn't really a proper mode for 42s code.  Just a quick hack with <code>define-generic-mode</code> to get some syntax highlighting &#x2013; which doesn't fully work as
@@ -1104,7 +863,7 @@ but this works for now.
 
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">define-generic-mode</span> '<span style="color: #00fa9a; font-weight: bold;">hp42s-mode</span>
-                     '(<span style="color: #fa8072;">"@@@@"</span> <span style="color: #fa8072;">"@@"</span>)
+                     '(<span style="color: #fa8072;">"@@@@"</span> <span style="color: #fa8072;">"@@##"</span> <span style="color: #fa8072;">"@NM@"</span>)
                      '(<span style="color: #fa8072;">"%"</span> <span style="color: #fa8072;">"%CH"</span> <span style="color: #fa8072;">"+"</span> <span style="color: #fa8072;">"+/-"</span> <span style="color: #fa8072;">"-"</span> <span style="color: #fa8072;">"1/X"</span> <span style="color: #fa8072;">"10&#8593;X"</span> <span style="color: #fa8072;">"ABS"</span> <span style="color: #fa8072;">"ACOS"</span> <span style="color: #fa8072;">"ACOSH"</span> <span style="color: #fa8072;">"ADV"</span> <span style="color: #fa8072;">"AGRAPH"</span> <span style="color: #fa8072;">"AIP"</span> <span style="color: #fa8072;">"ALENG"</span> <span style="color: #fa8072;">"ALL"</span> <span style="color: #fa8072;">"ALL&#931;"</span> <span style="color: #fa8072;">"AND"</span> <span style="color: #fa8072;">"AOFF"</span> <span style="color: #fa8072;">"AON"</span> <span style="color: #fa8072;">"ARCL"</span> <span style="color: #fa8072;">"AROT"</span> <span style="color: #fa8072;">"ASHF"</span> <span style="color: #fa8072;">"ASIN"</span> <span style="color: #fa8072;">"ASINH"</span> <span style="color: #fa8072;">"ASSIGN"</span> <span style="color: #fa8072;">"ASTO"</span> <span style="color: #fa8072;">"ATAN"</span> <span style="color: #fa8072;">"ATANH"</span> <span style="color: #fa8072;">"ATOX"</span> <span style="color: #fa8072;">"AVIEW"</span>
                        <span style="color: #fa8072;">"BASE+"</span> <span style="color: #fa8072;">"BASE+/-"</span> <span style="color: #fa8072;">"BASE-"</span> <span style="color: #fa8072;">"BASE&#215;"</span> <span style="color: #fa8072;">"BASE&#247;"</span> <span style="color: #fa8072;">"BEEP"</span> <span style="color: #fa8072;">"BEST"</span> <span style="color: #fa8072;">"BINM"</span> <span style="color: #fa8072;">"BIT"</span>  <span style="color: #fa8072;">"BIT"</span>  <span style="color: #fa8072;">"CF"</span> <span style="color: #fa8072;">"CLA"</span> <span style="color: #fa8072;">"CLD"</span> <span style="color: #fa8072;">"CLKEYS"</span> <span style="color: #fa8072;">"CLLCD"</span> <span style="color: #fa8072;">"CLMENU"</span> <span style="color: #fa8072;">"CLP"</span> <span style="color: #fa8072;">"CLRG"</span> <span style="color: #fa8072;">"CLST"</span> <span style="color: #fa8072;">"CLV"</span> <span style="color: #fa8072;">"CLX"</span> <span style="color: #fa8072;">"CL&#931;"</span> <span style="color: #fa8072;">"COMB"</span> <span style="color: #fa8072;">"COMPLEX"</span> <span style="color: #fa8072;">"CORR"</span> <span style="color: #fa8072;">"COS"</span> <span style="color: #fa8072;">"COSH"</span>
                        <span style="color: #fa8072;">"CPX"</span>  <span style="color: #fa8072;">"CPXRES"</span> <span style="color: #fa8072;">"CROSS"</span> <span style="color: #fa8072;">"CUSTOM"</span> <span style="color: #fa8072;">"DECM"</span> <span style="color: #fa8072;">"DEG"</span> <span style="color: #fa8072;">"DELAY"</span> <span style="color: #fa8072;">"DELR"</span> <span style="color: #fa8072;">"DET"</span> <span style="color: #fa8072;">"DIM"</span> <span style="color: #fa8072;">"DIM"</span>  <span style="color: #fa8072;">"DOT"</span> <span style="color: #fa8072;">"DSE"</span> <span style="color: #fa8072;">"EDIT"</span> <span style="color: #fa8072;">"EDITN"</span> <span style="color: #fa8072;">"END"</span> <span style="color: #fa8072;">"ENG"</span> <span style="color: #fa8072;">"ENTER"</span> <span style="color: #fa8072;">"EXITALL"</span> <span style="color: #fa8072;">"EXPF"</span> <span style="color: #fa8072;">"E&#8593;X"</span> <span style="color: #fa8072;">"E&#8593;X-1"</span> <span style="color: #fa8072;">"FC"</span>  <span style="color: #fa8072;">"FC?C"</span> <span style="color: #fa8072;">"FCSTX"</span> <span style="color: #fa8072;">"FCSTY"</span> <span style="color: #fa8072;">"FIX"</span>
@@ -1129,8 +888,8 @@ but this works for now.
 </div>
 </div>
 
-<div id="outline-container-org820d54a" class="outline-3">
-<h3 id="org820d54a"><span class="section-number-3">4.3</span> yas templates</h3>
+<div id="outline-container-orgc575048" class="outline-3">
+<h3 id="orgc575048"><span class="section-number-3">4.3</span> yas templates</h3>
 <div class="outline-text-3" id="text-4-3">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #b0c4de;">echo</span> <span style="color: #fa8072;">''</span>
@@ -1191,8 +950,8 @@ RTN       @@@@ IF-TRUE-END (<span style="color: #00ffff;">$</span><span style="c
 </div>
 </div>
 
-<div id="outline-container-orgb08a94a" class="outline-3">
-<h3 id="orgb08a94a"><span class="section-number-3">4.4</span> Export &amp; Tangle from dired</h3>
+<div id="outline-container-orgef8ac6c" class="outline-3">
+<h3 id="orgef8ac6c"><span class="section-number-3">4.4</span> Export &amp; Tangle from dired</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 This will export to HTML and tangle all marked files in a dired buffer.
@@ -1220,8 +979,8 @@ This will export to HTML and tangle all marked files in a dired buffer.
 </div>
 </div>
 
-<div id="outline-container-org5547154" class="outline-2">
-<h2 id="org5547154"><span class="section-number-2">5</span> Prepare Code For Conversion</h2>
+<div id="outline-container-org6a16e90" class="outline-2">
+<h2 id="org6a16e90"><span class="section-number-2">5</span> Prepare Code For Conversion</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 I include comments like <code>@@##</code> that I use like compiler directives in C.  They provide a way to remove lines of code that are incompatible or unnecessary for
@@ -1328,8 +1087,8 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-org5a97bc3" class="outline-2">
-<h2 id="org5a97bc3"><span class="section-number-2">6</span> Prepare Marked Region for Code Conversion</h2>
+<div id="outline-container-org98db17b" class="outline-2">
+<h2 id="org98db17b"><span class="section-number-2">6</span> Prepare Marked Region for Code Conversion</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-copy-42s-code-in-region</span> ()
@@ -1347,8 +1106,8 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-org37bf3cb" class="outline-2">
-<h2 id="org37bf3cb"><span class="section-number-2">7</span> Tangle &amp; Load Tangled File</h2>
+<div id="outline-container-orgedb4f09" class="outline-2">
+<h2 id="orgedb4f09"><span class="section-number-2">7</span> Tangle &amp; Load Tangled File</h2>
 <div class="outline-text-2" id="text-7">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-tangle-and-load</span> ()
@@ -1366,12 +1125,12 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-org55837ee" class="outline-2">
-<h2 id="org55837ee"><span class="section-number-2">8</span> free42 Notes</h2>
+<div id="outline-container-org87e4771" class="outline-2">
+<h2 id="org87e4771"><span class="section-number-2">8</span> free42 Notes</h2>
 <div class="outline-text-2" id="text-8">
 </div>
-<div id="outline-container-org10ace19" class="outline-3">
-<h3 id="org10ace19"><span class="section-number-3">8.1</span> Character Set</h3>
+<div id="outline-container-org54a1d36" class="outline-3">
+<h3 id="org54a1d36"><span class="section-number-3">8.1</span> Character Set</h3>
 <div class="outline-text-3" id="text-8-1">
 <div class="org-src-container">
 <pre class="src src-text">  0 &#247;
@@ -1509,8 +1268,8 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-orgb36b082" class="outline-3">
-<h3 id="orgb36b082"><span class="section-number-3">8.2</span> Date format</h3>
+<div id="outline-container-org1646fe1" class="outline-3">
+<h3 id="org1646fe1"><span class="section-number-3">8.2</span> Date format</h3>
 <div class="outline-text-3" id="text-8-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -1552,8 +1311,8 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-org6e70d2f" class="outline-3">
-<h3 id="org6e70d2f"><span class="section-number-3">8.3</span> Stats registers</h3>
+<div id="outline-container-org3c013ed" class="outline-3">
+<h3 id="org3c013ed"><span class="section-number-3">8.3</span> Stats registers</h3>
 <div class="outline-text-3" id="text-8-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1640,12 +1399,12 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-org714d4d9" class="outline-2">
-<h2 id="org714d4d9"><span class="section-number-2">9</span> DM 42 Notes</h2>
+<div id="outline-container-orgdd048df" class="outline-2">
+<h2 id="orgdd048df"><span class="section-number-2">9</span> DM 42 Notes</h2>
 <div class="outline-text-2" id="text-9">
 </div>
-<div id="outline-container-org829bcc4" class="outline-3">
-<h3 id="org829bcc4"><span class="section-number-3">9.1</span> Display</h3>
+<div id="outline-container-org68b4e31" class="outline-3">
+<h3 id="org68b4e31"><span class="section-number-3">9.1</span> Display</h3>
 <div class="outline-text-3" id="text-9-1">
 <p>
 GrMod is a read write variable.
@@ -1663,8 +1422,8 @@ ResX &amp; ResY are read only variables that have the display resolution
 </div>
 </div>
 
-<div id="outline-container-orgf214273" class="outline-2">
-<h2 id="orgf214273"><span class="section-number-2">10</span> EOF</h2>
+<div id="outline-container-orga69bda3" class="outline-2">
+<h2 id="orga69bda3"><span class="section-number-2">10</span> EOF</h2>
 <div class="outline-text-2" id="text-10">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1675,7 +1434,7 @@ ResX &amp; ResY are read only variables that have the display resolution
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-29 Thu 21:30 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-01 Sat 09:57 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
 </div>
 </body>
 </html>

@@ -158,7 +158,7 @@ Reports can be automatically generated upon entry of a configurable number of me
 | CLRM   | LBL 95 | CLRM  | Clear all measurements        |                                                                     |
 |--------+--------+-------+-------------------------------+---------------------------------------------------------------------|
 | μ      | LBL 94 | μ     | Arithmetic Mean               | Normal Errors: Measurement estimate                                 |
-| kuN    | LBL 92 | kuN   | ERR: k*SSD                    | Normal Errors: Expanded uncertainty estimate                        |
+| kuN    | LBL 93 | kuN   | ERR: k*SSD                    | Normal Errors: Expanded uncertainty estimate                        |
 | MR     | LBL 92 | MR    | Midrange                      | Rectangular Errors: Measurement estimate                            |
 | kuR    | LBL 91 | kuR   | ERR: k*(MAX-MIN)/(2*sqrt(3))  | Rectangular Errors: Expanded uncertainty estimate                   |
 | MIN    | LBL 89 | MIN   | Minimum value                 |                                                                     |
@@ -273,7 +273,7 @@ CLMENU
 "μ"
 KEY 1 XEQ 94
 "kuN"
-KEY 2 XEQ 92
+KEY 2 XEQ 93
 "MR"
 KEY 3 XEQ 92
 "kuR"
@@ -367,7 +367,7 @@ CLV "MeRDM"
 CLV "MeREP"
 CLV "MeRSC"
 CLV "MeTGN"
-XEQ 49
+XEQ 49 @NM@ DEFVAR
 "MeDAT & Set"
 ├"tings RESET"
 AVIEW
@@ -375,7 +375,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: EDIT: LABEL 38
-LBL 38
+LBL 38 @NM@ EDIT
 FUNC 00
 SF 25
 RCL "MeDAT"
@@ -387,20 +387,20 @@ EDITN "MeDAT"
 ├" to end"
 PROMPT
 EXITALL
-XEQ 47
+XEQ 47 @NM@ SMLREP 
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: M+: LABEL 70
-LBL 70
+LBL 70 @NM@ M+_LBL
 FUNC 00
-XEQ 49
+XEQ 49 @NM@ DEFVAR
 "M+"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Set unset variables to defaults
-LBL 49
+LBL 49 @NM@ DEFVAR
 FUNC 00
 0
 SF 25
@@ -428,7 +428,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: A: LABEL 78
-LBL 78
+LBL 78 @NM@ A_LBL
 FUNC 00
 "A:"
 RCL "MeTGN"
@@ -441,7 +441,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: S: LABEL 79
-LBL 79
+LBL 79 @NM@ S_LAB
 FUNC 00
 "S:"
 RCL "MeRSC"
@@ -453,7 +453,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: k: LABEL 48
-LBL 48
+LBL 48 @NM@ k_LAB
 FUNC 00    
 "k:"
 RCL "MeCFA"
@@ -466,7 +466,7 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: A: ACTION 80
 @@@@ A can be 0 or in [3,99]
-LBL 80
+LBL 80 @NM@ A_ACT
 FUNC 00
 0
 X≤Y?
@@ -496,7 +496,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: k: ACTION 81
-LBL 81
+LBL 81 @NM@ k_ACT
 FUNC 00
 1
 RCL+ "MeCFA"
@@ -520,7 +520,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: S: ACTION 82
-LBL 82
+LBL 82 @NM@ S_ACT
 FUNC 00
 1
 RCL+ "MeRSC"
@@ -535,14 +535,14 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: PSD 87
-LBL 87
+LBL 87 @NM@ PSD
 FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
 GTO 99
-XEQ 83
-XEQ 84
+XEQ 83 @NM@ SUMS
+XEQ 84 @NM@ N
 X<>Y
 X↑2
 RCL÷ ST Y
@@ -557,7 +557,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: M- 97
-LBL 97               @@@@ Action for menu key M-
+LBL 97 @NM@ M-
 FUNC 00
 SF 25
 RCL "MeDAT"
@@ -575,15 +575,15 @@ GTO 72               @@@@ MeDAT is missing
 J-
 RCLEL
 DELR
-XEQ 47
+XEQ 47 @NM@ SMLREP
 RTN
 LBL 72
-XEQ 95
+XEQ 95 @NM@ CLRM 
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: CLRM 95
-LBL 95
+LBL 95 @NM@ CLRM 
 FUNC 00
 SF 25
 INDEX "MeDAT"
@@ -595,7 +595,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: M+ 98
-LBL 98
+LBL 98 @NM@ M+
 FUNC 00
 REAL?
 GTO 56
@@ -614,7 +614,7 @@ INDEX "MeDAT"
 R↓
 R↓
 STOEL
-XEQ 47
+XEQ 47 @NM@ SMLREP
 RTN
 LBL 55               @@@@ MeDAT exists.  Grow it
 GROW
@@ -622,21 +622,21 @@ J-
 J+
 WRAP
 STOEL                @@@@ Store element at new location
-XEQ 84
+XEQ 84 @NM@ N
 RCL "MeTGN"
 X≠Y?
 GTO 43
-XEQ 96
+XEQ 96 @NM@ REP
 RTN
 LBL 43
-XEQ 47
+XEQ 47 @NM@ SMLREP
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: micro report
-LBL 47
+LBL 47 @NM@ SMLREP
 FUNC 00
-XEQ 84        
+XEQ 84 @NM@ N        
 "N="
 AIP
 AVIEW
@@ -661,7 +661,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: REP 96
-LBL 96       
+LBL 96 @NM@ REP
 FUNC 00
 SF 25
 RCL "MeDAT"
@@ -681,7 +681,7 @@ GTO 75               @@@@ We require 2 points for a report!
 R↓
 R↓
 "μ="
-XEQ 94
+XEQ 94 @NM@ μ 
 ARCL ST X
 ├" "
 RCL "MeCFA"
@@ -689,7 +689,7 @@ RCL "MeCFA"
 +
 XEQ IND ST X
 ├"×u="
-XEQ 93
+XEQ 93 @NM@ kuN
 ARCL ST X
 GTO 44
 LBL 31               @@@@ Rectangular: line 1 of compact report 
@@ -700,7 +700,7 @@ GTO 75               @@@@ We require 2 points for a report!
 R↓
 R↓
 "MR="
-XEQ 92
+XEQ 92 @NM@ MR
 ARCL ST X
 ├"  "
 RCL "MeCFA"
@@ -708,7 +708,7 @@ RCL "MeCFA"
 +
 XEQ IND ST X
 ├"×u="
-XEQ 91
+XEQ 91 @NM@ kuR
 ARCL ST X
 GTO 44
 LBL 32               @@@@ Quartiles: line 1 of compact report 
@@ -719,7 +719,7 @@ GTO 75               @@@@ We require 3 points for a report!
 R↓
 R↓
 "Q2="
-XEQ 77
+XEQ 77 @NM@ MED
 ARCL ST X
 ├"  "
 RCL "MeCFA"
@@ -727,7 +727,7 @@ RCL "MeCFA"
 +
 XEQ IND ST X
 ├"×u="
-XEQ 46
+XEQ 46 @NM@ kuQ
 ARCL ST X
 GTO 44
 LBL 44               @@@@  Finish up prototype 2 line report
@@ -737,10 +737,10 @@ X<Y?                 @@@@ Can we keep going with 4 value report?
 GTO 45               @@@@ Can't do 2-line as line 1 is too long...
 @@@@ Contineu to line 2 of compact report
 ├"[LF]↓="
-XEQ 89
+XEQ 89 @NM@ MIN
 ARCL ST X
 ├"  ↑="
-XEQ 88
+XEQ 88 @NM@ MAX
 ARCL ST X
 ALENG
 41
@@ -756,7 +756,7 @@ GTO IND ST X
 LBL 40               @@@@ Normal: long report
 R↓
 "μ="
-XEQ 94
+XEQ 94 @NM@ μ 
 ARCL ST X
 ├"[LF]"
 RCL "MeCFA"
@@ -764,14 +764,14 @@ RCL "MeCFA"
 +
 XEQ IND ST X
 ├"×u="
-XEQ 93
+XEQ 93 @NM@ kuN
 ARCL ST X
 AVIEW
 RTN
 LBL 41               @@@@ Rectangular: long report
 R↓
 "MR="
-XEQ 92
+XEQ 92 @NM@ MR
 ARCL ST X
 ├"[LF]"
 RCL "MeCFA"
@@ -779,14 +779,14 @@ RCL "MeCFA"
 +
 XEQ IND ST X
 ├"×u="
-XEQ 91
+XEQ 91 @NM@ kuR
 ARCL ST X
 AVIEW
 RTN
 LBL 42               @@@@ Quartiles: long report
 R↓
 "Q2="
-XEQ 77
+XEQ 77 @NM@ MED
 ARCL ST X
 ├"[LF]"
 RCL "MeCFA"
@@ -794,21 +794,21 @@ RCL "MeCFA"
 +
 XEQ IND ST X
 ├"×u="
-XEQ 46
+XEQ 46 @NM@ kuQ
 ARCL ST X
 AVIEW
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: MR (midrange) 92
-LBL 92
+LBL 92 @NM@ MR
 FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
 GTO 99
-XEQ 88
-XEQ 89
+XEQ 88 @NM@ MAX
+XEQ 89 @NM@ MIN
 +
 2
 ÷
@@ -816,7 +816,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: MAX 88
-LBL 88
+LBL 88 @NM@ MAX
 FUNC 01
 SF 25
 INDEX "MeDAT"
@@ -829,7 +829,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: MIN 89
-LBL 89          
+LBL 89 @NM@ MIN
 FUNC 01
 SF 25
 INDEX "MeDAT"
@@ -842,13 +842,13 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: kuR 91
-LBL 91          
+LBL 91 @NM@ kuR
 FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
 GTO 99
-XEQ 90
+XEQ 90 @NM@ RtVA
 RCL "MeCFA"
 60
 +
@@ -860,13 +860,13 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: RtVA 90
-LBL 90           
+LBL 90 @NM@ RtVA 
 FUNC 0
 SF 25
 INDEX "MeDAT"
 FC?C 25
 GTO 99
-XEQ 85
+XEQ 85 @NM@ RNG
 2
 ÷
 3
@@ -876,20 +876,20 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: RNG 85
-LBL 85       
+LBL 85 @NM@ RNG       
 FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
 GTO 99
-XEQ 88
-XEQ 89
+XEQ 88 @NM@ MAX
+XEQ 89 @NM@ MIN
 -
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: kuN 93
-LBL 93
+LBL 93 @NM@ kuN
 FUNC 01
 SF 25
 RCL "MeDAT"
@@ -898,7 +898,7 @@ GTO 99
 DIM?
 R↓
 2
-XEQ 86
+XEQ 86 @NM@ SSD
 RCL "MeCFA"
 60
 +
@@ -910,7 +910,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: SSD 86
-LBL 86
+LBL 86 @NM@ SSD 
 FUNC 01
 SF 25
 RCL "MeDAT"
@@ -921,8 +921,8 @@ R↓
 2
 X>Y?
 GTO 75
-XEQ 83
-XEQ 84
+XEQ 83 @NM@ SUMS
+XEQ 84 @NM@ N
 X<>Y
 X↑2
 RCL÷ ST Y
@@ -940,22 +940,22 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: μ (mean) 94
-LBL 94
+LBL 94 @NM@ μ 
 FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
 GTO 99
-XEQ 83
+XEQ 83 @NM@ SUMS
 X<>Y
 R↓
-XEQ 84
+XEQ 84 @NM@ N
 ÷
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: SUMS 83
-LBL 83
+LBL 83 @NM@ SUMS
 FUNC 02
 SF 25
 INDEX "MeDAT"
@@ -976,7 +976,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: N 84
-LBL 84        
+LBL 84 @NM@ N        
 FUNC 01
 SF 25
 RCL "MeDAT"
@@ -992,7 +992,7 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: MED (median) 77
 @@@@ FAQ: Needs at least 3 values
-LBL 77
+LBL 77 @NM@ MED
 FUNC 01
 XEQ 74
 R↓
@@ -1001,7 +1001,7 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Q1 (First quartile) 35
 @@@@ FAQ: Needs at least 3 values
-LBL 35
+LBL 35 @NM@ Q1 
 FUNC 01
 XEQ 74
 R↓
@@ -1011,7 +1011,7 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Q3 (Third quartile) 36
 @@@@ FAQ: Needs at least 3 values
-LBL 36
+LBL 36 @NM@ Q3
 FUNC 01
 XEQ 74
 RTN
@@ -1019,7 +1019,7 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: IQR (Interquartile Range) 34
 @@@@ FAQ: Needs at least 3 values
-LBL 34
+LBL 34 @NM@ IQR
 FUNC 01
 XEQ 74
 X<>Y
@@ -1031,7 +1031,7 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: kuQ (Quartiles uncertainty) 46
 @@@@ FAQ: Needs at least 3 values
-LBL 46
+LBL 46 @NM@ kuQ
 FUNC 01
 XEQ 74
 X<>Y
@@ -1053,7 +1053,7 @@ RTN
 @@@@ DSC: QUART (quartiles) 74
 @@@@ OUT: X: Q3 Y: Q2 Z: Q1
 @@@@ FAQ: Needs at least 3 values
-LBL 74
+LBL 74 @NM@ QUART
 FUNC 03
 L4STK
 SF 25
@@ -1080,7 +1080,7 @@ GTO 71
 @@@@ Array is sorted now
 RCL "_TMP"
 DIM?                 @@@@ ROWS=1 COLS 
-XEQ 76               @@@@ Q2 N
+XEQ 76 @NM@ MED-RNG  @@@@ Q2 N
 X<>Y                 @@@@ N Q2
 RCL ST X             @@@@ N N Q2
 1
@@ -1095,11 +1095,11 @@ GTO 37
 R↓                   @@@@ (N+1)/2 N Q2
 IP                   @@@@ IP((N+1)/2) N Q2
 1                    @@@@ 1 IP((N+1)/2) N Q2
-XEQ 76               @@@@ Q1 IP((N+1)/2) N Q2
+XEQ 76 @NM@ MED-RNG  @@@@ Q1 IP((N+1)/2) N Q2
 R↓                   @@@@ IP((N+1)/2) N Q2 Q1
 ISG ST X
 NOP                  @@@@ IP((N+1)/2)+1 N Q2 Q1
-XEQ 76               @@@@ Q3 N Q2 Q1
+XEQ 76 @NM@ MED-RNG  @@@@ Q3 N Q2 Q1
 X<>Y                 @@@@ N Q3 Q2 Q1
 R↓                   @@@@ Q3 Q2 Q1
 RTN
@@ -1109,20 +1109,20 @@ R↓                   @@@@ (N+1)/2 N Q2
 DSE ST X
 NOP                  @@@@ (N+1)/2-1 N Q2 
 1                    @@@@ 1 (N+1)/2-1 N Q2 
-XEQ 76               @@@@ Q1 (N+1)/2-1 N Q2
+XEQ 76 @NM@ MED-RNG  @@@@ Q1 (N+1)/2-1 N Q2
 R↓                   @@@@ (N+1)/2-1 N Q2 Q1
 ISG ST X
 NOP
 ISG ST X
 NOP                  @@@@ (N+1)/2+1 N Q2 Q1
-XEQ 76               @@@@ Q3 N Q2 Q1
+XEQ 76 @NM@ MED-RNG  @@@@ Q3 N Q2 Q1
 X<>Y                 @@@@ N Q3 Q2 Q1
 R↓                   @@@@ Q3 Q2 Q1
 RTN
  
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: MED of indexed matrix on RANGE X: Lower Y: upper 
-LBL 76
+LBL 76 @NM@ MED-RNG
 FUNC 11              @@@@ Really takes two, but we want to leave Y
 +                    @@@@ upper+Lower
 2

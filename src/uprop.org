@@ -1,0 +1,345 @@
+# -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
+#+TITLE:       free42 Uncertainty Propagation
+#+AUTHOR:      Mitch Richling
+#+EMAIL:       http://www.mitchr.me/
+#+DATE:        2021-04-30
+#+DESCRIPTION: Some simple math stuff for free42
+#+LANGUAGE:    en
+#+OPTIONS:     num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t skip:nil d:nil todo:t pri:nil H:5 p:t author:t html-scripts:nil
+#+HTML_HEAD: <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
+#+HTML_HEAD: <style>body { min-width: 500px; max-width: 1024px; }</style>
+#+HTML_HEAD: <style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
+#+HTML_HEAD: <style>h1,h2,h3 { line-height: 1.4em; }</style>
+#+HTML_HEAD: <style>h1.title { font-size: 3em; }</style>
+#+HTML_HEAD: <style>h4,h5,h6 { font-size: 1em; }</style>
+#+HTML_HEAD: <style>.org-src-container { border: 1px solid #ccc; box-shadow: 3px 3px 3px #eee; font-family: Lucida Console, monospace; font-size: 80%; margin: 0px; padding: 0px 0px; position: relative; }</style>
+#+HTML_HEAD: <style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
+#+HTML_HEAD: <style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
+#+HTML_HEAD: <style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
+#+HTML_LINK_HOME: https://www.mitchr.me/
+#+HTML_LINK_UP: https://richmit.github.io/hp42/
+#+EXPORT_FILE_NAME: ../docs/math
+
+#+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
+|          <r> | <l>                                          |
+|    *Author:* | /{{{author}}}/                               |
+|   *Updated:* | /{{{modification-time(%Y-%m-%d %H:%M:%S)}}}/ |
+#+ATTR_HTML: :align center
+Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
+
+#+TOC: headlines 5
+
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+#   00   #    10   #    20   #    30   #    40   #    50   #    60   #    70   #    80   #    90   #   100   #   110   #   120   #   130   #   140   #   150   #   160   #
+# 234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+#        #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
+
+* Metadata
+
+The home for this HTML file is: https://richmit.github.io/hp42/uprop.html
+
+Files related to this document may be found on github: https://github.com/richmit/hp42
+
+Directory contents:
+#+ATTR_HTML: :border 0 :frame none :rules none :align center
+   | =src=     | - | The org-mode file that generated this HTML document            |
+   | =src_42s= | - | Ready to convert source listings for 42s code in this document |
+   | =docs=    | - | This html document                                             |
+   | =bin=     | - | Importable RAW program files                                   |
+
+* Introduction
+:PROPERTIES:
+:CUSTOM_ID: introduction
+:END:
+
+This org-mode file contains a program, =UPROP=, that can be used to preform calculations that propagate uncertainty using the standard Gaussian model.  Values
+are respresetd as compelx numbers with teh imaginary part being the standard deviation.  i.e.  V+iU means the value is V and the uncertainty is represented by
+U (a sandard deviation).
+
+* Menu
+:PROPERTIES:
+:CUSTOM_ID: menu-uprop
+:END:
+
+#+ATTR_HTML: :align center :frame box :rules all
+#+NAME:UPROP
+| Menu | LBL  | Value    | SD                                           |
+|------+------+----------+----------------------------------------------|
+| +    | U+   | Y.v+X.v  | HYPOT(X.u, Y.u)                              |
+| -    | U-   | Y.v-X.v  | HYPOT(X.u, Y.u)                              |
+| ×    | U×   | Y.v*X.v  | ABS(X.v*Y.v)*HYPOT(X.u/X.v, Y.u/Y.v)         |
+| ÷    | U÷   | Y.v/X.v  | ABS(X.v/Y.v)*HYPOT(X.u/X.v, Y.u/Y.v)         |
+| ↑    | U↑   | Y.v^X.v  | ABS(Y.v^X.v)*HYPOT(Y.u*X.v/Y.v, LN(Y.v)*X.u) |
+| 1/X  | U1/X | 1/X.v    | ABS(X.u)                                     |
+| LN   | ULN  | LN(X.v)  | ABS(X.u/X.v)                                 |
+| E↑X  | UE↑X | EXP(X.v) | EXP(X.v)*ABS(X.u*X.v)                        |
+| ▒▒▒▒ |      |          |                                              |
+| SIN  | USIN | SIN(X.v) | ABS(SIN(X.v)*X.u)                            |
+| COS  | UCOS | COS(X.v) | ABS(SIN(X.v)*X.u)                            |
+| TAN  | UTAN | TAN(X.v) | ABS(SEC^2(X.v)*X.u)                          |
+
+* Menu Code
+
+#+BEGIN_SRC elisp :var tbl=UPROP :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/uprop/uprop.hp42s"
+(MJR-generate-42-menu-code "UPROP" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
+#+END_SRC
+
+#+RESULTS:
+#+begin_src hp42s :eval never :tangle ../src_42s/uprop/uprop.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UPROP)
+@@@@ DSC: Auto-generated menu program
+LBL "UPROP"
+LBL 01            @@@@ Page 1 of menu UPROP
+CLMENU
+"+"
+KEY 1 XEQ "U+"
+"-"
+KEY 2 XEQ "U-"
+"×"
+KEY 3 XEQ "U×"
+"÷"
+KEY 4 XEQ "U÷"
+"↑"
+KEY 5 XEQ "U↑"
+"1/X"
+KEY 6 XEQ "U1/X"
+KEY 7 GTO 02
+KEY 8 GTO 02
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 02            @@@@ Page 2 of menu UPROP
+CLMENU
+"LN"
+KEY 1 XEQ "ULN"
+"E↑X"
+KEY 2 XEQ "UE↑X"
+"SIN"
+KEY 4 XEQ "USIN"
+"COS"
+KEY 5 XEQ "UCOS"
+"TAN"
+KEY 6 XEQ "UTAN"
+KEY 7 GTO 01
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 02
+LBL 00 @@@@ Application Exit
+EXITALL
+RTN
+@@@@ Free labels start at: 3
+#+end_src
+
+
+#+begin_src hp42s :eval never :tangle ../src_42s/uprop/uprop.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "U+"    @@@@ X Y
+FUNC 21
+L4STK
+XEQ 99
+X<>Y
+XEQ 99
+COMPLEX     @@@@ Y.u Y.v X 
+X<>Y        @@@@ Y.v Y.u X 
+RCL ST Z    @@@@ X Y.v Y.u X 
+COMPLEX     @@@@ X.u X.v Y.v Y.u
+Rv          @@@@ X.v Y.v Y.u X.u 
++           @@@@ (Y+X).v Y.u X.u 
+Rv          @@@@ Y.u X.u ? (X+Y).v 
+COMPLEX     
+ABS         @@@@ (X+Y).u ? (X+Y).v (X+Y).v
+R↑          @@@@ (X+Y).v (X+Y).u ? (X+Y).v 
+X<>Y        @@@@ (X+Y).u (X+Y).v ? (X+Y).v 
+COMPLEX     @@@@ X+Y
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "U-"    @@@@ X Y
+FUNC 21
+L4STK
+XEQ 99
+X<>Y
+XEQ 99
+COMPLEX     @@@@ Y.u Y.v X 
+X<>Y        @@@@ Y.v Y.u X 
+RCL ST Z    @@@@ X Y.v Y.u X 
+COMPLEX     @@@@ X.u X.v Y.v Y.u
+Rv          @@@@ X.v Y.v Y.u X.u 
+-           @@@@ (Y-X).v Y.u X.u 
+Rv          @@@@ Y.u X.u ? (X-Y).v 
+COMPLEX     
+ABS         @@@@ (X-Y).u ? (X-Y).v (X-Y).v
+R↑          @@@@ (X-Y).v (X-Y).u ? (X-Y).v 
+X<>Y        @@@@ (X-Y).u (X-Y).v ? (X-Y).v 
+COMPLEX     @@@@ X-Y
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "U×"      @@@@ X Y
+FUNC 21
+L4STK
+XEQ 99
+X<>Y          @@@@ Y X
+XEQ 99
+COMPLEX       @@@@ Y.u Y.v X 
+LSTO "_Xu"
+Rv            @@@@ Y.v X 
+LSTO "_Xv"    @@@@ Y.v X
+X<>Y          @@@@ X Y.v
+COMPLEX       @@@@ X.u X.v Y.v
+LSTO "_Yu"
+Rv            @@@@ X.v Y.v
+LSTO "_Yv"    @@@@ X.v Y.v
+×             @@@@ (YX).v
+RCL "_Xu"     @@@@ Xu (YX).v
+RCL÷ "_Xv"    @@@@ Xu/Xv (YX).v
+RCL "_Yu"     @@@@ Yu Xu/Xv (YX).v
+RCL÷ "_Yv"    @@@@ Yu/Yv Xu/Xv (YX).v
+COMPLEX       @@@@ TMP (YX).v
+ABS           @@@@ TMP (YX).v
+RCL ST Y      @@@@ (YX).v TMP (YX).v
+ABS           
+×             @@@@ (YX).v*TMP (YX).v
+ABS           @@@@ (YX).u (YX).v
+COMPLEX
+RTN           @@@@ YX
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "U÷"      @@@@ X Y
+FUNC 21
+L4STK
+XEQ 99
+X<>Y          @@@@ Y X
+XEQ 99
+COMPLEX       @@@@ Y.u Y.v X 
+LSTO "_Xu"
+Rv            @@@@ Y.v X 
+LSTO "_Xv"    @@@@ Y.v X
+X<>Y          @@@@ X Y.v
+COMPLEX       @@@@ X.u X.v Y.v
+LSTO "_Yu"
+Rv            @@@@ X.v Y.v
+LSTO "_Yv"    @@@@ X.v Y.v
+÷             @@@@ (YX).v
+RCL "_Xu"     @@@@ Xu (YX).v
+RCL÷ "_Xv"    @@@@ Xu/Xv (YX).v
+RCL "_Yu"     @@@@ Yu Xu/Xv (YX).v
+RCL÷ "_Yv"    @@@@ Yu/Yv Xu/Xv (YX).v
+COMPLEX       @@@@ TMP (YX).v
+ABS           @@@@ TMP (YX).v
+RCL ST Y      @@@@ (YX).v TMP (YX).v
+ABS           
+×             @@@@ (YX).v*TMP (YX).v
+ABS           @@@@ (YX).u (YX).v
+COMPLEX
+RTN           @@@@ YX
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "U1/X"      @@@@ X
+FUNC 11
+L4STK
+XEQ 99
+1               @@@@ 1 X
+XEQ 99
+X<>Y            @@@@ X 1
+XEQ "U÷"        @@@@ 1/X
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "ULN"       @@@@ X
+FUNC 11
+L4STK
+XEQ 99          @@@@ X
+COMPLEX         @@@@ X.u X.v
+RCL ST Y        @@@@ X.v X.u X.v
+÷               @@@@ X.u/X.v X.v
+ABS             @@@@ ln(X).u X.v
+X<>Y            @@@@ X.v ln(X).u 
+LN              @@@@ ln(X).v ln(X).u 
+X<>Y            @@@@ ln(X).u ln(X).v 
+COMPLEX         @@@@ ln(X)
+RTN
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "UE↑X"      @@@@ X
+FUNC 11
+L4STK
+XEQ 99          @@@@ X
+COMPLEX         @@@@ X.u X.v
+X<>Y            @@@@ X.v X.u 
+E↑X             @@@@ exp(X).v X.u
+X<>Y            @@@@ X.u exp(X).v 
+RCL× ST Y       @@@@ exp(X).v*X.u exp(X).v 
+ABS             @@@@ exp(X).u exp(X).v 
+COMPLEX         @@@@ exp(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "USIN"      @@@@ X
+FUNC 11
+L4STK
+XEQ 99          @@@@ X
+COMPLEX         @@@@ X.u X.v
+RCL ST Y        @@@@ X.v X.u X.v
+COS             @@@@ COS(X.v) X.u X.v
+×               @@@@ COS(X.v)*X.u X.v
+ABS             @@@@ SIN(X).u X.v 
+X<>Y            @@@@ X.v SIN(X).u 
+SIN             @@@@ SIN(X).v SIN(X).u
+X<>Y            @@@@ SIN(X).u SIN(X).v 
+COMPLEX         @@@@ SIN(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "UCOS"      @@@@ X
+FUNC 11
+L4STK
+XEQ 99          @@@@ X
+COMPLEX         @@@@ X.u X.v
+RCL ST Y        @@@@ X.v X.u X.v
+SIN             @@@@ SIN(X.v) X.u X.v
+×               @@@@ SIN(X.v)*X.u X.v
+ABS             @@@@ COS(X).u X.v 
+X<>Y            @@@@ X.v COS(X).u 
+COS             @@@@ COS(X).v COS(X).u
+X<>Y            @@@@ COS(X).u COS(X).v 
+COMPLEX         @@@@ COS(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "UTAN"      @@@@ X
+FUNC 11
+L4STK
+XEQ 99          @@@@ X
+COMPLEX         @@@@ X.u X.v
+RCL ST Y        @@@@ X.v X.u X.v
+COS             @@@@ COS(X.v) X.u X.v
+1/X             @@@@ SEC(X.v) X.u X.v 
+X↑2             @@@@ SEC^2(X.v) X.u X.v
+×               @@@@ SEC^2(X.v)*X.u X.v
+ABS             @@@@ tan(X).u X.v 
+X<>Y            @@@@ X.v tan(X).u
+TAN             @@@@ tan(X).v tan(X).u
+X<>Y            @@@@ tan(X).u tan(X).v 
+COMPLEX         @@@@ tan(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL 99 @@@@ R->C
+FUNC 11
+L4STK
+CPX?
+RTN
+0
+COMPLEX
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+END
+#+end_src
+

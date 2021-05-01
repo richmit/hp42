@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-30 Fri 22:49 -->
+<!-- 2021-05-01 Sat 12:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>free42 Uncertainty Propagation</title>
+<title>free42 Random Math Stuff</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Mitch Richling" />
 <meta name="description" content="Some simple math stuff for free42"
@@ -212,7 +212,7 @@
  |
  <a accesskey="H" href="https://www.mitchr.me/"> HOME </a>
 </div><div id="content">
-<h1 class="title">free42 Uncertainty Propagation</h1>
+<h1 class="title">free42 Random Math Stuff</h1>
 <table border="2 solid #ccc" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-30 22:45:23</i></td>
+<td class="org-left"><i>2021-04-30 18:57:03</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,19 +241,59 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgc2d0dd8">1. Metadata</a></li>
+<li><a href="#org4c466f7">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
-<li><a href="#menu-uprop">3. Menu</a></li>
-<li><a href="#orgdae3d6f">4. Menu Code</a></li>
+<li><a href="#orgab37b75">3. <code>NLA</code>: Linear Algebra</a>
+<ul>
+<li><a href="#menu-nla">3.1. Menu</a></li>
+<li><a href="#org01d2887">3.2. Notes on individual programs</a>
+<ul>
+<li><a href="#org8ad197f">3.2.1. <code>MXCPLY</code>: Characteristic polynomial</a></li>
+<li><a href="#org200f690">3.2.2. <code>EQCPLY</code>: Characteristic polynomial as an <code>MVAR</code> program</a></li>
+</ul>
+</li>
+<li><a href="#orge6c3094">3.3. Code for Menu</a></li>
+<li><a href="#orga48cfc0">3.4. Functions</a></li>
+</ul>
+</li>
+<li><a href="#orgaf74ef9">4. <code>POLY</code>: A collection of polynomial tools</a>
+<ul>
+<li><a href="#menu-poly">4.1. Menu</a></li>
+<li><a href="#org14cbe1c">4.2. Notes for individual programs</a>
+<ul>
+<li><a href="#orgb0e89e0">4.2.1. <code>PEVAL</code>, <code>PEVL1</code>, &amp; <code>PEVL2</code>: Evaluating Polynomials</a></li>
+<li><a href="#org3f25883">4.2.2. <code>PWRP</code>: Wrapping a polynomial matrix in an <code>MVAR</code> function</a></li>
+<li><a href="#org0a7138a">4.2.3. <code>PR1ST</code> &amp; <code>PRNXT</code>: Finding the roots of a polynomial</a></li>
+<li><a href="#orga74e254">4.2.4. <code>PLGRR</code>: Search for a polynomial root</a></li>
+</ul>
+</li>
+<li><a href="#org8a3cdec">4.3. Code for Menu</a></li>
+<li><a href="#org332ff3d">4.4. Local functions</a></li>
+</ul>
+</li>
+<li><a href="#org05f9491">5. <code>VEC3</code>: 3D Real Vector Application</a>
+<ul>
+<li><a href="#menu-vec3">5.1. Menu</a></li>
+<li><a href="#org37f8c9d">5.2. Code for Menu</a></li>
+<li><a href="#orgdc84c54">5.3. Local functions</a></li>
+</ul>
+</li>
+<li><a href="#org98921d1">6. <code>STATR</code>: Statistics Registers</a>
+<ul>
+<li><a href="#menu-statr">6.1. Menu</a></li>
+<li><a href="#org1aa56b7">6.2. Code</a></li>
+</ul>
+</li>
+<li><a href="#org52ebfa1">7. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgc2d0dd8" class="outline-2">
-<h2 id="orgc2d0dd8"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org4c466f7" class="outline-2">
+<h2 id="org4c466f7"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-The home for this HTML file is: <a href="https://richmit.github.io/hp42/uprop.html">https://richmit.github.io/hp42/uprop.html</a>
+The home for this HTML file is: <a href="https://richmit.github.io/hp42/math.html">https://richmit.github.io/hp42/math.html</a>
 </p>
 
 <p>
@@ -306,20 +346,25 @@ Directory contents:
 <h2 id="introduction"><span class="section-number-2">2</span> Introduction</h2>
 <div class="outline-text-2" id="text-introduction">
 <p>
-This org-mode file contains a program, <code>UPROP</code>, that can be used to preform calculations that propagate uncertainty using the standard Gaussian model.  Values
-are respresetd as compelx numbers with teh imaginary part being the standard deviation.  i.e.  V+iU means the value is V and the uncertainty is represented by
-U (a sandard deviation).
+This org-mode file collects together a handful of mathematical stuff I find useful.  Note that in the past I had a collection of simple mathematical functions
+in this file.  That stuff has moved to <a href="sfun.html">sfun.html</a>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-menu-uprop" class="outline-2">
-<h2 id="menu-uprop"><span class="section-number-2">3</span> Menu</h2>
-<div class="outline-text-2" id="text-menu-uprop">
-<table id="org70fcb1b" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<div id="outline-container-orgab37b75" class="outline-2">
+<h2 id="orgab37b75"><span class="section-number-2">3</span> <code>NLA</code>: Linear Algebra</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-menu-nla" class="outline-3">
+<h3 id="menu-nla"><span class="section-number-3">3.1</span> Menu</h3>
+<div class="outline-text-3" id="text-menu-nla">
+<table id="orgb0c643d" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
+<col  class="org-left" />
+
 <col  class="org-left" />
 
 <col  class="org-left" />
@@ -331,144 +376,181 @@ U (a sandard deviation).
 <thead>
 <tr>
 <th scope="col" class="org-left">Menu</th>
-<th scope="col" class="org-left">LBL</th>
-<th scope="col" class="org-left">Value</th>
-<th scope="col" class="org-left">SD</th>
+<th scope="col" class="org-left">Lab</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">Inputs</th>
+<th scope="col" class="org-left">Output</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">+</td>
-<td class="org-left">U+</td>
-<td class="org-left">Y.v+X.v</td>
-<td class="org-left">HYPOT(X.u, Y.u)</td>
+<td class="org-left">IDEN</td>
+<td class="org-left">MXIDN</td>
+<td class="org-left">Create an nxn identity matrix</td>
+<td class="org-left">X: N</td>
+<td class="org-left">X: identity matrix</td>
 </tr>
 
 <tr>
-<td class="org-left">-</td>
-<td class="org-left">U-</td>
-<td class="org-left">Y.v-X.v</td>
-<td class="org-left">HYPOT(X.u, Y.u)</td>
+<td class="org-left">DIAG</td>
+<td class="org-left">MXDIAG</td>
+<td class="org-left">Create diagonal matrix with given elements</td>
+<td class="org-left">X: VEC</td>
+<td class="org-left">X: diagonal matrix</td>
 </tr>
 
 <tr>
-<td class="org-left">×</td>
-<td class="org-left">U×</td>
-<td class="org-left">Y.v*X.v</td>
-<td class="org-left">ABS(X.v*Y.v)*HYPOT(X.u/X.v, Y.u/Y.v)</td>
+<td class="org-left">TR</td>
+<td class="org-left">MXTR</td>
+<td class="org-left">Compute the trace of a matrix</td>
+<td class="org-left">X: M</td>
+<td class="org-left">X: trace</td>
 </tr>
 
 <tr>
-<td class="org-left">÷</td>
-<td class="org-left">U÷</td>
-<td class="org-left">Y.v/X.v</td>
-<td class="org-left">ABS(X.v/Y.v)*HYPOT(X.u/X.v, Y.u/Y.v)</td>
+<td class="org-left">CPLY</td>
+<td class="org-left">MXCPLY</td>
+<td class="org-left">Compute matrix Characteristic polynomial</td>
+<td class="org-left">X: M</td>
+<td class="org-left">X: polynomial</td>
 </tr>
 
 <tr>
-<td class="org-left">↑</td>
-<td class="org-left">U↑</td>
-<td class="org-left">Y.v^X.v</td>
-<td class="org-left">ABS(Y.v^X.v)*HYPOT(Y.u*X.v/Y.v, LN(Y.v)*X.u)</td>
-</tr>
-
-<tr>
-<td class="org-left">1/X</td>
-<td class="org-left">U1/X</td>
-<td class="org-left">1/X.v</td>
-<td class="org-left">ABS(X.u)</td>
-</tr>
-
-<tr>
-<td class="org-left">LN</td>
-<td class="org-left">ULN</td>
-<td class="org-left">LN(X.v)</td>
-<td class="org-left">ABS(X.u/X.v)</td>
-</tr>
-
-<tr>
-<td class="org-left">E↑X</td>
-<td class="org-left">UE↑X</td>
-<td class="org-left">EXP(X.v)</td>
-<td class="org-left">EXP(X.v)*ABS(X.u*X.v)</td>
-</tr>
-
-<tr>
-<td class="org-left">▒▒▒▒</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="org-left">SIN</td>
-<td class="org-left">USIN</td>
-<td class="org-left">SIN(X.v)</td>
-<td class="org-left">ABS(SIN(X.v)*X.u)</td>
+<td class="org-left">EDIT</td>
+<td class="org-left">LBL 96</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">MAT</td>
+<td class="org-left">LBL 98</td>
+<td class="org-left">Store/Recall Current CPOLY matrix</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="org-left">COS</td>
-<td class="org-left">UCOS</td>
-<td class="org-left">COS(X.v)</td>
-<td class="org-left">ABS(SIN(X.v)*X.u)</td>
+<td class="org-left">X</td>
+<td class="org-left">LBL 97</td>
+<td class="org-left">Store/Recall current value of "X"</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="org-left">TAN</td>
-<td class="org-left">UTAN</td>
-<td class="org-left">TAN(X.v)</td>
-<td class="org-left">ABS(SEC^2(X.v)*X.u)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">EVCP</td>
+<td class="org-left">EQCPLY</td>
+<td class="org-left">Evaluate Characteristic polynomial</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 
-<div id="outline-container-orgdae3d6f" class="outline-2">
-<h2 id="orgdae3d6f"><span class="section-number-2">4</span> Menu Code</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org01d2887" class="outline-3">
+<h3 id="org01d2887"><span class="section-number-3">3.2</span> Notes on individual programs</h3>
+<div class="outline-text-3" id="text-3-2">
+</div>
+<div id="outline-container-org8ad197f" class="outline-4">
+<h4 id="org8ad197f"><span class="section-number-4">3.2.1</span> <code>MXCPLY</code>: Characteristic polynomial</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<p>
+<code>MXCPLY</code> uses the Faddeev–LeVerrier algorithm to compute the characteristic polynomial of a matrix.  The polynomial is a matrix of coefficients suitable for use
+by the polynomials tools found later on this page.
+</p>
+
+<p>
+One can find the eigenvalues of a matrix by using <code>PR1ST</code> &amp; <code>PRNXT</code> to solve the characteristic polynomial.  
+</p>
+</div>
+</div>
+
+<div id="outline-container-org200f690" class="outline-4">
+<h4 id="org200f690"><span class="section-number-4">3.2.2</span> <code>EQCPLY</code>: Characteristic polynomial as an <code>MVAR</code> program</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<p>
+The <code>EQCPLY</code> function is an <code>MVAR</code> function that directly computes values of the characteristic polynomial.  It is horribly inefficient, but it can be used by
+the built in solver to find real eigenvalues or to plot the characteristic polynomial (See: <a href="pgmforfun.html">pgmforfun.html</a>).
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge6c3094" class="outline-3">
+<h3 id="orge6c3094"><span class="section-number-3">3.3</span> Code for Menu</h3>
+<div class="outline-text-3" id="text-3-3">
 <div class="org-src-container">
-<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"UPROP"</span> 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
+<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"NLA"</span> 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-hp42s"><span id="coderef-UPROP" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (UPROP)</span>
+<pre class="src src-hp42s"><span id="coderef-NLA" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (NLA)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Auto-generated menu program</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"UPROP"</span>
-<span style="color: #00ffff;">LBL</span> 01            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu UPROP</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"NLA"</span>
+<span style="color: #00ffff;">LBL</span> 01            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu NLA</span>
 <span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"+"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"U+"</span>
-<span style="color: #fa8072;">"-"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"U-"</span>
-<span style="color: #fa8072;">"&#215;"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"U&#215;"</span>
-<span style="color: #fa8072;">"&#247;"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"U&#247;"</span>
-<span style="color: #fa8072;">"&#8593;"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"U&#8593;"</span>
-<span style="color: #fa8072;">"1/X"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"U1/X"</span>
+<span style="color: #fa8072;">"IDEN"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MXIDN"</span>
+<span style="color: #fa8072;">"DIAG"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MXDIAG"</span>
+<span style="color: #fa8072;">"TR"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MXTR"</span>
+<span style="color: #fa8072;">"CPLY"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MXCPLY"</span>
+<span style="color: #fa8072;">"EDIT"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 96
 <span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 02
 <span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 02
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
 <span style="color: #00ffff;">GTO</span> 01
-<span style="color: #00ffff;">LBL</span> 02            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu UPROP</span>
+<span style="color: #00ffff;">LBL</span> 02            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu NLA</span>
 <span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"LN"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"ULN"</span>
-<span style="color: #fa8072;">"E&#8593;X"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UE&#8593;X"</span>
-<span style="color: #fa8072;">"SIN"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"USIN"</span>
-<span style="color: #fa8072;">"COS"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UCOS"</span>
-<span style="color: #fa8072;">"TAN"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UTAN"</span>
+<span style="color: #fa8072;">"MAT"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 98
+<span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 97
+<span style="color: #fa8072;">"EVCP"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"EQCPLY"</span>
 <span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 01
 <span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 01
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
@@ -481,210 +563,195 @@ U (a sandard deviation).
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Free labels start at: 3</span>
 </pre>
 </div>
+</div>
+</div>
 
-
+<div id="outline-container-orga48cfc0" class="outline-3">
+<h3 id="orga48cfc0"><span class="section-number-3">3.4</span> Functions</h3>
+<div class="outline-text-3" id="text-3-4">
 <div class="org-src-container">
-<pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"U+"</span>    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X Y</span>
-<span style="color: #00ffff;">FUNC</span> 21
-<span style="color: #00ffff;">L4STK</span>
-<span style="color: #00ffff;">XEQ</span> 99
+<pre class="src src-hp42s"><span id="coderef-MXCPLY" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MXCPLY)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Compute matrix Characteristic polynomial</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Matrix</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Characteristic polynomial</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: 28</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Uses INDEX</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-27</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TC:  [[1,2,3][4,5,6][7,8,10]] =&gt; [1, -16, -12, 3]</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"MXCPLY"</span>
+<span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24 </span>
+<span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0    </span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_A"</span>
+<span style="color: #00ffff;">DIM</span>?
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MXIDN"</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_I"</span>
+R&#8595;
+1
+<span style="color: #00ffff;">+</span>
+1
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
-<span style="color: #00ffff;">XEQ</span> 99
-<span style="color: #00ffff;">COMPLEX</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y.u Y.v X </span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y.v Y.u X </span>
-<span style="color: #00ffff;">RCL ST</span> Z    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X Y.v Y.u X </span>
-<span style="color: #00ffff;">COMPLEX</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v Y.v Y.u</span>
-Rv          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v Y.v Y.u X.u </span>
-<span style="color: #00ffff;">+</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(Y+X).v Y.u X.u </span>
-Rv          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y.u X.u ? (X+Y).v </span>
-<span style="color: #00ffff;">COMPLEX</span>     
-<span style="color: #00ffff;">ABS</span>         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(X+Y).u ? (X+Y).v (X+Y).v</span>
-R&#8593;          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(X+Y).v (X+Y).u ? (X+Y).v </span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(X+Y).u (X+Y).v ? (X+Y).v </span>
-<span style="color: #00ffff;">COMPLEX</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X+Y</span>
+<span style="color: #00ffff;">NEWMAT</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_P"</span>
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_P"</span>
+R&#8595;
+-1
+<span style="color: #00ffff;">STOEL</span>
+<span style="color: #00ffff;">J+</span>
+<span style="color: #00ffff;">+/-</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_CTR"</span>
+0               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">p_{n-1}</span>
+<span style="color: #00ffff;">LBL</span> 28
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_A"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">A               p_{n-1}</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_M"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">M               A        p_{n-1}</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_I"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">I               M        A         p_{n-1}</span>
+<span style="color: #00ffff;">RCL&#215; ST</span> T       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">I*p_{n-1}       M        A         p_{n-1}</span>
+<span style="color: #00ffff;">-</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">M-I*p_{n-1}     A        p_{n-1}</span>
+<span style="color: #00ffff;">&#215;</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">A*(M-I*p_{n-1}) p_{n-1}</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MXTR"</span>      <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">A*(M-I*p_{n-1}) p_{n-1}</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_CTR"</span>
+<span style="color: #00ffff;">&#247;</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">p_n             p_{n-1}</span>
+<span style="color: #00ffff;">STOEL</span>
+<span style="color: #00ffff;">ISG</span> <span style="color: #fa8072;">"_CTR"</span>
+<span style="color: #00ffff;">NOP</span>
+<span style="color: #00ffff;">J+</span>
+<span style="color: #00ffff;">FC</span>? 77
+<span style="color: #00ffff;">GTO</span> 28
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_P"</span>
+<span style="color: #00ffff;">+/-</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-MXTR" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MXTR)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Compute matrix trace (sum of the diagonal elements)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Matrix</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: trace</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Dosen't use INDEX</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-27</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TC:  [[1,2,3][4,5,6][7,8,10]] =&gt; 16</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"MXTR"</span>
+<span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24 </span>
+<span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0    </span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">M           -- M is an nxn matrix</span>
+<span style="color: #00ffff;">DIM</span>?            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">n n M</span>
+1               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 n n M</span>
+<span style="color: #00ffff;">+</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1+n n M</span>
+<span style="color: #00ffff;">DIM</span> <span style="color: #fa8072;">"_M"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1+n n M     -- M is now an nx(n+1) matrix with original diag in first column</span>
+1               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 1+n n M</span>
+1               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 1 1+n n M</span>
+<span style="color: #00ffff;">NEWMAT</span>          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P 1+n n M   -- P is a 1x1 zero matrix</span>
+<span style="color: #00ffff;">SIGN</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P 1+n n M   -- P is a 1x1 identity matrix</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_P"</span>
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1+n n M     -- P is a 1x1 matrix e_1</span>
+1               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1   1+n n   -- P is a 1x1 matrix e_1</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1+n 1   n   -- P is a 1x1 matrix e_1</span>
+<span style="color: #00ffff;">DIM</span> <span style="color: #fa8072;">"_P"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1+n 1       -- P is now an 1x(1+n) e_1 row matrix</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_P"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P   1+n 1</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_M"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">M   P   1+n </span>
+<span style="color: #00ffff;">TRANS</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X   P   1+n -- X is now an (n+1)xn matrix with original diag in first row</span>
+<span style="color: #00ffff;">&#215;</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X   1+n 1   -- X is now an 1xn matrix with original diag in first row</span>
+<span style="color: #00ffff;">RSUM</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X   1+n 1   -- X is now a 1x1 matrix with the sum of the diag</span>
+<span style="color: #00ffff;">DET</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TR          -- DET of a 1x1 matrix is matrix element</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ </span><span style="color: #ff7f24;">(MXIDN)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Create an XxX identity matrix</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Size of matrix to make</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Identity matrix of size X</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Dosen't use INDEX</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-27</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REF: https://forum.swissmicros.com/viewtopic.php?f=19&amp;t=2958</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: This code is longer, but easier to understand -- for me anyhow.</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"MXIDN"</span>
+<span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24 </span>
+<span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0    </span>
+1
+<span style="color: #00ffff;">NEWMAT</span>          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X is an nx1 zero matrix </span>
+<span style="color: #00ffff;">SIGN</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X is now a constant matrix filled with 1s</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MXDIAG"</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-MXDIAG" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MXDIAG)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Create diagonal matrix with given elements</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: matrix</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: diagonal matrix</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Dosen't use INDEX</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Uses all elements of X -- even if it is not 1xn or nx1</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-27</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REF: https://forum.swissmicros.com/viewtopic.php?f=19&amp;t=2958</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: This code is longer, but easier to understand -- for me anyhow.</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"MXDIAG"</span>
+<span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24 </span>
+<span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0    </span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">D</span>
+<span style="color: #00ffff;">DIM</span>?            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">n m</span>
+<span style="color: #00ffff;">&#215;</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">N</span>
+1               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 N</span>
+<span style="color: #00ffff;">X=Y</span>?
+<span style="color: #00ffff;">GTO</span> 23
+                <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">non 1x1 case</span>
+<span style="color: #00ffff;">RCL+ ST</span> Y       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">N+1 N</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">N N+1</span>
+<span style="color: #00ffff;">DIM</span> <span style="color: #fa8072;">"_M"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">N N+1      -- M is now an (N+1)xN matrix with D on first row</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_M"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">M N N+1</span>
+<span style="color: #00ffff;">TRANS</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">M N N+1    -- M is now an Nx(N+1) matrix with D on first column</span>
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"_M"</span>
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 N+1  N</span>
+<span style="color: #00ffff;">ENTER</span>
+<span style="color: #00ffff;">DIM</span> <span style="color: #fa8072;">"_M"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 N+1  N  -- M is now an NxN matrix with D on the diagonal</span>
+<span style="color: #00ffff;">LBL</span> 23          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 N+1  N  -- due to the resize reshuffle</span>
+                <span style="color: #ff7f24;">@@@ All done.  Return</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_M"</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-EQCPLY" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (EQCPLY)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Evaluate Chararstic Polynomial of a Matrix: DET(M-X*I)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">I/O: N/A MVAR program</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">VAR: CPM a square matrix</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">VAR: X a real or complex number</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LAB: 24-25</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Can be used </span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Dosen't use INDEX</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-27</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"EQCPLY"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"CPM"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"CPM"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"CPM"</span>
+<span style="color: #00ffff;">DIM</span>?
+R&#8595;
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MXIDN"</span>
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">DET</span>
 <span style="color: #00ffff;">RTN</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"U-"</span>    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X Y</span>
-<span style="color: #00ffff;">FUNC</span> 21
-<span style="color: #00ffff;">L4STK</span>
-<span style="color: #00ffff;">XEQ</span> 99
-<span style="color: #00ffff;">X&lt;&gt;Y</span>
-<span style="color: #00ffff;">XEQ</span> 99
-<span style="color: #00ffff;">COMPLEX</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y.u Y.v X </span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y.v Y.u X </span>
-<span style="color: #00ffff;">RCL ST</span> Z    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X Y.v Y.u X </span>
-<span style="color: #00ffff;">COMPLEX</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v Y.v Y.u</span>
-Rv          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v Y.v Y.u X.u </span>
-<span style="color: #00ffff;">-</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(Y-X).v Y.u X.u </span>
-Rv          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y.u X.u ? (X-Y).v </span>
-<span style="color: #00ffff;">COMPLEX</span>     
-<span style="color: #00ffff;">ABS</span>         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(X-Y).u ? (X-Y).v (X-Y).v</span>
-R&#8593;          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(X-Y).v (X-Y).u ? (X-Y).v </span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(X-Y).u (X-Y).v ? (X-Y).v </span>
-<span style="color: #00ffff;">COMPLEX</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X-Y</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Store/Recall variable "CPM"</span>
+<span style="color: #00ffff;">LBL</span> 98 
+<span style="color: #00ffff;">FS</span>? 64
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"CPM"</span>
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"CPM"</span>
 <span style="color: #00ffff;">RTN</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"U&#215;"</span>      <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X Y</span>
-<span style="color: #00ffff;">FUNC</span> 21
-<span style="color: #00ffff;">L4STK</span>
-<span style="color: #00ffff;">XEQ</span> 99
-<span style="color: #00ffff;">X&lt;&gt;Y</span>          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y X</span>
-<span style="color: #00ffff;">XEQ</span> 99
-<span style="color: #00ffff;">COMPLEX</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y.u Y.v X </span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_Xu"</span>
-Rv            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y.v X </span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_Xv"</span>    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y.v X</span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X Y.v</span>
-<span style="color: #00ffff;">COMPLEX</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v Y.v</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_Yu"</span>
-Rv            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v Y.v</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_Yv"</span>    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v Y.v</span>
-<span style="color: #00ffff;">&#215;</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(YX).v</span>
-<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_Xu"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Xu (YX).v</span>
-<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"_Xv"</span>    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Xu/Xv (YX).v</span>
-<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_Yu"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Yu Xu/Xv (YX).v</span>
-<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"_Yv"</span>    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Yu/Yv Xu/Xv (YX).v</span>
-<span style="color: #00ffff;">COMPLEX</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TMP (YX).v</span>
-<span style="color: #00ffff;">ABS</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TMP (YX).v</span>
-<span style="color: #00ffff;">RCL ST</span> Y      <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(YX).v TMP (YX).v</span>
-<span style="color: #00ffff;">ABS</span>           
-<span style="color: #00ffff;">&#215;</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(YX).v*TMP (YX).v</span>
-<span style="color: #00ffff;">ABS</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(YX).u (YX).v</span>
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">RTN</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">YX</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Store/Recall variable "X"</span>
+<span style="color: #00ffff;">LBL</span> 97
+<span style="color: #00ffff;">FS</span>? 64
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RTN</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"U&#247;"</span>      <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X Y</span>
-<span style="color: #00ffff;">FUNC</span> 21
-<span style="color: #00ffff;">L4STK</span>
-<span style="color: #00ffff;">XEQ</span> 99
-<span style="color: #00ffff;">X&lt;&gt;Y</span>          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y X</span>
-<span style="color: #00ffff;">XEQ</span> 99
-<span style="color: #00ffff;">COMPLEX</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y.u Y.v X </span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_Xu"</span>
-Rv            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y.v X </span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_Xv"</span>    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y.v X</span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X Y.v</span>
-<span style="color: #00ffff;">COMPLEX</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v Y.v</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_Yu"</span>
-Rv            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v Y.v</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_Yv"</span>    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v Y.v</span>
-<span style="color: #00ffff;">&#247;</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(YX).v</span>
-<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_Xu"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Xu (YX).v</span>
-<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"_Xv"</span>    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Xu/Xv (YX).v</span>
-<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_Yu"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Yu Xu/Xv (YX).v</span>
-<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"_Yv"</span>    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Yu/Yv Xu/Xv (YX).v</span>
-<span style="color: #00ffff;">COMPLEX</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TMP (YX).v</span>
-<span style="color: #00ffff;">ABS</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TMP (YX).v</span>
-<span style="color: #00ffff;">RCL ST</span> Y      <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(YX).v TMP (YX).v</span>
-<span style="color: #00ffff;">ABS</span>           
-<span style="color: #00ffff;">&#215;</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(YX).v*TMP (YX).v</span>
-<span style="color: #00ffff;">ABS</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(YX).u (YX).v</span>
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">RTN</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">YX</span>
-
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"U1/X"</span>      <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Edit matrix</span>
+<span style="color: #00ffff;">LBL</span> 96
 <span style="color: #00ffff;">FUNC</span> 11
-<span style="color: #00ffff;">L4STK</span>
-<span style="color: #00ffff;">XEQ</span> 99
-1               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 X</span>
-<span style="color: #00ffff;">XEQ</span> 99
-<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X 1</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"U&#247;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1/X</span>
-<span style="color: #00ffff;">RTN</span>
-
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"ULN"</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X</span>
-<span style="color: #00ffff;">FUNC</span> 11
-<span style="color: #00ffff;">L4STK</span>
-<span style="color: #00ffff;">XEQ</span> 99          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X</span>
-<span style="color: #00ffff;">COMPLEX</span>         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Y        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
-<span style="color: #00ffff;">&#247;</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u/X.v X.v</span>
-<span style="color: #00ffff;">ABS</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">ln(X).u X.v</span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v ln(X).u </span>
-<span style="color: #00ffff;">LN</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">ln(X).v ln(X).u </span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">ln(X).u ln(X).v </span>
-<span style="color: #00ffff;">COMPLEX</span>         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">ln(X)</span>
-<span style="color: #00ffff;">RTN</span>
-
-
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"UE&#8593;X"</span>      <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X</span>
-<span style="color: #00ffff;">FUNC</span> 11
-<span style="color: #00ffff;">L4STK</span>
-<span style="color: #00ffff;">XEQ</span> 99          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X</span>
-<span style="color: #00ffff;">COMPLEX</span>         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u </span>
-<span style="color: #00ffff;">E&#8593;X</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">exp(X).v X.u</span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u exp(X).v </span>
-<span style="color: #00ffff;">RCL&#215; ST</span> Y       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">exp(X).v*X.u exp(X).v </span>
-<span style="color: #00ffff;">ABS</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">exp(X).u exp(X).v </span>
-<span style="color: #00ffff;">COMPLEX</span>         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">exp(X)</span>
-<span style="color: #00ffff;">RTN</span>
-
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"USIN"</span>      <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X</span>
-<span style="color: #00ffff;">FUNC</span> 11
-<span style="color: #00ffff;">L4STK</span>
-<span style="color: #00ffff;">XEQ</span> 99          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X</span>
-<span style="color: #00ffff;">COMPLEX</span>         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Y        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
-<span style="color: #00ffff;">COS</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">COS(X.v) X.u X.v</span>
-<span style="color: #00ffff;">&#215;</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">COS(X.v)*X.u X.v</span>
-<span style="color: #00ffff;">ABS</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SIN(X).u X.v </span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v SIN(X).u </span>
-<span style="color: #00ffff;">SIN</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SIN(X).v SIN(X).u</span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SIN(X).u SIN(X).v </span>
-<span style="color: #00ffff;">COMPLEX</span>         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SIN(X)</span>
-<span style="color: #00ffff;">RTN</span>
-
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"UCOS"</span>      <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X</span>
-<span style="color: #00ffff;">FUNC</span> 11
-<span style="color: #00ffff;">L4STK</span>
-<span style="color: #00ffff;">XEQ</span> 99          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X</span>
-<span style="color: #00ffff;">COMPLEX</span>         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Y        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
-<span style="color: #00ffff;">SIN</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SIN(X.v) X.u X.v</span>
-<span style="color: #00ffff;">&#215;</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SIN(X.v)*X.u X.v</span>
-<span style="color: #00ffff;">ABS</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">COS(X).u X.v </span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v COS(X).u </span>
-<span style="color: #00ffff;">COS</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">COS(X).v COS(X).u</span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">COS(X).u COS(X).v </span>
-<span style="color: #00ffff;">COMPLEX</span>         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">COS(X)</span>
-<span style="color: #00ffff;">RTN</span>
-
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"UTAN"</span>      <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X</span>
-<span style="color: #00ffff;">FUNC</span> 11
-<span style="color: #00ffff;">L4STK</span>
-<span style="color: #00ffff;">XEQ</span> 99          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X</span>
-<span style="color: #00ffff;">COMPLEX</span>         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Y        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
-<span style="color: #00ffff;">COS</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">COS(X.v) X.u X.v</span>
-<span style="color: #00ffff;">1/X</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SEC(X.v) X.u X.v </span>
-<span style="color: #00ffff;">X&#8593;2</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SEC^2(X.v) X.u X.v</span>
-<span style="color: #00ffff;">&#215;</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SEC^2(X.v)*X.u X.v</span>
-<span style="color: #00ffff;">ABS</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">tan(X).u X.v </span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v tan(X).u</span>
-<span style="color: #00ffff;">TAN</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">tan(X).v tan(X).u</span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">tan(X).u tan(X).v </span>
-<span style="color: #00ffff;">COMPLEX</span>         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">tan(X)</span>
-<span style="color: #00ffff;">RTN</span>
-
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #00ffff;">LBL</span> 99 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">R-&gt;C</span>
-<span style="color: #00ffff;">FUNC</span> 11
-<span style="color: #00ffff;">L4STK</span>
-<span style="color: #00ffff;">CPX</span>?
-<span style="color: #00ffff;">RTN</span>
-0
-<span style="color: #00ffff;">COMPLEX</span>
+<span style="color: #00ffff;">EDIT</span>
+<span style="color: #fa8072;">"Enter data; R/S"</span>
+&#9500;<span style="color: #fa8072;">" to end"</span>
+<span style="color: #00ffff;">PROMPT</span>
+<span style="color: #00ffff;">EXITALL</span>
 <span style="color: #00ffff;">RTN</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -694,8 +761,1559 @@ Rv            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7
 </div>
 </div>
 </div>
+
+<div id="outline-container-orgaf74ef9" class="outline-2">
+<h2 id="orgaf74ef9"><span class="section-number-2">4</span> <code>POLY</code>: A collection of polynomial tools</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-menu-poly" class="outline-3">
+<h3 id="menu-poly"><span class="section-number-3">4.1</span> Menu</h3>
+<div class="outline-text-3" id="text-menu-poly">
+<table id="orge04b905" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Menu</th>
+<th scope="col" class="org-left">LBL</th>
+<th scope="col" class="org-left">Description</th>
+<th scope="col" class="org-left">Inputs</th>
+<th scope="col" class="org-left">Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">NEW</td>
+<td class="org-left">NEWPLY</td>
+<td class="org-left">Create a polynomial of degree X</td>
+<td class="org-left">X: N</td>
+<td class="org-left">X: P</td>
+</tr>
+
+<tr>
+<td class="org-left">INTRP</td>
+<td class="org-left">PINTRP</td>
+<td class="org-left">Create interpolateing polynomial</td>
+<td class="org-left">Y: XDAT X: YDAT</td>
+<td class="org-left">X: P</td>
+</tr>
+
+<tr>
+<td class="org-left">▒▒▒▒</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">▒▒▒▒</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">EDIT</td>
+<td class="org-left">LBL 78</td>
+<td class="org-left">Edit a polynomial</td>
+<td class="org-left">X: P</td>
+<td class="org-left">X:P</td>
+</tr>
+
+<tr>
+<td class="org-left">VIEW</td>
+<td class="org-left">VPOLY</td>
+<td class="org-left">View  a polynomial</td>
+<td class="org-left">X: P</td>
+<td class="org-left">N/A</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">SLV2</td>
+<td class="org-left">P2SLV</td>
+<td class="org-left">Solve quadratic polynomial</td>
+<td class="org-left">X: P</td>
+<td class="org-left">Y: root_1 X: root_2</td>
+</tr>
+
+<tr>
+<td class="org-left">SLV1</td>
+<td class="org-left">P1SLV</td>
+<td class="org-left">Solve linear polynomial</td>
+<td class="org-left">X: P</td>
+<td class="org-left">X: root</td>
+</tr>
+
+<tr>
+<td class="org-left">R1ST</td>
+<td class="org-left">PR1ST</td>
+<td class="org-left">Find a root</td>
+<td class="org-left">X: P</td>
+<td class="org-left">Z: OPoly Y: DPoly X: root</td>
+</tr>
+
+<tr>
+<td class="org-left">RNXT</td>
+<td class="org-left">PRNXT</td>
+<td class="org-left">Find next root</td>
+<td class="org-left">Z: OPoly Y: DPoly X: GUESS</td>
+<td class="org-left">Z: OPoly Y: DPoly X: root</td>
+</tr>
+
+<tr>
+<td class="org-left">▒▒▒▒</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">VIEW</td>
+<td class="org-left">VPOLY</td>
+<td class="org-left">View the coeffients of a polynomial</td>
+<td class="org-left">X: P</td>
+<td class="org-left">N/A</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">DFALT</td>
+<td class="org-left">PDEFLT</td>
+<td class="org-left">Deflate polynomial</td>
+<td class="org-left">Y: P X: R</td>
+<td class="org-left">Y: Remainder X: P/(X-R)</td>
+</tr>
+
+<tr>
+<td class="org-left">EVAL</td>
+<td class="org-left">PEVAL</td>
+<td class="org-left">Evaluate polynomial P @ X</td>
+<td class="org-left">Y: P  X: X</td>
+<td class="org-left">X: P(X)</td>
+</tr>
+
+<tr>
+<td class="org-left">EVAL1</td>
+<td class="org-left">PEVL1</td>
+<td class="org-left">Evaluate polynomial P &amp; P' @ X</td>
+<td class="org-left">Y: P  X: X</td>
+<td class="org-left">Y: P(X) X: P'(x)</td>
+</tr>
+
+<tr>
+<td class="org-left">EVAL2</td>
+<td class="org-left">PEVL2</td>
+<td class="org-left">Evaluate polynomial P, P', &amp; P'' @ X</td>
+<td class="org-left">Y: P  X: X</td>
+<td class="org-left">Z: P(X) Y: P''(x) Y: P'(x)</td>
+</tr>
+
+<tr>
+<td class="org-left">LGRR</td>
+<td class="org-left">PLGRR</td>
+<td class="org-left">Root search  (Laguerre's Method)</td>
+<td class="org-left">T: P Z: GUESS Y: ACC X: MAXITR</td>
+<td class="org-left">Z: Status y: P_Val X: root</td>
+</tr>
+
+<tr>
+<td class="org-left">VIEW</td>
+<td class="org-left">VPOLY</td>
+<td class="org-left">View the coeffients of a polynomial</td>
+<td class="org-left">X: P</td>
+<td class="org-left">N/A</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">POLY</td>
+<td class="org-left">LBL 98</td>
+<td class="org-left">Store/Recall Current Polynomial</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">X</td>
+<td class="org-left">LBL 97</td>
+<td class="org-left">Store/Recall current value of "X"</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">▒▒▒▒</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">▒▒▒▒</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">▒▒▒▒</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">EVAL</td>
+<td class="org-left">PWRP</td>
+<td class="org-left">Evaluate wrapped polynomial at X</td>
+<td class="org-left">N/A</td>
+<td class="org-left">X: P("X")</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+A polynomial is represented as 1xn matrix of coefficients.  The first element of the matrix is the coefficient on the highest
+degree.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org14cbe1c" class="outline-3">
+<h3 id="org14cbe1c"><span class="section-number-3">4.2</span> Notes for individual programs</h3>
+<div class="outline-text-3" id="text-4-2">
+</div>
+<div id="outline-container-orgb0e89e0" class="outline-4">
+<h4 id="orgb0e89e0"><span class="section-number-4">4.2.1</span> <code>PEVAL</code>, <code>PEVL1</code>, &amp; <code>PEVL2</code>: Evaluating Polynomials</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<p>
+These functions efficiently evaluate a polynomial (and its first and/or second derivative).  They are handy for simply evaluating a polynomial repeatedly;
+however, they are more tuned for use as subroutines in other programs &#x2013; ex: solvers.  Note that the last page of the main menu provides a more efficient way
+to repeatedly evaluate a polynomial.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3f25883" class="outline-4">
+<h4 id="org3f25883"><span class="section-number-4">4.2.2</span> <code>PWRP</code>: Wrapping a polynomial matrix in an <code>MVAR</code> function</h4>
+<div class="outline-text-4" id="text-4-2-2">
+<p>
+Simply store the polynomial into the global variable "<code>WRPP</code>", and then feed <code>PWRP</code> to things like the built in solver/integrator and similar tools (See:
+<a href="pgmforfun.html">pgmforfun.html</a>).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0a7138a" class="outline-4">
+<h4 id="org0a7138a"><span class="section-number-4">4.2.3</span> <code>PR1ST</code> &amp; <code>PRNXT</code>: Finding the roots of a polynomial</h4>
+<div class="outline-text-4" id="text-4-2-3">
+<p>
+These two programs provide a way to find all the roots of a polynomial.  They work on real or complex polynomials, and finds both real and complex roots.
+</p>
+
+<p>
+These functions use the global variable <code>ACC</code> to specify how close to zero the polynomial must be to accept a root.  If <code>ACC</code> is not set, then 1e-15 is used.
+</p>
+
+<p>
+The first function, <code>PR1ST</code>, is used to find an initial root of a polynomial.  It only takes a polynomial.  It will almost always find a root; however, it is
+<i>possible</i> for it to fail and return an error.  When it fails, I suggest running the function again to see if it will find a root &#x2013; it uses a random initial
+guess each time it runs.  When it finds a root, it returns the original polynomial, the polynomial with the located root removed (deflated), and a root.  This output 
+is precisely what is needed to find more roots.
+</p>
+
+<p>
+The second function, <code>PRNXT</code>, finds the <b>next</b> root of the polynomial.  It requires three arguments (original polynomial, deflated polynomial, and a guess).
+This is precisely what the <code>PR1ST</code> function returns.  <code>PRNXT</code> also returns the original polynomial, the polynomial with the located root removed, and a new
+root.  So you can feed <code>PRNXT</code> the return of <code>PR1ST</code> or <code>PRNXT</code>.  
+</p>
+
+<p>
+A common question: Why is the original polynomial required by <code>PRNXT</code>, and not just the deflated one?  A series of polynomial deflations leads to a deflated
+polynomial with some round off error.  So wen <code>PRNXT</code> finds a root of the deflated polynomial, it then uses that root as the initial guess to <code>PLGRR</code> on the
+original polynomial.  This significantly reduces round-off error, and <i>almost</i> always works &#x2013; it is <i>possible</i> that it may converge to a root we already
+found.  Currently <code>PRNXT</code> dosen't check for this case &#x2013; that is on my todo list.
+</p>
+
+<p>
+In summary, to find all the roots of a polynomial: Put the polynomial on the stack, and press <code>PR1ST</code> to get the first root.  Then hit <code>PRNXT</code> until you have
+found all the roots.
+</p>
+
+<p>
+Alternately, with a bit more round off error, you can just repeatedly use <code>PR1ST</code> on the deflated polynomial that <code>PR1ST</code> returns.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga74e254" class="outline-4">
+<h4 id="orga74e254"><span class="section-number-4">4.2.4</span> <code>PLGRR</code>: Search for a polynomial root</h4>
+<div class="outline-text-4" id="text-4-2-4">
+<p>
+This is designed to be used by other programs.  It takes a polynomial, a guess, a tolerance, and a maximum number of iterations.  If the tolerance is
+negative, then the function will always preform the maximum number of iterations.  This is useful for "refining" a root.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8a3cdec" class="outline-3">
+<h3 id="org8a3cdec"><span class="section-number-3">4.3</span> Code for Menu</h3>
+<div class="outline-text-3" id="text-4-3">
+<div class="org-src-container">
+<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"POLY"</span> 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-POLY" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (POLY)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Auto-generated menu program</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"POLY"</span>
+<span style="color: #00ffff;">LBL</span> 01            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu POLY</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"NEW"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"NEWPLY"</span>
+<span style="color: #fa8072;">"INTRP"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PINTRP"</span>
+<span style="color: #fa8072;">"EDIT"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 78
+<span style="color: #fa8072;">"VIEW"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"VPOLY"</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 04
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">LBL</span> 02            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu POLY</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"SLV2"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"P2SLV"</span>
+<span style="color: #fa8072;">"SLV1"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"P1SLV"</span>
+<span style="color: #fa8072;">"R1ST"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PR1ST"</span>
+<span style="color: #fa8072;">"RNXT"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PRNXT"</span>
+<span style="color: #fa8072;">"VIEW"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"VPOLY"</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">LBL</span> 03            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 3 of menu POLY</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"DFALT"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PDEFLT"</span>
+<span style="color: #fa8072;">"EVAL"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PEVAL"</span>
+<span style="color: #fa8072;">"EVAL1"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PEVL1"</span>
+<span style="color: #fa8072;">"EVAL2"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PEVL2"</span>
+<span style="color: #fa8072;">"LGRR"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PLGRR"</span>
+<span style="color: #fa8072;">"VIEW"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"VPOLY"</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 04
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">LBL</span> 04            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 4 of menu POLY</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"POLY"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 98
+<span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 97
+<span style="color: #fa8072;">"EVAL"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PWRP"</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 04
+<span style="color: #00ffff;">LBL</span> 00 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Application Exit</span>
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Free labels start at: 5</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org332ff3d" class="outline-3">
+<h3 id="org332ff3d"><span class="section-number-3">4.4</span> Local functions</h3>
+<div class="outline-text-3" id="text-4-4">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-PINTRP" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PINTRP)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Create an interpolateing polynomial</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: X data matrix</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: Y data matrix</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: interpolateing polynomial</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0.2.2</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-28</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: X &amp; Y must have the same number of elements, but dimintions may differ.</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Explicitly constructs the vandermonde matrix, and solves the system</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Uses INDEX</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TC:  xdat:[ 1, 2, 3, 4] ydat:[1, -1, 1, -1] =&gt; [-4/3 10 -68/3 15] = [-1.33.. 10 -22.66.. 15]</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TC:  xdat:[-1, 0, 1, 2] ydat:[-2, 3, -24, -77] =&gt; [1, -16, -12, 3]  </span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"PINTRP"</span>
+<span style="color: #00ffff;">FUNC</span> 21         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24 </span>
+<span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0    </span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_YDAT"</span>    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">YDAT XDAT</span>
+<span style="color: #00ffff;">DIM</span>?
+<span style="color: #00ffff;">&#215;</span>
+1
+<span style="color: #00ffff;">DIM</span> <span style="color: #fa8072;">"_YDAT"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 N XDAT -- YDAT is now an Nx1 matrix</span>
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">N XDAT</span>
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">XDAT</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_XDAT"</span>    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">XDAT</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"MXDIAG"</span>    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">MUL      -- nxn diag matrix</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_MUL"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">MUL</span>
+<span style="color: #00ffff;">DIM</span>?            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">N N</span>
+R&#8595;
+1               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 N</span>
+<span style="color: #00ffff;">NEWMAT</span>          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TPL      -- TPL is an nx1 zero matrix</span>
+<span style="color: #00ffff;">SIGN</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TPL      -- TPL is now an NX1 1 matrix</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_TPL"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TPL</span>
+<span style="color: #00ffff;">DIM</span>?            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 N</span>
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">N</span>
+<span style="color: #00ffff;">ENTER</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">N N</span>
+<span style="color: #00ffff;">NEWMAT</span>          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">VM       -- VM is an NXN zero matrix</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_VM"</span>      <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">VM</span>
+<span style="color: #00ffff;">DIM</span>?            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">N N</span>
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">N</span>
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_VM"</span>
+1               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 N</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">N 1</span>
+<span style="color: #00ffff;">STOIJ</span>
+<span style="color: #00ffff;">LBL</span> 79
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_TPL"</span>
+<span style="color: #00ffff;">PUTM</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_MUL"</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"_TPL"</span>
+<span style="color: #00ffff;">J-</span>
+<span style="color: #00ffff;">FC</span>? 77
+<span style="color: #00ffff;">GTO</span> 79
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_YDAT"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">YDAT</span>
+<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"_VM"</span>      <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">POLY</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-NEWPLY" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (NEWPLY)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Create a new polynomial of degree X</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: degree</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: polynomial</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0.2</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-26</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"NEWPLY"</span>
+<span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24 </span>
+<span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0    </span>
+1
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+1
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">NEWMAT</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Edit a polynomial in the matrix editor</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: polynomial</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: polynomial</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0.2</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-26</span>
+<span style="color: #00ffff;">LBL</span> 78 
+<span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24 </span>
+<span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0    </span>
+<span style="color: #00ffff;">EDIT</span>
+<span style="color: #fa8072;">"Enter data; R/S"</span>
+&#9500;<span style="color: #fa8072;">" to end"</span>
+<span style="color: #00ffff;">PROMPT</span>
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-P2SLV" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (P2SLV)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Solve quadratic polynomial</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Polynomial matrix</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Y: root_1</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: root_2</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0.2</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Uses INDEX</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-26</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"P2SLV"</span>
+<span style="color: #00ffff;">FUNC</span> 12         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
+R&#8595;
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">WRAP</span>
+<span style="color: #00ffff;">LBL</span> 77
+<span style="color: #00ffff;">RCLEL</span>
+<span style="color: #00ffff;">J+</span>
+<span style="color: #00ffff;">FC</span>? 77
+<span style="color: #00ffff;">GTO</span> 77
+<span style="color: #00ffff;">RCL ST</span> Z        <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">a                     c                     b                     a</span>
+<span style="color: #00ffff;">ABS</span>             <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">|a|                   c                     b                     a</span>
+<span style="color: #00ffff;">X=0</span>?
+<span style="color: #00ffff;">RTNERR</span> 3
+R&#8595;              <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">a                     c                     b                     a</span>
+2               <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">2                     c                     b                      a</span>
+<span style="color: #00ffff;">RCL&#215; ST</span> T       <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">2a                    c                     b                      a</span>
+R&#8595;              <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">c                     b                     a                     2a                    </span>
+<span style="color: #00ffff;">RCL&#247; ST</span> T       <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">c/(2a)                b                     a                     2a                    </span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">b                     c/(2a)                a                     2a                    </span>
+<span style="color: #00ffff;">RCL&#247; ST</span> T       <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">b/(2a)                c/(2a)                a                     2a                    </span>
+<span style="color: #00ffff;">+/-</span>             <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">-B                    C                     a                     2a                    </span>
+<span style="color: #00ffff;">ENTER</span>           <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">-B                   -B                     C                      a</span>
+<span style="color: #00ffff;">X&#8593;2</span>             <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">B^2                  -B                     C                      a</span>
+<span style="color: #00ffff;">RCL- ST</span> Z       <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">B^2-C                -B                     C                      a</span>
+<span style="color: #00ffff;">RCL- ST</span> Z       <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">B^2-2C               -B                     C                      a</span>
+<span style="color: #00ffff;">SQRT</span>            <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">&#8730;(B^2-2C)            -B                     C                      a</span>
+<span style="color: #00ffff;">RCL ST</span> Y        <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">-B                    &#8730;(B^2-2C)            -B                      C</span>
+<span style="color: #00ffff;">RCL- ST</span> Y       <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">-B-&#8730;(B^2-2C)          &#8730;(B^2-2C)            -B                      C</span>
+<span style="color: #00ffff;">RCL ST</span> Z        <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">-B                   -B-&#8730;(B^2-2C)          &#8730;(B^2-2C)              -B                     </span>
+<span style="color: #00ffff;">RCL+ ST</span> Z       <span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">-B+&#8730;(B^2-2C)         -B-&#8730;(B^2-2C)          &#8730;(B^2-2C)              -B                     </span>
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-P1SLV" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (P1SLV)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Solve linear polynomial</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Polynomial matrix</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: root</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0.2</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Uses INDEX</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-26</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"P1SLV"</span>
+<span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
+R&#8595;
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">WRAP</span>
+<span style="color: #00ffff;">RCLEL</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">a_1</span>
+<span style="color: #00ffff;">J+</span>
+<span style="color: #00ffff;">RCLEL</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">a_0</span>
+<span style="color: #00ffff;">&#247;</span>
+<span style="color: #00ffff;">+/-</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-PEVAL" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PEVAL)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Evaluate a polynomial</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: Matrix with polynomial coefficients.  DIM of 1xn, nx1, whatever...</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: Value at which polynomial should be evaluated</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: value of polynomial evaluated at X</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: 91</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Uses INDEX</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0.2</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-03</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"PEVAL"</span>
+<span style="color: #00ffff;">FUNC</span> 21         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P X</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">WRAP</span>
+0               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">PV P X</span>
+<span style="color: #00ffff;">LBL</span> 91
+<span style="color: #00ffff;">RCL&#215; ST</span> Z       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">PV*X P X</span>
+<span style="color: #00ffff;">RCLEL</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Coef PV*X P X</span>
+<span style="color: #00ffff;">+</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">PV=Coef+PV*X P X</span>
+<span style="color: #00ffff;">J+</span>
+<span style="color: #00ffff;">FC</span>? 77
+<span style="color: #00ffff;">GTO</span> 91
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-PEVL1" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PEVL1)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Evaluate a polynomial and it's first derivative</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: Matrix with polynomial coefficients.  DIM of 1xn, nx1, whatever...</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: Value at which polynomial &amp; derivative should be evaluated</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Y: value of polynomial evaluated at X</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: value of polynomial's derivative evaluated at X</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: 91</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Uses INDEX</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0.2</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-03</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"PEVL1"</span>
+<span style="color: #00ffff;">FUNC</span> 22         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P       X</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X</span>
+<span style="color: #00ffff;">WRAP</span>
+0               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">PV      X</span>
+0               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DV      PV       X</span>
+<span style="color: #00ffff;">LBL</span> 92
+<span style="color: #00ffff;">RCL&#215; ST</span> Z       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DV*X    PV       X</span>
+<span style="color: #00ffff;">RCL+ ST</span> Y       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DV*X+PV PV       X</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">PV      DV*X+PV  X</span>
+<span style="color: #00ffff;">RCL&#215; ST</span> Z       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">PV*X    DV*X+PV  X</span>
+<span style="color: #00ffff;">RCLEL</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">C       PV*X     DV*X+PV  X</span>
+<span style="color: #00ffff;">+</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">C+PV*X  DV*X+PV  X</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DV*X+PV C+PV*X   X</span>
+<span style="color: #00ffff;">J+</span>
+<span style="color: #00ffff;">FC</span>? 77
+<span style="color: #00ffff;">GTO</span> 92
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-PEVL2" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PEVL2)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Evaluate a polynomial and it's first two derivatives</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: Matrix with polynomial coefficients.  DIM of 1xn, nx1, whatever...</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: Value at which polynomial &amp; derivative should be evaluated</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Z: value of polynomial evaluated at X</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">Y: value of polynomial's first derivative evaluated at X</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: value of polynomial's second derivative evaluated at X</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: 91</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Uses INDEX</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0.2</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-03</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"PEVL2"</span>
+<span style="color: #00ffff;">FUNC</span> 23         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_X"</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X       P</span>
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+R&#8595;              <span style="color: #ffa500;">@@@@ </span>
+<span style="color: #00ffff;">WRAP</span>
+0               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">PV      </span>
+0               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DV       PV       </span>
+0               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DDV      DV       PV       </span>
+<span style="color: #00ffff;">LBL</span> 93
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"_X"</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DDV*X    DV       PV       </span>
+<span style="color: #00ffff;">RCL+ ST</span> Y       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DDV*X+DV DV       PV       </span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DV       DDV*X+DV PV       </span>
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"_X"</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DV*X     DDV*X+DV PV       </span>
+<span style="color: #00ffff;">RCL+ ST</span> Z       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DV*X+PV  DDV*X+DV PV       </span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DDV*X+DV DV*X+PV  PV       </span>
+<span style="color: #00ffff;">RCL ST</span> Z        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">PV       DDV*X+DV DV*X+PV  PV       </span>
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"_X"</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">PV*X     DDV*X+DV DV*X+PV  PV       </span>
+<span style="color: #00ffff;">RCLEL</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">C        PV*X     DDV*X+DV DV*X+PV</span>
+<span style="color: #00ffff;">+</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">C+PV*X   DDV*X+DV DV*X+PV</span>
+<span style="color: #00ffff;">STO ST</span> T        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">C+PV*X   DDV*X+DV DV*X+PV  C+PV*X   </span>
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DDV*X+DV DV*X+PV  C+PV*X   </span>
+<span style="color: #00ffff;">J+</span>
+<span style="color: #00ffff;">FC</span>? 77
+<span style="color: #00ffff;">GTO</span> 93
+2
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-PDEFLT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PDEFLT)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Deflate polynomial</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: Matrix with polynomial coefficients.  DIM of 1xn, nx1, whatever...</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: Root</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Y: Remainder (a number)</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: Deflated polynomial</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: 96</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Uses INDEX</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0.2</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-03</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"PDEFLT"</span>
+<span style="color: #00ffff;">FUNC</span> 22         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">REAL</span>?
+<span style="color: #00ffff;">GTO</span> 88
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">XEQ</span> 89          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">MAT2C</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+<span style="color: #00ffff;">LBL</span> 88
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P R</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">WRAP</span>
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">R</span>
+<span style="color: #00ffff;">+/-</span>
+0               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LC R</span>
+<span style="color: #00ffff;">LBL</span> 96
+<span style="color: #00ffff;">RCL&#215; ST</span> Y       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LC*R R</span>
+<span style="color: #00ffff;">RCLEL</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">C LC*R R</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LC*R C R</span>
+<span style="color: #00ffff;">-</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">C-LC*R  R</span>
+<span style="color: #00ffff;">STOEL</span>         
+<span style="color: #00ffff;">J+</span>
+<span style="color: #00ffff;">FC</span>? 77
+<span style="color: #00ffff;">GTO</span> 96
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_M"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REM</span>
+<span style="color: #00ffff;">DIM</span>?            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">m n REM</span>
+<span style="color: #00ffff;">&#215;</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">N REM</span>
+1               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 N REM</span>
+<span style="color: #00ffff;">-</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">N-1 REM</span>
+1               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 N-1 REM</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">N-1 1 REM</span>
+<span style="color: #00ffff;">DIM</span> <span style="color: #fa8072;">"_M"</span>  
+R&#8595;
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REM</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_M"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P REM</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Make matrix complex</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: MAT2C 89</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Matrix</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Matrix</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Uses INDEX</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: MAT2C</span>
+<span style="color: #00ffff;">LBL</span> 89
+<span style="color: #00ffff;">FUNC</span> 11
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">RCLEL</span>
+<span style="color: #00ffff;">REAL</span>?
+<span style="color: #00ffff;">GTO</span> 87
+R&#8595;
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 87
+R&#8595;
+<span style="color: #00ffff;">ENTER</span>
+<span style="color: #00ffff;">DIM</span>?
+<span style="color: #00ffff;">NEWMAT</span>
+<span style="color: #00ffff;">COMPLEX</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-VPOLY" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (VPOLY)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: View elements of polynomial</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: polynomial matrix</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: N/A</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0.2</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Uses INDEX</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-03</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"VPOLY"</span>
+<span style="color: #00ffff;">FUNC</span> 00
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">WRAP</span>
+<span style="color: #00ffff;">DIM</span>?
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #00ffff;">LBL</span> 90
+<span style="color: #fa8072;">"X^"</span>
+<span style="color: #00ffff;">AIP</span>
+&#9500;<span style="color: #fa8072;">":"</span>
+<span style="color: #00ffff;">RCLEL</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+R&#8595;
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">STOP</span>
+1
+<span style="color: #00ffff;">-</span>
+<span style="color: #00ffff;">J+</span>
+<span style="color: #00ffff;">FC</span>? 77
+<span style="color: #00ffff;">GTO</span> 90
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-PR1ST" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PR1ST)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Find a root</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Polynomial</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Z: Origional Polynomial</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">Y: Deflated Polynomial</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: Root</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: If set, the global variable ACC is used to set accuracy</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TC:  [1, -16, -12, 3] =&gt; -0.90574, 0.1982, 16.70749</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"PR1ST"</span>
+<span style="color: #00ffff;">FUNC</span> 13
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">XEQ</span> 81          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">PLYBAD</span>
+<span style="color: #00ffff;">RTNERR</span> 5
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_P"</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P</span>
+<span style="color: #00ffff;">RAN</span>
+<span style="color: #00ffff;">RAN</span>
+<span style="color: #00ffff;">COMPLEX</span>         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Guss Poly</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ACC"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+1e-15           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Tol  Guss Poly</span>
+50              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Itr  Tol  Guss  Poly</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PLGRR"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Root Pval Stat</span>
+0&#8800;? ST Z   <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">TODO: Memory leak in free42 &lt; 3.0.3</span>
+<span style="color: #00ffff;">RTNERR</span> 6
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_P"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Poly Root Pval Stat</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_P"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Poly Poly Root Pval</span>
+<span style="color: #00ffff;">RCL ST</span> Z        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Root Poly Poly Root</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PDEFLT"</span>    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DPly Rem  Poly Root</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Rem  DPly Poly Root</span>
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DPly Poly Root</span>
+<span style="color: #00ffff;">RCL ST</span> Z        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Root DPly Poly Root</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span id="coderef-PRNXT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PRNXT)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Find a another/next root</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">in:  Z: Origional Polynomial</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">Y: Deflated Polynomial</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: Guess</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Z: Origional Polynomial</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">Y: Deflated Polynomial or 0 if fully deflated</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: Root</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: If set, the global variable ACC is used to set accuracy</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"PRNXT"</span>
+<span style="color: #00ffff;">FUNC</span> 33
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">RCL ST</span> Z        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Poly Gues DPly Poly</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_P"</span>  
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Gues DPly Poly</span>
+<span style="color: #00ffff;">RCL ST</span> Y        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DPLY Gues DPly Poly</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_DP"</span>  
+<span style="color: #00ffff;">XEQ</span> 81          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">PLYBAD</span>
+<span style="color: #00ffff;">RTNERR</span> 5
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Gues DPly Poly</span>
+<span style="color: #00ffff;">SF</span> 25
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ACC"</span>
+<span style="color: #00ffff;">FC?C</span> 25
+1e-15           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Tol  Gues DPly Poly</span>
+50              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Itr  Tol  Gues DPly</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PLGRR"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Root Pval Stat</span>
+<span style="color: #00ffff;">RCL ST</span> Z        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Root Pval Stat                   @@## REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+<span style="color: #00ffff;">X&#8800;0</span>?                                                  <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+0&#8800;? ST Z                                              <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0.3</span>
+<span style="color: #00ffff;">RTNERR</span> 6
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Root Pval Stat                   @@## REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_P"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Poly Root Pval Stat</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Root Poly Pval Stat</span>
+-1              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">-1   Root Poly Pval</span>
+5               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">5    -1   Root Poly</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PLGRR"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Root Pval Stat</span>
+<span style="color: #00ffff;">RCL ST</span> X        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Root Root Pval Stat</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_DP"</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DPly Root Root Pval</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Root DPly Root Pval</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PDEFLT"</span>    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DPly Rem  Root Pval</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DPly Root Pval</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TODO: Should check if |Rem| is near zero.  If it is not, then we probably converged to a previously found root and removed from DPly. It is also possible</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TODO: that we we might have diverged, but that is super unlikely.  In fact, both cases are quite unlikely.  Still good software should check.</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_P"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Poly DPly Root Pval</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DPly Poly Root Pval</span>
+<span style="color: #00ffff;">RCL ST</span> Z        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Root DPly Poly Root</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: RTNNO if X is not a polynomial of degree&gt;0</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: PLYBAD 81</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Polynomial</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: N/A</span>
+<span style="color: #00ffff;">LBL</span> 81
+<span style="color: #00ffff;">FUNC</span> 00
+<span style="color: #00ffff;">MAT</span>?
+<span style="color: #00ffff;">GTO</span> 82
+<span style="color: #00ffff;">RTNYES</span>
+<span style="color: #00ffff;">LBL</span> 82
+<span style="color: #00ffff;">DIM</span>?
+<span style="color: #00ffff;">&#215;</span>
+2
+<span style="color: #00ffff;">X&gt;Y</span>?
+<span style="color: #00ffff;">RTNYES</span>
+<span style="color: #00ffff;">RTNNO</span>
+
+<span id="coderef-PLGRR" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PLGRR)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Use Laguerre's method to find a polynomial root</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  T: Polynomial</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">Z: Guess</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">Y: Tolerance</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: Maximum Iteration</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Z: Reason for exit</span>
+<span style="color: #ffa500;">@@@@         </span><span style="color: #ff7f24;">0 = A solution has been found.</span>
+<span style="color: #ffa500;">@@@@         </span><span style="color: #ff7f24;">3 = Bad guess was used.</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">Y: P(X)</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: Root</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"PLGRR"</span>
+<span style="color: #00ffff;">FUNC</span> 43
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_I"</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">ITR   TOL   GUESS POLY</span>
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TOL   GUESS POLY</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_T"</span>  
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GUESS POLY</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_G"</span>        
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">POLY</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_P"</span>  
+<span style="color: #00ffff;">DIM</span>?                       
+<span style="color: #00ffff;">&#215;</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">N</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_N"</span>  
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TODO: Check N&gt;1.  Another status: 4 = polynomial is constant</span>
+1
+<span style="color: #00ffff;">-</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">N-1</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_NM1"</span>  
+R&#8595;
+<span style="color: #00ffff;">LBL</span> 94
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_P"</span>  
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_G"</span>  
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PEVL2"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P''         P'     P        ?</span>
+<span style="color: #00ffff;">RCL ST</span> Z
+<span style="color: #00ffff;">ABS</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">|P|         P''    P'       P    @@## REQ:free42&gt;=3.0.3</span>
+X&lt;? <span style="color: #fa8072;">"_T"</span>                                              <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0.3</span>
+<span style="color: #00ffff;">XEQ</span> 76                                                <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+<span style="color: #00ffff;">GTO</span> 95
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P''         P'     P        ?</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TODO: Check P' for /0.  Another status: 5 = Iteration failed due to division by zero</span>
+<span style="color: #00ffff;">RCL&#247; ST</span> Y       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P''/P'      P'     P        ?</span>
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P'          P      ?        P''/P'  </span>
+<span style="color: #00ffff;">&#247;</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">-N=P/P'     ?      P''/P'   P''/P' </span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">?           -N     P''/P'   P''/P' </span>
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">-N          P''/P' P''/P'   ?</span>
+<span style="color: #00ffff;">+/-</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">N           P''/P' P''/P'   ?</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P''/P'      N      P''/P'   ?</span>
+<span style="color: #00ffff;">RCL&#215; ST</span> Y       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">-L          N      P''/P'   ?</span>
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"_N"</span>       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">-L*n        N      P''/P'   ?</span>
+<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"_NM1"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">-L*n/(n-1)  N      P''/P'   ?</span>
+1
+<span style="color: #00ffff;">+</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1-L*n/(n-1) N      P''/P'   P''/P'  </span>
+<span style="color: #00ffff;">SQRT</span>
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"_NM1"</span>  
+<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"_N"</span>  
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_N"</span>  
+<span style="color: #00ffff;">1/X</span>
+<span style="color: #00ffff;">+</span>  
+<span style="color: #00ffff;">1/X</span>
+<span style="color: #00ffff;">&#215;</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LD          P''/P'   P''/P'  </span>
+<span style="color: #00ffff;">STO+</span> <span style="color: #fa8072;">"_G"</span>  
+<span style="color: #00ffff;">DSE</span> <span style="color: #fa8072;">"_I"</span>  
+<span style="color: #00ffff;">GTO</span> 94
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">EXIT: Max iter</span>
+3               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">3      LD       P''/P'   ?</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_P"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">POLY   3        LD       ?</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_G"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">G      POLY     3        ?</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PEVAL"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P      3        ?        ?</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_G"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">G      P        3        ?</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 95          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">|P|    P''      P'       P   </span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">EXIT: Found root</span>
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P''    P'       P   </span>
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P'     P   </span>
+R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P   </span>
+0
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P      0</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_G"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Root   Pval     0</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 76   <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+<span style="color: #00ffff;">FUNC</span> 00  <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+<span style="color: #00ffff;">ABS</span>      <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_T"</span> <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+<span style="color: #00ffff;">X&gt;Y</span>?     <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+<span style="color: #00ffff;">RTNYES</span>   <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+<span style="color: #00ffff;">RTNNO</span>    <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+
+<span id="coderef-PWRP" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PWRP)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Make a polynomial stored in a matrix into a =MVAR= function</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: N/A</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: N/A</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GLB: WRPP -- Store a polynomial matrix in this variable</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0.2</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Allows one to use SOLVER &amp; INTEG on polynomials</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">USE: PEVAL</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-03</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"PWRP"</span>
+<span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"WRPP"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PEVAL"</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Store/Recall variable "WRPP"</span>
+<span style="color: #00ffff;">LBL</span> 98 
+<span style="color: #00ffff;">FS</span>? 64
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"WRPP"</span>
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"WRPP"</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Store/Recall variable "X"</span>
+<span style="color: #00ffff;">LBL</span> 97
+<span style="color: #00ffff;">FS</span>? 64
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Is a number very close to zero</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: ZEROISH 80</span>
+<span style="color: #00ffff;">LBL</span> 80
+<span style="color: #00ffff;">FUNC</span> 11
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">ABS</span>
+1e-10
+<span style="color: #00ffff;">X&gt;Y</span>?
+<span style="color: #00ffff;">RTNYES</span>
+<span style="color: #00ffff;">RTNNO</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org05f9491" class="outline-2">
+<h2 id="org05f9491"><span class="section-number-2">5</span> <code>VEC3</code>: 3D Real Vector Application</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+This is a simple little application that makes working with 3D vectors less painfull.  
+</p>
+</div>
+<div id="outline-container-menu-vec3" class="outline-3">
+<h3 id="menu-vec3"><span class="section-number-3">5.1</span> Menu</h3>
+<div class="outline-text-3" id="text-menu-vec3">
+<table id="orgccbcab6" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Menu</th>
+<th scope="col" class="org-left">Target</th>
+<th scope="col" class="org-left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">→V</td>
+<td class="org-left">LBL 99</td>
+<td class="org-left">Put stack elements X, Y, &amp; Z into a vector: [Z, Y, X]</td>
+</tr>
+
+<tr>
+<td class="org-left">V→</td>
+<td class="org-left">LBL 98</td>
+<td class="org-left">Vector contents to stack. [A, B, C] =&gt; X: C, Y: B, Z: A</td>
+</tr>
+
+<tr>
+<td class="org-left">DOT</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Dot product</td>
+</tr>
+
+<tr>
+<td class="org-left">CROSS</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Cross product</td>
+</tr>
+
+<tr>
+<td class="org-left">MAG</td>
+<td class="org-left">FNRM</td>
+<td class="org-left">Euculidian magnitude</td>
+</tr>
+
+<tr>
+<td class="org-left">VVIEW</td>
+<td class="org-left">LBL 96</td>
+<td class="org-left">View a vector one element at a time &#x2013; press <code>R/S</code> for next element</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org37f8c9d" class="outline-3">
+<h3 id="org37f8c9d"><span class="section-number-3">5.2</span> Code for Menu</h3>
+<div class="outline-text-3" id="text-5-2">
+<div class="org-src-container">
+<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"VEC3"</span> 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-VEC3" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (VEC3)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Auto-generated menu program</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"VEC3"</span>
+<span style="color: #00ffff;">LBL</span> 01            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu VEC3</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"&#8594;V"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 99
+<span style="color: #fa8072;">"V&#8594;"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 98
+<span style="color: #fa8072;">"DOT"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 02
+<span style="color: #fa8072;">"CROSS"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 03
+<span style="color: #fa8072;">"MAG"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 04
+<span style="color: #fa8072;">"VVIEW"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 96
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">LBL</span> 00 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Application Exit</span>
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 02    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key DOT</span>
+<span style="color: #00ffff;">DOT</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 03    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key CROSS</span>
+<span style="color: #00ffff;">CROSS</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 04    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key MAG</span>
+<span style="color: #00ffff;">FNRM</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Free labels start at: 5</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdc84c54" class="outline-3">
+<h3 id="orgdc84c54"><span class="section-number-3">5.3</span> Local functions</h3>
+<div class="outline-text-3" id="text-5-3">
+<div class="org-src-container">
+<pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Create a vector from stack contents</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: &#8594;V 99</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Z: real number</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">Y: real number</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: real number</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: 1x3 matrix</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used: 51</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Uses INDEX</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0.2</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-03</span>
+<span style="color: #00ffff;">LBL</span> 99
+<span style="color: #00ffff;">FUNC</span> 31
+<span style="color: #00ffff;">XEQ</span> 95
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
+R&#8595;
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">WRAP</span>
+<span style="color: #00ffff;">J-</span>
+<span style="color: #00ffff;">LBL</span> 51
+<span style="color: #00ffff;">STOEL</span>
+R&#8595;
+<span style="color: #00ffff;">J-</span>
+<span style="color: #00ffff;">FC</span>? 77
+<span style="color: #00ffff;">GTO</span> 51
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">RTN</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Put vector elements on stack</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: V&#8594; 98</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: 1x3 matrix V</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Z: First component of V</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">Y: Second component of V</span>
+<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: Third component of V</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used: 52</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Uses INDEX</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0.2</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-03</span>
+<span style="color: #00ffff;">LBL</span> 98
+<span style="color: #00ffff;">FUNC</span> 13
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
+R&#8595;
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">WRAP</span>
+<span style="color: #00ffff;">LBL</span> 52
+<span style="color: #00ffff;">RCLEL</span>
+<span style="color: #00ffff;">J+</span>
+<span style="color: #00ffff;">FC</span>? 77
+<span style="color: #00ffff;">GTO</span> 52
+<span style="color: #00ffff;">RTN</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: View elements of vector</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: VVIEW 96</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: 1x3 matrix V</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: N/A</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used: 53</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Uses INDEX</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0.2</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-03</span>
+<span style="color: #00ffff;">LBL</span> 96
+<span style="color: #00ffff;">FUNC</span> 00
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">WRAP</span>
+1
+<span style="color: #00ffff;">LBL</span> 54
+<span style="color: #00ffff;">CLA</span>
+<span style="color: #00ffff;">AIP</span>
+&#9500;<span style="color: #fa8072;">":"</span>
+<span style="color: #00ffff;">RCLEL</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+R&#8595;
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">STOP</span>
+1
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">J+</span>
+<span style="color: #00ffff;">FC</span>? 77
+<span style="color: #00ffff;">GTO</span> 54
+<span style="color: #00ffff;">RTN</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Make a 3D vector full of zeros</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">NAM: VVIEW 95</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  N/A</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: 1x3 Matrix</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: Used: 53</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0.2</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-03</span>
+<span style="color: #00ffff;">LBL</span> 95
+<span style="color: #00ffff;">FUNC</span> 01
+1
+3
+<span style="color: #00ffff;">NEWMAT</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org98921d1" class="outline-2">
+<h2 id="org98921d1"><span class="section-number-2">6</span> <code>STATR</code>: Statistics Registers</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-menu-statr" class="outline-3">
+<h3 id="menu-statr"><span class="section-number-3">6.1</span> Menu</h3>
+<div class="outline-text-3" id="text-menu-statr">
+<table id="org79be59d" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Menu</th>
+<th scope="col" class="org-left">Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Σx</td>
+<td class="org-left">FUNC 01; L4STK; ΣREG?;  0; +; RCL IND ST X; "Σx=";       ARCL ST X; AVIEW</td>
+</tr>
+
+<tr>
+<td class="org-left">Σx↑2</td>
+<td class="org-left">FUNC 01; L4STK; ΣREG?;  1; +; RCL IND ST X; "Σx^2=";     ARCL ST X; AVIEW</td>
+</tr>
+
+<tr>
+<td class="org-left">Σy</td>
+<td class="org-left">FUNC 01; L4STK; ΣREG?;  2; +; RCL IND ST X; "Σy=";       ARCL ST X; AVIEW</td>
+</tr>
+
+<tr>
+<td class="org-left">Σy↑2</td>
+<td class="org-left">FUNC 01; L4STK; ΣREG?;  3; +; RCL IND ST X; "Σy^2=";     ARCL ST X; AVIEW</td>
+</tr>
+
+<tr>
+<td class="org-left">Σxy</td>
+<td class="org-left">FUNC 01; L4STK; ΣREG?;  4; +; RCL IND ST X; "Σxy=";      ARCL ST X; AVIEW</td>
+</tr>
+
+<tr>
+<td class="org-left">n</td>
+<td class="org-left">FUNC 01; L4STK; ΣREG?;  5; +; RCL IND ST X; "n=";        ARCL ST X; AVIEW</td>
+</tr>
+
+<tr>
+<td class="org-left">Σlnx</td>
+<td class="org-left">FUNC 01; L4STK; ΣREG?;  6; +; RCL IND ST X; "Σlnx=";     ARCL ST X; AVIEW</td>
+</tr>
+
+<tr>
+<td class="org-left">Σlnx↑2</td>
+<td class="org-left">FUNC 01; L4STK; ΣREG?;  7; +; RCL IND ST X; "Σ(lnx)^2="; ARCL ST X; AVIEW</td>
+</tr>
+
+<tr>
+<td class="org-left">Σlny</td>
+<td class="org-left">FUNC 01; L4STK; ΣREG?;  8; +; RCL IND ST X; "Σlny=";     ARCL ST X; AVIEW</td>
+</tr>
+
+<tr>
+<td class="org-left">Σlny↑2</td>
+<td class="org-left">FUNC 01; L4STK; ΣREG?;  9; +; RCL IND ST X; "Σ(lny)^2="; ARCL ST X; AVIEW</td>
+</tr>
+
+<tr>
+<td class="org-left">Σlnxlny</td>
+<td class="org-left">FUNC 01; L4STK; ΣREG?; 10; +; RCL IND ST X; "Σlnxlny=";  ARCL ST X; AVIEW</td>
+</tr>
+
+<tr>
+<td class="org-left">Σxlny</td>
+<td class="org-left">FUNC 01; L4STK; ΣREG?; 11; +; RCL IND ST X; "Σxlny=";    ARCL ST X; AVIEW</td>
+</tr>
+
+<tr>
+<td class="org-left">Σylnx</td>
+<td class="org-left">FUNC 01; L4STK; ΣREG?; 12; +; RCL IND ST X; "Σylnx=";    ARCL ST X; AVIEW</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org1aa56b7" class="outline-3">
+<h3 id="org1aa56b7"><span class="section-number-3">6.2</span> Code</h3>
+<div class="outline-text-3" id="text-6-2">
+<div class="org-src-container">
+<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"STATR"</span> 0 tbl 0 nil 'stay 'up #'MJR-local-only-gen-lab (<span style="color: #00ffff;">lambda</span> (atrg target row) 
+                                                                                    (<span style="color: #00ffff;">cl-destructuring-bind</span> (menu prog) row
+                                                                                      (mapconcat #'string-trim-left 
+                                                                                                 (split-string prog <span style="color: #fa8072;">";"</span>) <span style="color: #fa8072;">"\n"</span>))))
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-STATR" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (STATR)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Auto-generated menu program</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"STATR"</span>
+<span style="color: #00ffff;">LBL</span> 01            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu STATR</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"&#931;x"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 04
+<span style="color: #fa8072;">"&#931;x&#8593;2"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 05
+<span style="color: #fa8072;">"&#931;y"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 06
+<span style="color: #fa8072;">"&#931;y&#8593;2"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 07
+<span style="color: #fa8072;">"&#931;xy"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 08
+<span style="color: #fa8072;">"n"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 09
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">LBL</span> 02            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu STATR</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"&#931;lnx"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 10
+<span style="color: #fa8072;">"&#931;lnx&#8593;2"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 11
+<span style="color: #fa8072;">"&#931;lny"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 12
+<span style="color: #fa8072;">"&#931;lny&#8593;2"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 13
+<span style="color: #fa8072;">"&#931;lnxlny"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 14
+<span style="color: #fa8072;">"&#931;xlny"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 15
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">LBL</span> 03            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 3 of menu STATR</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"&#931;ylnx"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 16
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">LBL</span> 00 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Application Exit</span>
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 04    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#931;x</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG</span>?
+0
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;x="</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 05    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#931;x&#8593;2</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG</span>?
+1
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;x^2="</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 06    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#931;y</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG</span>?
+2
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;y="</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 07    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#931;y&#8593;2</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG</span>?
+3
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;y^2="</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 08    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#931;xy</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG</span>?
+4
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;xy="</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 09    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key n</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG</span>?
+5
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"n="</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 10    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#931;lnx</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG</span>?
+6
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;lnx="</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 11    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#931;lnx&#8593;2</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG</span>?
+7
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;(lnx)^2="</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 12    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#931;lny</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG</span>?
+8
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;lny="</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 13    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#931;lny&#8593;2</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG</span>?
+9
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;(lny)^2="</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 14    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#931;lnxlny</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG</span>?
+10
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;lnxlny="</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 15    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#931;xlny</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG</span>?
+11
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;xlny="</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 16    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#931;ylnx</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG</span>?
+12
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;ylnx="</span>
+<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Free labels start at: 17</span>
+<span style="color: #00ffff;">END</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org52ebfa1" class="outline-2">
+<h2 id="org52ebfa1"><span class="section-number-2">7</span> EOF</h2>
+<div class="outline-text-2" id="text-7">
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+</div>
+</div>
+</div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-04-30 Fri 22:49 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-01 Sat 12:15 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
 </div>
 </body>
 </html>

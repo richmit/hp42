@@ -18,7 +18,7 @@
 #+HTML_HEAD: <style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
 #+HTML_LINK_HOME: https://www.mitchr.me/
 #+HTML_LINK_UP: https://richmit.github.io/hp42/
-#+EXPORT_FILE_NAME: ../docs/math
+#+EXPORT_FILE_NAME: ../docs/uprop
 
 #+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
 |          <r> | <l>                                          |
@@ -54,8 +54,8 @@ Directory contents:
 :END:
 
 This org-mode file contains a program, =UPROP=, that can be used to preform calculations that propagate uncertainty using the standard Gaussian model.  Values
-are respresetd as compelx numbers with teh imaginary part being the standard deviation.  i.e.  V+iU means the value is V and the uncertainty is represented by
-U (a sandard deviation).
+are represented as complex numbers with the imaginary part being the standard deviation.  i.e.  V+iU means the value is V and the uncertainty is represented by
+U (a standard deviation).
 
 * Menu
 :PROPERTIES:
@@ -64,20 +64,28 @@ U (a sandard deviation).
 
 #+ATTR_HTML: :align center :frame box :rules all
 #+NAME:UPROP
-| Menu | LBL  | Value    | SD                                           |
-|------+------+----------+----------------------------------------------|
-| +    | U+   | Y.v+X.v  | HYPOT(X.u, Y.u)                              |
-| -    | U-   | Y.v-X.v  | HYPOT(X.u, Y.u)                              |
-| ×    | U×   | Y.v*X.v  | ABS(X.v*Y.v)*HYPOT(X.u/X.v, Y.u/Y.v)         |
-| ÷    | U÷   | Y.v/X.v  | ABS(X.v/Y.v)*HYPOT(X.u/X.v, Y.u/Y.v)         |
-| ↑    | U↑   | Y.v^X.v  | ABS(Y.v^X.v)*HYPOT(Y.u*X.v/Y.v, LN(Y.v)*X.u) |
-| 1/X  | U1/X | 1/X.v    | ABS(X.u)                                     |
-| LN   | ULN  | LN(X.v)  | ABS(X.u/X.v)                                 |
-| E↑X  | UE↑X | EXP(X.v) | EXP(X.v)*ABS(X.u*X.v)                        |
-| ▒▒▒▒ |      |          |                                              |
-| SIN  | USIN | SIN(X.v) | ABS(SIN(X.v)*X.u)                            |
-| COS  | UCOS | COS(X.v) | ABS(SIN(X.v)*X.u)                            |
-| TAN  | UTAN | TAN(X.v) | ABS(SEC^2(X.v)*X.u)                          |
+| Menu | LBL   | Value     | Uncertainty (Standard Deviation)             |
+|------+-------+-----------+----------------------------------------------|
+| +    | U+    | Y.v+X.v   | HYPOT(X.u, Y.u)                              |
+| -    | U-    | Y.v-X.v   | HYPOT(X.u, Y.u)                              |
+| ×    | U×    | Y.v*X.v   | ABS(X.v*Y.v)*HYPOT(X.u/X.v, Y.u/Y.v)         |
+| ÷    | U÷    | Y.v/X.v   | ABS(X.v/Y.v)*HYPOT(X.u/X.v, Y.u/Y.v)         |
+| Y↑X  | UY↑X  | Y.v^X.v   | ABS(Y.v^X.v)*HYPOT(Y.u*X.v/Y.v, LN(Y.v)*X.u) |
+| 1/X  | U1/X  | 1/X.v     | ABS(X.u)                                     |
+|------+-------+-----------+----------------------------------------------|
+| ▒▒▒▒ |       |           |                                              |
+| ▒▒▒▒ |       |           |                                              |
+| LN   | ULN   | LN(X.v)   | ABS(X.u/X.v)                                 |
+| E↑X  | UE↑X  | EXP(X.v)  | EXP(X.v)*ABS(X.u*X.v)                        |
+| ▒▒▒▒ |       |           |                                              |
+| ▒▒▒▒ |       |           |                                              |
+|------+-------+-----------+----------------------------------------------|
+| SIN  | USIN  | SIN(X.v)  | ABS(COS(X.v)*X.u)                            |
+| COS  | UCOS  | COS(X.v)  | ABS(SIN(X.v)*X.u)                            |
+| TAN  | UTAN  | TAN(X.v)  | ABS(SEC^2(X.v)*X.u)                          |
+| ASIN | UASIN | ASIN(X.v) | ABS(X.u/SQRT(1-X.v^2))                       |
+| ACOS | UACOS | ACOS(X.v) | ABS(X.u/SQRT(1-X.v^2))                       |
+| ATAN | UATAN | ATAN(X.v) | ABS(X.u/(1+X.v^2))                           |
 
 * Menu Code
 
@@ -100,11 +108,11 @@ KEY 2 XEQ "U-"
 KEY 3 XEQ "U×"
 "÷"
 KEY 4 XEQ "U÷"
-"↑"
-KEY 5 XEQ "U↑"
+"Y↑X"
+KEY 5 XEQ "UY↑X"
 "1/X"
 KEY 6 XEQ "U1/X"
-KEY 7 GTO 02
+KEY 7 GTO 03
 KEY 8 GTO 02
 KEY 9 GTO 00
 MENU
@@ -113,224 +121,325 @@ GTO 01
 LBL 02            @@@@ Page 2 of menu UPROP
 CLMENU
 "LN"
-KEY 1 XEQ "ULN"
+KEY 3 XEQ "ULN"
 "E↑X"
-KEY 2 XEQ "UE↑X"
-"SIN"
-KEY 4 XEQ "USIN"
-"COS"
-KEY 5 XEQ "UCOS"
-"TAN"
-KEY 6 XEQ "UTAN"
+KEY 4 XEQ "UE↑X"
 KEY 7 GTO 01
-KEY 8 GTO 01
+KEY 8 GTO 03
 KEY 9 GTO 00
 MENU
 STOP
 GTO 02
+LBL 03            @@@@ Page 3 of menu UPROP
+CLMENU
+"SIN"
+KEY 1 XEQ "USIN"
+"COS"
+KEY 2 XEQ "UCOS"
+"TAN"
+KEY 3 XEQ "UTAN"
+"ASIN"
+KEY 4 XEQ "UASIN"
+"ACOS"
+KEY 5 XEQ "UACOS"
+"ATAN"
+KEY 6 XEQ "UATAN"
+KEY 7 GTO 02
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 03
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-@@@@ Free labels start at: 3
+@@@@ Free labels start at: 4
 #+end_src
 
+* Functions
 
 #+begin_src hp42s :eval never :tangle ../src_42s/uprop/uprop.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-LBL "U+"    @@@@ X Y
-FUNC 21
+LBL "U+"
+FUNC 21              @@@@ X Y
 L4STK
-XEQ 99
-X<>Y
-XEQ 99
-COMPLEX     @@@@ Y.u Y.v X 
-X<>Y        @@@@ Y.v Y.u X 
-RCL ST Z    @@@@ X Y.v Y.u X 
-COMPLEX     @@@@ X.u X.v Y.v Y.u
-Rv          @@@@ X.v Y.v Y.u X.u 
-+           @@@@ (Y+X).v Y.u X.u 
-Rv          @@@@ Y.u X.u ? (X+Y).v 
-COMPLEX     
-ABS         @@@@ (X+Y).u ? (X+Y).v (X+Y).v
-R↑          @@@@ (X+Y).v (X+Y).u ? (X+Y).v 
-X<>Y        @@@@ (X+Y).u (X+Y).v ? (X+Y).v 
-COMPLEX     @@@@ X+Y
+XEQ 99 @NM@ R->C     @@@@ X Y
+X<>Y                 @@@@ Y X
+XEQ 99 @NM@ R->C     @@@@ Y X
+COMPLEX              @@@@ Y.u Y.v X 
+X<>Y                 @@@@ Y.v Y.u X 
+RCL ST Z             @@@@ X Y.v Y.u X 
+COMPLEX              @@@@ X.u X.v Y.v Y.u
+Rv                   @@@@ X.v Y.v Y.u X.u 
++                    @@@@ (Y+X).v Y.u X.u 
+Rv                   @@@@ Y.u X.u ? (X+Y).v 
+COMPLEX              @@@@ TMP ? (X+Y).v (X+Y).v 
+ABS                  @@@@ (X+Y).u ? (X+Y).v (X+Y).v
+R↑                   @@@@ (X+Y).v (X+Y).u ? (X+Y).v 
+X<>Y                 @@@@ (X+Y).u (X+Y).v ? (X+Y).v 
+COMPLEX              @@@@ X+Y
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-LBL "U-"    @@@@ X Y
-FUNC 21
+LBL "U-"
+FUNC 21              @@@@ X Y
 L4STK
-XEQ 99
-X<>Y
-XEQ 99
-COMPLEX     @@@@ Y.u Y.v X 
-X<>Y        @@@@ Y.v Y.u X 
-RCL ST Z    @@@@ X Y.v Y.u X 
-COMPLEX     @@@@ X.u X.v Y.v Y.u
-Rv          @@@@ X.v Y.v Y.u X.u 
--           @@@@ (Y-X).v Y.u X.u 
-Rv          @@@@ Y.u X.u ? (X-Y).v 
-COMPLEX     
-ABS         @@@@ (X-Y).u ? (X-Y).v (X-Y).v
-R↑          @@@@ (X-Y).v (X-Y).u ? (X-Y).v 
-X<>Y        @@@@ (X-Y).u (X-Y).v ? (X-Y).v 
-COMPLEX     @@@@ X-Y
+XEQ 99 @NM@ R->C     @@@@ X Y
+X<>Y                 @@@@ Y X
+XEQ 99 @NM@ R->C     @@@@ Y X
+COMPLEX              @@@@ Y.u Y.v X 
+X<>Y                 @@@@ Y.v Y.u X 
+RCL ST Z             @@@@ X Y.v Y.u X 
+COMPLEX              @@@@ X.u X.v Y.v Y.u
+Rv                   @@@@ X.v Y.v Y.u X.u 
+-                    @@@@ (Y-X).v Y.u X.u 
+Rv                   @@@@ Y.u X.u ? (X-Y).v 
+COMPLEX              @@@@ TMP ? (X-Y).v (X-Y).v 
+ABS                  @@@@ (X-Y).u ? (X-Y).v (X-Y).v
+R↑                   @@@@ (X-Y).v (X-Y).u ? (X-Y).v 
+X<>Y                 @@@@ (X-Y).u (X-Y).v ? (X-Y).v 
+COMPLEX              @@@@ X-Y
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-LBL "U×"      @@@@ X Y
-FUNC 21
+LBL "U×"
+FUNC 21              @@@@ X Y
 L4STK
-XEQ 99
-X<>Y          @@@@ Y X
-XEQ 99
-COMPLEX       @@@@ Y.u Y.v X 
-LSTO "_Xu"
-Rv            @@@@ Y.v X 
-LSTO "_Xv"    @@@@ Y.v X
-X<>Y          @@@@ X Y.v
-COMPLEX       @@@@ X.u X.v Y.v
-LSTO "_Yu"
-Rv            @@@@ X.v Y.v
-LSTO "_Yv"    @@@@ X.v Y.v
-×             @@@@ (YX).v
-RCL "_Xu"     @@@@ Xu (YX).v
-RCL÷ "_Xv"    @@@@ Xu/Xv (YX).v
-RCL "_Yu"     @@@@ Yu Xu/Xv (YX).v
-RCL÷ "_Yv"    @@@@ Yu/Yv Xu/Xv (YX).v
-COMPLEX       @@@@ TMP (YX).v
-ABS           @@@@ TMP (YX).v
-RCL ST Y      @@@@ (YX).v TMP (YX).v
-ABS           
-×             @@@@ (YX).v*TMP (YX).v
-ABS           @@@@ (YX).u (YX).v
-COMPLEX
-RTN           @@@@ YX
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-LBL "U÷"      @@@@ X Y
-FUNC 21
-L4STK
-XEQ 99
-X<>Y          @@@@ Y X
-XEQ 99
-COMPLEX       @@@@ Y.u Y.v X 
-LSTO "_Xu"
-Rv            @@@@ Y.v X 
-LSTO "_Xv"    @@@@ Y.v X
-X<>Y          @@@@ X Y.v
-COMPLEX       @@@@ X.u X.v Y.v
-LSTO "_Yu"
-Rv            @@@@ X.v Y.v
-LSTO "_Yv"    @@@@ X.v Y.v
-÷             @@@@ (YX).v
-RCL "_Xu"     @@@@ Xu (YX).v
-RCL÷ "_Xv"    @@@@ Xu/Xv (YX).v
-RCL "_Yu"     @@@@ Yu Xu/Xv (YX).v
-RCL÷ "_Yv"    @@@@ Yu/Yv Xu/Xv (YX).v
-COMPLEX       @@@@ TMP (YX).v
-ABS           @@@@ TMP (YX).v
-RCL ST Y      @@@@ (YX).v TMP (YX).v
-ABS           
-×             @@@@ (YX).v*TMP (YX).v
-ABS           @@@@ (YX).u (YX).v
-COMPLEX
-RTN           @@@@ YX
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-LBL "U1/X"      @@@@ X
-FUNC 11
-L4STK
-XEQ 99
-1               @@@@ 1 X
-XEQ 99
-X<>Y            @@@@ X 1
-XEQ "U÷"        @@@@ 1/X
+XEQ 99 @NM@ R->C     @@@@ X Y
+X<>Y                 @@@@ Y X
+XEQ 99 @NM@ R->C     @@@@ Y X
+COMPLEX              @@@@ Y.u Y.v X 
+LSTO "_Yu"           @@@@ Y.u Y.v X 
+Rv                   @@@@ Y.v X 
+LSTO "_Yv"           @@@@ Y.v X
+X<>Y                 @@@@ X Y.v
+COMPLEX              @@@@ X.u X.v Y.v
+LSTO "_Xu"           @@@@ X.u X.v Y.v
+Rv                   @@@@ X.v Y.v
+LSTO "_Xv"           @@@@ X.v Y.v
+×                    @@@@ (YX).v
+RCL "_Xu"            @@@@ Xu (YX).v
+RCL÷ "_Xv"           @@@@ Xu/Xv (YX).v
+RCL "_Yu"            @@@@ Yu Xu/Xv (YX).v
+RCL÷ "_Yv"           @@@@ Yu/Yv Xu/Xv (YX).v
+COMPLEX              @@@@ TMP (YX).v
+ABS                  @@@@ TMP (YX).v
+RCL ST Y             @@@@ (YX).v TMP (YX).v
+ABS                  @@@@ TMP TMP (YX).v
+×                    @@@@ TMP (YX).v
+ABS                  @@@@ (YX).u (YX).v
+COMPLEX              @@@@ YX
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-LBL "ULN"       @@@@ X
-FUNC 11
+LBL "UY↑X"
+FUNC 21              @@@@ X Y
 L4STK
-XEQ 99          @@@@ X
-COMPLEX         @@@@ X.u X.v
-RCL ST Y        @@@@ X.v X.u X.v
-÷               @@@@ X.u/X.v X.v
-ABS             @@@@ ln(X).u X.v
-X<>Y            @@@@ X.v ln(X).u 
-LN              @@@@ ln(X).v ln(X).u 
-X<>Y            @@@@ ln(X).u ln(X).v 
-COMPLEX         @@@@ ln(X)
-RTN
-
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-LBL "UE↑X"      @@@@ X
-FUNC 11
-L4STK
-XEQ 99          @@@@ X
-COMPLEX         @@@@ X.u X.v
-X<>Y            @@@@ X.v X.u 
-E↑X             @@@@ exp(X).v X.u
-X<>Y            @@@@ X.u exp(X).v 
-RCL× ST Y       @@@@ exp(X).v*X.u exp(X).v 
-ABS             @@@@ exp(X).u exp(X).v 
-COMPLEX         @@@@ exp(X)
-RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-LBL "USIN"      @@@@ X
-FUNC 11
-L4STK
-XEQ 99          @@@@ X
-COMPLEX         @@@@ X.u X.v
-RCL ST Y        @@@@ X.v X.u X.v
-COS             @@@@ COS(X.v) X.u X.v
-×               @@@@ COS(X.v)*X.u X.v
-ABS             @@@@ SIN(X).u X.v 
-X<>Y            @@@@ X.v SIN(X).u 
-SIN             @@@@ SIN(X).v SIN(X).u
-X<>Y            @@@@ SIN(X).u SIN(X).v 
-COMPLEX         @@@@ SIN(X)
+XEQ 99 @NM@ R->C     @@@@ X Y
+X<>Y                 @@@@ Y X
+XEQ 99 @NM@ R->C     @@@@ Y X
+COMPLEX              @@@@ Y.u Y.v X 
+LSTO "_Yu"           @@@@ Y.u Y.v X 
+Rv                   @@@@ Y.v X 
+LSTO "_Yv"           @@@@ Y.v X
+X<>Y                 @@@@ X Y.v
+COMPLEX              @@@@ X.u X.v Y.v
+LSTO "_Xu"           @@@@ X.u X.v Y.v
+Rv                   @@@@ X.v Y.v
+LSTO "_Xv"           @@@@ X.v Y.v
+Y↑X                  @@@@ (Y↑X).v
+RCL "_Yu"            @@@@ Y.u (Y↑X).v
+RCL× "_Xv"           @@@@ Y.u*X.v (Y↑X).v
+RCL÷ "_Yv"           @@@@ Y.u*X.v/Y.v (Y↑X).v
+RCL "_Yv"            @@@@ Y.v Y.u*X.v/Y.v (Y↑X).v
+LN                   @@@@ LN(Y.v) Y.u*X.v/Y.v (Y↑X).v
+RCL× "_Xu"           @@@@ X.u*LN(Y.v) Y.u*X.v/Y.v (Y↑X).v
+COMPLEX              @@@@ TMP (Y↑X).v
+ABS                  @@@@ TMP (Y↑X).v
+RCL× ST Y            @@@@ TMP (Y↑X).v
+ABS                  @@@@ (Y↑X).u (Y↑X).v
+COMPLEX              @@@@ Y↑X
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-LBL "UCOS"      @@@@ X
-FUNC 11
+LBL "U÷"
+FUNC 21              @@@@ X Y
 L4STK
-XEQ 99          @@@@ X
-COMPLEX         @@@@ X.u X.v
-RCL ST Y        @@@@ X.v X.u X.v
-SIN             @@@@ SIN(X.v) X.u X.v
-×               @@@@ SIN(X.v)*X.u X.v
-ABS             @@@@ COS(X).u X.v 
-X<>Y            @@@@ X.v COS(X).u 
-COS             @@@@ COS(X).v COS(X).u
-X<>Y            @@@@ COS(X).u COS(X).v 
-COMPLEX         @@@@ COS(X)
+XEQ 99 @NM@ R->C     @@@@ X Y
+X<>Y                 @@@@ Y X
+XEQ 99 @NM@ R->C     @@@@ Y X
+COMPLEX              @@@@ Y.u Y.v X 
+LSTO "_Yu"           @@@@ Y.u Y.v X 
+Rv                   @@@@ Y.v X 
+LSTO "_Yv"           @@@@ Y.v X
+X<>Y                 @@@@ X Y.v
+COMPLEX              @@@@ X.u X.v Y.v
+LSTO "_Xu"           @@@@ X.u X.v Y.v
+Rv                   @@@@ X.v Y.v
+LSTO "_Xv"           @@@@ X.v Y.v
+÷                    @@@@ (Y/X).v
+RCL "_Xu"            @@@@ Xu (Y/X).v
+RCL÷ "_Xv"           @@@@ Xu/Xv (Y/X).v
+RCL "_Yu"            @@@@ Yu Xu/Xv (Y/X).v
+RCL÷ "_Yv"           @@@@ Yu/Yv Xu/Xv (Y/X).v
+COMPLEX              @@@@ TMP (Y/X).v
+ABS                  @@@@ TMP (Y/X).v
+RCL ST Y             @@@@ (Y/X).v TMP (Y/X).v
+ABS                  @@@@ TMP TMP (Y/X).v
+×                    @@@@ TMP (Y/X).v
+ABS                  @@@@ (Y/X).u (Y/X).v
+COMPLEX              @@@@ Y/X
+RTN    
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "U1/X"
+FUNC 11              @@@@ X
+L4STK
+XEQ 99 @NM@ R->C     @@@@ X
+1                    @@@@ 1 X
+XEQ 99 @NM@ R->C     @@@@ 1 X
+X<>Y                 @@@@ X 1
+XEQ "U÷"             @@@@ 1/X
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-LBL "UTAN"      @@@@ X
-FUNC 11
+LBL "ULN"
+FUNC 11              @@@@ X
 L4STK
-XEQ 99          @@@@ X
-COMPLEX         @@@@ X.u X.v
-RCL ST Y        @@@@ X.v X.u X.v
-COS             @@@@ COS(X.v) X.u X.v
-1/X             @@@@ SEC(X.v) X.u X.v 
-X↑2             @@@@ SEC^2(X.v) X.u X.v
-×               @@@@ SEC^2(X.v)*X.u X.v
-ABS             @@@@ tan(X).u X.v 
-X<>Y            @@@@ X.v tan(X).u
-TAN             @@@@ tan(X).v tan(X).u
-X<>Y            @@@@ tan(X).u tan(X).v 
-COMPLEX         @@@@ tan(X)
+XEQ 99 @NM@ R->C     @@@@ X
+COMPLEX              @@@@ X.u X.v
+RCL ST Y             @@@@ X.v X.u X.v
+÷                    @@@@ X.u/X.v X.v
+ABS                  @@@@ ln(X).u X.v
+X<>Y                 @@@@ X.v ln(X).u 
+LN                   @@@@ ln(X).v ln(X).u 
+X<>Y                 @@@@ ln(X).u ln(X).v 
+COMPLEX              @@@@ ln(X)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-LBL 99 @@@@ R->C
+LBL "UE↑X"
+FUNC 11              @@@@ X
+L4STK
+XEQ 99 @NM@ R->C     @@@@ X
+COMPLEX              @@@@ X.u X.v
+X<>Y                 @@@@ X.v X.u 
+E↑X                  @@@@ exp(X).v X.u
+X<>Y                 @@@@ X.u exp(X).v 
+RCL× ST Y            @@@@ exp(X).v*X.u exp(X).v 
+ABS                  @@@@ exp(X).u exp(X).v 
+COMPLEX              @@@@ exp(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "USIN"
+FUNC 11              @@@@ X
+L4STK
+XEQ 99 @NM@ R->C     @@@@ X
+COMPLEX              @@@@ X.u X.v
+RCL ST Y             @@@@ X.v X.u X.v
+COS                  @@@@ COS(X.v) X.u X.v
+×                    @@@@ COS(X.v)*X.u X.v
+ABS                  @@@@ SIN(X).u X.v 
+X<>Y                 @@@@ X.v SIN(X).u 
+SIN                  @@@@ SIN(X).v SIN(X).u
+X<>Y                 @@@@ SIN(X).u SIN(X).v 
+COMPLEX              @@@@ SIN(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "UCOS"
+FUNC 11              @@@@ X
+L4STK
+XEQ 99 @NM@ R->C     @@@@ X
+COMPLEX              @@@@ X.u X.v
+RCL ST Y             @@@@ X.v X.u X.v
+SIN                  @@@@ SIN(X.v) X.u X.v
+×                    @@@@ SIN(X.v)*X.u X.v
+ABS                  @@@@ COS(X).u X.v 
+X<>Y                 @@@@ X.v COS(X).u 
+COS                  @@@@ COS(X).v COS(X).u
+X<>Y                 @@@@ COS(X).u COS(X).v 
+COMPLEX              @@@@ COS(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "UTAN"
+FUNC 11              @@@@ X
+L4STK
+XEQ 99 @NM@ R->C     @@@@ X
+COMPLEX              @@@@ X.u X.v
+RCL ST Y             @@@@ X.v X.u X.v
+COS                  @@@@ COS(X.v) X.u X.v
+1/X                  @@@@ SEC(X.v) X.u X.v 
+X↑2                  @@@@ SEC^2(X.v) X.u X.v
+×                    @@@@ SEC^2(X.v)*X.u X.v
+ABS                  @@@@ tan(X).u X.v 
+X<>Y                 @@@@ X.v tan(X).u
+TAN                  @@@@ tan(X).v tan(X).u
+X<>Y                 @@@@ tan(X).u tan(X).v 
+COMPLEX              @@@@ tan(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "UASIN"
+FUNC 11              @@@@ X
+L4STK
+XEQ 99 @NM@ R->C     @@@@ X
+COMPLEX              @@@@ X.u X.v
+1                    @@@@ 1 X.u X.v
+RCL ST Z             @@@@ X.v 1 X.u X.v
+X↑2                  @@@@ X.v^2 1 X.u X.v
+-                    @@@@ 1-X.v^2 X.u X.v
+SQRT                 @@@@ SQRT(1-X.v^2) X.u X.v
+÷                    @@@@ X.u/SQRT(1-X.v^2) X.v
+ABS                  @@@@ ASIN(X).u X.v
+X<>Y                 @@@@ X.v ASIN(X).u 
+ASIN                 @@@@ ASIN(X).v ASIN(X).u
+X<>Y                 @@@@ ASIN(X).u ASIN(X).v 
+COMPLEX              @@@@ ASIN(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "UACOS"
+FUNC 11              @@@@ X
+L4STK
+XEQ 99 @NM@ R->C     @@@@ X
+COMPLEX              @@@@ X.u X.v
+1                    @@@@ 1 X.u X.v
+RCL ST Z             @@@@ X.v 1 X.u X.v
+X↑2                  @@@@ X.v^2 1 X.u X.v
+-                    @@@@ 1-X.v^2 X.u X.v
+SQRT                 @@@@ SQRT(1-X.v^2) X.u X.v
+÷                    @@@@ X.u/SQRT(1-X.v^2) X.v
+ABS                  @@@@ ACOS(X).u X.v
+X<>Y                 @@@@ X.v ACOS(X).u 
+ACOS                 @@@@ ACOS(X).v ACOS(X).u
+X<>Y                 @@@@ ACOS(X).u ACOS(X).v 
+COMPLEX              @@@@ ACOS(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "UATAN"
+FUNC 11              @@@@ X
+L4STK
+XEQ 99 @NM@ R->C     @@@@ X
+COMPLEX              @@@@ X.u X.v
+1                    @@@@ 1 X.u X.v
+RCL ST Z             @@@@ X.v 1 X.u X.v
+X↑2                  @@@@ X.v^2 1 X.u X.v
++                    @@@@ 1-X.v^2 X.u X.v
+SQRT                 @@@@ SQRT(1-X.v^2) X.u X.v
+÷                    @@@@ X.u/SQRT(1-X.v^2) X.v
+ABS                  @@@@ ATAN(X).u X.v
+X<>Y                 @@@@ X.v ATAN(X).u 
+ATAN                 @@@@ ATAN(X).v ATAN(X).u
+X<>Y                 @@@@ ATAN(X).u ATAN(X).v 
+COMPLEX              @@@@ ATAN(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL 99 @NM@ R->C
 FUNC 11
 L4STK
 CPX?

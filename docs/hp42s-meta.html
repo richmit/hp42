@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-05-01 Sat 09:57 -->
+<!-- 2021-05-01 Sat 10:03 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Programming Tools</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-05-01 09:21:46</i></td>
+<td class="org-left"><i>2021-05-01 10:02:49</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,45 +241,45 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org3c37929">1. Metadata</a></li>
+<li><a href="#org9c3b419">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
 <li><a href="#menu-gen">3. Generating 42s menu code</a>
 <ul>
-<li><a href="#orge44aacf">3.1. Generic menu generator</a></li>
-<li><a href="#org19d7aa7">3.2. For CUSTOM-type Menus</a></li>
-<li><a href="#orgdd868ae">3.3. Always generate local lables</a></li>
+<li><a href="#org5d48ad0">3.1. Generic menu generator</a></li>
+<li><a href="#org5ccbea0">3.2. For CUSTOM-type Menus</a></li>
+<li><a href="#org01e1f9a">3.3. Always generate local lables</a></li>
 </ul>
 </li>
-<li><a href="#org8b83d82">4. Emacs Helper Stuff</a>
+<li><a href="#org47eabea">4. Emacs Helper Stuff</a>
 <ul>
-<li><a href="#org3f0f061">4.1. Emacs function to insert charcters given a list of character codes</a></li>
-<li><a href="#org849375a">4.2. Emacs Mode for 42s Code</a></li>
-<li><a href="#orgc575048">4.3. yas templates</a></li>
-<li><a href="#orgef8ac6c">4.4. Export &amp; Tangle from dired</a></li>
+<li><a href="#org6492b55">4.1. Emacs function to insert charcters given a list of character codes</a></li>
+<li><a href="#orga92c4d2">4.2. Emacs Mode for 42s Code</a></li>
+<li><a href="#org0e2cf8a">4.3. yas templates</a></li>
+<li><a href="#orgb907594">4.4. Export &amp; Tangle from dired</a></li>
 </ul>
 </li>
-<li><a href="#org6a16e90">5. Prepare Code For Conversion</a></li>
-<li><a href="#org98db17b">6. Prepare Marked Region for Code Conversion</a></li>
-<li><a href="#orgedb4f09">7. Tangle &amp; Load Tangled File</a></li>
-<li><a href="#org87e4771">8. free42 Notes</a>
+<li><a href="#org56a20b1">5. Prepare Code For Conversion</a></li>
+<li><a href="#orgc2e9c12">6. Prepare Marked Region for Code Conversion</a></li>
+<li><a href="#org50f5ed9">7. Tangle &amp; Load Tangled File</a></li>
+<li><a href="#org2893a79">8. free42 Notes</a>
 <ul>
-<li><a href="#org54a1d36">8.1. Character Set</a></li>
-<li><a href="#org1646fe1">8.2. Date format</a></li>
-<li><a href="#org3c013ed">8.3. Stats registers</a></li>
+<li><a href="#org8955169">8.1. Character Set</a></li>
+<li><a href="#org590ee0a">8.2. Date format</a></li>
+<li><a href="#orgc420ee1">8.3. Stats registers</a></li>
 </ul>
 </li>
-<li><a href="#orgdd048df">9. DM 42 Notes</a>
+<li><a href="#org0bd1f47">9. DM 42 Notes</a>
 <ul>
-<li><a href="#org68b4e31">9.1. Display</a></li>
+<li><a href="#orge40924c">9.1. Display</a></li>
 </ul>
 </li>
-<li><a href="#orga69bda3">10. EOF</a></li>
+<li><a href="#org370296f">10. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org3c37929" class="outline-2">
-<h2 id="org3c37929"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org9c3b419" class="outline-2">
+<h2 id="org9c3b419"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/hp42s-meta.html">https://richmit.github.io/hp42/hp42s-meta.html</a>
@@ -357,8 +357,8 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
 <div class="outline-text-2" id="text-menu-gen">
 </div>
 
-<div id="outline-container-orge44aacf" class="outline-3">
-<h3 id="orge44aacf"><span class="section-number-3">3.1</span> Generic menu generator</h3>
+<div id="outline-container-org5d48ad0" class="outline-3">
+<h3 id="org5d48ad0"><span class="section-number-3">3.1</span> Generic menu generator</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 This code will read an org-mode table describing a menu, and generate 42s code to implement the menu.  The only limitation on menu depth and size are the
@@ -734,8 +734,8 @@ tables.
 </div>
 </div>
 
-<div id="outline-container-org19d7aa7" class="outline-3">
-<h3 id="org19d7aa7"><span class="section-number-3">3.2</span> For CUSTOM-type Menus</h3>
+<div id="outline-container-org5ccbea0" class="outline-3">
+<h3 id="org5ccbea0"><span class="section-number-3">3.2</span> For CUSTOM-type Menus</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 These functions are useful for CUSTOM-type menus &#x2013; that is menus that call other programs or built in functions.  I use this as a way to add hierarchy to the
@@ -810,8 +810,8 @@ the org-mode file and the whole thing will then be tangled together into one pro
 </div>
 </div>
 
-<div id="outline-container-orgdd868ae" class="outline-3">
-<h3 id="orgdd868ae"><span class="section-number-3">3.3</span> Always generate local lables</h3>
+<div id="outline-container-org01e1f9a" class="outline-3">
+<h3 id="org01e1f9a"><span class="section-number-3">3.3</span> Always generate local lables</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 This function is handy when you want to always generate local labels.
@@ -825,12 +825,12 @@ This function is handy when you want to always generate local labels.
 </div>
 </div>
 
-<div id="outline-container-org8b83d82" class="outline-2">
-<h2 id="org8b83d82"><span class="section-number-2">4</span> Emacs Helper Stuff</h2>
+<div id="outline-container-org47eabea" class="outline-2">
+<h2 id="org47eabea"><span class="section-number-2">4</span> Emacs Helper Stuff</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org3f0f061" class="outline-3">
-<h3 id="org3f0f061"><span class="section-number-3">4.1</span> Emacs function to insert charcters given a list of character codes</h3>
+<div id="outline-container-org6492b55" class="outline-3">
+<h3 id="org6492b55"><span class="section-number-3">4.1</span> Emacs function to insert charcters given a list of character codes</h3>
 <div class="outline-text-3" id="text-4-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-ins42char</span> (charn)
@@ -838,22 +838,22 @@ This function is handy when you want to always generate local labels.
   (<span style="color: #00ffff;">interactive</span> <span style="color: #fa8072;">"sCharacter Number(s): "</span>)
   (<span style="color: #00ffff;">if</span> charn
       (<span style="color: #00ffff;">cl-loop</span> for c in (split-string charn)
-               do (insert (nth (eval (car (read-from-string c))) '(<span style="color: #fa8072;">"&#247;"</span> <span style="color: #fa8072;">"&#215;"</span> <span style="color: #fa8072;">"&#8730;"</span>  <span style="color: #fa8072;">"&#8747;"</span> <span style="color: #fa8072;">"&#9618;"</span> <span style="color: #fa8072;">"&#931;"</span> <span style="color: #fa8072;">"&#9656;"</span> <span style="color: #fa8072;">"&#960;"</span> <span style="color: #fa8072;">"&#191;"</span> <span style="color: #fa8072;">"&#8804;"</span>     <span style="color: #fa8072;">"[LF]"</span> <span style="color: #fa8072;">"&#8805;"</span>     <span style="color: #fa8072;">"&#8800;"</span>  <span style="color: #fa8072;">"&#8629;"</span> <span style="color: #fa8072;">"&#8595;"</span> <span style="color: #fa8072;">"&#8594;"</span>
-                                                                   <span style="color: #fa8072;">"&#8592;"</span> <span style="color: #fa8072;">"&#956;"</span> <span style="color: #fa8072;">"&#163;"</span>  <span style="color: #fa8072;">"&#176;"</span> <span style="color: #fa8072;">"&#197;"</span> <span style="color: #fa8072;">"&#209;"</span> <span style="color: #fa8072;">"&#196;"</span> <span style="color: #fa8072;">"&#8737;"</span> <span style="color: #fa8072;">"&#7431;"</span> <span style="color: #fa8072;">"&#198;"</span>     <span style="color: #fa8072;">"&#8230;"</span>    <span style="color: #fa8072;">"[ESC]"</span> <span style="color: #fa8072;">"&#214;"</span>  <span style="color: #fa8072;">"&#220;"</span> <span style="color: #fa8072;">"&#9618;"</span> <span style="color: #fa8072;">"&#8226;"</span>  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">CHAR 30 &amp; CHAR 4 are the same unicode.  Not sure how to type a char 30 into a string...</span>
-                                                                   <span style="color: #fa8072;">" "</span> <span style="color: #fa8072;">"!"</span> <span style="color: #fa8072;">"\""</span> <span style="color: #fa8072;">"#"</span> <span style="color: #fa8072;">"$"</span> <span style="color: #fa8072;">"%"</span> <span style="color: #fa8072;">"&amp;"</span> <span style="color: #fa8072;">"'"</span> <span style="color: #fa8072;">"("</span> <span style="color: #fa8072;">")"</span>     <span style="color: #fa8072;">"*"</span>    <span style="color: #fa8072;">"+"</span>     <span style="color: #fa8072;">","</span>  <span style="color: #fa8072;">"-"</span> <span style="color: #fa8072;">"."</span> <span style="color: #fa8072;">"/"</span>
-                                                                   <span style="color: #fa8072;">"0"</span> <span style="color: #fa8072;">"1"</span> <span style="color: #fa8072;">"2"</span>  <span style="color: #fa8072;">"3"</span> <span style="color: #fa8072;">"4"</span> <span style="color: #fa8072;">"5"</span> <span style="color: #fa8072;">"6"</span> <span style="color: #fa8072;">"7"</span> <span style="color: #fa8072;">"8"</span> <span style="color: #fa8072;">"9"</span>     <span style="color: #fa8072;">":"</span>    <span style="color: #fa8072;">";"</span>     <span style="color: #fa8072;">"&lt;"</span>  <span style="color: #fa8072;">"="</span> <span style="color: #fa8072;">"&gt;"</span> <span style="color: #fa8072;">"?"</span>
-                                                                   <span style="color: #fa8072;">"@"</span> <span style="color: #fa8072;">"A"</span> <span style="color: #fa8072;">"B"</span>  <span style="color: #fa8072;">"C"</span> <span style="color: #fa8072;">"D"</span> <span style="color: #fa8072;">"E"</span> <span style="color: #fa8072;">"F"</span> <span style="color: #fa8072;">"G"</span> <span style="color: #fa8072;">"H"</span> <span style="color: #fa8072;">"I"</span>     <span style="color: #fa8072;">"J"</span>    <span style="color: #fa8072;">"K"</span>     <span style="color: #fa8072;">"L"</span>  <span style="color: #fa8072;">"M"</span> <span style="color: #fa8072;">"N"</span> <span style="color: #fa8072;">"O"</span>
-                                                                   <span style="color: #fa8072;">"P"</span> <span style="color: #fa8072;">"Q"</span> <span style="color: #fa8072;">"R"</span>  <span style="color: #fa8072;">"S"</span> <span style="color: #fa8072;">"T"</span> <span style="color: #fa8072;">"U"</span> <span style="color: #fa8072;">"V"</span> <span style="color: #fa8072;">"W"</span> <span style="color: #fa8072;">"X"</span> <span style="color: #fa8072;">"Y"</span>     <span style="color: #fa8072;">"Z"</span>    <span style="color: #fa8072;">"["</span>     <span style="color: #fa8072;">"\\"</span> <span style="color: #fa8072;">"]"</span> <span style="color: #fa8072;">"&#8593;"</span> <span style="color: #fa8072;">"_"</span>
-                                                                   <span style="color: #fa8072;">"`"</span> <span style="color: #fa8072;">"a"</span> <span style="color: #fa8072;">"b"</span>  <span style="color: #fa8072;">"c"</span> <span style="color: #fa8072;">"d"</span> <span style="color: #fa8072;">"e"</span> <span style="color: #fa8072;">"f"</span> <span style="color: #fa8072;">"g"</span> <span style="color: #fa8072;">"h"</span> <span style="color: #fa8072;">"i"</span>     <span style="color: #fa8072;">"j"</span>    <span style="color: #fa8072;">"k"</span>     <span style="color: #fa8072;">"l"</span>  <span style="color: #fa8072;">"m"</span> <span style="color: #fa8072;">"n"</span> <span style="color: #fa8072;">"o"</span>
-                                                                   <span style="color: #fa8072;">"p"</span> <span style="color: #fa8072;">"q"</span> <span style="color: #fa8072;">"r"</span>  <span style="color: #fa8072;">"s"</span> <span style="color: #fa8072;">"t"</span> <span style="color: #fa8072;">"u"</span> <span style="color: #fa8072;">"v"</span> <span style="color: #fa8072;">"w"</span> <span style="color: #fa8072;">"x"</span> <span style="color: #fa8072;">"y"</span>     <span style="color: #fa8072;">"z"</span>    <span style="color: #fa8072;">"{"</span>     <span style="color: #fa8072;">"|"</span>  <span style="color: #fa8072;">"}"</span> <span style="color: #fa8072;">"~"</span> <span style="color: #fa8072;">"&#9500;"</span>
+               do (insert (nth (eval (car (read-from-string c))) '(<span style="color: #fa8072;">"&#247;"</span> <span style="color: #fa8072;">"&#215;"</span> <span style="color: #fa8072;">"&#8730;"</span>  <span style="color: #fa8072;">"&#8747;"</span> <span style="color: #fa8072;">"&#9618;"</span> <span style="color: #fa8072;">"&#931;"</span> <span style="color: #fa8072;">"&#9656;"</span> <span style="color: #fa8072;">"&#960;"</span> <span style="color: #fa8072;">"&#191;"</span> <span style="color: #fa8072;">"&#8804;"</span>  <span style="color: #fa8072;">"[LF]"</span> <span style="color: #fa8072;">"&#8805;"</span>     <span style="color: #fa8072;">"&#8800;"</span>  <span style="color: #fa8072;">"&#8629;"</span> <span style="color: #fa8072;">"&#8595;"</span> <span style="color: #fa8072;">"&#8594;"</span>
+                                                                   <span style="color: #fa8072;">"&#8592;"</span> <span style="color: #fa8072;">"&#956;"</span> <span style="color: #fa8072;">"&#163;"</span>  <span style="color: #fa8072;">"&#176;"</span> <span style="color: #fa8072;">"&#197;"</span> <span style="color: #fa8072;">"&#209;"</span> <span style="color: #fa8072;">"&#196;"</span> <span style="color: #fa8072;">"&#8737;"</span> <span style="color: #fa8072;">"&#7431;"</span> <span style="color: #fa8072;">"&#198;"</span>  <span style="color: #fa8072;">"&#8230;"</span>    <span style="color: #fa8072;">"[ESC]"</span> <span style="color: #fa8072;">"&#214;"</span>  <span style="color: #fa8072;">"&#220;"</span> <span style="color: #fa8072;">"&#9618;"</span> <span style="color: #fa8072;">"&#8226;"</span>  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">CHAR 30 &amp; CHAR 4 are the same unicode.  Not sure how to type a char 30 into a string...</span>
+                                                                   <span style="color: #fa8072;">" "</span> <span style="color: #fa8072;">"!"</span> <span style="color: #fa8072;">"\""</span> <span style="color: #fa8072;">"#"</span> <span style="color: #fa8072;">"$"</span> <span style="color: #fa8072;">"%"</span> <span style="color: #fa8072;">"&amp;"</span> <span style="color: #fa8072;">"'"</span> <span style="color: #fa8072;">"("</span> <span style="color: #fa8072;">")"</span>  <span style="color: #fa8072;">"*"</span>    <span style="color: #fa8072;">"+"</span>     <span style="color: #fa8072;">","</span>  <span style="color: #fa8072;">"-"</span> <span style="color: #fa8072;">"."</span> <span style="color: #fa8072;">"/"</span>
+                                                                   <span style="color: #fa8072;">"0"</span> <span style="color: #fa8072;">"1"</span> <span style="color: #fa8072;">"2"</span>  <span style="color: #fa8072;">"3"</span> <span style="color: #fa8072;">"4"</span> <span style="color: #fa8072;">"5"</span> <span style="color: #fa8072;">"6"</span> <span style="color: #fa8072;">"7"</span> <span style="color: #fa8072;">"8"</span> <span style="color: #fa8072;">"9"</span>  <span style="color: #fa8072;">":"</span>    <span style="color: #fa8072;">";"</span>     <span style="color: #fa8072;">"&lt;"</span>  <span style="color: #fa8072;">"="</span> <span style="color: #fa8072;">"&gt;"</span> <span style="color: #fa8072;">"?"</span>
+                                                                   <span style="color: #fa8072;">"@"</span> <span style="color: #fa8072;">"A"</span> <span style="color: #fa8072;">"B"</span>  <span style="color: #fa8072;">"C"</span> <span style="color: #fa8072;">"D"</span> <span style="color: #fa8072;">"E"</span> <span style="color: #fa8072;">"F"</span> <span style="color: #fa8072;">"G"</span> <span style="color: #fa8072;">"H"</span> <span style="color: #fa8072;">"I"</span>  <span style="color: #fa8072;">"J"</span>    <span style="color: #fa8072;">"K"</span>     <span style="color: #fa8072;">"L"</span>  <span style="color: #fa8072;">"M"</span> <span style="color: #fa8072;">"N"</span> <span style="color: #fa8072;">"O"</span>
+                                                                   <span style="color: #fa8072;">"P"</span> <span style="color: #fa8072;">"Q"</span> <span style="color: #fa8072;">"R"</span>  <span style="color: #fa8072;">"S"</span> <span style="color: #fa8072;">"T"</span> <span style="color: #fa8072;">"U"</span> <span style="color: #fa8072;">"V"</span> <span style="color: #fa8072;">"W"</span> <span style="color: #fa8072;">"X"</span> <span style="color: #fa8072;">"Y"</span>  <span style="color: #fa8072;">"Z"</span>    <span style="color: #fa8072;">"["</span>     <span style="color: #fa8072;">"\\"</span> <span style="color: #fa8072;">"]"</span> <span style="color: #fa8072;">"&#8593;"</span> <span style="color: #fa8072;">"_"</span>
+                                                                   <span style="color: #fa8072;">"`"</span> <span style="color: #fa8072;">"a"</span> <span style="color: #fa8072;">"b"</span>  <span style="color: #fa8072;">"c"</span> <span style="color: #fa8072;">"d"</span> <span style="color: #fa8072;">"e"</span> <span style="color: #fa8072;">"f"</span> <span style="color: #fa8072;">"g"</span> <span style="color: #fa8072;">"h"</span> <span style="color: #fa8072;">"i"</span>  <span style="color: #fa8072;">"j"</span>    <span style="color: #fa8072;">"k"</span>     <span style="color: #fa8072;">"l"</span>  <span style="color: #fa8072;">"m"</span> <span style="color: #fa8072;">"n"</span> <span style="color: #fa8072;">"o"</span>
+                                                                   <span style="color: #fa8072;">"p"</span> <span style="color: #fa8072;">"q"</span> <span style="color: #fa8072;">"r"</span>  <span style="color: #fa8072;">"s"</span> <span style="color: #fa8072;">"t"</span> <span style="color: #fa8072;">"u"</span> <span style="color: #fa8072;">"v"</span> <span style="color: #fa8072;">"w"</span> <span style="color: #fa8072;">"x"</span> <span style="color: #fa8072;">"y"</span>  <span style="color: #fa8072;">"z"</span>    <span style="color: #fa8072;">"{"</span>     <span style="color: #fa8072;">"|"</span>  <span style="color: #fa8072;">"}"</span> <span style="color: #fa8072;">"~"</span> <span style="color: #fa8072;">"&#9500;"</span>
                                                                    <span style="color: #fa8072;">":"</span> <span style="color: #fa8072;">"&#655;"</span>))))))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org849375a" class="outline-3">
-<h3 id="org849375a"><span class="section-number-3">4.2</span> Emacs Mode for 42s Code</h3>
+<div id="outline-container-orga92c4d2" class="outline-3">
+<h3 id="orga92c4d2"><span class="section-number-3">4.2</span> Emacs Mode for 42s Code</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 This isn't really a proper mode for 42s code.  Just a quick hack with <code>define-generic-mode</code> to get some syntax highlighting &#x2013; which doesn't fully work as
@@ -888,8 +888,8 @@ but this works for now.
 </div>
 </div>
 
-<div id="outline-container-orgc575048" class="outline-3">
-<h3 id="orgc575048"><span class="section-number-3">4.3</span> yas templates</h3>
+<div id="outline-container-org0e2cf8a" class="outline-3">
+<h3 id="org0e2cf8a"><span class="section-number-3">4.3</span> yas templates</h3>
 <div class="outline-text-3" id="text-4-3">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #b0c4de;">echo</span> <span style="color: #fa8072;">''</span>
@@ -950,8 +950,8 @@ RTN       @@@@ IF-TRUE-END (<span style="color: #00ffff;">$</span><span style="c
 </div>
 </div>
 
-<div id="outline-container-orgef8ac6c" class="outline-3">
-<h3 id="orgef8ac6c"><span class="section-number-3">4.4</span> Export &amp; Tangle from dired</h3>
+<div id="outline-container-orgb907594" class="outline-3">
+<h3 id="orgb907594"><span class="section-number-3">4.4</span> Export &amp; Tangle from dired</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 This will export to HTML and tangle all marked files in a dired buffer.
@@ -979,8 +979,8 @@ This will export to HTML and tangle all marked files in a dired buffer.
 </div>
 </div>
 
-<div id="outline-container-org6a16e90" class="outline-2">
-<h2 id="org6a16e90"><span class="section-number-2">5</span> Prepare Code For Conversion</h2>
+<div id="outline-container-org56a20b1" class="outline-2">
+<h2 id="org56a20b1"><span class="section-number-2">5</span> Prepare Code For Conversion</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 I include comments like <code>@@##</code> that I use like compiler directives in C.  They provide a way to remove lines of code that are incompatible or unnecessary for
@@ -1087,8 +1087,8 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-org98db17b" class="outline-2">
-<h2 id="org98db17b"><span class="section-number-2">6</span> Prepare Marked Region for Code Conversion</h2>
+<div id="outline-container-orgc2e9c12" class="outline-2">
+<h2 id="orgc2e9c12"><span class="section-number-2">6</span> Prepare Marked Region for Code Conversion</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-copy-42s-code-in-region</span> ()
@@ -1106,8 +1106,8 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-orgedb4f09" class="outline-2">
-<h2 id="orgedb4f09"><span class="section-number-2">7</span> Tangle &amp; Load Tangled File</h2>
+<div id="outline-container-org50f5ed9" class="outline-2">
+<h2 id="org50f5ed9"><span class="section-number-2">7</span> Tangle &amp; Load Tangled File</h2>
 <div class="outline-text-2" id="text-7">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-tangle-and-load</span> ()
@@ -1125,12 +1125,12 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-org87e4771" class="outline-2">
-<h2 id="org87e4771"><span class="section-number-2">8</span> free42 Notes</h2>
+<div id="outline-container-org2893a79" class="outline-2">
+<h2 id="org2893a79"><span class="section-number-2">8</span> free42 Notes</h2>
 <div class="outline-text-2" id="text-8">
 </div>
-<div id="outline-container-org54a1d36" class="outline-3">
-<h3 id="org54a1d36"><span class="section-number-3">8.1</span> Character Set</h3>
+<div id="outline-container-org8955169" class="outline-3">
+<h3 id="org8955169"><span class="section-number-3">8.1</span> Character Set</h3>
 <div class="outline-text-3" id="text-8-1">
 <div class="org-src-container">
 <pre class="src src-text">  0 &#247;
@@ -1268,8 +1268,8 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-org1646fe1" class="outline-3">
-<h3 id="org1646fe1"><span class="section-number-3">8.2</span> Date format</h3>
+<div id="outline-container-org590ee0a" class="outline-3">
+<h3 id="org590ee0a"><span class="section-number-3">8.2</span> Date format</h3>
 <div class="outline-text-3" id="text-8-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -1311,8 +1311,8 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-org3c013ed" class="outline-3">
-<h3 id="org3c013ed"><span class="section-number-3">8.3</span> Stats registers</h3>
+<div id="outline-container-orgc420ee1" class="outline-3">
+<h3 id="orgc420ee1"><span class="section-number-3">8.3</span> Stats registers</h3>
 <div class="outline-text-3" id="text-8-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1399,12 +1399,12 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-orgdd048df" class="outline-2">
-<h2 id="orgdd048df"><span class="section-number-2">9</span> DM 42 Notes</h2>
+<div id="outline-container-org0bd1f47" class="outline-2">
+<h2 id="org0bd1f47"><span class="section-number-2">9</span> DM 42 Notes</h2>
 <div class="outline-text-2" id="text-9">
 </div>
-<div id="outline-container-org68b4e31" class="outline-3">
-<h3 id="org68b4e31"><span class="section-number-3">9.1</span> Display</h3>
+<div id="outline-container-orge40924c" class="outline-3">
+<h3 id="orge40924c"><span class="section-number-3">9.1</span> Display</h3>
 <div class="outline-text-3" id="text-9-1">
 <p>
 GrMod is a read write variable.
@@ -1422,8 +1422,8 @@ ResX &amp; ResY are read only variables that have the display resolution
 </div>
 </div>
 
-<div id="outline-container-orga69bda3" class="outline-2">
-<h2 id="orga69bda3"><span class="section-number-2">10</span> EOF</h2>
+<div id="outline-container-org370296f" class="outline-2">
+<h2 id="org370296f"><span class="section-number-2">10</span> EOF</h2>
 <div class="outline-text-2" id="text-10">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1434,7 +1434,7 @@ ResX &amp; ResY are read only variables that have the display resolution
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-01 Sat 09:57 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-01 Sat 10:03 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
 </div>
 </body>
 </html>

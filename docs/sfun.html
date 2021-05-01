@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-05-01 Sat 13:13 -->
+<!-- 2021-05-01 Sat 13:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Simple Math Functions</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-05-01 12:43:43</i></td>
+<td class="org-left"><i>2021-05-01 13:15:47</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,34 +241,31 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org78cb9e9">1. Metadata</a></li>
+<li><a href="#org023d7c3">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
 <li><a href="#menu-sfun">3. <code>SFUN</code> Menu</a></li>
-<li><a href="#org85eba20">4. Menu Code</a></li>
-<li><a href="#org57892e2">5. Functions</a>
+<li><a href="#org49ae380">4. Menu Code</a></li>
+<li><a href="#org55dad02">5. Functions</a>
 <ul>
-<li><a href="#org6518953">5.1. Complex Numbers</a></li>
-<li><a href="#orgfdc65f4">5.2. Percentages</a></li>
-<li><a href="#org93257da">5.3. Integers</a></li>
-<li><a href="#org504c131">5.4. Binomials, Factorals, Beta, etc&#x2026;</a></li>
-<li><a href="#orge7b05b1">5.5. Error &amp; Standard Normal Functions</a></li>
-<li><a href="#org1d4d595">5.6. Hyperbolic Trigonometric Functions</a>
-<ul>
-<li><a href="#orgd41d2cc">5.6.1. <code>TRIG</code>: Trigonometric Functions</a></li>
+<li><a href="#org90cb924">5.1. Complex Numbers</a></li>
+<li><a href="#orgbebbd9f">5.2. Percentages</a></li>
+<li><a href="#org5e5ba28">5.3. Integers</a></li>
+<li><a href="#orgfca6d53">5.4. Binomials, Factorals, Beta, etc&#x2026;</a></li>
+<li><a href="#orgee6f324">5.5. Error &amp; Standard Normal Functions</a></li>
+<li><a href="#org9959508">5.6. Hyperbolic Trigonometric Functions</a></li>
+<li><a href="#orgaeda9d3">5.7. <code>TRIG</code>: Trigonometric Functions</a></li>
+<li><a href="#org533ee30">5.8. Logs, Powers &amp; Roots</a></li>
+<li><a href="#org19256f8">5.9. Everything Else</a></li>
 </ul>
 </li>
-<li><a href="#org7d5b3d8">5.7. Logs, Powers &amp; Roots</a></li>
-<li><a href="#orga3f3d14">5.8. Everything Else</a></li>
-</ul>
-</li>
-<li><a href="#org1cc8da3">6. END</a></li>
-<li><a href="#orgb886ee2">7. EOF</a></li>
+<li><a href="#org81dc90b">6. END</a></li>
+<li><a href="#org87c5a9a">7. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org78cb9e9" class="outline-2">
-<h2 id="org78cb9e9"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org023d7c3" class="outline-2">
+<h2 id="org023d7c3"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/sfun.html">https://richmit.github.io/hp42/sfun.html</a>
@@ -332,7 +329,7 @@ This org-mode file collects together a handful simple mathematical functions tha
 <div id="outline-container-menu-sfun" class="outline-2">
 <h2 id="menu-sfun"><span class="section-number-2">3</span> <code>SFUN</code> Menu</h2>
 <div class="outline-text-2" id="text-menu-sfun">
-<table id="orga4ec66a" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="orgb1c1d4c" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -1016,8 +1013,8 @@ This org-mode file collects together a handful simple mathematical functions tha
 </div>
 </div>
 
-<div id="outline-container-org85eba20" class="outline-2">
-<h2 id="org85eba20"><span class="section-number-2">4</span> Menu Code</h2>
+<div id="outline-container-org49ae380" class="outline-2">
+<h2 id="org49ae380"><span class="section-number-2">4</span> Menu Code</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"SFUN"</span> 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
@@ -1395,12 +1392,12 @@ N!
 </div>
 </div>
 
-<div id="outline-container-org57892e2" class="outline-2">
-<h2 id="org57892e2"><span class="section-number-2">5</span> Functions</h2>
+<div id="outline-container-org55dad02" class="outline-2">
+<h2 id="org55dad02"><span class="section-number-2">5</span> Functions</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-org6518953" class="outline-3">
-<h3 id="org6518953"><span class="section-number-3">5.1</span> Complex Numbers</h3>
+<div id="outline-container-org90cb924" class="outline-3">
+<h3 id="org90cb924"><span class="section-number-3">5.1</span> Complex Numbers</h3>
 <div class="outline-text-3" id="text-5-1">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-RPART" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (RPART)</span>
@@ -1666,8 +1663,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-orgfdc65f4" class="outline-3">
-<h3 id="orgfdc65f4"><span class="section-number-3">5.2</span> Percentages</h3>
+<div id="outline-container-orgbebbd9f" class="outline-3">
+<h3 id="orgbebbd9f"><span class="section-number-3">5.2</span> Percentages</h3>
 <div class="outline-text-3" id="text-5-2">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-PTOT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PTOT)</span>
@@ -1689,8 +1686,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org93257da" class="outline-3">
-<h3 id="org93257da"><span class="section-number-3">5.3</span> Integers</h3>
+<div id="outline-container-org5e5ba28" class="outline-3">
+<h3 id="org5e5ba28"><span class="section-number-3">5.3</span> Integers</h3>
 <div class="outline-text-3" id="text-5-3">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-ROUND" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ROUND)</span>
@@ -1846,8 +1843,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org504c131" class="outline-3">
-<h3 id="org504c131"><span class="section-number-3">5.4</span> Binomials, Factorals, Beta, etc&#x2026;</h3>
+<div id="outline-container-orgfca6d53" class="outline-3">
+<h3 id="orgfca6d53"><span class="section-number-3">5.4</span> Binomials, Factorals, Beta, etc&#x2026;</h3>
 <div class="outline-text-3" id="text-5-4">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-BETA" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (BETA)</span>
@@ -1876,8 +1873,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-orge7b05b1" class="outline-3">
-<h3 id="orge7b05b1"><span class="section-number-3">5.5</span> Error &amp; Standard Normal Functions</h3>
+<div id="outline-container-orgee6f324" class="outline-3">
+<h3 id="orgee6f324"><span class="section-number-3">5.5</span> Error &amp; Standard Normal Functions</h3>
 <div class="outline-text-3" id="text-5-5">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-NPDF" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (NPDF)</span>
@@ -2034,8 +2031,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org1d4d595" class="outline-3">
-<h3 id="org1d4d595"><span class="section-number-3">5.6</span> Hyperbolic Trigonometric Functions</h3>
+<div id="outline-container-org9959508" class="outline-3">
+<h3 id="org9959508"><span class="section-number-3">5.6</span> Hyperbolic Trigonometric Functions</h3>
 <div class="outline-text-3" id="text-5-6">
 <div class="org-src-container">
 <pre class="src src-hp42s">
@@ -2095,10 +2092,11 @@ R&#8595;
 </pre>
 </div>
 </div>
+</div>
 
-<div id="outline-container-orgd41d2cc" class="outline-4">
-<h4 id="orgd41d2cc"><span class="section-number-4">5.6.1</span> <code>TRIG</code>: Trigonometric Functions</h4>
-<div class="outline-text-4" id="text-5-6-1">
+<div id="outline-container-orgaeda9d3" class="outline-3">
+<h3 id="orgaeda9d3"><span class="section-number-3">5.7</span> <code>TRIG</code>: Trigonometric Functions</h3>
+<div class="outline-text-3" id="text-5-7">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Inverse Haversine</span>
@@ -2275,11 +2273,10 @@ R&#8595;
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-org7d5b3d8" class="outline-3">
-<h3 id="org7d5b3d8"><span class="section-number-3">5.7</span> Logs, Powers &amp; Roots</h3>
-<div class="outline-text-3" id="text-5-7">
+<div id="outline-container-org533ee30" class="outline-3">
+<h3 id="org533ee30"><span class="section-number-3">5.8</span> Logs, Powers &amp; Roots</h3>
+<div class="outline-text-3" id="text-5-8">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Base Y Logarithm of X</span>
@@ -2457,9 +2454,9 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-orga3f3d14" class="outline-3">
-<h3 id="orga3f3d14"><span class="section-number-3">5.8</span> Everything Else</h3>
-<div class="outline-text-3" id="text-5-8">
+<div id="outline-container-org19256f8" class="outline-3">
+<h3 id="org19256f8"><span class="section-number-3">5.9</span> Everything Else</h3>
+<div class="outline-text-3" id="text-5-9">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ </span><span style="color: #ff7f24;">(ref:||)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Parallel Operator</span>
@@ -2482,8 +2479,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org1cc8da3" class="outline-2">
-<h2 id="org1cc8da3"><span class="section-number-2">6</span> END</h2>
+<div id="outline-container-org81dc90b" class="outline-2">
+<h2 id="org81dc90b"><span class="section-number-2">6</span> END</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -2493,8 +2490,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-orgb886ee2" class="outline-2">
-<h2 id="orgb886ee2"><span class="section-number-2">7</span> EOF</h2>
+<div id="outline-container-org87c5a9a" class="outline-2">
+<h2 id="org87c5a9a"><span class="section-number-2">7</span> EOF</h2>
 <div class="outline-text-2" id="text-7">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -2505,7 +2502,7 @@ R&#8595;
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-01 Sat 13:13 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-01 Sat 13:15 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
 </div>
 </body>
 </html>

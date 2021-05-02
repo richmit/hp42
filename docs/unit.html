@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-05-01 Sat 13:13 -->
+<!-- 2021-05-01 Sat 19:23 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Custom Unit Conversion Factors</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-04-29 21:30:20</i></td>
+<td class="org-left"><i>2021-05-01 19:18:30</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,21 +241,27 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org25f2195">1. Metadata</a></li>
+<li><a href="#org6f15afb">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
-<li><a href="#org2406b46">3. Units</a>
+<li><a href="#orgf0b4009">3. Units</a>
 <ul>
-<li><a href="#org0d79a0c">3.1. Conversion Factors</a></li>
-<li><a href="#org13825dd">3.2. Code</a></li>
+<li><a href="#orgceafe75">3.1. Conversion Factors</a></li>
+<li><a href="#org2bfe84f">3.2. Code</a></li>
 </ul>
 </li>
-<li><a href="#orgb7d24f1">4. EOF</a></li>
+<li><a href="#org5a0ceb8">4. SI Prefixes</a>
+<ul>
+<li><a href="#orgcaecbf4">4.1. Menu</a></li>
+<li><a href="#orgf6eec1d">4.2. Menu Code</a></li>
+</ul>
+</li>
+<li><a href="#org73ff0f5">5. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org25f2195" class="outline-2">
-<h2 id="org25f2195"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org6f15afb" class="outline-2">
+<h2 id="org6f15afb"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/unit.html">https://richmit.github.io/hp42/unit.html</a>
@@ -328,14 +334,14 @@ the base conversion factors are exact quantities, the programs insure we obtain 
 </div>
 </div>
 
-<div id="outline-container-org2406b46" class="outline-2">
-<h2 id="org2406b46"><span class="section-number-2">3</span> Units</h2>
+<div id="outline-container-orgf0b4009" class="outline-2">
+<h2 id="orgf0b4009"><span class="section-number-2">3</span> Units</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org0d79a0c" class="outline-3">
-<h3 id="org0d79a0c"><span class="section-number-3">3.1</span> Conversion Factors</h3>
+<div id="outline-container-orgceafe75" class="outline-3">
+<h3 id="orgceafe75"><span class="section-number-3">3.1</span> Conversion Factors</h3>
 <div class="outline-text-3" id="text-3-1">
-<table id="org487b3d8" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
+<table id="org929520f" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
 
 
 <colgroup>
@@ -751,7 +757,7 @@ the base conversion factors are exact quantities, the programs insure we obtain 
 
 <tr>
 <td class="org-left">Pres:psi</td>
-<td class="org-right">FUNC 01; 1e4; 0.45359237; *; 9.80665; *; 2.54; X^2; /;</td>
+<td class="org-right">FUNC 01; 1e4; 0.45359237; *; 9.80665; *; 2.54; X^2; /</td>
 <td class="org-left">&#xa0;</td>
 </tr>
 
@@ -823,12 +829,25 @@ the base conversion factors are exact quantities, the programs insure we obtain 
 <td class="org-left">&#xa0;</td>
 </tr>
 </tbody>
+<tbody>
+<tr>
+<td class="org-left">▒▒▒▒</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">SIPFX</td>
+<td class="org-right">Run the <code>SIPFX</code> application</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
 
-<div id="outline-container-org13825dd" class="outline-3">
-<h3 id="org13825dd"><span class="section-number-3">3.2</span> Code</h3>
+<div id="outline-container-org2bfe84f" class="outline-3">
+<h3 id="org2bfe84f"><span class="section-number-3">3.2</span> Code</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"UNIT"</span> 
@@ -838,7 +857,8 @@ the base conversion factors are exact quantities, the programs insure we obtain 
                            nil
                            'stay <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Change to 'exit to exit immediatly after a conversion factor is pushed to the stack</span>
                            'up   <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Change to 'exit to have the application exit when [EXIT] is pressed</span>
-                           #'MJR-local-only-gen-lab
+                           (<span style="color: #00ffff;">lambda</span> (atrg row) (<span style="color: #00ffff;">if</span> (string-equal <span style="color: #fa8072;">"SIPFX"</span> atrg) (format <span style="color: #fa8072;">"\"%s\""</span> atrg)))
+                           <span style="color: #ffa500;">;;</span><span style="color: #ff7f24;">#'MJR-local-only-gen-lab</span>
                            (<span style="color: #00ffff;">lambda</span> (atrg target row) 
                              (<span style="color: #00ffff;">cl-destructuring-bind</span> (menu cfactor desc) row
                                (<span style="color: #00ffff;">let</span> ((print-desc 't))    <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Set to NIL to not print description</span>
@@ -891,6 +911,8 @@ the base conversion factors are exact quantities, the programs insure we obtain 
 <span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">GTO</span> 11
 <span style="color: #fa8072;">"Temp"</span>
 <span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">GTO</span> 12
+<span style="color: #fa8072;">"SIPFX"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"SIPFX"</span>
 <span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 01
 <span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 01
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
@@ -1505,7 +1527,6 @@ the base conversion factors are exact quantities, the programs insure we obtain 
 2.54
 X^2
 /
-
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 83    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key atm</span>
 101325
@@ -1565,6 +1586,337 @@ X^2
 <span style="color: #00ffff;">+</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Free labels start at: 94</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5a0ceb8" class="outline-2">
+<h2 id="org5a0ceb8"><span class="section-number-2">4</span> SI Prefixes</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orgcaecbf4" class="outline-3">
+<h3 id="orgcaecbf4"><span class="section-number-3">4.1</span> Menu</h3>
+<div class="outline-text-3" id="text-4-1">
+<table id="orge0a01ce" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Prefix</th>
+<th scope="col" class="org-left">Sym</th>
+<th scope="col" class="org-right">Val</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">centi</td>
+<td class="org-left">c</td>
+<td class="org-right">1e-2</td>
+</tr>
+
+<tr>
+<td class="org-left">milli</td>
+<td class="org-left">m</td>
+<td class="org-right">1e-3</td>
+</tr>
+
+<tr>
+<td class="org-left">micro</td>
+<td class="org-left">µ</td>
+<td class="org-right">1e-6</td>
+</tr>
+
+<tr>
+<td class="org-left">nano</td>
+<td class="org-left">n</td>
+<td class="org-right">1e-9</td>
+</tr>
+
+<tr>
+<td class="org-left">pico</td>
+<td class="org-left">p</td>
+<td class="org-right">1e-12</td>
+</tr>
+
+<tr>
+<td class="org-left">femto</td>
+<td class="org-left">f</td>
+<td class="org-right">1e-15</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">kilo</td>
+<td class="org-left">k</td>
+<td class="org-right">1e+3</td>
+</tr>
+
+<tr>
+<td class="org-left">mega</td>
+<td class="org-left">M</td>
+<td class="org-right">1e+6</td>
+</tr>
+
+<tr>
+<td class="org-left">giga</td>
+<td class="org-left">G</td>
+<td class="org-right">1e+9</td>
+</tr>
+
+<tr>
+<td class="org-left">tera</td>
+<td class="org-left">T</td>
+<td class="org-right">1e+12</td>
+</tr>
+
+<tr>
+<td class="org-left">peta</td>
+<td class="org-left">P</td>
+<td class="org-right">1e+15</td>
+</tr>
+
+<tr>
+<td class="org-left">exa</td>
+<td class="org-left">E</td>
+<td class="org-right">1e+18</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">kibi</td>
+<td class="org-left">Ki</td>
+<td class="org-right">1024</td>
+</tr>
+
+<tr>
+<td class="org-left">mebi</td>
+<td class="org-left">Mi</td>
+<td class="org-right">1048576</td>
+</tr>
+
+<tr>
+<td class="org-left">gibi</td>
+<td class="org-left">Gi</td>
+<td class="org-right">1073741824</td>
+</tr>
+
+<tr>
+<td class="org-left">tebi</td>
+<td class="org-left">Ti</td>
+<td class="org-right">1099511627776</td>
+</tr>
+
+<tr>
+<td class="org-left">pebi</td>
+<td class="org-left">Pi</td>
+<td class="org-right">1125899906842624</td>
+</tr>
+
+<tr>
+<td class="org-left">exbi</td>
+<td class="org-left">Ei</td>
+<td class="org-right">1152921504606846976</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgf6eec1d" class="outline-3">
+<h3 id="orgf6eec1d"><span class="section-number-3">4.2</span> Menu Code</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+Note: This one will have an <code>END</code> generated to finish the <code>UNIT</code> application.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"SIPFX"</span> 
+                           0
+                           tbl
+                           0
+                           nil
+                           'stay <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Change to 'exit to exit immediatly after a conversion factor is pushed to the stack</span>
+                           'up   <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Change to 'exit to have the application exit when [EXIT] is pressed</span>
+                           #'MJR-local-only-gen-lab
+                           (<span style="color: #00ffff;">lambda</span> (atrg target row) 
+                            (<span style="color: #00ffff;">cl-destructuring-bind</span> (prefix-str sym-string mult) row
+                              (mapconcat #'string-trim-left 
+                                         (list (format <span style="color: #fa8072;">"%s"</span> mult)
+                                               (format <span style="color: #fa8072;">"&#215;"</span> mult)
+                                               (format <span style="color: #fa8072;">"\"%s (%s)\""</span> prefix-str sym-string)
+                                               <span style="color: #ffa500;">;;</span><span style="color: #ff7f24;">(format "AVIEW")</span>
+                                               )
+                                         <span style="color: #fa8072;">"\n"</span>))))
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-hp42s"><span id="coderef-SIPFX" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SIPFX)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Auto-generated menu program</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"SIPFX"</span>
+<span style="color: #00ffff;">LBL</span> 01            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu SIPFX</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"centi"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 04
+<span style="color: #fa8072;">"milli"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 05
+<span style="color: #fa8072;">"micro"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 06
+<span style="color: #fa8072;">"nano"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 07
+<span style="color: #fa8072;">"pico"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 08
+<span style="color: #fa8072;">"femto"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 09
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">LBL</span> 02            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu SIPFX</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"kilo"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 10
+<span style="color: #fa8072;">"mega"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 11
+<span style="color: #fa8072;">"giga"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 12
+<span style="color: #fa8072;">"tera"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 13
+<span style="color: #fa8072;">"peta"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 14
+<span style="color: #fa8072;">"exa"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 15
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">LBL</span> 03            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 3 of menu SIPFX</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"kibi"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 16
+<span style="color: #fa8072;">"mebi"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 17
+<span style="color: #fa8072;">"gibi"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 18
+<span style="color: #fa8072;">"tebi"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 19
+<span style="color: #fa8072;">"pebi"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 20
+<span style="color: #fa8072;">"exbi"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 21
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 02
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 01
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> 03
+<span style="color: #00ffff;">LBL</span> 00 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Application Exit</span>
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 04    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key centi</span>
+0.01
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #fa8072;">"centi (c)"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 05    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key milli</span>
+0.001
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #fa8072;">"milli (m)"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 06    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key micro</span>
+1e-06
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #fa8072;">"micro (&#181;)"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 07    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key nano</span>
+1e-09
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #fa8072;">"nano (n)"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 08    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key pico</span>
+1e-12
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #fa8072;">"pico (p)"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 09    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key femto</span>
+1e-15
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #fa8072;">"femto (f)"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 10    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kilo</span>
+1000.0
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #fa8072;">"kilo (k)"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 11    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mega</span>
+1000000.0
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #fa8072;">"mega (M)"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 12    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key giga</span>
+1000000000.0
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #fa8072;">"giga (G)"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 13    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key tera</span>
+1000000000000.0
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #fa8072;">"tera (T)"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 14    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key peta</span>
+1e+15
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #fa8072;">"peta (P)"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 15    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key exa</span>
+1e+18
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #fa8072;">"exa (E)"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 16    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key kibi</span>
+1024
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #fa8072;">"kibi (Ki)"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 17    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key mebi</span>
+1048576
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #fa8072;">"mebi (Mi)"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 18    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key gibi</span>
+1073741824
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #fa8072;">"gibi (Gi)"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 19    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key tebi</span>
+1099511627776
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #fa8072;">"tebi (Ti)"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 20    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key pebi</span>
+1125899906842624
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #fa8072;">"pebi (Pi)"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 21    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key exbi</span>
+1152921504606846976
+<span style="color: #00ffff;">&#215;</span>
+<span style="color: #fa8072;">"exbi (Ei)"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Free labels start at: 22</span>
 <span style="color: #00ffff;">END</span>
 </pre>
 </div>
@@ -1572,9 +1924,9 @@ X^2
 </div>
 </div>
 
-<div id="outline-container-orgb7d24f1" class="outline-2">
-<h2 id="orgb7d24f1"><span class="section-number-2">4</span> EOF</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org73ff0f5" class="outline-2">
+<h2 id="org73ff0f5"><span class="section-number-2">5</span> EOF</h2>
+<div class="outline-text-2" id="text-5">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1584,7 +1936,7 @@ X^2
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-01 Sat 13:13 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-01 Sat 19:23 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
 </div>
 </body>
 </html>

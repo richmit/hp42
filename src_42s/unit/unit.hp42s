@@ -29,6 +29,8 @@ KEY 2 GTO 10
 KEY 3 GTO 11
 "Temp"
 KEY 4 GTO 12
+"SIPFX"
+KEY 6 XEQ "SIPFX"
 KEY 7 GTO 01
 KEY 8 GTO 01
 KEY 9 GTO 00
@@ -700,6 +702,160 @@ LBL 93
 FUNC 11
 273.15
 +
+RTN
+LBL "SIPFX"
+LBL 01
+CLMENU
+"centi"
+KEY 1 XEQ 04
+"milli"
+KEY 2 XEQ 05
+"micro"
+KEY 3 XEQ 06
+"nano"
+KEY 4 XEQ 07
+"pico"
+KEY 5 XEQ 08
+"femto"
+KEY 6 XEQ 09
+KEY 7 GTO 03
+KEY 8 GTO 02
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 02
+CLMENU
+"kilo"
+KEY 1 XEQ 10
+"mega"
+KEY 2 XEQ 11
+"giga"
+KEY 3 XEQ 12
+"tera"
+KEY 4 XEQ 13
+"peta"
+KEY 5 XEQ 14
+"exa"
+KEY 6 XEQ 15
+KEY 7 GTO 01
+KEY 8 GTO 03
+KEY 9 GTO 00
+MENU
+STOP
+GTO 02
+LBL 03
+CLMENU
+"kibi"
+KEY 1 XEQ 16
+"mebi"
+KEY 2 XEQ 17
+"gibi"
+KEY 3 XEQ 18
+"tebi"
+KEY 4 XEQ 19
+"pebi"
+KEY 5 XEQ 20
+"exbi"
+KEY 6 XEQ 21
+KEY 7 GTO 02
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 03
+LBL 00
+EXITALL
+RTN
+LBL 04
+0.01
+×
+"centi (c)"
+RTN
+LBL 05
+0.001
+×
+"milli (m)"
+RTN
+LBL 06
+1e-06
+×
+"micro (µ)"
+RTN
+LBL 07
+1e-09
+×
+"nano (n)"
+RTN
+LBL 08
+1e-12
+×
+"pico (p)"
+RTN
+LBL 09
+1e-15
+×
+"femto (f)"
+RTN
+LBL 10
+1000.0
+×
+"kilo (k)"
+RTN
+LBL 11
+1000000.0
+×
+"mega (M)"
+RTN
+LBL 12
+1000000000.0
+×
+"giga (G)"
+RTN
+LBL 13
+1000000000000.0
+×
+"tera (T)"
+RTN
+LBL 14
+1e+15
+×
+"peta (P)"
+RTN
+LBL 15
+1e+18
+×
+"exa (E)"
+RTN
+LBL 16
+1024
+×
+"kibi (Ki)"
+RTN
+LBL 17
+1048576
+×
+"mebi (Mi)"
+RTN
+LBL 18
+1073741824
+×
+"gibi (Gi)"
+RTN
+LBL 19
+1099511627776
+×
+"tebi (Ti)"
+RTN
+LBL 20
+1125899906842624
+×
+"pebi (Pi)"
+RTN
+LBL 21
+1152921504606846976
+×
+"exbi (Ei)"
 RTN
 END
 

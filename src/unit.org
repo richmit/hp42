@@ -64,104 +64,106 @@ Some constants are little programs.  In some cases these are derived conversion 
 the base conversion factors are exact quantities, the programs insure we obtain machine accuracy -- i.e. 1/2.54 is better than 0.3937.
 
 * Units
-
 ** Conversion Factors
 
 #+ATTR_HTML: :rules groups :frame box :align center
 #+NAME: units                      
-| Type        |                                             Conversion | Description .......... |
-|-------------+--------------------------------------------------------+------------------------|
-| Leng:mm     |                                                    1.0 |                        |
-| Leng:Ang    |                                                   1e-7 | Angstrom               |
-| Leng:μm     |                                                  0.001 | Micron                 |
-| Leng:mil    |                                 FUNC 01; 25.4; 1000; / | mil (1/1000 in)        |
-| Leng:cm     |                                                     10 |                        |
-| Leng:in     |                                                   25.4 | Inch                   |
-|-------------+--------------------------------------------------------+------------------------|
-| Leng:cm     |                                                      1 |                        |
-| Leng:in     |                                                   2.54 | Intl Inch              |
-| Leng:ft     |                                   FUNC 01; 2.54; 12; * | Intl Foot              |
-| Leng:m      |                                                    100 |                        |
-| Leng:yd     |                             FUNC 01; 2.54; 12; *; 3; * | Intl Yard              |
-| Leng:hand   |                                    FUNC 01; 2.54; 4; * | Intl hand              |
-|-------------+--------------------------------------------------------+------------------------|
-| Leng:km     |                                                      1 |                        |
-| Leng:mi     |                  FUNC 01; 2.54; 12; *; 5280; *; 1e5; / | Int Mile               |
-| Leng:us mi  |                                          1.60934721869 | US Mile                |
-| Leng:nmi    |                                                  1.852 | Int Nautical mi        |
-| Leng:m      |                                                  0.001 |                        |
-| Leng:ft     |                           FUNC 01; 2.54; 12; *; 1e5; / | Intl Foot              |
-|-------------+--------------------------------------------------------+------------------------|
-| Area:hector |                                                      1 | hector                 |
-| Area:acre   |                                          0.40468564224 | Int Acre               |
-| Area:m^2    |                                                 0.0001 |                        |
-| Area:yd^2   |                                       8.36127360001e-5 |                        |
-|-------------+--------------------------------------------------------+------------------------|
-| Vol:l       |                                                      1 |                        |
-| Vol:qt      |                                            0.946352946 | US Lq Quart            |
-| Vol:gal     |                             FUNC 01; 0.946352946; 4; * | US Lq Gal              |
-| Vol:cc      |                                                  0.001 |                        |
-| Vol:butt    |                     FUNC 01; 0.946352946; 4; *; 126; * | US Butt 126 US Gal     |
-| Vol:bbutt   |                               FUNC 01; 4.54609; 108; * | UK Butt 108 UK Gal     |
-|-------------+--------------------------------------------------------+------------------------|
-| Vol:tsp     |                                                      1 | Teaspoon               |
-| Vol:tbsp    |                                                      3 | Tablespoon             |
-| Vol:flOZ    |                                                      6 | fl oz                  |
-| Vol:cup     |                                                     48 | Cup                    |
-| Vol:pint    |                                                     96 | Pint                   |
-| Vol:qt      |                                                    192 | Quart                  |
-|-------------+--------------------------------------------------------+------------------------|
-| Time:sec    |                                                      1 |                        |
-| Time:min    |                                                     60 |                        |
-| Time:hour   |                                                   3600 |                        |
-| Time:day    |                                                  86400 |                        |
-| Time:week   |                                                 604800 |                        |
-| Time:year   |                                               31536000 | 365 day year           |
-|-------------+--------------------------------------------------------+------------------------|
-| Time:day    |                                                      1 |                        |
-| Time:year   |                                                    365 | Conentional            |
-| Time:acnt   |                                                    360 | Accounting             |
-| Time:greg   |                                               365.2425 | Mean Gregorian         |
-| Time:julian |                                                 365.25 |                        |
-| Time:astro  |                                          365.256363004 | Astronomical           |
-|-------------+--------------------------------------------------------+------------------------|
-| Mass:kg     |                                                      1 |                        |
-| Mass:lb     |                                             0.45359237 | Pound Int              |
-| Mass:g      |                                                    1e3 |                        |
-| Mass:ozWT   |                                                   28e3 | Ounce Food Weight      |
-| Mass:ozTr   |                                           31.1034768e3 | Ounce Troy             |
-| Mass:stone  |                             FUNC 01; 0.45359237; 14; × | Int Stone              |
-|-------------+--------------------------------------------------------+------------------------|
-| Mass:lb     |                                                      1 |                        |
-| Mass:US ton |                                                   2000 | US (short) Ton         |
-| Mass:UK ton |                                                   2240 | UK (long) Ton          |
-|-------------+--------------------------------------------------------+------------------------|
-| Force:N     |                                                      1 |                        |
-| Force:kgf   |                                                9.80665 |                        |
-| Force:lbf   |                        FUNC 01; 0.45359237; 9.80665; * | Int lbf                |
-|-------------+--------------------------------------------------------+------------------------|
-| Sped:m/s    |                                                      1 |                        |
-| Sped:mph    |         FUNC 01; 2.54; 12; *; 5280; *; 1e2; /; 3600; / | Int mph                |
-| Sped:kph    |                                 FUNC 01; 1000; 3600; / |                        |
-| Sped:knot   |                       FUNC 01; 1.852; 1000; *; 3600; / | Intl nmi               |
-|-------------+--------------------------------------------------------+------------------------|
-| Pres:Pa     |                                                      1 | N/m^2                  |
-| Pres:bar    |                                                 100000 |                        |
-| Pres:psi    | FUNC 01; 1e4; 0.45359237; *; 9.80665; *; 2.54; X^2; /; |                        |
-| Pres:atm    |                                                 101325 | Standard               |
-| Pres:mmHg   |                                                133.322 |                        |
-| Pres:inHg   |                                             3.386389e3 | Conventional           |
-|-------------+--------------------------------------------------------+------------------------|
-| Powr:watt   |                                                      1 |                        |
-| Powr:BTU/h  |                                           0.2930710702 | International          |
-| Powr:hp     |                                              735.49875 | Metric                 |
-| Powr:kcal/h |                                                  1.163 |                        |
-|-------------+--------------------------------------------------------+------------------------|
-| Temp:C→F    |                             FUNC 11; 9; ×; 5; ÷; 32; + |                        |
-| Temp:F→C    |                             FUNC 11; 32; -; 5; ×; 9; ÷ |                        |
-| Temp:K→C    |                                     FUNC 11; 273.15; - |                        |
-| Temp:C→K    |                                     FUNC 11; 273.15; + |                        |
-|-------------+--------------------------------------------------------+------------------------|
+| Type        |                                            Conversion | Description .......... |
+|-------------+-------------------------------------------------------+------------------------|
+| Leng:mm     |                                                   1.0 |                        |
+| Leng:Ang    |                                                  1e-7 | Angstrom               |
+| Leng:μm     |                                                 0.001 | Micron                 |
+| Leng:mil    |                                FUNC 01; 25.4; 1000; / | mil (1/1000 in)        |
+| Leng:cm     |                                                    10 |                        |
+| Leng:in     |                                                  25.4 | Inch                   |
+|-------------+-------------------------------------------------------+------------------------|
+| Leng:cm     |                                                     1 |                        |
+| Leng:in     |                                                  2.54 | Intl Inch              |
+| Leng:ft     |                                  FUNC 01; 2.54; 12; * | Intl Foot              |
+| Leng:m      |                                                   100 |                        |
+| Leng:yd     |                            FUNC 01; 2.54; 12; *; 3; * | Intl Yard              |
+| Leng:hand   |                                   FUNC 01; 2.54; 4; * | Intl hand              |
+|-------------+-------------------------------------------------------+------------------------|
+| Leng:km     |                                                     1 |                        |
+| Leng:mi     |                 FUNC 01; 2.54; 12; *; 5280; *; 1e5; / | Int Mile               |
+| Leng:us mi  |                                         1.60934721869 | US Mile                |
+| Leng:nmi    |                                                 1.852 | Int Nautical mi        |
+| Leng:m      |                                                 0.001 |                        |
+| Leng:ft     |                          FUNC 01; 2.54; 12; *; 1e5; / | Intl Foot              |
+|-------------+-------------------------------------------------------+------------------------|
+| Area:hector |                                                     1 | hector                 |
+| Area:acre   |                                         0.40468564224 | Int Acre               |
+| Area:m^2    |                                                0.0001 |                        |
+| Area:yd^2   |                                      8.36127360001e-5 |                        |
+|-------------+-------------------------------------------------------+------------------------|
+| Vol:l       |                                                     1 |                        |
+| Vol:qt      |                                           0.946352946 | US Lq Quart            |
+| Vol:gal     |                            FUNC 01; 0.946352946; 4; * | US Lq Gal              |
+| Vol:cc      |                                                 0.001 |                        |
+| Vol:butt    |                    FUNC 01; 0.946352946; 4; *; 126; * | US Butt 126 US Gal     |
+| Vol:bbutt   |                              FUNC 01; 4.54609; 108; * | UK Butt 108 UK Gal     |
+|-------------+-------------------------------------------------------+------------------------|
+| Vol:tsp     |                                                     1 | Teaspoon               |
+| Vol:tbsp    |                                                     3 | Tablespoon             |
+| Vol:flOZ    |                                                     6 | fl oz                  |
+| Vol:cup     |                                                    48 | Cup                    |
+| Vol:pint    |                                                    96 | Pint                   |
+| Vol:qt      |                                                   192 | Quart                  |
+|-------------+-------------------------------------------------------+------------------------|
+| Time:sec    |                                                     1 |                        |
+| Time:min    |                                                    60 |                        |
+| Time:hour   |                                                  3600 |                        |
+| Time:day    |                                                 86400 |                        |
+| Time:week   |                                                604800 |                        |
+| Time:year   |                                              31536000 | 365 day year           |
+|-------------+-------------------------------------------------------+------------------------|
+| Time:day    |                                                     1 |                        |
+| Time:year   |                                                   365 | Conentional            |
+| Time:acnt   |                                                   360 | Accounting             |
+| Time:greg   |                                              365.2425 | Mean Gregorian         |
+| Time:julian |                                                365.25 |                        |
+| Time:astro  |                                         365.256363004 | Astronomical           |
+|-------------+-------------------------------------------------------+------------------------|
+| Mass:kg     |                                                     1 |                        |
+| Mass:lb     |                                            0.45359237 | Pound Int              |
+| Mass:g      |                                                   1e3 |                        |
+| Mass:ozWT   |                                                  28e3 | Ounce Food Weight      |
+| Mass:ozTr   |                                          31.1034768e3 | Ounce Troy             |
+| Mass:stone  |                            FUNC 01; 0.45359237; 14; × | Int Stone              |
+|-------------+-------------------------------------------------------+------------------------|
+| Mass:lb     |                                                     1 |                        |
+| Mass:US ton |                                                  2000 | US (short) Ton         |
+| Mass:UK ton |                                                  2240 | UK (long) Ton          |
+|-------------+-------------------------------------------------------+------------------------|
+| Force:N     |                                                     1 |                        |
+| Force:kgf   |                                               9.80665 |                        |
+| Force:lbf   |                       FUNC 01; 0.45359237; 9.80665; * | Int lbf                |
+|-------------+-------------------------------------------------------+------------------------|
+| Sped:m/s    |                                                     1 |                        |
+| Sped:mph    |        FUNC 01; 2.54; 12; *; 5280; *; 1e2; /; 3600; / | Int mph                |
+| Sped:kph    |                                FUNC 01; 1000; 3600; / |                        |
+| Sped:knot   |                      FUNC 01; 1.852; 1000; *; 3600; / | Intl nmi               |
+|-------------+-------------------------------------------------------+------------------------|
+| Pres:Pa     |                                                     1 | N/m^2                  |
+| Pres:bar    |                                                100000 |                        |
+| Pres:psi    | FUNC 01; 1e4; 0.45359237; *; 9.80665; *; 2.54; X^2; / |                        |
+| Pres:atm    |                                                101325 | Standard               |
+| Pres:mmHg   |                                               133.322 |                        |
+| Pres:inHg   |                                            3.386389e3 | Conventional           |
+|-------------+-------------------------------------------------------+------------------------|
+| Powr:watt   |                                                     1 |                        |
+| Powr:BTU/h  |                                          0.2930710702 | International          |
+| Powr:hp     |                                             735.49875 | Metric                 |
+| Powr:kcal/h |                                                 1.163 |                        |
+|-------------+-------------------------------------------------------+------------------------|
+| Temp:C→F    |                            FUNC 11; 9; ×; 5; ÷; 32; + |                        |
+| Temp:F→C    |                            FUNC 11; 32; -; 5; ×; 9; ÷ |                        |
+| Temp:K→C    |                                    FUNC 11; 273.15; - |                        |
+| Temp:C→K    |                                    FUNC 11; 273.15; + |                        |
+|-------------+-------------------------------------------------------+------------------------|
+| ▒▒▒▒        |                                                       |                        |
+| SIPFX       |                           Run the =SIPFX= application |                        |
+|-------------+-------------------------------------------------------+------------------------|
 
 ** Code
 
@@ -173,7 +175,8 @@ the base conversion factors are exact quantities, the programs insure we obtain 
                            nil
                            'stay ;; Change to 'exit to exit immediatly after a conversion factor is pushed to the stack
                            'up   ;; Change to 'exit to have the application exit when [EXIT] is pressed
-                           #'MJR-local-only-gen-lab
+                           (lambda (atrg row) (if (string-equal "SIPFX" atrg) (format "\"%s\"" atrg)))
+                           ;;#'MJR-local-only-gen-lab
                            (lambda (atrg target row) 
                              (cl-destructuring-bind (menu cfactor desc) row
                                (let ((print-desc 't))    ;; Set to NIL to not print description
@@ -226,6 +229,8 @@ KEY 2 GTO 10
 KEY 3 GTO 11
 "Temp"
 KEY 4 GTO 12
+"SIPFX"
+KEY 6 XEQ "SIPFX"
 KEY 7 GTO 01
 KEY 8 GTO 01
 KEY 9 GTO 00
@@ -840,7 +845,6 @@ FUNC 01
 2.54
 X^2
 /
-
 RTN
 LBL 83    @@@@ Action for menu key atm
 101325
@@ -900,6 +904,218 @@ FUNC 11
 +
 RTN
 @@@@ Free labels start at: 94
+#+end_src
+
+* SI Prefixes
+** Menu
+#+ATTR_HTML: :rules groups :frame box :align center
+#+NAME: sipfx
+| Prefix | Sym |                 Val |
+|--------+-----+---------------------|
+| centi  | c   |                1e-2 |
+| milli  | m   |                1e-3 |
+| micro  | µ   |                1e-6 |
+| nano   | n   |                1e-9 |
+| pico   | p   |               1e-12 |
+| femto  | f   |               1e-15 |
+|--------+-----+---------------------|
+| kilo   | k   |                1e+3 |
+| mega   | M   |                1e+6 |
+| giga   | G   |                1e+9 |
+| tera   | T   |               1e+12 |
+| peta   | P   |               1e+15 |
+| exa    | E   |               1e+18 |
+|--------+-----+---------------------|
+| kibi   | Ki  |                1024 |
+| mebi   | Mi  |             1048576 |
+| gibi   | Gi  |          1073741824 |
+| tebi   | Ti  |       1099511627776 |
+| pebi   | Pi  |    1125899906842624 |
+| exbi   | Ei  | 1152921504606846976 |
+
+** Menu Code
+
+Note: This one will have an =END= generated to finish the =UNIT= application.
+
+#+BEGIN_SRC elisp :var tbl=sipfx :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/unit/unit.hp42s"
+(MJR-generate-42-menu-code "SIPFX" 
+                           0
+                           tbl
+                           0
+                           nil
+                           'stay ;; Change to 'exit to exit immediatly after a conversion factor is pushed to the stack
+                           'up   ;; Change to 'exit to have the application exit when [EXIT] is pressed
+                           #'MJR-local-only-gen-lab
+                           (lambda (atrg target row) 
+                            (cl-destructuring-bind (prefix-str sym-string mult) row
+                              (mapconcat #'string-trim-left 
+                                         (list (format "%s" mult)
+                                               (format "×" mult)
+                                               (format "\"%s (%s)\"" prefix-str sym-string)
+                                               ;;(format "AVIEW")
+                                               )
+                                         "\n"))))
+#+END_SRC
+
+#+RESULTS:
+#+begin_src hp42s :eval never :tangle ../src_42s/unit/unit.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SIPFX)
+@@@@ DSC: Auto-generated menu program
+LBL "SIPFX"
+LBL 01            @@@@ Page 1 of menu SIPFX
+CLMENU
+"centi"
+KEY 1 XEQ 04
+"milli"
+KEY 2 XEQ 05
+"micro"
+KEY 3 XEQ 06
+"nano"
+KEY 4 XEQ 07
+"pico"
+KEY 5 XEQ 08
+"femto"
+KEY 6 XEQ 09
+KEY 7 GTO 03
+KEY 8 GTO 02
+KEY 9 GTO 00
+MENU
+STOP
+GTO 01
+LBL 02            @@@@ Page 2 of menu SIPFX
+CLMENU
+"kilo"
+KEY 1 XEQ 10
+"mega"
+KEY 2 XEQ 11
+"giga"
+KEY 3 XEQ 12
+"tera"
+KEY 4 XEQ 13
+"peta"
+KEY 5 XEQ 14
+"exa"
+KEY 6 XEQ 15
+KEY 7 GTO 01
+KEY 8 GTO 03
+KEY 9 GTO 00
+MENU
+STOP
+GTO 02
+LBL 03            @@@@ Page 3 of menu SIPFX
+CLMENU
+"kibi"
+KEY 1 XEQ 16
+"mebi"
+KEY 2 XEQ 17
+"gibi"
+KEY 3 XEQ 18
+"tebi"
+KEY 4 XEQ 19
+"pebi"
+KEY 5 XEQ 20
+"exbi"
+KEY 6 XEQ 21
+KEY 7 GTO 02
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 03
+LBL 00 @@@@ Application Exit
+EXITALL
+RTN
+LBL 04    @@@@ Action for menu key centi
+0.01
+×
+"centi (c)"
+RTN
+LBL 05    @@@@ Action for menu key milli
+0.001
+×
+"milli (m)"
+RTN
+LBL 06    @@@@ Action for menu key micro
+1e-06
+×
+"micro (µ)"
+RTN
+LBL 07    @@@@ Action for menu key nano
+1e-09
+×
+"nano (n)"
+RTN
+LBL 08    @@@@ Action for menu key pico
+1e-12
+×
+"pico (p)"
+RTN
+LBL 09    @@@@ Action for menu key femto
+1e-15
+×
+"femto (f)"
+RTN
+LBL 10    @@@@ Action for menu key kilo
+1000.0
+×
+"kilo (k)"
+RTN
+LBL 11    @@@@ Action for menu key mega
+1000000.0
+×
+"mega (M)"
+RTN
+LBL 12    @@@@ Action for menu key giga
+1000000000.0
+×
+"giga (G)"
+RTN
+LBL 13    @@@@ Action for menu key tera
+1000000000000.0
+×
+"tera (T)"
+RTN
+LBL 14    @@@@ Action for menu key peta
+1e+15
+×
+"peta (P)"
+RTN
+LBL 15    @@@@ Action for menu key exa
+1e+18
+×
+"exa (E)"
+RTN
+LBL 16    @@@@ Action for menu key kibi
+1024
+×
+"kibi (Ki)"
+RTN
+LBL 17    @@@@ Action for menu key mebi
+1048576
+×
+"mebi (Mi)"
+RTN
+LBL 18    @@@@ Action for menu key gibi
+1073741824
+×
+"gibi (Gi)"
+RTN
+LBL 19    @@@@ Action for menu key tebi
+1099511627776
+×
+"tebi (Ti)"
+RTN
+LBL 20    @@@@ Action for menu key pebi
+1125899906842624
+×
+"pebi (Pi)"
+RTN
+LBL 21    @@@@ Action for menu key exbi
+1152921504606846976
+×
+"exbi (Ei)"
+RTN
+@@@@ Free labels start at: 22
 END
 #+end_src
 
@@ -917,6 +1133,9 @@ END
 #+END_SRC
 
 Code in this section is under construction.  Most likely broken.
+
+
+
 * EOF
 
 # End of document.

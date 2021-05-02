@@ -64,28 +64,35 @@ U (a standard deviation).
 
 #+ATTR_HTML: :align center :frame box :rules all
 #+NAME:UPROP
-| Menu | LBL   | Value     | Uncertainty (Standard Deviation)             |
-|------+-------+-----------+----------------------------------------------|
-| +    | U+    | Y.v+X.v   | HYPOT(X.u, Y.u)                              |
-| -    | U-    | Y.v-X.v   | HYPOT(X.u, Y.u)                              |
-| ×    | U×    | Y.v*X.v   | ABS(X.v*Y.v)*HYPOT(X.u/X.v, Y.u/Y.v)         |
-| ÷    | U÷    | Y.v/X.v   | ABS(X.v/Y.v)*HYPOT(X.u/X.v, Y.u/Y.v)         |
-| Y↑X  | UY↑X  | Y.v^X.v   | ABS(Y.v^X.v)*HYPOT(Y.u*X.v/Y.v, LN(Y.v)*X.u) |
-| 1/X  | U1/X  | 1/X.v     | ABS(X.u)                                     |
-|------+-------+-----------+----------------------------------------------|
-| ▒▒▒▒ |       |           |                                              |
-| ▒▒▒▒ |       |           |                                              |
-| LN   | ULN   | LN(X.v)   | ABS(X.u/X.v)                                 |
-| E↑X  | UE↑X  | EXP(X.v)  | EXP(X.v)*ABS(X.u*X.v)                        |
-| ▒▒▒▒ |       |           |                                              |
-| ▒▒▒▒ |       |           |                                              |
-|------+-------+-----------+----------------------------------------------|
-| SIN  | USIN  | SIN(X.v)  | ABS(COS(X.v)*X.u)                            |
-| COS  | UCOS  | COS(X.v)  | ABS(SIN(X.v)*X.u)                            |
-| TAN  | UTAN  | TAN(X.v)  | ABS(SEC^2(X.v)*X.u)                          |
-| ASIN | UASIN | ASIN(X.v) | ABS(X.u/SQRT(1-X.v^2))                       |
-| ACOS | UACOS | ACOS(X.v) | ABS(X.u/SQRT(1-X.v^2))                       |
-| ATAN | UATAN | ATAN(X.v) | ABS(X.u/(1+X.v^2))                           |
+| Menu  | LBL    | Value      | Uncertainty (Standard Deviation)             | Notes           |
+|-------+--------+------------+----------------------------------------------+-----------------|
+| +     | U+     | Y.v+X.v    | HYPOT(X.u, Y.u)                              |                 |
+| -     | U-     | Y.v-X.v    | HYPOT(X.u, Y.u)                              |                 |
+| ×     | U×     | Y.v*X.v    | ABS(X.v*Y.v)*HYPOT(X.u/X.v, Y.u/Y.v)         |                 |
+| ÷     | U÷     | Y.v/X.v    | ABS(X.v/Y.v)*HYPOT(X.u/X.v, Y.u/Y.v)         |                 |
+| Y↑X   | UY↑X   | Y.v^X.v    | ABS(Y.v^X.v)*HYPOT(Y.u*X.v/Y.v, LN(Y.v)*X.u) |                 |
+| 1/X   | U1/X   | 1/X.v      | ABS(X.u)                                     |                 |
+|-------+--------+------------+----------------------------------------------+-----------------|
+| ▒▒▒▒  |        |            |                                              |                 |
+| LN    | ULN    | LN(X.v)    | ABS(X.u/X.v)                                 |                 |
+| E↑X   | UE↑X   | EXP(X.v)   | EXP(X.v)*ABS(X.u*X.v)                        |                 |
+| ▒▒▒▒  |        |            |                                              |                 |
+| GAM   | UGAMMA | GAMMA(X.v) | ABS(DIGAMMA(X.v)*GAMMA(X.v)*X.u)             | Requires [[file:sfun.org][=SFUN=]] |
+| ▒▒▒▒  |        |            |                                              |                 |
+|-------+--------+------------+----------------------------------------------+-----------------|
+| SIN   | USIN   | SIN(X.v)   | ABS(COS(X.v)*X.u)                            |                 |
+| COS   | UCOS   | COS(X.v)   | ABS(SIN(X.v)*X.u)                            |                 |
+| TAN   | UTAN   | TAN(X.v)   | ABS(SEC^2(X.v)*X.u)                          |                 |
+| ASIN  | UASIN  | ASIN(X.v)  | ABS(X.u/SQRT(1-X.v^2))                       |                 |
+| ACOS  | UACOS  | ACOS(X.v)  | ABS(X.u/SQRT(1-X.v^2))                       |                 |
+| ATAN  | UATAN  | ATAN(X.v)  | ABS(X.u/(1+X.v^2))                           |                 |
+|-------+--------+------------+----------------------------------------------+-----------------|
+| SINH  | USINH  | SINH(X.v)  | ABS(COSH(X.v)*X.u)                           |                 |
+| COSH  | UCOSH  | COSH(X.v)  | ABS(SINH(X.v)*X.u)                           |                 |
+| TANH  | UTANH  | TANH(X.v)  | ABS(SECH^2(X.v)*X.u)                         |                 |
+| ASINH | UASINH | ASINH(X.v) | ABS(X.u/SQRT(1-X.v^2))                       |                 |
+| ACOSH | UACOSH | ACOSH(X.v) | ABS(X.u/SQRT(1-X.v^2))                       |                 |
+| ATANH | UATANH | ATANH(X.v) | ABS(X.u/(1+X.v^2))                           |                 |
 
 * Menu Code
 
@@ -112,7 +119,7 @@ KEY 4 XEQ "U÷"
 KEY 5 XEQ "UY↑X"
 "1/X"
 KEY 6 XEQ "U1/X"
-KEY 7 GTO 03
+KEY 7 GTO 04
 KEY 8 GTO 02
 KEY 9 GTO 00
 MENU
@@ -121,9 +128,11 @@ GTO 01
 LBL 02            @@@@ Page 2 of menu UPROP
 CLMENU
 "LN"
-KEY 3 XEQ "ULN"
+KEY 2 XEQ "ULN"
 "E↑X"
-KEY 4 XEQ "UE↑X"
+KEY 3 XEQ "UE↑X"
+"GAM"
+KEY 5 XEQ "UGAMMA"
 KEY 7 GTO 01
 KEY 8 GTO 03
 KEY 9 GTO 00
@@ -145,15 +154,35 @@ KEY 5 XEQ "UACOS"
 "ATAN"
 KEY 6 XEQ "UATAN"
 KEY 7 GTO 02
-KEY 8 GTO 01
+KEY 8 GTO 04
 KEY 9 GTO 00
 MENU
 STOP
 GTO 03
+LBL 04            @@@@ Page 4 of menu UPROP
+CLMENU
+"SINH"
+KEY 1 XEQ "USINH"
+"COSH"
+KEY 2 XEQ "UCOSH"
+"TANH"
+KEY 3 XEQ "UTANH"
+"ASINH"
+KEY 4 XEQ "UASINH"
+"ACOSH"
+KEY 5 XEQ "UACOSH"
+"ATANH"
+KEY 6 XEQ "UATANH"
+KEY 7 GTO 03
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 04
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-@@@@ Free labels start at: 4
+@@@@ Free labels start at: 5
 #+end_src
 
 * Functions
@@ -428,14 +457,136 @@ COMPLEX              @@@@ X.u X.v
 1                    @@@@ 1 X.u X.v
 RCL ST Z             @@@@ X.v 1 X.u X.v
 X↑2                  @@@@ X.v^2 1 X.u X.v
-+                    @@@@ 1-X.v^2 X.u X.v
-SQRT                 @@@@ SQRT(1-X.v^2) X.u X.v
-÷                    @@@@ X.u/SQRT(1-X.v^2) X.v
++                    @@@@ 1+X.v^2 X.u X.v
+÷                    @@@@ X.u/(1+X.v^2) X.v
 ABS                  @@@@ ATAN(X).u X.v
 X<>Y                 @@@@ X.v ATAN(X).u 
 ATAN                 @@@@ ATAN(X).v ATAN(X).u
 X<>Y                 @@@@ ATAN(X).u ATAN(X).v 
 COMPLEX              @@@@ ATAN(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "USINH"
+FUNC 11              @@@@ X
+L4STK
+XEQ 99 @NM@ R->C     @@@@ X
+COMPLEX              @@@@ X.u X.v
+RCL ST Y             @@@@ X.v X.u X.v
+COSH                 @@@@ COSH(X.v) X.u X.v
+×                    @@@@ COSH(X.v)*X.u X.v
+ABS                  @@@@ SINH(X).u X.v 
+X<>Y                 @@@@ X.v SINH(X).u 
+SINH                 @@@@ SINH(X).v SINH(X).u
+X<>Y                 @@@@ SINH(X).u SINH(X).v 
+COMPLEX              @@@@ SINH(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "UCOSH"
+FUNC 11              @@@@ X
+L4STK
+XEQ 99 @NM@ R->C     @@@@ X
+COMPLEX              @@@@ X.u X.v
+RCL ST Y             @@@@ X.v X.u X.v
+SINH                 @@@@ SINH(X.v) X.u X.v
+×                    @@@@ SINH(X.v)*X.u X.v
+ABS                  @@@@ COSH(X).u X.v 
+X<>Y                 @@@@ X.v COSH(X).u 
+COSH                 @@@@ COSH(X).v COSH(X).u
+X<>Y                 @@@@ COSH(X).u COSH(X).v 
+COMPLEX              @@@@ COSH(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "UTANH"
+FUNC 11              @@@@ X
+L4STK
+XEQ 99 @NM@ R->C     @@@@ X
+COMPLEX              @@@@ X.u X.v
+RCL ST Y             @@@@ X.v X.u X.v
+COSH                 @@@@ COSH(X.v) X.u X.v
+1/X                  @@@@ SECH(X.v) X.u X.v 
+X↑2                  @@@@ SECH^2(X.v) X.u X.v
+×                    @@@@ SECH^2(X.v)*X.u X.v
+ABS                  @@@@ tanh(X).u X.v 
+X<>Y                 @@@@ X.v tanh(X).u
+TANH                 @@@@ tanh(X).v tanh(X).u
+X<>Y                 @@@@ tanh(X).u tanh(X).v 
+COMPLEX              @@@@ tanh(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "UASINH"
+FUNC 11              @@@@ X
+L4STK
+XEQ 99 @NM@ R->C     @@@@ X
+COMPLEX              @@@@ X.u X.v
+RCL ST Y             @@@@ X.v X.u X.v
+X↑2                  @@@@ X.v^2 X.u X.v
+1                    @@@@ 1 X.v^2 X.u X.v
++                    @@@@ X.v^2-1 X.u X.v
+SQRT                 @@@@ SQRT(X.v^2-1) X.u X.v
+÷                    @@@@ X.u/SQRT(X.v^2-1) X.v
+ABS                  @@@@ ASINH(X).u X.v
+X<>Y                 @@@@ X.v ASINH(X).u 
+ASINH                @@@@ ASINH(X).v ASINH(X).u
+X<>Y                 @@@@ ASINH(X).u ASINH(X).v 
+COMPLEX              @@@@ ASINH(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "UACOSH"
+FUNC 11              @@@@ X
+L4STK
+XEQ 99 @NM@ R->C     @@@@ X
+COMPLEX              @@@@ X.u X.v
+RCL ST Y             @@@@ X.v X.u X.v
+X↑2                  @@@@ X.v^2 X.u X.v
+1                    @@@@ 1 X.v^2 X.u X.v
+-                    @@@@ X.v^2-1 X.u X.v
+SQRT                 @@@@ SQRT(X.v^2-1) X.u X.v
+÷                    @@@@ X.u/SQRT(X.v^2-1) X.v
+ABS                  @@@@ ACOSH(X).u X.v
+X<>Y                 @@@@ X.v ACOSH(X).u 
+ACOSH                @@@@ ACOSH(X).v ACOSH(X).u
+X<>Y                 @@@@ ACOSH(X).u ACOSH(X).v 
+COMPLEX              @@@@ ACOSH(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "UATANH"
+FUNC 11              @@@@ X
+L4STK
+XEQ 99 @NM@ R->C     @@@@ X
+COMPLEX              @@@@ X.u X.v
+RCL ST Y             @@@@ X.v X.u X.v
+X↑2                  @@@@ X.v^2 X.u X.v
+1                    @@@@ 1 X.v^2 X.u X.v
+-                    @@@@ 1-X.v^2 X.u X.v
+÷                    @@@@ X.u/(1-X.v^2) X.v
+ABS                  @@@@ ATANH(X).u X.v
+X<>Y                 @@@@ X.v ATANH(X).u 
+ATANH                @@@@ ATANH(X).v ATANH(X).u
+X<>Y                 @@@@ ATANH(X).u ATANH(X).v 
+COMPLEX              @@@@ ATANH(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+LBL "UGAMMA"
+FUNC 11              @@@@ X
+L4STK
+XEQ 99 @NM@ R->C     @@@@ X
+COMPLEX              @@@@ X.u X.v
+RCL ST Y             @@@@ X.v X.u X.v
+XEQ "DIGAMM"         @@@@ DIGAMM(X.v) X.u X.v
+×                    @@@@ DIGAMM(X.v)*X.u X.v
+X<>Y                 @@@@ X.v DIGAMM(X.v)*X.u 
+GAMMA                @@@@ GAMMA(X.v) DIGAMM(X.v)*X.u 
+X<>Y                 @@@@ DIGAMM(X.v)*X.u GAMMA(X.v) 
+RCL× ST Y            @@@@ GAMMA(X.v)*DIGAMM(X.v)*X.u GAMMA(X.v) 
+ABS                  @@@@ GAMMA(X).u GAMMA(X).v
+COMPLEX              @@@@ GAMMA(X)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

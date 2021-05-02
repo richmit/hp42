@@ -249,6 +249,8 @@ KEY 1 XEQ 40
 KEY 2 XEQ 41
 "!"
 KEY 3 XEQ 42
+"PSI"
+KEY 4 XEQ "DIGAMM"
 "GAM"
 KEY 5 XEQ 43
 "BETA"
@@ -646,6 +648,79 @@ RCL ST Z
 +
 GAMMA
 ÷
+RTN
+LBL "DIGAMM"
+FUNC 11
+L4STK
+LSTO "_X"
+2
++
+LSTO "_S"
+LN
+2
+RCL× "_S"
+1/X
+-
+RCL "_S"
+X↑2
+LSTO "_SS"
+12
+×
+1/X
+-
+RCL "_SS"
+RCL× "_SS"
+STO ST Z
+120
+×
+1/X
++
+X<>Y
+RCL× "_SS"
+STO ST Z
+252
+×
+1/X
+-
+X<>Y
+RCL× "_SS"
+STO ST Z
+240
+×
+1/X
++
+X<>Y
+RCL× "_SS"
+STO ST Z
+660
+×
+1/X
+5
+×
+-
+X<>Y
+RCL× "_SS"
+STO ST Z
+32760
+×
+1/X
+691
+×
++
+X<>Y
+RCL× "_SS"
+12
+×
+1/X
+-
+RCL "_X"
+1/X
+-
+RCL "_X"
+1
++
+1/X
+-
 RTN
 LBL "NPDF"
 FUNC 11

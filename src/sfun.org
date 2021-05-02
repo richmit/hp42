@@ -143,7 +143,7 @@ This org-mode file collects together a handful simple mathematical functions tha
 | BINO:COMB  |        |                                                                            |                  |                 |
 | BINO:PERM  |        |                                                                            |                  |                 |
 | BINO:!     | N!     |                                                                            |                  |                 |
-| BINO:▒▒▒▒  |        |                                                                            |                  |                 |
+| BINO:PSI   | DIGAMM |                                                                            |                  |                 |
 | BINO:GAM   | GAMMA  |                                                                            |                  |                 |
 | BINO:BETA  |        | Beta function                                                              |                  |                 |
 |------------+--------+----------------------------------------------------------------------------+------------------+-----------------|
@@ -417,6 +417,8 @@ KEY 1 XEQ 40
 KEY 2 XEQ 41
 "!"
 KEY 3 XEQ 42
+"PSI"
+KEY 4 XEQ "DIGAMM"
 "GAM"
 KEY 5 XEQ 43
 "BETA"
@@ -991,6 +993,88 @@ RCL ST Z
 GAMMA
 ÷
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:DIGAMM)
+@@@@ DSC: digamma function
+@@@@ IN:  X: Number
+@@@@ OUT: X: psi(X)
+@@@@ FAQ: Good to about 1e-5 for real X>0.1
+@@@@ TST: free42_3.0.2
+@@@@ UPD: 2021-05-02
+LBL "DIGAMM"
+FUNC 11         @@## REQ:free42>=2.5.24
+L4STK           @@## REQ:free42>=3.0
+LSTO "_X"       @@@@ X
+2               @@@@ 2 X
++               @@@@ 2+X
+LSTO "_S"       @@@@ S
+LN              @@@@ SUM            ln(s)
+2               @@@@ 2 S SUM
+RCL× "_S"       @@@@ 2*S SUM
+1/X             @@@@ TRM SUM         
+-               @@@@ SUM            ln(s) -1/(2*s)
+RCL "_S"        @@@@ S SUM
+X↑2             @@@@ S^2 SUM
+LSTO "_SS"      @@@@ SS SUM
+12              @@@@ 12 S^2 SUM
+×               @@@@ 12*S^2 SUM
+1/X             @@@@ TRM SUM
+-               @@@@ SUM             ln(s) -1/(2*s) -1/(12*s^2)
+RCL "_SS"       @@@@ S^2 SUM       
+RCL× "_SS"      @@@@ S^4 SUM       
+STO ST Z        @@@@ S^4 SUM S^4
+120
+×
+1/X
++               @@@@ SUM S^4         ln(s) -1/(2*s) -1/(12*s^2) +1/(120*s^4)
+X<>Y
+RCL× "_SS"      @@@@ S^6 SUM       
+STO ST Z        @@@@ S^6 SUM S^6
+252
+×
+1/X         
+-               @@@@ SUM S^6         ln(s) -1/(2*s) -1/(12*s^2) +1/(120*s^4) -1/(252*s^6)
+X<>Y
+RCL× "_SS"      @@@@ S^8 SUM       
+STO ST Z        @@@@ S^8 SUM S^8
+240
+×
+1/X         
++               @@@@ SUM S^8         ln(s) -1/(2*s) -1/(12*s^2) +1/(120*s^4) -1/(252*s^6) +1/(240*s^8)
+X<>Y
+RCL× "_SS"      @@@@ S^10 SUM       
+STO ST Z        @@@@ S^10 SUM S^10
+660
+×
+1/X
+5
+×        
+-               @@@@ SUM S^10        ln(s) -1/(2*s) -1/(12*s^2) +1/(120*s^4) -1/(252*s^6) +1/(240*s^8) -5/(660*s^10)
+X<>Y
+RCL× "_SS"      @@@@ S^12 SUM       
+STO ST Z        @@@@ S^12 SUM S^12
+32760
+×
+1/X
+691
+×        
++               @@@@ SUM S^12        ln(s) -1/(2*s) -1/(12*s^2) +1/(120*s^4) -1/(252*s^6) +1/(240*s^8) -5/(660*s^10) +691/(32760*s^12)
+X<>Y
+RCL× "_SS"      @@@@ S^14 SUM       
+12
+×
+1/X
+-               @@@@ SUM             ln(s) -1/(2*s) -1/(12*s^2) +1/(120*s^4) -1/(252*s^6) +1/(240*s^8) -5/(660*s^10) +691/(32760*s^12) -1/(12*s^14)
+RCL "_X"                   
+1/X                        
+-               @@@@ SUM             ln(s) -1/(2*s) -1/(12*s^2) +1/(120*s^4) -1/(252*s^6) +1/(240*s^8) -5/(660*s^10) +691/(32760*s^12) -1/(12*s^14) -1/x
+RCL "_X"                   
+1                          
++                          
+1/X                        
+-               @@@@ SUM             ln(s) -1/(2*s) -1/(12*s^2) +1/(120*s^4) -1/(252*s^6) +1/(240*s^8) -5/(660*s^10) +691/(32760*s^12) -1/(12*s^14) -1/x -1/(x+1)
+RTN
+
 #+END_SRC
 
 ** Error & Standard Normal Functions

@@ -154,7 +154,7 @@ Reports can be automatically generated upon entry of a configurable number of me
 | M-     | LBL 97 | M-    | Delete last measurement       |                                                              |
 | EDIT   | LBL 38 | EDIT  | Edit MeDAT                    | Requires N>0 -- i.e. can't edit an empty MeDAT matrix!       |
 | REP    | LBL 96 | REP   | Display Report                | The report format & content is controlled by the settings.   |
-| ▒▒▒▒   |        | ▒▒▒▒  |                               |                                                              |
+| →STK   | LBL 39 | →STK  | Report to Stack               | Y: Measurement Estimate X: Expanded Uncertainty              |
 | CLRM   | LBL 95 | CLRM  | Clear all measurements        |                                                              |
 |--------+--------+-------+-------------------------------+--------------------------------------------------------------|
 | μ      | LBL 94 | μ     | Arithmetic Mean               | Normal Errors: Measurement estimate                          |
@@ -182,7 +182,7 @@ Reports can be automatically generated upon entry of a configurable number of me
 | LBL 48 | LBL 81 | K:?   | Coverage Factor               | Cycle through predefined values for current reporting scheme |
 | LBL 78 | LBL 80 | A:?   | Auto Report Count             | Automatically generate a report on N'th measurement entry    |
 | REP    | LBL 96 | REP   | Display Report                | Duplicated here so you can see reports after option changes  |
-| ▒▒▒▒   |        | ▒▒▒▒  |                               |                                                              |
+| →STK   | LBL 39 | →STK  | Report to Stack               | Duplicated here so you can see reports after option changes  |
 | RESET  | RSTMES | RESET | Delete data & set defaults    | Use the global label RSTMES to access outside application    |
 |--------+--------+-------+-------------------------------+--------------------------------------------------------------|
 
@@ -193,6 +193,7 @@ Notes:
     - Q1 is the median of the lower half of the data while Q3 is the median of the upper half
     - If N is odd, we do not include the median (the central value in the ordered list) in either half.
     - If N is even, we split this data set exactly in half.
+  - =RSTIMES= is a global label that will set all global variables used by =MEAS= to default values
 
 * Global Variables
 
@@ -260,6 +261,8 @@ KEY 2 XEQ 97
 KEY 3 XEQ 38
 "REP"
 KEY 4 XEQ 96
+"→STK"
+KEY 5 XEQ 39
 "CLRM"
 KEY 6 XEQ 95
 KEY 7 GTO 05
@@ -456,10 +459,7 @@ RTN
 LBL 48 @NM@ k_LAB
 FUNC 00    
 "k:"
-RCL "MeCFA"
-65
-+
-XEQ IND ST X
+XEQ 22 @@@@ |-CNA
 R↓
 RTN
 
@@ -660,143 +660,140 @@ AVIEW
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ DSC: REP 96
-LBL 96 @NM@ REP
-FUNC 00
+@@@@ DSC: Report to Stack
+LBL 39 @NM@ →STK
+FUNC 02
+XEQ 24 @@@@ E&U
+X≠0?      @@@@ Status U V
+GTO 75
+R↓
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Compute estimate & uncertainty
+@@@@ OUT: Z: Measure Estimating
+@@@@      Y: Expanded Uncertainty
+@@@@      X: Status
+@@@@         0 - Good Result
+@@@@         1 - ERROR
+LBL 24 @NM@ E&U
+FUNC 03
 SF 25
 RCL "MeDAT"
 FC?C 25
-GTO 99
+GTO 26
 DIM?
 R↓
 RCL "MeRSC"
-30
+27
 +
 GTO IND ST X
-LBL 30               @@@@ Normal: line 1 of compact report 
+LBL 27 @@@@ Normal
 R↓
 2
 X>Y?
-GTO 75               @@@@ We require 2 points for a report!
-R↓
-R↓
-"μ="
+GTO 26 @@@@ We require 2 points for a report!
 XEQ 94 @NM@ μ 
-ARCL ST X
-├" "
-RCL "MeCFA"
-65
-+
-XEQ IND ST X
-├"×u="
 XEQ 93 @NM@ kuN
-ARCL ST X
-GTO 44
-LBL 31               @@@@ Rectangular: line 1 of compact report 
+0
+RTN
+LBL 28 @@@@ Rectangular
 R↓
 2
 X>Y?
-GTO 75               @@@@ We require 2 points for a report!
-R↓
-R↓
-"MR="
+GTO 26 @@@@ We require 2 points for a report!
 XEQ 92 @NM@ MR
-ARCL ST X
-├"  "
-RCL "MeCFA"
-65
-+
-XEQ IND ST X
-├"×u="
 XEQ 91 @NM@ kuR
-ARCL ST X
-GTO 44
-LBL 32               @@@@ Quartiles: line 1 of compact report 
+0
+RTN
+LBL 29 @@@@ Quartiles
 R↓
 3
 X>Y?
-GTO 75               @@@@ We require 3 points for a report!
-R↓
-R↓
-"Q2="
+GTO 26 @@@@ We require 3 points for a report!
 XEQ 77 @NM@ MED
-ARCL ST X
-├"  "
-RCL "MeCFA"
-65
-+
-XEQ IND ST X
-├"×u="
 XEQ 46 @NM@ kuQ
-ARCL ST X
-GTO 44
-LBL 44               @@@@  Finish up prototype 2 line report
-ALENG
-21
+0
+RTN
+LBL 26
+1
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: REP 96
+LBL 96 @NM@ REP
+FUNC 00
+XEQ 24 @@@@ E&U
+X≠0?
+GTO 75
+R↓                   @@@@ U V
+XEQ 21 @NM@ MN=2A
+ARCL ST Y
+├" "
+XEQ 22 @@@@ |-CNA
+├"×u="
+ARCL ST X            @@@@ U V
+ALENG                @@@@ ALEN1 U V 
+21                   @@@@ 21 ALEN1 U V 
 X<Y?                 @@@@ Can we keep going with 4 value report?
 GTO 45               @@@@ Can't do 2-line as line 1 is too long...
 @@@@ Contineu to line 2 of compact report
+R↓                   @@@@ ALEN1 U V 
 ├"[LF]↓="
-XEQ 89 @NM@ MIN
+XEQ 89 @NM@ MIN      @@@@ MIN ALEN1 U V 
 ARCL ST X
+R↓                   @@@@ ALEN1 U V 
 ├"  ↑="
-XEQ 88 @NM@ MAX
+XEQ 88 @NM@ MAX      @@@@ MAX ALEN1 U V 
 ARCL ST X
-ALENG
-41
+R↓                   @@@@ ALEN1 U V 
+ALENG                @@@@ ALEN2 ALEN1 U V 
+-                    @@@@ ALEND U V 
+21                   @@@@ 41 ALEND U V 
 X<Y?
 GTO 45               @@@@ Can't do compact report as line 2 was too long...
 AVIEW
+R↓                   @@@@ ALEND U V 
+R↓                   @@@@ U V 
 RTN
 LBL 45               @@@@ Long form report..
-RCL "MeRSC"
-40
-+
-GTO IND ST X
-LBL 40               @@@@ Normal: long report
-R↓
+R↓                   @@@@ ALEN? U V 
+R↓                   @@@@ U V 
+XEQ 21 @NM@ MN=2A
+ARCL ST Y            @@@@ U V 
+├"[LF]"
+XEQ 22 @@@@ |-CNA
+├"×u="
+ARCL ST X            @@@@ U V 
+AVIEW
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Set alpha to measure name
+LBL 21 @NM@ MN=2A
+FUNC 00
+RCL "MeRSC"          @@@@ MeRSC
+0                    @@@@ 0 MeRSC
+X=Y?
 "μ="
-XEQ 94 @NM@ μ 
-ARCL ST X
-├"[LF]"
-RCL "MeCFA"
-65
-+
-XEQ IND ST X
-├"×u="
-XEQ 93 @NM@ kuN
-ARCL ST X
-AVIEW
-RTN
-LBL 41               @@@@ Rectangular: long report
-R↓
+R↓                   @@@@ MeRSC
+1                    @@@@ 1 MeRSC
+X=Y?
 "MR="
-XEQ 92 @NM@ MR
-ARCL ST X
-├"[LF]"
-RCL "MeCFA"
-65
-+
-XEQ IND ST X
-├"×u="
-XEQ 91 @NM@ kuR
-ARCL ST X
-AVIEW
-RTN
-LBL 42               @@@@ Quartiles: long report
-R↓
+R↓                   @@@@ MeRSC
+2                    @@@@ 2 MeRSC
+X=Y?
 "Q2="
-XEQ 77 @NM@ MED
-ARCL ST X
-├"[LF]"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Append Coverage Names to alpha
+LBL 22
+FUNC 00
 RCL "MeCFA"
 65
 +
 XEQ IND ST X
-├"×u="
-XEQ 46 @NM@ kuQ
-ARCL ST X
-AVIEW
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -848,20 +845,20 @@ SF 25
 INDEX "MeDAT"
 FC?C 25
 GTO 99
-XEQ 90 @NM@ RtVA
-RCL "MeCFA"
+XEQ 90 @NM@ RtVA    @@@@ RtVA
+RCL "MeCFA"        
 60
-+
-XEQ IND ST X
-X<>Y
-R↓
-×
++                   @@@@ JMP RtVA
+XEQ IND ST X        @@@@ VAL JMP RtVA
+X<>Y                @@@@ JMP VAL RtVA
+R↓                  @@@@ VAL RtVA
+×                   @@@@ VAL*RtVA
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: RtVA 90
 LBL 90 @NM@ RtVA 
-FUNC 0
+FUNC 01
 SF 25
 INDEX "MeDAT"
 FC?C 25
@@ -1185,6 +1182,7 @@ FUNC 01
 1
 RTN
 LBL 61               @@@@ Value for coverage factor 1
+FUNC 01
 RCL "MeRSC"
 1
 X≠Y?
@@ -1199,12 +1197,15 @@ R↓
 2
 RTN
 LBL 62               @@@@ Value for coverage factor 2
+FUNC 01
 3
 RTN
 LBL 63               @@@@ Value for coverage factor 3
+FUNC 01
 4
 RTN
 LBL 64               @@@@ Value for coverage factor 4
+FUNC 01
 999
 RTN
 

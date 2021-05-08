@@ -73,12 +73,12 @@ U (a standard deviation).
 | Y↑X   | UY↑X   | Y.v^X.v    | ABS(Y.v^X.v)*HYPOT(Y.u*X.v/Y.v, LN(Y.v)*X.u) |                 |
 | 1/X   | U1/X   | 1/X.v      | ABS(X.u)                                     |                 |
 |-------+--------+------------+----------------------------------------------+-----------------|
-| ▒▒▒▒  |        |            |                                              |                 |
 | LN    | ULN    | LN(X.v)    | ABS(X.u/X.v)                                 |                 |
 | E↑X   | UE↑X   | EXP(X.v)   | EXP(X.v)*ABS(X.u*X.v)                        |                 |
 | ▒▒▒▒  |        |            |                                              |                 |
-| GAM   | UGAMMA | GAMMA(X.v) | ABS(DIGAMMA(X.v)*GAMMA(X.v)*X.u)             | Requires [[file:sfun.org][=SFUN=]] |
+| ABS   | UABS   | ABS(X.v)   | ABS(X.u)                                     |                 |
 | ▒▒▒▒  |        |            |                                              |                 |
+| GAM   | UGAMMA | GAMMA(X.v) | ABS(DIGAMMA(X.v)*GAMMA(X.v)*X.u)             | Requires [[file:sfun.org][=SFUN=]] |
 |-------+--------+------------+----------------------------------------------+-----------------|
 | SIN   | USIN   | SIN(X.v)   | ABS(COS(X.v)*X.u)                            |                 |
 | COS   | UCOS   | COS(X.v)   | ABS(SIN(X.v)*X.u)                            |                 |
@@ -93,11 +93,55 @@ U (a standard deviation).
 | ASINH | UASINH | ASINH(X.v) | ABS(X.u/SQRT(1-X.v^2))                       |                 |
 | ACOSH | UACOSH | ACOSH(X.v) | ABS(X.u/SQRT(1-X.v^2))                       |                 |
 | ATANH | UATANH | ATANH(X.v) | ABS(X.u/(1+X.v^2))                           |                 |
+|-------+--------+------------+----------------------------------------------+-----------------|
+| I→VU  | UI→VU  | (X+Y)/2    | ABS(X-Y)/2                                   | Interval->      |
+| VU→I  | UVU→I  | N/A        | N/A                                          | ->Interval      |
+| ▒▒▒▒  |        |            |                                              |                 |
+| VU→%  | UVU→%  | N/A        | N/A                                          | Percentages     |
+| ▒▒▒▒  |        |            |                                              |                 |
+| ×U    | U×U    | Y.v        | Y.u×X                                        | U Factor        |
+
+** Notes
+
+*** =[SHIFT]= key magic for menus
+
+Menu keys that can accept a value with uncertainty in the X position of the stack behave differently when used with the =[SHIFT]= key.  If the =[SHIFT]= key is
+pressed before such a menu key, then it is like pressing =[SHIFT] [COMPLEX]= and then the menu key.  For example, pressing =[SHIFT] [COSH]= is the same as
+=[SHIFT] [COMPLEX] [COSH]=.  This is a handy way to save a keystroke when entering new values.
+
+Note that =I→VU= doesn't take a value with uncertainty, and thus pressing the =[SHIFT]= key before this function has no effect.
+
+*** Global Labels
+
+The menu items correspond to global labels that you can =XEQ= them from other programs.  The names are the menu labels prefixed with "=U=" -- so "=SIN="
+becomes "=USIN=".
+
+*** =UI→VU= & =UVU→I=: Intervals
+
+These functions convert between intervals and quantity with uncertainty.  Intervals are specified by interval end points on levels X & Y of the stack.  For
+=I→VU= the order is not relevant, but =VU→I= will always return the leftmost end point in Y and the rightmost end point in X.
+
+*** =UVU→%=
+
+Given a quantity with uncertainty in X, it will return =T%= of the uncertainty.  This value is always positive.
+
+*** =UxU=: Multiply uncertainty
+
+This is a quick way to multiply the uncertainty by a factor.  For example if you are using an expanded uncertainty value.
 
 * Menu Code
 
 #+BEGIN_SRC elisp :var tbl=UPROP :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/uprop/uprop.hp42s"
-(MJR-generate-42-menu-code "UPROP" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
+(MJR-generate-42-menu-code "UPROP" 0 tbl 0 1 'stay 'up 
+                           (lambda (atrg row) (if (string-equal "UI→VU" atrg) (format "\"%s\"" atrg)))
+                           ;;#'MJR-local-only-gen-lab
+                           (lambda (atrg target row) 
+                             (cl-destructuring-bind (md-menu md-lbl md-v md-u mdnotes) row
+                                   (mapconcat #'string-trim-left 
+                                              (list  (format "FS? 64")
+                                                     (format "XEQ 98 @NM@ ?CPLX")
+                                                     (format "XEQ \"U%s\"" md-menu))
+                                              "\n"))))
 #+END_SRC
 
 #+RESULTS:
@@ -108,18 +152,18 @@ LBL "UPROP"
 LBL 01            @@@@ Page 1 of menu UPROP
 CLMENU
 "+"
-KEY 1 XEQ "U+"
+KEY 1 XEQ 06
 "-"
-KEY 2 XEQ "U-"
+KEY 2 XEQ 07
 "×"
-KEY 3 XEQ "U×"
+KEY 3 XEQ 08
 "÷"
-KEY 4 XEQ "U÷"
+KEY 4 XEQ 09
 "Y↑X"
-KEY 5 XEQ "UY↑X"
+KEY 5 XEQ 10
 "1/X"
-KEY 6 XEQ "U1/X"
-KEY 7 GTO 04
+KEY 6 XEQ 11
+KEY 7 GTO 05
 KEY 8 GTO 02
 KEY 9 GTO 00
 MENU
@@ -128,11 +172,13 @@ GTO 01
 LBL 02            @@@@ Page 2 of menu UPROP
 CLMENU
 "LN"
-KEY 2 XEQ "ULN"
+KEY 1 XEQ 12
 "E↑X"
-KEY 3 XEQ "UE↑X"
+KEY 2 XEQ 13
+"ABS"
+KEY 4 XEQ 14
 "GAM"
-KEY 5 XEQ "UGAMMA"
+KEY 6 XEQ 15
 KEY 7 GTO 01
 KEY 8 GTO 03
 KEY 9 GTO 00
@@ -142,17 +188,17 @@ GTO 02
 LBL 03            @@@@ Page 3 of menu UPROP
 CLMENU
 "SIN"
-KEY 1 XEQ "USIN"
+KEY 1 XEQ 16
 "COS"
-KEY 2 XEQ "UCOS"
+KEY 2 XEQ 17
 "TAN"
-KEY 3 XEQ "UTAN"
+KEY 3 XEQ 18
 "ASIN"
-KEY 4 XEQ "UASIN"
+KEY 4 XEQ 19
 "ACOS"
-KEY 5 XEQ "UACOS"
+KEY 5 XEQ 20
 "ATAN"
-KEY 6 XEQ "UATAN"
+KEY 6 XEQ 21
 KEY 7 GTO 02
 KEY 8 GTO 04
 KEY 9 GTO 00
@@ -162,33 +208,177 @@ GTO 03
 LBL 04            @@@@ Page 4 of menu UPROP
 CLMENU
 "SINH"
-KEY 1 XEQ "USINH"
+KEY 1 XEQ 22
 "COSH"
-KEY 2 XEQ "UCOSH"
+KEY 2 XEQ 23
 "TANH"
-KEY 3 XEQ "UTANH"
+KEY 3 XEQ 24
 "ASINH"
-KEY 4 XEQ "UASINH"
+KEY 4 XEQ 25
 "ACOSH"
-KEY 5 XEQ "UACOSH"
+KEY 5 XEQ 26
 "ATANH"
-KEY 6 XEQ "UATANH"
+KEY 6 XEQ 27
 KEY 7 GTO 03
-KEY 8 GTO 01
+KEY 8 GTO 05
 KEY 9 GTO 00
 MENU
 STOP
 GTO 04
+LBL 05            @@@@ Page 5 of menu UPROP
+CLMENU
+"I→VU"
+KEY 1 XEQ "UI→VU"
+"VU→I"
+KEY 2 XEQ 28
+"VU→%"
+KEY 4 XEQ 29
+"×U"
+KEY 6 XEQ 30
+KEY 7 GTO 04
+KEY 8 GTO 01
+KEY 9 GTO 00
+MENU
+STOP
+GTO 05
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-@@@@ Free labels start at: 5
+LBL 06    @@@@ Action for menu key +
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "U+"
+RTN
+LBL 07    @@@@ Action for menu key -
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "U-"
+RTN
+LBL 08    @@@@ Action for menu key ×
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "U×"
+RTN
+LBL 09    @@@@ Action for menu key ÷
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "U÷"
+RTN
+LBL 10    @@@@ Action for menu key Y↑X
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "UY↑X"
+RTN
+LBL 11    @@@@ Action for menu key 1/X
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "U1/X"
+RTN
+LBL 12    @@@@ Action for menu key LN
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "ULN"
+RTN
+LBL 13    @@@@ Action for menu key E↑X
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "UE↑X"
+RTN
+LBL 14    @@@@ Action for menu key ABS
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "UABS"
+RTN
+LBL 15    @@@@ Action for menu key GAM
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "UGAM"
+RTN
+LBL 16    @@@@ Action for menu key SIN
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "USIN"
+RTN
+LBL 17    @@@@ Action for menu key COS
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "UCOS"
+RTN
+LBL 18    @@@@ Action for menu key TAN
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "UTAN"
+RTN
+LBL 19    @@@@ Action for menu key ASIN
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "UASIN"
+RTN
+LBL 20    @@@@ Action for menu key ACOS
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "UACOS"
+RTN
+LBL 21    @@@@ Action for menu key ATAN
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "UATAN"
+RTN
+LBL 22    @@@@ Action for menu key SINH
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "USINH"
+RTN
+LBL 23    @@@@ Action for menu key COSH
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "UCOSH"
+RTN
+LBL 24    @@@@ Action for menu key TANH
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "UTANH"
+RTN
+LBL 25    @@@@ Action for menu key ASINH
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "UASINH"
+RTN
+LBL 26    @@@@ Action for menu key ACOSH
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "UACOSH"
+RTN
+LBL 27    @@@@ Action for menu key ATANH
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "UATANH"
+RTN
+LBL 28    @@@@ Action for menu key VU→I
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "UVU→I"
+RTN
+LBL 29    @@@@ Action for menu key VU→%
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "UVU→%"
+RTN
+LBL 30    @@@@ Action for menu key ×U
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "U×U"
+RTN
+@@@@ Free labels start at: 31
 #+end_src
 
 * Functions
 
 #+begin_src hp42s :eval never :tangle ../src_42s/uprop/uprop.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  Y: Y   Quantity & Uncertainty _or_ Exact Quantity
+@@@@      X: X   Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: Y+X Quantity & Uncertainty (Uncertainty is 0 when X & Y are exact)
 LBL "U+"
 FUNC 21              @@@@ X Y
 L4STK
@@ -210,6 +400,9 @@ COMPLEX              @@@@ X+Y
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  Y: Y   Quantity & Uncertainty _or_ Exact Quantity
+@@@@      X: X   Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: Y-X Quantity & Uncertainty (Uncertainty is 0 when X & Y are exact)
 LBL "U-"
 FUNC 21              @@@@ X Y
 L4STK
@@ -231,6 +424,9 @@ COMPLEX              @@@@ X-Y
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  Y: Y   Quantity & Uncertainty _or_ Exact Quantity
+@@@@      X: X   Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: Y×X Quantity & Uncertainty (Uncertainty is 0 when X & Y are exact)
 LBL "U×"
 FUNC 21              @@@@ X Y
 L4STK
@@ -261,36 +457,9 @@ COMPLEX              @@@@ YX
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-LBL "UY↑X"
-FUNC 21              @@@@ X Y
-L4STK
-XEQ 99 @NM@ R->C     @@@@ X Y
-X<>Y                 @@@@ Y X
-XEQ 99 @NM@ R->C     @@@@ Y X
-COMPLEX              @@@@ Y.u Y.v X 
-LSTO "_Yu"           @@@@ Y.u Y.v X 
-Rv                   @@@@ Y.v X 
-LSTO "_Yv"           @@@@ Y.v X
-X<>Y                 @@@@ X Y.v
-COMPLEX              @@@@ X.u X.v Y.v
-LSTO "_Xu"           @@@@ X.u X.v Y.v
-Rv                   @@@@ X.v Y.v
-LSTO "_Xv"           @@@@ X.v Y.v
-Y↑X                  @@@@ (Y↑X).v
-RCL "_Yu"            @@@@ Y.u (Y↑X).v
-RCL× "_Xv"           @@@@ Y.u*X.v (Y↑X).v
-RCL÷ "_Yv"           @@@@ Y.u*X.v/Y.v (Y↑X).v
-RCL "_Yv"            @@@@ Y.v Y.u*X.v/Y.v (Y↑X).v
-LN                   @@@@ LN(Y.v) Y.u*X.v/Y.v (Y↑X).v
-RCL× "_Xu"           @@@@ X.u*LN(Y.v) Y.u*X.v/Y.v (Y↑X).v
-COMPLEX              @@@@ TMP (Y↑X).v
-ABS                  @@@@ TMP (Y↑X).v
-RCL× ST Y            @@@@ TMP (Y↑X).v
-ABS                  @@@@ (Y↑X).u (Y↑X).v
-COMPLEX              @@@@ Y↑X
-RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  Y: Y   Quantity & Uncertainty _or_ Exact Quantity
+@@@@      X: X   Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: Y÷X Quantity & Uncertainty (Uncertainty is 0 when X & Y are exact)
 LBL "U÷"
 FUNC 21              @@@@ X Y
 L4STK
@@ -321,6 +490,41 @@ COMPLEX              @@@@ Y/X
 RTN    
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  Y: Y   Quantity & Uncertainty _or_ Exact Quantity
+@@@@      X: X   Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: Y↑X Quantity & Uncertainty (Uncertainty is 0 when X & Y are exact)
+LBL "UY↑X"
+FUNC 21              @@@@ X Y
+L4STK
+XEQ 99 @NM@ R->C     @@@@ X Y
+X<>Y                 @@@@ Y X
+XEQ 99 @NM@ R->C     @@@@ Y X
+COMPLEX              @@@@ Y.u Y.v X 
+LSTO "_Yu"           @@@@ Y.u Y.v X 
+Rv                   @@@@ Y.v X 
+LSTO "_Yv"           @@@@ Y.v X
+X<>Y                 @@@@ X Y.v
+COMPLEX              @@@@ X.u X.v Y.v
+LSTO "_Xu"           @@@@ X.u X.v Y.v
+Rv                   @@@@ X.v Y.v
+LSTO "_Xv"           @@@@ X.v Y.v
+Y↑X                  @@@@ (Y↑X).v
+RCL "_Yu"            @@@@ Y.u (Y↑X).v
+RCL× "_Xv"           @@@@ Y.u*X.v (Y↑X).v
+RCL÷ "_Yv"           @@@@ Y.u*X.v/Y.v (Y↑X).v
+RCL "_Yv"            @@@@ Y.v Y.u*X.v/Y.v (Y↑X).v
+LN                   @@@@ LN(Y.v) Y.u*X.v/Y.v (Y↑X).v
+RCL× "_Xu"           @@@@ X.u*LN(Y.v) Y.u*X.v/Y.v (Y↑X).v
+COMPLEX              @@@@ TMP (Y↑X).v
+ABS                  @@@@ TMP (Y↑X).v
+RCL× ST Y            @@@@ TMP (Y↑X).v
+ABS                  @@@@ (Y↑X).u (Y↑X).v
+COMPLEX              @@@@ Y↑X
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  X: X      Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: 1/X    Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "U1/X"
 FUNC 11              @@@@ X
 L4STK
@@ -332,6 +536,23 @@ XEQ "U÷"             @@@@ 1/X
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  X: X      Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: ABS(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
+LBL "UABS"
+FUNC 11              @@@@ X
+L4STK
+XEQ 99 @NM@ R->C     @@@@ X
+COMPLEX              @@@@ X.u   X.v
+ABS                  @@@@ |X.u| X.v
+X<>Y                 @@@@ X.v   |X.u| 
+ABS                  @@@@ |X.v| |X.u| 
+X<>Y                 @@@@ |X.u| |X.v| 
+COMPLEX              @@@@ ABS(X)
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  X: X      Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: ln(X)  Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "ULN"
 FUNC 11              @@@@ X
 L4STK
@@ -347,6 +568,8 @@ COMPLEX              @@@@ ln(X)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  X: X      Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: E↑X    Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UE↑X"
 FUNC 11              @@@@ X
 L4STK
@@ -361,6 +584,8 @@ COMPLEX              @@@@ exp(X)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  X: X      Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: SIN(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "USIN"
 FUNC 11              @@@@ X
 L4STK
@@ -377,6 +602,8 @@ COMPLEX              @@@@ SIN(X)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  X: X      Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: COS(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UCOS"
 FUNC 11              @@@@ X
 L4STK
@@ -393,6 +620,8 @@ COMPLEX              @@@@ COS(X)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  X: X      Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: TAN(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UTAN"
 FUNC 11              @@@@ X
 L4STK
@@ -411,6 +640,8 @@ COMPLEX              @@@@ tan(X)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  X: X       Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: ASIN(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UASIN"
 FUNC 11              @@@@ X
 L4STK
@@ -430,6 +661,8 @@ COMPLEX              @@@@ ASIN(X)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  X: X       Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: ACOS(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UACOS"
 FUNC 11              @@@@ X
 L4STK
@@ -449,6 +682,8 @@ COMPLEX              @@@@ ACOS(X)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  X: X       Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: ATAN(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UATAN"
 FUNC 11              @@@@ X
 L4STK
@@ -467,6 +702,8 @@ COMPLEX              @@@@ ATAN(X)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  X: X        Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: SINH(X)  Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "USINH"
 FUNC 11              @@@@ X
 L4STK
@@ -483,6 +720,8 @@ COMPLEX              @@@@ SINH(X)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  X: X        Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: COSH(X)  Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UCOSH"
 FUNC 11              @@@@ X
 L4STK
@@ -499,6 +738,8 @@ COMPLEX              @@@@ COSH(X)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  X: X        Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: TANH(X)  Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UTANH"
 FUNC 11              @@@@ X
 L4STK
@@ -517,6 +758,8 @@ COMPLEX              @@@@ tanh(X)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  X: X        Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: ASINH(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UASINH"
 FUNC 11              @@@@ X
 L4STK
@@ -536,6 +779,8 @@ COMPLEX              @@@@ ASINH(X)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  X: X        Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: ACOSH(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UACOSH"
 FUNC 11              @@@@ X
 L4STK
@@ -555,6 +800,8 @@ COMPLEX              @@@@ ACOSH(X)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  X: X        Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: ATANH(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UATANH"
 FUNC 11              @@@@ X
 L4STK
@@ -573,6 +820,8 @@ COMPLEX              @@@@ ATANH(X)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  X: X        Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: GAMMA(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UGAMMA"
 FUNC 11              @@@@ X
 L4STK
@@ -590,12 +839,100 @@ COMPLEX              @@@@ GAMMA(X)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Convert interval to center+uncertanty
+@@@@ IN:  Y: Interval endpoint
+@@@@      X: Interval endpoint
+@@@@ OUT: X: Quantity & Uncertainty
+@@@@ UPD: 2021-05-07
+LBL "UI→VU"
+FUNC 21  @@@@ P1      P2
+L4STK
+RCL ST Y @@@@ P2      P1    P2
+RCL ST Y @@@@ P1      P2    P1 P2
++        @@@@ P1+P2   P1    P2 P2
+2        @@@@ 2       P1+P2 P1 P2
+÷        @@@@ C       P1    P2 P2
+RCL ST Z @@@@ P2      C     P1 P2
+RCL ST Z @@@@ P1      P2    C  P1
+-        @@@@ P2-P1   C     P1 P1
+ABS      @@@@ |P2-P1| C     P1 P1
+2        @@@@ 2       R     C  P1
+÷        @@@@ R/2     P2    C  P1
+COMPLEX  @@@@ V+iU    C     P1 P1
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: center+uncertanty to interval
+@@@@ IN:  X: X Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT  Y: Interval left point
+@@@@      X: Interval right point
+@@@@ UPD: 2021-05-07
+LBL "UVU→I"
+FUNC 12           @@@@ X
+L4STK
+XEQ 99 @NM@ R->C  @@@@ X
+COMPLEX           @@@@ X.u     X.v
+ABS               @@@@ X.u     X.v
+RCL ST Y          @@@@ X.v     X.u     X.v
+RCL ST Y          @@@@ X.u     X.v     X.u     X.v
+-                 @@@@ MIN     X.u     X.v     X.v
+RCL ST Z          @@@@ X.v     MIN     X.u     X.v
+RCL ST Z          @@@@ X.u     X.v     MIN     X.u
++                 @@@@ MAX     MIN     X.u     X.u
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: center+uncertanty to Percentage Uncertainty
+@@@@ IN:  X: X Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT  X: U%
+@@@@ UPD: 2021-05-07
+LBL "UVU→%"
+FUNC 11           @@@@ X
+L4STK
+XEQ 99 @NM@ R->C  @@@@ X
+COMPLEX           @@@@ X.u       X.v
+X<>Y              @@@@ X.v       X.u
+÷                 @@@@ X.u/X.v      
+ABS               @@@@ |X.u/X.v| 
+100               @@@@ 100       |X.u/X.v| 
+×                 @@@@ %T
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Multiply Uncertainty 
+@@@@ IN:  Y: Quantity & Uncertainty _or_ Exact Quantity
+@@@@      X: Eexact quantity
+@@@@ OUT  X: Quantity & Uncertainty
+@@@@ UPD: 2021-05-07
+LBL "U×U"
+FUNC 21           @@@@ X        Y
+L4STK
+ABS               @@@@ |X|      Y
+X<>Y              @@@@ Y        |X|    
+XEQ 99 @NM@ R->C  @@@@ Y        |X|    
+COMPLEX           @@@@ Y.u      Y.v   |X|
+RCL× ST Z         @@@@ Y.u×|Y|  Y.v   |X|
+COMPLEX           @@@@ Y
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: If X is not complex, make it the real part of a complex number
 LBL 99 @NM@ R->C
 FUNC 11
 L4STK
 CPX?
 RTN
 0
+COMPLEX
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: If X is not complex, do a COMPLEX
+LBL 98 @NM@ ?CPLX
+FUNC 11
+L4STK
+CPX?
+RTN
 COMPLEX
 RTN
 

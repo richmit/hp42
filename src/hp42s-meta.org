@@ -367,12 +367,12 @@ This function is handy when you want to always generate local labels.
 | n:LBL 89 | n:m    |      |     12 | N      | N:LBL 79 |
 | LBL 88   | p      |      |     13 | O      | LBL 73   |
 
-#+BEGIN_SRC elisp :var tbl=menu :colnames y :results output verbatum :wrap "src hp42s :eval never :eval never :tangle no"
+#+BEGIN_SRC elisp :var tbl=menu :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle no"
 (MJR-generate-42-menu-code "PROG_NAME" 0 tbl 1 nil 'stay 'up #'MJR-local-only-gen-lab nil) ;;#'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
-#+begin_src hp42s :eval never :eval never :tangle no
+#+begin_src hp42s :eval never :tangle no
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PROG_NAME)
 @@@@ DSC: Auto-generated menu program
 LBL "PROG_NAME"
@@ -586,10 +586,14 @@ RTN       @@@@ IF-TRUE-END ($1)
 
 This will export to HTML and tangle all marked files in a dired buffer.
 
-#+begin_src elisp :results silent
-(defun MJR-dired-org-to-html-and-code ()
+#+begin_src elisp :results silent :eval never
+(defun MJR-dired-org-export (execute-blocks tangle-blocks export-html)
   "Evaluate all code blocks, export to HTML, and tangle current file or all marked files in dired-mode"
-  (interactive)
+  (interactive (if (null current-prefix-arg)
+                   (list (y-or-n-p "Evaluate all blocks?")
+                         (y-or-n-p "Tangle all blocks?")
+                         (y-or-n-p "Export to HTML?"))
+                   (list 't 't 't)))
   (if (not (equal major-mode 'dired-mode))
       (message "MJR-dired-org-to-html-and-code: ERROR: Not in dired mode!!")
       (let ((marked-files (dired-get-marked-files)))
@@ -597,12 +601,15 @@ This will export to HTML and tangle all marked files in a dired buffer.
             (message "MJR-dired-org-to-html-and-code: ERROR: No marked files!!")
             (mapc (lambda (f)
                     (with-current-buffer (find-file-noselect f)
-                      (MJR-org-babel-execute-buffer)
-                      (org-html-export-to-html)
-                      (org-babel-tangle)))
+                      (if execute-blocks (MJR-org-babel-execute-buffer))
+                      (if tangle-blocks (org-babel-tangle))
+                      (if export-html (org-html-export-to-html))))
                   marked-files)))
             (message "dired-get-marked-files: Complete!")))
 #+end_src
+
+Note the previous block is set =:eval never= because I keep this function in my =.emacs= file, and thus don't need to evaluate it to get it into my personal
+environment.
 
 * Prepare Code For Conversion
 

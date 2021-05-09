@@ -70,15 +70,15 @@ U (a standard deviation).
 | -     | U-     | Y.v-X.v    | HYPOT(X.u, Y.u)                              |                 |
 | ×     | U×     | Y.v*X.v    | ABS(X.v*Y.v)*HYPOT(X.u/X.v, Y.u/Y.v)         |                 |
 | ÷     | U÷     | Y.v/X.v    | ABS(X.v/Y.v)*HYPOT(X.u/X.v, Y.u/Y.v)         |                 |
-| Y↑X   | UY↑X   | Y.v^X.v    | ABS(Y.v^X.v)*HYPOT(Y.u*X.v/Y.v, LN(Y.v)*X.u) |                 |
+| +/-   | U+/-   | -X.v       | ABS(X.u)                                     |                 |
 | 1/X   | U1/X   | 1/X.v      | ABS(X.u)                                     |                 |
 |-------+--------+------------+----------------------------------------------+-----------------|
 | LN    | ULN    | LN(X.v)    | ABS(X.u/X.v)                                 |                 |
 | E↑X   | UE↑X   | EXP(X.v)   | EXP(X.v)*ABS(X.u*X.v)                        |                 |
-| ▒▒▒▒  |        |            |                                              |                 |
+| Y↑X   | UY↑X   | Y.v^X.v    | ABS(Y.v^X.v)*HYPOT(Y.u*X.v/Y.v, LN(Y.v)*X.u) |                 |
 | ABS   | UABS   | ABS(X.v)   | ABS(X.u)                                     |                 |
-| ▒▒▒▒  |        |            |                                              |                 |
 | GAM   | UGAMMA | GAMMA(X.v) | ABS(DIGAMMA(X.v)*GAMMA(X.v)*X.u)             | Requires [[file:sfun.org][=SFUN=]] |
+| ▒▒▒▒  |        |            |                                              |                 |
 |-------+--------+------------+----------------------------------------------+-----------------|
 | SIN   | USIN   | SIN(X.v)   | ABS(COS(X.v)*X.u)                            |                 |
 | COS   | UCOS   | COS(X.v)   | ABS(SIN(X.v)*X.u)                            |                 |
@@ -159,7 +159,7 @@ KEY 2 XEQ 07
 KEY 3 XEQ 08
 "÷"
 KEY 4 XEQ 09
-"Y↑X"
+"+/-"
 KEY 5 XEQ 10
 "1/X"
 KEY 6 XEQ 11
@@ -175,10 +175,12 @@ CLMENU
 KEY 1 XEQ 12
 "E↑X"
 KEY 2 XEQ 13
+"Y↑X"
+KEY 3 XEQ 14
 "ABS"
-KEY 4 XEQ 14
+KEY 4 XEQ 15
 "GAM"
-KEY 6 XEQ 15
+KEY 5 XEQ 16
 KEY 7 GTO 01
 KEY 8 GTO 03
 KEY 9 GTO 00
@@ -188,17 +190,17 @@ GTO 02
 LBL 03            @@@@ Page 3 of menu UPROP
 CLMENU
 "SIN"
-KEY 1 XEQ 16
+KEY 1 XEQ 17
 "COS"
-KEY 2 XEQ 17
+KEY 2 XEQ 18
 "TAN"
-KEY 3 XEQ 18
+KEY 3 XEQ 19
 "ASIN"
-KEY 4 XEQ 19
+KEY 4 XEQ 20
 "ACOS"
-KEY 5 XEQ 20
+KEY 5 XEQ 21
 "ATAN"
-KEY 6 XEQ 21
+KEY 6 XEQ 22
 KEY 7 GTO 02
 KEY 8 GTO 04
 KEY 9 GTO 00
@@ -208,17 +210,17 @@ GTO 03
 LBL 04            @@@@ Page 4 of menu UPROP
 CLMENU
 "SINH"
-KEY 1 XEQ 22
+KEY 1 XEQ 23
 "COSH"
-KEY 2 XEQ 23
+KEY 2 XEQ 24
 "TANH"
-KEY 3 XEQ 24
+KEY 3 XEQ 25
 "ASINH"
-KEY 4 XEQ 25
+KEY 4 XEQ 26
 "ACOSH"
-KEY 5 XEQ 26
+KEY 5 XEQ 27
 "ATANH"
-KEY 6 XEQ 27
+KEY 6 XEQ 28
 KEY 7 GTO 03
 KEY 8 GTO 05
 KEY 9 GTO 00
@@ -230,11 +232,11 @@ CLMENU
 "I→VU"
 KEY 1 XEQ "UI→VU"
 "VU→I"
-KEY 2 XEQ 28
+KEY 2 XEQ 29
 "VU→%"
-KEY 4 XEQ 29
+KEY 4 XEQ 30
 "×U"
-KEY 6 XEQ 30
+KEY 6 XEQ 31
 KEY 7 GTO 04
 KEY 8 GTO 01
 KEY 9 GTO 00
@@ -264,10 +266,10 @@ FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "U÷"
 RTN
-LBL 10    @@@@ Action for menu key Y↑X
+LBL 10    @@@@ Action for menu key +/-
 FS? 64
 XEQ 98 @NM@ ?CPLX
-XEQ "UY↑X"
+XEQ "U+/-"
 RTN
 LBL 11    @@@@ Action for menu key 1/X
 FS? 64
@@ -284,92 +286,97 @@ FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "UE↑X"
 RTN
-LBL 14    @@@@ Action for menu key ABS
+LBL 14    @@@@ Action for menu key Y↑X
+FS? 64
+XEQ 98 @NM@ ?CPLX
+XEQ "UY↑X"
+RTN
+LBL 15    @@@@ Action for menu key ABS
 FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "UABS"
 RTN
-LBL 15    @@@@ Action for menu key GAM
+LBL 16    @@@@ Action for menu key GAM
 FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "UGAM"
 RTN
-LBL 16    @@@@ Action for menu key SIN
+LBL 17    @@@@ Action for menu key SIN
 FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "USIN"
 RTN
-LBL 17    @@@@ Action for menu key COS
+LBL 18    @@@@ Action for menu key COS
 FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "UCOS"
 RTN
-LBL 18    @@@@ Action for menu key TAN
+LBL 19    @@@@ Action for menu key TAN
 FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "UTAN"
 RTN
-LBL 19    @@@@ Action for menu key ASIN
+LBL 20    @@@@ Action for menu key ASIN
 FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "UASIN"
 RTN
-LBL 20    @@@@ Action for menu key ACOS
+LBL 21    @@@@ Action for menu key ACOS
 FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "UACOS"
 RTN
-LBL 21    @@@@ Action for menu key ATAN
+LBL 22    @@@@ Action for menu key ATAN
 FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "UATAN"
 RTN
-LBL 22    @@@@ Action for menu key SINH
+LBL 23    @@@@ Action for menu key SINH
 FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "USINH"
 RTN
-LBL 23    @@@@ Action for menu key COSH
+LBL 24    @@@@ Action for menu key COSH
 FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "UCOSH"
 RTN
-LBL 24    @@@@ Action for menu key TANH
+LBL 25    @@@@ Action for menu key TANH
 FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "UTANH"
 RTN
-LBL 25    @@@@ Action for menu key ASINH
+LBL 26    @@@@ Action for menu key ASINH
 FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "UASINH"
 RTN
-LBL 26    @@@@ Action for menu key ACOSH
+LBL 27    @@@@ Action for menu key ACOSH
 FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "UACOSH"
 RTN
-LBL 27    @@@@ Action for menu key ATANH
+LBL 28    @@@@ Action for menu key ATANH
 FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "UATANH"
 RTN
-LBL 28    @@@@ Action for menu key VU→I
+LBL 29    @@@@ Action for menu key VU→I
 FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "UVU→I"
 RTN
-LBL 29    @@@@ Action for menu key VU→%
+LBL 30    @@@@ Action for menu key VU→%
 FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "UVU→%"
 RTN
-LBL 30    @@@@ Action for menu key ×U
+LBL 31    @@@@ Action for menu key ×U
 FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "U×U"
 RTN
-@@@@ Free labels start at: 31
+@@@@ Free labels start at: 32
 #+end_src
 
 * Functions
@@ -520,6 +527,21 @@ ABS                  @@@@ TMP (Y↑X).v
 RCL× ST Y            @@@@ TMP (Y↑X).v
 ABS                  @@@@ (Y↑X).u (Y↑X).v
 COMPLEX              @@@@ Y↑X
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ IN:  X: X     Quantity & Uncertainty _or_ Exact Quantity
+@@@@ OUT: X: -X    Quantity & Uncertainty (Uncertainty is 0 when X is exact)
+LBL "U+/-"
+FUNC 11              @@@@ X
+L4STK
+XEQ 99 @NM@ R->C     @@@@ X
+COMPLEX              @@@@ X.u   X.v
+ABS                  @@@@ |X.u| X.v
+X<>Y                 @@@@ X.v   |X.u| 
++/-                  @@@@ -X.v  |X.u| 
+X<>Y                 @@@@ |X.u| X.v 
+COMPLEX              @@@@ -X
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

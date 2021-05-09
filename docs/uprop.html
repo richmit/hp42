@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-05-08 Sat 18:28 -->
+<!-- 2021-05-08 Sat 19:11 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Uncertainty Propagation</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-05-08 09:48:23</i></td>
+<td class="org-left"><i>2021-05-08 19:09:54</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,30 +241,30 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org0b054aa">1. Metadata</a></li>
+<li><a href="#orgaea9319">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
 <li><a href="#menu-uprop">3. Menu</a>
 <ul>
-<li><a href="#org6b5a64c">3.1. Notes</a>
+<li><a href="#org990a6be">3.1. Notes</a>
 <ul>
-<li><a href="#org74d17ed">3.1.1. <code>[SHIFT]</code> key magic for menus</a></li>
-<li><a href="#orgb965276">3.1.2. Global Labels</a></li>
-<li><a href="#orgdf1de15">3.1.3. <code>UI→VU</code> &amp; <code>UVU→I</code>: Intervals</a></li>
-<li><a href="#org63baa02">3.1.4. <code>UVU→%</code></a></li>
-<li><a href="#org3590f12">3.1.5. <code>UxU</code>: Multiply uncertainty</a></li>
+<li><a href="#org7b6b7cf">3.1.1. <code>[SHIFT]</code> key magic for menus</a></li>
+<li><a href="#org9daf53a">3.1.2. Global Labels</a></li>
+<li><a href="#orgece0cd2">3.1.3. <code>UI→VU</code> &amp; <code>UVU→I</code>: Intervals</a></li>
+<li><a href="#orge4bfe86">3.1.4. <code>UVU→%</code></a></li>
+<li><a href="#org6dc416b">3.1.5. <code>UxU</code>: Multiply uncertainty</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org1f7357e">4. Menu Code</a></li>
-<li><a href="#org7e9abfd">5. Functions</a></li>
-<li><a href="#org6bd0db6">6. EOF</a></li>
+<li><a href="#org5bc9872">4. Menu Code</a></li>
+<li><a href="#org9db404c">5. Functions</a></li>
+<li><a href="#orgb4a9c7c">6. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org0b054aa" class="outline-2">
-<h2 id="org0b054aa"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-orgaea9319" class="outline-2">
+<h2 id="orgaea9319"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/uprop.html">https://richmit.github.io/hp42/uprop.html</a>
@@ -330,7 +330,7 @@ U (a standard deviation).
 <div id="outline-container-menu-uprop" class="outline-2">
 <h2 id="menu-uprop"><span class="section-number-2">3</span> Menu</h2>
 <div class="outline-text-2" id="text-menu-uprop">
-<table id="org6b1e8ed" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="org97302ad" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -387,10 +387,10 @@ U (a standard deviation).
 </tr>
 
 <tr>
-<td class="org-left">Y↑X</td>
-<td class="org-left">UY↑X</td>
-<td class="org-left">Y.v^X.v</td>
-<td class="org-left">ABS(Y.v^X.v)*HYPOT(Y.u*X.v/Y.v, LN(Y.v)*X.u)</td>
+<td class="org-left">+/-</td>
+<td class="org-left">U+/-</td>
+<td class="org-left">-X.v</td>
+<td class="org-left">ABS(X.u)</td>
 <td class="org-left">&#xa0;</td>
 </tr>
 
@@ -420,10 +420,10 @@ U (a standard deviation).
 </tr>
 
 <tr>
-<td class="org-left">▒▒▒▒</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">Y↑X</td>
+<td class="org-left">UY↑X</td>
+<td class="org-left">Y.v^X.v</td>
+<td class="org-left">ABS(Y.v^X.v)*HYPOT(Y.u*X.v/Y.v, LN(Y.v)*X.u)</td>
 <td class="org-left">&#xa0;</td>
 </tr>
 
@@ -436,19 +436,19 @@ U (a standard deviation).
 </tr>
 
 <tr>
-<td class="org-left">▒▒▒▒</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
 <td class="org-left">GAM</td>
 <td class="org-left">UGAMMA</td>
 <td class="org-left">GAMMA(X.v)</td>
 <td class="org-left">ABS(DIGAMMA(X.v)*GAMMA(X.v)*X.u)</td>
 <td class="org-left">Requires <a href="sfun.html"><code>SFUN</code></a></td>
+</tr>
+
+<tr>
+<td class="org-left">▒▒▒▒</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 </tbody>
 <tbody>
@@ -601,12 +601,12 @@ U (a standard deviation).
 </table>
 </div>
 
-<div id="outline-container-org6b5a64c" class="outline-3">
-<h3 id="org6b5a64c"><span class="section-number-3">3.1</span> Notes</h3>
+<div id="outline-container-org990a6be" class="outline-3">
+<h3 id="org990a6be"><span class="section-number-3">3.1</span> Notes</h3>
 <div class="outline-text-3" id="text-3-1">
 </div>
-<div id="outline-container-org74d17ed" class="outline-4">
-<h4 id="org74d17ed"><span class="section-number-4">3.1.1</span> <code>[SHIFT]</code> key magic for menus</h4>
+<div id="outline-container-org7b6b7cf" class="outline-4">
+<h4 id="org7b6b7cf"><span class="section-number-4">3.1.1</span> <code>[SHIFT]</code> key magic for menus</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <p>
 Menu keys that can accept a value with uncertainty in the X position of the stack behave differently when used with the <code>[SHIFT]</code> key.  If the <code>[SHIFT]</code> key is
@@ -620,8 +620,8 @@ Note that <code>I→VU</code> doesn't take a value with uncertainty, and thus pr
 </div>
 </div>
 
-<div id="outline-container-orgb965276" class="outline-4">
-<h4 id="orgb965276"><span class="section-number-4">3.1.2</span> Global Labels</h4>
+<div id="outline-container-org9daf53a" class="outline-4">
+<h4 id="org9daf53a"><span class="section-number-4">3.1.2</span> Global Labels</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <p>
 The menu items correspond to global labels that you can <code>XEQ</code> them from other programs.  The names are the menu labels prefixed with "<code>U</code>" &#x2013; so "<code>SIN</code>"
@@ -630,8 +630,8 @@ becomes "<code>USIN</code>".
 </div>
 </div>
 
-<div id="outline-container-orgdf1de15" class="outline-4">
-<h4 id="orgdf1de15"><span class="section-number-4">3.1.3</span> <code>UI→VU</code> &amp; <code>UVU→I</code>: Intervals</h4>
+<div id="outline-container-orgece0cd2" class="outline-4">
+<h4 id="orgece0cd2"><span class="section-number-4">3.1.3</span> <code>UI→VU</code> &amp; <code>UVU→I</code>: Intervals</h4>
 <div class="outline-text-4" id="text-3-1-3">
 <p>
 These functions convert between intervals and quantity with uncertainty.  Intervals are specified by interval end points on levels X &amp; Y of the stack.  For
@@ -640,8 +640,8 @@ These functions convert between intervals and quantity with uncertainty.  Interv
 </div>
 </div>
 
-<div id="outline-container-org63baa02" class="outline-4">
-<h4 id="org63baa02"><span class="section-number-4">3.1.4</span> <code>UVU→%</code></h4>
+<div id="outline-container-orge4bfe86" class="outline-4">
+<h4 id="orge4bfe86"><span class="section-number-4">3.1.4</span> <code>UVU→%</code></h4>
 <div class="outline-text-4" id="text-3-1-4">
 <p>
 Given a quantity with uncertainty in X, it will return <code>T%</code> of the uncertainty.  This value is always positive.
@@ -649,8 +649,8 @@ Given a quantity with uncertainty in X, it will return <code>T%</code> of the un
 </div>
 </div>
 
-<div id="outline-container-org3590f12" class="outline-4">
-<h4 id="org3590f12"><span class="section-number-4">3.1.5</span> <code>UxU</code>: Multiply uncertainty</h4>
+<div id="outline-container-org6dc416b" class="outline-4">
+<h4 id="org6dc416b"><span class="section-number-4">3.1.5</span> <code>UxU</code>: Multiply uncertainty</h4>
 <div class="outline-text-4" id="text-3-1-5">
 <p>
 This is a quick way to multiply the uncertainty by a factor.  For example if you are using an expanded uncertainty value.
@@ -660,8 +660,8 @@ This is a quick way to multiply the uncertainty by a factor.  For example if you
 </div>
 </div>
 
-<div id="outline-container-org1f7357e" class="outline-2">
-<h2 id="org1f7357e"><span class="section-number-2">4</span> Menu Code</h2>
+<div id="outline-container-org5bc9872" class="outline-2">
+<h2 id="org5bc9872"><span class="section-number-2">4</span> Menu Code</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"UPROP"</span> 0 tbl 0 1 'stay 'up 
@@ -691,7 +691,7 @@ This is a quick way to multiply the uncertainty by a factor.  For example if you
 <span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 08
 <span style="color: #fa8072;">"&#247;"</span>
 <span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 09
-<span style="color: #fa8072;">"Y&#8593;X"</span>
+<span style="color: #fa8072;">"+/-"</span>
 <span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 10
 <span style="color: #fa8072;">"1/X"</span>
 <span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 11
@@ -707,10 +707,12 @@ This is a quick way to multiply the uncertainty by a factor.  For example if you
 <span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 12
 <span style="color: #fa8072;">"E&#8593;X"</span>
 <span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 13
+<span style="color: #fa8072;">"Y&#8593;X"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 14
 <span style="color: #fa8072;">"ABS"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 14
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 15
 <span style="color: #fa8072;">"GAM"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 15
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 16
 <span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 01
 <span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 03
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
@@ -720,17 +722,17 @@ This is a quick way to multiply the uncertainty by a factor.  For example if you
 <span style="color: #00ffff;">LBL</span> 03            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 3 of menu UPROP</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"SIN"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 16
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 17
 <span style="color: #fa8072;">"COS"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 17
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 18
 <span style="color: #fa8072;">"TAN"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 18
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 19
 <span style="color: #fa8072;">"ASIN"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 19
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 20
 <span style="color: #fa8072;">"ACOS"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 20
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 21
 <span style="color: #fa8072;">"ATAN"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 21
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 22
 <span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 02
 <span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 04
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
@@ -740,17 +742,17 @@ This is a quick way to multiply the uncertainty by a factor.  For example if you
 <span style="color: #00ffff;">LBL</span> 04            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 4 of menu UPROP</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"SINH"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 22
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 23
 <span style="color: #fa8072;">"COSH"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 23
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 24
 <span style="color: #fa8072;">"TANH"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 24
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 25
 <span style="color: #fa8072;">"ASINH"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 25
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 26
 <span style="color: #fa8072;">"ACOSH"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 26
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 27
 <span style="color: #fa8072;">"ATANH"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 27
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 28
 <span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 03
 <span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 05
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
@@ -762,11 +764,11 @@ This is a quick way to multiply the uncertainty by a factor.  For example if you
 <span style="color: #fa8072;">"I&#8594;VU"</span>
 <span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UI&#8594;VU"</span>
 <span style="color: #fa8072;">"VU&#8594;I"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 28
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 29
 <span style="color: #fa8072;">"VU&#8594;%"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 29
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 30
 <span style="color: #fa8072;">"&#215;U"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 30
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 31
 <span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 04
 <span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 01
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
@@ -796,10 +798,10 @@ This is a quick way to multiply the uncertainty by a factor.  For example if you
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"U&#247;"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 10    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key Y&#8593;X</span>
+<span style="color: #00ffff;">LBL</span> 10    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key +/-</span>
 <span style="color: #00ffff;">FS</span>? 64
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UY&#8593;X"</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"U+/-"</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 11    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key 1/X</span>
 <span style="color: #00ffff;">FS</span>? 64
@@ -816,99 +818,104 @@ This is a quick way to multiply the uncertainty by a factor.  For example if you
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UE&#8593;X"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 14    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ABS</span>
+<span style="color: #00ffff;">LBL</span> 14    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key Y&#8593;X</span>
+<span style="color: #00ffff;">FS</span>? 64
+<span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UY&#8593;X"</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> 15    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ABS</span>
 <span style="color: #00ffff;">FS</span>? 64
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UABS"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 15    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key GAM</span>
+<span style="color: #00ffff;">LBL</span> 16    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key GAM</span>
 <span style="color: #00ffff;">FS</span>? 64
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UGAM"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 16    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key SIN</span>
+<span style="color: #00ffff;">LBL</span> 17    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key SIN</span>
 <span style="color: #00ffff;">FS</span>? 64
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"USIN"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 17    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key COS</span>
+<span style="color: #00ffff;">LBL</span> 18    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key COS</span>
 <span style="color: #00ffff;">FS</span>? 64
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UCOS"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 18    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key TAN</span>
+<span style="color: #00ffff;">LBL</span> 19    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key TAN</span>
 <span style="color: #00ffff;">FS</span>? 64
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UTAN"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 19    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ASIN</span>
+<span style="color: #00ffff;">LBL</span> 20    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ASIN</span>
 <span style="color: #00ffff;">FS</span>? 64
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UASIN"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 20    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ACOS</span>
+<span style="color: #00ffff;">LBL</span> 21    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ACOS</span>
 <span style="color: #00ffff;">FS</span>? 64
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UACOS"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 21    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ATAN</span>
+<span style="color: #00ffff;">LBL</span> 22    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ATAN</span>
 <span style="color: #00ffff;">FS</span>? 64
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UATAN"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 22    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key SINH</span>
+<span style="color: #00ffff;">LBL</span> 23    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key SINH</span>
 <span style="color: #00ffff;">FS</span>? 64
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"USINH"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 23    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key COSH</span>
+<span style="color: #00ffff;">LBL</span> 24    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key COSH</span>
 <span style="color: #00ffff;">FS</span>? 64
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UCOSH"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 24    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key TANH</span>
+<span style="color: #00ffff;">LBL</span> 25    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key TANH</span>
 <span style="color: #00ffff;">FS</span>? 64
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UTANH"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 25    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ASINH</span>
+<span style="color: #00ffff;">LBL</span> 26    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ASINH</span>
 <span style="color: #00ffff;">FS</span>? 64
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UASINH"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 26    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ACOSH</span>
+<span style="color: #00ffff;">LBL</span> 27    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ACOSH</span>
 <span style="color: #00ffff;">FS</span>? 64
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UACOSH"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 27    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ATANH</span>
+<span style="color: #00ffff;">LBL</span> 28    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ATANH</span>
 <span style="color: #00ffff;">FS</span>? 64
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UATANH"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 28    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key VU&#8594;I</span>
+<span style="color: #00ffff;">LBL</span> 29    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key VU&#8594;I</span>
 <span style="color: #00ffff;">FS</span>? 64
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UVU&#8594;I"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 29    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key VU&#8594;%</span>
+<span style="color: #00ffff;">LBL</span> 30    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key VU&#8594;%</span>
 <span style="color: #00ffff;">FS</span>? 64
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"UVU&#8594;%"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 30    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#215;U</span>
+<span style="color: #00ffff;">LBL</span> 31    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#215;U</span>
 <span style="color: #00ffff;">FS</span>? 64
 <span style="color: #00ffff;">XEQ</span> 98 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">?CPLX</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"U&#215;U"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Free labels start at: 31</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Free labels start at: 32</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org7e9abfd" class="outline-2">
-<h2 id="org7e9abfd"><span class="section-number-2">5</span> Functions</h2>
+<div id="outline-container-org9db404c" class="outline-2">
+<h2 id="org9db404c"><span class="section-number-2">5</span> Functions</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -1056,6 +1063,21 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 <span style="color: #00ffff;">RCL&#215; ST</span> Y            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TMP (Y&#8593;X).v</span>
 <span style="color: #00ffff;">ABS</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(Y&#8593;X).u (Y&#8593;X).v</span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y&#8593;X</span>
+<span style="color: #00ffff;">RTN</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: X     Quantity &amp; Uncertainty _or_ Exact Quantity</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: -X    Quantity &amp; Uncertainty (Uncertainty is 0 when X is exact)</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"U+/-"</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X</span>
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">XEQ</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">R-&gt;C     @@@@ X</span>
+<span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u   X.v</span>
+<span style="color: #00ffff;">ABS</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">|X.u| X.v</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v   |X.u| </span>
+<span style="color: #00ffff;">+/-</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">-X.v  |X.u| </span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">|X.u| X.v </span>
+<span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">-X</span>
 <span style="color: #00ffff;">RTN</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -1479,8 +1501,8 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 </div>
 </div>
 
-<div id="outline-container-org6bd0db6" class="outline-2">
-<h2 id="org6bd0db6"><span class="section-number-2">6</span> EOF</h2>
+<div id="outline-container-orgb4a9c7c" class="outline-2">
+<h2 id="orgb4a9c7c"><span class="section-number-2">6</span> EOF</h2>
 <div class="outline-text-2" id="text-6">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1491,7 +1513,7 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-08 Sat 18:28 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-08 Sat 19:11 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
 </div>
 </body>
 </html>

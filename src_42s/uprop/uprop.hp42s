@@ -29,7 +29,7 @@ KEY 2 XEQ 13
 KEY 3 XEQ 14
 "ABS"
 KEY 4 XEQ 15
-"GAM"
+"GAMMA"
 KEY 5 XEQ 16
 KEY 7 GTO 01
 KEY 8 GTO 03
@@ -149,7 +149,7 @@ RTN
 LBL 16
 FS? 64
 XEQ 98 @NM@ ?CPLX
-XEQ "UGAM"
+XEQ "UGAMMA"
 RTN
 LBL 17
 FS? 64
@@ -281,14 +281,10 @@ Rv
 LSTO "_Xv"
 ×
 RCL "_Xu"
-RCL÷ "_Xv"
-RCL "_Yu"
-RCL÷ "_Yv"
+RCL× "_Yv"
+RCL "_Xv"
+RCL× "_Yu"
 COMPLEX
-ABS
-RCL ST Y
-ABS
-×
 ABS
 COMPLEX
 RTN
@@ -309,15 +305,13 @@ Rv
 LSTO "_Xv"
 ÷
 RCL "_Xu"
-RCL÷ "_Xv"
-RCL "_Yu"
-RCL÷ "_Yv"
+RCL× "_Yv"
+RCL "_Xv"
+RCL× "_Yu"
 COMPLEX
 ABS
-RCL ST Y
-ABS
-×
-ABS
+RCL÷ "_Xv"
+RCL÷ "_Xv"
 COMPLEX
 RTN
 LBL "UY↑X"
@@ -363,10 +357,14 @@ LBL "U1/X"
 FUNC 11
 L4STK
 XEQ 99 @NM@ R->C
-1
-XEQ 99 @NM@ R->C
+COMPLEX
+ABS
 X<>Y
-XEQ "U÷"
+1/X
+X<>Y
+RCL× ST Y
+RCL× ST Y
+COMPLEX
 RTN
 LBL "UABS"
 FUNC 11

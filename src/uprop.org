@@ -68,16 +68,16 @@ U (a standard deviation).
 |-------+--------+------------+----------------------------------------------+-----------------|
 | +     | U+     | Y.v+X.v    | HYPOT(X.u, Y.u)                              |                 |
 | -     | U-     | Y.v-X.v    | HYPOT(X.u, Y.u)                              |                 |
-| ×     | U×     | Y.v*X.v    | ABS(X.v*Y.v)*HYPOT(X.u/X.v, Y.u/Y.v)         |                 |
-| ÷     | U÷     | Y.v/X.v    | ABS(X.v/Y.v)*HYPOT(X.u/X.v, Y.u/Y.v)         |                 |
+| ×     | U×     | Y.v*X.v    | HYPOT(X.u*Y.v, X.v*Y.u)                      |                 |
+| ÷     | U÷     | Y.v/X.v    | HYPOT(X.u*Y.v, X.v*Y.u)/X.v^2                |                 |
 | +/-   | U+/-   | -X.v       | ABS(X.u)                                     |                 |
-| 1/X   | U1/X   | 1/X.v      | ABS(X.u)                                     |                 |
+| 1/X   | U1/X   | 1/X.v      | ABS(X.u)/X.v^2                               |                 |
 |-------+--------+------------+----------------------------------------------+-----------------|
 | LN    | ULN    | LN(X.v)    | ABS(X.u/X.v)                                 |                 |
 | E↑X   | UE↑X   | EXP(X.v)   | EXP(X.v)*ABS(X.u*X.v)                        |                 |
 | Y↑X   | UY↑X   | Y.v^X.v    | ABS(Y.v^X.v)*HYPOT(Y.u*X.v/Y.v, LN(Y.v)*X.u) |                 |
 | ABS   | UABS   | ABS(X.v)   | ABS(X.u)                                     |                 |
-| GAM   | UGAMMA | GAMMA(X.v) | ABS(DIGAMMA(X.v)*GAMMA(X.v)*X.u)             | Requires [[file:sfun.org][=SFUN=]] |
+| GAMMA | UGAMMA | GAMMA(X.v) | ABS(DIGAMMA(X.v)*GAMMA(X.v)*X.u)             | Requires [[file:sfun.org][=SFUN=]] |
 | ▒▒▒▒  |        |            |                                              |                 |
 |-------+--------+------------+----------------------------------------------+-----------------|
 | SIN   | USIN   | SIN(X.v)   | ABS(COS(X.v)*X.u)                            |                 |
@@ -179,7 +179,7 @@ KEY 2 XEQ 13
 KEY 3 XEQ 14
 "ABS"
 KEY 4 XEQ 15
-"GAM"
+"GAMMA"
 KEY 5 XEQ 16
 KEY 7 GTO 01
 KEY 8 GTO 03
@@ -296,10 +296,10 @@ FS? 64
 XEQ 98 @NM@ ?CPLX
 XEQ "UABS"
 RTN
-LBL 16    @@@@ Action for menu key GAM
+LBL 16    @@@@ Action for menu key GAMMA
 FS? 64
 XEQ 98 @NM@ ?CPLX
-XEQ "UGAM"
+XEQ "UGAMMA"
 RTN
 LBL 17    @@@@ Action for menu key SIN
 FS? 64
@@ -451,14 +451,10 @@ Rv                   @@@@ X.v Y.v
 LSTO "_Xv"           @@@@ X.v Y.v
 ×                    @@@@ (YX).v
 RCL "_Xu"            @@@@ Xu (YX).v
-RCL÷ "_Xv"           @@@@ Xu/Xv (YX).v
-RCL "_Yu"            @@@@ Yu Xu/Xv (YX).v
-RCL÷ "_Yv"           @@@@ Yu/Yv Xu/Xv (YX).v
+RCL× "_Yv"           @@@@ Xu*Yv (YX).v
+RCL "_Xv"            @@@@ Yu Xu*Yv (YX).v
+RCL× "_Yu"           @@@@ Xv*Yu Xu*Yv (YX).v
 COMPLEX              @@@@ TMP (YX).v
-ABS                  @@@@ TMP (YX).v
-RCL ST Y             @@@@ (YX).v TMP (YX).v
-ABS                  @@@@ TMP TMP (YX).v
-×                    @@@@ TMP (YX).v
 ABS                  @@@@ (YX).u (YX).v
 COMPLEX              @@@@ YX
 RTN
@@ -483,16 +479,14 @@ LSTO "_Xu"           @@@@ X.u X.v Y.v
 Rv                   @@@@ X.v Y.v
 LSTO "_Xv"           @@@@ X.v Y.v
 ÷                    @@@@ (Y/X).v
-RCL "_Xu"            @@@@ Xu (Y/X).v
-RCL÷ "_Xv"           @@@@ Xu/Xv (Y/X).v
-RCL "_Yu"            @@@@ Yu Xu/Xv (Y/X).v
-RCL÷ "_Yv"           @@@@ Yu/Yv Xu/Xv (Y/X).v
-COMPLEX              @@@@ TMP (Y/X).v
-ABS                  @@@@ TMP (Y/X).v
-RCL ST Y             @@@@ (Y/X).v TMP (Y/X).v
-ABS                  @@@@ TMP TMP (Y/X).v
-×                    @@@@ TMP (Y/X).v
-ABS                  @@@@ (Y/X).u (Y/X).v
+RCL "_Xu"            @@@@ Xu (YX).v
+RCL× "_Yv"           @@@@ Xu*Yv (YX).v
+RCL "_Xv"            @@@@ Yu Xu*Yv (YX).v
+RCL× "_Yu"           @@@@ Xv*Yu Xu*Yv (YX).v
+COMPLEX              @@@@ TMP (YX).v
+ABS                  @@@@ TMP (YX).v
+RCL÷ "_Xv"           @@@@ TMP (YX).v
+RCL÷ "_Xv"           @@@@ (YX).u (YX).v
 COMPLEX              @@@@ Y/X
 RTN    
 
@@ -551,10 +545,14 @@ LBL "U1/X"
 FUNC 11              @@@@ X
 L4STK
 XEQ 99 @NM@ R->C     @@@@ X
-1                    @@@@ 1 X
-XEQ 99 @NM@ R->C     @@@@ 1 X
-X<>Y                 @@@@ X 1
-XEQ "U÷"             @@@@ 1/X
+COMPLEX              @@@@ X.u     X.v
+ABS                  @@@@ |X.u|   X.v
+X<>Y                 @@@@ X.v     |X.u| 
+1/X                  @@@@ (1/X).v |X.u| 
+X<>Y                 @@@@ |X.u|   (1/X).v 
+RCL× ST Y            @@@@ TMP     (1/X).v 
+RCL× ST Y            @@@@ (1/X).u (1/X).v 
+COMPLEX              @@@@ (1/X)
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

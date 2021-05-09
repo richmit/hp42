@@ -2,6 +2,11 @@
 
 # I keep a copy of the raw files on my OneDrive so I can easily pull them into free42 on my tablet and phone.
 
+
+echo "Contents of OneDrive:"
+ls -lGh ~/winHome/OneDrive/Downloads/42s/ | grep -v 'total' | sed 's/^.*richmit /        /'
+echo ""
+
 if [ -e bin -a -e src_42s ]; then
   if [ -e bin/ALL.raw ]; then
     if [ $(find src_42s -name '*.hp42s' -a -newer bin/ALL.raw | wc -l) -gt 0 ]; then
@@ -11,12 +16,19 @@ if [ -e bin -a -e src_42s ]; then
       echo "Newer Source Files"
       find src_42s -name '*.hp42s' -a -newer bin/ALL.raw | sed 's/^/        /'
       echo ""
-      echo "Preforming Update.."
+      echo "Checking RAW files.."
       echo ""
     fi
-    cp bin/ALL.raw ~/winHome/OneDrive/Downloads/42s/
-    cp bin/*/*.raw ~/winHome/OneDrive/Downloads/42s/
-
+    for f in bin/ALL.raw bin/*/*.raw; do
+      fb=$(basename $f)
+      if diff -b $f ~/winHome/OneDrive/Downloads/42s/$fb 2>/dev/null >/dev/null; then
+        true
+      else
+        echo Updateing ~/winHome/OneDrive/Downloads/42s/$fb
+        cp $f ~/winHome/OneDrive/Downloads/42s/$fb
+      fi
+    done
+    echo ""
     echo "Contents of OneDrive:"
     ls -lGh ~/winHome/OneDrive/Downloads/42s/ | grep -v 'total' | sed 's/^.*richmit /        /'
   else

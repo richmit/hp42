@@ -19,7 +19,7 @@ if [ -e bin -a -e src_42s ]; then
       echo "Checking RAW files.."
       echo ""
     fi
-    UPDATED_COUNT='FALSE'
+    ANY_UPDATED='FALSE'
     for f in bin/ALL.raw bin/*/*.raw; do
       fb=$(basename $f)
       if diff -b $f ~/winHome/OneDrive/Downloads/42s/$fb 2>/dev/null >/dev/null; then
@@ -30,7 +30,7 @@ if [ -e bin -a -e src_42s ]; then
         ANY_UPDATED='TRUE'
       fi
     done
-    if [ "$UPDATED_COUNT" = "TRUE" ]; then
+    if [ "$ANY_UPDATED" = "TRUE" ]; then
     echo ""
       echo "Contents of OneDrive:"
       ls -lGh ~/winHome/OneDrive/Downloads/42s/ | grep -v 'total' | sed 's/^.*richmit /        /'

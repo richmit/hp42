@@ -69,31 +69,16 @@ This is a collection of programs that work with =MVAR=-type programs (equations)
 |--------+--------+-------+------------------------------------------------------------------|
 | SPT    | FSPT   | SPT   | Interactive application for computing Sums, Products, and Tables |
 | LBL 99 | FPLT   | PLOT  | Interactive application for plotting a function (DM42 Specific)  |
-| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
-| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
-| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
-| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
-|--------+--------+-------+------------------------------------------------------------------|
-| EVAL   | FEVL   | EVAL  | Evaluate EqV on X                                                |
-| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
 | SOLVE  | FSLV   | SOLVE | Solve EqP for EqV in [LLIM, ULIM]                                |
 | INTG   | FINT   | INTG  | Integrate EqP for EqV in [LLIM, ULIM]                            |
-| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
 | SUM    | FSUM   | SUM   | Sum EqP for values of EqV from LLIM to ULIM stepping by STEP     |
 | PROD   | FPRD   | PROD  | Product EqP for values of EqV from LLIM to ULIM stepping by STEP |
 |--------+--------+-------+------------------------------------------------------------------|
+| EVAL   | FEVL   | EVAL  | Evaluate EqV on X                                                |
 | PICF   |        | PICF  | Interactive application to select and describe an =MVAR= program |
-| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
 | FVARM  |        | FVARM | MVAR program with all the global variables for these apps        |
-| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
-| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
-| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
-|--------+--------+-------+------------------------------------------------------------------|
 | FUN    | LBL 98 | FUN   | Store/Recall Current wrapped simple function                     |
 | X      | LBL 97 | X     | Store/Recall current value of "X"                                |
-| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
-| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
-| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
 | SFWRP  |        | SFWRP | Evaluate currently wrapped simple function                       |
 |--------+--------+-------+------------------------------------------------------------------|
 
@@ -183,7 +168,15 @@ CLMENU
 KEY 1 XEQ "FSPT"
 XEQ 99
 KEY 2 XEQ "FPLT"
-KEY 7 GTO 05
+"SOLVE"
+KEY 3 XEQ "FSLV"
+"INTG"
+KEY 4 XEQ "FINT"
+"SUM"
+KEY 5 XEQ "FSUM"
+"PROD"
+KEY 6 XEQ "FPRD"
+KEY 7 GTO 02
 KEY 8 GTO 02
 KEY 9 GTO 00
 MENU
@@ -193,58 +186,26 @@ LBL 02            @@@@ Page 2 of menu FMENU
 CLMENU
 "EVAL"
 KEY 1 XEQ "FEVL"
-"SOLVE"
-KEY 3 XEQ "FSLV"
-"INTG"
-KEY 4 XEQ "FINT"
-"SUM"
-KEY 6 XEQ "FSUM"
-KEY 7 GTO 01
-KEY 8 GTO 03
-KEY 9 GTO 00
-MENU
-STOP
-GTO 02
-LBL 03            @@@@ Page 3 of menu FMENU
-CLMENU
-"PROD"
-KEY 1 XEQ "FPRD"
 "PICF"
 KEY 2 XEQ "PICF"
 "FVARM"
-KEY 4 XEQ "FVARM"
-KEY 7 GTO 02
-KEY 8 GTO 04
-KEY 9 GTO 00
-MENU
-STOP
-GTO 03
-LBL 04            @@@@ Page 4 of menu FMENU
-CLMENU
+KEY 3 XEQ "FVARM"
 "FUN"
-KEY 2 XEQ 98
+KEY 4 XEQ 98
 "X"
-KEY 3 XEQ 97
-KEY 7 GTO 03
-KEY 8 GTO 05
-KEY 9 GTO 00
-MENU
-STOP
-GTO 04
-LBL 05            @@@@ Page 5 of menu FMENU
-CLMENU
+KEY 5 XEQ 97
 "SFWRP"
-KEY 1 XEQ "SFWRP"
-KEY 7 GTO 04
+KEY 6 XEQ "SFWRP"
+KEY 7 GTO 01
 KEY 8 GTO 01
 KEY 9 GTO 00
 MENU
 STOP
-GTO 05
+GTO 02
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-@@@@ Free labels start at: 6
+@@@@ Free labels start at: 3
 #+end_src
 
 ** Functions

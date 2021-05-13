@@ -65,22 +65,31 @@ This is a collection of programs that work with =MVAR=-type programs (equations)
 
 #+ATTR_HTML: :align center :frame box :rules all
 #+NAME:FMENU
-| MSTR   | LBL    | Menu  | Description                                                      |
-|--------+--------+-------+------------------------------------------------------------------|
-| SPT    | FSPT   | SPT   | Interactive application for computing Sums, Products, and Tables |
-| LBL 99 | FPLT   | PLOT  | Interactive application for plotting a function (DM42 Specific)  |
-| SOLVE  | FSLV   | SOLVE | Solve EqP for EqV in [LLIM, ULIM]                                |
-| INTG   | FINT   | INTG  | Integrate EqP for EqV in [LLIM, ULIM]                            |
-| SUM    | FSUM   | SUM   | Sum EqP for values of EqV from LLIM to ULIM stepping by STEP     |
-| PROD   | FPRD   | PROD  | Product EqP for values of EqV from LLIM to ULIM stepping by STEP |
-|--------+--------+-------+------------------------------------------------------------------|
-| EVAL   | FEVL   | EVAL  | Evaluate EqV on X                                                |
-| PICF   |        | PICF  | Interactive application to select and describe an =MVAR= program |
-| FVARM  |        | FVARM | MVAR program with all the global variables for these apps        |
-| FUN    | LBL 98 | FUN   | Store/Recall Current wrapped simple function                     |
-| X      | LBL 97 | X     | Store/Recall current value of "X"                                |
-| SFWRP  |        | SFWRP | Evaluate currently wrapped simple function                       |
-|--------+--------+-------+------------------------------------------------------------------|
+| MSTR       | LBL    | Menu       | Description                                                      |
+|------------+--------+------------+------------------------------------------------------------------|
+| SPT        | FSPT   | SPT        | Interactive application for computing Sums, Products, and Tables |
+| LBL 99     | FPLT   | PLOT       | Interactive application for plotting a function (DM42 Specific)  |
+| COMP:SOLVE | FSLV   | COMP:SOLVE | Solve EqP for EqV in [LLIM, ULIM]                                |
+| COMP:INTG  | FINT   | COMP:INTG  | Integrate EqP for EqV in [LLIM, ULIM]                            |
+| COMP:SUM   | FSUM   | COMP:SUM   | Sum EqP for values of EqV from LLIM to ULIM stepping by STEP     |
+| COMP:PROD  | FPRD   | COMP:PROD  | Product EqP for values of EqV from LLIM to ULIM stepping by STEP |
+| COMP:EVAL  | FEVL   | COMP:EVAL  | Evaluate EqV on X                                                |
+| COMP:▒▒▒▒  |        | COMP:▒▒▒▒  |                                                                  |
+| COMP:PICF  |        | COMP:PICF  | Interactive application to select and describe an =MVAR= program |
+| COMP:▒▒▒▒  |        | COMP:▒▒▒▒  |                                                                  |
+| COMP:▒▒▒▒  |        | COMP:▒▒▒▒  |                                                                  |
+| COMP:X     | LBL 97 | COMP:X     | Store/Recall current value of "X"                                |
+| COMP:▒▒▒▒  |        | COMP:▒▒▒▒  |                                                                  |
+| COMP:EVAL  | FEVL   | COMP:EVAL  | Evaluate EqV on X                                                |
+| WRAP:PICF  |        | WRAP:PICF  | Interactive application to select and describe an =MVAR= program |
+| WRAP:▒▒▒▒  |        | WRAP:▒▒▒▒  |                                                                  |
+| WRAP:SFUN  | LBL 98 | WRAP:FUN   | Store/Recall Current wrapped simple function                     |
+| WRAP:X     | LBL 97 | WRAP:X     | Store/Recall current value of "X"                                |
+| WRAP:▒▒▒▒  |        | WRAP:▒▒▒▒  |                                                                  |
+| WRAP:SEVAL | SFWRP  | WRAP:SFWRP | Evaluate currently wrapped simple function                       |
+| PICF       |        | PICF       | Interactive application to select and describe an =MVAR= program |
+| FVARM      |        | FVARM      | MVAR program with all the global variables for these apps        |
+|------------+--------+------------+------------------------------------------------------------------|
 
 ** Notes Regarding Some Individual Programs
 
@@ -168,44 +177,68 @@ CLMENU
 KEY 1 XEQ "FSPT"
 XEQ 99
 KEY 2 XEQ "FPLT"
-"SOLVE"
-KEY 3 XEQ "FSLV"
-"INTG"
-KEY 4 XEQ "FINT"
-"SUM"
-KEY 5 XEQ "FSUM"
-"PROD"
-KEY 6 XEQ "FPRD"
-KEY 7 GTO 02
-KEY 8 GTO 02
+"COMP"
+KEY 3 GTO 02
+"WRAP"
+KEY 4 GTO 03
+"PICF"
+KEY 5 XEQ "PICF"
+"FVARM"
+KEY 6 XEQ "FVARM"
 KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02            @@@@ Page 2 of menu FMENU
+LBL 02            @@@@ Page 1 of menu COMP
 CLMENU
+"SOLVE"
+KEY 1 XEQ "FSLV"
+"INTG"
+KEY 2 XEQ "FINT"
+"SUM"
+KEY 3 XEQ "FSUM"
+"PROD"
+KEY 4 XEQ "FPRD"
 "EVAL"
-KEY 1 XEQ "FEVL"
-"PICF"
-KEY 2 XEQ "PICF"
-"FVARM"
-KEY 3 XEQ "FVARM"
-"FUN"
-KEY 4 XEQ 98
-"X"
-KEY 5 XEQ 97
-"SFWRP"
-KEY 6 XEQ "SFWRP"
-KEY 7 GTO 01
-KEY 8 GTO 01
-KEY 9 GTO 00
+KEY 5 XEQ "FEVL"
+KEY 7 GTO 04
+KEY 8 GTO 04
+KEY 9 GTO 01
 MENU
 STOP
 GTO 02
+LBL 04            @@@@ Page 2 of menu COMP
+CLMENU
+"PICF"
+KEY 1 XEQ "PICF"
+"X"
+KEY 4 XEQ 97
+"EVAL"
+KEY 6 XEQ "FEVL"
+KEY 7 GTO 02
+KEY 8 GTO 02
+KEY 9 GTO 01
+MENU
+STOP
+GTO 04
+LBL 03            @@@@ Page 1 of menu WRAP
+CLMENU
+"PICF"
+KEY 1 XEQ "PICF"
+"SFUN"
+KEY 3 XEQ 98
+"X"
+KEY 4 XEQ 97
+"SEVAL"
+KEY 6 XEQ "SFWRP"
+KEY 9 GTO 01
+MENU
+STOP
+GTO 03
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-@@@@ Free labels start at: 3
+@@@@ Free labels start at: 5
 #+end_src
 
 ** Functions

@@ -19,13 +19,32 @@
 #+HTML_LINK_HOME: https://www.mitchr.me/
 #+HTML_LINK_UP: https://richmit.github.io/hp42/
 #+EXPORT_FILE_NAME: ../docs/uprop
+#+LATEX_HEADER: \usepackage{extsizes} 
 #+LATEX_HEADER: \usepackage[margin=0.5in]{geometry}
+#+LATEX_HEADER: \usepackage{mathabx}
+#+LATEX_HEADER: \usepackage{boisik}
 #+LATEX_CLASS_OPTIONS: [letterpaper, 8pt]
+#+LATEX_HEADER: \usepackage[utf8]{inputenc}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{028F}{\textsc{Y}}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{03A3}{$\Sigma$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{03BC}{$\mu$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{03C0}{\pi}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{1D07}{$\bagmember$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{21B5}{$\dlsh$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{221A}{\makebox[.5em]{$\sqrt{}$}}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2221}{$\measuredangle$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{222B}{$\int$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2260}{$\neq$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2264}{$\leq$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2265}{$\geq$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{251C}{$\vdash$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2592}{$\square$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{25B8}{$\blacktriangleright$}
 
 #+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
-|          <r> | <l>                                          |
-|    *Author:* | /{{{author}}}/                               |
-|   *Updated:* | /{{{modification-time(%Y-%m-%d %H:%M:%S)}}}/ |
+|        <r> | <l>                                          |
+|  *Author:* | /{{{author}}}/                               |
+| *Updated:* | /{{{modification-time(%Y-%m-%d %H:%M:%S)}}}/ |
 #+ATTR_HTML: :align center
 Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 
@@ -40,6 +59,8 @@ Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 * Metadata
 
 The home for this HTML file is: https://richmit.github.io/hp42/uprop.html
+
+A PDF version of this file may be found here: https://richmit.github.io/hp42/uprop.pdf
 
 Files related to this document may be found on github: https://github.com/richmit/hp42
 
@@ -385,7 +406,7 @@ RTN
 * Functions
 
 #+begin_src hp42s :eval never :tangle ../src_42s/uprop/uprop.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UPLUS)
 @@@@ IN:  Y: Y   Quantity & Uncertainty _or_ Exact Quantity
 @@@@      X: X   Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: Y+X Quantity & Uncertainty (Uncertainty is 0 when X & Y are exact)
@@ -409,7 +430,7 @@ X<>Y                 @@@@ (X+Y).u (X+Y).v ? (X+Y).v
 COMPLEX              @@@@ X+Y
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UMINUS)
 @@@@ IN:  Y: Y   Quantity & Uncertainty _or_ Exact Quantity
 @@@@      X: X   Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: Y-X Quantity & Uncertainty (Uncertainty is 0 when X & Y are exact)
@@ -433,7 +454,7 @@ X<>Y                 @@@@ (X-Y).u (X-Y).v ? (X-Y).v
 COMPLEX              @@@@ X-Y
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UMULT)
 @@@@ IN:  Y: Y   Quantity & Uncertainty _or_ Exact Quantity
 @@@@      X: X   Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: Y×X Quantity & Uncertainty (Uncertainty is 0 when X & Y are exact)
@@ -462,7 +483,7 @@ ABS                  @@@@ (YX).u (YX).v
 COMPLEX              @@@@ YX
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UDIV)
 @@@@ IN:  Y: Y   Quantity & Uncertainty _or_ Exact Quantity
 @@@@      X: X   Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: Y÷X Quantity & Uncertainty (Uncertainty is 0 when X & Y are exact)
@@ -493,7 +514,7 @@ RCL÷ "_Xv"           @@@@ (YX).u (YX).v
 COMPLEX              @@@@ Y/X
 RTN    
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UPOW)
 @@@@ IN:  Y: Y   Quantity & Uncertainty _or_ Exact Quantity
 @@@@      X: X   Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: Y↑X Quantity & Uncertainty (Uncertainty is 0 when X & Y are exact)
@@ -526,7 +547,7 @@ ABS                  @@@@ (Y↑X).u (Y↑X).v
 COMPLEX              @@@@ Y↑X
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UNEG)
 @@@@ IN:  X: X     Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: -X    Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "U+/-"
@@ -541,7 +562,7 @@ X<>Y                 @@@@ |X.u| X.v
 COMPLEX              @@@@ -X
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UINV)
 @@@@ IN:  X: X      Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: 1/X    Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "U1/X"
@@ -558,7 +579,7 @@ RCL× ST Y            @@@@ (1/X).u (1/X).v
 COMPLEX              @@@@ (1/X)
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UABS)
 @@@@ IN:  X: X      Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: ABS(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UABS"
@@ -573,7 +594,7 @@ X<>Y                 @@@@ |X.u| |X.v|
 COMPLEX              @@@@ ABS(X)
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ULN)
 @@@@ IN:  X: X      Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: ln(X)  Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "ULN"
@@ -590,7 +611,7 @@ X<>Y                 @@@@ ln(X).u ln(X).v
 COMPLEX              @@@@ ln(X)
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UEXP)
 @@@@ IN:  X: X      Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: E↑X    Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UE↑X"
@@ -606,7 +627,7 @@ ABS                  @@@@ exp(X).u exp(X).v
 COMPLEX              @@@@ exp(X)
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:USIN)
 @@@@ IN:  X: X      Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: SIN(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "USIN"
@@ -624,7 +645,7 @@ X<>Y                 @@@@ SIN(X).u SIN(X).v
 COMPLEX              @@@@ SIN(X)
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UCOS)
 @@@@ IN:  X: X      Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: COS(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UCOS"
@@ -642,7 +663,7 @@ X<>Y                 @@@@ COS(X).u COS(X).v
 COMPLEX              @@@@ COS(X)
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UTAN)
 @@@@ IN:  X: X      Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: TAN(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UTAN"
@@ -662,7 +683,7 @@ X<>Y                 @@@@ tan(X).u tan(X).v
 COMPLEX              @@@@ tan(X)
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UASIN)
 @@@@ IN:  X: X       Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: ASIN(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UASIN"
@@ -683,7 +704,7 @@ X<>Y                 @@@@ ASIN(X).u ASIN(X).v
 COMPLEX              @@@@ ASIN(X)
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UACOS)
 @@@@ IN:  X: X       Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: ACOS(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UACOS"
@@ -704,7 +725,7 @@ X<>Y                 @@@@ ACOS(X).u ACOS(X).v
 COMPLEX              @@@@ ACOS(X)
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UATAN)
 @@@@ IN:  X: X       Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: ATAN(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UATAN"
@@ -724,7 +745,7 @@ X<>Y                 @@@@ ATAN(X).u ATAN(X).v
 COMPLEX              @@@@ ATAN(X)
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:USINH)
 @@@@ IN:  X: X        Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: SINH(X)  Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "USINH"
@@ -742,7 +763,7 @@ X<>Y                 @@@@ SINH(X).u SINH(X).v
 COMPLEX              @@@@ SINH(X)
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UCOSH)
 @@@@ IN:  X: X        Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: COSH(X)  Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UCOSH"
@@ -760,7 +781,7 @@ X<>Y                 @@@@ COSH(X).u COSH(X).v
 COMPLEX              @@@@ COSH(X)
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UTANH)
 @@@@ IN:  X: X        Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: TANH(X)  Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UTANH"
@@ -780,7 +801,7 @@ X<>Y                 @@@@ tanh(X).u tanh(X).v
 COMPLEX              @@@@ tanh(X)
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UASINH)
 @@@@ IN:  X: X        Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: ASINH(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UASINH"
@@ -801,7 +822,7 @@ X<>Y                 @@@@ ASINH(X).u ASINH(X).v
 COMPLEX              @@@@ ASINH(X)
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UACOSH)
 @@@@ IN:  X: X        Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: ACOSH(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UACOSH"
@@ -822,7 +843,7 @@ X<>Y                 @@@@ ACOSH(X).u ACOSH(X).v
 COMPLEX              @@@@ ACOSH(X)
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UATANH)
 @@@@ IN:  X: X        Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: ATANH(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UATANH"
@@ -842,7 +863,7 @@ X<>Y                 @@@@ ATANH(X).u ATANH(X).v
 COMPLEX              @@@@ ATANH(X)
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UGAMMA)
 @@@@ IN:  X: X        Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT: X: GAMMA(X) Quantity & Uncertainty (Uncertainty is 0 when X is exact)
 LBL "UGAMMA"
@@ -861,7 +882,7 @@ ABS                  @@@@ GAMMA(X).u GAMMA(X).v
 COMPLEX              @@@@ GAMMA(X)
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UI2UV)
 @@@@ DSC: Convert interval to center+uncertanty
 @@@@ IN:  Y: Interval endpoint
 @@@@      X: Interval endpoint
@@ -884,7 +905,7 @@ ABS      @@@@ |P2-P1| C     P1 P1
 COMPLEX  @@@@ V+iU    C     P1 P1
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UUV2I)
 @@@@ DSC: center+uncertanty to interval
 @@@@ IN:  X: X Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT  Y: Interval left point
@@ -904,7 +925,7 @@ RCL ST Z          @@@@ X.u     X.v     MIN     X.u
 +                 @@@@ MAX     MIN     X.u     X.u
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UV2PERC)
 @@@@ DSC: center+uncertanty to Percentage Uncertainty
 @@@@ IN:  X: X Quantity & Uncertainty _or_ Exact Quantity
 @@@@ OUT  X: U%
@@ -921,7 +942,7 @@ ABS               @@@@ |X.u/X.v|
 ×                 @@@@ %T
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:UUMULT)
 @@@@ DSC: Multiply Uncertainty 
 @@@@ IN:  Y: Quantity & Uncertainty _or_ Exact Quantity
 @@@@      X: Eexact quantity

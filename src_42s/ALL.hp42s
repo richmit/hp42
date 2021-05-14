@@ -5010,7 +5010,7 @@ KEY 3 GTO 02
 "WRAP"
 KEY 4 GTO 03
 "PICF"
-KEY 5 XEQ "PICF"
+KEY 5 XEQ 96
 "FVARM"
 KEY 6 XEQ "FVARM"
 KEY 9 GTO 00
@@ -5038,8 +5038,8 @@ GTO 02
 LBL 04
 CLMENU
 "PICF"
-KEY 1 XEQ "PICF"
-"X"
+KEY 1 XEQ 96
+"INDP"
 KEY 4 XEQ 97
 "EVAL"
 KEY 6 XEQ "FEVL"
@@ -5052,7 +5052,7 @@ GTO 04
 LBL 03
 CLMENU
 "PICF"
-KEY 1 XEQ "PICF"
+KEY 1 XEQ 96
 "SFUN"
 KEY 3 XEQ 98
 "X"
@@ -5131,6 +5131,11 @@ LBL 84
 RTN
 LBL 85
 4
+RTN
+LBL 96 @NM@ IPICF
+FUNC 00
+1
+XEQ "PICF"
 RTN
 LBL "FPRD"
 FUNC 01
@@ -8273,91 +8278,145 @@ EXITALL
 RTN
 LBL 04
 0.01
+FS? 64
+÷
+FC? 64
 ×
 "centi (c)"
 RTN
 LBL 05
 0.001
+FS? 64
+÷
+FC? 64
 ×
 "milli (m)"
 RTN
 LBL 06
 1e-06
+FS? 64
+÷
+FC? 64
 ×
 "micro (µ)"
 RTN
 LBL 07
 1e-09
+FS? 64
+÷
+FC? 64
 ×
 "nano (n)"
 RTN
 LBL 08
 1e-12
+FS? 64
+÷
+FC? 64
 ×
 "pico (p)"
 RTN
 LBL 09
 1e-15
+FS? 64
+÷
+FC? 64
 ×
 "femto (f)"
 RTN
 LBL 10
 1000.0
+FS? 64
+÷
+FC? 64
 ×
 "kilo (k)"
 RTN
 LBL 11
 1000000.0
+FS? 64
+÷
+FC? 64
 ×
 "mega (M)"
 RTN
 LBL 12
 1000000000.0
+FS? 64
+÷
+FC? 64
 ×
 "giga (G)"
 RTN
 LBL 13
 1000000000000.0
+FS? 64
+÷
+FC? 64
 ×
 "tera (T)"
 RTN
 LBL 14
 1e+15
+FS? 64
+÷
+FC? 64
 ×
 "peta (P)"
 RTN
 LBL 15
 1e+18
+FS? 64
+÷
+FC? 64
 ×
 "exa (E)"
 RTN
 LBL 16
 1024
+FS? 64
+÷
+FC? 64
 ×
 "kibi (Ki)"
 RTN
 LBL 17
 1048576
+FS? 64
+÷
+FC? 64
 ×
 "mebi (Mi)"
 RTN
 LBL 18
 1073741824
+FS? 64
+÷
+FC? 64
 ×
 "gibi (Gi)"
 RTN
 LBL 19
 1099511627776
+FS? 64
+÷
+FC? 64
 ×
 "tebi (Ti)"
 RTN
 LBL 20
 1125899906842624
+FS? 64
+÷
+FC? 64
 ×
 "pebi (Pi)"
 RTN
 LBL 21
 1152921504606846976
+FS? 64
+÷
+FC? 64
 ×
 "exbi (Ei)"
 RTN

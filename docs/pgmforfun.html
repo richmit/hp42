@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-05-12 Wed 19:24 -->
+<!-- 2021-05-13 Thu 19:57 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42: Programs For Functions</title>
@@ -251,7 +251,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-05-12 19:24:11</i></td>
+<td class="org-left"><i>2021-05-13 19:56:07</i></td>
 </tr>
 </tbody>
 </table>
@@ -263,55 +263,59 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org23a6400">1. Metadata</a></li>
+<li><a href="#org470a8f1">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a>
 <ul>
 <li><a href="#menu-fmenu">2.1. Functionality &amp; the Main Menu</a></li>
-<li><a href="#org5e5810b">2.2. Notes Regarding Some Individual Programs</a>
+<li><a href="#org0f572a8">2.2. Notes Regarding Some Individual Programs</a>
 <ul>
-<li><a href="#org73ef54f">2.2.1. <code>FEVL</code>: Evaluating the current equation</a></li>
-<li><a href="#org54bcbdb">2.2.2. <code>PICF</code>: Selecting a <code>MVAR</code> program</a></li>
-<li><a href="#org6652185">2.2.3. <code>SFWRP</code>: Wrap a simple function</a></li>
-<li><a href="#orgce5c427">2.2.4. <code>FSLV</code> &amp; <code>FINT</code>: Apply the built in <code>SOLVE</code> &amp; <code>INTG</code> tools to the current <code>EqP</code></a></li>
-<li><a href="#org773c61d">2.2.5. <code>FPRD</code> &amp; <code>FSUM</code>: Non-interactive Sums &amp; Products</a></li>
+<li><a href="#org408e47f">2.2.1. <code>FEVL</code>: Evaluating the current equation</a></li>
+<li><a href="#orge79e293">2.2.2. <code>PICF</code>: Selecting a <code>MVAR</code> program</a></li>
+<li><a href="#orgf306a97">2.2.3. <code>SFWRP</code>: Wrap a simple function</a></li>
+<li><a href="#orga2e1ee2">2.2.4. <code>FSLV</code> &amp; <code>FINT</code>: Apply the built in <code>SOLVE</code> &amp; <code>INTG</code> tools to the current <code>EqP</code></a></li>
+<li><a href="#org42c5a66">2.2.5. <code>FPRD</code> &amp; <code>FSUM</code>: Non-interactive Sums &amp; Products</a></li>
 </ul>
 </li>
-<li><a href="#org6466647">2.3. Organizing Principles</a></li>
+<li><a href="#orgcbe5719">2.3. Organizing Principles</a></li>
 </ul>
 </li>
-<li><a href="#orge95ef69">3. <code>FMENU</code>: Main menu for all apps</a>
+<li><a href="#orgedf6278">3. <code>FMENU</code>: Main menu for all apps</a>
 <ul>
-<li><a href="#org84f8f31">3.1. Menu Code</a></li>
-<li><a href="#org396bfaf">3.2. Functions</a></li>
+<li><a href="#org2149228">3.1. Menu Code</a></li>
+<li><a href="#org12a97cf">3.2. Functions</a></li>
 </ul>
 </li>
-<li><a href="#org8109f77">4. <code>FSPT</code>: Interactive Sums, Products, &amp; Tables</a></li>
-<li><a href="#orgea63634">5. <code>FPLT</code>: Interactive Plotting</a>
+<li><a href="#orgcc2c2f0">4. <code>FSPT</code>: Interactive Sums, Products, &amp; Tables</a></li>
+<li><a href="#orgf17dfbb">5. <code>FPLT</code>: Interactive Plotting</a>
 <ul>
-<li><a href="#orgc64a56b">5.1. User Interface</a>
+<li><a href="#org060f1c9">5.1. User Interface</a>
 <ul>
-<li><a href="#org49baa68">5.1.1. Main Menu</a></li>
+<li><a href="#org1fe5fa5">5.1.1. Main Menu</a></li>
 </ul>
 </li>
-<li><a href="#orgdea60f7">5.2. Computational Menu</a>
+<li><a href="#org9ec32b8">5.2. Computational Menu</a>
 <ul>
-<li><a href="#org6b3818d">5.2.1. Graphics Display</a></li>
+<li><a href="#org6c3c4ec">5.2.1. Graphics Display</a></li>
 </ul>
 </li>
-<li><a href="#orgedcae20">5.3. Code</a></li>
+<li><a href="#org28cb297">5.3. Code</a></li>
 </ul>
 </li>
-<li><a href="#orgccbc839">6. Test Functions</a></li>
-<li><a href="#org2fb5dd3">7. EOF</a></li>
+<li><a href="#org291ac8f">6. Test Functions</a></li>
+<li><a href="#org9e05a24">7. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org23a6400" class="outline-2">
-<h2 id="org23a6400"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org470a8f1" class="outline-2">
+<h2 id="org470a8f1"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/pgmforfun.html">https://richmit.github.io/hp42/pgmforfun.html</a>
+</p>
+
+<p>
+A PDF version of this file may be found here: <a href="https://richmit.github.io/hp42/pgmforfun.pdf">https://richmit.github.io/hp42/pgmforfun.pdf</a>
 </p>
 
 <p>
@@ -374,7 +378,7 @@ This is a collection of programs that work with <code>MVAR</code>-type programs 
 <div id="outline-container-menu-fmenu" class="outline-3">
 <h3 id="menu-fmenu"><span class="section-number-3">2.1</span> Functionality &amp; the Main Menu</h3>
 <div class="outline-text-3" id="text-menu-fmenu">
-<table id="orgedd9eca" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="org58b5380" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -453,7 +457,7 @@ This is a collection of programs that work with <code>MVAR</code>-type programs 
 
 <tr>
 <td class="org-left">COMP:PICF</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">LBL 96</td>
 <td class="org-left">COMP:PICF</td>
 <td class="org-left">Interactive application to select and describe an <code>MVAR</code> program</td>
 </tr>
@@ -473,9 +477,9 @@ This is a collection of programs that work with <code>MVAR</code>-type programs 
 </tr>
 
 <tr>
-<td class="org-left">COMP:X</td>
+<td class="org-left">COMP:INDP</td>
 <td class="org-left">LBL 97</td>
-<td class="org-left">COMP:X</td>
+<td class="org-left">COMP:INDP</td>
 <td class="org-left">Store/Recall current value of "X"</td>
 </tr>
 
@@ -495,7 +499,7 @@ This is a collection of programs that work with <code>MVAR</code>-type programs 
 
 <tr>
 <td class="org-left">WRAP:PICF</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">LBL 96</td>
 <td class="org-left">WRAP:PICF</td>
 <td class="org-left">Interactive application to select and describe an <code>MVAR</code> program</td>
 </tr>
@@ -537,7 +541,7 @@ This is a collection of programs that work with <code>MVAR</code>-type programs 
 
 <tr>
 <td class="org-left">PICF</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">LBL 96</td>
 <td class="org-left">PICF</td>
 <td class="org-left">Interactive application to select and describe an <code>MVAR</code> program</td>
 </tr>
@@ -553,12 +557,12 @@ This is a collection of programs that work with <code>MVAR</code>-type programs 
 </div>
 </div>
 
-<div id="outline-container-org5e5810b" class="outline-3">
-<h3 id="org5e5810b"><span class="section-number-3">2.2</span> Notes Regarding Some Individual Programs</h3>
+<div id="outline-container-org0f572a8" class="outline-3">
+<h3 id="org0f572a8"><span class="section-number-3">2.2</span> Notes Regarding Some Individual Programs</h3>
 <div class="outline-text-3" id="text-2-2">
 </div>
-<div id="outline-container-org73ef54f" class="outline-4">
-<h4 id="org73ef54f"><span class="section-number-4">2.2.1</span> <code>FEVL</code>: Evaluating the current equation</h4>
+<div id="outline-container-org408e47f" class="outline-4">
+<h4 id="org408e47f"><span class="section-number-4">2.2.1</span> <code>FEVL</code>: Evaluating the current equation</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <p>
 I frequently use <code>VARMENU</code> to repeatedly evaluate a formula, with different input values.  Functionally that means typing in the value, and then hitting the
@@ -567,18 +571,18 @@ variable button twice.  That's not super efficient when repeatedly changing the 
 </div>
 </div>
 
-<div id="outline-container-org54bcbdb" class="outline-4">
-<h4 id="org54bcbdb"><span class="section-number-4">2.2.2</span> <code>PICF</code>: Selecting a <code>MVAR</code> program</h4>
+<div id="outline-container-orge79e293" class="outline-4">
+<h4 id="orge79e293"><span class="section-number-4">2.2.2</span> <code>PICF</code>: Selecting a <code>MVAR</code> program</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <p>
 This little function is at the center of all the tools on this page.  It queries for an <code>MVAR</code> program, lets you set constants, pick an independent variable,
-and describe the number of returns from the function.  See the section <a href="#org6466647">Organizing Principles</a> for more about the global variables used to house this data.
+and describe the number of returns from the function.  See the section <a href="#orgcbe5719">Organizing Principles</a> for more about the global variables used to house this data.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org6652185" class="outline-4">
-<h4 id="org6652185"><span class="section-number-4">2.2.3</span> <code>SFWRP</code>: Wrap a simple function</h4>
+<div id="outline-container-orgf306a97" class="outline-4">
+<h4 id="orgf306a97"><span class="section-number-4">2.2.3</span> <code>SFWRP</code>: Wrap a simple function</h4>
 <div class="outline-text-4" id="text-2-2-3">
 <p>
 This <code>MVAR</code> program allows one to wrap a simple function for use with tools that need an <code>MVAR</code> program.  For example, if you have a program for <code>SECH</code> you
@@ -591,8 +595,8 @@ To use this program simply put the name of the simple function into the variable
 </div>
 </div>
 
-<div id="outline-container-orgce5c427" class="outline-4">
-<h4 id="orgce5c427"><span class="section-number-4">2.2.4</span> <code>FSLV</code> &amp; <code>FINT</code>: Apply the built in <code>SOLVE</code> &amp; <code>INTG</code> tools to the current <code>EqP</code></h4>
+<div id="outline-container-orga2e1ee2" class="outline-4">
+<h4 id="orga2e1ee2"><span class="section-number-4">2.2.4</span> <code>FSLV</code> &amp; <code>FINT</code>: Apply the built in <code>SOLVE</code> &amp; <code>INTG</code> tools to the current <code>EqP</code></h4>
 <div class="outline-text-4" id="text-2-2-4">
 <p>
 These are handy little functions that allow one to apply the built in solver and integration capabilities of the 42s to the program currently active function.
@@ -600,8 +604,8 @@ These are handy little functions that allow one to apply the built in solver and
 </div>
 </div>
 
-<div id="outline-container-org773c61d" class="outline-4">
-<h4 id="org773c61d"><span class="section-number-4">2.2.5</span> <code>FPRD</code> &amp; <code>FSUM</code>: Non-interactive Sums &amp; Products</h4>
+<div id="outline-container-org42c5a66" class="outline-4">
+<h4 id="org42c5a66"><span class="section-number-4">2.2.5</span> <code>FPRD</code> &amp; <code>FSUM</code>: Non-interactive Sums &amp; Products</h4>
 <div class="outline-text-4" id="text-2-2-5">
 <p>
 These programs are well suited for use by other programs.  They print no status, and are significantly faster than the interactive tool <code>FSPT</code>.  Note that
@@ -611,8 +615,8 @@ they do not support the <code>LN</code> transform capability of <code>FSPT</code
 </div>
 </div>
 
-<div id="outline-container-org6466647" class="outline-3">
-<h3 id="org6466647"><span class="section-number-3">2.3</span> Organizing Principles</h3>
+<div id="outline-container-orgcbe5719" class="outline-3">
+<h3 id="orgcbe5719"><span class="section-number-3">2.3</span> Organizing Principles</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 All the top level programs use <code>PICF</code> to collect information about the <code>MVAR</code> program to be used.  The collected information is housed in three global
@@ -732,12 +736,12 @@ If an accuracy is required, then we use the variable <code>ACC</code>.
 </div>
 </div>
 
-<div id="outline-container-orge95ef69" class="outline-2">
-<h2 id="orge95ef69"><span class="section-number-2">3</span> <code>FMENU</code>: Main menu for all apps</h2>
+<div id="outline-container-orgedf6278" class="outline-2">
+<h2 id="orgedf6278"><span class="section-number-2">3</span> <code>FMENU</code>: Main menu for all apps</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org84f8f31" class="outline-3">
-<h3 id="org84f8f31"><span class="section-number-3">3.1</span> Menu Code</h3>
+<div id="outline-container-org2149228" class="outline-3">
+<h3 id="org2149228"><span class="section-number-3">3.1</span> Menu Code</h3>
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"FMENU"</span> 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
@@ -759,7 +763,7 @@ If an accuracy is required, then we use the variable <code>ACC</code>.
 <span style="color: #fa8072;">"WRAP"</span>
 <span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">GTO</span> 03
 <span style="color: #fa8072;">"PICF"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PICF"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 96
 <span style="color: #fa8072;">"FVARM"</span>
 <span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FVARM"</span>
 <span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
@@ -787,8 +791,8 @@ If an accuracy is required, then we use the variable <code>ACC</code>.
 <span style="color: #00ffff;">LBL</span> 04            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu COMP</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"PICF"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PICF"</span>
-<span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 96
+<span style="color: #fa8072;">"INDP"</span>
 <span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 97
 <span style="color: #fa8072;">"EVAL"</span>
 <span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FEVL"</span>
@@ -801,7 +805,7 @@ If an accuracy is required, then we use the variable <code>ACC</code>.
 <span style="color: #00ffff;">LBL</span> 03            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu WRAP</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"PICF"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PICF"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 96
 <span style="color: #fa8072;">"SFUN"</span>
 <span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 98
 <span style="color: #fa8072;">"X"</span>
@@ -821,8 +825,8 @@ If an accuracy is required, then we use the variable <code>ACC</code>.
 </div>
 </div>
 
-<div id="outline-container-org396bfaf" class="outline-3">
-<h3 id="org396bfaf"><span class="section-number-3">3.2</span> Functions</h3>
+<div id="outline-container-org12a97cf" class="outline-3">
+<h3 id="org12a97cf"><span class="section-number-3">3.2</span> Functions</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: 80-87, 97-98</span>
@@ -902,6 +906,14 @@ PGMMENU
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> 85
 4
+<span style="color: #00ffff;">RTN</span>
+
+<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Run PICF with a 1 value for X -- so return count is queried</span>
+<span style="color: #00ffff;">LBL</span> 96 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">IPICF</span>
+<span style="color: #00ffff;">FUNC</span> 00
+1
+<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PICF"</span>
 <span style="color: #00ffff;">RTN</span>
 
 <span id="coderef-FPRD" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FPRD)</span>
@@ -1084,8 +1096,8 @@ PGMMENU
 </div>
 </div>
 
-<div id="outline-container-org8109f77" class="outline-2">
-<h2 id="org8109f77"><span class="section-number-2">4</span> <code>FSPT</code>: Interactive Sums, Products, &amp; Tables</h2>
+<div id="outline-container-orgcc2c2f0" class="outline-2">
+<h2 id="orgcc2c2f0"><span class="section-number-2">4</span> <code>FSPT</code>: Interactive Sums, Products, &amp; Tables</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Create function tables and computes sums &amp; products.  Works much like the built in integration application.
@@ -1397,8 +1409,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-orgea63634" class="outline-2">
-<h2 id="orgea63634"><span class="section-number-2">5</span> <code>FPLT</code>: Interactive Plotting</h2>
+<div id="outline-container-orgf17dfbb" class="outline-2">
+<h2 id="orgf17dfbb"><span class="section-number-2">5</span> <code>FPLT</code>: Interactive Plotting</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Features:
@@ -1417,12 +1429,12 @@ Features:
 </ul>
 </div>
 
-<div id="outline-container-orgc64a56b" class="outline-3">
-<h3 id="orgc64a56b"><span class="section-number-3">5.1</span> User Interface</h3>
+<div id="outline-container-org060f1c9" class="outline-3">
+<h3 id="org060f1c9"><span class="section-number-3">5.1</span> User Interface</h3>
 <div class="outline-text-3" id="text-5-1">
 </div>
-<div id="outline-container-org49baa68" class="outline-4">
-<h4 id="org49baa68"><span class="section-number-4">5.1.1</span> Main Menu</h4>
+<div id="outline-container-org1fe5fa5" class="outline-4">
+<h4 id="org1fe5fa5"><span class="section-number-4">5.1.1</span> Main Menu</h4>
 <div class="outline-text-4" id="text-5-1-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -1493,8 +1505,8 @@ For a graph with default settings: [0] [ENTER] [XRNG] [YRNG] [GRID] [PLOT]
 </div>
 </div>
 
-<div id="outline-container-orgdea60f7" class="outline-3">
-<h3 id="orgdea60f7"><span class="section-number-3">5.2</span> Computational Menu</h3>
+<div id="outline-container-org9ec32b8" class="outline-3">
+<h3 id="org9ec32b8"><span class="section-number-3">5.2</span> Computational Menu</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 This menu is for doing computations on the current equation based on
@@ -1549,8 +1561,8 @@ the current plot range or last zoom box region.
 </table>
 </div>
 
-<div id="outline-container-org6b3818d" class="outline-4">
-<h4 id="org6b3818d"><span class="section-number-4">5.2.1</span> Graphics Display</h4>
+<div id="outline-container-org6c3c4ec" class="outline-4">
+<h4 id="org6c3c4ec"><span class="section-number-4">5.2.1</span> Graphics Display</h4>
 <div class="outline-text-4" id="text-5-2-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -1632,8 +1644,8 @@ the current plot range or last zoom box region.
 </div>
 </div>
 
-<div id="outline-container-orgedcae20" class="outline-3">
-<h3 id="orgedcae20"><span class="section-number-3">5.3</span> Code</h3>
+<div id="outline-container-org28cb297" class="outline-3">
+<h3 id="org28cb297"><span class="section-number-3">5.3</span> Code</h3>
 <div class="outline-text-3" id="text-5-3">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-FPLT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FPLT)</span>
@@ -2559,8 +2571,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-orgccbc839" class="outline-2">
-<h2 id="orgccbc839"><span class="section-number-2">6</span> Test Functions</h2>
+<div id="outline-container-org291ac8f" class="outline-2">
+<h2 id="org291ac8f"><span class="section-number-2">6</span> Test Functions</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 A few <code>MVAR</code> functions to test with
@@ -2692,8 +2704,8 @@ A few <code>MVAR</code> functions to test with
 </div>
 </div>
 
-<div id="outline-container-org2fb5dd3" class="outline-2">
-<h2 id="org2fb5dd3"><span class="section-number-2">7</span> EOF</h2>
+<div id="outline-container-org9e05a24" class="outline-2">
+<h2 id="org9e05a24"><span class="section-number-2">7</span> EOF</h2>
 <div class="outline-text-2" id="text-7">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -2704,7 +2716,7 @@ A few <code>MVAR</code> functions to test with
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-12 Wed 19:24 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-13 Thu 19:57 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
 </div>
 </body>
 </html>

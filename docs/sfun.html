@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-05-02 Sun 13:24 -->
+<!-- 2021-05-13 Thu 19:58 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Simple Math Functions</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-05-02 13:19:53</i></td>
+<td class="org-left"><i>2021-05-13 19:56:18</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,34 +241,38 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org5ba54ea">1. Metadata</a></li>
+<li><a href="#org741e3ca">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
 <li><a href="#menu-sfun">3. <code>SFUN</code> Menu</a></li>
-<li><a href="#orgd2f24a5">4. Menu Code</a></li>
-<li><a href="#orgb364dd4">5. Functions</a>
+<li><a href="#org5dde359">4. Menu Code</a></li>
+<li><a href="#org470eaf4">5. Functions</a>
 <ul>
-<li><a href="#org828bb43">5.1. Complex Numbers</a></li>
-<li><a href="#orgc061d37">5.2. Percentages</a></li>
-<li><a href="#org70846f3">5.3. Integers</a></li>
-<li><a href="#org3c0b9d7">5.4. Binomials, Factorals, Beta, etc&#x2026;</a></li>
-<li><a href="#orgbde8a1b">5.5. Error &amp; Standard Normal Functions</a></li>
-<li><a href="#org9c481d2">5.6. Hyperbolic Trigonometric Functions</a></li>
-<li><a href="#orgf4351c6">5.7. Trigonometric Functions</a></li>
-<li><a href="#org1b60b66">5.8. Logs, Powers &amp; Roots</a></li>
-<li><a href="#org68714f7">5.9. Everything Else</a></li>
+<li><a href="#orgd0a6580">5.1. Complex Numbers</a></li>
+<li><a href="#org0b1d0a7">5.2. Percentages</a></li>
+<li><a href="#orgaa82c15">5.3. Integers</a></li>
+<li><a href="#org69dfeb4">5.4. Binomials, Factorals, Beta, etc&#x2026;</a></li>
+<li><a href="#orgdd06fa5">5.5. Error &amp; Standard Normal Functions</a></li>
+<li><a href="#org600df3a">5.6. Hyperbolic Trigonometric Functions</a></li>
+<li><a href="#orgabcd894">5.7. Trigonometric Functions</a></li>
+<li><a href="#orgb107683">5.8. Logs, Powers &amp; Roots</a></li>
+<li><a href="#org026d2f5">5.9. Everything Else</a></li>
 </ul>
 </li>
-<li><a href="#org439102c">6. END</a></li>
-<li><a href="#org46e7bea">7. EOF</a></li>
+<li><a href="#org3237125">6. END</a></li>
+<li><a href="#org85821e6">7. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org5ba54ea" class="outline-2">
-<h2 id="org5ba54ea"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org741e3ca" class="outline-2">
+<h2 id="org741e3ca"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/sfun.html">https://richmit.github.io/hp42/sfun.html</a>
+</p>
+
+<p>
+A PDF version of this file may be found here: <a href="https://richmit.github.io/hp42/sfun.pdf">https://richmit.github.io/hp42/sfun.pdf</a>
 </p>
 
 <p>
@@ -329,7 +333,7 @@ This org-mode file collects together a handful simple mathematical functions tha
 <div id="outline-container-menu-sfun" class="outline-2">
 <h2 id="menu-sfun"><span class="section-number-2">3</span> <code>SFUN</code> Menu</h2>
 <div class="outline-text-2" id="text-menu-sfun">
-<table id="orgf5bee8c" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="org5f92bb8" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -1013,8 +1017,8 @@ This org-mode file collects together a handful simple mathematical functions tha
 </div>
 </div>
 
-<div id="outline-container-orgd2f24a5" class="outline-2">
-<h2 id="orgd2f24a5"><span class="section-number-2">4</span> Menu Code</h2>
+<div id="outline-container-org5dde359" class="outline-2">
+<h2 id="org5dde359"><span class="section-number-2">4</span> Menu Code</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"SFUN"</span> 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
@@ -1394,12 +1398,12 @@ N!
 </div>
 </div>
 
-<div id="outline-container-orgb364dd4" class="outline-2">
-<h2 id="orgb364dd4"><span class="section-number-2">5</span> Functions</h2>
+<div id="outline-container-org470eaf4" class="outline-2">
+<h2 id="org470eaf4"><span class="section-number-2">5</span> Functions</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-org828bb43" class="outline-3">
-<h3 id="org828bb43"><span class="section-number-3">5.1</span> Complex Numbers</h3>
+<div id="outline-container-orgd0a6580" class="outline-3">
+<h3 id="orgd0a6580"><span class="section-number-3">5.1</span> Complex Numbers</h3>
 <div class="outline-text-3" id="text-5-1">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-RPART" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (RPART)</span>
@@ -1665,8 +1669,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-orgc061d37" class="outline-3">
-<h3 id="orgc061d37"><span class="section-number-3">5.2</span> Percentages</h3>
+<div id="outline-container-org0b1d0a7" class="outline-3">
+<h3 id="org0b1d0a7"><span class="section-number-3">5.2</span> Percentages</h3>
 <div class="outline-text-3" id="text-5-2">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-PTOT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PTOT)</span>
@@ -1688,8 +1692,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org70846f3" class="outline-3">
-<h3 id="org70846f3"><span class="section-number-3">5.3</span> Integers</h3>
+<div id="outline-container-orgaa82c15" class="outline-3">
+<h3 id="orgaa82c15"><span class="section-number-3">5.3</span> Integers</h3>
 <div class="outline-text-3" id="text-5-3">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-ROUND" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ROUND)</span>
@@ -1845,8 +1849,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org3c0b9d7" class="outline-3">
-<h3 id="org3c0b9d7"><span class="section-number-3">5.4</span> Binomials, Factorals, Beta, etc&#x2026;</h3>
+<div id="outline-container-org69dfeb4" class="outline-3">
+<h3 id="org69dfeb4"><span class="section-number-3">5.4</span> Binomials, Factorals, Beta, etc&#x2026;</h3>
 <div class="outline-text-3" id="text-5-4">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-BETA" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (BETA)</span>
@@ -1957,8 +1961,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-orgbde8a1b" class="outline-3">
-<h3 id="orgbde8a1b"><span class="section-number-3">5.5</span> Error &amp; Standard Normal Functions</h3>
+<div id="outline-container-orgdd06fa5" class="outline-3">
+<h3 id="orgdd06fa5"><span class="section-number-3">5.5</span> Error &amp; Standard Normal Functions</h3>
 <div class="outline-text-3" id="text-5-5">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-NPDF" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (NPDF)</span>
@@ -2115,13 +2119,13 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org9c481d2" class="outline-3">
-<h3 id="org9c481d2"><span class="section-number-3">5.6</span> Hyperbolic Trigonometric Functions</h3>
+<div id="outline-container-org600df3a" class="outline-3">
+<h3 id="org600df3a"><span class="section-number-3">5.6</span> Hyperbolic Trigonometric Functions</h3>
 <div class="outline-text-3" id="text-5-6">
 <div class="org-src-container">
 <pre class="src src-hp42s">
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: 1/SIN(X)</span>
+<span id="coderef-CSCH" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (CSCH)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: 1/SINH(X)</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"CSCH"</span>
 <span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0</span>
@@ -2129,8 +2133,8 @@ R&#8595;
 <span style="color: #00ffff;">1/X</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: 1/COS(X)</span>
+<span id="coderef-SECH" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SECH)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: 1/COSH(X)</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"SECH"</span>
 <span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0</span>
@@ -2138,8 +2142,8 @@ R&#8595;
 <span style="color: #00ffff;">1/X</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: 1/TAN(X)</span>
+<span id="coderef-COTH" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (COTH)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: 1/TANH(X)</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"COTH"</span>
 <span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0</span>
@@ -2147,8 +2151,8 @@ R&#8595;
 <span style="color: #00ffff;">1/X</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: SIN(1/X)</span>
+<span id="coderef-ACSCH" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ACSCH)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: SINH(1/X)</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"ACSCH"</span>
 <span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0</span>
@@ -2156,8 +2160,8 @@ R&#8595;
 <span style="color: #00ffff;">ASINH</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: COS(1/X)</span>
+<span id="coderef-ASECH" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ASECH)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: COSH(1/X)</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"ASECH"</span>
 <span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0</span>
@@ -2165,8 +2169,8 @@ R&#8595;
 <span style="color: #00ffff;">ACOSH</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: TAN(1/X)</span>
+<span id="coderef-ACOTH" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ACOTH)</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: TANH(1/X)</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"ACOTH"</span>
 <span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
 <span style="color: #00ffff;">L4STK</span>           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0</span>
@@ -2178,11 +2182,11 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-orgf4351c6" class="outline-3">
-<h3 id="orgf4351c6"><span class="section-number-3">5.7</span> Trigonometric Functions</h3>
+<div id="outline-container-orgabcd894" class="outline-3">
+<h3 id="orgabcd894"><span class="section-number-3">5.7</span> Trigonometric Functions</h3>
 <div class="outline-text-3" id="text-5-7">
 <div class="org-src-container">
-<pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<pre class="src src-hp42s"><span id="coderef-AHAV" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (AHAV)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Inverse Haversine</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: number</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: ahav(X)=2*asin(sqrt(X))</span>
@@ -2197,7 +2201,7 @@ R&#8595;
 <span style="color: #00ffff;">&#215;</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-HAV" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (HAV)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Haversine</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: number</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: hav(X)=1/2-cos(X)/2</span>
@@ -2213,7 +2217,7 @@ R&#8595;
 <span style="color: #00ffff;">+</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-HYPOT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (HYPOT)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Hypot</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: number</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: number</span>
@@ -2230,7 +2234,7 @@ R&#8595;
 <span style="color: #00ffff;">ABS</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-CSC" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (CSC)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: 1/SIN(X)</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"CSC"</span>
 <span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
@@ -2239,7 +2243,7 @@ R&#8595;
 <span style="color: #00ffff;">1/X</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-SEC" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SEC)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: 1/COS(X)</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"SEC"</span>
 <span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
@@ -2248,7 +2252,7 @@ R&#8595;
 <span style="color: #00ffff;">1/X</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-COT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (COT)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: 1/TAN(X)</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"COT"</span>
 <span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
@@ -2257,7 +2261,7 @@ R&#8595;
 <span style="color: #00ffff;">1/X</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-ACSC" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ACSC)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: SIN(1/X)</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"ACSC"</span>
 <span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
@@ -2266,7 +2270,7 @@ R&#8595;
 <span style="color: #00ffff;">ASIN</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-ASEC" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ASEC)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: COS(1/X)</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"ASEC"</span>
 <span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
@@ -2275,7 +2279,7 @@ R&#8595;
 <span style="color: #00ffff;">ACOS</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-ACOT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ACOT)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: TAN(1/X)</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"ACOT"</span>
 <span style="color: #00ffff;">FUNC</span> 11         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
@@ -2284,7 +2288,7 @@ R&#8595;
 <span style="color: #00ffff;">ATAN</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-ATAN2" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ATAN2)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: ATAN2</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: number</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: number</span>
@@ -2358,11 +2362,11 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org1b60b66" class="outline-3">
-<h3 id="org1b60b66"><span class="section-number-3">5.8</span> Logs, Powers &amp; Roots</h3>
+<div id="outline-container-orgb107683" class="outline-3">
+<h3 id="orgb107683"><span class="section-number-3">5.8</span> Logs, Powers &amp; Roots</h3>
 <div class="outline-text-3" id="text-5-8">
 <div class="org-src-container">
-<pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<pre class="src src-hp42s"><span id="coderef-lnYX" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (lnYX)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Base Y Logarithm of X</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: logarithm base</span>
 <span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: number or matrix (element-wise)</span>
@@ -2378,7 +2382,7 @@ R&#8595;
 <span style="color: #00ffff;">&#247;</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-ln2" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (ln2)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Base 2 Logarithm</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: number or matrix (element-wise)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: log_2(x)</span>
@@ -2468,7 +2472,7 @@ Y^X
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"YROOT"</span>
 <span style="color: #00ffff;">RTN</span>
 
-<span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span id="coderef-YROOT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (YROOT)</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Nth roots prefering real &amp; pure imaginary answers</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Y: Number</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: Number or numeric matrix (element-wise)</span>
@@ -2538,8 +2542,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org68714f7" class="outline-3">
-<h3 id="org68714f7"><span class="section-number-3">5.9</span> Everything Else</h3>
+<div id="outline-container-org026d2f5" class="outline-3">
+<h3 id="org026d2f5"><span class="section-number-3">5.9</span> Everything Else</h3>
 <div class="outline-text-3" id="text-5-9">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ </span><span style="color: #ff7f24;">(ref:||)</span>
@@ -2563,8 +2567,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org439102c" class="outline-2">
-<h2 id="org439102c"><span class="section-number-2">6</span> END</h2>
+<div id="outline-container-org3237125" class="outline-2">
+<h2 id="org3237125"><span class="section-number-2">6</span> END</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -2574,8 +2578,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org46e7bea" class="outline-2">
-<h2 id="org46e7bea"><span class="section-number-2">7</span> EOF</h2>
+<div id="outline-container-org85821e6" class="outline-2">
+<h2 id="org85821e6"><span class="section-number-2">7</span> EOF</h2>
 <div class="outline-text-2" id="text-7">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -2586,7 +2590,7 @@ R&#8595;
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-02 Sun 13:24 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-13 Thu 19:58 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
 </div>
 </body>
 </html>

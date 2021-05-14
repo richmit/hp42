@@ -19,6 +19,27 @@
 #+HTML_LINK_HOME: https://www.mitchr.me/
 #+HTML_LINK_UP: https://richmit.github.io/hp42/
 #+EXPORT_FILE_NAME: ../docs/pgmforfun
+#+LATEX_HEADER: \usepackage{extsizes} 
+#+LATEX_HEADER: \usepackage[margin=0.5in]{geometry}
+#+LATEX_HEADER: \usepackage{mathabx}
+#+LATEX_HEADER: \usepackage{boisik}
+#+LATEX_CLASS_OPTIONS: [letterpaper, 8pt]
+#+LATEX_HEADER: \usepackage[utf8]{inputenc}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{028F}{\textsc{Y}}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{03A3}{$\Sigma$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{03BC}{$\mu$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{03C0}{\pi}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{1D07}{$\bagmember$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{21B5}{$\dlsh$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{221A}{\makebox[.5em]{$\sqrt{}$}}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2221}{$\measuredangle$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{222B}{$\int$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2260}{$\neq$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2264}{$\leq$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2265}{$\geq$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{251C}{$\vdash$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2592}{$\square$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{25B8}{$\blacktriangleright$}
 
 #+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
 |        <r> | <l>                                          |
@@ -38,6 +59,8 @@ Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 * Metadata
 
 The home for this HTML file is: https://richmit.github.io/hp42/pgmforfun.html
+
+A PDF version of this file may be found here: https://richmit.github.io/hp42/pgmforfun.pdf
 
 Files related to this document may be found on github: https://github.com/richmit/hp42
 
@@ -75,19 +98,19 @@ This is a collection of programs that work with =MVAR=-type programs (equations)
 | COMP:PROD  | FPRD   | COMP:PROD  | Product EqP for values of EqV from LLIM to ULIM stepping by STEP |
 | COMP:EVAL  | FEVL   | COMP:EVAL  | Evaluate EqV on X                                                |
 | COMP:▒▒▒▒  |        | COMP:▒▒▒▒  |                                                                  |
-| COMP:PICF  |        | COMP:PICF  | Interactive application to select and describe an =MVAR= program |
+| COMP:PICF  | LBL 96 | COMP:PICF  | Interactive application to select and describe an =MVAR= program |
 | COMP:▒▒▒▒  |        | COMP:▒▒▒▒  |                                                                  |
 | COMP:▒▒▒▒  |        | COMP:▒▒▒▒  |                                                                  |
-| COMP:X     | LBL 97 | COMP:X     | Store/Recall current value of "X"                                |
+| COMP:INDP  | LBL 97 | COMP:INDP  | Store/Recall current value of "X"                                |
 | COMP:▒▒▒▒  |        | COMP:▒▒▒▒  |                                                                  |
 | COMP:EVAL  | FEVL   | COMP:EVAL  | Evaluate EqV on X                                                |
-| WRAP:PICF  |        | WRAP:PICF  | Interactive application to select and describe an =MVAR= program |
+| WRAP:PICF  | LBL 96 | WRAP:PICF  | Interactive application to select and describe an =MVAR= program |
 | WRAP:▒▒▒▒  |        | WRAP:▒▒▒▒  |                                                                  |
 | WRAP:SFUN  | LBL 98 | WRAP:FUN   | Store/Recall Current wrapped simple function                     |
 | WRAP:X     | LBL 97 | WRAP:X     | Store/Recall current value of "X"                                |
 | WRAP:▒▒▒▒  |        | WRAP:▒▒▒▒  |                                                                  |
 | WRAP:SEVAL | SFWRP  | WRAP:SFWRP | Evaluate currently wrapped simple function                       |
-| PICF       |        | PICF       | Interactive application to select and describe an =MVAR= program |
+| PICF       | LBL 96 | PICF       | Interactive application to select and describe an =MVAR= program |
 | FVARM      |        | FVARM      | MVAR program with all the global variables for these apps        |
 |------------+--------+------------+------------------------------------------------------------------|
 
@@ -182,7 +205,7 @@ KEY 3 GTO 02
 "WRAP"
 KEY 4 GTO 03
 "PICF"
-KEY 5 XEQ "PICF"
+KEY 5 XEQ 96
 "FVARM"
 KEY 6 XEQ "FVARM"
 KEY 9 GTO 00
@@ -210,8 +233,8 @@ GTO 02
 LBL 04            @@@@ Page 2 of menu COMP
 CLMENU
 "PICF"
-KEY 1 XEQ "PICF"
-"X"
+KEY 1 XEQ 96
+"INDP"
 KEY 4 XEQ 97
 "EVAL"
 KEY 6 XEQ "FEVL"
@@ -224,7 +247,7 @@ GTO 04
 LBL 03            @@@@ Page 1 of menu WRAP
 CLMENU
 "PICF"
-KEY 1 XEQ "PICF"
+KEY 1 XEQ 96
 "SFUN"
 KEY 3 XEQ 98
 "X"
@@ -321,6 +344,14 @@ LBL 84
 RTN
 LBL 85
 4
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Run PICF with a 1 value for X -- so return count is queried
+LBL 96 @NM@ IPICF
+FUNC 00
+1
+XEQ "PICF"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FPRD)

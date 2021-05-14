@@ -19,6 +19,27 @@
 #+HTML_LINK_HOME: https://www.mitchr.me/
 #+HTML_LINK_UP: https://richmit.github.io/hp42/
 #+EXPORT_FILE_NAME: ../docs/unit
+#+LATEX_HEADER: \usepackage{extsizes} 
+#+LATEX_HEADER: \usepackage[margin=0.5in]{geometry}
+#+LATEX_HEADER: \usepackage{mathabx}
+#+LATEX_HEADER: \usepackage{boisik}
+#+LATEX_CLASS_OPTIONS: [letterpaper, 8pt]
+#+LATEX_HEADER: \usepackage[utf8]{inputenc}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{028F}{\textsc{Y}}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{03A3}{$\Sigma$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{03BC}{$\mu$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{03C0}{\pi}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{1D07}{$\bagmember$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{21B5}{$\dlsh$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{221A}{\makebox[.5em]{$\sqrt{}$}}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2221}{$\measuredangle$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{222B}{$\int$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2260}{$\neq$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2264}{$\leq$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2265}{$\geq$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{251C}{$\vdash$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2592}{$\square$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{25B8}{$\blacktriangleright$}
 
 #+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
 |        <r> | <l>                                          |
@@ -38,6 +59,8 @@ Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 * Metadata
 
 The home for this HTML file is: https://richmit.github.io/hp42/unit.html
+
+A PDF version of this file may be found here: https://richmit.github.io/hp42/unit.pdf
 
 Files related to this document may be found on github: https://github.com/richmit/hp42
 
@@ -66,6 +89,7 @@ the base conversion factors are exact quantities, the programs insure we obtain 
 * Units
 ** Conversion Factors
 
+#+ATTR_LATEX: :environment longtable
 #+ATTR_HTML: :rules groups :frame box :align center
 #+NAME: units                      
 | Type        |                                            Conversion | Description .......... |
@@ -939,6 +963,9 @@ END
 | pebi   | Pi  |    1125899906842624 |
 | exbi   | Ei  | 1152921504606846976 |
 
+Normally pressing the menu key will multiply the X value on the stack by the prefix multiplayer.  If =[SHIFT]= is pressed befreo the menu key, then X will be
+divided by the prefix mulitplyer.
+
 ** Menu Code
 
 Note: This one will have an =END= generated to finish the =UNIT= application.
@@ -956,7 +983,10 @@ Note: This one will have an =END= generated to finish the =UNIT= application.
                             (cl-destructuring-bind (prefix-str sym-string mult) row
                               (mapconcat #'string-trim-left 
                                          (list (format "%s" mult)
-                                               (format "×" mult)
+                                               (format "FS? 64")
+                                               (format "÷")
+                                               (format "FC? 64")
+                                               (format "×")
                                                (format "\"%s (%s)\"" prefix-str sym-string)
                                                ;;(format "AVIEW")
                                                )
@@ -1033,91 +1063,145 @@ EXITALL
 RTN
 LBL 04    @@@@ Action for menu key centi
 0.01
+FS? 64
+÷
+FC? 64
 ×
 "centi (c)"
 RTN
 LBL 05    @@@@ Action for menu key milli
 0.001
+FS? 64
+÷
+FC? 64
 ×
 "milli (m)"
 RTN
 LBL 06    @@@@ Action for menu key micro
 1e-06
+FS? 64
+÷
+FC? 64
 ×
 "micro (µ)"
 RTN
 LBL 07    @@@@ Action for menu key nano
 1e-09
+FS? 64
+÷
+FC? 64
 ×
 "nano (n)"
 RTN
 LBL 08    @@@@ Action for menu key pico
 1e-12
+FS? 64
+÷
+FC? 64
 ×
 "pico (p)"
 RTN
 LBL 09    @@@@ Action for menu key femto
 1e-15
+FS? 64
+÷
+FC? 64
 ×
 "femto (f)"
 RTN
 LBL 10    @@@@ Action for menu key kilo
 1000.0
+FS? 64
+÷
+FC? 64
 ×
 "kilo (k)"
 RTN
 LBL 11    @@@@ Action for menu key mega
 1000000.0
+FS? 64
+÷
+FC? 64
 ×
 "mega (M)"
 RTN
 LBL 12    @@@@ Action for menu key giga
 1000000000.0
+FS? 64
+÷
+FC? 64
 ×
 "giga (G)"
 RTN
 LBL 13    @@@@ Action for menu key tera
 1000000000000.0
+FS? 64
+÷
+FC? 64
 ×
 "tera (T)"
 RTN
 LBL 14    @@@@ Action for menu key peta
 1e+15
+FS? 64
+÷
+FC? 64
 ×
 "peta (P)"
 RTN
 LBL 15    @@@@ Action for menu key exa
 1e+18
+FS? 64
+÷
+FC? 64
 ×
 "exa (E)"
 RTN
 LBL 16    @@@@ Action for menu key kibi
 1024
+FS? 64
+÷
+FC? 64
 ×
 "kibi (Ki)"
 RTN
 LBL 17    @@@@ Action for menu key mebi
 1048576
+FS? 64
+÷
+FC? 64
 ×
 "mebi (Mi)"
 RTN
 LBL 18    @@@@ Action for menu key gibi
 1073741824
+FS? 64
+÷
+FC? 64
 ×
 "gibi (Gi)"
 RTN
 LBL 19    @@@@ Action for menu key tebi
 1099511627776
+FS? 64
+÷
+FC? 64
 ×
 "tebi (Ti)"
 RTN
 LBL 20    @@@@ Action for menu key pebi
 1125899906842624
+FS? 64
+÷
+FC? 64
 ×
 "pebi (Pi)"
 RTN
 LBL 21    @@@@ Action for menu key exbi
 1152921504606846976
+FS? 64
+÷
+FC? 64
 ×
 "exbi (Ei)"
 RTN
@@ -1140,7 +1224,18 @@ END
 
 Code in this section is under construction.  Most likely broken.
 
+For EE problems the following menu would be handy:
 
+#+ATTR_HTML: :rules groups :frame box :align center
+#+NAME: eepfx
+| Prefix | Sym |   Val |
+|--------+-----+-------|
+| micro  | µ   |  1e-6 |
+| nano   | n   |  1e-9 |
+| pico   | p   | 1e-12 |
+| ▒▒▒▒   |     |       |
+| kilo   | k   |  1e+3 |
+| mega   | M   |  1e+6 |
 
 * EOF
 

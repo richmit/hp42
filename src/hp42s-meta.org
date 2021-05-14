@@ -19,6 +19,27 @@
 #+HTML_LINK_HOME: https://www.mitchr.me/
 #+HTML_LINK_UP: https://richmit.github.io/hp42/
 #+EXPORT_FILE_NAME: ../docs/hp42s-meta
+#+LATEX_HEADER: \usepackage{extsizes} 
+#+LATEX_HEADER: \usepackage[landscape,margin=0.5in]{geometry}
+#+LATEX_HEADER: \usepackage{mathabx}
+#+LATEX_HEADER: \usepackage{boisik}
+#+LATEX_CLASS_OPTIONS: [letterpaper, 8pt]
+#+LATEX_HEADER: \usepackage[utf8]{inputenc}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{028F}{\textsc{Y}}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{03A3}{$\Sigma$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{03BC}{$\mu$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{03C0}{\pi}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{1D07}{$\bagmember$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{21B5}{$\dlsh$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{221A}{\makebox[.5em]{$\sqrt{}$}}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2221}{$\measuredangle$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{222B}{$\int$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2260}{$\neq$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2264}{$\leq$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2265}{$\geq$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{251C}{$\vdash$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2592}{$\square$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{25B8}{$\blacktriangleright$}
 
 #+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
 |        <r> | <l>                                          |
@@ -37,7 +58,12 @@ Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 
 * Metadata
 
+$\sqrt{\,}$
+$\textsc{Y}$
+
 The home for this HTML file is: https://richmit.github.io/hp42/hp42s-meta.html
+
+A PDF version of this file may be found here: https://richmit.github.io/hp42/hp42s-meta.pdf
 
 Files related to this document may be found on github: https://github.com/richmit/hp42
 
@@ -277,7 +303,7 @@ tables.
       (gen-mnu numeric-lbl-start 
                (1+ numeric-lbl-start)
                (prc-mnu (append (list top-lab) (cl-loop for row in tbl
-                                                        for row-strs = (mapcar (lambda (x) (replace-regexp-in-string "¦" "|" (format "%s" x) 't 't)) 
+                                                        for row-strs = (mapcar (lambda (x) (replace-regexp-in-string "¦" "|" (format "%s" x)  't 't)) 
                                                                                row)
                                                         for n from 0
                                                         for menu-parts = (split-string 
@@ -321,16 +347,24 @@ If any menu or prog is a label, then an =END= will not be generated at the end o
 the org-mode file and the whole thing will then be tangled together into one program.
 
 #+BEGIN_SRC elisp :results silent
-(defun MJR-is-42-builtin (astring) (cl-position astring '("%" "%CH" "+" "+/-" "-" "1/X" "10↑X" "ABS" "ACOS" "ACOSH" "ADV" "AGRAPH" "AIP" "ALENG" "ALL" "ALLΣ" "AND" "AOFF" "AON" "ARCL" "AROT" "ASHF" "ASIN" "ASINH" "ASSIGN" "ASTO" "ATAN" "ATANH" "ATOX" "AVIEW"
-                                                          "BASE+" "BASE+/-" "BASE-" "BASE×" "BASE÷" "BEEP" "BEST" "BINM" "BIT?"  "BIT?"  "CF" "CLA" "CLD" "CLKEYS" "CLLCD" "CLMENU" "CLP" "CLRG" "CLST" "CLV" "CLX" "CLΣ" "COMB" "COMPLEX" "CORR" "COS" "COSH"
-                                                          "CPX?"  "CPXRES" "CROSS" "CUSTOM" "DECM" "DEG" "DELAY" "DELR" "DET" "DIM" "DIM?"  "DOT" "DSE" "EDIT" "EDITN" "END" "ENG" "ENTER" "EXITALL" "EXPF" "E↑X" "E↑X-1" "FC?"  "FC?C" "FCSTX" "FCSTY" "FIX"
-                                                          "FNRM" "FP" "FS?"  "FS?C" "FUNC" "GAMMA" "GETKEY" "GETM" "GRAD" "GROW" "GTO" "HEXM" "HMS+" "HMS-" "I+" "I-" "INDEX" "INPUT" "INSR" "INTEG" "INVRT" "IP" "ISG" "J+" "J-" "KEY" "KEYASN" "L4STK" "LASTX"
-                                                          "LBL" "LCLBL" "LINF" "LINΣ" "LN" "LN1+X" "LOG" "LOGF" "LSTO" "MAN" "MAT?"  "MEAN" "MENU" "MOD" "MVAR" "N!"  "NEWMAT" "NOP" "NORM" "NOT" "OCTM" "OFF" "OLD" "ON" "OR" "PERM" "PGMINT" "PGMSLV" "PIXEL"
-                                                          "POLAR" "POSA" "PRA" "PRLCD" "PROFF" "PROMPT" "PRON" "PRSTK" "PRUSR" "PRV" "PRX" "PRΣ" "PSE" "PUTM" "PWRF" "R<>R" "RAD" "RAN" "RCL" "RCL+" "RCL-" "RCLEL" "RCLIJ" "RCL×" "RCL÷" "RDX," "RDX."  "REAL?"
-                                                          "REALRES" "RECT" "RND" "RNRM" "ROTXY" "RSUM" "RTN" "RTNERR" "RTNYES" "RTNNO" "R↑" "R↓" "SCI" "SDEV" "SEED" "SF" "SIGN" "SIN" "SINH" "SIZE" "SLOPE" "SOLVE" "SQRT" "STO" "STO+" "STO-" "STOEL" "STOIJ" "STOP" "STO×"
-                                                          "STO÷" "STR?"  "SUM" "TAN" "TANH" "TONE" "TRACE" "TRANS" "UVEC" "VARMENU" "VIEW" "WMEAN" "WRAP" "WSIZE?"  "X<0?"  "X<>" "X<>Y" "X<Y?"  "X=0?"  "X=Y?"  "X>0?"  "X>Y?"  "XEQ" "XTOA" "X↑2" "X≠0?"
-                                                          "X≠Y?"  "X≤0?"  "X≤Y?"  "X≥0?"  "X≥Y?"  "X≥Y?"  "YINT" "Y↑X" "[FIND]" "[MAX]" "[MIN]" "×" "÷" "Σ+" "Σ-" "ΣREG" "ΣREG?"  "←" "↑" "→" "→DEC" "→DEG" "→HMS" "→HR" "→OCT" "→POL" "→RAD" "→REC" "↓"
-                                                          "DDAYS" "DOW" "CLK12" "CLK24" "DMY" "MDY" "YMD" "DATE" "TIME" "DATE+" "PI" "WSIZE" "BSIGNED" "BWRAP" "XOR")
+(defun MJR-is-42-builtin (astring) (cl-position astring 
+                                                '("%" "%CH" "+" "+/-" "-" "1/X" "10↑X" "ABS" "ACOS" "ACOSH" "ADV" "AGRAPH" "AIP" "ALENG" "ALL" "ALLΣ" "AND" "AOFF" "AON"
+                                                  "ARCL" "AROT" "ASHF" "ASIN" "ASINH" "ASSIGN" "ASTO" "ATAN" "ATANH" "ATOX" "AVIEW" "BASE+" "BASE+/-" "BASE-" "BASE×"
+                                                  "BASE÷" "BEEP" "BEST" "BINM" "BIT?"  "BIT?"  "CF" "CLA" "CLD" "CLKEYS" "CLLCD" "CLMENU" "CLP" "CLRG" "CLST" "CLV"
+                                                  "CLX" "CLΣ" "COMB" "COMPLEX" "CORR" "COS" "COSH" "CPX?"  "CPXRES" "CROSS" "CUSTOM" "DECM" "DEG" "DELAY" "DELR"
+                                                  "DET" "DIM" "DIM?"  "DOT" "DSE" "EDIT" "EDITN" "END" "ENG" "ENTER" "EXITALL" "EXPF" "E↑X" "E↑X-1" "FC?"  "FC?C"
+                                                  "FCSTX" "FCSTY" "FIX" "FNRM" "FP" "FS?"  "FS?C" "FUNC" "GAMMA" "GETKEY" "GETM" "GRAD" "GROW" "GTO" "HEXM" "HMS+"
+                                                  "HMS-" "I+" "I-" "INDEX" "INPUT" "INSR" "INTEG" "INVRT" "IP" "ISG" "J+" "J-" "KEY" "KEYASN" "L4STK" "LASTX" "LBL"
+                                                  "LCLBL" "LINF" "LINΣ" "LN" "LN1+X" "LOG" "LOGF" "LSTO" "MAN" "MAT?"  "MEAN" "MENU" "MOD" "MVAR" "N!"  "NEWMAT"
+                                                  "NOP" "NORM" "NOT" "OCTM" "OFF" "OLD" "ON" "OR" "PERM" "PGMINT" "PGMSLV" "PIXEL" "POLAR" "POSA" "PRA" "PRLCD"
+                                                  "PROFF" "PROMPT" "PRON" "PRSTK" "PRUSR" "PRV" "PRX" "PRΣ" "PSE" "PUTM" "PWRF" "R<>R" "RAD" "RAN" "RCL" "RCL+"
+                                                  "RCL-" "RCLEL" "RCLIJ" "RCL×" "RCL÷" "RDX," "RDX."  "REAL?"  "REALRES" "RECT" "RND" "RNRM" "ROTXY" "RSUM" "RTN"
+                                                  "RTNERR" "RTNYES" "RTNNO" "R↑" "R↓" "SCI" "SDEV" "SEED" "SF" "SIGN" "SIN" "SINH" "SIZE" "SLOPE" "SOLVE" "SQRT"
+                                                  "STO" "STO+" "STO-" "STOEL" "STOIJ" "STOP" "STO×" "STO÷" "STR?"  "SUM" "TAN" "TANH" "TONE" "TRACE" "TRANS" "UVEC"
+                                                  "VARMENU" "VIEW" "WMEAN" "WRAP" "WSIZE?"  "X<0?"  "X<>" "X<>Y" "X<Y?"  "X=0?"  "X=Y?"  "X>0?"  "X>Y?"  "XEQ" "XTOA"
+                                                  "X↑2" "X≠0?"  "X≠Y?"  "X≤0?"  "X≤Y?"  "X≥0?"  "X≥Y?"  "X≥Y?"  "YINT" "Y↑X" "[FIND]" "[MAX]" "[MIN]" "×" "÷" "Σ+"
+                                                  "Σ-" "ΣREG" "ΣREG?"  "←" "↑" "→" "→DEC" "→DEG" "→HMS" "→HR" "→OCT" "→POL" "→RAD" "→REC" "↓" "DDAYS" "DOW" "CLK12"
+                                                  "CLK24" "DMY" "MDY" "YMD" "DATE" "TIME" "DATE+" "PI" "WSIZE" "BSIGNED" "BWRAP" "XOR")
                                                 :test #'string-equal))
 
 (defun MJR-custom-gen-lab (atrg row) (if (not (MJR-is-42-builtin atrg))
@@ -368,7 +402,7 @@ This function is handy when you want to always generate local labels.
 | LBL 88   | p      |      |     13 | O      | LBL 73   |
 
 #+BEGIN_SRC elisp :var tbl=menu :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle no"
-(MJR-generate-42-menu-code "PROG_NAME" 0 tbl 1 nil 'stay 'up #'MJR-local-only-gen-lab nil) ;;#'MJR-custom-gen-lab #'MJR-custom-gen-sub)
+(MJR-generate-42-menu-code "PROG_NAME" 0 tbl 1 nil 'stay 'up #'MJR-local-only-gen-lab nil)
 #+END_SRC
 
 #+RESULTS:
@@ -484,7 +518,8 @@ END
   (if charn
       (cl-loop for c in (split-string charn)
                do (insert (nth (eval (car (read-from-string c))) '("÷" "×" "√"  "∫" "▒" "Σ" "▸" "π" "¿" "≤"  "[LF]" "≥"     "≠"  "↵" "↓" "→"
-                                                                   "←" "μ" "£"  "°" "Å" "Ñ" "Ä" "∡" "ᴇ" "Æ"  "…"    "[ESC]" "Ö"  "Ü" "▒" "•"  ;; CHAR 30 & CHAR 4 are the same unicode.  Not sure how to type a char 30 into a string...
+                                                                   ;; CHAR 30 & CHAR 4 are the same unicode.  How to put 30 in a string?
+                                                                   "←" "μ" "£"  "°" "Å" "Ñ" "Ä" "∡" "ᴇ" "Æ"  "…"    "[ESC]" "Ö"  "Ü" "▒" "•"  
                                                                    " " "!" "\"" "#" "$" "%" "&" "'" "(" ")"  "*"    "+"     ","  "-" "." "/"
                                                                    "0" "1" "2"  "3" "4" "5" "6" "7" "8" "9"  ":"    ";"     "<"  "=" ">" "?"
                                                                    "@" "A" "B"  "C" "D" "E" "F" "G" "H" "I"  "J"    "K"     "L"  "M" "N" "O"
@@ -503,21 +538,23 @@ but this works for now.
 #+BEGIN_SRC elisp :results silent
 (define-generic-mode 'hp42s-mode
                      '("@@@@" "@@##" "@NM@")
-                     '("%" "%CH" "+" "+/-" "-" "1/X" "10↑X" "ABS" "ACOS" "ACOSH" "ADV" "AGRAPH" "AIP" "ALENG" "ALL" "ALLΣ" "AND" "AOFF" "AON" "ARCL" "AROT" "ASHF" "ASIN" "ASINH" "ASSIGN" "ASTO" "ATAN" "ATANH" "ATOX" "AVIEW"
-                       "BASE+" "BASE+/-" "BASE-" "BASE×" "BASE÷" "BEEP" "BEST" "BINM" "BIT"  "BIT"  "CF" "CLA" "CLD" "CLKEYS" "CLLCD" "CLMENU" "CLP" "CLRG" "CLST" "CLV" "CLX" "CLΣ" "COMB" "COMPLEX" "CORR" "COS" "COSH"
-                       "CPX"  "CPXRES" "CROSS" "CUSTOM" "DECM" "DEG" "DELAY" "DELR" "DET" "DIM" "DIM"  "DOT" "DSE" "EDIT" "EDITN" "END" "ENG" "ENTER" "EXITALL" "EXPF" "E↑X" "E↑X-1" "FC"  "FC?C" "FCSTX" "FCSTY" "FIX"
-                       "FNRM" "FP" "FS"  "FS?C" "FUNC" "GAMMA" "GETKEY" "GETM" "GRAD" "GROW" "GTO" "HEXM" "HMS+" "HMS-" "I+" "I-" "INDEX" "INPUT" "INSR" "INTEG" "INVRT" "IP" "ISG" "J+" "J-" "KEY" "KEYASN" "L4STK" "LASTX"
-                       "LBL" "LCLBL" "LINF" "LINΣ" "LN" "LN1+X" "LOG" "LOGF" "LSTO" "MAN" "MAT"  "MEAN" "MENU" "MOD" "MVAR" "N!"  "NEWMAT" "NOP" "NORM" "NOT" "OCTM" "OFF" "OLD" "ON" "OR" "PERM" "PGMINT" "PGMSLV" "PIXEL"
-                       "POLAR" "POSA" "PRA" "PRLCD" "PROFF" "PROMPT" "PRON" "PRSTK" "PRUSR" "PRV" "PRX" "PRΣ" "PSE" "PUTM" "PWRF" "R<>R" "RAD" "RAN" "RCL" "RCL+" "RCL-" "RCLEL" "RCLIJ" "RCL×" "RCL÷" "RDX," "RDX."  "REAL"
-                       "REALRES" "RECT" "RND" "RNRM" "ROTXY" "RSUM" "RTN" "RTNERR" "R↑" "R↓" "SCI" "SDEV" "SEED" "SF" "SIGN" "SIN" "SINH" "SIZE" "SLOPE" "SOLVE" "SQRT" "STO" "STO+" "STO-" "STOEL" "STOIJ" "STOP" "STO×"
-                       "STO÷" "STR"  "SUM" "TAN" "TANH" "TONE" "TRACE" "TRANS" "UVEC" "VARMENU" "VIEW" "WMEAN" "WRAP" "WSIZE"  "X<0"  "X<>" "X<>Y" "X<Y"  "X=0"  "X=0" "X=Y"  "X>0"  "X>Y"  "XEQ" "XTOA" "X↑2" "X≠0"
-                       "X≠Y"  "X≤0"  "X≤Y"  "X≥0"  "X≥Y"  "X≥Y"  "YINT" "Y↑X" "[FIND]" "[MAX]" "[MIN]" "×" "÷" "Σ+" "Σ-" "ΣREG" "ΣREG"  "←" "↑" "→" "→DEC" "→DEG" "→HMS" "→HR" "→OCT" "→POL" "→RAD" "→REC" "↓"
-                       "DDAYS" "DOW" "CLK12" "CLK24" "DMY" "MDY" "YMD" "DATE" "TIME" "ADATE" "ATIME" "DATE+" "XEQ IND ST" "XEQ IND" "GTO IND" "GTO IND ST" "STO IND ST" "STO+ IND ST" "STO- IND ST" "STOEL IND ST"
-                       "STOIJ IND ST" "STOP IND ST" "STO× IND ST" "STO÷ IND ST" "STO ST" "STO+ ST" "STO- ST" "STOEL ST" "STOIJ ST" "STOP ST" "STO× ST" "STO÷ ST" "RCL IND ST" "RCL+ IND ST" "RCL- IND ST" "RCLEL IND ST"
-                       "RCLIJ IND ST" "RCL× IND ST" "RCL÷ IND ST" "RCL ST" "RCL+ ST" "RCL- ST" "RCLEL ST"
-                       "RCLIJ ST" "RCL× ST" "RCL÷ ST"
-                       "RTNNO" "RTNYES" "PI"
-                       )
+                     '("%" "%CH" "+" "+/-" "-" "1/X" "10↑X" "ABS" "ACOS" "ACOSH" "ADV" "AGRAPH" "AIP" "ALENG" "ALL" "ALLΣ" "AND" "AOFF" "AON" "ARCL" "AROT" "ASHF" 
+                       "ASIN" "ASINH" "ASSIGN" "ASTO" "ATAN" "ATANH" "ATOX" "AVIEW" "BASE+" "BASE+/-" "BASE-" "BASE×" "BASE÷" "BEEP" "BEST" "BINM" "BIT" "BIT"
+                       "CF" "CLA" "CLD" "CLKEYS" "CLLCD" "CLMENU" "CLP" "CLRG" "CLST" "CLV" "CLX" "CLΣ" "COMB" "COMPLEX" "CORR" "COS" "COSH" "CPX" "CPXRES"
+                       "CROSS" "CUSTOM" "DECM" "DEG" "DELAY" "DELR" "DET" "DIM" "DIM" "DOT" "DSE" "EDIT" "EDITN" "END" "ENG" "ENTER" "EXITALL" "EXPF" "E↑X"
+                       "E↑X-1" "FC" "FC?C" "FCSTX" "FCSTY" "FIX" "FNRM" "FP" "FS" "FS?C" "FUNC" "GAMMA" "GETKEY" "GETM" "GRAD" "GROW" "GTO" "HEXM" "HMS+"
+                       "HMS-" "I+" "I-" "INDEX" "INPUT" "INSR" "INTEG" "INVRT" "IP" "ISG" "J+" "J-" "KEY" "KEYASN" "L4STK" "LASTX" "LBL" "LCLBL" "LINF" "LINΣ"
+                       "LN" "LN1+X" "LOG" "LOGF" "LSTO" "MAN" "MAT" "MEAN" "MENU" "MOD" "MVAR" "N!"  "NEWMAT" "NOP" "NORM" "NOT" "OCTM" "OFF" "OLD" "ON" "OR"
+                       "PERM" "PGMINT" "PGMSLV" "PIXEL" "POLAR" "POSA" "PRA" "PRLCD" "PROFF" "PROMPT" "PRON" "PRSTK" "PRUSR" "PRV" "PRX" "PRΣ" "PSE" "PUTM"
+                       "PWRF" "R<>R" "RAD" "RAN" "RCL" "RCL+" "RCL-" "RCLEL" "RCLIJ" "RCL×" "RCL÷" "RDX," "RDX."  "REAL" "REALRES" "RECT" "RND" "RNRM" "ROTXY"
+                       "RSUM" "RTN" "RTNERR" "R↑" "R↓" "SCI" "SDEV" "SEED" "SF" "SIGN" "SIN" "SINH" "SIZE" "SLOPE" "SOLVE" "SQRT" "STO" "STO+" "STO-" "STOEL"
+                       "STOIJ" "STOP" "STO×" "STO÷" "STR" "SUM" "TAN" "TANH" "TONE" "TRACE" "TRANS" "UVEC" "VARMENU" "VIEW" "WMEAN" "WRAP" "WSIZE" "X<0" "X<>"
+                       "X<>Y" "X<Y" "X=0" "X=0" "X=Y" "X>0" "X>Y" "XEQ" "XTOA" "X↑2" "X≠0" "X≠Y" "X≤0" "X≤Y" "X≥0" "X≥Y" "X≥Y" "YINT" "Y↑X" "[FIND]" "[MAX]"
+                       "[MIN]" "×" "÷" "Σ+" "Σ-" "ΣREG" "ΣREG" "←" "↑" "→" "→DEC" "→DEG" "→HMS" "→HR" "→OCT" "→POL" "→RAD" "→REC" "↓" "DDAYS" "DOW" "CLK12"
+                       "CLK24" "DMY" "MDY" "YMD" "DATE" "TIME" "ADATE" "ATIME" "DATE+" "XEQ IND ST" "XEQ IND" "GTO IND" "GTO IND ST" "STO IND ST" "STO+ IND ST"
+                       "STO- IND ST" "STOEL IND ST" "STOIJ IND ST" "STOP IND ST" "STO× IND ST" "STO÷ IND ST" "STO ST" "STO+ ST" "STO- ST" "STOEL ST" "STOIJ ST"
+                       "STOP ST" "STO× ST" "STO÷ ST" "RCL IND ST" "RCL+ IND ST" "RCL- IND ST" "RCLEL IND ST" "RCLIJ IND ST" "RCL× IND ST" "RCL÷ IND ST" "RCL
+                       ST" "RCL+ ST" "RCL- ST" "RCLEL ST" "RCLIJ ST" "RCL× ST" "RCL÷ ST" "RTNNO" "RTNYES" "PI")
                      '(("@@## REQ:.*" . font-lock-preprocessor-face)) ;; Not sure why this is broken.
                      '(".42s\\'")
                      nil
@@ -587,12 +624,13 @@ RTN       @@@@ IF-TRUE-END ($1)
 This will export to HTML and tangle all marked files in a dired buffer.
 
 #+begin_src elisp :results silent :eval never
-(defun MJR-dired-org-export (execute-blocks tangle-blocks export-html)
+(defun MJR-dired-org-export (execute-blocks tangle-blocks export-html export-pdf)
   "Evaluate all code blocks, export to HTML, and tangle current file or all marked files in dired-mode"
   (interactive (if (null current-prefix-arg)
                    (list (y-or-n-p "Evaluate all blocks?")
                          (y-or-n-p "Tangle all blocks?")
-                         (y-or-n-p "Export to HTML?"))
+                         (y-or-n-p "Export to HTML?")
+                         (y-or-n-p "Export to PDF via LaTeX?"))
                    (list 't 't 't)))
   (if (not (equal major-mode 'dired-mode))
       (message "MJR-dired-org-to-html-and-code: ERROR: Not in dired mode!!")
@@ -603,7 +641,8 @@ This will export to HTML and tangle all marked files in a dired buffer.
                     (with-current-buffer (find-file-noselect f)
                       (if execute-blocks (MJR-org-babel-execute-buffer))
                       (if tangle-blocks (org-babel-tangle))
-                      (if export-html (org-html-export-to-html))))
+                      (if export-html (org-html-export-to-html))
+                      (if export-pdf (org-latex-export-to-pdf))))
                   marked-files)))
             (message "dired-get-marked-files: Complete!")))
 #+end_src

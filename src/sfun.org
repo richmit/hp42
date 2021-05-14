@@ -19,6 +19,27 @@
 #+HTML_LINK_HOME: https://www.mitchr.me/
 #+HTML_LINK_UP: https://richmit.github.io/hp42/
 #+EXPORT_FILE_NAME: ../docs/sfun
+#+LATEX_HEADER: \usepackage{extsizes} 
+#+LATEX_HEADER: \usepackage[landscape,margin=0.5in]{geometry}
+#+LATEX_HEADER: \usepackage{mathabx}
+#+LATEX_HEADER: \usepackage{boisik}
+#+LATEX_CLASS_OPTIONS: [letterpaper, 8pt]
+#+LATEX_HEADER: \usepackage[utf8]{inputenc}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{028F}{\textsc{Y}}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{03A3}{$\Sigma$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{03BC}{$\mu$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{03C0}{\pi}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{1D07}{$\bagmember$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{21B5}{$\dlsh$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{221A}{\makebox[.5em]{$\sqrt{}$}}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2221}{$\measuredangle$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{222B}{$\int$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2260}{$\neq$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2264}{$\leq$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2265}{$\geq$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{251C}{$\vdash$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2592}{$\square$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{25B8}{$\blacktriangleright$}
 
 #+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
 |          <r> | <l>                                          |
@@ -41,6 +62,8 @@ Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 
 The home for this HTML file is: https://richmit.github.io/hp42/sfun.html
 
+A PDF version of this file may be found here: https://richmit.github.io/hp42/sfun.pdf
+
 Files related to this document may be found on github: https://github.com/richmit/hp42
 
 Directory contents:
@@ -62,6 +85,7 @@ This org-mode file collects together a handful simple mathematical functions tha
 :CUSTOM_ID: menu-sfun
 :END:
 
+#+ATTR_LATEX: :environment longtable
 #+ATTR_HTML: :align center :frame box :rules all
 #+NAME:SFUN
 | Menu       |        | Description                                                                |                  |                 |
@@ -1235,8 +1259,8 @@ RTN
 
 #+BEGIN_src hp42s :eval never :tangle ../src_42s/sfun/sfun.hp42s
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ DSC: 1/SIN(X)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CSCH)
+@@@@ DSC: 1/SINH(X)
 LBL "CSCH"
 FUNC 11         @@## REQ:free42>=2.5.24
 L4STK           @@## REQ:free42>=3.0
@@ -1244,8 +1268,8 @@ SINH
 1/X
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ DSC: 1/COS(X)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SECH)
+@@@@ DSC: 1/COSH(X)
 LBL "SECH"
 FUNC 11         @@## REQ:free42>=2.5.24
 L4STK           @@## REQ:free42>=3.0
@@ -1253,8 +1277,8 @@ COSH
 1/X
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ DSC: 1/TAN(X)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:COTH)
+@@@@ DSC: 1/TANH(X)
 LBL "COTH"
 FUNC 11         @@## REQ:free42>=2.5.24
 L4STK           @@## REQ:free42>=3.0
@@ -1262,8 +1286,8 @@ TANH
 1/X
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ DSC: SIN(1/X)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ACSCH)
+@@@@ DSC: SINH(1/X)
 LBL "ACSCH"
 FUNC 11         @@## REQ:free42>=2.5.24
 L4STK           @@## REQ:free42>=3.0
@@ -1271,8 +1295,8 @@ L4STK           @@## REQ:free42>=3.0
 ASINH
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ DSC: COS(1/X)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ASECH)
+@@@@ DSC: COSH(1/X)
 LBL "ASECH"
 FUNC 11         @@## REQ:free42>=2.5.24
 L4STK           @@## REQ:free42>=3.0
@@ -1280,8 +1304,8 @@ L4STK           @@## REQ:free42>=3.0
 ACOSH
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ DSC: TAN(1/X)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ACOTH)
+@@@@ DSC: TANH(1/X)
 LBL "ACOTH"
 FUNC 11         @@## REQ:free42>=2.5.24
 L4STK           @@## REQ:free42>=3.0
@@ -1293,7 +1317,7 @@ RTN
 ** Trigonometric Functions
 
 #+BEGIN_src hp42s :eval never :tangle ../src_42s/sfun/sfun.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:AHAV)
 @@@@ DSC: Inverse Haversine
 @@@@ IN:  X: number
 @@@@ OUT: X: ahav(X)=2*asin(sqrt(X))
@@ -1308,7 +1332,7 @@ ASIN
 ×
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:HAV)
 @@@@ DSC: Haversine
 @@@@ IN:  X: number
 @@@@ OUT: X: hav(X)=1/2-cos(X)/2
@@ -1324,7 +1348,7 @@ COS
 +
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:HYPOT)
 @@@@ DSC: Hypot
 @@@@ IN:  Y: number
 @@@@ IN:  X: number
@@ -1341,7 +1365,7 @@ COMPLEX
 ABS
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CSC)
 @@@@ DSC: 1/SIN(X)
 LBL "CSC"
 FUNC 11         @@## REQ:free42>=2.5.24
@@ -1350,7 +1374,7 @@ SIN
 1/X
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SEC)
 @@@@ DSC: 1/COS(X)
 LBL "SEC"
 FUNC 11         @@## REQ:free42>=2.5.24
@@ -1359,7 +1383,7 @@ COS
 1/X
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:COT)
 @@@@ DSC: 1/TAN(X)
 LBL "COT"
 FUNC 11         @@## REQ:free42>=2.5.24
@@ -1368,7 +1392,7 @@ TAN
 1/X
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ACSC)
 @@@@ DSC: SIN(1/X)
 LBL "ACSC"
 FUNC 11         @@## REQ:free42>=2.5.24
@@ -1377,7 +1401,7 @@ L4STK           @@## REQ:free42>=3.0
 ASIN
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ASEC)
 @@@@ DSC: COS(1/X)
 LBL "ASEC"
 FUNC 11         @@## REQ:free42>=2.5.24
@@ -1386,7 +1410,7 @@ L4STK           @@## REQ:free42>=3.0
 ACOS
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ACOT)
 @@@@ DSC: TAN(1/X)
 LBL "ACOT"
 FUNC 11         @@## REQ:free42>=2.5.24
@@ -1395,7 +1419,7 @@ L4STK           @@## REQ:free42>=3.0
 ATAN
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ATAN2)
 @@@@ DSC: ATAN2
 @@@@ IN:  Y: number
 @@@@ IN:  X: number
@@ -1468,7 +1492,7 @@ RTN
 
 ** Logs, Powers & Roots
 #+BEGIN_src hp42s :eval never :tangle ../src_42s/sfun/sfun.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:lnYX)
 @@@@ DSC: Base Y Logarithm of X
 @@@@ IN:  Y: logarithm base
 @@@@      X: number or matrix (element-wise)
@@ -1484,7 +1508,7 @@ LN
 ÷
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ln2)
 @@@@ DSC: Base 2 Logarithm
 @@@@ IN:  X: number or matrix (element-wise)
 @@@@ OUT: X: log_2(x)
@@ -1574,7 +1598,7 @@ X<>Y
 XEQ "YROOT"
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:YROOT)
 @@@@ DSC: Nth roots prefering real & pure imaginary answers
 @@@@ IN:  Y: Number
 @@@@ IN:  X: Number or numeric matrix (element-wise)

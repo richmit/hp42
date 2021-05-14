@@ -19,6 +19,27 @@
 #+HTML_LINK_HOME: https://www.mitchr.me/
 #+HTML_LINK_UP: https://richmit.github.io/hp42/
 #+EXPORT_FILE_NAME: ../docs/math
+#+LATEX_HEADER: \usepackage{extsizes} 
+#+LATEX_HEADER: \usepackage[margin=0.5in]{geometry}
+#+LATEX_HEADER: \usepackage{mathabx}
+#+LATEX_HEADER: \usepackage{boisik}
+#+LATEX_CLASS_OPTIONS: [letterpaper, 8pt]
+#+LATEX_HEADER: \usepackage[utf8]{inputenc}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{028F}{\textsc{Y}}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{03A3}{$\Sigma$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{03BC}{$\mu$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{03C0}{\pi}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{1D07}{$\bagmember$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{21B5}{$\dlsh$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{221A}{\makebox[.5em]{$\sqrt{}$}}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2221}{$\measuredangle$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{222B}{$\int$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2260}{$\neq$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2264}{$\leq$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2265}{$\geq$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{251C}{$\vdash$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{2592}{$\square$}
+#+LATEX_HEADER: \DeclareUnicodeCharacter{25B8}{$\blacktriangleright$}
 
 #+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
 |          <r> | <l>                                          |
@@ -40,6 +61,8 @@ Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 * Metadata
 
 The home for this HTML file is: https://richmit.github.io/hp42/math.html
+
+A PDF version of this file may be found here: https://richmit.github.io/hp42/math.pdf
 
 Files related to this document may be found on github: https://github.com/richmit/hp42
 
@@ -72,14 +95,14 @@ in this file.  That stuff has moved to file:sfun.org.
 | DIAG | MXDIAG | Create diagonal matrix with given elements | X: VEC | X: diagonal matrix |
 | TR   | MXTR   | Compute the trace of a matrix              | X: M   | X: trace           |
 | CPLY | MXCPLY | Compute matrix Characteristic polynomial   | X: M   | X: polynomial      |
-|      |        |                                            |        |                    |
+| ▒▒▒▒ |        |                                            |        |                    |
 | EDIT | LBL 96 |                                            |        |                    |
 |------+--------+--------------------------------------------+--------+--------------------|
 | MAT  | LBL 98 | Store/Recall Current CPOLY matrix          |        |                    |
 | X    | LBL 97 | Store/Recall current value of "X"          |        |                    |
-|      |        |                                            |        |                    |
-|      |        |                                            |        |                    |
-|      |        |                                            |        |                    |
+| ▒▒▒▒ |        |                                            |        |                    |
+| ▒▒▒▒ |        |                                            |        |                    |
+| ▒▒▒▒ |        |                                            |        |                    |
 | EVCP | EQCPLY | Evaluate Characteristic polynomial         |        |                    |
 
 ** Notes on individual programs
@@ -232,7 +255,7 @@ RSUM            @@@@ X   1+n 1   -- X is now a 1x1 matrix with the sum of the di
 DET             @@@@ TR          -- DET of a 1x1 matrix is matrix element
 RTN
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (MXIDN)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MXIDN)
 @@@@ DSC: Create an XxX identity matrix
 @@@@ IN:  X: Size of matrix to make
 @@@@ OUT: X: Identity matrix of size X
@@ -1297,10 +1320,12 @@ END
 ** Code
 
 #+BEGIN_SRC elisp :var tbl=STATR :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
-(MJR-generate-42-menu-code "STATR" 0 tbl 0 nil 'stay 'up #'MJR-local-only-gen-lab (lambda (atrg target row) 
-                                                                                    (cl-destructuring-bind (menu prog) row
-                                                                                      (mapconcat #'string-trim-left 
-                                                                                                 (split-string prog ";") "\n"))))
+(MJR-generate-42-menu-code "STATR" 0 tbl 0 nil 'stay 'up 
+                           #'MJR-local-only-gen-lab 
+                           (lambda (atrg target row) 
+                             (cl-destructuring-bind (menu prog) row
+                               (mapconcat #'string-trim-left 
+                                          (split-string prog ";") "\n"))))
 #+END_SRC
 
 #+RESULTS:
@@ -1533,6 +1558,3 @@ Code in this section is under construction.  Most likely broken.
 #+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 #+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 #+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
-
-
-

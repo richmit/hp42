@@ -131,7 +131,7 @@ The other columns of the table are not used.
 The menu program is generated via the following bit of elisp.  You must first define the =MJR-generate-42-menu-code= and =MJR-custom-x-gen= by evaluating the code blocks in the =hp42s-meta.org= file.
 
 #+BEGIN_SRC elisp :var tbl=cust :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/custom/custom.hp42s"
-(MJR-generate-42-menu-code "CUST" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
+(MJR-generate-42-menu-code "CUST" 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
@@ -212,7 +212,7 @@ each key.
 |    2 |            |         |
 |    3 |            |         |
 |    4 |            |         |
-|    5 | SIPFX      |         |
+|    5 | EEPFX      |         |
 |    6 | ¦¦         |         |
 |------+------------+---------|
 |    7 | VirtV      | DM42    |
@@ -258,7 +258,7 @@ Simply evaluate the followign lisp block, and the 42s program will be created.
 LBL "MKCM"
 CLKEYS
 ASSIGN "CUST" TO 01
-ASSIGN "SIPFX" TO 05
+ASSIGN "EEPFX" TO 05
 ASSIGN "||" TO 06
 SF 25
 RCL "GrMod"

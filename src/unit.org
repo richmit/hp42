@@ -101,12 +101,12 @@ the base conversion factors are exact quantities, the programs insure we obtain 
 | Leng:cm     |                                                    10 |                        |
 | Leng:in     |                                                  25.4 | Inch                   |
 |-------------+-------------------------------------------------------+------------------------|
-| Leng:cm     |                                                     1 |                        |
-| Leng:in     |                                                  2.54 | Intl Inch              |
-| Leng:ft     |                                  FUNC 01; 2.54; 12; * | Intl Foot              |
-| Leng:m      |                                                   100 |                        |
-| Leng:yd     |                            FUNC 01; 2.54; 12; *; 3; * | Intl Yard              |
-| Leng:hand   |                                   FUNC 01; 2.54; 4; * | Intl hand              |
+| Leng:in     |                                                     1 |                        |
+| Leng:hand   |                                                     4 |                        |
+| Leng:ft     |                                                    12 |                        |
+| Leng:yd     |                                     FUNC 01; 3; 12; * |                        |
+| Leng:fathom |                                     FUNC 01; 6; 12; * |                        |
+| Leng:mile   |                                  FUNC 01; 5280; 12; * |                        |
 |-------------+-------------------------------------------------------+------------------------|
 | Leng:km     |                                                     1 |                        |
 | Leng:mi     |                 FUNC 01; 2.54; 12; *; 5280; *; 1e5; / | Int Mile               |
@@ -199,6 +199,7 @@ the base conversion factors are exact quantities, the programs insure we obtain 
                            nil
                            'stay ;; Change to 'exit to exit immediatly after a conversion factor is pushed to the stack
                            'up   ;; Change to 'exit to have the application exit when [EXIT] is pressed
+                           'yes
                            (lambda (atrg row) (if (string-equal "SIPFX" atrg) (format "\"%s\"" atrg)))
                            ;;#'MJR-local-only-gen-lab
                            (lambda (atrg target row) 
@@ -283,17 +284,17 @@ STOP
 GTO 03
 LBL 13            @@@@ Page 2 of menu Leng
 CLMENU
-"cm"
-KEY 1 XEQ 21
 "in"
+KEY 1 XEQ 21
+"hand"
 KEY 2 XEQ 22
 "ft"
 KEY 3 XEQ 23
-"m"
-KEY 4 XEQ 24
 "yd"
+KEY 4 XEQ 24
+"fathom"
 KEY 5 XEQ 25
-"hand"
+"mile"
 KEY 6 XEQ 26
 KEY 7 GTO 03
 KEY 8 GTO 14
@@ -554,42 +555,32 @@ LBL 20    @@@@ Action for menu key in
 "Inch"
 AVIEW
 RTN
-LBL 21    @@@@ Action for menu key cm
+LBL 21    @@@@ Action for menu key in
 1
 RTN
-LBL 22    @@@@ Action for menu key in
-2.54
-"Intl Inch"
-AVIEW
+LBL 22    @@@@ Action for menu key hand
+4
 RTN
 LBL 23    @@@@ Action for menu key ft
-FUNC 01
-2.54
 12
-,*
-"Intl Foot"
-AVIEW
 RTN
-LBL 24    @@@@ Action for menu key m
-100
-RTN
-LBL 25    @@@@ Action for menu key yd
+LBL 24    @@@@ Action for menu key yd
 FUNC 01
-2.54
-12
-,*
 3
+12
 ,*
-"Intl Yard"
-AVIEW
 RTN
-LBL 26    @@@@ Action for menu key hand
+LBL 25    @@@@ Action for menu key fathom
 FUNC 01
-2.54
-4
+6
+12
 ,*
-"Intl hand"
-AVIEW
+RTN
+LBL 26    @@@@ Action for menu key mile
+FUNC 01
+5280
+12
+,*
 RTN
 LBL 27    @@@@ Action for menu key km
 1
@@ -928,16 +919,12 @@ FUNC 11
 +
 RTN
 @@@@ Free labels start at: 94
-#+end_src
-
-#+begin_src hp42s :eval never :tangle ../src_42s/unit/unit.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 #+end_src
 
-
 * SI Prefixes
-** Menu
+** Generic
+*** Menu
 #+ATTR_HTML: :rules groups :frame box :align center
 #+NAME: sipfx
 | Prefix | Sym |                 Val |
@@ -966,7 +953,7 @@ END
 Normally pressing the menu key will multiply the X value on the stack by the prefix multiplayer.  If =[SHIFT]= is pressed befreo the menu key, then X will be
 divided by the prefix mulitplyer.
 
-** Menu Code
+*** Menu Code
 
 Note: This one will have an =END= generated to finish the =UNIT= application.
 
@@ -978,6 +965,7 @@ Note: This one will have an =END= generated to finish the =UNIT= application.
                            nil
                            'stay ;; Change to 'exit to exit immediatly after a conversion factor is pushed to the stack
                            'up   ;; Change to 'exit to have the application exit when [EXIT] is pressed
+                           'no
                            #'MJR-local-only-gen-lab
                            (lambda (atrg target row) 
                             (cl-destructuring-bind (prefix-str sym-string mult) row
@@ -1206,6 +1194,108 @@ FC? 64
 "exbi (Ei)"
 RTN
 @@@@ Free labels start at: 22
+#+end_src
+
+** EE Prefixes
+
+For EE problems a smaller set of prefixes is more efficient
+
+*** Menu
+
+#+ATTR_HTML: :rules groups :frame box :align center
+#+NAME: eepfx
+| Prefix | Sym |   Val |
+|--------+-----+-------|
+| micro  | µ   |  1e-6 |
+| nano   | n   |  1e-9 |
+| pico   | p   | 1e-12 |
+| ▒▒▒▒   |     |       |
+| kilo   | k   |  1e+3 |
+| mega   | M   |  1e+6 |
+
+*** Menu Code
+
+#+BEGIN_SRC elisp :var tbl=eepfx :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/unit/unit.hp42s"
+(MJR-generate-42-menu-code "EEPFX" 
+                           30
+                           tbl
+                           0
+                           nil
+                           'stay ;; Change to 'exit to exit immediatly after a conversion factor is pushed to the stack
+                           'up   ;; Change to 'exit to have the application exit when [EXIT] is pressed
+                           'yes
+                           #'MJR-local-only-gen-lab
+                           (lambda (atrg target row) 
+                            (cl-destructuring-bind (prefix-str sym-string mult) row
+                              (mapconcat #'string-trim-left 
+                                         (list (format "%s" mult)
+                                               (format "FS? 64")
+                                               (format "÷")
+                                               (format "FC? 64")
+                                               (format "×"))
+                                         "\n"))))
+#+END_SRC
+
+#+RESULTS:
+#+begin_src hp42s :eval never :tangle ../src_42s/unit/unit.hp42s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:EEPFX)
+@@@@ DSC: Auto-generated menu program
+LBL "EEPFX"
+LBL 31            @@@@ Page 1 of menu EEPFX
+CLMENU
+"micro"
+KEY 1 XEQ 32
+"nano"
+KEY 2 XEQ 33
+"pico"
+KEY 3 XEQ 34
+"kilo"
+KEY 5 XEQ 35
+"mega"
+KEY 6 XEQ 36
+KEY 9 GTO 30
+MENU
+STOP
+GTO 31
+LBL 30 @@@@ Application Exit
+EXITALL
+RTN
+LBL 32    @@@@ Action for menu key micro
+1e-06
+FS? 64
+÷
+FC? 64
+×
+RTN
+LBL 33    @@@@ Action for menu key nano
+1e-09
+FS? 64
+÷
+FC? 64
+×
+RTN
+LBL 34    @@@@ Action for menu key pico
+1e-12
+FS? 64
+÷
+FC? 64
+×
+RTN
+LBL 35    @@@@ Action for menu key kilo
+1000.0
+FS? 64
+÷
+FC? 64
+×
+RTN
+LBL 36    @@@@ Action for menu key mega
+1000000.0
+FS? 64
+÷
+FC? 64
+×
+RTN
+@@@@ Free labels start at: 37
 END
 #+end_src
 
@@ -1224,18 +1314,6 @@ END
 
 Code in this section is under construction.  Most likely broken.
 
-For EE problems the following menu would be handy:
-
-#+ATTR_HTML: :rules groups :frame box :align center
-#+NAME: eepfx
-| Prefix | Sym |   Val |
-|--------+-----+-------|
-| micro  | µ   |  1e-6 |
-| nano   | n   |  1e-9 |
-| pico   | p   | 1e-12 |
-| ▒▒▒▒   |     |       |
-| kilo   | k   |  1e+3 |
-| mega   | M   |  1e+6 |
 
 * EOF
 

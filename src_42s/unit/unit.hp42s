@@ -59,17 +59,17 @@ STOP
 GTO 03
 LBL 13
 CLMENU
-"cm"
-KEY 1 XEQ 21
 "in"
+KEY 1 XEQ 21
+"hand"
 KEY 2 XEQ 22
 "ft"
 KEY 3 XEQ 23
-"m"
-KEY 4 XEQ 24
 "yd"
+KEY 4 XEQ 24
+"fathom"
 KEY 5 XEQ 25
-"hand"
+"mile"
 KEY 6 XEQ 26
 KEY 7 GTO 03
 KEY 8 GTO 14
@@ -334,38 +334,28 @@ LBL 21
 1
 RTN
 LBL 22
-2.54
-"Intl Inch"
-AVIEW
+4
 RTN
 LBL 23
-FUNC 01
-2.54
 12
-*
-"Intl Foot"
-AVIEW
 RTN
 LBL 24
-100
+FUNC 01
+3
+12
+*
 RTN
 LBL 25
 FUNC 01
-2.54
+6
 12
 *
-3
-*
-"Intl Yard"
-AVIEW
 RTN
 LBL 26
 FUNC 01
-2.54
-4
+5280
+12
 *
-"Intl hand"
-AVIEW
 RTN
 LBL 27
 1
@@ -912,6 +902,61 @@ FS? 64
 FC? 64
 ×
 "exbi (Ei)"
+RTN
+LBL "EEPFX"
+LBL 31
+CLMENU
+"micro"
+KEY 1 XEQ 32
+"nano"
+KEY 2 XEQ 33
+"pico"
+KEY 3 XEQ 34
+"kilo"
+KEY 5 XEQ 35
+"mega"
+KEY 6 XEQ 36
+KEY 9 GTO 30
+MENU
+STOP
+GTO 31
+LBL 30
+EXITALL
+RTN
+LBL 32
+1e-06
+FS? 64
+÷
+FC? 64
+×
+RTN
+LBL 33
+1e-09
+FS? 64
+÷
+FC? 64
+×
+RTN
+LBL 34
+1e-12
+FS? 64
+÷
+FC? 64
+×
+RTN
+LBL 35
+1000.0
+FS? 64
+÷
+FC? 64
+×
+RTN
+LBL 36
+1000000.0
+FS? 64
+÷
+FC? 64
+×
 RTN
 END
 

@@ -162,6 +162,10 @@ tables.
  - =after-leaf-action=       :: What do do when a /action/ menu is used (a leaf node in the menu)
     - ='stay=: Keep the menu active
     - ='exit=: Exit the menu
+ - =include-end=       :: Include final =END= statement
+    - ='yes=: Create final =END= statement
+    - ='exit=: Do not create final =END= statement
+    - ='auto=: Create final =END= statement if all menu target labels were generated
  - =target-column=           :: nil means no target column.  
  - =gen-target-label=        :: A function that generates the label for the =KEY= commands =GTO=/=XEQ=.  Return =nil= for autogen.
    - Arguments: autoish-target, list of row data
@@ -177,6 +181,7 @@ tables.
                                   target-column
                                   after-leaf-action
                                   menu-exit-behavior
+                                  include-end
                                   gen-target-label
                                   gen-target-code)
   (let* ((no-local 't)
@@ -322,7 +327,7 @@ tables.
     (princ m-code)
     (princ x-code)
     (princ (format "@@@@ Free labels start at: %d\n" min-free-lab))
-    (if no-local
+    (if (or (string-equal include-end "yes") (and (string-equal include-end "auto") no-local))
         (princ "END"))))
 #+END_SRC
 
@@ -402,7 +407,7 @@ This function is handy when you want to always generate local labels.
 | LBL 88   | p      |      |     13 | O      | LBL 73   |
 
 #+BEGIN_SRC elisp :var tbl=menu :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle no"
-(MJR-generate-42-menu-code "PROG_NAME" 0 tbl 1 nil 'stay 'up #'MJR-local-only-gen-lab nil)
+(MJR-generate-42-menu-code "PROG_NAME" 0 tbl 1 nil 'stay 'up 'auto #'MJR-local-only-gen-lab nil)
 #+END_SRC
 
 #+RESULTS:

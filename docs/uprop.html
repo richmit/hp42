@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-05-13 Thu 19:58 -->
+<!-- 2021-05-14 Fri 18:18 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Uncertainty Propagation</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-05-13 19:56:29</i></td>
+<td class="org-left"><i>2021-05-14 18:16:08</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,30 +241,30 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org7eb297e">1. Metadata</a></li>
+<li><a href="#org89a4154">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
 <li><a href="#menu-uprop">3. Menu</a>
 <ul>
-<li><a href="#orgcd32fe0">3.1. Notes</a>
+<li><a href="#orgf5072af">3.1. Notes</a>
 <ul>
-<li><a href="#org761471d">3.1.1. <code>[SHIFT]</code> key magic for menus</a></li>
-<li><a href="#org2bfd311">3.1.2. Global Labels</a></li>
-<li><a href="#org581605b">3.1.3. <code>UI→VU</code> &amp; <code>UVU→I</code>: Intervals</a></li>
-<li><a href="#orgf56dfbe">3.1.4. <code>UVU→%</code></a></li>
-<li><a href="#org21cf247">3.1.5. <code>UxU</code>: Multiply uncertainty</a></li>
+<li><a href="#org2468e31">3.1.1. <code>[SHIFT]</code> key magic for menus</a></li>
+<li><a href="#orgf4d3df5">3.1.2. Global Labels</a></li>
+<li><a href="#org9654827">3.1.3. <code>UI→VU</code> &amp; <code>UVU→I</code>: Intervals</a></li>
+<li><a href="#org9858065">3.1.4. <code>UVU→%</code></a></li>
+<li><a href="#org6f168d0">3.1.5. <code>UxU</code>: Multiply uncertainty</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org2f24178">4. Menu Code</a></li>
-<li><a href="#org9a1ae27">5. Functions</a></li>
-<li><a href="#org6c895b8">6. EOF</a></li>
+<li><a href="#orgae2a172">4. Menu Code</a></li>
+<li><a href="#org0b67464">5. Functions</a></li>
+<li><a href="#orgfb76852">6. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org7eb297e" class="outline-2">
-<h2 id="org7eb297e"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org89a4154" class="outline-2">
+<h2 id="org89a4154"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/uprop.html">https://richmit.github.io/hp42/uprop.html</a>
@@ -334,7 +334,7 @@ U (a standard deviation).
 <div id="outline-container-menu-uprop" class="outline-2">
 <h2 id="menu-uprop"><span class="section-number-2">3</span> Menu</h2>
 <div class="outline-text-2" id="text-menu-uprop">
-<table id="org4094375" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="org3a4c9b4" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -605,12 +605,12 @@ U (a standard deviation).
 </table>
 </div>
 
-<div id="outline-container-orgcd32fe0" class="outline-3">
-<h3 id="orgcd32fe0"><span class="section-number-3">3.1</span> Notes</h3>
+<div id="outline-container-orgf5072af" class="outline-3">
+<h3 id="orgf5072af"><span class="section-number-3">3.1</span> Notes</h3>
 <div class="outline-text-3" id="text-3-1">
 </div>
-<div id="outline-container-org761471d" class="outline-4">
-<h4 id="org761471d"><span class="section-number-4">3.1.1</span> <code>[SHIFT]</code> key magic for menus</h4>
+<div id="outline-container-org2468e31" class="outline-4">
+<h4 id="org2468e31"><span class="section-number-4">3.1.1</span> <code>[SHIFT]</code> key magic for menus</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <p>
 Menu keys that can accept a value with uncertainty in the X position of the stack behave differently when used with the <code>[SHIFT]</code> key.  If the <code>[SHIFT]</code> key is
@@ -624,8 +624,8 @@ Note that <code>I→VU</code> doesn't take a value with uncertainty, and thus pr
 </div>
 </div>
 
-<div id="outline-container-org2bfd311" class="outline-4">
-<h4 id="org2bfd311"><span class="section-number-4">3.1.2</span> Global Labels</h4>
+<div id="outline-container-orgf4d3df5" class="outline-4">
+<h4 id="orgf4d3df5"><span class="section-number-4">3.1.2</span> Global Labels</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <p>
 The menu items correspond to global labels that you can <code>XEQ</code> from other programs.  The names are the menu labels prefixed with "<code>U</code>" &#x2013; so "<code>SIN</code>" becomes
@@ -634,8 +634,8 @@ The menu items correspond to global labels that you can <code>XEQ</code> from ot
 </div>
 </div>
 
-<div id="outline-container-org581605b" class="outline-4">
-<h4 id="org581605b"><span class="section-number-4">3.1.3</span> <code>UI→VU</code> &amp; <code>UVU→I</code>: Intervals</h4>
+<div id="outline-container-org9654827" class="outline-4">
+<h4 id="org9654827"><span class="section-number-4">3.1.3</span> <code>UI→VU</code> &amp; <code>UVU→I</code>: Intervals</h4>
 <div class="outline-text-4" id="text-3-1-3">
 <p>
 These functions convert between intervals and quantity with uncertainty.  Intervals are specified by interval end points on levels X &amp; Y of the stack.  For
@@ -644,8 +644,8 @@ These functions convert between intervals and quantity with uncertainty.  Interv
 </div>
 </div>
 
-<div id="outline-container-orgf56dfbe" class="outline-4">
-<h4 id="orgf56dfbe"><span class="section-number-4">3.1.4</span> <code>UVU→%</code></h4>
+<div id="outline-container-org9858065" class="outline-4">
+<h4 id="org9858065"><span class="section-number-4">3.1.4</span> <code>UVU→%</code></h4>
 <div class="outline-text-4" id="text-3-1-4">
 <p>
 Given a quantity with uncertainty in X, it will return <code>T%</code> of the uncertainty.  This value is always positive.
@@ -653,8 +653,8 @@ Given a quantity with uncertainty in X, it will return <code>T%</code> of the un
 </div>
 </div>
 
-<div id="outline-container-org21cf247" class="outline-4">
-<h4 id="org21cf247"><span class="section-number-4">3.1.5</span> <code>UxU</code>: Multiply uncertainty</h4>
+<div id="outline-container-org6f168d0" class="outline-4">
+<h4 id="org6f168d0"><span class="section-number-4">3.1.5</span> <code>UxU</code>: Multiply uncertainty</h4>
 <div class="outline-text-4" id="text-3-1-5">
 <p>
 This is a quick way to multiply the uncertainty by a factor.  For example if you are using an expanded uncertainty value.
@@ -664,11 +664,11 @@ This is a quick way to multiply the uncertainty by a factor.  For example if you
 </div>
 </div>
 
-<div id="outline-container-org2f24178" class="outline-2">
-<h2 id="org2f24178"><span class="section-number-2">4</span> Menu Code</h2>
+<div id="outline-container-orgae2a172" class="outline-2">
+<h2 id="orgae2a172"><span class="section-number-2">4</span> Menu Code</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
-<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"UPROP"</span> 0 tbl 0 1 'stay 'up 
+<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"UPROP"</span> 0 tbl 0 1 'stay 'up 'auto
                            (<span style="color: #00ffff;">lambda</span> (atrg row) (<span style="color: #00ffff;">if</span> (string-equal <span style="color: #fa8072;">"UI&#8594;VU"</span> atrg)
                                                   (format <span style="color: #fa8072;">"\"%s\""</span> atrg)))
                            <span style="color: #ffa500;">;;</span><span style="color: #ff7f24;">#'MJR-local-only-gen-lab</span>
@@ -919,8 +919,8 @@ This is a quick way to multiply the uncertainty by a factor.  For example if you
 </div>
 </div>
 
-<div id="outline-container-org9a1ae27" class="outline-2">
-<h2 id="org9a1ae27"><span class="section-number-2">5</span> Functions</h2>
+<div id="outline-container-org0b67464" class="outline-2">
+<h2 id="org0b67464"><span class="section-number-2">5</span> Functions</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-UPLUS" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (UPLUS)</span>
@@ -1504,8 +1504,8 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 </div>
 </div>
 
-<div id="outline-container-org6c895b8" class="outline-2">
-<h2 id="org6c895b8"><span class="section-number-2">6</span> EOF</h2>
+<div id="outline-container-orgfb76852" class="outline-2">
+<h2 id="orgfb76852"><span class="section-number-2">6</span> EOF</h2>
 <div class="outline-text-2" id="text-6">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1516,7 +1516,7 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-13 Thu 19:58 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-14 Fri 18:18 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
 </div>
 </body>
 </html>

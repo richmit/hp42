@@ -88,38 +88,44 @@ This is a collection of programs that work with =MVAR=-type programs (equations)
 
 #+ATTR_HTML: :align center :frame box :rules all
 #+NAME:FMENU
-| MSTR       | LBL    | Menu       | Description                                                      |
-|------------+--------+------------+------------------------------------------------------------------|
-| SPT        | FSPT   | SPT        | Interactive application for computing Sums, Products, and Tables |
-| LBL 99     | FPLT   | PLOT       | Interactive application for plotting a function (DM42 Specific)  |
-| COMP:SOLVE | FSLV   | COMP:SOLVE | Solve EqP for EqV in [LLIM, ULIM]                                |
-| COMP:INTG  | FINT   | COMP:INTG  | Integrate EqP for EqV in [LLIM, ULIM]                            |
-| COMP:SUM   | FSUM   | COMP:SUM   | Sum EqP for values of EqV from LLIM to ULIM stepping by STEP     |
-| COMP:PROD  | FPRD   | COMP:PROD  | Product EqP for values of EqV from LLIM to ULIM stepping by STEP |
-| COMP:EVAL  | FEVL   | COMP:EVAL  | Evaluate EqV on X                                                |
-| COMP:▒▒▒▒  |        | COMP:▒▒▒▒  |                                                                  |
-| COMP:PICF  | LBL 96 | COMP:PICF  | Interactive application to select and describe an =MVAR= program |
-| COMP:▒▒▒▒  |        | COMP:▒▒▒▒  |                                                                  |
-| COMP:▒▒▒▒  |        | COMP:▒▒▒▒  |                                                                  |
-| COMP:INDP  | LBL 97 | COMP:INDP  | Store/Recall current value of "X"                                |
-| COMP:▒▒▒▒  |        | COMP:▒▒▒▒  |                                                                  |
-| COMP:EVAL  | FEVL   | COMP:EVAL  | Evaluate EqV on X                                                |
-| WRAP:PICF  | LBL 96 | WRAP:PICF  | Interactive application to select and describe an =MVAR= program |
-| WRAP:▒▒▒▒  |        | WRAP:▒▒▒▒  |                                                                  |
-| WRAP:SFUN  | LBL 98 | WRAP:FUN   | Store/Recall Current wrapped simple function                     |
-| WRAP:X     | LBL 97 | WRAP:X     | Store/Recall current value of "X"                                |
-| WRAP:▒▒▒▒  |        | WRAP:▒▒▒▒  |                                                                  |
-| WRAP:SEVAL | SFWRP  | WRAP:SFWRP | Evaluate currently wrapped simple function                       |
-| PICF       | LBL 96 | PICF       | Interactive application to select and describe an =MVAR= program |
-| FVARM      |        | FVARM      | MVAR program with all the global variables for these apps        |
-|------------+--------+------------+------------------------------------------------------------------|
+| MSTR   | LBL    | Menu  | Description                                                      |
+|--------+--------+-------+------------------------------------------------------------------|
+| SPT    | FSPT   | SPT   | Interactive application for computing Sums, Products, and Tables |
+| LBL 99 | FPLT   | PLOT  | Interactive application for plotting a function (DM42 Specific)  |
+| ▒▒▒▒   |        | ▒▒▒▒  |                                                                  |
+| EVAL   | LBL 91 | EVAL  | Evaluate EqV on X                                                |
+| FVARM  | LBL 95 | FVARM | MVAR program with all the global variables for these apps        |
+| PICF   | LBL 96 | PICF  | Interactive application to select and describe an =MVAR= program |
+|--------+--------+-------+------------------------------------------------------------------|
+| SOLVE  | FSLV   | SOLVE | Solve EqP for EqV in [LLIM, ULIM]                                |
+| INTG   | FINT   | INTG  | Integrate EqP for EqV over [LLIM, ULIM]                          |
+| SUM    | FSUM   | SUM   | Sum EqP for values of EqV from LLIM to ULIM stepping by STEP     |
+| PROD   | FPRD   | PROD  | Product EqP for values of EqV from LLIM to ULIM stepping by STEP |
+| FVARM  | LBL 95 | FVARM | MVAR program with all the global variables for these apps        |
+| PICF   | LBL 96 | PICF  | Interactive application to select and describe an =MVAR= program |
+|--------+--------+-------+------------------------------------------------------------------|
+
+Please ignore the first two columns in the table -- they are used to auto-generate the menu code for the application.
 
 ** Notes Regarding Some Individual Programs
+
+*** Interactive vs Non-interactive
+
+=SPT= & =FPLT= are fully interactive, user friendly applications.  The rest are stripped down programs designed to offer performance and good programmatic
+usability -- they are decidedly unfriendly.  Except for =FEVL= (menu key =[EVAL]=) these other programs provide no substantive error checking, they just do
+what they do as fast as they can do it.  This can lead to rather cryptic error messages when they are incorrectly used.  This is a feature.
+
+*** =FVARM=: Global Variables
+
+While =FVARM= is simply an MVAR program with all the global variables, the =[FVARM]= menu key actually shows the variable menu with =VARMENU=.
 
 *** =FEVL=: Evaluating the current equation
 
 I frequently use =VARMENU= to repeatedly evaluate a formula, with different input values.  Functionally that means typing in the value, and then hitting the
-variable button twice.  That's not super efficient when repeatedly changing the same variable.  That's where this little function comes in!
+variable button twice.  That's not super efficient when repeatedly changing the same variable.  That's where this little function comes in!  
+
+Note the program =FEVL= and the menu key =[EVAL]= are different.  The menu will do some error checking before it runs while the program just attempts to
+evaluate EqP on X.
 
 *** =PICF=: Selecting a =MVAR= program
 
@@ -136,11 +142,12 @@ To use this program simply put the name of the simple function into the variable
 *** =FSLV= & =FINT=: Apply the built in =SOLVE= & =INTG= tools to the current =EqP=
 
 These are handy little functions that allow one to apply the built in solver and integration capabilities of the 42s to the program currently active function.
+I debated putting them in the menu because they are really more suited to programmatic use.
 
 *** =FPRD= & =FSUM=: Non-interactive Sums & Products
 
 These programs are well suited for use by other programs.  They print no status, and are significantly faster than the interactive tool =FSPT=.  Note that
-they do not support the =LN= transform capability of =FSPT=.
+they do not support the =LN= transform capability of =FSPT=.  I debated putting them in the menu because they are really more suited to programmatic use.
 
 ** Organizing Principles
 
@@ -186,7 +193,7 @@ If an accuracy is required, then we use the variable =ACC=.
 ** Menu Code
 
 #+BEGIN_SRC elisp :var tbl=FMENU :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/pgmforfun/pgmforfun.hp42s"
-(MJR-generate-42-menu-code "FMENU" 0 tbl 0 1 'stay 'up #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
+(MJR-generate-42-menu-code "FMENU" 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
 #+RESULTS:
@@ -200,19 +207,19 @@ CLMENU
 KEY 1 XEQ "FSPT"
 XEQ 99
 KEY 2 XEQ "FPLT"
-"COMP"
-KEY 3 GTO 02
-"WRAP"
-KEY 4 GTO 03
-"PICF"
-KEY 5 XEQ 96
+"EVAL"
+KEY 4 XEQ 91
 "FVARM"
-KEY 6 XEQ "FVARM"
+KEY 5 XEQ 95
+"PICF"
+KEY 6 XEQ 96
+KEY 7 GTO 02
+KEY 8 GTO 02
 KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02            @@@@ Page 1 of menu COMP
+LBL 02            @@@@ Page 2 of menu FMENU
 CLMENU
 "SOLVE"
 KEY 1 XEQ "FSLV"
@@ -222,52 +229,26 @@ KEY 2 XEQ "FINT"
 KEY 3 XEQ "FSUM"
 "PROD"
 KEY 4 XEQ "FPRD"
-"EVAL"
-KEY 5 XEQ "FEVL"
-KEY 7 GTO 04
-KEY 8 GTO 04
-KEY 9 GTO 01
+"FVARM"
+KEY 5 XEQ 95
+"PICF"
+KEY 6 XEQ 96
+KEY 7 GTO 01
+KEY 8 GTO 01
+KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 04            @@@@ Page 2 of menu COMP
-CLMENU
-"PICF"
-KEY 1 XEQ 96
-"INDP"
-KEY 4 XEQ 97
-"EVAL"
-KEY 6 XEQ "FEVL"
-KEY 7 GTO 02
-KEY 8 GTO 02
-KEY 9 GTO 01
-MENU
-STOP
-GTO 04
-LBL 03            @@@@ Page 1 of menu WRAP
-CLMENU
-"PICF"
-KEY 1 XEQ 96
-"SFUN"
-KEY 3 XEQ 98
-"X"
-KEY 4 XEQ 97
-"SEVAL"
-KEY 6 XEQ "SFWRP"
-KEY 9 GTO 01
-MENU
-STOP
-GTO 03
 LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-@@@@ Free labels start at: 5
+@@@@ Free labels start at: 3
 #+end_src
 
 ** Functions
 
 #+begin_src hp42s :eval never :tangle ../src_42s/pgmforfun/pgmforfun.hp42s
-@@@@ LBL: 80-87, 97-98
+@@@@ LBL: 80-87, 91-87, 99
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PICF)
 @@@@ DSC: Pick an MVAR function and variable
@@ -352,6 +333,16 @@ LBL 96 @NM@ IPICF
 FUNC 00
 1
 XEQ "PICF"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Wrap "FVARM"
+LBL 95 @NM@ FVARMM
+"Set Vars; "
+├"R/S To End"
+AVIEW
+VARMENU "FVARM"
+STOP
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FPRD)
@@ -472,6 +463,50 @@ STO IND "EqV"
 XEQ IND "EqP"
 RTN
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: FEVL Menu Action
+LBL 94 @NM@ FEVLM
+XEQ 91 @NM@ CHKEqX
+X≠0?
+GTO 97 @NM@ AVRTN
+XEQ "FEVL"
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: GTO TARGET!! Display string and cause calling function to return
+LBL 97 @NM@ AVRTN
+AVIEW
+RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: FEVLM menu action -- wrapper for FEVL
+LBL 91 @NM@ FEVLM
+"ERR: EqP"
+├" is unset"
+SF 25
+RCL "EqP"
+FC?C 25
+GTO 92
+"ERR: EqV"
+├" is unset"
+R↓
+SF 25
+RCL "EqV"
+FC?C 25
+GTO 92
+"ERR: EqD"
+├" is unset"
+R↓
+SF 25
+RCL "EqD"
+FC?C 25
+GTO 92
+XEQ "FEVL"
+RTN
+LBL 92
+AVIEW
+RTN
+
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FVARM)
 @@@@ DSC: MVAR Program with all the global vartiables used by the F* programs
 @@@@ GBL: EqP, EqV, EqD, ACC, WFUN, LLIM, ULIM, STEP, YMIN, YMAX, & YSTP
@@ -500,24 +535,8 @@ XEQ IND "WFUN"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Store/Recall variable "WFUN"
-LBL 98 
-FS? 64
-RCL "WFUN"
-STO "WFUN"
-RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Store/Recall variable "X"
-LBL 97
-FS? 64
-RCL "X"
-STO "X"
-RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ LBL for FPLT menu
-LBL 99
+LBL 99 @NM@ FPLTM
 CLA
 SF 25
 RCL "GrMod"

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-05-18 Tue 21:10 -->
+<!-- 2021-05-18 Tue 23:30 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Programming Tools</title>
@@ -205,28 +205,6 @@
 <style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
 <style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
 <style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
-</script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="org-div-home-and-up">
@@ -251,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-05-18 21:09:45</i></td>
+<td class="org-left"><i>2021-05-18 23:30:23</i></td>
 </tr>
 </tbody>
 </table>
@@ -263,51 +241,46 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgfbb75e9">1. Metadata</a></li>
+<li><a href="#orgd9fb66f">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
 <li><a href="#menu-gen">3. Generating 42s menu code</a>
 <ul>
-<li><a href="#orgf759cfe">3.1. Generic menu generator</a></li>
-<li><a href="#orgfce0388">3.2. For CUSTOM-type Menus</a></li>
-<li><a href="#org650d49c">3.3. Always generate local lables</a></li>
+<li><a href="#org0ced644">3.1. Generic menu generator</a></li>
+<li><a href="#org4f46cd4">3.2. For CUSTOM-type Menus</a></li>
+<li><a href="#org1db076a">3.3. Always generate local lables</a></li>
 </ul>
 </li>
-<li><a href="#org4a14039">4. Emacs Helper Stuff</a>
+<li><a href="#orgdf9536e">4. Emacs Helper Stuff</a>
 <ul>
-<li><a href="#org68ad0d8">4.1. Emacs function to insert charcters given a list of character codes</a></li>
-<li><a href="#org4973634">4.2. Emacs Mode for 42s Code</a></li>
-<li><a href="#org8c07aa9">4.3. yas templates</a></li>
-<li><a href="#org2218e7e">4.4. Export &amp; Tangle from dired</a></li>
+<li><a href="#org9f3d8cb">4.1. Emacs function to insert charcters given a list of character codes</a></li>
+<li><a href="#orgc31cbac">4.2. Emacs Mode for 42s Code</a></li>
+<li><a href="#org0d8b8c1">4.3. yas templates</a></li>
+<li><a href="#org8404726">4.4. Export &amp; Tangle from dired</a></li>
 </ul>
 </li>
-<li><a href="#org699f32d">5. Prepare Code For Conversion</a></li>
-<li><a href="#orged4c76e">6. Prepare Marked Region for Code Conversion</a></li>
-<li><a href="#orga332c9f">7. Tangle &amp; Load Tangled File</a></li>
-<li><a href="#orgf5f9d92">8. free42 Notes</a>
+<li><a href="#org759f137">5. Prepare Code For Conversion</a></li>
+<li><a href="#orge0c96cc">6. Prepare Marked Region for Code Conversion</a></li>
+<li><a href="#orgf4fe2aa">7. Tangle &amp; Load Tangled File</a></li>
+<li><a href="#org1db6bda">8. free42 Notes</a>
 <ul>
-<li><a href="#org3b46b26">8.1. Character Set</a></li>
-<li><a href="#orge492be6">8.2. Date format</a></li>
-<li><a href="#org00970ea">8.3. Stats registers</a></li>
+<li><a href="#orged3c315">8.1. Character Set</a></li>
+<li><a href="#org7067b2a">8.2. Date format</a></li>
+<li><a href="#orga724c76">8.3. Stats registers</a></li>
 </ul>
 </li>
-<li><a href="#orge8c8a3c">9. DM 42 Notes</a>
+<li><a href="#org70123d0">9. DM 42 Notes</a>
 <ul>
-<li><a href="#orgc1190c6">9.1. Display</a></li>
+<li><a href="#org6203d9f">9.1. Display</a></li>
 </ul>
 </li>
-<li><a href="#org303c1ff">10. EOF</a></li>
+<li><a href="#org3fe8ad4">10. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgfbb75e9" class="outline-2">
-<h2 id="orgfbb75e9"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-orgd9fb66f" class="outline-2">
+<h2 id="orgd9fb66f"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
-<p>
-\(\sqrt{\,}\)
-\(\textsc{Y}\)
-</p>
-
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/hp42s-meta.html">https://richmit.github.io/hp42/hp42s-meta.html</a>
 </p>
@@ -388,8 +361,8 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
 <div class="outline-text-2" id="text-menu-gen">
 </div>
 
-<div id="outline-container-orgf759cfe" class="outline-3">
-<h3 id="orgf759cfe"><span class="section-number-3">3.1</span> Generic menu generator</h3>
+<div id="outline-container-org0ced644" class="outline-3">
+<h3 id="org0ced644"><span class="section-number-3">3.1</span> Generic menu generator</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 This code will read an org-mode table describing a menu, and generate 42s code to implement the menu.  The only limitation on menu depth and size are the
@@ -772,8 +745,8 @@ tables.
 </div>
 </div>
 
-<div id="outline-container-orgfce0388" class="outline-3">
-<h3 id="orgfce0388"><span class="section-number-3">3.2</span> For CUSTOM-type Menus</h3>
+<div id="outline-container-org4f46cd4" class="outline-3">
+<h3 id="org4f46cd4"><span class="section-number-3">3.2</span> For CUSTOM-type Menus</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 These functions are useful for CUSTOM-type menus &#x2013; that is menus that call other programs or built in functions.  I use this as a way to add hierarchy to the
@@ -856,8 +829,8 @@ the org-mode file and the whole thing will then be tangled together into one pro
 </div>
 </div>
 
-<div id="outline-container-org650d49c" class="outline-3">
-<h3 id="org650d49c"><span class="section-number-3">3.3</span> Always generate local lables</h3>
+<div id="outline-container-org1db076a" class="outline-3">
+<h3 id="org1db076a"><span class="section-number-3">3.3</span> Always generate local lables</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 This function is handy when you want to always generate local labels.
@@ -871,12 +844,12 @@ This function is handy when you want to always generate local labels.
 </div>
 </div>
 
-<div id="outline-container-org4a14039" class="outline-2">
-<h2 id="org4a14039"><span class="section-number-2">4</span> Emacs Helper Stuff</h2>
+<div id="outline-container-orgdf9536e" class="outline-2">
+<h2 id="orgdf9536e"><span class="section-number-2">4</span> Emacs Helper Stuff</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org68ad0d8" class="outline-3">
-<h3 id="org68ad0d8"><span class="section-number-3">4.1</span> Emacs function to insert charcters given a list of character codes</h3>
+<div id="outline-container-org9f3d8cb" class="outline-3">
+<h3 id="org9f3d8cb"><span class="section-number-3">4.1</span> Emacs function to insert charcters given a list of character codes</h3>
 <div class="outline-text-3" id="text-4-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-ins42char</span> (charn)
@@ -899,8 +872,8 @@ This function is handy when you want to always generate local labels.
 </div>
 </div>
 
-<div id="outline-container-org4973634" class="outline-3">
-<h3 id="org4973634"><span class="section-number-3">4.2</span> Emacs Mode for 42s Code</h3>
+<div id="outline-container-orgc31cbac" class="outline-3">
+<h3 id="orgc31cbac"><span class="section-number-3">4.2</span> Emacs Mode for 42s Code</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 This isn't really a proper mode for 42s code.  Just a quick hack with <code>define-generic-mode</code> to get some syntax highlighting &#x2013; which doesn't fully work as
@@ -937,8 +910,8 @@ but this works for now.
 </div>
 </div>
 
-<div id="outline-container-org8c07aa9" class="outline-3">
-<h3 id="org8c07aa9"><span class="section-number-3">4.3</span> yas templates</h3>
+<div id="outline-container-org0d8b8c1" class="outline-3">
+<h3 id="org0d8b8c1"><span class="section-number-3">4.3</span> yas templates</h3>
 <div class="outline-text-3" id="text-4-3">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #b0c4de;">echo</span> <span style="color: #fa8072;">''</span>
@@ -1008,8 +981,8 @@ RTN       @@@@ IF-TRUE-END (<span style="color: #00ffff;">$</span><span style="c
 </div>
 </div>
 
-<div id="outline-container-org2218e7e" class="outline-3">
-<h3 id="org2218e7e"><span class="section-number-3">4.4</span> Export &amp; Tangle from dired</h3>
+<div id="outline-container-org8404726" class="outline-3">
+<h3 id="org8404726"><span class="section-number-3">4.4</span> Export &amp; Tangle from dired</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 This will export to HTML and tangle all marked files in a dired buffer.
@@ -1048,8 +1021,8 @@ environment.
 </div>
 </div>
 
-<div id="outline-container-org699f32d" class="outline-2">
-<h2 id="org699f32d"><span class="section-number-2">5</span> Prepare Code For Conversion</h2>
+<div id="outline-container-org759f137" class="outline-2">
+<h2 id="org759f137"><span class="section-number-2">5</span> Prepare Code For Conversion</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 I include comments like <code>@@##</code> that I use like compiler directives in C.  They provide a way to remove lines of code that are incompatible or unnecessary for
@@ -1156,8 +1129,8 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-orged4c76e" class="outline-2">
-<h2 id="orged4c76e"><span class="section-number-2">6</span> Prepare Marked Region for Code Conversion</h2>
+<div id="outline-container-orge0c96cc" class="outline-2">
+<h2 id="orge0c96cc"><span class="section-number-2">6</span> Prepare Marked Region for Code Conversion</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-copy-42s-code-in-region</span> ()
@@ -1175,8 +1148,8 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-orga332c9f" class="outline-2">
-<h2 id="orga332c9f"><span class="section-number-2">7</span> Tangle &amp; Load Tangled File</h2>
+<div id="outline-container-orgf4fe2aa" class="outline-2">
+<h2 id="orgf4fe2aa"><span class="section-number-2">7</span> Tangle &amp; Load Tangled File</h2>
 <div class="outline-text-2" id="text-7">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-tangle-and-load</span> ()
@@ -1194,12 +1167,12 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-orgf5f9d92" class="outline-2">
-<h2 id="orgf5f9d92"><span class="section-number-2">8</span> free42 Notes</h2>
+<div id="outline-container-org1db6bda" class="outline-2">
+<h2 id="org1db6bda"><span class="section-number-2">8</span> free42 Notes</h2>
 <div class="outline-text-2" id="text-8">
 </div>
-<div id="outline-container-org3b46b26" class="outline-3">
-<h3 id="org3b46b26"><span class="section-number-3">8.1</span> Character Set</h3>
+<div id="outline-container-orged3c315" class="outline-3">
+<h3 id="orged3c315"><span class="section-number-3">8.1</span> Character Set</h3>
 <div class="outline-text-3" id="text-8-1">
 <div class="org-src-container">
 <pre class="src src-text">  0 &#247;
@@ -1337,8 +1310,8 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-orge492be6" class="outline-3">
-<h3 id="orge492be6"><span class="section-number-3">8.2</span> Date format</h3>
+<div id="outline-container-org7067b2a" class="outline-3">
+<h3 id="org7067b2a"><span class="section-number-3">8.2</span> Date format</h3>
 <div class="outline-text-3" id="text-8-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -1380,8 +1353,8 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-org00970ea" class="outline-3">
-<h3 id="org00970ea"><span class="section-number-3">8.3</span> Stats registers</h3>
+<div id="outline-container-orga724c76" class="outline-3">
+<h3 id="orga724c76"><span class="section-number-3">8.3</span> Stats registers</h3>
 <div class="outline-text-3" id="text-8-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1468,12 +1441,12 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-orge8c8a3c" class="outline-2">
-<h2 id="orge8c8a3c"><span class="section-number-2">9</span> DM 42 Notes</h2>
+<div id="outline-container-org70123d0" class="outline-2">
+<h2 id="org70123d0"><span class="section-number-2">9</span> DM 42 Notes</h2>
 <div class="outline-text-2" id="text-9">
 </div>
-<div id="outline-container-orgc1190c6" class="outline-3">
-<h3 id="orgc1190c6"><span class="section-number-3">9.1</span> Display</h3>
+<div id="outline-container-org6203d9f" class="outline-3">
+<h3 id="org6203d9f"><span class="section-number-3">9.1</span> Display</h3>
 <div class="outline-text-3" id="text-9-1">
 <p>
 GrMod is a read write variable.
@@ -1491,8 +1464,8 @@ ResX &amp; ResY are read only variables that have the display resolution
 </div>
 </div>
 
-<div id="outline-container-org303c1ff" class="outline-2">
-<h2 id="org303c1ff"><span class="section-number-2">10</span> EOF</h2>
+<div id="outline-container-org3fe8ad4" class="outline-2">
+<h2 id="org3fe8ad4"><span class="section-number-2">10</span> EOF</h2>
 <div class="outline-text-2" id="text-10">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1503,7 +1476,7 @@ ResX &amp; ResY are read only variables that have the display resolution
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-18 Tue 21:10 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-18 Tue 23:30 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
 </div>
 </body>
 </html>

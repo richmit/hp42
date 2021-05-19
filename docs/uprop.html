@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-05-14 Fri 18:18 -->
+<!-- 2021-05-18 Tue 21:11 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>free42 Uncertainty Propagation</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-05-14 18:16:08</i></td>
+<td class="org-left"><i>2021-05-18 21:09:45</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,30 +241,30 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org89a4154">1. Metadata</a></li>
+<li><a href="#org2a86e1f">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
 <li><a href="#menu-uprop">3. Menu</a>
 <ul>
-<li><a href="#orgf5072af">3.1. Notes</a>
+<li><a href="#orgc0ca095">3.1. Notes</a>
 <ul>
-<li><a href="#org2468e31">3.1.1. <code>[SHIFT]</code> key magic for menus</a></li>
-<li><a href="#orgf4d3df5">3.1.2. Global Labels</a></li>
-<li><a href="#org9654827">3.1.3. <code>UI→VU</code> &amp; <code>UVU→I</code>: Intervals</a></li>
-<li><a href="#org9858065">3.1.4. <code>UVU→%</code></a></li>
-<li><a href="#org6f168d0">3.1.5. <code>UxU</code>: Multiply uncertainty</a></li>
+<li><a href="#org0873b3d">3.1.1. <code>[SHIFT]</code> key magic for menus</a></li>
+<li><a href="#orge27eae7">3.1.2. Global Labels</a></li>
+<li><a href="#org66f4fa6">3.1.3. <code>UI→VU</code> &amp; <code>UVU→I</code>: Intervals</a></li>
+<li><a href="#org0dddaa2">3.1.4. <code>UVU→%</code></a></li>
+<li><a href="#org079390c">3.1.5. <code>UxU</code>: Multiply uncertainty</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgae2a172">4. Menu Code</a></li>
-<li><a href="#org0b67464">5. Functions</a></li>
-<li><a href="#orgfb76852">6. EOF</a></li>
+<li><a href="#org31295e5">4. Menu Code</a></li>
+<li><a href="#org80f8a9b">5. Functions</a></li>
+<li><a href="#org123242f">6. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org89a4154" class="outline-2">
-<h2 id="org89a4154"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org2a86e1f" class="outline-2">
+<h2 id="org2a86e1f"><span class="section-number-2">1</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/uprop.html">https://richmit.github.io/hp42/uprop.html</a>
@@ -307,7 +307,7 @@ Directory contents:
 <tr>
 <td class="org-left"><code>docs</code></td>
 <td class="org-left">-</td>
-<td class="org-left">This html document</td>
+<td class="org-left">This html document and associated PDF</td>
 </tr>
 
 <tr>
@@ -334,7 +334,7 @@ U (a standard deviation).
 <div id="outline-container-menu-uprop" class="outline-2">
 <h2 id="menu-uprop"><span class="section-number-2">3</span> Menu</h2>
 <div class="outline-text-2" id="text-menu-uprop">
-<table id="org3a4c9b4" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="org52c5347" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -605,12 +605,12 @@ U (a standard deviation).
 </table>
 </div>
 
-<div id="outline-container-orgf5072af" class="outline-3">
-<h3 id="orgf5072af"><span class="section-number-3">3.1</span> Notes</h3>
+<div id="outline-container-orgc0ca095" class="outline-3">
+<h3 id="orgc0ca095"><span class="section-number-3">3.1</span> Notes</h3>
 <div class="outline-text-3" id="text-3-1">
 </div>
-<div id="outline-container-org2468e31" class="outline-4">
-<h4 id="org2468e31"><span class="section-number-4">3.1.1</span> <code>[SHIFT]</code> key magic for menus</h4>
+<div id="outline-container-org0873b3d" class="outline-4">
+<h4 id="org0873b3d"><span class="section-number-4">3.1.1</span> <code>[SHIFT]</code> key magic for menus</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <p>
 Menu keys that can accept a value with uncertainty in the X position of the stack behave differently when used with the <code>[SHIFT]</code> key.  If the <code>[SHIFT]</code> key is
@@ -624,8 +624,8 @@ Note that <code>I→VU</code> doesn't take a value with uncertainty, and thus pr
 </div>
 </div>
 
-<div id="outline-container-orgf4d3df5" class="outline-4">
-<h4 id="orgf4d3df5"><span class="section-number-4">3.1.2</span> Global Labels</h4>
+<div id="outline-container-orge27eae7" class="outline-4">
+<h4 id="orge27eae7"><span class="section-number-4">3.1.2</span> Global Labels</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <p>
 The menu items correspond to global labels that you can <code>XEQ</code> from other programs.  The names are the menu labels prefixed with "<code>U</code>" &#x2013; so "<code>SIN</code>" becomes
@@ -634,8 +634,8 @@ The menu items correspond to global labels that you can <code>XEQ</code> from ot
 </div>
 </div>
 
-<div id="outline-container-org9654827" class="outline-4">
-<h4 id="org9654827"><span class="section-number-4">3.1.3</span> <code>UI→VU</code> &amp; <code>UVU→I</code>: Intervals</h4>
+<div id="outline-container-org66f4fa6" class="outline-4">
+<h4 id="org66f4fa6"><span class="section-number-4">3.1.3</span> <code>UI→VU</code> &amp; <code>UVU→I</code>: Intervals</h4>
 <div class="outline-text-4" id="text-3-1-3">
 <p>
 These functions convert between intervals and quantity with uncertainty.  Intervals are specified by interval end points on levels X &amp; Y of the stack.  For
@@ -644,8 +644,8 @@ These functions convert between intervals and quantity with uncertainty.  Interv
 </div>
 </div>
 
-<div id="outline-container-org9858065" class="outline-4">
-<h4 id="org9858065"><span class="section-number-4">3.1.4</span> <code>UVU→%</code></h4>
+<div id="outline-container-org0dddaa2" class="outline-4">
+<h4 id="org0dddaa2"><span class="section-number-4">3.1.4</span> <code>UVU→%</code></h4>
 <div class="outline-text-4" id="text-3-1-4">
 <p>
 Given a quantity with uncertainty in X, it will return <code>T%</code> of the uncertainty.  This value is always positive.
@@ -653,8 +653,8 @@ Given a quantity with uncertainty in X, it will return <code>T%</code> of the un
 </div>
 </div>
 
-<div id="outline-container-org6f168d0" class="outline-4">
-<h4 id="org6f168d0"><span class="section-number-4">3.1.5</span> <code>UxU</code>: Multiply uncertainty</h4>
+<div id="outline-container-org079390c" class="outline-4">
+<h4 id="org079390c"><span class="section-number-4">3.1.5</span> <code>UxU</code>: Multiply uncertainty</h4>
 <div class="outline-text-4" id="text-3-1-5">
 <p>
 This is a quick way to multiply the uncertainty by a factor.  For example if you are using an expanded uncertainty value.
@@ -664,8 +664,8 @@ This is a quick way to multiply the uncertainty by a factor.  For example if you
 </div>
 </div>
 
-<div id="outline-container-orgae2a172" class="outline-2">
-<h2 id="orgae2a172"><span class="section-number-2">4</span> Menu Code</h2>
+<div id="outline-container-org31295e5" class="outline-2">
+<h2 id="org31295e5"><span class="section-number-2">4</span> Menu Code</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"UPROP"</span> 0 tbl 0 1 'stay 'up 'auto
@@ -919,8 +919,8 @@ This is a quick way to multiply the uncertainty by a factor.  For example if you
 </div>
 </div>
 
-<div id="outline-container-org0b67464" class="outline-2">
-<h2 id="org0b67464"><span class="section-number-2">5</span> Functions</h2>
+<div id="outline-container-org80f8a9b" class="outline-2">
+<h2 id="org80f8a9b"><span class="section-number-2">5</span> Functions</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-UPLUS" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (UPLUS)</span>
@@ -935,7 +935,7 @@ This is a quick way to multiply the uncertainty by a factor.  For example if you
 <span style="color: #00ffff;">XEQ</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">R-&gt;C     @@@@ Y X</span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y.u Y.v X </span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y.v Y.u X </span>
-<span style="color: #00ffff;">RCL ST</span> Z             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X Y.v Y.u X </span>
+<span style="color: #00ffff;">RCL</span> ST Z             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X Y.v Y.u X </span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v Y.v Y.u</span>
 Rv                   <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v Y.v Y.u X.u </span>
 <span style="color: #00ffff;">+</span>                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(Y+X).v Y.u X.u </span>
@@ -959,7 +959,7 @@ R&#8593;                   <span style="color: #ffa500;">@@@@ </span><span style
 <span style="color: #00ffff;">XEQ</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">R-&gt;C     @@@@ Y X</span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y.u Y.v X </span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y.v Y.u X </span>
-<span style="color: #00ffff;">RCL ST</span> Z             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X Y.v Y.u X </span>
+<span style="color: #00ffff;">RCL</span> ST Z             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X Y.v Y.u X </span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v Y.v Y.u</span>
 Rv                   <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v Y.v Y.u X.u </span>
 <span style="color: #00ffff;">-</span>                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">(Y-X).v Y.u X.u </span>
@@ -1119,7 +1119,7 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 <span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">XEQ</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">R-&gt;C     @@@@ X</span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
+<span style="color: #00ffff;">RCL</span> ST Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
 <span style="color: #00ffff;">&#247;</span>                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u/X.v X.v</span>
 <span style="color: #00ffff;">ABS</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">ln(X).u X.v</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v ln(X).u </span>
@@ -1152,7 +1152,7 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 <span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">XEQ</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">R-&gt;C     @@@@ X</span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
+<span style="color: #00ffff;">RCL</span> ST Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
 <span style="color: #00ffff;">COS</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">COS(X.v) X.u X.v</span>
 <span style="color: #00ffff;">&#215;</span>                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">COS(X.v)*X.u X.v</span>
 <span style="color: #00ffff;">ABS</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SIN(X).u X.v </span>
@@ -1170,7 +1170,7 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 <span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">XEQ</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">R-&gt;C     @@@@ X</span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
+<span style="color: #00ffff;">RCL</span> ST Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
 <span style="color: #00ffff;">SIN</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SIN(X.v) X.u X.v</span>
 <span style="color: #00ffff;">&#215;</span>                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SIN(X.v)*X.u X.v</span>
 <span style="color: #00ffff;">ABS</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">COS(X).u X.v </span>
@@ -1188,7 +1188,7 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 <span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">XEQ</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">R-&gt;C     @@@@ X</span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
+<span style="color: #00ffff;">RCL</span> ST Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
 <span style="color: #00ffff;">COS</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">COS(X.v) X.u X.v</span>
 <span style="color: #00ffff;">1/X</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SEC(X.v) X.u X.v </span>
 <span style="color: #00ffff;">X&#8593;2</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SEC^2(X.v) X.u X.v</span>
@@ -1209,7 +1209,7 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 <span style="color: #00ffff;">XEQ</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">R-&gt;C     @@@@ X</span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
 1                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 X.u X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Z             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v 1 X.u X.v</span>
+<span style="color: #00ffff;">RCL</span> ST Z             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v 1 X.u X.v</span>
 <span style="color: #00ffff;">X&#8593;2</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v^2 1 X.u X.v</span>
 <span style="color: #00ffff;">-</span>                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1-X.v^2 X.u X.v</span>
 <span style="color: #00ffff;">SQRT</span>                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SQRT(1-X.v^2) X.u X.v</span>
@@ -1230,7 +1230,7 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 <span style="color: #00ffff;">XEQ</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">R-&gt;C     @@@@ X</span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
 1                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 X.u X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Z             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v 1 X.u X.v</span>
+<span style="color: #00ffff;">RCL</span> ST Z             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v 1 X.u X.v</span>
 <span style="color: #00ffff;">X&#8593;2</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v^2 1 X.u X.v</span>
 <span style="color: #00ffff;">-</span>                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1-X.v^2 X.u X.v</span>
 <span style="color: #00ffff;">SQRT</span>                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SQRT(1-X.v^2) X.u X.v</span>
@@ -1251,7 +1251,7 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 <span style="color: #00ffff;">XEQ</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">R-&gt;C     @@@@ X</span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
 1                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 X.u X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Z             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v 1 X.u X.v</span>
+<span style="color: #00ffff;">RCL</span> ST Z             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v 1 X.u X.v</span>
 <span style="color: #00ffff;">X&#8593;2</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v^2 1 X.u X.v</span>
 <span style="color: #00ffff;">+</span>                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1+X.v^2 X.u X.v</span>
 <span style="color: #00ffff;">&#247;</span>                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u/(1+X.v^2) X.v</span>
@@ -1270,7 +1270,7 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 <span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">XEQ</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">R-&gt;C     @@@@ X</span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
+<span style="color: #00ffff;">RCL</span> ST Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
 <span style="color: #00ffff;">COSH</span>                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">COSH(X.v) X.u X.v</span>
 <span style="color: #00ffff;">&#215;</span>                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">COSH(X.v)*X.u X.v</span>
 <span style="color: #00ffff;">ABS</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SINH(X).u X.v </span>
@@ -1288,7 +1288,7 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 <span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">XEQ</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">R-&gt;C     @@@@ X</span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
+<span style="color: #00ffff;">RCL</span> ST Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
 <span style="color: #00ffff;">SINH</span>                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SINH(X.v) X.u X.v</span>
 <span style="color: #00ffff;">&#215;</span>                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SINH(X.v)*X.u X.v</span>
 <span style="color: #00ffff;">ABS</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">COSH(X).u X.v </span>
@@ -1306,7 +1306,7 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 <span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">XEQ</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">R-&gt;C     @@@@ X</span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
+<span style="color: #00ffff;">RCL</span> ST Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
 <span style="color: #00ffff;">COSH</span>                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">COSH(X.v) X.u X.v</span>
 <span style="color: #00ffff;">1/X</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SECH(X.v) X.u X.v </span>
 <span style="color: #00ffff;">X&#8593;2</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">SECH^2(X.v) X.u X.v</span>
@@ -1326,7 +1326,7 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 <span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">XEQ</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">R-&gt;C     @@@@ X</span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
+<span style="color: #00ffff;">RCL</span> ST Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
 <span style="color: #00ffff;">X&#8593;2</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v^2 X.u X.v</span>
 1                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 X.v^2 X.u X.v</span>
 <span style="color: #00ffff;">+</span>                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v^2-1 X.u X.v</span>
@@ -1347,7 +1347,7 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 <span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">XEQ</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">R-&gt;C     @@@@ X</span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
+<span style="color: #00ffff;">RCL</span> ST Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
 <span style="color: #00ffff;">X&#8593;2</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v^2 X.u X.v</span>
 1                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 X.v^2 X.u X.v</span>
 <span style="color: #00ffff;">-</span>                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v^2-1 X.u X.v</span>
@@ -1368,7 +1368,7 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 <span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">XEQ</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">R-&gt;C     @@@@ X</span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
+<span style="color: #00ffff;">RCL</span> ST Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
 <span style="color: #00ffff;">X&#8593;2</span>                  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v^2 X.u X.v</span>
 1                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1 X.v^2 X.u X.v</span>
 <span style="color: #00ffff;">-</span>                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">1-X.v^2 X.u X.v</span>
@@ -1388,7 +1388,7 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 <span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">XEQ</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">R-&gt;C     @@@@ X</span>
 <span style="color: #00ffff;">COMPLEX</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
+<span style="color: #00ffff;">RCL</span> ST Y             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v X.u X.v</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"DIGAMM"</span>         <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DIGAMM(X.v) X.u X.v</span>
 <span style="color: #00ffff;">&#215;</span>                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DIGAMM(X.v)*X.u X.v</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v DIGAMM(X.v)*X.u </span>
@@ -1408,13 +1408,13 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 <span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"UI&#8594;VU"</span>
 <span style="color: #00ffff;">FUNC</span> 21  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P1      P2</span>
 <span style="color: #00ffff;">L4STK</span>
-<span style="color: #00ffff;">RCL ST</span> Y <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P2      P1    P2</span>
-<span style="color: #00ffff;">RCL ST</span> Y <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P1      P2    P1 P2</span>
+<span style="color: #00ffff;">RCL</span> ST Y <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P2      P1    P2</span>
+<span style="color: #00ffff;">RCL</span> ST Y <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P1      P2    P1 P2</span>
 <span style="color: #00ffff;">+</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P1+P2   P1    P2 P2</span>
 2        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">2       P1+P2 P1 P2</span>
 <span style="color: #00ffff;">&#247;</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">C       P1    P2 P2</span>
-<span style="color: #00ffff;">RCL ST</span> Z <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P2      C     P1 P2</span>
-<span style="color: #00ffff;">RCL ST</span> Z <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P1      P2    C  P1</span>
+<span style="color: #00ffff;">RCL</span> ST Z <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P2      C     P1 P2</span>
+<span style="color: #00ffff;">RCL</span> ST Z <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P1      P2    C  P1</span>
 <span style="color: #00ffff;">-</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">P2-P1   C     P1 P1</span>
 <span style="color: #00ffff;">ABS</span>      <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">|P2-P1| C     P1 P1</span>
 2        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">2       R     C  P1</span>
@@ -1434,11 +1434,11 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 <span style="color: #00ffff;">XEQ</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">R-&gt;C  @@@@ X</span>
 <span style="color: #00ffff;">COMPLEX</span>           <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u     X.v</span>
 <span style="color: #00ffff;">ABS</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u     X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Y          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v     X.u     X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Y          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u     X.v     X.u     X.v</span>
+<span style="color: #00ffff;">RCL</span> ST Y          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v     X.u     X.v</span>
+<span style="color: #00ffff;">RCL</span> ST Y          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u     X.v     X.u     X.v</span>
 <span style="color: #00ffff;">-</span>                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">MIN     X.u     X.v     X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Z          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v     MIN     X.u     X.v</span>
-<span style="color: #00ffff;">RCL ST</span> Z          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u     X.v     MIN     X.u</span>
+<span style="color: #00ffff;">RCL</span> ST Z          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.v     MIN     X.u     X.v</span>
+<span style="color: #00ffff;">RCL</span> ST Z          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X.u     X.v     MIN     X.u</span>
 <span style="color: #00ffff;">+</span>                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">MAX     MIN     X.u     X.u</span>
 <span style="color: #00ffff;">RTN</span>
 
@@ -1504,8 +1504,8 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 </div>
 </div>
 
-<div id="outline-container-orgfb76852" class="outline-2">
-<h2 id="orgfb76852"><span class="section-number-2">6</span> EOF</h2>
+<div id="outline-container-org123242f" class="outline-2">
+<h2 id="org123242f"><span class="section-number-2">6</span> EOF</h2>
 <div class="outline-text-2" id="text-6">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1516,7 +1516,7 @@ Rv                   <span style="color: #ffa500;">@@@@ </span><span style="colo
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-14 Fri 18:18 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-18 Tue 21:11 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
 </div>
 </body>
 </html>

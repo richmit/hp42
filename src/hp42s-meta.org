@@ -71,7 +71,7 @@ Directory contents:
 #+ATTR_HTML: :border 0 :frame none :rules none :align center
    | =src=     | - | The org-mode file that generated this HTML document            |
    | =src_42s= | - | Ready to convert source listings for 42s code in this document |
-   | =docs=    | - | This html document                                             |
+   | =docs=    | - | This html document and associated PDF                          |
    | =bin=     | - | Importable RAW program files                                   |
 
 * Introduction
@@ -600,6 +600,15 @@ GTO ${1:$(format "%02d" (+ 2 (string-to-number yas-text)))}
 LBL ${1:$(format "%02d" (+ 1 (string-to-number yas-text)))} @@@@ IF-ELSE ($1/${1:$(format "%02d" (+ 1 (string-to-number yas-text)))}/${1:$(format "%02d" (+ 2 (string-to-number yas-text)))})
 @@@@ False Code ($1/${1:$(format "%02d" (+ 1 (string-to-number yas-text)))}/${1:$(format "%02d" (+ 2 (string-to-number yas-text)))})
 LBL ${1:$(format "%02d" (+ 2 (string-to-number yas-text)))} @@@@ IF-END ($1/${1:$(format "%02d" (+ 1 (string-to-number yas-text)))}/${1:$(format "%02d" (+ 2 (string-to-number yas-text)))})
+
+# -*- mode: snippet -*-
+# name: if-not-then-end
+# key: ifn
+# --
+...?   @@@@ IF-NOT-BEGIN ($1)
+GTO ${1:1$(format "%02d" (string-to-number yas-text))}
+@@@@ False Code ($1)
+LBL $1 @@@@ IF-NOT-END ($1)
 
 # -*- mode: snippet -*-
 # name: if-not-then-end

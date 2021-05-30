@@ -827,14 +827,14 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PTOT)
 @@@@ DSC: Percentage of total (just like hp-12c button)
 @@@@ IN:  Y: Real Number -- Total
-@@@@ IN:  X: Real Number -- Part
-@@@@ OUT: X: 100*X/Y
+@@@@      X: Real Number -- Part
+@@@@ OUT: Y: Y
+@@@@      X: 100*X/Y
 @@@@ UPD: 2021-03-12
 LBL "%T"
-FUNC 21         @@## REQ:free42>=2.5.24
+FUNC 22         @@## REQ:free42>=2.5.24
 L4STK           @@## REQ:free42>=3.0
-X<>Y
-÷
+RCL÷ ST Y
 100
 ×
 RTN

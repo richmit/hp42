@@ -97,100 +97,100 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 #+ATTR_LATEX: :environment longtable
 #+ATTR_HTML: :align center
 #+NAME: basem
-| Menu:SubMenu:Key | Program | Description                                        |
-|------------------+---------+----------------------------------------------------|
-| S&R:SLn          |         | Shift Y Left X Bits                                |
-| S&R:SRn          |         | Shift Y Right X Bits                               |
-| S&R:RLn          |         | Rotate Y Left by X bits                            |
-| S&R:RRn          |         | Rotate Y Right by X bits                           |
-| S&R:▒▒▒▒         |         |                                                    |
-| S&R:BVIEW        |         |                                                    |
-|------------------+---------+----------------------------------------------------|
-| S&R:LJ           |         | Left Justify Bits.                                 |
-| S&R:RJ           |         | Right Justify Bits                                 |
-| S&R:SHFXY        |         | Shift X by Y Bits (left when Y negative)           |
-| S&R:ROTXY        |         |                                                    |
-| S&R:▒▒▒▒         |         |                                                    |
-| S&R:BVIEW        |         |                                                    |
-|------------------+---------+----------------------------------------------------|
-| S&R:SL           |         | Shift Left 1 Bit                                   |
-| S&R:SR           |         | Shift Right 1 Bit                                  |
-| S&R:RL           |         | Rotate Left 1 Bit                                  |
-| S&R:RR           |         | Rotate Right 1 Bit                                 |
-| S&R:▒▒▒▒         |         |                                                    |
-| S&R:BVIEW        |         |                                                    |
-|------------------+---------+----------------------------------------------------|
-| BITS:GETB        |         | Return the Xth bit of Y                            |
-| BITS:SB          | SETB    | Set the Xth bit of Y                               |
-| BITS:CB          | CLRB    | Clear the Xth bit in Y                             |
-| BITS:AB          | ASNB    | Assign X to the Yth bit of Z                       |
-| BITS:▒▒▒▒        |         |                                                    |
-| BITS:BVIEW       |         |                                                    |
-|------------------+---------+----------------------------------------------------|
-| BITS:GY@X        |         | Return the Y bits of Z starting at bit X           |
-| BITS:SY@X        |         | Set Y bits of Z starting at bit X                  |
-| BITS:CY@X        |         | Clear Y bits of Z starting at bit X                |
-| BITS:AZ@Y        |         | Assign LS Z bits of X to Z bits of T starting at Y |
-| BITS:▒▒▒▒        |         |                                                    |
-| BITS:BVIEW       |         |                                                    |
-|------------------+---------+----------------------------------------------------|
-| BITS:POPRB       |         | Pop rightmost bits X bits off of Y                 |
-| BITS:POPLB       |         | Pop leftmost bits X bits off of Y                  |
-| BITS:▒▒▒▒        |         |                                                    |
-| BITS:▒▒▒▒        |         |                                                    |
-| BITS:▒▒▒▒        |         |                                                    |
-| BITS:BVIEW       |         |                                                    |
-|------------------+---------+----------------------------------------------------|
-| FUN:B#           |         | Count set bits                                     |
-| FUN:MSSB         |         | Position of the Most Significant Set Bit           |
-| FUN:LSSB         |         | Position of the Least Significant Set Bit          |
-| FUN:ILN2         |         | Integer base 2 log                                 |
-| FUN:ISQRT        |         | Integer square root                                |
-| FUN:BVIEW        |         |                                                    |
-|------------------+---------+----------------------------------------------------|
-| FUN:REVNB        |         | Reverse rightmost X bits of Y                      |
-| FUN:REVB         |         | Reverse bits of X                                  |
-| FUN:▒▒▒▒         |         |                                                    |
-| FUN:▒▒▒▒         |         |                                                    |
-| FUN:▒▒▒▒         |         |                                                    |
-| FUN:BVIEW        |         |                                                    |
-|------------------+---------+----------------------------------------------------|
-| MASK:MSKL        |         | Create integer with left most X bits set           |
-| MASK:MSKR        |         | Create integer with right most X bits set          |
-| MASK:MSKn        |         | Create integer with Y set bits located at bit X    |
-| MASK:▒▒▒▒        |         |                                                    |
-| MASK:▒▒▒▒        |         |                                                    |
-| MASK:BVIEW       |         |                                                    |
-|------------------+---------+----------------------------------------------------|
-| ARTH:AND         |         |                                                    |
-| ARTH:OR          |         |                                                    |
-| ARTH:XOR         |         |                                                    |
-| ARTH:NOT         |         |                                                    |
-| ARTH:NEG         | BASE+/- |                                                    |
-| ARTH:BVIEW       |         |                                                    |
-|------------------+---------+----------------------------------------------------|
-| ARTH:+           | BASE+   |                                                    |
-| ARTH:-           | BASE-   |                                                    |
-| ARTH:×           | BASE×   |                                                    |
-| ARTH:÷           | BASE÷   |                                                    |
-| ARTH:MOD         |         |                                                    |
-| ARTH:BVIEW       |         |                                                    |
-|------------------+---------+----------------------------------------------------|
-| BVIEW            |         |                                                    |
-|------------------+---------+----------------------------------------------------|
-| LBL 92           | HEXM    | Set current base to hexadecimal                    |
-| LBL 93           | DECM    | Set current base to decimal                        |
-| LBL 94           | OCTM    | Set current base to octal                          |
-| LBL 95           | BINM    | Set current base to binary                         |
-| ▒▒▒▒             | -       |                                                    |
-| BMNU             | LBL 75  | Switch to built in BASE menu                       |
-|------------------+---------+----------------------------------------------------|
-| LBL 96           | WSIZE   | Set WSIZE                                          |
-| LBL 97           | BSIGNED | Toggle signed/unsigned mode                        |
-| LBL 98           | BWRAP   | Toggle wrapped mode                                |
-| ▒▒▒▒             | -       |                                                    |
-| LBL 99           | LBL 74  | Toggle BVIEW padding                               |
-| ▒▒▒▒             | -       |                                                    |
+| Menu:SubMenu:Key | Program | Description                                        | AutoBV? |
+|------------------+---------+----------------------------------------------------+---------|
+| S&R:SLn          |         | Shift Y Left X Bits                                | Y       |
+| S&R:SRn          |         | Shift Y Right X Bits                               | Y       |
+| S&R:RLn          |         | Rotate Y Left by X bits                            | Y       |
+| S&R:RRn          |         | Rotate Y Right by X bits                           | Y       |
+| S&R:▒▒▒▒         |         |                                                    |         |
+| S&R:BVIEW        |         |                                                    |         |
+|------------------+---------+----------------------------------------------------+---------|
+| S&R:LJ           |         | Left Justify Bits.                                 |         |
+| S&R:RJ           |         | Right Justify Bits                                 |         |
+| S&R:SHFXY        |         | Shift X by Y Bits (left when Y negative)           | Y       |
+| S&R:ROTXY        |         |                                                    | Y       |
+| S&R:▒▒▒▒         |         |                                                    |         |
+| S&R:BVIEW        |         |                                                    |         |
+|------------------+---------+----------------------------------------------------+---------|
+| S&R:SL           |         | Shift Left 1 Bit                                   | Y       |
+| S&R:SR           |         | Shift Right 1 Bit                                  | Y       |
+| S&R:RL           |         | Rotate Left 1 Bit                                  | Y       |
+| S&R:RR           |         | Rotate Right 1 Bit                                 | Y       |
+| S&R:▒▒▒▒         |         |                                                    |         |
+| S&R:BVIEW        |         |                                                    |         |
+|------------------+---------+----------------------------------------------------+---------|
+| BITS:GETB        |         | Return the Xth bit of Y                            |         |
+| BITS:SB          | SETB    | Set the Xth bit of Y                               | Y       |
+| BITS:CB          | CLRB    | Clear the Xth bit in Y                             | Y       |
+| BITS:AB          | ASNB    | Assign X to the Yth bit of Z                       | Y       |
+| BITS:▒▒▒▒        |         |                                                    |         |
+| BITS:BVIEW       |         |                                                    |         |
+|------------------+---------+----------------------------------------------------+---------|
+| BITS:GY@X        |         | Return the Y bits of Z starting at bit X           | Y       |
+| BITS:SY@X        |         | Set Y bits of Z starting at bit X                  | Y       |
+| BITS:CY@X        |         | Clear Y bits of Z starting at bit X                | Y       |
+| BITS:AZ@Y        |         | Assign LS Z bits of X to Z bits of T starting at Y | Y       |
+| BITS:▒▒▒▒        |         |                                                    |         |
+| BITS:BVIEW       |         |                                                    |         |
+|------------------+---------+----------------------------------------------------+---------|
+| BITS:POPRB       |         | Pop rightmost bits X bits off of Y                 | Y       |
+| BITS:POPLB       |         | Pop leftmost bits X bits off of Y                  | Y       |
+| BITS:▒▒▒▒        |         |                                                    |         |
+| BITS:▒▒▒▒        |         |                                                    |         |
+| BITS:▒▒▒▒        |         |                                                    |         |
+| BITS:BVIEW       |         |                                                    |         |
+|------------------+---------+----------------------------------------------------+---------|
+| FUN:B#           |         | Count set bits                                     |         |
+| FUN:MSSB         |         | Position of the Most Significant Set Bit           |         |
+| FUN:LSSB         |         | Position of the Least Significant Set Bit          |         |
+| FUN:ILN2         |         | Integer base 2 log                                 |         |
+| FUN:ISQRT        |         | Integer square root                                |         |
+| FUN:BVIEW        |         |                                                    |         |
+|------------------+---------+----------------------------------------------------+---------|
+| FUN:REVNB        |         | Reverse rightmost X bits of Y                      | Y       |
+| FUN:REVB         |         | Reverse bits of X                                  | Y       |
+| FUN:▒▒▒▒         |         |                                                    |         |
+| FUN:▒▒▒▒         |         |                                                    |         |
+| FUN:▒▒▒▒         |         |                                                    |         |
+| FUN:BVIEW        |         |                                                    |         |
+|------------------+---------+----------------------------------------------------+---------|
+| MASK:MSKL        |         | Create integer with left most X bits set           | Y       |
+| MASK:MSKR        |         | Create integer with right most X bits set          | Y       |
+| MASK:MSKn        |         | Create integer with Y set bits located at bit X    | Y       |
+| MASK:▒▒▒▒        |         |                                                    |         |
+| MASK:▒▒▒▒        |         |                                                    |         |
+| MASK:BVIEW       |         |                                                    |         |
+|------------------+---------+----------------------------------------------------+---------|
+| ARTH:AND         |         |                                                    | Y       |
+| ARTH:OR          |         |                                                    | Y       |
+| ARTH:XOR         |         |                                                    | Y       |
+| ARTH:NOT         |         |                                                    | Y       |
+| ARTH:NEG         | BASE+/- |                                                    | Y       |
+| ARTH:BVIEW       |         |                                                    |         |
+|------------------+---------+----------------------------------------------------+---------|
+| ARTH:+           | BASE+   |                                                    | Y       |
+| ARTH:-           | BASE-   |                                                    | Y       |
+| ARTH:×           | BASE×   |                                                    | Y       |
+| ARTH:÷           | BASE÷   |                                                    | Y       |
+| ARTH:MOD         |         |                                                    | Y       |
+| ARTH:BVIEW       |         |                                                    |         |
+|------------------+---------+----------------------------------------------------+---------|
+| BVIEW            |         |                                                    |         |
+|------------------+---------+----------------------------------------------------+---------|
+| LBL 92           | HEXM    | Set current base to hexadecimal                    |         |
+| LBL 93           | DECM    | Set current base to decimal                        |         |
+| LBL 94           | OCTM    | Set current base to octal                          |         |
+| LBL 95           | BINM    | Set current base to binary                         |         |
+| ▒▒▒▒             | -       |                                                    |         |
+| BMNU             | LBL 75  | Switch to built in BASE menu                       |         |
+|------------------+---------+----------------------------------------------------+---------|
+| LBL 96           | WSIZE   | Set WSIZE                                          |         |
+| LBL 97           | BSIGNED | Toggle signed/unsigned mode                        |         |
+| LBL 98           | BWRAP   | Toggle wrapped mode                                |         |
+| ▒▒▒▒             | -       |                                                    |         |
+| LBL 99           | LBL 74  | Toggle BVIEW padding (Flag 02)                     |         |
+| ▒▒▒▒             | -       |                                                    |         |
 
 ** Menu Code
 
@@ -605,8 +605,7 @@ L4STK                          @@## REQ:free42>=3.0
 IP
 @@@@ All zeros case?
 0
-0≥? ST Y           @@## REQ:free42>=3.0.3 
-XEQ 44 @@@ 0≥Y?    @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+0≥? ST Y
 RTN
 R↓
 0
@@ -637,8 +636,7 @@ L4STK                         @@## REQ:free42>=3.0
 IP
 X<>Y
 @@@@ Do nothing if X was negative
-0>? ST Y           @@## REQ:free42>=3.0.3 
-XEQ 43 @@@ 0>Y?    @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+0>? ST Y
 RTN
 @@@@ Do nothing if X was >= WSIZE
 XEQ 67 @@@@ Y≥WSIZE?
@@ -667,8 +665,7 @@ IP
 X<>Y
 IP
 @@@@ Do nothing if X was negative
-0>? ST Y           @@## REQ:free42>=3.0.3 
-XEQ 43 @@@ 0>Y?    @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+0>? ST Y
 RTN
 @@@@ Do nothing if X was >= WSIZE
 XEQ 67 @@@@ Y≥WSIZE?
@@ -697,8 +694,7 @@ FUNC 21                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 0
 @@@@ Return 0 if X was negative
-0>? ST Y           @@## REQ:free42>=3.0.3 
-XEQ 43 @@@ 0>Y?    @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+0>? ST Y
 RTN
 @@@@ Return 0  if X was >= WSIZE
 XEQ 67 @@@@ Y≥WSIZE?
@@ -880,8 +876,7 @@ IP
 X<>Y
 IP
 @@@@ Return Y if X was negative
-0≥? ST Y           @@## REQ:free42>=3.0.3 
-XEQ 44 @@@ 0≥Y?    @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+0≥? ST Y
 RTN
 X<>Y
 0
@@ -920,8 +915,7 @@ IP
 X<>Y
 IP
 @@@@ Return Y if X was negative
-0≥? ST Y           @@## REQ:free42>=3.0.3 
-XEQ 44 @@@ 0≥Y?    @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+0≥? ST Y
 RTN
 X<>Y
 0
@@ -958,8 +952,7 @@ L4STK                         @@## REQ:free42>=3.0
 IP
 X<>Y
 @@@@ Return Y if X was negative
-0≥? ST Y           @@## REQ:free42>=3.0.3 
-XEQ 44 @@@ 0≥Y?    @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+0≥? ST Y
 RTN
 X<>Y
 @@@@ X was positive
@@ -980,8 +973,7 @@ L4STK                         @@## REQ:free42>=3.0
 IP
 X<>Y
 @@@@ Return Y if X was negative
-0≥? ST Y           @@## REQ:free42>=3.0.3 
-XEQ 44 @@@ 0≥Y?    @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+0≥? ST Y
 RTN
 X<>Y
 @@@@ X was positive
@@ -1116,8 +1108,7 @@ FUNC 11                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 IP
 -1
-0=? ST Y          @@## REQ:free42>=3.0.3 
-XEQ  42 @@@ 0=Y?  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+0=? ST Y
 RTN
 R↓
 XEQ "LJ"
@@ -1140,32 +1131,12 @@ FUNC 11                       @@## REQ:free42>=2.5.24
 L4STK                         @@## REQ:free42>=3.0
 IP
 -1
-0=? ST Y          @@## REQ:free42>=3.0.3 
-XEQ  42 @@@ 0=Y?  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+0=? ST Y
 RTN
 R↓
 XEQ "RJ"
 RTN
-                      @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-LBL 42   @@@ 0=Y?     @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-FUNC 00               @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-X<>Y                  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-X=0?                  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-RTNYES                @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-RTNNO                 @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-LBL 43   @@@ 0>Y?     @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-FUNC 00               @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-X<>Y                  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-X<0?                  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-RTNYES                @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-RTNNO                 @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-LBL 44   @@@ 0≥Y?     @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-FUNC 00               @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-X<>Y                  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-X≤0?                  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-RTNYES                @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-RTNNO                 @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-                      @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ Menu Label: WSIZE
 LBL 96
@@ -1194,12 +1165,12 @@ FC? 79
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Menu Label: BVIEW 
+@@@@ Menu Label: BVP (BVIEW Padding)
 LBL 99
 FC? 02
-"BVA•"
+"BVP•"
 FS? 02
-"BVA"
+"BVP"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1438,8 +1409,7 @@ EXITALL
 1000
 ÷
 LSTO "_CTR"
-LBL 91
-LBL 76  @@@@ TODO.  Not used?
+LBL 76
 @@@@ Figure out X&Y coordinates for digit
 RCL "_CTR"            @@@@ IF
 IP
@@ -1531,14 +1501,14 @@ RCL+ "_CB"
 XEQ 78
 LBL 84
 ISG  "_CTR"
-GTO 91
+GTO 76
 FC? 81
 GTO 89
-@@@@ On DM42.  Hack to keep screen clean
-GETKEY
-CLLCD
-"BVIEW FINISHED"
-AVIEW
+@@@@ @@@@ On DM42.  Hack to keep screen clean
+@@@@ GETKEY
+@@@@ CLLCD
+@@@@ "BVIEW FINISHED"
+@@@@ AVIEW
 LBL 89
 RCL "_SBMD"
 20

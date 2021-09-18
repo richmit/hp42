@@ -152,14 +152,14 @@ tables.
  - =top-lab=                 :: The global label to use for the generated program
  - =numeric-lbl-start=       :: Beginning for a range of local numeric labels that will be used for the program
  - =tbl=                     :: The org-mode table with the menu description
- - =menu-alpha-column=                     :: The column with the menu alpha strings
+ - =menu-alpha-column=       :: The column with the menu alpha strings
  - =menu-exit-behavior=      :: What to do when =[EXIT]= is pressed.
     - ='exit=: Exit the application
     - ='up=: Return to parent menu or exit if no parent
  - =after-leaf-action=       :: What do do when a /action/ menu is used (a leaf node in the menu)
     - ='stay=: Keep the menu active
     - ='exit=: Exit the menu
- - =include-end=       :: Include final =END= statement
+ - =include-end=             :: Include final =END= statement
     - ='yes=: Create final =END= statement
     - ='exit=: Do not create final =END= statement
     - ='auto=: Create final =END= statement if all menu target labels were generated
@@ -550,7 +550,7 @@ but this works for now.
                        "PERM" "PGMINT" "PGMSLV" "PIXEL" "POLAR" "POSA" "PRA" "PRLCD" "PROFF" "PROMPT" "PRON" "PRSTK" "PRUSR" "PRV" "PRX" "PRΣ" "PSE" "PUTM"
                        "PWRF" "R<>R" "RAD" "RAN" "RCL" "RCL+" "RCL-" "RCLEL" "RCLIJ" "RCL×" "RCL÷" "RDX," "RDX."  "REAL" "REALRES" "RECT" "RND" "RNRM" "ROTXY"
                        "RSUM" "RTN" "RTNERR" "R↑" "R↓" "SCI" "SDEV" "SEED" "SF" "SIGN" "SIN" "SINH" "SIZE" "SLOPE" "SOLVE" "SQRT" "STO" "STO+" "STO-" "STOEL"
-                       "STOIJ" "STOP" "STO×" "STO÷" "STR" "SUM" "TAN" "TANH" "TONE" "TRACE" "TRANS" "UVEC" "VARMENU" "VIEW" "WMEAN" "WRAP" "WSIZE" "X<0" "X<>"
+                       "STOIJ" "STOP" "STO×" "STO÷" "STR" "SUM" "TAN" "TANH" "TONE" "TRACE" "TRANS" "UVEC" "VARMENU" "VARMNU1" "VIEW" "WMEAN" "WRAP" "WSIZE" "X<0" "X<>"
                        "X<>Y" "X<Y" "X=0" "X=0" "X=Y" "X>0" "X>Y" "XEQ" "XTOA" "X↑2" "X≠0" "X≠Y" "X≤0" "X≤Y" "X≥0" "X≥Y" "X≥Y" "YINT" "Y↑X" "[FIND]" "[MAX]"
                        "[MIN]" "×" "÷" "Σ+" "Σ-" "ΣREG" "ΣREG" "←" "↑" "→" "→DEC" "→DEG" "→HMS" "→HR" "→OCT" "→POL" "→RAD" "→REC" "↓" "DDAYS" "DOW" "CLK12"
                        "CLK24" "DMY" "MDY" "YMD" "DATE" "TIME" "ADATE" "ATIME" "DATE+" "XEQ IND ST" "XEQ IND" "GTO IND" "GTO IND ST" "STO IND ST" "STO+ IND ST"
@@ -671,6 +671,7 @@ the code is automatically filtered for the selected version of free42 (set via =
 |------------------------+---------------|
 | DM42 Version           | Target Free42 |
 |------------------------+---------------|
+| DMCP 3.22 / DM42 v3.20 |         3.0.5 |
 | DMCP 3.21 / DM42 v3.18 |         3.0.2 |
 | DMCP-3.20 / DM42-3.17  |        2.5.20 |
 | DMCP-3.20 / DM42-3.16  |        2.5.20 |
@@ -681,7 +682,7 @@ This function cleans up tangled (C-c C-v t) code so that it can be cleanly paste
 
 #+BEGIN_SRC elisp :results output silent
 (defvar MJR-target-free42-version nil)
-(setq MJR-target-free42-version "3.0.2")
+(setq MJR-target-free42-version "3.0.5")
 
 (defun MJR-process-tangled-42s-code ()
   "Prepare tangled hp42s code for upload"

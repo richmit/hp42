@@ -3,9 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-05-18 Tue 21:10 -->
+<!-- 2021-09-18 Sat 12:49 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=1024, initial-scale=1" />
 <title>free42 Base-N Tools</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Mitch Richling" />
@@ -211,7 +211,10 @@
  <a accesskey="h" href="https://richmit.github.io/hp42/"> UP </a>
  |
  <a accesskey="H" href="https://www.mitchr.me/"> HOME </a>
-</div><div id="content">
+</div><div id="preamble" class="status">
+c:/Users/richmit/Documents/world/my_prog/hp42/src/org-html-preamble.html
+</div>
+<div id="content">
 <h1 class="title">free42 Base-N Tools</h1>
 <table border="2 solid #ccc" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -229,7 +232,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-05-18 21:09:45</i></td>
+<td class="org-left"><i>2021-09-18 12:49:45</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,22 +244,22 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org8cdb18a">1. Metadata</a></li>
+<li><a href="#org93a3f80">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
-<li><a href="#org7fc20d7">3. <code>BASE</code>: BASE-N Application</a>
+<li><a href="#org395f6c1">3. <code>BASE</code>: BASE-N Application</a>
 <ul>
 <li><a href="#menu">3.1. Functionality &amp; Menu</a></li>
-<li><a href="#orgd9b98aa">3.2. Menu Code</a></li>
-<li><a href="#orgaf9f1c5">3.3. Application Local Subroutines</a></li>
+<li><a href="#org83bf501">3.2. Menu Code</a></li>
+<li><a href="#orga8ef9bf">3.3. Application Local Subroutines</a></li>
 </ul>
 </li>
-<li><a href="#org5d0c81b">4. EOF</a></li>
+<li><a href="#orgdfb1742">4. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org8cdb18a" class="outline-2">
-<h2 id="org8cdb18a"><span class="section-number-2">1</span> Metadata</h2>
+<div id="outline-container-org93a3f80" class="outline-2">
+<h2 id="org93a3f80"><span class="section-number-2">1.</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/base.html">https://richmit.github.io/hp42/base.html</a>
@@ -313,10 +316,10 @@ Directory contents:
 </div>
 
 <div id="outline-container-introduction" class="outline-2">
-<h2 id="introduction"><span class="section-number-2">2</span> Introduction</h2>
+<h2 id="introduction"><span class="section-number-2">2.</span> Introduction</h2>
 <div class="outline-text-2" id="text-introduction">
 
-<div id="org555a74f" class="figure">
+<div id="org98ddeda" class="figure">
 <p><img src="bviewSS.jpeg" alt="bviewSS.jpeg" align="center" />
 </p>
 </div>
@@ -337,17 +340,19 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 </div>
 </div>
 
-<div id="outline-container-org7fc20d7" class="outline-2">
-<h2 id="org7fc20d7"><span class="section-number-2">3</span> <code>BASE</code>: BASE-N Application</h2>
+<div id="outline-container-org395f6c1" class="outline-2">
+<h2 id="org395f6c1"><span class="section-number-2">3.</span> <code>BASE</code>: BASE-N Application</h2>
 <div class="outline-text-2" id="text-3">
 </div>
 <div id="outline-container-menu" class="outline-3">
-<h3 id="menu"><span class="section-number-3">3.1</span> Functionality &amp; Menu</h3>
+<h3 id="menu"><span class="section-number-3">3.1.</span> Functionality &amp; Menu</h3>
 <div class="outline-text-3" id="text-menu">
-<table id="org76b0ffb" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+<table id="orgd0492be" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
 <colgroup>
+<col  class="org-left" />
+
 <col  class="org-left" />
 
 <col  class="org-left" />
@@ -359,6 +364,7 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 <th scope="col" class="org-left">Menu:SubMenu:Key</th>
 <th scope="col" class="org-left">Program</th>
 <th scope="col" class="org-left">Description</th>
+<th scope="col" class="org-left">AutoBV?</th>
 </tr>
 </thead>
 <tbody>
@@ -366,34 +372,40 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 <td class="org-left">S&amp;R:SLn</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Shift Y Left X Bits</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">S&amp;R:SRn</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Shift Y Right X Bits</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">S&amp;R:RLn</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Rotate Y Left by X bits</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">S&amp;R:RRn</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Rotate Y Right by X bits</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">S&amp;R:▒▒▒▒</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">S&amp;R:BVIEW</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -403,34 +415,40 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 <td class="org-left">S&amp;R:LJ</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Left Justify Bits.</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">S&amp;R:RJ</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Right Justify Bits</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">S&amp;R:SHFXY</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Shift X by Y Bits (left when Y negative)</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">S&amp;R:ROTXY</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">S&amp;R:▒▒▒▒</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">S&amp;R:BVIEW</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -440,34 +458,40 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 <td class="org-left">S&amp;R:SL</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Shift Left 1 Bit</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">S&amp;R:SR</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Shift Right 1 Bit</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">S&amp;R:RL</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Rotate Left 1 Bit</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">S&amp;R:RR</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Rotate Right 1 Bit</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">S&amp;R:▒▒▒▒</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">S&amp;R:BVIEW</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -477,34 +501,40 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 <td class="org-left">BITS:GETB</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Return the Xth bit of Y</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">BITS:SB</td>
 <td class="org-left">SETB</td>
 <td class="org-left">Set the Xth bit of Y</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">BITS:CB</td>
 <td class="org-left">CLRB</td>
 <td class="org-left">Clear the Xth bit in Y</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">BITS:AB</td>
 <td class="org-left">ASNB</td>
 <td class="org-left">Assign X to the Yth bit of Z</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">BITS:▒▒▒▒</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">BITS:BVIEW</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -514,34 +544,40 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 <td class="org-left">BITS:GY@X</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Return the Y bits of Z starting at bit X</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">BITS:SY@X</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Set Y bits of Z starting at bit X</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">BITS:CY@X</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Clear Y bits of Z starting at bit X</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">BITS:AZ@Y</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Assign LS Z bits of X to Z bits of T starting at Y</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">BITS:▒▒▒▒</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">BITS:BVIEW</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -551,34 +587,40 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 <td class="org-left">BITS:POPRB</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Pop rightmost bits X bits off of Y</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">BITS:POPLB</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Pop leftmost bits X bits off of Y</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">BITS:▒▒▒▒</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">BITS:▒▒▒▒</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">BITS:▒▒▒▒</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">BITS:BVIEW</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -588,34 +630,40 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 <td class="org-left">FUN:B#</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Count set bits</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">FUN:MSSB</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Position of the Most Significant Set Bit</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">FUN:LSSB</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Position of the Least Significant Set Bit</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">FUN:ILN2</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Integer base 2 log</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">FUN:ISQRT</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Integer square root</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">FUN:BVIEW</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -625,34 +673,40 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 <td class="org-left">FUN:REVNB</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Reverse rightmost X bits of Y</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">FUN:REVB</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Reverse bits of X</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">FUN:▒▒▒▒</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">FUN:▒▒▒▒</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">FUN:▒▒▒▒</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">FUN:BVIEW</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -662,34 +716,40 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 <td class="org-left">MASK:MSKL</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Create integer with left most X bits set</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">MASK:MSKR</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Create integer with right most X bits set</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">MASK:MSKn</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Create integer with Y set bits located at bit X</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">MASK:▒▒▒▒</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">MASK:▒▒▒▒</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">MASK:BVIEW</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -699,34 +759,40 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 <td class="org-left">ARTH:AND</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">ARTH:OR</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">ARTH:XOR</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">ARTH:NOT</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">ARTH:NEG</td>
 <td class="org-left">BASE+/-</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">ARTH:BVIEW</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -736,34 +802,40 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 <td class="org-left">ARTH:+</td>
 <td class="org-left">BASE+</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">ARTH:-</td>
 <td class="org-left">BASE-</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">ARTH:×</td>
 <td class="org-left">BASE×</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">ARTH:÷</td>
 <td class="org-left">BASE÷</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">ARTH:MOD</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">Y</td>
 </tr>
 
 <tr>
 <td class="org-left">ARTH:BVIEW</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -773,6 +845,7 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 <td class="org-left">BVIEW</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 </tbody>
 <tbody>
@@ -780,29 +853,34 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 <td class="org-left">LBL 92</td>
 <td class="org-left">HEXM</td>
 <td class="org-left">Set current base to hexadecimal</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">LBL 93</td>
 <td class="org-left">DECM</td>
 <td class="org-left">Set current base to decimal</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">LBL 94</td>
 <td class="org-left">OCTM</td>
 <td class="org-left">Set current base to octal</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">LBL 95</td>
 <td class="org-left">BINM</td>
 <td class="org-left">Set current base to binary</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">▒▒▒▒</td>
 <td class="org-left">-</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
 
@@ -810,6 +888,7 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 <td class="org-left">BMNU</td>
 <td class="org-left">LBL 75</td>
 <td class="org-left">Switch to built in BASE menu</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 </tbody>
 <tbody>
@@ -817,35 +896,41 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 <td class="org-left">LBL 96</td>
 <td class="org-left">WSIZE</td>
 <td class="org-left">Set WSIZE</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">LBL 97</td>
 <td class="org-left">BSIGNED</td>
 <td class="org-left">Toggle signed/unsigned mode</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">LBL 98</td>
 <td class="org-left">BWRAP</td>
 <td class="org-left">Toggle wrapped mode</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">▒▒▒▒</td>
 <td class="org-left">-</td>
 <td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">LBL 99</td>
 <td class="org-left">LBL 74</td>
-<td class="org-left">Toggle BVIEW padding</td>
+<td class="org-left">Toggle BVIEW padding (Flag 02)</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">▒▒▒▒</td>
 <td class="org-left">-</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
 </tbody>
@@ -853,8 +938,8 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 </div>
 </div>
 
-<div id="outline-container-orgd9b98aa" class="outline-3">
-<h3 id="orgd9b98aa"><span class="section-number-3">3.2</span> Menu Code</h3>
+<div id="outline-container-org83bf501" class="outline-3">
+<h3 id="org83bf501"><span class="section-number-3">3.2.</span> Menu Code</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 The menu program is generated via the following bit of elisp.  You must first define the <code>MJR-generate-42-menu-code</code> and <code>MJR-custom-x-gen</code> by evaluating the code blocks in the <code>hp42s-meta.org</code> file.
@@ -1179,8 +1264,8 @@ XOR
 </div>
 </div>
 
-<div id="outline-container-orgaf9f1c5" class="outline-3">
-<h3 id="orgaf9f1c5"><span class="section-number-3">3.3</span> Application Local Subroutines</h3>
+<div id="outline-container-orga8ef9bf" class="outline-3">
+<h3 id="orga8ef9bf"><span class="section-number-3">3.3.</span> Application Local Subroutines</h3>
 <div class="outline-text-3" id="text-3-3">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ </span><span style="color: #ff7f24;">(ref:b#)</span>
@@ -1273,8 +1358,7 @@ R&#8595;
 <span style="color: #00ffff;">IP</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">All zeros case?</span>
 0
-0&#8805;? ST Y           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0.3 </span>
-<span style="color: #00ffff;">XEQ</span> 44 <span style="color: #ff7f24;">@@@ 0&#8805;Y?    @@## REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+0&#8805;? ST Y
 <span style="color: #00ffff;">RTN</span>
 R&#8595;
 0
@@ -1305,8 +1389,7 @@ R&#8595;
 <span style="color: #00ffff;">IP</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Do nothing if X was negative</span>
-0&gt;? ST Y           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0.3 </span>
-<span style="color: #00ffff;">XEQ</span> 43 <span style="color: #ff7f24;">@@@ 0&gt;Y?    @@## REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+0&gt;? ST Y
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Do nothing if X was &gt;= WSIZE</span>
 <span style="color: #00ffff;">XEQ</span> 67 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y&#8805;WSIZE?</span>
@@ -1335,8 +1418,7 @@ R&#8595;
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">IP</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Do nothing if X was negative</span>
-0&gt;? ST Y           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0.3 </span>
-<span style="color: #00ffff;">XEQ</span> 43 <span style="color: #ff7f24;">@@@ 0&gt;Y?    @@## REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+0&gt;? ST Y
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Do nothing if X was &gt;= WSIZE</span>
 <span style="color: #00ffff;">XEQ</span> 67 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y&#8805;WSIZE?</span>
@@ -1365,8 +1447,7 @@ R&#8595;
 <span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0</span>
 0
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Return 0 if X was negative</span>
-0&gt;? ST Y           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0.3 </span>
-<span style="color: #00ffff;">XEQ</span> 43 <span style="color: #ff7f24;">@@@ 0&gt;Y?    @@## REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+0&gt;? ST Y
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Return 0  if X was &gt;= WSIZE</span>
 <span style="color: #00ffff;">XEQ</span> 67 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y&#8805;WSIZE?</span>
@@ -1548,8 +1629,7 @@ R&#8595;              <span style="color: #ffa500;">@@@@  </span><span style="co
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">IP</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Return Y if X was negative</span>
-0&#8805;? ST Y           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0.3 </span>
-<span style="color: #00ffff;">XEQ</span> 44 <span style="color: #ff7f24;">@@@ 0&#8805;Y?    @@## REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+0&#8805;? ST Y
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 0
@@ -1588,8 +1668,7 @@ R&#8595;
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">IP</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Return Y if X was negative</span>
-0&#8805;? ST Y           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0.3 </span>
-<span style="color: #00ffff;">XEQ</span> 44 <span style="color: #ff7f24;">@@@ 0&#8805;Y?    @@## REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+0&#8805;? ST Y
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 0
@@ -1626,8 +1705,7 @@ R&#8595;
 <span style="color: #00ffff;">IP</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Return Y if X was negative</span>
-0&#8805;? ST Y           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0.3 </span>
-<span style="color: #00ffff;">XEQ</span> 44 <span style="color: #ff7f24;">@@@ 0&#8805;Y?    @@## REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+0&#8805;? ST Y
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X was positive</span>
@@ -1648,8 +1726,7 @@ R&#8595;
 <span style="color: #00ffff;">IP</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Return Y if X was negative</span>
-0&#8805;? ST Y           <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0.3 </span>
-<span style="color: #00ffff;">XEQ</span> 44 <span style="color: #ff7f24;">@@@ 0&#8805;Y?    @@## REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+0&#8805;? ST Y
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X was positive</span>
@@ -1784,8 +1861,7 @@ R&#8595;
 <span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
 -1
-0=? ST Y          <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0.3 </span>
-<span style="color: #00ffff;">XEQ</span>  42 <span style="color: #ff7f24;">@@@ 0=Y?  @@## REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+0=? ST Y
 <span style="color: #00ffff;">RTN</span>
 R&#8595;
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"LJ"</span>
@@ -1808,32 +1884,12 @@ R&#8595;
 <span style="color: #00ffff;">L4STK</span>                         <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
 -1
-0=? ST Y          <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0.3 </span>
-<span style="color: #00ffff;">XEQ</span>  42 <span style="color: #ff7f24;">@@@ 0=Y?  @@## REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+0=? ST Y
 <span style="color: #00ffff;">RTN</span>
 R&#8595;
 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"RJ"</span>
 <span style="color: #00ffff;">RTN</span>
-                      <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-<span style="color: #00ffff;">LBL</span> 42   <span style="color: #ff7f24;">@@@ 0=Y?     @@## REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-<span style="color: #00ffff;">FUNC</span> 00               <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>                  <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-<span style="color: #00ffff;">X=0</span>?                  <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-<span style="color: #00ffff;">RTNYES</span>                <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-<span style="color: #00ffff;">RTNNO</span>                 <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-<span style="color: #00ffff;">LBL</span> 43   <span style="color: #ff7f24;">@@@ 0&gt;Y?     @@## REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-<span style="color: #00ffff;">FUNC</span> 00               <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>                  <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-<span style="color: #00ffff;">X&lt;0</span>?                  <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-<span style="color: #00ffff;">RTNYES</span>                <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-<span style="color: #00ffff;">RTNNO</span>                 <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-<span style="color: #00ffff;">LBL</span> 44   <span style="color: #ff7f24;">@@@ 0&#8805;Y?     @@## REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-<span style="color: #00ffff;">FUNC</span> 00               <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>                  <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-<span style="color: #00ffff;">X&#8804;0</span>?                  <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-<span style="color: #00ffff;">RTNYES</span>                <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-<span style="color: #00ffff;">RTNNO</span>                 <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
-                      <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.3   @@## TODO: Delete when DM42 &gt;= free42 3.0.3</span>
+
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Menu Label: WSIZE</span>
 <span style="color: #00ffff;">LBL</span> 96
@@ -1862,12 +1918,12 @@ R&#8595;
 <span style="color: #00ffff;">RTN</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Menu Label: BVIEW </span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Menu Label: BVP (BVIEW Padding)</span>
 <span style="color: #00ffff;">LBL</span> 99
 <span style="color: #00ffff;">FC</span>? 02
-<span style="color: #fa8072;">"BVA&#8226;"</span>
+<span style="color: #fa8072;">"BVP&#8226;"</span>
 <span style="color: #00ffff;">FS</span>? 02
-<span style="color: #fa8072;">"BVA"</span>
+<span style="color: #fa8072;">"BVP"</span>
 <span style="color: #00ffff;">RTN</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -2106,8 +2162,7 @@ R&#8595;
 1000
 <span style="color: #00ffff;">&#247;</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_CTR"</span>
-<span style="color: #00ffff;">LBL</span> 91
-<span style="color: #00ffff;">LBL</span> 76  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TODO.  Not used?</span>
+<span style="color: #00ffff;">LBL</span> 76
 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Figure out X&amp;Y coordinates for digit</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_CTR"</span>            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IF</span>
 <span style="color: #00ffff;">IP</span>
@@ -2199,14 +2254,14 @@ R&#8595;
 <span style="color: #00ffff;">XEQ</span> 78
 <span style="color: #00ffff;">LBL</span> 84
 <span style="color: #00ffff;">ISG</span>  <span style="color: #fa8072;">"_CTR"</span>
-<span style="color: #00ffff;">GTO</span> 91
+<span style="color: #00ffff;">GTO</span> 76
 <span style="color: #00ffff;">FC</span>? 81
 <span style="color: #00ffff;">GTO</span> 89
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">On DM42.  Hack to keep screen clean</span>
-<span style="color: #00ffff;">GETKEY</span>
-<span style="color: #00ffff;">CLLCD</span>
-<span style="color: #fa8072;">"BVIEW FINISHED"</span>
-<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">@@@@ On DM42.  Hack to keep screen clean</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GETKEY</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CLLCD</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">"BVIEW FINISHED"</span>
+<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">AVIEW</span>
 <span style="color: #00ffff;">LBL</span> 89
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_SBMD"</span>
 20
@@ -2275,8 +2330,8 @@ R&#8595;
 </div>
 </div>
 
-<div id="outline-container-org5d0c81b" class="outline-2">
-<h2 id="org5d0c81b"><span class="section-number-2">4</span> EOF</h2>
+<div id="outline-container-orgdfb1742" class="outline-2">
+<h2 id="orgdfb1742"><span class="section-number-2">4.</span> EOF</h2>
 <div class="outline-text-2" id="text-4">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -2287,7 +2342,7 @@ R&#8595;
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-05-18 Tue 21:10 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.4.5)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-09-18 Sat 12:49 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.6)
 </div>
 </body>
 </html>

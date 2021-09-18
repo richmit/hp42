@@ -531,10 +531,8 @@ FC?C 25
 1e-15
 50
 XEQ "PLGRR"
-RCL ST Z
-X≠0?
+0≠? ST Z
 RTNERR 6
-R↓
 RCL "_P"
 X<>Y
 -1
@@ -584,7 +582,8 @@ RCL "_P"
 RCL "_G"
 XEQ "PEVL2"
 RCL ST Z
-XEQ 76
+ABS
+X<? "_T"
 GTO 95
 R↓
 RCL÷ ST Y
@@ -624,13 +623,6 @@ R↓
 X<>Y
 RCL "_G"
 RTN
-LBL 76
-FUNC 00
-ABS
-RCL "_T"
-X>Y?
-RTNYES
-RTNNO
 LBL "PWRP"
 MVAR "X"
 RCL "WRPP"

@@ -911,7 +911,7 @@ FC?C 25
 1e-15           @@@@ Tol  Guss Poly
 50              @@@@ Itr  Tol  Guss  Poly
 XEQ "PLGRR"     @@@@ Root Pval Stat
-0≠? ST Z   @@## TODO: Memory leak in free42 < 3.0.3
+0≠? ST Z
 RTNERR 6
 RCL "_P"        @@@@ Poly Root Pval Stat
 RCL "_P"        @@@@ Poly Poly Root Pval
@@ -948,11 +948,8 @@ FC?C 25
 1e-15           @@@@ Tol  Gues DPly Poly
 50              @@@@ Itr  Tol  Gues DPly
 XEQ "PLGRR"     @@@@ Root Pval Stat
-RCL ST Z        @@@@ Root Pval Stat                   @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-X≠0?                                                  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-0≠? ST Z                                              @@## REQ:free42>=3.0.3
+0≠? ST Z
 RTNERR 6
-R↓              @@@@ Root Pval Stat                   @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
 RCL "_P"        @@@@ Poly Root Pval Stat
 X<>Y            @@@@ Root Poly Pval Stat
 -1              @@@@ -1   Root Poly Pval
@@ -1023,9 +1020,8 @@ RCL "_P"
 RCL "_G"  
 XEQ "PEVL2"     @@@@ P''         P'     P        ?
 RCL ST Z
-ABS             @@@@ |P|         P''    P'       P    @@## REQ:free42>=3.0.3
-X<? "_T"                                              @@## REQ:free42>=3.0.3
-XEQ 76                                                @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
+ABS             @@@@ |P|         P''    P'       P
+X<? "_T"
 GTO 95
 R↓              @@@@ P''         P'     P        ?
 @@@@ TODO: Check P' for /0.  Another status: 5 = Iteration failed due to division by zero
@@ -1068,13 +1064,6 @@ R↓              @@@@ P
 X<>Y            @@@@ P      0
 RCL "_G"        @@@@ Root   Pval     0
 RTN
-LBL 76   @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-FUNC 00  @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-ABS      @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-RCL "_T" @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-X>Y?     @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-RTNYES   @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
-RTNNO    @@## REQ:free42<3.0.3   @@## TODO: Delete when DM42 >= free42 3.0.3
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PWRP)
 @@@@ DSC: Make a polynomial stored in a matrix into a =MVAR= function

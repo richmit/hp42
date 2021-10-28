@@ -511,56 +511,61 @@ END
 
 * Emacs Helper Stuff
 
-** Emacs function to insert charcters given a list of character codes
+The elisp file =hp42s-mode.el= provides few things:
+ - A language mode for free42 code -- mostly just provides syntax highlighting
+ - =MJR-ins42char=: Lisp function to insert characters given a list of character codes
+ - =MJR-dired-org-export=: Lisp function to export to HTML and tangle all marked files in a dired buffer
+ - =MJR-process-buffer-as-42s-code=: Lisp function to process *all free42 code in a buffer* for pasting into free42
+ - =MJR-target-free42-version=: Variable used by =MJR-process-buffer-as-42s-code= & =MJR-copy-42s-code-in-region= to control version of free42
+ - =MJR-copy-42s-code-in-region=: Lisp function that process marked region for pasting into free42 and puts the test on the kill ring -- like =MJR-process-buffer-as-42s-code= but for a region.
 
-#+BEGIN_SRC elisp :results silent
-(defun MJR-ins42char (charn)
-  "Insert free42 character at point."
-  (interactive "sCharacter Number(s): ")
-  (if charn
-      (cl-loop for c in (split-string charn)
-               do (insert (nth (eval (car (read-from-string c))) '("÷" "×" "√"  "∫" "▒" "Σ" "▸" "π" "¿" "≤"  "[LF]" "≥"     "≠"  "↵" "↓" "→"
-                                                                   ;; CHAR 30 & CHAR 4 are the same unicode.  How to put 30 in a string?
-                                                                   "←" "μ" "£"  "°" "Å" "Ñ" "Ä" "∡" "ᴇ" "Æ"  "…"    "[ESC]" "Ö"  "Ü" "▒" "•"  
-                                                                   " " "!" "\"" "#" "$" "%" "&" "'" "(" ")"  "*"    "+"     ","  "-" "." "/"
-                                                                   "0" "1" "2"  "3" "4" "5" "6" "7" "8" "9"  ":"    ";"     "<"  "=" ">" "?"
-                                                                   "@" "A" "B"  "C" "D" "E" "F" "G" "H" "I"  "J"    "K"     "L"  "M" "N" "O"
-                                                                   "P" "Q" "R"  "S" "T" "U" "V" "W" "X" "Y"  "Z"    "["     "\\" "]" "↑" "_"
-                                                                   "`" "a" "b"  "c" "d" "e" "f" "g" "h" "i"  "j"    "k"     "l"  "m" "n" "o"
-                                                                   "p" "q" "r"  "s" "t" "u" "v" "w" "x" "y"  "z"    "{"     "|"  "}" "~" "├"
-                                                                   ":" "ʏ"))))))
+To activate the functionality, simply =load= the =hp42s-mode.el= file into emacs.  You can evaluate teh folloing block to do that:
+
+#+BEGIN_SRC elisp :results output silent
+(load-file "../emacs/hp42s-mode.el")
 #+END_SRC
 
-** Emacs Mode for 42s Code
+** Prepare Code For Conversion
 
-This isn't really a proper mode for 42s code.  Just a quick hack with =define-generic-mode= to get some syntax highlighting -- which doesn't fully work as
-some of the characters in keywords are recognized as punctuation.  Still it makes listings a little better.  Someday I may take the time to write a real mode,
-but this works for now.
+I include comments like =@@##= that I use like compiler directives in C.  They provide a way to remove lines of code that are incompatible or unnecessary for
+the target version of free42.  It's a bit of a hack, but it lets me maintain one program for diff-rent versions of free42.  When I "tangle" an =org-mode=
+buffer, the code is automatically filtered for the selected version of free42 (set via =MJR-target-free42-version=).
 
-#+BEGIN_SRC elisp :results silent
-(define-generic-mode 'hp42s-mode
-                     '("@@@@" "@@##" "@NM@")
-                     '("%" "%CH" "+" "+/-" "-" "1/X" "10↑X" "ABS" "ACOS" "ACOSH" "ADV" "AGRAPH" "AIP" "ALENG" "ALL" "ALLΣ" "AND" "AOFF" "AON" "ARCL" "AROT" "ASHF" 
-                       "ASIN" "ASINH" "ASSIGN" "ASTO" "ATAN" "ATANH" "ATOX" "AVIEW" "BASE+" "BASE+/-" "BASE-" "BASE×" "BASE÷" "BEEP" "BEST" "BINM" "BIT" "BIT"
-                       "CF" "CLA" "CLD" "CLKEYS" "CLLCD" "CLMENU" "CLP" "CLRG" "CLST" "CLV" "CLX" "CLΣ" "COMB" "COMPLEX" "CORR" "COS" "COSH" "CPX" "CPXRES"
-                       "CROSS" "CUSTOM" "DECM" "DEG" "DELAY" "DELR" "DET" "DIM" "DIM" "DOT" "DSE" "EDIT" "EDITN" "END" "ENG" "ENTER" "EXITALL" "EXPF" "E↑X"
-                       "E↑X-1" "FC" "FC?C" "FCSTX" "FCSTY" "FIX" "FNRM" "FP" "FS" "FS?C" "FUNC" "GAMMA" "GETKEY" "GETM" "GRAD" "GROW" "GTO" "HEXM" "HMS+"
-                       "HMS-" "I+" "I-" "INDEX" "INPUT" "INSR" "INTEG" "INVRT" "IP" "ISG" "J+" "J-" "KEY" "KEYASN" "L4STK" "LASTX" "LBL" "LCLBL" "LINF" "LINΣ"
-                       "LN" "LN1+X" "LOG" "LOGF" "LSTO" "MAN" "MAT" "MEAN" "MENU" "MOD" "MVAR" "N!"  "NEWMAT" "NOP" "NORM" "NOT" "OCTM" "OFF" "OLD" "ON" "OR"
-                       "PERM" "PGMINT" "PGMSLV" "PIXEL" "POLAR" "POSA" "PRA" "PRLCD" "PROFF" "PROMPT" "PRON" "PRSTK" "PRUSR" "PRV" "PRX" "PRΣ" "PSE" "PUTM"
-                       "PWRF" "R<>R" "RAD" "RAN" "RCL" "RCL+" "RCL-" "RCLEL" "RCLIJ" "RCL×" "RCL÷" "RDX," "RDX."  "REAL" "REALRES" "RECT" "RND" "RNRM" "ROTXY"
-                       "RSUM" "RTN" "RTNERR" "R↑" "R↓" "SCI" "SDEV" "SEED" "SF" "SIGN" "SIN" "SINH" "SIZE" "SLOPE" "SOLVE" "SQRT" "STO" "STO+" "STO-" "STOEL"
-                       "STOIJ" "STOP" "STO×" "STO÷" "STR" "SUM" "TAN" "TANH" "TONE" "TRACE" "TRANS" "UVEC" "VARMENU" "VARMNU1" "VIEW" "WMEAN" "WRAP" "WSIZE" "X<0" "X<>"
-                       "X<>Y" "X<Y" "X=0" "X=0" "X=Y" "X>0" "X>Y" "XEQ" "XTOA" "X↑2" "X≠0" "X≠Y" "X≤0" "X≤Y" "X≥0" "X≥Y" "X≥Y" "YINT" "Y↑X" "[FIND]" "[MAX]"
-                       "[MIN]" "×" "÷" "Σ+" "Σ-" "ΣREG" "ΣREG" "←" "↑" "→" "→DEC" "→DEG" "→HMS" "→HR" "→OCT" "→POL" "→RAD" "→REC" "↓" "DDAYS" "DOW" "CLK12"
-                       "CLK24" "DMY" "MDY" "YMD" "DATE" "TIME" "ADATE" "ATIME" "DATE+" "XEQ IND ST" "XEQ IND" "GTO IND" "GTO IND ST" "STO IND ST" "STO+ IND ST"
-                       "STO- IND ST" "STOEL IND ST" "STOIJ IND ST" "STOP IND ST" "STO× IND ST" "STO÷ IND ST" "STO ST" "STO+ ST" "STO- ST" "STOEL ST" "STOIJ ST"
-                       "STOP ST" "STO× ST" "STO÷ ST" "RCL IND ST" "RCL+ IND ST" "RCL- IND ST" "RCLEL IND ST" "RCLIJ IND ST" "RCL× IND ST" "RCL÷ IND ST" "RCL
-                       ST" "RCL+ ST" "RCL- ST" "RCLEL ST" "RCLIJ ST" "RCL× ST" "RCL÷ ST" "RTNNO" "RTNYES" "PI")
-                     '(("@@## REQ:.*" . font-lock-preprocessor-face)) ;; Not sure why this is broken.
-                     '(".42s\\'")
-                     nil
-                     "Major mode for editing HP-42s programs")
+#+ATTR_HTML: :border 2 :frame box :rules all :align center
+|------------------------+---------------|
+| DM42 Version           | Target Free42 |
+|------------------------+---------------|
+| DMCP 3.22 / DM42 v3.20 |         3.0.5 |
+| DMCP 3.21 / DM42 v3.18 |         3.0.2 |
+| DMCP-3.20 / DM42-3.17  |        2.5.20 |
+| DMCP-3.20 / DM42-3.16  |        2.5.20 |
+| DMCP 3.18 / DM42 v3.15 |        2.5.16 |
+|------------------------+---------------|
+
+** Automatically processing tangled code
+
+By adding =MJR-process-buffer-as-42s-code= to the =org-babel-post-tangle-hook=, you can automatically process tangled code.  You can do that by evaluating
+the next block:
+
+#+BEGIN_SRC elisp :results output silent
+(add-hook 'org-babel-post-tangle-hook 'MJR-process-buffer-as-42s-code)
+#+END_SRC
+
+A handy way to tangle a file, or files in dired, is the =MJR-org-export-der= in my =.emacs= file.
+
+** Tangle & Load Tangled File
+
+#+BEGIN_SRC elisp :results output silent
+(defun MJR-tangle-and-load ()
+  "Tangles current file and attempts to load the tangled file.
+The tangled file is determiend by looking backward for a :tangle argument."
+  (interactive)
+  (save-excursion (org-babel-tangle)
+                  (if (re-search-backward ":tangle[[:blank:]]+\\([^[:blank:]]+.hp42s\\)$" nil t)
+                      (let ((file-name (match-string 1)))
+                        (if (or (string-equal "yes" file-name) (string-equal "no" file-name))
+                            (message "No explicit tangle file specified")
+                            (find-file file-name))))))
 #+END_SRC
 
 ** yas templates
@@ -630,137 +635,6 @@ RTN       @@@@ IF-TRUE-END ($1)
 
 #+end_src
 
-** Export & Tangle from dired
-
-This will export to HTML and tangle all marked files in a dired buffer.
-
-#+begin_src elisp :results silent :eval never
-(defun MJR-dired-org-export (execute-blocks tangle-blocks export-html export-pdf)
-  "Evaluate all code blocks, export to HTML, and tangle current file or all marked files in dired-mode"
-  (interactive (if (null current-prefix-arg)
-                   (list (y-or-n-p "Evaluate all blocks?")
-                         (y-or-n-p "Tangle all blocks?")
-                         (y-or-n-p "Export to HTML?")
-                         (y-or-n-p "Export to PDF via LaTeX?"))
-                   (list 't 't 't)))
-  (if (not (equal major-mode 'dired-mode))
-      (message "MJR-dired-org-to-html-and-code: ERROR: Not in dired mode!!")
-      (let ((marked-files (dired-get-marked-files)))
-        (if (null marked-files)
-            (message "MJR-dired-org-to-html-and-code: ERROR: No marked files!!")
-            (mapc (lambda (f)
-                    (with-current-buffer (find-file-noselect f)
-                      (if execute-blocks (MJR-org-babel-execute-buffer))
-                      (if tangle-blocks (org-babel-tangle))
-                      (if export-html (org-html-export-to-html))
-                      (if export-pdf (org-latex-export-to-pdf))))
-                  marked-files)))
-            (message "dired-get-marked-files: Complete!")))
-#+end_src
-
-Note the previous block is set =:eval never= because I keep this function in my =.emacs= file, and thus don't need to evaluate it to get it into my personal
-environment.
-
-* Prepare Code For Conversion
-
-I include comments like =@@##= that I use like compiler directives in C.  They provide a way to remove lines of code that are incompatible or unnecessary for
-the target version of free42.  It's a bit of a hack, but it lets me maintain one program for diff-rent versions of free42.  When I "tangle" an =org-mode= buffer,
-the code is automatically filtered for the selected version of free42 (set via =MJR-target-free42-version=).
-
-#+ATTR_HTML: :border 2 :frame box :rules all :align center
-|------------------------+---------------|
-| DM42 Version           | Target Free42 |
-|------------------------+---------------|
-| DMCP 3.22 / DM42 v3.20 |         3.0.5 |
-| DMCP 3.21 / DM42 v3.18 |         3.0.2 |
-| DMCP-3.20 / DM42-3.17  |        2.5.20 |
-| DMCP-3.20 / DM42-3.16  |        2.5.20 |
-| DMCP 3.18 / DM42 v3.15 |        2.5.16 |
-|------------------------+---------------|
-
-This function cleans up tangled (C-c C-v t) code so that it can be cleanly pasted into free42.
-
-#+BEGIN_SRC elisp :results output silent
-(defvar MJR-target-free42-version nil)
-(setq MJR-target-free42-version "3.0.5")
-
-(defun MJR-process-tangled-42s-code ()
-  "Prepare tangled hp42s code for upload"
-  (interactive)
-  (let ((zap-loc-too-new 0)
-        (zap-loc-too-old 0))
-  ;; Remove code requireing a newer version of free42 than our target
-  (goto-char (point-min))
-  (while (re-search-forward "^.*@@## REQ:free42>=\\([0-9.]+\\) *$" nil t)
-    (if (and MJR-target-free42-version (version< MJR-target-free42-version (match-string 1)))
-        (progn (cl-incf zap-loc-too-new)
-               (replace-match ""))))
-  ;; Remove code only needed for an older version of free42 than our target
-  (goto-char (point-min))
-  (while (re-search-forward "^.*@@## REQ:free42<\\([0-9.]+\\) *$" nil t)
-    (if (and MJR-target-free42-version (version<= MJR-target-free42-version (match-string 1)))
-        (progn (cl-incf zap-loc-too-old)
-               (replace-match ""))))
-  ;; Zap comments
-  (goto-char (point-min))
-  (while (re-search-forward "\\(@@@@\\|@@##\\).*$" nil t)
-    (replace-match ""))
-  ;; Zap trailing whitespace
-  (goto-char (point-min))
-  (while (re-search-forward "  *$" nil t)
-    (replace-match ""))
-  ;; Zap blank lines
-  (goto-char (point-min))  
-  (flush-lines "^[[:space:]]*$")
-  ;; Add lines after END commands
-  (goto-char (point-min))
-  (while (re-search-forward "^END$" nil t)
-    (replace-match "END\n"))
-  ;; Save the buffer
-  (if (buffer-file-name)
-      (save-buffer))
-  ;; Report our status
-  (if MJR-target-free42-version
-      (message "MJR-process-tangled-42s-code (%s): Tangle complete. Zapped %d loc too old, and %d loc too new." (buffer-name) zap-loc-too-old zap-loc-too-new)
-      (message "MJR-process-tangled-42s-code (%s): Tangle complete. MJR-target-free42-version not set." (buffer-name) zap-loc-too-old zap-loc-too-new))
-  ))
-#+END_SRC
-
-The above function must be added to the tangle-hook like this:
-
-#+BEGIN_SRC elisp :results output silent
-(add-hook 'org-babel-post-tangle-hook 'MJR-process-tangled-42s-code)
-#+END_SRC
-
-* Prepare Marked Region for Code Conversion
-
-#+BEGIN_SRC elisp :results output silent
-(defun MJR-copy-42s-code-in-region ()
-  "Copy region and prepare it for paste into free42"
-  (interactive)
-  (let ((pmin (min (point) (mark)))
-        (pmax (max (point) (mark))))
-    (if (< pmin pmax)
-        (progn (kill-ring-save (min (point) (mark)) (max (point) (mark)))
-               (with-temp-buffer  (yank)
-                                  (MJR-process-tangled-42s-code)
-                                  (kill-ring-save (point-min) (point-max)))))))
-#+END_SRC
-
-* Tangle & Load Tangled File
-
-#+BEGIN_SRC elisp :results output silent
-(defun MJR-tangle-and-load ()
-  "Tangles current file and attempts to load the tangled file.
-The tangled file is determiend by looking backward for a :tangle argument."
-  (interactive)
-  (save-excursion (org-babel-tangle)
-                  (if (re-search-backward ":tangle[[:blank:]]+\\([^[:blank:]]+.hp42s\\)$" nil t)
-                      (let ((file-name (match-string 1)))
-                        (if (or (string-equal "yes" file-name) (string-equal "no" file-name))
-                            (message "No explicit tangle file specified")
-                            (find-file file-name))))))
-#+END_SRC
 
 * free42 Notes
 ** Character Set

@@ -97,23 +97,23 @@ the base conversion factors are exact quantities, the programs insure we obtain 
 | Leng:mm      |                                                   1.0 |                        |
 | Leng:Ang     |                                                  1e-7 | Angstrom               |
 | Leng:μm      |                                                 0.001 | Micron                 |
-| Leng:mil     |                                FUNC 01; 25.4; 1000; / | mil (1/1000 in)        |
+| Leng:mil     |                                FUNC 01; 25.4; 1000; ÷ | mil (1/1000 in)        |
 | Leng:cm      |                                                    10 |                        |
 | Leng:in      |                                                  25.4 | Inch                   |
 |--------------+-------------------------------------------------------+------------------------|
 | Leng:in      |                                                     1 |                        |
 | Leng:hand    |                                                     4 |                        |
 | Leng:ft      |                                                    12 |                        |
-| Leng:yd      |                                     FUNC 01; 3; 12; * |                        |
-| Leng:fathom  |                                     FUNC 01; 6; 12; * |                        |
-| Leng:mile    |                                  FUNC 01; 5280; 12; * |                        |
+| Leng:yd      |                                     FUNC 01; 3; 12; × |                        |
+| Leng:fathom  |                                     FUNC 01; 6; 12; × |                        |
+| Leng:mile    |                                  FUNC 01; 5280; 12; × |                        |
 |--------------+-------------------------------------------------------+------------------------|
 | Leng:km      |                                                     1 |                        |
-| Leng:mi      |                 FUNC 01; 2.54; 12; *; 5280; *; 1e5; / | Int Mile               |
+| Leng:mi      |                 FUNC 01; 2.54; 12; ×; 5280; ×; 1e5; ÷ | Int Mile               |
 | Leng:us mi   |                                         1.60934721869 | US Mile                |
 | Leng:nmi     |                                                 1.852 | Int Nautical mi        |
 | Leng:m       |                                                 0.001 |                        |
-| Leng:ft      |                          FUNC 01; 2.54; 12; *; 1e5; / | Intl Foot              |
+| Leng:ft      |                          FUNC 01; 2.54; 12; ×; 1e5; ÷ | Intl Foot              |
 |--------------+-------------------------------------------------------+------------------------|
 | Area:hectare |                                                     1 | hectare                |
 | Area:acre    |                                         0.40468564224 | Int Acre               |
@@ -122,10 +122,10 @@ the base conversion factors are exact quantities, the programs insure we obtain 
 |--------------+-------------------------------------------------------+------------------------|
 | Vol:l        |                                                     1 |                        |
 | Vol:qt       |                                           0.946352946 | US Lq Quart            |
-| Vol:gal      |                            FUNC 01; 0.946352946; 4; * | US Lq Gal              |
+| Vol:gal      |                            FUNC 01; 0.946352946; 4; × | US Lq Gal              |
 | Vol:cc       |                                                 0.001 |                        |
-| Vol:butt     |                    FUNC 01; 0.946352946; 4; *; 126; * | US Butt 126 US Gal     |
-| Vol:bbutt    |                              FUNC 01; 4.54609; 108; * | UK Butt 108 UK Gal     |
+| Vol:butt     |                    FUNC 01; 0.946352946; 4; ×; 126; × | US Butt 126 US Gal     |
+| Vol:bbutt    |                              FUNC 01; 4.54609; 108; × | UK Butt 108 UK Gal     |
 |--------------+-------------------------------------------------------+------------------------|
 | Vol:tsp      |                                                     1 | Teaspoon               |
 | Vol:tbsp     |                                                     3 | Tablespoon             |
@@ -161,16 +161,16 @@ the base conversion factors are exact quantities, the programs insure we obtain 
 |--------------+-------------------------------------------------------+------------------------|
 | Force:N      |                                                     1 |                        |
 | Force:kgf    |                                               9.80665 |                        |
-| Force:lbf    |                       FUNC 01; 0.45359237; 9.80665; * | Int lbf                |
+| Force:lbf    |                       FUNC 01; 0.45359237; 9.80665; × | Int lbf                |
 |--------------+-------------------------------------------------------+------------------------|
 | Sped:m/s     |                                                     1 |                        |
-| Sped:mph     |        FUNC 01; 2.54; 12; *; 5280; *; 1e2; /; 3600; / | Int mph                |
-| Sped:kph     |                                FUNC 01; 1000; 3600; / |                        |
-| Sped:knot    |                      FUNC 01; 1.852; 1000; *; 3600; / | Intl nmi               |
+| Sped:mph     |        FUNC 01; 2.54; 12; ×; 5280; ×; 1e2; ÷; 3600; ÷ | Int mph                |
+| Sped:kph     |                                FUNC 01; 1000; 3600; ÷ |                        |
+| Sped:knot    |                      FUNC 01; 1.852; 1000; ×; 3600; ÷ | Intl nmi               |
 |--------------+-------------------------------------------------------+------------------------|
 | Pres:Pa      |                                                     1 | N/m^2                  |
 | Pres:bar     |                                                100000 |                        |
-| Pres:psi     | FUNC 01; 1e4; 0.45359237; *; 9.80665; *; 2.54; X^2; / |                        |
+| Pres:psi     | FUNC 01; 1e4; 0.45359237; ×; 9.80665; ×; 2.54; X^2; ÷ |                        |
 | Pres:atm     |                                                101325 | Standard               |
 | Pres:mmHg    |                                               133.322 |                        |
 | Pres:inHg    |                                            3.386389e3 | Conventional           |
@@ -542,7 +542,7 @@ LBL 18    @@@@ Action for menu key mil
 FUNC 01
 25.4
 1000
-/
+÷
 "mil (1/1000 in)"
 ├""
 AVIEW
@@ -568,19 +568,19 @@ LBL 24    @@@@ Action for menu key yd
 FUNC 01
 3
 12
-,*
+×
 RTN
 LBL 25    @@@@ Action for menu key fathom
 FUNC 01
 6
 12
-,*
+×
 RTN
 LBL 26    @@@@ Action for menu key mile
 FUNC 01
 5280
 12
-,*
+×
 RTN
 LBL 27    @@@@ Action for menu key km
 1
@@ -589,11 +589,11 @@ LBL 28    @@@@ Action for menu key mi
 FUNC 01
 2.54
 12
-,*
+×
 5280
-,*
+×
 1e5
-/
+÷
 "Int Mile"
 AVIEW
 RTN
@@ -615,9 +615,9 @@ LBL 32    @@@@ Action for menu key ft
 FUNC 01
 2.54
 12
-,*
+×
 1e5
-/
+÷
 "Intl Foot"
 AVIEW
 RTN
@@ -649,7 +649,7 @@ LBL 40    @@@@ Action for menu key gal
 FUNC 01
 0.946352946
 4
-,*
+×
 "US Lq Gal"
 AVIEW
 RTN
@@ -660,9 +660,9 @@ LBL 42    @@@@ Action for menu key butt
 FUNC 01
 0.946352946
 4
-,*
+×
 126
-,*
+×
 "US Butt 126 US "
 ├"Gal"
 AVIEW
@@ -671,7 +671,7 @@ LBL 43    @@@@ Action for menu key bbutt
 FUNC 01
 4.54609
 108
-,*
+×
 "UK Butt 108 UK "
 ├"Gal"
 AVIEW
@@ -805,7 +805,7 @@ LBL 75    @@@@ Action for menu key lbf
 FUNC 01
 0.45359237
 9.80665
-,*
+×
 "Int lbf"
 AVIEW
 RTN
@@ -816,13 +816,13 @@ LBL 77    @@@@ Action for menu key mph
 FUNC 01
 2.54
 12
-,*
+×
 5280
-,*
+×
 1e2
-/
+÷
 3600
-/
+÷
 "Int mph"
 AVIEW
 RTN
@@ -830,15 +830,15 @@ LBL 78    @@@@ Action for menu key kph
 FUNC 01
 1000
 3600
-/
+÷
 RTN
 LBL 79    @@@@ Action for menu key knot
 FUNC 01
 1.852
 1000
-,*
+×
 3600
-/
+÷
 "Intl nmi"
 AVIEW
 RTN
@@ -854,12 +854,12 @@ LBL 82    @@@@ Action for menu key psi
 FUNC 01
 1e4
 0.45359237
-,*
+×
 9.80665
-,*
+×
 2.54
 X^2
-/
+÷
 RTN
 LBL 83    @@@@ Action for menu key atm
 101325

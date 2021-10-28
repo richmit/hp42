@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-10-20 Wed 21:22 -->
+<!-- 2021-10-27 Wed 19:06 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=1024, initial-scale=1" />
 <title>free42 Programming Tools</title>
@@ -229,7 +229,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-10-20 21:22:51</i></td>
+<td class="org-left"><i>2021-10-27 19:05:47</i></td>
 </tr>
 </tbody>
 </table>
@@ -241,45 +241,42 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orged7d154">1. Metadata</a></li>
+<li><a href="#org5dda47e">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
 <li><a href="#menu-gen">3. Generating 42s menu code</a>
 <ul>
-<li><a href="#org0f9aa43">3.1. Generic menu generator</a></li>
-<li><a href="#org5471781">3.2. For CUSTOM-type Menus</a></li>
-<li><a href="#orgd0e7b44">3.3. Always generate local lables</a></li>
+<li><a href="#orga0027b9">3.1. Generic menu generator</a></li>
+<li><a href="#org952fc52">3.2. For CUSTOM-type Menus</a></li>
+<li><a href="#orged96052">3.3. Always generate local lables</a></li>
 </ul>
 </li>
-<li><a href="#orgf6fa97d">4. Emacs Helper Stuff</a>
+<li><a href="#orge49bf4d">4. Emacs Helper Stuff</a>
 <ul>
-<li><a href="#orgcfda486">4.1. Emacs function to insert charcters given a list of character codes</a></li>
-<li><a href="#orgd584573">4.2. Emacs Mode for 42s Code</a></li>
-<li><a href="#org9f5905a">4.3. yas templates</a></li>
-<li><a href="#org86f1f35">4.4. Export &amp; Tangle from dired</a></li>
+<li><a href="#orgdf9778c">4.1. Prepare Code For Conversion</a></li>
+<li><a href="#orgcbec341">4.2. Automatically processing tangled code</a></li>
+<li><a href="#orgc840b78">4.3. Tangle &amp; Load Tangled File</a></li>
+<li><a href="#orgc7b532d">4.4. yas templates</a></li>
 </ul>
 </li>
-<li><a href="#org0d4dff0">5. Prepare Code For Conversion</a></li>
-<li><a href="#org8238b7f">6. Prepare Marked Region for Code Conversion</a></li>
-<li><a href="#org7748e5a">7. Tangle &amp; Load Tangled File</a></li>
-<li><a href="#orgfd6d77c">8. free42 Notes</a>
+<li><a href="#orgf87bbc2">5. free42 Notes</a>
 <ul>
-<li><a href="#orgcf631c9">8.1. Character Set</a></li>
-<li><a href="#orgd1389fa">8.2. Date format</a></li>
-<li><a href="#org5528e0b">8.3. Stats registers</a></li>
+<li><a href="#org93c8e6a">5.1. Character Set</a></li>
+<li><a href="#org55b8c53">5.2. Date format</a></li>
+<li><a href="#orgfd54c99">5.3. Stats registers</a></li>
 </ul>
 </li>
-<li><a href="#org915bd36">9. DM 42 Notes</a>
+<li><a href="#orgd983f9b">6. DM 42 Notes</a>
 <ul>
-<li><a href="#orgdba98ff">9.1. Display</a></li>
+<li><a href="#org57c76d8">6.1. Display</a></li>
 </ul>
 </li>
-<li><a href="#orge97ab7d">10. EOF</a></li>
+<li><a href="#orgcb41032">7. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orged7d154" class="outline-2">
-<h2 id="orged7d154"><span class="section-number-2">1.</span> Metadata</h2>
+<div id="outline-container-org5dda47e" class="outline-2">
+<h2 id="org5dda47e"><span class="section-number-2">1.</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/hp42s-meta.html">https://richmit.github.io/hp42/hp42s-meta.html</a>
@@ -361,8 +358,8 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
 <div class="outline-text-2" id="text-menu-gen">
 </div>
 
-<div id="outline-container-org0f9aa43" class="outline-3">
-<h3 id="org0f9aa43"><span class="section-number-3">3.1.</span> Generic menu generator</h3>
+<div id="outline-container-orga0027b9" class="outline-3">
+<h3 id="orga0027b9"><span class="section-number-3">3.1.</span> Generic menu generator</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 This code will read an org-mode table describing a menu, and generate 42s code to implement the menu.  The only limitation on menu depth and size are the
@@ -745,8 +742,8 @@ tables.
 </div>
 </div>
 
-<div id="outline-container-org5471781" class="outline-3">
-<h3 id="org5471781"><span class="section-number-3">3.2.</span> For CUSTOM-type Menus</h3>
+<div id="outline-container-org952fc52" class="outline-3">
+<h3 id="org952fc52"><span class="section-number-3">3.2.</span> For CUSTOM-type Menus</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 These functions are useful for CUSTOM-type menus &#x2013; that is menus that call other programs or built in functions.  I use this as a way to add hierarchy to the
@@ -829,8 +826,8 @@ the org-mode file and the whole thing will then be tangled together into one pro
 </div>
 </div>
 
-<div id="outline-container-orgd0e7b44" class="outline-3">
-<h3 id="orgd0e7b44"><span class="section-number-3">3.3.</span> Always generate local lables</h3>
+<div id="outline-container-orged96052" class="outline-3">
+<h3 id="orged96052"><span class="section-number-3">3.3.</span> Always generate local lables</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 This function is handy when you want to always generate local labels.
@@ -844,75 +841,125 @@ This function is handy when you want to always generate local labels.
 </div>
 </div>
 
-<div id="outline-container-orgf6fa97d" class="outline-2">
-<h2 id="orgf6fa97d"><span class="section-number-2">4.</span> Emacs Helper Stuff</h2>
+<div id="outline-container-orge49bf4d" class="outline-2">
+<h2 id="orge49bf4d"><span class="section-number-2">4.</span> Emacs Helper Stuff</h2>
 <div class="outline-text-2" id="text-4">
-</div>
-<div id="outline-container-orgcfda486" class="outline-3">
-<h3 id="orgcfda486"><span class="section-number-3">4.1.</span> Emacs function to insert charcters given a list of character codes</h3>
-<div class="outline-text-3" id="text-4-1">
-<div class="org-src-container">
-<pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-ins42char</span> (charn)
-  <span style="color: #f08080;">"Insert free42 character at point."</span>
-  (<span style="color: #00ffff;">interactive</span> <span style="color: #fa8072;">"sCharacter Number(s): "</span>)
-  (<span style="color: #00ffff;">if</span> charn
-      (<span style="color: #00ffff;">cl-loop</span> for c in (split-string charn)
-               do (insert (nth (eval (car (read-from-string c))) '(<span style="color: #fa8072;">"&#247;"</span> <span style="color: #fa8072;">"&#215;"</span> <span style="color: #fa8072;">"&#8730;"</span>  <span style="color: #fa8072;">"&#8747;"</span> <span style="color: #fa8072;">"&#9618;"</span> <span style="color: #fa8072;">"&#931;"</span> <span style="color: #fa8072;">"&#9656;"</span> <span style="color: #fa8072;">"&#960;"</span> <span style="color: #fa8072;">"&#191;"</span> <span style="color: #fa8072;">"&#8804;"</span>  <span style="color: #fa8072;">"[LF]"</span> <span style="color: #fa8072;">"&#8805;"</span>     <span style="color: #fa8072;">"&#8800;"</span>  <span style="color: #fa8072;">"&#8629;"</span> <span style="color: #fa8072;">"&#8595;"</span> <span style="color: #fa8072;">"&#8594;"</span>
-                                                                   <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">CHAR 30 &amp; CHAR 4 are the same unicode.  How to put 30 in a string?</span>
-                                                                   <span style="color: #fa8072;">"&#8592;"</span> <span style="color: #fa8072;">"&#956;"</span> <span style="color: #fa8072;">"&#163;"</span>  <span style="color: #fa8072;">"&#176;"</span> <span style="color: #fa8072;">"&#197;"</span> <span style="color: #fa8072;">"&#209;"</span> <span style="color: #fa8072;">"&#196;"</span> <span style="color: #fa8072;">"&#8737;"</span> <span style="color: #fa8072;">"&#7431;"</span> <span style="color: #fa8072;">"&#198;"</span>  <span style="color: #fa8072;">"&#8230;"</span>    <span style="color: #fa8072;">"[ESC]"</span> <span style="color: #fa8072;">"&#214;"</span>  <span style="color: #fa8072;">"&#220;"</span> <span style="color: #fa8072;">"&#9618;"</span> <span style="color: #fa8072;">"&#8226;"</span>  
-                                                                   <span style="color: #fa8072;">" "</span> <span style="color: #fa8072;">"!"</span> <span style="color: #fa8072;">"\""</span> <span style="color: #fa8072;">"#"</span> <span style="color: #fa8072;">"$"</span> <span style="color: #fa8072;">"%"</span> <span style="color: #fa8072;">"&amp;"</span> <span style="color: #fa8072;">"'"</span> <span style="color: #fa8072;">"("</span> <span style="color: #fa8072;">")"</span>  <span style="color: #fa8072;">"*"</span>    <span style="color: #fa8072;">"+"</span>     <span style="color: #fa8072;">","</span>  <span style="color: #fa8072;">"-"</span> <span style="color: #fa8072;">"."</span> <span style="color: #fa8072;">"/"</span>
-                                                                   <span style="color: #fa8072;">"0"</span> <span style="color: #fa8072;">"1"</span> <span style="color: #fa8072;">"2"</span>  <span style="color: #fa8072;">"3"</span> <span style="color: #fa8072;">"4"</span> <span style="color: #fa8072;">"5"</span> <span style="color: #fa8072;">"6"</span> <span style="color: #fa8072;">"7"</span> <span style="color: #fa8072;">"8"</span> <span style="color: #fa8072;">"9"</span>  <span style="color: #fa8072;">":"</span>    <span style="color: #fa8072;">";"</span>     <span style="color: #fa8072;">"&lt;"</span>  <span style="color: #fa8072;">"="</span> <span style="color: #fa8072;">"&gt;"</span> <span style="color: #fa8072;">"?"</span>
-                                                                   <span style="color: #fa8072;">"@"</span> <span style="color: #fa8072;">"A"</span> <span style="color: #fa8072;">"B"</span>  <span style="color: #fa8072;">"C"</span> <span style="color: #fa8072;">"D"</span> <span style="color: #fa8072;">"E"</span> <span style="color: #fa8072;">"F"</span> <span style="color: #fa8072;">"G"</span> <span style="color: #fa8072;">"H"</span> <span style="color: #fa8072;">"I"</span>  <span style="color: #fa8072;">"J"</span>    <span style="color: #fa8072;">"K"</span>     <span style="color: #fa8072;">"L"</span>  <span style="color: #fa8072;">"M"</span> <span style="color: #fa8072;">"N"</span> <span style="color: #fa8072;">"O"</span>
-                                                                   <span style="color: #fa8072;">"P"</span> <span style="color: #fa8072;">"Q"</span> <span style="color: #fa8072;">"R"</span>  <span style="color: #fa8072;">"S"</span> <span style="color: #fa8072;">"T"</span> <span style="color: #fa8072;">"U"</span> <span style="color: #fa8072;">"V"</span> <span style="color: #fa8072;">"W"</span> <span style="color: #fa8072;">"X"</span> <span style="color: #fa8072;">"Y"</span>  <span style="color: #fa8072;">"Z"</span>    <span style="color: #fa8072;">"["</span>     <span style="color: #fa8072;">"\\"</span> <span style="color: #fa8072;">"]"</span> <span style="color: #fa8072;">"&#8593;"</span> <span style="color: #fa8072;">"_"</span>
-                                                                   <span style="color: #fa8072;">"`"</span> <span style="color: #fa8072;">"a"</span> <span style="color: #fa8072;">"b"</span>  <span style="color: #fa8072;">"c"</span> <span style="color: #fa8072;">"d"</span> <span style="color: #fa8072;">"e"</span> <span style="color: #fa8072;">"f"</span> <span style="color: #fa8072;">"g"</span> <span style="color: #fa8072;">"h"</span> <span style="color: #fa8072;">"i"</span>  <span style="color: #fa8072;">"j"</span>    <span style="color: #fa8072;">"k"</span>     <span style="color: #fa8072;">"l"</span>  <span style="color: #fa8072;">"m"</span> <span style="color: #fa8072;">"n"</span> <span style="color: #fa8072;">"o"</span>
-                                                                   <span style="color: #fa8072;">"p"</span> <span style="color: #fa8072;">"q"</span> <span style="color: #fa8072;">"r"</span>  <span style="color: #fa8072;">"s"</span> <span style="color: #fa8072;">"t"</span> <span style="color: #fa8072;">"u"</span> <span style="color: #fa8072;">"v"</span> <span style="color: #fa8072;">"w"</span> <span style="color: #fa8072;">"x"</span> <span style="color: #fa8072;">"y"</span>  <span style="color: #fa8072;">"z"</span>    <span style="color: #fa8072;">"{"</span>     <span style="color: #fa8072;">"|"</span>  <span style="color: #fa8072;">"}"</span> <span style="color: #fa8072;">"~"</span> <span style="color: #fa8072;">"&#9500;"</span>
-                                                                   <span style="color: #fa8072;">":"</span> <span style="color: #fa8072;">"&#655;"</span>))))))
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orgd584573" class="outline-3">
-<h3 id="orgd584573"><span class="section-number-3">4.2.</span> Emacs Mode for 42s Code</h3>
-<div class="outline-text-3" id="text-4-2">
 <p>
-This isn't really a proper mode for 42s code.  Just a quick hack with <code>define-generic-mode</code> to get some syntax highlighting &#x2013; which doesn't fully work as
-some of the characters in keywords are recognized as punctuation.  Still it makes listings a little better.  Someday I may take the time to write a real mode,
-but this works for now.
+The elisp file <code>hp42s-mode.el</code> provides few things:
+</p>
+<ul class="org-ul">
+<li>A language mode for free42 code &#x2013; mostly just provides syntax highlighting</li>
+<li><code>MJR-ins42char</code>: Lisp function to insert characters given a list of character codes</li>
+<li><code>MJR-dired-org-export</code>: Lisp function to export to HTML and tangle all marked files in a dired buffer</li>
+<li><code>MJR-process-buffer-as-42s-code</code>: Lisp function to process <b>all free42 code in a buffer</b> for pasting into free42</li>
+<li><code>MJR-target-free42-version</code>: Variable used by <code>MJR-process-buffer-as-42s-code</code> &amp; <code>MJR-copy-42s-code-in-region</code> to control version of free42</li>
+<li><code>MJR-copy-42s-code-in-region</code>: Lisp function that process marked region for pasting into free42 and puts the test on the kill ring &#x2013; like <code>MJR-process-buffer-as-42s-code</code> but for a region.</li>
+</ul>
+
+<p>
+To activate the functionality, simply <code>load</code> the <code>hp42s-mode.el</code> file into emacs.  You can evaluate teh folloing block to do that:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp">(<span style="color: #00ffff;">define-generic-mode</span> '<span style="color: #00fa9a; font-weight: bold;">hp42s-mode</span>
-                     '(<span style="color: #fa8072;">"@@@@"</span> <span style="color: #fa8072;">"@@##"</span> <span style="color: #fa8072;">"@NM@"</span>)
-                     '(<span style="color: #fa8072;">"%"</span> <span style="color: #fa8072;">"%CH"</span> <span style="color: #fa8072;">"+"</span> <span style="color: #fa8072;">"+/-"</span> <span style="color: #fa8072;">"-"</span> <span style="color: #fa8072;">"1/X"</span> <span style="color: #fa8072;">"10&#8593;X"</span> <span style="color: #fa8072;">"ABS"</span> <span style="color: #fa8072;">"ACOS"</span> <span style="color: #fa8072;">"ACOSH"</span> <span style="color: #fa8072;">"ADV"</span> <span style="color: #fa8072;">"AGRAPH"</span> <span style="color: #fa8072;">"AIP"</span> <span style="color: #fa8072;">"ALENG"</span> <span style="color: #fa8072;">"ALL"</span> <span style="color: #fa8072;">"ALL&#931;"</span> <span style="color: #fa8072;">"AND"</span> <span style="color: #fa8072;">"AOFF"</span> <span style="color: #fa8072;">"AON"</span> <span style="color: #fa8072;">"ARCL"</span> <span style="color: #fa8072;">"AROT"</span> <span style="color: #fa8072;">"ASHF"</span> 
-                       <span style="color: #fa8072;">"ASIN"</span> <span style="color: #fa8072;">"ASINH"</span> <span style="color: #fa8072;">"ASSIGN"</span> <span style="color: #fa8072;">"ASTO"</span> <span style="color: #fa8072;">"ATAN"</span> <span style="color: #fa8072;">"ATANH"</span> <span style="color: #fa8072;">"ATOX"</span> <span style="color: #fa8072;">"AVIEW"</span> <span style="color: #fa8072;">"BASE+"</span> <span style="color: #fa8072;">"BASE+/-"</span> <span style="color: #fa8072;">"BASE-"</span> <span style="color: #fa8072;">"BASE&#215;"</span> <span style="color: #fa8072;">"BASE&#247;"</span> <span style="color: #fa8072;">"BEEP"</span> <span style="color: #fa8072;">"BEST"</span> <span style="color: #fa8072;">"BINM"</span> <span style="color: #fa8072;">"BIT"</span> <span style="color: #fa8072;">"BIT"</span>
-                       <span style="color: #fa8072;">"CF"</span> <span style="color: #fa8072;">"CLA"</span> <span style="color: #fa8072;">"CLD"</span> <span style="color: #fa8072;">"CLKEYS"</span> <span style="color: #fa8072;">"CLLCD"</span> <span style="color: #fa8072;">"CLMENU"</span> <span style="color: #fa8072;">"CLP"</span> <span style="color: #fa8072;">"CLRG"</span> <span style="color: #fa8072;">"CLST"</span> <span style="color: #fa8072;">"CLV"</span> <span style="color: #fa8072;">"CLX"</span> <span style="color: #fa8072;">"CL&#931;"</span> <span style="color: #fa8072;">"COMB"</span> <span style="color: #fa8072;">"COMPLEX"</span> <span style="color: #fa8072;">"CORR"</span> <span style="color: #fa8072;">"COS"</span> <span style="color: #fa8072;">"COSH"</span> <span style="color: #fa8072;">"CPX"</span> <span style="color: #fa8072;">"CPXRES"</span>
-                       <span style="color: #fa8072;">"CROSS"</span> <span style="color: #fa8072;">"CUSTOM"</span> <span style="color: #fa8072;">"DECM"</span> <span style="color: #fa8072;">"DEG"</span> <span style="color: #fa8072;">"DELAY"</span> <span style="color: #fa8072;">"DELR"</span> <span style="color: #fa8072;">"DET"</span> <span style="color: #fa8072;">"DIM"</span> <span style="color: #fa8072;">"DIM"</span> <span style="color: #fa8072;">"DOT"</span> <span style="color: #fa8072;">"DSE"</span> <span style="color: #fa8072;">"EDIT"</span> <span style="color: #fa8072;">"EDITN"</span> <span style="color: #fa8072;">"END"</span> <span style="color: #fa8072;">"ENG"</span> <span style="color: #fa8072;">"ENTER"</span> <span style="color: #fa8072;">"EXITALL"</span> <span style="color: #fa8072;">"EXPF"</span> <span style="color: #fa8072;">"E&#8593;X"</span>
-                       <span style="color: #fa8072;">"E&#8593;X-1"</span> <span style="color: #fa8072;">"FC"</span> <span style="color: #fa8072;">"FC?C"</span> <span style="color: #fa8072;">"FCSTX"</span> <span style="color: #fa8072;">"FCSTY"</span> <span style="color: #fa8072;">"FIX"</span> <span style="color: #fa8072;">"FNRM"</span> <span style="color: #fa8072;">"FP"</span> <span style="color: #fa8072;">"FS"</span> <span style="color: #fa8072;">"FS?C"</span> <span style="color: #fa8072;">"FUNC"</span> <span style="color: #fa8072;">"GAMMA"</span> <span style="color: #fa8072;">"GETKEY"</span> <span style="color: #fa8072;">"GETM"</span> <span style="color: #fa8072;">"GRAD"</span> <span style="color: #fa8072;">"GROW"</span> <span style="color: #fa8072;">"GTO"</span> <span style="color: #fa8072;">"HEXM"</span> <span style="color: #fa8072;">"HMS+"</span>
-                       <span style="color: #fa8072;">"HMS-"</span> <span style="color: #fa8072;">"I+"</span> <span style="color: #fa8072;">"I-"</span> <span style="color: #fa8072;">"INDEX"</span> <span style="color: #fa8072;">"INPUT"</span> <span style="color: #fa8072;">"INSR"</span> <span style="color: #fa8072;">"INTEG"</span> <span style="color: #fa8072;">"INVRT"</span> <span style="color: #fa8072;">"IP"</span> <span style="color: #fa8072;">"ISG"</span> <span style="color: #fa8072;">"J+"</span> <span style="color: #fa8072;">"J-"</span> <span style="color: #fa8072;">"KEY"</span> <span style="color: #fa8072;">"KEYASN"</span> <span style="color: #fa8072;">"L4STK"</span> <span style="color: #fa8072;">"LASTX"</span> <span style="color: #fa8072;">"LBL"</span> <span style="color: #fa8072;">"LCLBL"</span> <span style="color: #fa8072;">"LINF"</span> <span style="color: #fa8072;">"LIN&#931;"</span>
-                       <span style="color: #fa8072;">"LN"</span> <span style="color: #fa8072;">"LN1+X"</span> <span style="color: #fa8072;">"LOG"</span> <span style="color: #fa8072;">"LOGF"</span> <span style="color: #fa8072;">"LSTO"</span> <span style="color: #fa8072;">"MAN"</span> <span style="color: #fa8072;">"MAT"</span> <span style="color: #fa8072;">"MEAN"</span> <span style="color: #fa8072;">"MENU"</span> <span style="color: #fa8072;">"MOD"</span> <span style="color: #fa8072;">"MVAR"</span> <span style="color: #fa8072;">"N!"</span>  <span style="color: #fa8072;">"NEWMAT"</span> <span style="color: #fa8072;">"NOP"</span> <span style="color: #fa8072;">"NORM"</span> <span style="color: #fa8072;">"NOT"</span> <span style="color: #fa8072;">"OCTM"</span> <span style="color: #fa8072;">"OFF"</span> <span style="color: #fa8072;">"OLD"</span> <span style="color: #fa8072;">"ON"</span> <span style="color: #fa8072;">"OR"</span>
-                       <span style="color: #fa8072;">"PERM"</span> <span style="color: #fa8072;">"PGMINT"</span> <span style="color: #fa8072;">"PGMSLV"</span> <span style="color: #fa8072;">"PIXEL"</span> <span style="color: #fa8072;">"POLAR"</span> <span style="color: #fa8072;">"POSA"</span> <span style="color: #fa8072;">"PRA"</span> <span style="color: #fa8072;">"PRLCD"</span> <span style="color: #fa8072;">"PROFF"</span> <span style="color: #fa8072;">"PROMPT"</span> <span style="color: #fa8072;">"PRON"</span> <span style="color: #fa8072;">"PRSTK"</span> <span style="color: #fa8072;">"PRUSR"</span> <span style="color: #fa8072;">"PRV"</span> <span style="color: #fa8072;">"PRX"</span> <span style="color: #fa8072;">"PR&#931;"</span> <span style="color: #fa8072;">"PSE"</span> <span style="color: #fa8072;">"PUTM"</span>
-                       <span style="color: #fa8072;">"PWRF"</span> <span style="color: #fa8072;">"R&lt;&gt;R"</span> <span style="color: #fa8072;">"RAD"</span> <span style="color: #fa8072;">"RAN"</span> <span style="color: #fa8072;">"RCL"</span> <span style="color: #fa8072;">"RCL+"</span> <span style="color: #fa8072;">"RCL-"</span> <span style="color: #fa8072;">"RCLEL"</span> <span style="color: #fa8072;">"RCLIJ"</span> <span style="color: #fa8072;">"RCL&#215;"</span> <span style="color: #fa8072;">"RCL&#247;"</span> <span style="color: #fa8072;">"RDX,"</span> <span style="color: #fa8072;">"RDX."</span>  <span style="color: #fa8072;">"REAL"</span> <span style="color: #fa8072;">"REALRES"</span> <span style="color: #fa8072;">"RECT"</span> <span style="color: #fa8072;">"RND"</span> <span style="color: #fa8072;">"RNRM"</span> <span style="color: #fa8072;">"ROTXY"</span>
-                       <span style="color: #fa8072;">"RSUM"</span> <span style="color: #fa8072;">"RTN"</span> <span style="color: #fa8072;">"RTNERR"</span> <span style="color: #fa8072;">"R&#8593;"</span> <span style="color: #fa8072;">"R&#8595;"</span> <span style="color: #fa8072;">"SCI"</span> <span style="color: #fa8072;">"SDEV"</span> <span style="color: #fa8072;">"SEED"</span> <span style="color: #fa8072;">"SF"</span> <span style="color: #fa8072;">"SIGN"</span> <span style="color: #fa8072;">"SIN"</span> <span style="color: #fa8072;">"SINH"</span> <span style="color: #fa8072;">"SIZE"</span> <span style="color: #fa8072;">"SLOPE"</span> <span style="color: #fa8072;">"SOLVE"</span> <span style="color: #fa8072;">"SQRT"</span> <span style="color: #fa8072;">"STO"</span> <span style="color: #fa8072;">"STO+"</span> <span style="color: #fa8072;">"STO-"</span> <span style="color: #fa8072;">"STOEL"</span>
-                       <span style="color: #fa8072;">"STOIJ"</span> <span style="color: #fa8072;">"STOP"</span> <span style="color: #fa8072;">"STO&#215;"</span> <span style="color: #fa8072;">"STO&#247;"</span> <span style="color: #fa8072;">"STR"</span> <span style="color: #fa8072;">"SUM"</span> <span style="color: #fa8072;">"TAN"</span> <span style="color: #fa8072;">"TANH"</span> <span style="color: #fa8072;">"TONE"</span> <span style="color: #fa8072;">"TRACE"</span> <span style="color: #fa8072;">"TRANS"</span> <span style="color: #fa8072;">"UVEC"</span> <span style="color: #fa8072;">"VARMENU"</span> <span style="color: #fa8072;">"VARMNU1"</span> <span style="color: #fa8072;">"VIEW"</span> <span style="color: #fa8072;">"WMEAN"</span> <span style="color: #fa8072;">"WRAP"</span> <span style="color: #fa8072;">"WSIZE"</span> <span style="color: #fa8072;">"X&lt;0"</span> <span style="color: #fa8072;">"X&lt;&gt;"</span>
-                       <span style="color: #fa8072;">"X&lt;&gt;Y"</span> <span style="color: #fa8072;">"X&lt;Y"</span> <span style="color: #fa8072;">"X=0"</span> <span style="color: #fa8072;">"X=0"</span> <span style="color: #fa8072;">"X=Y"</span> <span style="color: #fa8072;">"X&gt;0"</span> <span style="color: #fa8072;">"X&gt;Y"</span> <span style="color: #fa8072;">"XEQ"</span> <span style="color: #fa8072;">"XTOA"</span> <span style="color: #fa8072;">"X&#8593;2"</span> <span style="color: #fa8072;">"X&#8800;0"</span> <span style="color: #fa8072;">"X&#8800;Y"</span> <span style="color: #fa8072;">"X&#8804;0"</span> <span style="color: #fa8072;">"X&#8804;Y"</span> <span style="color: #fa8072;">"X&#8805;0"</span> <span style="color: #fa8072;">"X&#8805;Y"</span> <span style="color: #fa8072;">"X&#8805;Y"</span> <span style="color: #fa8072;">"YINT"</span> <span style="color: #fa8072;">"Y&#8593;X"</span> <span style="color: #fa8072;">"[FIND]"</span> <span style="color: #fa8072;">"[MAX]"</span>
-                       <span style="color: #fa8072;">"[MIN]"</span> <span style="color: #fa8072;">"&#215;"</span> <span style="color: #fa8072;">"&#247;"</span> <span style="color: #fa8072;">"&#931;+"</span> <span style="color: #fa8072;">"&#931;-"</span> <span style="color: #fa8072;">"&#931;REG"</span> <span style="color: #fa8072;">"&#931;REG"</span> <span style="color: #fa8072;">"&#8592;"</span> <span style="color: #fa8072;">"&#8593;"</span> <span style="color: #fa8072;">"&#8594;"</span> <span style="color: #fa8072;">"&#8594;DEC"</span> <span style="color: #fa8072;">"&#8594;DEG"</span> <span style="color: #fa8072;">"&#8594;HMS"</span> <span style="color: #fa8072;">"&#8594;HR"</span> <span style="color: #fa8072;">"&#8594;OCT"</span> <span style="color: #fa8072;">"&#8594;POL"</span> <span style="color: #fa8072;">"&#8594;RAD"</span> <span style="color: #fa8072;">"&#8594;REC"</span> <span style="color: #fa8072;">"&#8595;"</span> <span style="color: #fa8072;">"DDAYS"</span> <span style="color: #fa8072;">"DOW"</span> <span style="color: #fa8072;">"CLK12"</span>
-                       <span style="color: #fa8072;">"CLK24"</span> <span style="color: #fa8072;">"DMY"</span> <span style="color: #fa8072;">"MDY"</span> <span style="color: #fa8072;">"YMD"</span> <span style="color: #fa8072;">"DATE"</span> <span style="color: #fa8072;">"TIME"</span> <span style="color: #fa8072;">"ADATE"</span> <span style="color: #fa8072;">"ATIME"</span> <span style="color: #fa8072;">"DATE+"</span> <span style="color: #fa8072;">"XEQ IND ST"</span> <span style="color: #fa8072;">"XEQ IND"</span> <span style="color: #fa8072;">"GTO IND"</span> <span style="color: #fa8072;">"GTO IND ST"</span> <span style="color: #fa8072;">"STO IND ST"</span> <span style="color: #fa8072;">"STO+ IND ST"</span>
-                       <span style="color: #fa8072;">"STO- IND ST"</span> <span style="color: #fa8072;">"STOEL IND ST"</span> <span style="color: #fa8072;">"STOIJ IND ST"</span> <span style="color: #fa8072;">"STOP IND ST"</span> <span style="color: #fa8072;">"STO&#215; IND ST"</span> <span style="color: #fa8072;">"STO&#247; IND ST"</span> <span style="color: #fa8072;">"STO ST"</span> <span style="color: #fa8072;">"STO+ ST"</span> <span style="color: #fa8072;">"STO- ST"</span> <span style="color: #fa8072;">"STOEL ST"</span> <span style="color: #fa8072;">"STOIJ ST"</span>
-                       <span style="color: #fa8072;">"STOP ST"</span> <span style="color: #fa8072;">"STO&#215; ST"</span> <span style="color: #fa8072;">"STO&#247; ST"</span> <span style="color: #fa8072;">"RCL IND ST"</span> <span style="color: #fa8072;">"RCL+ IND ST"</span> <span style="color: #fa8072;">"RCL- IND ST"</span> <span style="color: #fa8072;">"RCLEL IND ST"</span> <span style="color: #fa8072;">"RCLIJ IND ST"</span> <span style="color: #fa8072;">"RCL&#215; IND ST"</span> <span style="color: #fa8072;">"RCL&#247; IND ST"</span> <span style="color: #fa8072;">"RCL</span>
-<span style="color: #fa8072;">                       ST"</span> <span style="color: #fa8072;">"RCL+ ST"</span> <span style="color: #fa8072;">"RCL- ST"</span> <span style="color: #fa8072;">"RCLEL ST"</span> <span style="color: #fa8072;">"RCLIJ ST"</span> <span style="color: #fa8072;">"RCL&#215; ST"</span> <span style="color: #fa8072;">"RCL&#247; ST"</span> <span style="color: #fa8072;">"RTNNO"</span> <span style="color: #fa8072;">"RTNYES"</span> <span style="color: #fa8072;">"PI"</span>)
-                     '((<span style="color: #fa8072;">"@@## REQ:.*"</span> . font-lock-preprocessor-face)) <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Not sure why this is broken.</span>
-                     '(<span style="color: #fa8072;">".42s\\'"</span>)
-                     nil
-                     <span style="color: #f08080;">"Major mode for editing HP-42s programs"</span>)
+<pre class="src src-elisp">(load-file <span style="color: #fa8072;">"../emacs/hp42s-mode.el"</span>)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgdf9778c" class="outline-3">
+<h3 id="orgdf9778c"><span class="section-number-3">4.1.</span> Prepare Code For Conversion</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+I include comments like <code>@@##</code> that I use like compiler directives in C.  They provide a way to remove lines of code that are incompatible or unnecessary for
+the target version of free42.  It's a bit of a hack, but it lets me maintain one program for diff-rent versions of free42.  When I "tangle" an <code>org-mode</code>
+buffer, the code is automatically filtered for the selected version of free42 (set via <code>MJR-target-free42-version</code>).
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">DM42 Version</th>
+<th scope="col" class="org-right">Target Free42</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">DMCP 3.22 / DM42 v3.20</td>
+<td class="org-right">3.0.5</td>
+</tr>
+
+<tr>
+<td class="org-left">DMCP 3.21 / DM42 v3.18</td>
+<td class="org-right">3.0.2</td>
+</tr>
+
+<tr>
+<td class="org-left">DMCP-3.20 / DM42-3.17</td>
+<td class="org-right">2.5.20</td>
+</tr>
+
+<tr>
+<td class="org-left">DMCP-3.20 / DM42-3.16</td>
+<td class="org-right">2.5.20</td>
+</tr>
+
+<tr>
+<td class="org-left">DMCP 3.18 / DM42 v3.15</td>
+<td class="org-right">2.5.16</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgcbec341" class="outline-3">
+<h3 id="orgcbec341"><span class="section-number-3">4.2.</span> Automatically processing tangled code</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+By adding <code>MJR-process-buffer-as-42s-code</code> to the <code>org-babel-post-tangle-hook</code>, you can automatically process tangled code.  You can do that by evaluating
+the next block:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(add-hook 'org-babel-post-tangle-hook 'MJR-process-buffer-as-42s-code)
+</pre>
+</div>
+
+<p>
+A handy way to tangle a file, or files in dired, is the <code>MJR-org-export-der</code> in my <code>.emacs</code> file.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc840b78" class="outline-3">
+<h3 id="orgc840b78"><span class="section-number-3">4.3.</span> Tangle &amp; Load Tangled File</h3>
+<div class="outline-text-3" id="text-4-3">
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-tangle-and-load</span> ()
+  <span style="color: #f08080;">"Tangles current file and attempts to load the tangled file.</span>
+<span style="color: #f08080;">The tangled file is determiend by looking backward for a :tangle argument."</span>
+  (<span style="color: #00ffff;">interactive</span>)
+  (<span style="color: #00ffff;">save-excursion</span> (org-babel-tangle)
+                  (<span style="color: #00ffff;">if</span> (re-search-backward <span style="color: #fa8072;">":tangle[[:blank:]]+</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">(</span><span style="color: #fa8072;">[</span><span style="color: #fa8072;">^</span><span style="color: #fa8072;">[:blank:]]+.hp42s</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">)</span><span style="color: #fa8072;">$"</span> nil t)
+                      (<span style="color: #00ffff;">let</span> ((file-name (match-string 1)))
+                        (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">or</span> (string-equal <span style="color: #fa8072;">"yes"</span> file-name) (string-equal <span style="color: #fa8072;">"no"</span> file-name))
+                            (message <span style="color: #fa8072;">"No explicit tangle file specified"</span>)
+                            (find-file file-name))))))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org9f5905a" class="outline-3">
-<h3 id="org9f5905a"><span class="section-number-3">4.3.</span> yas templates</h3>
-<div class="outline-text-3" id="text-4-3">
+<div id="outline-container-orgc7b532d" class="outline-3">
+<h3 id="orgc7b532d"><span class="section-number-3">4.4.</span> yas templates</h3>
+<div class="outline-text-3" id="text-4-4">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #b0c4de;">echo</span> <span style="color: #fa8072;">''</span>
 <span style="color: #00ffff;">for</span> f<span style="color: #00ffff;"> in</span> ~/core/yasnippet/hp42s-mode/*; <span style="color: #00ffff;">do</span> cat $<span style="color: #7fffd4;">f</span>; <span style="color: #b0c4de;">echo</span> <span style="color: #fa8072;">''</span>; <span style="color: #00ffff;">done</span>
@@ -980,205 +1027,16 @@ RTN       @@@@ IF-TRUE-END (<span style="color: #00ffff;">$</span><span style="c
 </div>
 </div>
 </div>
-
-<div id="outline-container-org86f1f35" class="outline-3">
-<h3 id="org86f1f35"><span class="section-number-3">4.4.</span> Export &amp; Tangle from dired</h3>
-<div class="outline-text-3" id="text-4-4">
-<p>
-This will export to HTML and tangle all marked files in a dired buffer.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-dired-org-export</span> (execute-blocks tangle-blocks export-html export-pdf)
-  <span style="color: #f08080;">"Evaluate all code blocks, export to HTML, and tangle current file or all marked files in dired-mode"</span>
-  (<span style="color: #00ffff;">interactive</span> (<span style="color: #00ffff;">if</span> (null current-prefix-arg)
-                   (list (y-or-n-p <span style="color: #fa8072;">"Evaluate all blocks?"</span>)
-                         (y-or-n-p <span style="color: #fa8072;">"Tangle all blocks?"</span>)
-                         (y-or-n-p <span style="color: #fa8072;">"Export to HTML?"</span>)
-                         (y-or-n-p <span style="color: #fa8072;">"Export to PDF via LaTeX?"</span>))
-                   (list 't 't 't)))
-  (<span style="color: #00ffff;">if</span> (not (equal major-mode 'dired-mode))
-      (message <span style="color: #fa8072;">"MJR-dired-org-to-html-and-code: ERROR: Not in dired mode!!"</span>)
-      (<span style="color: #00ffff;">let</span> ((marked-files (dired-get-marked-files)))
-        (<span style="color: #00ffff;">if</span> (null marked-files)
-            (message <span style="color: #fa8072;">"MJR-dired-org-to-html-and-code: ERROR: No marked files!!"</span>)
-            (mapc (<span style="color: #00ffff;">lambda</span> (f)
-                    (<span style="color: #00ffff;">with-current-buffer</span> (find-file-noselect f)
-                      (<span style="color: #00ffff;">if</span> execute-blocks (MJR-org-babel-execute-buffer))
-                      (<span style="color: #00ffff;">if</span> tangle-blocks (org-babel-tangle))
-                      (<span style="color: #00ffff;">if</span> export-html (org-html-export-to-html))
-                      (<span style="color: #00ffff;">if</span> export-pdf (org-latex-export-to-pdf))))
-                  marked-files)))
-            (message <span style="color: #fa8072;">"dired-get-marked-files: Complete!"</span>)))
-</pre>
 </div>
 
-<p>
-Note the previous block is set <code>:eval never</code> because I keep this function in my <code>.emacs</code> file, and thus don't need to evaluate it to get it into my personal
-environment.
-</p>
-</div>
-</div>
-</div>
 
-<div id="outline-container-org0d4dff0" class="outline-2">
-<h2 id="org0d4dff0"><span class="section-number-2">5.</span> Prepare Code For Conversion</h2>
+<div id="outline-container-orgf87bbc2" class="outline-2">
+<h2 id="orgf87bbc2"><span class="section-number-2">5.</span> free42 Notes</h2>
 <div class="outline-text-2" id="text-5">
-<p>
-I include comments like <code>@@##</code> that I use like compiler directives in C.  They provide a way to remove lines of code that are incompatible or unnecessary for
-the target version of free42.  It's a bit of a hack, but it lets me maintain one program for diff-rent versions of free42.  When I "tangle" an <code>org-mode</code> buffer,
-the code is automatically filtered for the selected version of free42 (set via <code>MJR-target-free42-version</code>).
-</p>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-right" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">DM42 Version</th>
-<th scope="col" class="org-right">Target Free42</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">DMCP 3.22 / DM42 v3.20</td>
-<td class="org-right">3.0.5</td>
-</tr>
-
-<tr>
-<td class="org-left">DMCP 3.21 / DM42 v3.18</td>
-<td class="org-right">3.0.2</td>
-</tr>
-
-<tr>
-<td class="org-left">DMCP-3.20 / DM42-3.17</td>
-<td class="org-right">2.5.20</td>
-</tr>
-
-<tr>
-<td class="org-left">DMCP-3.20 / DM42-3.16</td>
-<td class="org-right">2.5.20</td>
-</tr>
-
-<tr>
-<td class="org-left">DMCP 3.18 / DM42 v3.15</td>
-<td class="org-right">2.5.16</td>
-</tr>
-</tbody>
-</table>
-
-<p>
-This function cleans up tangled (C-c C-v t) code so that it can be cleanly pasted into free42.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-elisp">(<span style="color: #00ffff;">defvar</span> <span style="color: #7fffd4;">MJR-target-free42-version</span> nil)
-(<span style="color: #00ffff;">setq</span> MJR-target-free42-version <span style="color: #fa8072;">"3.0.5"</span>)
-
-(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-process-tangled-42s-code</span> ()
-  <span style="color: #f08080;">"Prepare tangled hp42s code for upload"</span>
-  (<span style="color: #00ffff;">interactive</span>)
-  (<span style="color: #00ffff;">let</span> ((zap-loc-too-new 0)
-        (zap-loc-too-old 0))
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Remove code requireing a newer version of free42 than our target</span>
-  (goto-char (point-min))
-  (<span style="color: #00ffff;">while</span> (re-search-forward <span style="color: #fa8072;">"^.*@@## REQ:free42&gt;=</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">(</span><span style="color: #fa8072;">[0-9.]+</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">)</span><span style="color: #fa8072;"> *$"</span> nil t)
-    (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">and</span> MJR-target-free42-version (version&lt; MJR-target-free42-version (match-string 1)))
-        (<span style="color: #00ffff;">progn</span> (<span style="color: #00ffff;">cl-incf</span> zap-loc-too-new)
-               (replace-match <span style="color: #fa8072;">""</span>))))
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Remove code only needed for an older version of free42 than our target</span>
-  (goto-char (point-min))
-  (<span style="color: #00ffff;">while</span> (re-search-forward <span style="color: #fa8072;">"^.*@@## REQ:free42&lt;</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">(</span><span style="color: #fa8072;">[0-9.]+</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">)</span><span style="color: #fa8072;"> *$"</span> nil t)
-    (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">and</span> MJR-target-free42-version (version&lt;= MJR-target-free42-version (match-string 1)))
-        (<span style="color: #00ffff;">progn</span> (<span style="color: #00ffff;">cl-incf</span> zap-loc-too-old)
-               (replace-match <span style="color: #fa8072;">""</span>))))
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap comments</span>
-  (goto-char (point-min))
-  (<span style="color: #00ffff;">while</span> (re-search-forward <span style="color: #fa8072;">"</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">(</span><span style="color: #fa8072;">@@@@</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">|</span><span style="color: #fa8072;">@@##</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">)</span><span style="color: #fa8072;">.*$"</span> nil t)
-    (replace-match <span style="color: #fa8072;">""</span>))
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap trailing whitespace</span>
-  (goto-char (point-min))
-  (<span style="color: #00ffff;">while</span> (re-search-forward <span style="color: #fa8072;">"  *$"</span> nil t)
-    (replace-match <span style="color: #fa8072;">""</span>))
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Zap blank lines</span>
-  (goto-char (point-min))  
-  (flush-lines <span style="color: #fa8072;">"^[[:space:]]*$"</span>)
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Add lines after END commands</span>
-  (goto-char (point-min))
-  (<span style="color: #00ffff;">while</span> (re-search-forward <span style="color: #fa8072;">"^END$"</span> nil t)
-    (replace-match <span style="color: #fa8072;">"END\n"</span>))
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Save the buffer</span>
-  (<span style="color: #00ffff;">if</span> (buffer-file-name)
-      (save-buffer))
-  <span style="color: #ffa500;">;; </span><span style="color: #ff7f24;">Report our status</span>
-  (<span style="color: #00ffff;">if</span> MJR-target-free42-version
-      (message <span style="color: #fa8072;">"MJR-process-tangled-42s-code (%s): Tangle complete. Zapped %d loc too old, and %d loc too new."</span> (buffer-name) zap-loc-too-old zap-loc-too-new)
-      (message <span style="color: #fa8072;">"MJR-process-tangled-42s-code (%s): Tangle complete. MJR-target-free42-version not set."</span> (buffer-name) zap-loc-too-old zap-loc-too-new))
-  ))
-</pre>
 </div>
-
-<p>
-The above function must be added to the tangle-hook like this:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-elisp">(add-hook 'org-babel-post-tangle-hook 'MJR-process-tangled-42s-code)
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org8238b7f" class="outline-2">
-<h2 id="org8238b7f"><span class="section-number-2">6.</span> Prepare Marked Region for Code Conversion</h2>
-<div class="outline-text-2" id="text-6">
-<div class="org-src-container">
-<pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-copy-42s-code-in-region</span> ()
-  <span style="color: #f08080;">"Copy region and prepare it for paste into free42"</span>
-  (<span style="color: #00ffff;">interactive</span>)
-  (<span style="color: #00ffff;">let</span> ((pmin (min (point) (mark)))
-        (pmax (max (point) (mark))))
-    (<span style="color: #00ffff;">if</span> (&lt; pmin pmax)
-        (<span style="color: #00ffff;">progn</span> (kill-ring-save (min (point) (mark)) (max (point) (mark)))
-               (<span style="color: #00ffff;">with-temp-buffer</span>  (yank)
-                                  (MJR-process-tangled-42s-code)
-                                  (kill-ring-save (point-min) (point-max)))))))
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org7748e5a" class="outline-2">
-<h2 id="org7748e5a"><span class="section-number-2">7.</span> Tangle &amp; Load Tangled File</h2>
-<div class="outline-text-2" id="text-7">
-<div class="org-src-container">
-<pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-tangle-and-load</span> ()
-  <span style="color: #f08080;">"Tangles current file and attempts to load the tangled file.</span>
-<span style="color: #f08080;">The tangled file is determiend by looking backward for a :tangle argument."</span>
-  (<span style="color: #00ffff;">interactive</span>)
-  (<span style="color: #00ffff;">save-excursion</span> (org-babel-tangle)
-                  (<span style="color: #00ffff;">if</span> (re-search-backward <span style="color: #fa8072;">":tangle[[:blank:]]+</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">(</span><span style="color: #fa8072;">[</span><span style="color: #fa8072;">^</span><span style="color: #fa8072;">[:blank:]]+.hp42s</span><span style="color: #fa8072; font-weight: bold;">\\</span><span style="color: #fa8072; font-weight: bold;">)</span><span style="color: #fa8072;">$"</span> nil t)
-                      (<span style="color: #00ffff;">let</span> ((file-name (match-string 1)))
-                        (<span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">or</span> (string-equal <span style="color: #fa8072;">"yes"</span> file-name) (string-equal <span style="color: #fa8072;">"no"</span> file-name))
-                            (message <span style="color: #fa8072;">"No explicit tangle file specified"</span>)
-                            (find-file file-name))))))
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orgfd6d77c" class="outline-2">
-<h2 id="orgfd6d77c"><span class="section-number-2">8.</span> free42 Notes</h2>
-<div class="outline-text-2" id="text-8">
-</div>
-<div id="outline-container-orgcf631c9" class="outline-3">
-<h3 id="orgcf631c9"><span class="section-number-3">8.1.</span> Character Set</h3>
-<div class="outline-text-3" id="text-8-1">
+<div id="outline-container-org93c8e6a" class="outline-3">
+<h3 id="org93c8e6a"><span class="section-number-3">5.1.</span> Character Set</h3>
+<div class="outline-text-3" id="text-5-1">
 <div class="org-src-container">
 <pre class="src src-text">  0 &#247;
   1 &#215;
@@ -1315,9 +1173,9 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-orgd1389fa" class="outline-3">
-<h3 id="orgd1389fa"><span class="section-number-3">8.2.</span> Date format</h3>
-<div class="outline-text-3" id="text-8-2">
+<div id="outline-container-org55b8c53" class="outline-3">
+<h3 id="org55b8c53"><span class="section-number-3">5.2.</span> Date format</h3>
+<div class="outline-text-3" id="text-5-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
@@ -1358,9 +1216,9 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-org5528e0b" class="outline-3">
-<h3 id="org5528e0b"><span class="section-number-3">8.3.</span> Stats registers</h3>
-<div class="outline-text-3" id="text-8-3">
+<div id="outline-container-orgfd54c99" class="outline-3">
+<h3 id="orgfd54c99"><span class="section-number-3">5.3.</span> Stats registers</h3>
+<div class="outline-text-3" id="text-5-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -1446,13 +1304,13 @@ The above function must be added to the tangle-hook like this:
 </div>
 </div>
 
-<div id="outline-container-org915bd36" class="outline-2">
-<h2 id="org915bd36"><span class="section-number-2">9.</span> DM 42 Notes</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-orgd983f9b" class="outline-2">
+<h2 id="orgd983f9b"><span class="section-number-2">6.</span> DM 42 Notes</h2>
+<div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-orgdba98ff" class="outline-3">
-<h3 id="orgdba98ff"><span class="section-number-3">9.1.</span> Display</h3>
-<div class="outline-text-3" id="text-9-1">
+<div id="outline-container-org57c76d8" class="outline-3">
+<h3 id="org57c76d8"><span class="section-number-3">6.1.</span> Display</h3>
+<div class="outline-text-3" id="text-6-1">
 <p>
 GrMod is a read write variable.
 </p>
@@ -1469,9 +1327,9 @@ ResX &amp; ResY are read only variables that have the display resolution
 </div>
 </div>
 
-<div id="outline-container-orge97ab7d" class="outline-2">
-<h2 id="orge97ab7d"><span class="section-number-2">10.</span> EOF</h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-orgcb41032" class="outline-2">
+<h2 id="orgcb41032"><span class="section-number-2">7.</span> EOF</h2>
+<div class="outline-text-2" id="text-7">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1481,7 +1339,7 @@ ResX &amp; ResY are read only variables that have the display resolution
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-10-20 Wed 21:22 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-10-27 Wed 19:06 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.6)
 </div>
 </body>
 </html>

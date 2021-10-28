@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-10-20 Wed 21:23 -->
+<!-- 2021-10-27 Wed 19:07 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=1024, initial-scale=1" />
 <title>free42: Programs For Functions</title>
@@ -251,7 +251,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-10-20 21:23:17</i></td>
+<td class="org-left"><i>2021-10-27 18:56:45</i></td>
 </tr>
 </tbody>
 </table>
@@ -263,54 +263,54 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org8fe2b64">1. Metadata</a></li>
+<li><a href="#org5532d5c">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a>
 <ul>
 <li><a href="#menu-fmenu">2.1. Functionality &amp; the Main Menu</a></li>
-<li><a href="#orgb091bb0">2.2. Notes Regarding Some Individual Programs</a>
+<li><a href="#orga4880ce">2.2. Notes Regarding Some Individual Programs</a>
 <ul>
-<li><a href="#org8958864">2.2.1. Interactive vs Non-interactive</a></li>
-<li><a href="#orgeaf03a9">2.2.2. <code>FVARM</code>: Global Variables</a></li>
-<li><a href="#orgbf8807e">2.2.3. <code>FEVL</code>: Evaluating the current equation</a></li>
-<li><a href="#orgf21f6f5">2.2.4. <code>PICF</code>: Selecting a <code>MVAR</code> program</a></li>
-<li><a href="#org0fcedff">2.2.5. <code>SFWRP</code>: Wrap a simple function</a></li>
-<li><a href="#org2233bdc">2.2.6. <code>FSLV</code> &amp; <code>FINT</code>: Apply the built in <code>SOLVE</code> &amp; <code>INTG</code> tools to the current <code>EqP</code></a></li>
-<li><a href="#org1fb0235">2.2.7. <code>FPRD</code> &amp; <code>FSUM</code>: Non-interactive Sums &amp; Products</a></li>
+<li><a href="#org5df6549">2.2.1. Interactive vs Non-interactive</a></li>
+<li><a href="#org24a2549">2.2.2. <code>FVARM</code>: Global Variables</a></li>
+<li><a href="#org6efe8d6">2.2.3. <code>FEVL</code>: Evaluating the current equation</a></li>
+<li><a href="#org00ad0f7">2.2.4. <code>PICF</code>: Selecting a <code>MVAR</code> program</a></li>
+<li><a href="#org941714c">2.2.5. <code>SFWRP</code>: Wrap a simple function</a></li>
+<li><a href="#orga93aa3d">2.2.6. <code>FSLV</code> &amp; <code>FINT</code>: Apply the built in <code>SOLVE</code> &amp; <code>INTG</code> tools to the current <code>EqP</code></a></li>
+<li><a href="#org636e6b7">2.2.7. <code>FPRD</code> &amp; <code>FSUM</code>: Non-interactive Sums &amp; Products</a></li>
 </ul>
 </li>
-<li><a href="#orgb843f56">2.3. Organizing Principles</a></li>
+<li><a href="#org9dced4a">2.3. Organizing Principles</a></li>
 </ul>
 </li>
-<li><a href="#orgd17fc4d">3. <code>FMENU</code>: Main menu for all apps</a>
+<li><a href="#org5334462">3. <code>FMENU</code>: Main menu for all apps</a>
 <ul>
-<li><a href="#org224ee80">3.1. Menu Code</a></li>
-<li><a href="#org33b4a87">3.2. Functions</a></li>
+<li><a href="#org9a24c1e">3.1. Menu Code</a></li>
+<li><a href="#org9aa6047">3.2. Functions</a></li>
 </ul>
 </li>
-<li><a href="#orge22c118">4. <code>FSPT</code>: Interactive Sums, Products, &amp; Tables</a></li>
-<li><a href="#org73c8842">5. <code>FPLT</code>: Interactive Plotting</a>
+<li><a href="#org455bca5">4. <code>FSPT</code>: Interactive Sums, Products, &amp; Tables</a></li>
+<li><a href="#org9683d16">5. <code>FPLT</code>: Interactive Plotting</a>
 <ul>
-<li><a href="#org71aa357">5.1. User Interface</a>
+<li><a href="#orgbe83819">5.1. User Interface</a>
 <ul>
-<li><a href="#orgc326448">5.1.1. Main Menu</a></li>
+<li><a href="#org232cc9d">5.1.1. Main Menu</a></li>
 </ul>
 </li>
-<li><a href="#orgb2084d4">5.2. Computational Menu</a>
+<li><a href="#orgb87b99e">5.2. Computational Menu</a>
 <ul>
-<li><a href="#org15d14f2">5.2.1. Graphics Display</a></li>
+<li><a href="#orgcb46e69">5.2.1. Graphics Display</a></li>
 </ul>
 </li>
-<li><a href="#org6ce2ded">5.3. Code</a></li>
+<li><a href="#org78f878b">5.3. Code</a></li>
 </ul>
 </li>
-<li><a href="#orge120311">6. Test Functions</a></li>
-<li><a href="#orgdc09545">7. EOF</a></li>
+<li><a href="#org318acf7">6. Test Functions</a></li>
+<li><a href="#org2db1b53">7. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org8fe2b64" class="outline-2">
-<h2 id="org8fe2b64"><span class="section-number-2">1.</span> Metadata</h2>
+<div id="outline-container-org5532d5c" class="outline-2">
+<h2 id="org5532d5c"><span class="section-number-2">1.</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/pgmforfun.html">https://richmit.github.io/hp42/pgmforfun.html</a>
@@ -380,7 +380,7 @@ This is a collection of programs that work with <code>MVAR</code>-type programs 
 <div id="outline-container-menu-fmenu" class="outline-3">
 <h3 id="menu-fmenu"><span class="section-number-3">2.1.</span> Functionality &amp; the Main Menu</h3>
 <div class="outline-text-3" id="text-menu-fmenu">
-<table id="org620ee8b" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="org54cee51" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -494,12 +494,12 @@ Please ignore the first two columns in the table &#x2013; they are used to auto-
 </div>
 </div>
 
-<div id="outline-container-orgb091bb0" class="outline-3">
-<h3 id="orgb091bb0"><span class="section-number-3">2.2.</span> Notes Regarding Some Individual Programs</h3>
+<div id="outline-container-orga4880ce" class="outline-3">
+<h3 id="orga4880ce"><span class="section-number-3">2.2.</span> Notes Regarding Some Individual Programs</h3>
 <div class="outline-text-3" id="text-2-2">
 </div>
-<div id="outline-container-org8958864" class="outline-4">
-<h4 id="org8958864"><span class="section-number-4">2.2.1.</span> Interactive vs Non-interactive</h4>
+<div id="outline-container-org5df6549" class="outline-4">
+<h4 id="org5df6549"><span class="section-number-4">2.2.1.</span> Interactive vs Non-interactive</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <p>
 <code>SPT</code> &amp; <code>FPLT</code> are fully interactive, user friendly applications.  The rest are stripped down programs designed to offer performance and good programmatic
@@ -509,8 +509,8 @@ what they do as fast as they can do it.  This can lead to rather cryptic error m
 </div>
 </div>
 
-<div id="outline-container-orgeaf03a9" class="outline-4">
-<h4 id="orgeaf03a9"><span class="section-number-4">2.2.2.</span> <code>FVARM</code>: Global Variables</h4>
+<div id="outline-container-org24a2549" class="outline-4">
+<h4 id="org24a2549"><span class="section-number-4">2.2.2.</span> <code>FVARM</code>: Global Variables</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <p>
 While <code>FVARM</code> is simply an MVAR program with all the global variables, the <code>[FVARM]</code> menu key actually shows the variable menu with <code>VARMENU</code>.
@@ -518,8 +518,8 @@ While <code>FVARM</code> is simply an MVAR program with all the global variables
 </div>
 </div>
 
-<div id="outline-container-orgbf8807e" class="outline-4">
-<h4 id="orgbf8807e"><span class="section-number-4">2.2.3.</span> <code>FEVL</code>: Evaluating the current equation</h4>
+<div id="outline-container-org6efe8d6" class="outline-4">
+<h4 id="org6efe8d6"><span class="section-number-4">2.2.3.</span> <code>FEVL</code>: Evaluating the current equation</h4>
 <div class="outline-text-4" id="text-2-2-3">
 <p>
 I frequently use <code>VARMENU</code> to repeatedly evaluate a formula, with different input values.  Functionally that means typing in the value, and then hitting the
@@ -533,18 +533,18 @@ evaluate EqP on X.
 </div>
 </div>
 
-<div id="outline-container-orgf21f6f5" class="outline-4">
-<h4 id="orgf21f6f5"><span class="section-number-4">2.2.4.</span> <code>PICF</code>: Selecting a <code>MVAR</code> program</h4>
+<div id="outline-container-org00ad0f7" class="outline-4">
+<h4 id="org00ad0f7"><span class="section-number-4">2.2.4.</span> <code>PICF</code>: Selecting a <code>MVAR</code> program</h4>
 <div class="outline-text-4" id="text-2-2-4">
 <p>
 This little function is at the center of all the tools on this page.  It queries for an <code>MVAR</code> program, lets you set constants, pick an independent variable,
-and describe the number of returns from the function.  See the section <a href="#orgb843f56">Organizing Principles</a> for more about the global variables used to house this data.
+and describe the number of returns from the function.  See the section <a href="#org9dced4a">Organizing Principles</a> for more about the global variables used to house this data.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org0fcedff" class="outline-4">
-<h4 id="org0fcedff"><span class="section-number-4">2.2.5.</span> <code>SFWRP</code>: Wrap a simple function</h4>
+<div id="outline-container-org941714c" class="outline-4">
+<h4 id="org941714c"><span class="section-number-4">2.2.5.</span> <code>SFWRP</code>: Wrap a simple function</h4>
 <div class="outline-text-4" id="text-2-2-5">
 <p>
 This <code>MVAR</code> program allows one to wrap a simple function for use with tools that need an <code>MVAR</code> program.  For example, if you have a program for <code>SECH</code> you
@@ -557,8 +557,8 @@ To use this program simply put the name of the simple function into the variable
 </div>
 </div>
 
-<div id="outline-container-org2233bdc" class="outline-4">
-<h4 id="org2233bdc"><span class="section-number-4">2.2.6.</span> <code>FSLV</code> &amp; <code>FINT</code>: Apply the built in <code>SOLVE</code> &amp; <code>INTG</code> tools to the current <code>EqP</code></h4>
+<div id="outline-container-orga93aa3d" class="outline-4">
+<h4 id="orga93aa3d"><span class="section-number-4">2.2.6.</span> <code>FSLV</code> &amp; <code>FINT</code>: Apply the built in <code>SOLVE</code> &amp; <code>INTG</code> tools to the current <code>EqP</code></h4>
 <div class="outline-text-4" id="text-2-2-6">
 <p>
 These are handy little functions that allow one to apply the built in solver and integration capabilities of the 42s to the program currently active function.
@@ -567,8 +567,8 @@ I debated putting them in the menu because they are really more suited to progra
 </div>
 </div>
 
-<div id="outline-container-org1fb0235" class="outline-4">
-<h4 id="org1fb0235"><span class="section-number-4">2.2.7.</span> <code>FPRD</code> &amp; <code>FSUM</code>: Non-interactive Sums &amp; Products</h4>
+<div id="outline-container-org636e6b7" class="outline-4">
+<h4 id="org636e6b7"><span class="section-number-4">2.2.7.</span> <code>FPRD</code> &amp; <code>FSUM</code>: Non-interactive Sums &amp; Products</h4>
 <div class="outline-text-4" id="text-2-2-7">
 <p>
 These programs are well suited for use by other programs.  They print no status, and are significantly faster than the interactive tool <code>FSPT</code>.  Note that
@@ -578,8 +578,8 @@ they do not support the <code>LN</code> transform capability of <code>FSPT</code
 </div>
 </div>
 
-<div id="outline-container-orgb843f56" class="outline-3">
-<h3 id="orgb843f56"><span class="section-number-3">2.3.</span> Organizing Principles</h3>
+<div id="outline-container-org9dced4a" class="outline-3">
+<h3 id="org9dced4a"><span class="section-number-3">2.3.</span> Organizing Principles</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 All the top level programs use <code>PICF</code> to collect information about the <code>MVAR</code> program to be used.  The collected information is housed in three global
@@ -699,12 +699,12 @@ If an accuracy is required, then we use the variable <code>ACC</code>.
 </div>
 </div>
 
-<div id="outline-container-orgd17fc4d" class="outline-2">
-<h2 id="orgd17fc4d"><span class="section-number-2">3.</span> <code>FMENU</code>: Main menu for all apps</h2>
+<div id="outline-container-org5334462" class="outline-2">
+<h2 id="org5334462"><span class="section-number-2">3.</span> <code>FMENU</code>: Main menu for all apps</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org224ee80" class="outline-3">
-<h3 id="org224ee80"><span class="section-number-3">3.1.</span> Menu Code</h3>
+<div id="outline-container-org9a24c1e" class="outline-3">
+<h3 id="org9a24c1e"><span class="section-number-3">3.1.</span> Menu Code</h3>
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"FMENU"</span> 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
@@ -713,93 +713,93 @@ If an accuracy is required, then we use the variable <code>ACC</code>.
 
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-FMENU" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FMENU)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Auto-generated menu program</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FMENU"</span>
-<span style="color: #00ffff;">LBL</span> 01            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu FMENU</span>
+<span style="color: #ffa500;">@@@@ DSC: Auto-generated menu program</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"FMENU"</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">01</span>            <span style="color: #ffa500;">@@@@ Page 1 of menu FMENU</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"SPT"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FSPT"</span>
-<span style="color: #00ffff;">XEQ</span> 99
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FPLT"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"FSPT"</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">99</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"FPLT"</span>
 <span style="color: #fa8072;">"EVAL"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 91
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">91</span>
 <span style="color: #fa8072;">"FVARM"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 95
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">95</span>
 <span style="color: #fa8072;">"PICF"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 96
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 02
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 02
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">96</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> 01
-<span style="color: #00ffff;">LBL</span> 02            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu FMENU</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">02</span>            <span style="color: #ffa500;">@@@@ Page 2 of menu FMENU</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"SOLVE"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FSLV"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"FSLV"</span>
 <span style="color: #fa8072;">"INTG"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FINT"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"FINT"</span>
 <span style="color: #fa8072;">"SUM"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FSUM"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"FSUM"</span>
 <span style="color: #fa8072;">"PROD"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FPRD"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"FPRD"</span>
 <span style="color: #fa8072;">"FVARM"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 95
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">95</span>
 <span style="color: #fa8072;">"PICF"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 96
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 01
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 01
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">96</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> 02
-<span style="color: #00ffff;">LBL</span> 00 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Application Exit</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">00</span> <span style="color: #ffa500;">@@@@ Application Exit</span>
 <span style="color: #00ffff;">EXITALL</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Free labels start at: 3</span>
+<span style="color: #ffa500;">@@@@ Free labels start at: 3</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org33b4a87" class="outline-3">
-<h3 id="org33b4a87"><span class="section-number-3">3.2.</span> Functions</h3>
+<div id="outline-container-org9aa6047" class="outline-3">
+<h3 id="org9aa6047"><span class="section-number-3">3.2.</span> Functions</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
-<pre class="src src-hp42s"><span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL: 80-87, 91-87, 99</span>
+<pre class="src src-hp42s"><span style="color: #ffa500;">@@@@ LBL: 80-87, 91-87, 99</span>
 
 <span id="coderef-PICF" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PICF)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Pick an MVAR function and variable</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: integer</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: If X=0, then EqD is set to 1.  Otherwise the user is prompted.</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-24</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: EqP  -- Name of selected function</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: EqV -- Name of selected variable</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: EqD -- Return count</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: Variable menu works like solver, not like integrator.  Can't fix that...</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REQ: REQ:free42&gt;=3.0</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"PICF"</span>
+<span style="color: #ffa500;">@@@@ DSC: Pick an MVAR function and variable</span>
+<span style="color: #ffa500;">@@@@ IN:  X: integer</span>
+<span style="color: #ffa500;">@@@@ FAQ: If X=0, then EqD is set to 1.  Otherwise the user is prompted.</span>
+<span style="color: #ffa500;">@@@@ UPD: 2021-02-24</span>
+<span style="color: #ffa500;">@@@@ GBL: EqP  -- Name of selected function</span>
+<span style="color: #ffa500;">@@@@ GBL: EqV -- Name of selected variable</span>
+<span style="color: #ffa500;">@@@@ GBL: EqD -- Return count</span>
+<span style="color: #ffa500;">@@@@ BUG: Variable menu works like solver, not like integrator.  Can't fix that...</span>
+<span style="color: #ffa500;">@@@@ REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"PICF"</span>
 <span style="color: #00ffff;">FUNC</span> 10
 <span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">CLV</span> <span style="color: #fa8072;">"EqP"</span>
 <span style="color: #00ffff;">CLV</span> <span style="color: #fa8072;">"EqV"</span>
 <span style="color: #00ffff;">CLV</span> <span style="color: #fa8072;">"EqD"</span>
-<span style="color: #00ffff;">X&#8800;0</span>?
-<span style="color: #00ffff;">GTO</span> 87
+<span style="color: #00ffff;">X&#8800;0?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">87</span>
 1
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"EqD"</span>
-<span style="color: #00ffff;">LBL</span> 87
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">87</span>
 <span style="color: #00ffff;">EXITALL</span>
-PGMMENU
+<span style="color: #00ffff;">PGMMENU</span>
 <span style="color: #fa8072;">"Pick Function"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">STOP</span>
 <span style="color: #00ffff;">ASTO</span> <span style="color: #fa8072;">"EqP"</span>
 <span style="color: #00ffff;">EXITALL</span>
-<span style="color: #00ffff;">VARMENU</span> IND <span style="color: #fa8072;">"EqP"</span>      <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&lt;3.0.5</span>
-<span style="color: #00ffff;">VARMNU1</span> IND <span style="color: #fa8072;">"EqP"</span>      <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0.5</span>
+<span style="color: #00ffff;">VARMENU</span> IND <span style="color: #fa8072;">"EqP"</span>      <span style="color: #6495ed;">@@## REQ:free42&lt;3.0.5</span>
+<span style="color: #00ffff;">VARMNU1</span> IND <span style="color: #fa8072;">"EqP"</span>      <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0.5</span>
 <span style="color: #fa8072;">"Set Var; "</span>
-&#9500;<span style="color: #fa8072;">"Pick Free Var"</span>
+<span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">"Pick Free Var"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">STOP</span>
 <span style="color: #00ffff;">ASTO</span> <span style="color: #fa8072;">"EqV"</span>
@@ -807,147 +807,147 @@ PGMMENU
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"EqD"</span>
 <span style="color: #00ffff;">FS?C</span> 25
-<span style="color: #00ffff;">GTO</span> 86
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">86</span>
 <span style="color: #fa8072;">"Select Return"</span>
-&#9500;<span style="color: #fa8072;">" Count"</span>
+<span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">" Count"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"1"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 82
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">82</span>
 <span style="color: #fa8072;">"2"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 83
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">83</span>
 <span style="color: #fa8072;">"3"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 84
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">84</span>
 <span style="color: #fa8072;">"4"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 85
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">85</span>
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
 <span style="color: #00ffff;">EXITALL</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"EqD"</span>
-<span style="color: #00ffff;">LBL</span> 86
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">86</span>
 <span style="color: #fa8072;">"F: "</span>
 <span style="color: #00ffff;">ARCL</span> <span style="color: #fa8072;">"EqP"</span>
-&#9500;<span style="color: #fa8072;">"("</span>
+<span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">"("</span>
 <span style="color: #00ffff;">ARCL</span> <span style="color: #fa8072;">"EqV"</span>
-&#9500;<span style="color: #fa8072;">"):&#8594;"</span>
+<span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">"):&#8594;"</span>
 <span style="color: #00ffff;">ARCL</span> <span style="color: #fa8072;">"EqD"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 82
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">82</span>
 1
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 83
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">83</span>
 2
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 84
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">84</span>
 3
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 85
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">85</span>
 4
 <span style="color: #00ffff;">RTN</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Run PICF with a 1 value for X -- so return count is queried</span>
-<span style="color: #00ffff;">LBL</span> 96 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">IPICF</span>
+<span style="color: #ffa500;">@@@@ DSC: Run PICF with a 1 value for X -- so return count is queried</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">96</span> <span style="color: #ffa500;">@NM@ IPICF</span>
 <span style="color: #00ffff;">FUNC</span> 00
 1
-<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PICF"</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"PICF"</span>
 <span style="color: #00ffff;">RTN</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Wrap "FVARM"</span>
-<span style="color: #00ffff;">LBL</span> 95 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">FVARMM</span>
+<span style="color: #ffa500;">@@@@ DSC: Wrap "FVARM"</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">95</span> <span style="color: #ffa500;">@NM@ FVARMM</span>
 <span style="color: #fa8072;">"Set Vars; "</span>
-&#9500;<span style="color: #fa8072;">"R/S To End"</span>
+<span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">"R/S To End"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">VARMENU</span> <span style="color: #fa8072;">"FVARM"</span>
 <span style="color: #00ffff;">STOP</span>
 <span style="color: #00ffff;">RTN</span>
 
 <span id="coderef-FPRD" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FPRD)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Product of a function evaluated at regular intervals over a range</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: The product</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Faster than product in FSPT</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: EqD is ignored -- only last function value is summed</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-06</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REQ: REQ:free42&gt;=3.0</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FPRD"</span>
+<span style="color: #ffa500;">@@@@ DSC: Product of a function evaluated at regular intervals over a range</span>
+<span style="color: #ffa500;">@@@@ OUT: X: The product</span>
+<span style="color: #ffa500;">@@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP</span>
+<span style="color: #ffa500;">@@@@ FAQ: Faster than product in FSPT</span>
+<span style="color: #ffa500;">@@@@ FAQ: EqD is ignored -- only last function value is summed</span>
+<span style="color: #ffa500;">@@@@ UPD: 2021-04-06</span>
+<span style="color: #ffa500;">@@@@ REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"FPRD"</span>
 <span style="color: #00ffff;">FUNC</span> 01
 1
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_PROD"</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Step through independent variable values and do product</span>
+<span style="color: #ffa500;">@@@@ Step through independent variable values and do product</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"LLIM"</span>
 <span style="color: #00ffff;">STO</span> IND <span style="color: #fa8072;">"EqV"</span>
-<span style="color: #00ffff;">LBL</span> 80
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Evaluate function</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">80</span>
+<span style="color: #ffa500;">@@@@ Evaluate function</span>
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">XEQ IND</span> <span style="color: #fa8072;">"EqP"</span>
 <span style="color: #00ffff;">FC?C</span> 25
 <span style="color: #00ffff;">RTNERR</span> 2
 <span style="color: #00ffff;">STO&#215;</span> <span style="color: #fa8072;">"_PROD"</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Increment independent variable</span>
+<span style="color: #ffa500;">@@@@ Increment independent variable</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"STEP"</span>
 <span style="color: #00ffff;">RCL+</span> IND <span style="color: #fa8072;">"EqV"</span>
 <span style="color: #00ffff;">STO</span> IND <span style="color: #fa8072;">"EqV"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ULIM"</span>
-<span style="color: #00ffff;">X&#8805;Y</span>?
-<span style="color: #00ffff;">GTO</span> 80
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">All done, put Prd on stack</span>
+<span style="color: #00ffff;">X&#8805;Y?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">80</span>
+<span style="color: #ffa500;">@@@@ All done, put Prd on stack</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_PROD"</span>
 <span style="color: #00ffff;">RTN</span>
 
 <span id="coderef-FSUM" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FSUM)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Sum a function evaluated at regular intervals over a range</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: The sum</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Faster than sum in FSPT</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: EqD is ignored -- only last function value is summed</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-06</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REQ: REQ:free42&gt;=3.0</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FSUM"</span>
+<span style="color: #ffa500;">@@@@ DSC: Sum a function evaluated at regular intervals over a range</span>
+<span style="color: #ffa500;">@@@@ OUT: X: The sum</span>
+<span style="color: #ffa500;">@@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP</span>
+<span style="color: #ffa500;">@@@@ FAQ: Faster than sum in FSPT</span>
+<span style="color: #ffa500;">@@@@ FAQ: EqD is ignored -- only last function value is summed</span>
+<span style="color: #ffa500;">@@@@ UPD: 2021-04-06</span>
+<span style="color: #ffa500;">@@@@ REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"FSUM"</span>
 <span style="color: #00ffff;">FUNC</span> 01
 0
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_SUM"</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Step through independent variable values and do sum</span>
+<span style="color: #ffa500;">@@@@ Step through independent variable values and do sum</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"LLIM"</span>
 <span style="color: #00ffff;">STO</span> IND <span style="color: #fa8072;">"EqV"</span>
-<span style="color: #00ffff;">LBL</span> 81
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Evaluate function</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">81</span>
+<span style="color: #ffa500;">@@@@ Evaluate function</span>
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">XEQ IND</span> <span style="color: #fa8072;">"EqP"</span>
 <span style="color: #00ffff;">FC?C</span> 25
 <span style="color: #00ffff;">RTNERR</span> 2
 <span style="color: #00ffff;">STO+</span> <span style="color: #fa8072;">"_SUM"</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Increment independent variable</span>
+<span style="color: #ffa500;">@@@@ Increment independent variable</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"STEP"</span>
 <span style="color: #00ffff;">RCL+</span> IND <span style="color: #fa8072;">"EqV"</span>
 <span style="color: #00ffff;">STO</span> IND <span style="color: #fa8072;">"EqV"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ULIM"</span>
-<span style="color: #00ffff;">X&#8805;Y</span>?
-<span style="color: #00ffff;">GTO</span> 81
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">All done, put Sum on stack</span>
+<span style="color: #00ffff;">X&#8805;Y?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">81</span>
+<span style="color: #ffa500;">@@@@ All done, put Sum on stack</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_SUM"</span>
 <span style="color: #00ffff;">RTN</span>
 
 <span id="coderef-FSLV" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FSLV)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Use SOLVE to find a root for EqV in EqP on [LLIM, ULIM]</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: T: Code indicating solver exit reason</span>
-<span style="color: #ffa500;">@@@@         </span><span style="color: #ff7f24;">0 Found a root</span>
-<span style="color: #ffa500;">@@@@         </span><span style="color: #ff7f24;">1 Sign Reversal</span>
-<span style="color: #ffa500;">@@@@         </span><span style="color: #ff7f24;">2 Extremum</span>
-<span style="color: #ffa500;">@@@@         </span><span style="color: #ff7f24;">3 Bad Guess or Guesses</span>
-<span style="color: #ffa500;">@@@@         </span><span style="color: #ff7f24;">3 Constant?</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Z: EqP evaluated at X</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: Y: Previous best guess</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: Final best guess -- a root if we are lucky</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Faster than product in FSPT</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: EqD is ignored -- only last function value is summed</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: EqP, EqV, LLIM, ULIM</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-06</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REQ: REQ:free42&gt;=3.0</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FSLV"</span>
+<span style="color: #ffa500;">@@@@ DSC: Use SOLVE to find a root for EqV in EqP on [LLIM, ULIM]</span>
+<span style="color: #ffa500;">@@@@ OUT: T: Code indicating solver exit reason</span>
+<span style="color: #ffa500;">@@@@         0 Found a root</span>
+<span style="color: #ffa500;">@@@@         1 Sign Reversal</span>
+<span style="color: #ffa500;">@@@@         2 Extremum</span>
+<span style="color: #ffa500;">@@@@         3 Bad Guess or Guesses</span>
+<span style="color: #ffa500;">@@@@         3 Constant?</span>
+<span style="color: #ffa500;">@@@@ OUT: Z: EqP evaluated at X</span>
+<span style="color: #ffa500;">@@@@ OUT: Y: Previous best guess</span>
+<span style="color: #ffa500;">@@@@ OUT: X: Final best guess -- a root if we are lucky</span>
+<span style="color: #ffa500;">@@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP</span>
+<span style="color: #ffa500;">@@@@ FAQ: Faster than product in FSPT</span>
+<span style="color: #ffa500;">@@@@ FAQ: EqD is ignored -- only last function value is summed</span>
+<span style="color: #ffa500;">@@@@ GBL: EqP, EqV, LLIM, ULIM</span>
+<span style="color: #ffa500;">@@@@ UPD: 2021-04-06</span>
+<span style="color: #ffa500;">@@@@ REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"FSLV"</span>
 <span style="color: #00ffff;">FUNC</span> 04
 <span style="color: #00ffff;">PGMSLV</span> IND <span style="color: #fa8072;">"EqP"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"LLIM"</span>
@@ -957,80 +957,80 @@ PGMMENU
 <span style="color: #00ffff;">RTN</span>
 
 <span id="coderef-FINT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FINT)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Use INTEG to find a root for EqV in EqP on [LLIM, ULIM]</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: The integral</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: No error checking is done on ACC, LLIM, ULIM, STEP, EqV, or EqP</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: EqD is ignored -- only last function value is summed</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: EqP, EqV, LLIM, ULIM, ACC</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-06</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REQ: REQ:free42&gt;=3.0</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FINT"</span>
+<span style="color: #ffa500;">@@@@ DSC: Use INTEG to find a root for EqV in EqP on [LLIM, ULIM]</span>
+<span style="color: #ffa500;">@@@@ OUT: X: The integral</span>
+<span style="color: #ffa500;">@@@@ FAQ: No error checking is done on ACC, LLIM, ULIM, STEP, EqV, or EqP</span>
+<span style="color: #ffa500;">@@@@ FAQ: EqD is ignored -- only last function value is summed</span>
+<span style="color: #ffa500;">@@@@ GBL: EqP, EqV, LLIM, ULIM, ACC</span>
+<span style="color: #ffa500;">@@@@ UPD: 2021-04-06</span>
+<span style="color: #ffa500;">@@@@ REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"FINT"</span>
 <span style="color: #00ffff;">FUNC</span> 03
 <span style="color: #00ffff;">PGMINT</span> IND <span style="color: #fa8072;">"EqP"</span>
 <span style="color: #00ffff;">INTEG</span> IND <span style="color: #fa8072;">"EqV"</span>
 <span style="color: #00ffff;">RTN</span>
 
 <span id="coderef-FEVL" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FEVL)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Evaluate EqP at X</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X: EqP(x)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: No error checking is done on EqV or EqP</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: EqP, EqV</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-09</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REQ: REQ:free42&gt;=3.0</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FEVL"</span>
+<span style="color: #ffa500;">@@@@ DSC: Evaluate EqP at X</span>
+<span style="color: #ffa500;">@@@@ OUT: X: EqP(x)</span>
+<span style="color: #ffa500;">@@@@ FAQ: No error checking is done on EqV or EqP</span>
+<span style="color: #ffa500;">@@@@ GBL: EqP, EqV</span>
+<span style="color: #ffa500;">@@@@ UPD: 2021-04-09</span>
+<span style="color: #ffa500;">@@@@ REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"FEVL"</span>
 <span style="color: #00ffff;">STO</span> IND <span style="color: #fa8072;">"EqV"</span>
 <span style="color: #00ffff;">XEQ IND</span> <span style="color: #fa8072;">"EqP"</span>
 <span style="color: #00ffff;">RTN</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: FEVL Menu Action</span>
-<span style="color: #00ffff;">LBL</span> 94 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">FEVLM</span>
-<span style="color: #00ffff;">XEQ</span> 91 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">CHKEqX</span>
-<span style="color: #00ffff;">X&#8800;0</span>?
-<span style="color: #00ffff;">GTO</span> 97 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">AVRTN</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FEVL"</span>
+<span style="color: #ffa500;">@@@@ DSC: FEVL Menu Action</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">94</span> <span style="color: #ffa500;">@NM@ FEVLM</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">91</span> <span style="color: #ffa500;">@NM@ CHKEqX</span>
+<span style="color: #00ffff;">X&#8800;0?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">97</span> <span style="color: #ffa500;">@NM@ AVRTN</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"FEVL"</span>
 <span style="color: #00ffff;">RTN</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: GTO TARGET!! Display string and cause calling function to return</span>
-<span style="color: #00ffff;">LBL</span> 97 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">AVRTN</span>
+<span style="color: #ffa500;">@@@@ DSC: GTO TARGET!! Display string and cause calling function to return</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">97</span> <span style="color: #ffa500;">@NM@ AVRTN</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: FEVLM menu action -- wrapper for FEVL</span>
-<span style="color: #00ffff;">LBL</span> 91 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">FEVLM</span>
+<span style="color: #ffa500;">@@@@ DSC: FEVLM menu action -- wrapper for FEVL</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">91</span> <span style="color: #ffa500;">@NM@ FEVLM</span>
 <span style="color: #fa8072;">"ERR: EqP"</span>
-&#9500;<span style="color: #fa8072;">" is unset"</span>
+<span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">" is unset"</span>
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"EqP"</span>
 <span style="color: #00ffff;">FC?C</span> 25
-<span style="color: #00ffff;">GTO</span> 92
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">92</span>
 <span style="color: #fa8072;">"ERR: EqV"</span>
-&#9500;<span style="color: #fa8072;">" is unset"</span>
-R&#8595;
+<span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">" is unset"</span>
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"EqV"</span>
 <span style="color: #00ffff;">FC?C</span> 25
-<span style="color: #00ffff;">GTO</span> 92
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">92</span>
 <span style="color: #fa8072;">"ERR: EqD"</span>
-&#9500;<span style="color: #fa8072;">" is unset"</span>
-R&#8595;
+<span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">" is unset"</span>
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"EqD"</span>
 <span style="color: #00ffff;">FC?C</span> 25
-<span style="color: #00ffff;">GTO</span> 92
-<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FEVL"</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">92</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"FEVL"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 92
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">92</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
 
 <span id="coderef-FVARM" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FVARM)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: MVAR Program with all the global vartiables used by the F* programs</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: EqP, EqV, EqD, ACC, WFUN, LLIM, ULIM, STEP, YMIN, YMAX, &amp; YSTP</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-06</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FVARM"</span>
+<span style="color: #ffa500;">@@@@ DSC: MVAR Program with all the global vartiables used by the F* programs</span>
+<span style="color: #ffa500;">@@@@ GBL: EqP, EqV, EqD, ACC, WFUN, LLIM, ULIM, STEP, YMIN, YMAX, &amp; YSTP</span>
+<span style="color: #ffa500;">@@@@ UPD: 2021-04-06</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"FVARM"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"LLIM"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"ULIM"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"STEP"</span>
@@ -1045,8 +1045,8 @@ R&#8595;
 <span style="color: #00ffff;">RTN</span>
 
 <span id="coderef-SFWRP" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SFWRP)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Wrap a simple function inside an =MVAR= program</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"SFWRP"</span>
+<span style="color: #ffa500;">@@@@ DSC: Wrap a simple function inside an =MVAR= program</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"SFWRP"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"WFUN"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
@@ -1054,8 +1054,8 @@ R&#8595;
 <span style="color: #00ffff;">RTN</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LBL for FPLT menu</span>
-<span style="color: #00ffff;">LBL</span> 99 <span style="color: #ffa500;">@NM@ </span><span style="color: #ff7f24;">FPLTM</span>
+<span style="color: #ffa500;">@@@@ LBL for FPLT menu</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">99</span> <span style="color: #ffa500;">@NM@ FPLTM</span>
 <span style="color: #00ffff;">CLA</span>
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"GrMod"</span>
@@ -1065,15 +1065,15 @@ R&#8595;
 <span style="color: #00ffff;">RTNYES</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
-<span style="color: #00ffff;">END</span>
+END
 </pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orge22c118" class="outline-2">
-<h2 id="orge22c118"><span class="section-number-2">4.</span> <code>FSPT</code>: Interactive Sums, Products, &amp; Tables</h2>
+<div id="outline-container-org455bca5" class="outline-2">
+<h2 id="org455bca5"><span class="section-number-2">4.</span> <code>FSPT</code>: Interactive Sums, Products, &amp; Tables</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Create function tables and computes sums &amp; products.  Works much like the built in integration application.
@@ -1097,125 +1097,125 @@ Note: Using <code>[SHIFT]</code> before <code>[LLIM]</code>, <code>[ULIM]</code>
 
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-FSPT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FSPT)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Sums, Products, &amp; Tables</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  N/A</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: N/A</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-03</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: LLIM -- Lower limit for variable</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: ULIM -- Upper limit for variable</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: STEP -- Size of steps to make</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 82: Set: log function returns</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 83: Set: Store independent variable in table</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 84: Set: doing table, Clear: Doing sum or product (see flag 85)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 85: Set: doing sum, Clear; doing product</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LLB: 00-12,14-24,26-33</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GLB: FSPT</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">USE: PICF</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REQ: REQ:free42&gt;=3.0</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FSPT"</span>
+<span style="color: #ffa500;">@@@@ DSC: Sums, Products, &amp; Tables</span>
+<span style="color: #ffa500;">@@@@ IN:  N/A</span>
+<span style="color: #ffa500;">@@@@ OUT: N/A</span>
+<span style="color: #ffa500;">@@@@ UPD: 2021-04-03</span>
+<span style="color: #ffa500;">@@@@ GBL: LLIM -- Lower limit for variable</span>
+<span style="color: #ffa500;">@@@@ GBL: ULIM -- Upper limit for variable</span>
+<span style="color: #ffa500;">@@@@ GBL: STEP -- Size of steps to make</span>
+<span style="color: #ffa500;">@@@@ FLG: 82: Set: log function returns</span>
+<span style="color: #ffa500;">@@@@ FLG: 83: Set: Store independent variable in table</span>
+<span style="color: #ffa500;">@@@@ FLG: 84: Set: doing table, Clear: Doing sum or product (see flag 85)</span>
+<span style="color: #ffa500;">@@@@ FLG: 85: Set: doing sum, Clear; doing product</span>
+<span style="color: #ffa500;">@@@@ LLB: 00-12,14-24,26-33</span>
+<span style="color: #ffa500;">@@@@ GLB: FSPT</span>
+<span style="color: #ffa500;">@@@@ USE: PICF</span>
+<span style="color: #ffa500;">@@@@ REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"FSPT"</span>
 <span style="color: #00ffff;">CF</span> 82
 <span style="color: #00ffff;">SF</span> 83
 1
-<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PICF"</span>
-R&#8595;
-<span style="color: #00ffff;">LBL</span> 01            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu PROG_NAME</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"PICF"</span>
+<span style="color: #00ffff;">R&#8595;</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">01</span>            <span style="color: #ffa500;">@@@@ Page 1 of menu PROG_NAME</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"LLIM"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 03
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
 <span style="color: #fa8072;">"ULIM"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 04
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
 <span style="color: #fa8072;">"STEP"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 05
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">05</span>
 <span style="color: #fa8072;">"&#931;"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 06
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">06</span>
 <span style="color: #fa8072;">"&#960;"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 07
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">07</span>
 <span style="color: #fa8072;">"&#9618;"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 08
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 02
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 02
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">08</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> 01
-<span style="color: #00ffff;">LBL</span> 02            <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 2 of menu PROG_NAME</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">02</span>            <span style="color: #ffa500;">@@@@ Page 2 of menu PROG_NAME</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"EQ"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 09
-<span style="color: #00ffff;">FS</span>? 82
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">09</span>
+<span style="color: #00ffff;">FS?</span> 82
 <span style="color: #fa8072;">"LN&#8226;"</span>
-<span style="color: #00ffff;">FC</span>? 82
+<span style="color: #00ffff;">FC?</span> 82
 <span style="color: #fa8072;">"LN"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 10
-<span style="color: #00ffff;">FS</span>? 83
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">10</span>
+<span style="color: #00ffff;">FS?</span> 83
 <span style="color: #fa8072;">"IND&#8226;"</span>
-<span style="color: #00ffff;">FC</span>? 83
+<span style="color: #00ffff;">FC?</span> 83
 <span style="color: #fa8072;">"IND"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 11
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> 01
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> 01
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">11</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> 02
-<span style="color: #00ffff;">LBL</span> 00
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
 <span style="color: #00ffff;">EXITALL</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 03               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key LLIM</span>
-<span style="color: #00ffff;">FS</span>? 64
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">03</span>               <span style="color: #ffa500;">@@@@ Action for menu key LLIM</span>
+<span style="color: #00ffff;">FS?</span> 64
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"LLIM"</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"LLIM"</span>
 <span style="color: #fa8072;">"LLIM: "</span>
-<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">ARCL ST</span> X
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 04               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key ULIM</span>
-<span style="color: #00ffff;">FS</span>? 64
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">04</span>               <span style="color: #ffa500;">@@@@ Action for menu key ULIM</span>
+<span style="color: #00ffff;">FS?</span> 64
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ULIM"</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"ULIM"</span>
 <span style="color: #fa8072;">"ULIM: "</span>
-<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">ARCL ST</span> X
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 05               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key STEP</span>
-<span style="color: #00ffff;">FS</span>? 64
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">05</span>               <span style="color: #ffa500;">@@@@ Action for menu key STEP</span>
+<span style="color: #00ffff;">FS?</span> 64
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"STEP"</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"STEP"</span>
 <span style="color: #fa8072;">"STEP: "</span>
-<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">ARCL ST</span> X
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 06               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#931;</span>
-<span style="color: #00ffff;">CF</span> 84                <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">84 clear -&gt; not a table</span>
-<span style="color: #00ffff;">SF</span> 85                <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">85 set   -&gt; sum</span>
-<span style="color: #00ffff;">GTO</span> 20
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">06</span>               <span style="color: #ffa500;">@@@@ Action for menu key &#931;</span>
+<span style="color: #00ffff;">CF</span> 84                <span style="color: #ffa500;">@@@@ 84 clear -&gt; not a table</span>
+<span style="color: #00ffff;">SF</span> 85                <span style="color: #ffa500;">@@@@ 85 set   -&gt; sum</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">20</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 07               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#960;</span>
-<span style="color: #00ffff;">CF</span> 84                <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">84 clear -&gt; not a table</span>
-<span style="color: #00ffff;">CF</span> 85                <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">85 clear   -&gt; product</span>
-<span style="color: #00ffff;">GTO</span> 20
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">07</span>               <span style="color: #ffa500;">@@@@ Action for menu key &#960;</span>
+<span style="color: #00ffff;">CF</span> 84                <span style="color: #ffa500;">@@@@ 84 clear -&gt; not a table</span>
+<span style="color: #00ffff;">CF</span> 85                <span style="color: #ffa500;">@@@@ 85 clear   -&gt; product</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">20</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 08               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key &#9618;</span>
-<span style="color: #00ffff;">SF</span> 84                <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">84 set -&gt;  table</span>
-<span style="color: #00ffff;">GTO</span> 20
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">08</span>               <span style="color: #ffa500;">@@@@ Action for menu key &#9618;</span>
+<span style="color: #00ffff;">SF</span> 84                <span style="color: #ffa500;">@@@@ 84 set -&gt;  table</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">20</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 09               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key EQ</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">09</span>               <span style="color: #ffa500;">@@@@ Action for menu key EQ</span>
 1
-<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PICF"</span>
-R&#8595;
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"PICF"</span>
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 10               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key LN</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">10</span>               <span style="color: #ffa500;">@@@@ Action for menu key LN</span>
 <span style="color: #00ffff;">FS?C</span> 82
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">SF</span> 82
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 11               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key IND</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">11</span>               <span style="color: #ffa500;">@@@@ Action for menu key IND</span>
 <span style="color: #00ffff;">FS?C</span> 83
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">SF</span> 83
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 20  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Guts of the sum, product, table code</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Default LLIM &amp; STEP to 1 if unset</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">20</span>  <span style="color: #ffa500;">@@@@ Guts of the sum, product, table code</span>
+<span style="color: #ffa500;">@@@@ Default LLIM &amp; STEP to 1 if unset</span>
 1
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"LLIM"</span>
@@ -1225,168 +1225,168 @@ R&#8595;
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"STEP"</span>
 <span style="color: #00ffff;">FC?C</span> 25
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"STEP"</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Check for bad LLIM, ULIM, &amp; STEP.</span>
+<span style="color: #ffa500;">@@@@ Check for bad LLIM, ULIM, &amp; STEP.</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"LLIM"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ULIM"</span>
-<span style="color: #00ffff;">X&gt;Y</span>?
-<span style="color: #00ffff;">GTO</span> 12
+<span style="color: #00ffff;">X&gt;Y?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">12</span>
 <span style="color: #fa8072;">"ERR: LLIM &#8805;"</span>
-&#9500;<span style="color: #fa8072;">" ULIM"</span>
+<span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">" ULIM"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 12
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">12</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"STEP"</span>
-<span style="color: #00ffff;">X&gt;0</span>?
-<span style="color: #00ffff;">GTO</span> 14
+<span style="color: #00ffff;">X&gt;0?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">14</span>
 <span style="color: #fa8072;">"ERR: STEP &#8804; 0"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 14
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">14</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"EqD"</span>
-<span style="color: #00ffff;">X&gt;0</span>?
-<span style="color: #00ffff;">GTO</span> 15
+<span style="color: #00ffff;">X&gt;0?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">15</span>
 <span style="color: #fa8072;">"ERR: EqD &#8804; 0"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 15
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">15</span>
 4
-<span style="color: #00ffff;">X&#8805;Y</span>?
-<span style="color: #00ffff;">GTO</span> 16
+<span style="color: #00ffff;">X&#8805;Y?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">16</span>
 <span style="color: #fa8072;">"ERR: EqD &gt; 4"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 16
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Init before loop</span>
-<span style="color: #00ffff;">FS</span>? 84          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">84 set -&gt; table</span>
-<span style="color: #00ffff;">GTO</span> 21          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">84 clear -&gt; (85 set -&gt; sum , 85 clear -&gt; product)</span>
-<span style="color: #00ffff;">GTO</span> 22
-<span style="color: #00ffff;">LBL</span> 22
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Sum or Product</span>
-<span style="color: #00ffff;">FS</span>? 85
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">16</span>
+<span style="color: #ffa500;">@@@@ Init before loop</span>
+<span style="color: #00ffff;">FS?</span> 84          <span style="color: #ffa500;">@@@@ 84 set -&gt; table</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">21</span>          <span style="color: #ffa500;">@@@@ 84 clear -&gt; (85 set -&gt; sum , 85 clear -&gt; product)</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">22</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">22</span>
+<span style="color: #ffa500;">@@@@ Sum or Product</span>
+<span style="color: #00ffff;">FS?</span> 85
 0
-<span style="color: #00ffff;">FC</span>? 85
+<span style="color: #00ffff;">FC?</span> 85
 1
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_SOP"</span>
-<span style="color: #00ffff;">GTO</span> 23
-<span style="color: #00ffff;">LBL</span> 21
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Table</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">23</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">21</span>
+<span style="color: #ffa500;">@@@@ Table</span>
 1
 <span style="color: #00ffff;">ENTER</span>
 <span style="color: #00ffff;">ENTER</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"EqD"</span>
-<span style="color: #00ffff;">FS</span>? 83
+<span style="color: #00ffff;">FS?</span> 83
 <span style="color: #00ffff;">+</span>
 <span style="color: #00ffff;">NEWMAT</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_TMAT"</span>
-R&#8595;    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Drop matrix off stack to save RAM</span>
+<span style="color: #00ffff;">R&#8595;</span>    <span style="color: #ffa500;">@@@@ Drop matrix off stack to save RAM</span>
 <span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_TMAT"</span>
 <span style="color: #00ffff;">GROW</span>
-<span style="color: #00ffff;">LBL</span> 23
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Step through independent variable values and do sum, product, or table</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">23</span>
+<span style="color: #ffa500;">@@@@ Step through independent variable values and do sum, product, or table</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"LLIM"</span>
 <span style="color: #00ffff;">STO</span> IND <span style="color: #fa8072;">"EqV"</span>
-<span style="color: #00ffff;">LBL</span> 24
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Print progress</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">24</span>
+<span style="color: #ffa500;">@@@@ Print progress</span>
 <span style="color: #00ffff;">CLA</span>
 <span style="color: #00ffff;">ARCL</span> <span style="color: #fa8072;">"EqV"</span>
-&#9500;<span style="color: #fa8072;">"="</span>
+<span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">"="</span>
 <span style="color: #00ffff;">ARCL</span> IND <span style="color: #fa8072;">"EqV"</span>
 <span style="color: #00ffff;">AVIEW</span>
-<span style="color: #00ffff;">FC</span>? 84
-<span style="color: #00ffff;">GTO</span> 32
-<span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">Doing a table: Setup CTR for loop later</span>
+<span style="color: #00ffff;">FC?</span> 84
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">32</span>
+<span style="color: #ffa500;">@@@@  Doing a table: Setup CTR for loop later</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"EqD"</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_CTR"</span>
-<span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">Doing a table:  Store independent variable if FS? 83</span>
-<span style="color: #00ffff;">FC</span>? 83
-<span style="color: #00ffff;">GTO</span> 32
+<span style="color: #ffa500;">@@@@  Doing a table:  Store independent variable if FS? 83</span>
+<span style="color: #00ffff;">FC?</span> 83
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">32</span>
 <span style="color: #00ffff;">RCL</span> IND <span style="color: #fa8072;">"EqV"</span>
 <span style="color: #00ffff;">STOEL</span>
 <span style="color: #00ffff;">J+</span>
-<span style="color: #00ffff;">LBL</span> 32
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Evaluate function</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">32</span>
+<span style="color: #ffa500;">@@@@ Evaluate function</span>
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">XEQ IND</span> <span style="color: #fa8072;">"EqP"</span>
 <span style="color: #00ffff;">FS?C</span> 25
-<span style="color: #00ffff;">GTO</span> 17
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">17</span>
 <span style="color: #fa8072;">"ERR: Func Eval"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 17
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Do thing for sum, product, or table</span>
-<span style="color: #00ffff;">FS</span>? 84
-<span style="color: #00ffff;">GTO</span> 26
-<span style="color: #00ffff;">GTO</span> 27
-<span style="color: #00ffff;">LBL</span> 27
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Sum or Product</span>
-<span style="color: #00ffff;">FC</span>? 82
-<span style="color: #00ffff;">GTO</span> 29
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">17</span>
+<span style="color: #ffa500;">@@@@ Do thing for sum, product, or table</span>
+<span style="color: #00ffff;">FS?</span> 84
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">26</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">27</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">27</span>
+<span style="color: #ffa500;">@@@@ Sum or Product</span>
+<span style="color: #00ffff;">FC?</span> 82
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">29</span>
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">LN</span>
 <span style="color: #00ffff;">FS?C</span> 25
-<span style="color: #00ffff;">GTO</span> 29
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">29</span>
 <span style="color: #fa8072;">"ERR: Bad Log"</span>
 <span style="color: #00ffff;">AVIEW</span>
-<span style="color: #00ffff;">LBL</span> 29
-<span style="color: #00ffff;">FS</span>? 85
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">29</span>
+<span style="color: #00ffff;">FS?</span> 85
 <span style="color: #00ffff;">STO+</span> <span style="color: #fa8072;">"_SOP"</span>
-<span style="color: #00ffff;">FC</span>? 85
+<span style="color: #00ffff;">FC?</span> 85
 <span style="color: #00ffff;">STO&#215;</span> <span style="color: #fa8072;">"_SOP"</span>
-<span style="color: #00ffff;">GTO</span> 28
-<span style="color: #00ffff;">LBL</span> 26
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Table</span>
-<span style="color: #00ffff;">LBL</span> 30
-<span style="color: #00ffff;">FC</span>? 82
-<span style="color: #00ffff;">GTO</span> 31
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">28</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">26</span>
+<span style="color: #ffa500;">@@@@ Table</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">30</span>
+<span style="color: #00ffff;">FC?</span> 82
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">31</span>
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">LN</span>
 <span style="color: #00ffff;">FS?C</span> 25
-<span style="color: #00ffff;">GTO</span> 31
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">31</span>
 <span style="color: #fa8072;">"ERR: Bad Log"</span>
 <span style="color: #00ffff;">AVIEW</span>
-<span style="color: #00ffff;">LBL</span> 31
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">31</span>
 <span style="color: #00ffff;">STOEL</span>
 <span style="color: #00ffff;">J+</span>
-R&#8595;
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">DSE</span> <span style="color: #fa8072;">"_CTR"</span>
-<span style="color: #00ffff;">GTO</span> 30
-<span style="color: #00ffff;">LBL</span> 28
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Increment independent variable</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">30</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">28</span>
+<span style="color: #ffa500;">@@@@ Increment independent variable</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"STEP"</span>
 <span style="color: #00ffff;">RCL</span> IND <span style="color: #fa8072;">"EqV"</span>
 <span style="color: #00ffff;">+</span>
 <span style="color: #00ffff;">STO</span> IND <span style="color: #fa8072;">"EqV"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ULIM"</span>
-<span style="color: #00ffff;">X&#8805;Y</span>?
-<span style="color: #00ffff;">GTO</span> 24
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">All done.  Report Results</span>
-<span style="color: #00ffff;">FS</span>? 84          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">84 set -&gt; table</span>
-<span style="color: #00ffff;">GTO</span> 33          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">84 clear -&gt; (85 set -&gt; sum , 85 clear -&gt; product)</span>
-<span style="color: #00ffff;">GTO</span> 19
-<span style="color: #00ffff;">LBL</span> 19
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Sum or Product</span>
-<span style="color: #00ffff;">FS</span>? 85
+<span style="color: #00ffff;">X&#8805;Y?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">24</span>
+<span style="color: #ffa500;">@@@@ All done.  Report Results</span>
+<span style="color: #00ffff;">FS?</span> 84          <span style="color: #ffa500;">@@@@ 84 set -&gt; table</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">33</span>          <span style="color: #ffa500;">@@@@ 84 clear -&gt; (85 set -&gt; sum , 85 clear -&gt; product)</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">19</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">19</span>
+<span style="color: #ffa500;">@@@@ Sum or Product</span>
+<span style="color: #00ffff;">FS?</span> 85
 <span style="color: #fa8072;">"SUM: "</span>
-<span style="color: #00ffff;">FC</span>? 85
+<span style="color: #00ffff;">FC?</span> 85
 <span style="color: #fa8072;">"PROD: "</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_SOP"</span>
-<span style="color: #00ffff;">GTO</span> 18
-<span style="color: #00ffff;">LBL</span> 33
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Table</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">18</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">33</span>
+<span style="color: #ffa500;">@@@@ Table</span>
 <span style="color: #00ffff;">CLA</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_TMAT"</span>
-<span style="color: #00ffff;">LBL</span> 18
-<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">18</span>
+<span style="color: #00ffff;">ARCL ST</span> X
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">END</span>
+END
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org73c8842" class="outline-2">
-<h2 id="org73c8842"><span class="section-number-2">5.</span> <code>FPLT</code>: Interactive Plotting</h2>
+<div id="outline-container-org9683d16" class="outline-2">
+<h2 id="org9683d16"><span class="section-number-2">5.</span> <code>FPLT</code>: Interactive Plotting</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Features:
@@ -1405,12 +1405,12 @@ Features:
 </ul>
 </div>
 
-<div id="outline-container-org71aa357" class="outline-3">
-<h3 id="org71aa357"><span class="section-number-3">5.1.</span> User Interface</h3>
+<div id="outline-container-orgbe83819" class="outline-3">
+<h3 id="orgbe83819"><span class="section-number-3">5.1.</span> User Interface</h3>
 <div class="outline-text-3" id="text-5-1">
 </div>
-<div id="outline-container-orgc326448" class="outline-4">
-<h4 id="orgc326448"><span class="section-number-4">5.1.1.</span> Main Menu</h4>
+<div id="outline-container-org232cc9d" class="outline-4">
+<h4 id="org232cc9d"><span class="section-number-4">5.1.1.</span> Main Menu</h4>
 <div class="outline-text-4" id="text-5-1-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -1481,8 +1481,8 @@ For a graph with default settings: [0] [ENTER] [XRNG] [YRNG] [GRID] [PLOT]
 </div>
 </div>
 
-<div id="outline-container-orgb2084d4" class="outline-3">
-<h3 id="orgb2084d4"><span class="section-number-3">5.2.</span> Computational Menu</h3>
+<div id="outline-container-orgb87b99e" class="outline-3">
+<h3 id="orgb87b99e"><span class="section-number-3">5.2.</span> Computational Menu</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 This menu is for doing computations on the current equation based on
@@ -1537,8 +1537,8 @@ the current plot range or last zoom box region.
 </table>
 </div>
 
-<div id="outline-container-org15d14f2" class="outline-4">
-<h4 id="org15d14f2"><span class="section-number-4">5.2.1.</span> Graphics Display</h4>
+<div id="outline-container-orgcb46e69" class="outline-4">
+<h4 id="orgcb46e69"><span class="section-number-4">5.2.1.</span> Graphics Display</h4>
 <div class="outline-text-4" id="text-5-2-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -1620,74 +1620,74 @@ the current plot range or last zoom box region.
 </div>
 </div>
 
-<div id="outline-container-org6ce2ded" class="outline-3">
-<h3 id="org6ce2ded"><span class="section-number-3">5.3.</span> Code</h3>
+<div id="outline-container-org78f878b" class="outline-3">
+<h3 id="org78f878b"><span class="section-number-3">5.3.</span> Code</h3>
 <div class="outline-text-3" id="text-5-3">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-FPLT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FPLT)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Plot a MVAR function</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: EqP, EqV, LLIM, ULIM, STEP, YMIN, YMAX, YSTP</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">GBL: ZLLIM, ZULIM -- zoom box limits.</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: STEP &amp; YSTP are used for grids</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 03: PREF: Set: draw dots only;  Clear: connect dots</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 04: PREF: Set: Use GrMod 2; Clear Use GrMod 3</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 05: PREF: Reserved</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 82: TEMP: Used for max/min computation</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 83: TEMP: Used for automatic autoscale redraw</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FLG: 84: TEMP: Reserved</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FRE: LBL: 79-99</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">REQ: REQ:free42&gt;=3.0</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-04-09</span>
+<span style="color: #ffa500;">@@@@ DSC: Plot a MVAR function</span>
+<span style="color: #ffa500;">@@@@ GBL: EqP, EqV, LLIM, ULIM, STEP, YMIN, YMAX, YSTP</span>
+<span style="color: #ffa500;">@@@@ GBL: ZLLIM, ZULIM -- zoom box limits.</span>
+<span style="color: #ffa500;">@@@@ FAQ: STEP &amp; YSTP are used for grids</span>
+<span style="color: #ffa500;">@@@@ FLG: 03: PREF: Set: draw dots only;  Clear: connect dots</span>
+<span style="color: #ffa500;">@@@@ FLG: 04: PREF: Set: Use GrMod 2; Clear Use GrMod 3</span>
+<span style="color: #ffa500;">@@@@ FLG: 05: PREF: Reserved</span>
+<span style="color: #ffa500;">@@@@ FLG: 82: TEMP: Used for max/min computation</span>
+<span style="color: #ffa500;">@@@@ FLG: 83: TEMP: Used for automatic autoscale redraw</span>
+<span style="color: #ffa500;">@@@@ FLG: 84: TEMP: Reserved</span>
+<span style="color: #ffa500;">@@@@ FRE: LBL: 79-99</span>
+<span style="color: #ffa500;">@@@@ REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #ffa500;">@@@@ UPD: 2021-04-09</span>
 
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"FPLT"</span>
-<span style="color: #00ffff;">FC</span>? 04
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"FPLT"</span>
+<span style="color: #00ffff;">FC?</span> 04
 3
-<span style="color: #00ffff;">FS</span>? 04
+<span style="color: #00ffff;">FS?</span> 04
 2
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"GrMod"</span>
-R&#8595;
+<span style="color: #00ffff;">R&#8595;</span>
 131
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"ResX"</span>
-R&#8595;
+<span style="color: #00ffff;">R&#8595;</span>
 16
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"ResY"</span>
-R&#8595;
-<span style="color: #00ffff;">XEQ</span> 74
-<span style="color: #00ffff;">LBL</span> 01               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Page 1 of menu FPLT</span>
-<span style="color: #00ffff;">CF</span> 83                <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Turn off auto yscale redraw</span>
+<span style="color: #00ffff;">R&#8595;</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">74</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">01</span>               <span style="color: #ffa500;">@@@@ Page 1 of menu FPLT</span>
+<span style="color: #00ffff;">CF</span> 83                <span style="color: #ffa500;">@@@@ Turn off auto yscale redraw</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"EQ"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 02
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
 <span style="color: #fa8072;">"XRNG"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 03
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
 <span style="color: #fa8072;">"YRNG"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 04
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
 <span style="color: #fa8072;">"GRID"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> 05
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">05</span>
 <span style="color: #fa8072;">"COMP"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> 06
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">06</span>
 <span style="color: #fa8072;">"PLOT"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 07
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">07</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> 01
-<span style="color: #00ffff;">LBL</span> 00               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Application Exit</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">00</span>               <span style="color: #ffa500;">@@@@ Application Exit</span>
 <span style="color: #00ffff;">EXITALL</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 02               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key EQ</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">02</span>               <span style="color: #ffa500;">@@@@ Action for menu key EQ</span>
 0
-<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"PICF"</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"PICF"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 03               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key XRNG</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">03</span>               <span style="color: #ffa500;">@@@@ Action for menu key XRNG</span>
 <span style="color: #00ffff;">FUNC</span> 00
-<span style="color: #00ffff;">FS</span>? 64
-<span style="color: #00ffff;">GTO</span> 10               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">For shift we just display settings</span>
-<span style="color: #00ffff;">X&#8800;Y</span>?
-<span style="color: #00ffff;">GTO</span> 24
-<span style="color: #00ffff;">X=0</span>?
-<span style="color: #00ffff;">GTO</span> 26
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Code for LLIM=ULIM&#8800;0</span>
+<span style="color: #00ffff;">FS?</span> 64
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">10</span>               <span style="color: #ffa500;">@@@@ For shift we just display settings</span>
+<span style="color: #00ffff;">X&#8800;Y?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">24</span>
+<span style="color: #00ffff;">X=0?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">26</span>
+<span style="color: #ffa500;">@@@@ Code for LLIM=ULIM&#8800;0</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ULIM"</span>
 <span style="color: #00ffff;">RCL-</span> <span style="color: #fa8072;">"LLIM"</span>
 2
@@ -1697,44 +1697,44 @@ R&#8595;
 <span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"LLIM"</span>
 2
 <span style="color: #00ffff;">&#247;</span>
-<span style="color: #00ffff;">RCL</span> ST X
-<span style="color: #00ffff;">RCL</span> ST Z
+<span style="color: #00ffff;">RCL ST</span> X
+<span style="color: #00ffff;">RCL ST</span> Z
 <span style="color: #00ffff;">-</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"LLIM"</span>
-R&#8595;
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">+</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"ULIM"</span>
-<span style="color: #00ffff;">GTO</span> 10
-<span style="color: #00ffff;">LBL</span> 26
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Code for LLIM=ULIM=0</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">10</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">26</span>
+<span style="color: #ffa500;">@@@@ Code for LLIM=ULIM=0</span>
 <span style="color: #00ffff;">CLV</span> <span style="color: #fa8072;">"LLIM"</span>
 <span style="color: #00ffff;">CLV</span> <span style="color: #fa8072;">"ULIM"</span>
-<span style="color: #00ffff;">XEQ</span> 74
-<span style="color: #00ffff;">GTO</span> 10
-<span style="color: #00ffff;">LBL</span> 24
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Code for LLIM&#8800;ULIM</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">74</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">10</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">24</span>
+<span style="color: #ffa500;">@@@@ Code for LLIM&#8800;ULIM</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"ULIM"</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"LLIM"</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
-<span style="color: #00ffff;">LBL</span> 10
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">10</span>
 <span style="color: #fa8072;">"XMIN: "</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"LLIM"</span>
-<span style="color: #00ffff;">ARCL</span> ST X
-&#9500;<span style="color: #fa8072;">"[LF]XMAX: "</span>
+<span style="color: #00ffff;">ARCL ST</span> X
+<span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">"[LF]XMAX: "</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ULIM"</span>
-<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">ARCL ST</span> X
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 04               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key YRNG</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">04</span>               <span style="color: #ffa500;">@@@@ Action for menu key YRNG</span>
 <span style="color: #00ffff;">FUNC</span> 00
-<span style="color: #00ffff;">FS</span>? 64
-<span style="color: #00ffff;">GTO</span> 50               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">For shift we just display settings</span>
-<span style="color: #00ffff;">X&#8800;Y</span>?
-<span style="color: #00ffff;">GTO</span> 22
-<span style="color: #00ffff;">X=0</span>?
-<span style="color: #00ffff;">GTO</span> 23
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Code for YMIN=YMAX&#8800;0</span>
+<span style="color: #00ffff;">FS?</span> 64
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">50</span>               <span style="color: #ffa500;">@@@@ For shift we just display settings</span>
+<span style="color: #00ffff;">X&#8800;Y?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">22</span>
+<span style="color: #00ffff;">X=0?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">23</span>
+<span style="color: #ffa500;">@@@@ Code for YMIN=YMAX&#8800;0</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"YMAX"</span>
 <span style="color: #00ffff;">RCL-</span> <span style="color: #fa8072;">"YMIN"</span>
 2
@@ -1744,77 +1744,77 @@ R&#8595;
 <span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"YMIN"</span>
 2
 <span style="color: #00ffff;">&#247;</span>
-<span style="color: #00ffff;">RCL</span> ST X
-<span style="color: #00ffff;">RCL</span> ST Z
+<span style="color: #00ffff;">RCL ST</span> X
+<span style="color: #00ffff;">RCL ST</span> Z
 <span style="color: #00ffff;">-</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"YMIN"</span>
-R&#8595;
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">+</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"YMAX"</span>
-<span style="color: #00ffff;">GTO</span> 50
-<span style="color: #00ffff;">LBL</span> 23
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Code for YMIN=YMAX=0</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">50</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">23</span>
+<span style="color: #ffa500;">@@@@ Code for YMIN=YMAX=0</span>
 <span style="color: #00ffff;">CLV</span> <span style="color: #fa8072;">"YMIN"</span>
 <span style="color: #00ffff;">CLV</span> <span style="color: #fa8072;">"YMAX"</span>
-<span style="color: #00ffff;">XEQ</span> 74
-<span style="color: #00ffff;">GTO</span> 50
-<span style="color: #00ffff;">LBL</span> 22
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Code for YMIN&#8800;YMAX</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">74</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">50</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">22</span>
+<span style="color: #ffa500;">@@@@ Code for YMIN&#8800;YMAX</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"YMAX"</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"YMIN"</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
-<span style="color: #00ffff;">LBL</span> 50
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">50</span>
 <span style="color: #fa8072;">"YMIN: "</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"YMIN"</span>
-<span style="color: #00ffff;">ARCL</span> ST X
-&#9500;<span style="color: #fa8072;">"[LF]YMAX: "</span>
+<span style="color: #00ffff;">ARCL ST</span> X
+<span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">"[LF]YMAX: "</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"YMAX"</span>
-<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">ARCL ST</span> X
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 05               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key GRID</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">05</span>               <span style="color: #ffa500;">@@@@ Action for menu key GRID</span>
 <span style="color: #00ffff;">FUNC</span> 00
-<span style="color: #00ffff;">FS</span>? 64
-<span style="color: #00ffff;">GTO</span> 49               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">For shift we just display settings</span>
+<span style="color: #00ffff;">FS?</span> 64
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">49</span>               <span style="color: #ffa500;">@@@@ For shift we just display settings</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"YSTP"</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"STEP"</span>
-<span style="color: #00ffff;">LBL</span> 49
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">49</span>
 <span style="color: #fa8072;">"XSTP: "</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"STEP"</span>
-<span style="color: #00ffff;">ARCL</span> ST X
-&#9500;<span style="color: #fa8072;">"[LF]YSTP: "</span>
+<span style="color: #00ffff;">ARCL ST</span> X
+<span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">"[LF]YSTP: "</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"YSTP"</span>
-<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">ARCL ST</span> X
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 06               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key COMP</span>
-<span style="color: #00ffff;">LBL</span> 30               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">menu COMP</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">06</span>               <span style="color: #ffa500;">@@@@ Action for menu key COMP</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">30</span>               <span style="color: #ffa500;">@@@@ menu COMP</span>
 <span style="color: #00ffff;">CLMENU</span>
 <span style="color: #fa8072;">"ROOT"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> 32
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">32</span>
 <span style="color: #fa8072;">"INTG"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> 33
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">33</span>
 <span style="color: #fa8072;">"EVAL"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> 34
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">"RSV1"</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">KEY 4 XEQ 35</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">"RSV2"</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">KEY 5 XEQ 36</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">34</span>
+<span style="color: #ffa500;">@@@@ "RSV1"</span>
+<span style="color: #ffa500;">@@@@ KEY 4 XEQ 35</span>
+<span style="color: #ffa500;">@@@@ "RSV2"</span>
+<span style="color: #ffa500;">@@@@ KEY 5 XEQ 36</span>
 <span style="color: #fa8072;">"R&lt;&gt;B"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> 37
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> 31
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">37</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">31</span>
 <span style="color: #00ffff;">MENU</span>
 <span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> 30
-<span style="color: #00ffff;">LBL</span> 31               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Menu Exit</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">30</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">31</span>               <span style="color: #ffa500;">@@@@ Menu Exit</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 32               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key FSLV</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">32</span>               <span style="color: #ffa500;">@@@@ Action for menu key FSLV</span>
 <span style="color: #00ffff;">FUNC</span> 04
-<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FSLV"</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"FSLV"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 33               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key FINT</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">33</span>               <span style="color: #ffa500;">@@@@ Action for menu key FINT</span>
 <span style="color: #00ffff;">FUNC</span> 01
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ULIM"</span>
 <span style="color: #00ffff;">RCL-</span> <span style="color: #fa8072;">"LLIM"</span>
@@ -1823,46 +1823,46 @@ R&#8595;
 <span style="color: #00ffff;">RCL-</span> <span style="color: #fa8072;">"YMIN"</span>
 <span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"ResY"</span>
 <span style="color: #00ffff;">&#215;</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FINT"</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"FINT"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 34               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key RSV0</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"FEVL"</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">RSV0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">34</span>               <span style="color: #ffa500;">@@@@ Action for menu key RSV0</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"FEVL"</span>
+<span style="color: #ffa500;">@@@@ RSV0</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 35               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key RSV1</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">RSV1</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">35</span>               <span style="color: #ffa500;">@@@@ Action for menu key RSV1</span>
+<span style="color: #ffa500;">@@@@ RSV1</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 36               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key RSV2</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">RSV2</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">36</span>               <span style="color: #ffa500;">@@@@ Action for menu key RSV2</span>
+<span style="color: #ffa500;">@@@@ RSV2</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 37               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key RANGE &lt;&gt; BOX swap</span>
-<span style="color: #00ffff;">XEQ</span> 39
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">37</span>               <span style="color: #ffa500;">@@@@ Action for menu key RANGE &lt;&gt; BOX swap</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">39</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"GrMod"</span>
-<span style="color: #00ffff;">LBL</span> 07               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Action for menu key PLOT</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Set AGRAPH flags to OR</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">07</span>               <span style="color: #ffa500;">@@@@ Action for menu key PLOT</span>
+<span style="color: #ffa500;">@@@@ Set AGRAPH flags to OR</span>
 <span style="color: #00ffff;">CF</span> 34
 <span style="color: #00ffff;">CF</span> 35
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Just in case an important var is not set</span>
-<span style="color: #00ffff;">XEQ</span> 74
+<span style="color: #ffa500;">@@@@ Just in case an important var is not set</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">74</span>
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"EqV"</span>
 <span style="color: #00ffff;">FC?C</span> 25
-<span style="color: #00ffff;">GTO</span> 76
-R&#8595;
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">76</span>
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"EqP"</span>
 <span style="color: #00ffff;">FC?C</span> 25
-<span style="color: #00ffff;">GTO</span> 76
-R&#8595;
-<span style="color: #00ffff;">GTO</span> 77  <span style="color: #ff7f24;">@@ All good</span>
-<span style="color: #00ffff;">LBL</span> 76
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">76</span>
+<span style="color: #00ffff;">R&#8595;</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">77</span>  <span style="color: #ffa500;">@@@@ All good</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">76</span>
 <span style="color: #fa8072;">"ERR: Pick An"</span>
-&#9500;<span style="color: #fa8072;">" EQ First!"</span>
+<span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">" EQ First!"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 77
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Set YWID</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">77</span>
+<span style="color: #ffa500;">@@@@ Set YWID</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"YMAX"</span>
 <span style="color: #00ffff;">RCL-</span> <span style="color: #fa8072;">"YMIN"</span>
 1
@@ -1870,7 +1870,7 @@ R&#8595;
 <span style="color: #00ffff;">-</span>
 <span style="color: #00ffff;">&#247;</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"YWID"</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Set YWID</span>
+<span style="color: #ffa500;">@@@@ Set YWID</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ULIM"</span>
 <span style="color: #00ffff;">RCL-</span> <span style="color: #fa8072;">"LLIM"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ResX"</span>
@@ -1878,13 +1878,13 @@ R&#8595;
 <span style="color: #00ffff;">-</span>
 <span style="color: #00ffff;">&#247;</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"XWID"</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Draw stuff</span>
+<span style="color: #ffa500;">@@@@ Draw stuff</span>
 <span style="color: #00ffff;">CLLCD</span>
-<span style="color: #00ffff;">CLMENU</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Only needed on DM42</span>
-<span style="color: #00ffff;">EXITALL</span>              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Only needed on DM42</span>
-<span style="color: #00ffff;">FC</span>? 83
-<span style="color: #00ffff;">GTO</span> 17
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Doing an autoscale draw</span>
+<span style="color: #00ffff;">CLMENU</span>               <span style="color: #ffa500;">@@@@ Only needed on DM42</span>
+<span style="color: #00ffff;">EXITALL</span>              <span style="color: #ffa500;">@@@@ Only needed on DM42</span>
+<span style="color: #00ffff;">FC?</span> 83
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">17</span>
+<span style="color: #ffa500;">@@@@ Doing an autoscale draw</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ResX"</span>
 14
 <span style="color: #00ffff;">&#247;</span>
@@ -1892,51 +1892,51 @@ R&#8595;
 1
 <span style="color: #00ffff;">-</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_I"</span>
-<span style="color: #00ffff;">LBL</span> 15
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">15</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ResY"</span>
 2
-<span style="color: #00ffff;">&#247;</span>                             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Yctr</span>
+<span style="color: #00ffff;">&#247;</span>                             <span style="color: #ffa500;">@@@@ Yctr</span>
 9
 <span style="color: #00ffff;">-</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_I"</span>
 14
-<span style="color: #00ffff;">&#215;</span>                             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X coord</span>
-<span style="color: #fa8072;">"@`px|~&#9500;~|xp`@"</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Draw up triangle</span>
+<span style="color: #00ffff;">&#215;</span>                             <span style="color: #ffa500;">@@@@ X coord</span>
+<span style="color: #fa8072;">"@`px|~&#9500;~|xp`@"</span>               <span style="color: #ffa500;">@@@@ Draw up triangle</span>
 <span style="color: #00ffff;">AGRAPH</span>
-<span style="color: #fa8072;">"&#215;&#8747;&#960;&#8594;&#8226;?&#9500;?&#8226;&#8594;&#960;&#8747;&#215;"</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Draw down triangle</span>
+<span style="color: #fa8072;">"&#215;&#8747;&#960;&#8594;&#8226;?&#9500;?&#8226;&#8594;&#960;&#8747;&#215;"</span>               <span style="color: #ffa500;">@@@@ Draw down triangle</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 12
 <span style="color: #00ffff;">+</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">AGRAPH</span>
-<span style="color: #00ffff;">DSE</span> <span style="color: #fa8072;">"_I"</span>                       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Loopity doopity do</span>
-<span style="color: #00ffff;">GTO</span> 15
-<span style="color: #00ffff;">GTO</span> 20               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Jump past axis and grid drawing for autoscale redraw</span>
-<span style="color: #00ffff;">LBL</span> 17
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Draw X Axis</span>
+<span style="color: #00ffff;">DSE</span> <span style="color: #fa8072;">"_I"</span>                       <span style="color: #ffa500;">@@@@ Loopity doopity do</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">15</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">20</span>               <span style="color: #ffa500;">@@@@ Jump past axis and grid drawing for autoscale redraw</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">17</span>
+<span style="color: #ffa500;">@@@@ Draw X Axis</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"STEP"</span>
-<span style="color: #00ffff;">X&lt;0</span>?                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">No axis if negative</span>
-<span style="color: #00ffff;">GTO</span> 11
+<span style="color: #00ffff;">X&lt;0?</span>                 <span style="color: #ffa500;">@@@@ No axis if negative</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">11</span>
 0
-<span style="color: #00ffff;">XEQ</span> 56
-<span style="color: #00ffff;">XEQ</span> 58
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">56</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">58</span>
 1
 <span style="color: #00ffff;">-</span>
-<span style="color: #00ffff;">XEQ</span> 58
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">58</span>
 2
 <span style="color: #00ffff;">+</span>
-<span style="color: #00ffff;">XEQ</span> 58
-<span style="color: #00ffff;">LBL</span> 11
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Draw X Grid</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">58</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">11</span>
+<span style="color: #ffa500;">@@@@ Draw X Grid</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"STEP"</span>
-<span style="color: #00ffff;">X&#8804;0</span>?
-<span style="color: #00ffff;">GTO</span> 08               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">no grid when STEP&lt;=0</span>
+<span style="color: #00ffff;">X&#8804;0?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">08</span>               <span style="color: #ffa500;">@@@@ no grid when STEP&lt;=0</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"XWID"</span>
 10
 <span style="color: #00ffff;">&#215;</span>
-<span style="color: #00ffff;">X&gt;Y</span>?
-<span style="color: #00ffff;">GTO</span> 08               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">no grid when too small</span>
-R&#8595;
+<span style="color: #00ffff;">X&gt;Y?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">08</span>               <span style="color: #ffa500;">@@@@ no grid when too small</span>
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ULIM"</span>
 <span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"STEP"</span>
 <span style="color: #00ffff;">IP</span>
@@ -1947,39 +1947,39 @@ R&#8595;
 <span style="color: #00ffff;">IP</span>
 <span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"STEP"</span>
 <span style="color: #00ffff;">RCL-</span> <span style="color: #fa8072;">"STEP"</span>
-<span style="color: #00ffff;">LBL</span> 09
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">09</span>
 <span style="color: #00ffff;">ENTER</span>
-<span style="color: #00ffff;">XEQ</span> 46
-<span style="color: #00ffff;">XEQ</span> 48
-R&#8595;
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">46</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">48</span>
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"STEP"</span>
-<span style="color: #00ffff;">X&lt;Y</span>?
-<span style="color: #00ffff;">GTO</span> 09
-<span style="color: #00ffff;">LBL</span> 08
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Draw Y Axis</span>
+<span style="color: #00ffff;">X&lt;Y?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">09</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">08</span>
+<span style="color: #ffa500;">@@@@ Draw Y Axis</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"YSTP"</span>
-<span style="color: #00ffff;">X&lt;0</span>?                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">No axis if negative</span>
-<span style="color: #00ffff;">GTO</span> 12
+<span style="color: #00ffff;">X&lt;0?</span>                 <span style="color: #ffa500;">@@@@ No axis if negative</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">12</span>
 0
-<span style="color: #00ffff;">XEQ</span> 46
-<span style="color: #00ffff;">XEQ</span> 48
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">46</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">48</span>
 1
 <span style="color: #00ffff;">-</span>
-<span style="color: #00ffff;">XEQ</span> 48
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">48</span>
 2
 <span style="color: #00ffff;">+</span>
-<span style="color: #00ffff;">XEQ</span> 48
-<span style="color: #00ffff;">LBL</span> 12
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Draw Y Grid</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">48</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">12</span>
+<span style="color: #ffa500;">@@@@ Draw Y Grid</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"YSTP"</span>
-<span style="color: #00ffff;">X&#8804;0</span>?
-<span style="color: #00ffff;">GTO</span> 20               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">no grid when STEP&lt;=0</span>
+<span style="color: #00ffff;">X&#8804;0?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">20</span>               <span style="color: #ffa500;">@@@@ no grid when STEP&lt;=0</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"YWID"</span>
 -10
 <span style="color: #00ffff;">&#215;</span>
-<span style="color: #00ffff;">X&gt;Y</span>?
-<span style="color: #00ffff;">GTO</span> 20               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">no grid when too small</span>
-R&#8595;
+<span style="color: #00ffff;">X&gt;Y?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">20</span>               <span style="color: #ffa500;">@@@@ no grid when too small</span>
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"YMAX"</span>
 <span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"YSTP"</span>
 <span style="color: #00ffff;">IP</span>
@@ -1990,59 +1990,59 @@ R&#8595;
 <span style="color: #00ffff;">IP</span>
 <span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"YSTP"</span>
 <span style="color: #00ffff;">RCL-</span> <span style="color: #fa8072;">"YSTP"</span>
-<span style="color: #00ffff;">LBL</span> 21
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">21</span>
 <span style="color: #00ffff;">ENTER</span>
-<span style="color: #00ffff;">XEQ</span> 56
-<span style="color: #00ffff;">XEQ</span> 58
-R&#8595;
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">56</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">58</span>
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"YSTP"</span>
-<span style="color: #00ffff;">X&lt;Y</span>?
-<span style="color: #00ffff;">GTO</span> 21
-<span style="color: #00ffff;">LBL</span> 20
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Set Alpha to our box</span>
+<span style="color: #00ffff;">X&lt;Y?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">21</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">20</span>
+<span style="color: #ffa500;">@@@@ Set Alpha to our box</span>
 <span style="color: #fa8072;">"&#960;&#960;&#960;"</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Plot curve</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Init YPMAX &amp; YPMIN</span>
+<span style="color: #ffa500;">@@@@ Plot curve</span>
+<span style="color: #ffa500;">@@@@ Init YPMAX &amp; YPMIN</span>
 <span style="color: #00ffff;">SF</span> 82
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Init LASTY</span>
+<span style="color: #ffa500;">@@@@ Init LASTY</span>
 0
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_LASTY"</span>
-R&#8595;
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Loop across screen</span>
+<span style="color: #00ffff;">R&#8595;</span>
+<span style="color: #ffa500;">@@@@ Loop across screen</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ResX"</span>
 1000
 <span style="color: #00ffff;">&#247;</span>
 1
 <span style="color: #00ffff;">+</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_XICUR"</span>
-<span style="color: #00ffff;">LBL</span> 41
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">41</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_XICUR"</span>
 <span style="color: #00ffff;">IP</span>
-<span style="color: #00ffff;">XEQ</span> 47
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">47</span>
 <span style="color: #00ffff;">STO</span> IND <span style="color: #fa8072;">"EqV"</span>
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">XEQ IND</span> <span style="color: #fa8072;">"EqP"</span>
 <span style="color: #00ffff;">FC?C</span> 25
-<span style="color: #00ffff;">GTO</span> 29
-<span style="color: #00ffff;">FC</span>? 82
-<span style="color: #00ffff;">GTO</span> 43
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Setup YPMIN &amp; YPMAX</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">29</span>
+<span style="color: #00ffff;">FC?</span> 82
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">43</span>
+<span style="color: #ffa500;">@@@@ Setup YPMIN &amp; YPMAX</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_YPMAX"</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_YPMIN"</span>
 <span style="color: #00ffff;">CF</span> 82
-<span style="color: #00ffff;">LBL</span> 43
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Update YPMIN &amp; YPMAX if required.</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">43</span>
+<span style="color: #ffa500;">@@@@ Update YPMIN &amp; YPMAX if required.</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_YPMAX"</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
-<span style="color: #00ffff;">X&gt;Y</span>?
+<span style="color: #00ffff;">X&gt;Y?</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_YPMAX"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_YPMIN"</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
-<span style="color: #00ffff;">X&lt;Y</span>?
+<span style="color: #00ffff;">X&lt;Y?</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_YPMIN"</span>
-<span style="color: #00ffff;">FC</span>? 83
-<span style="color: #00ffff;">GTO</span> 78
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Draw autoscale progress bar</span>
+<span style="color: #00ffff;">FC?</span> 83
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">78</span>
+<span style="color: #ffa500;">@@@@ Draw autoscale progress bar</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ResY"</span>
 2
 <span style="color: #00ffff;">&#247;</span>
@@ -2050,46 +2050,46 @@ R&#8595;
 <span style="color: #00ffff;">-</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_XICUR"</span>
 <span style="color: #00ffff;">AGRAPH</span>
-R&#8595;
-R&#8595;
-<span style="color: #00ffff;">GTO</span> 19
-<span style="color: #00ffff;">LBL</span> 78
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">If y is on screen, then draw it</span>
-<span style="color: #00ffff;">XEQ</span> 56
-<span style="color: #00ffff;">XEQ</span> 55
-<span style="color: #00ffff;">GTO</span> 29
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DRAW FAT PIXEL</span>
+<span style="color: #00ffff;">R&#8595;</span>
+<span style="color: #00ffff;">R&#8595;</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">19</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">78</span>
+<span style="color: #ffa500;">@@@@ If y is on screen, then draw it</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">56</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">55</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">29</span>
+<span style="color: #ffa500;">@@@@ DRAW FAT PIXEL</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_XICUR"</span>
-<span style="color: #00ffff;">XEQ</span> 51              <span style="color: #ff7f24;">@@@ XICUR YICUR</span>
-R&#8595;
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Do we draw lines?</span>
-<span style="color: #00ffff;">FS</span>? 03
-<span style="color: #00ffff;">GTO</span> 19
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Don't do lines for an autoscale draw</span>
-<span style="color: #00ffff;">FS</span>? 83
-<span style="color: #00ffff;">GTO</span> 19
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Do we have a last point?</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">51</span>              <span style="color: #ffa500;">@@@@ XICUR YICUR</span>
+<span style="color: #00ffff;">R&#8595;</span>
+<span style="color: #ffa500;">@@@@ Do we draw lines?</span>
+<span style="color: #00ffff;">FS?</span> 03
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">19</span>
+<span style="color: #ffa500;">@@@@ Don't do lines for an autoscale draw</span>
+<span style="color: #00ffff;">FS?</span> 83
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">19</span>
+<span style="color: #ffa500;">@@@@ Do we have a last point?</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_LASTY"</span>
-<span style="color: #00ffff;">X=0</span>?
-<span style="color: #00ffff;">GTO</span> 19
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Yep &amp; Yep.  We draw a line!</span>
+<span style="color: #00ffff;">X=0?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">19</span>
+<span style="color: #ffa500;">@@@@ Yep &amp; Yep.  We draw a line!</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
-<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_XICUR"</span>  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">xi  newy lasty</span>
-<span style="color: #00ffff;">XEQ</span> 40
-<span style="color: #00ffff;">LBL</span> 19
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Save last Y</span>
-R&#8595;
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_XICUR"</span>  <span style="color: #ffa500;">@@@@ xi  newy lasty</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">40</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">19</span>
+<span style="color: #ffa500;">@@@@ Save last Y</span>
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_LASTY"</span>
-<span style="color: #00ffff;">GTO</span> 42
-<span style="color: #00ffff;">LBL</span> 29  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Bad Y target</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">42</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">29</span>  <span style="color: #ffa500;">@@@@ Bad Y target</span>
 0
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_LASTY"</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Backend of loop</span>
-<span style="color: #00ffff;">LBL</span> 42
+<span style="color: #ffa500;">@@@@ Backend of loop</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">42</span>
 <span style="color: #00ffff;">ISG</span> <span style="color: #fa8072;">"_XICUR"</span>
-<span style="color: #00ffff;">GTO</span> 41
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Done with graph.</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Setup zoom box</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">41</span>
+<span style="color: #ffa500;">@@@@ Done with graph.</span>
+<span style="color: #ffa500;">@@@@ Setup zoom box</span>
 10
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_ZSPD"</span>
 1
@@ -2099,112 +2099,112 @@ R&#8595;
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_ZBBOT"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ResX"</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_ZBRGT"</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Do we redraw with autoscale?</span>
+<span style="color: #ffa500;">@@@@ Do we redraw with autoscale?</span>
 <span style="color: #00ffff;">FS?C</span> 83
-<span style="color: #00ffff;">GTO</span> 68
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">graph UI</span>
-<span style="color: #00ffff;">LBL</span> 16
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">68</span>
+<span style="color: #ffa500;">@@@@ graph UI</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">16</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZSPD"</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_CTR"</span>
-<span style="color: #00ffff;">LBL</span> 52
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">52</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZBRGT"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_CTR"</span>
 <span style="color: #00ffff;">+</span>
-<span style="color: #00ffff;">XEQ</span> 48
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">48</span>
 <span style="color: #00ffff;">DSE</span> <span style="color: #fa8072;">"_CTR"</span>
-<span style="color: #00ffff;">GTO</span> 52
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">52</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZSPD"</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_CTR"</span>
-<span style="color: #00ffff;">LBL</span> 53
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">53</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZBBOT"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_CTR"</span>
 <span style="color: #00ffff;">+</span>
-<span style="color: #00ffff;">XEQ</span> 58
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">58</span>
 <span style="color: #00ffff;">DSE</span> <span style="color: #fa8072;">"_CTR"</span>
-<span style="color: #00ffff;">GTO</span> 53
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">53</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZSPD"</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_CTR"</span>
-<span style="color: #00ffff;">LBL</span> 54
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">54</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZBTOP"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_CTR"</span>
 <span style="color: #00ffff;">-</span>
-<span style="color: #00ffff;">XEQ</span> 58
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">58</span>
 <span style="color: #00ffff;">DSE</span> <span style="color: #fa8072;">"_CTR"</span>
-<span style="color: #00ffff;">GTO</span> 54
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">54</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZSPD"</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_CTR"</span>
-<span style="color: #00ffff;">LBL</span> 59
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">59</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZBLFT"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_CTR"</span>
 <span style="color: #00ffff;">-</span>
-<span style="color: #00ffff;">XEQ</span> 48
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">48</span>
 <span style="color: #00ffff;">DSE</span> <span style="color: #fa8072;">"_CTR"</span>
-<span style="color: #00ffff;">GTO</span> 59
-<span style="color: #00ffff;">LBL</span> 44
-GETKEY1
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">59</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">44</span>
+<span style="color: #00ffff;">GETKEY1</span>
 13
-<span style="color: #00ffff;">X=Y</span>?                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">13 ENTER key</span>
-<span style="color: #00ffff;">GTO</span> 73
-R&#8595;
+<span style="color: #00ffff;">X=Y?</span>                 <span style="color: #ffa500;">@@@@ 13 ENTER key</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">73</span>
+<span style="color: #00ffff;">R&#8595;</span>
 17
-<span style="color: #00ffff;">X=Y</span>?                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">24 Backspace key</span>
-<span style="color: #00ffff;">GTO</span> 60
-R&#8595;
+<span style="color: #00ffff;">X=Y?</span>                 <span style="color: #ffa500;">@@@@ 24 Backspace key</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">60</span>
+<span style="color: #00ffff;">R&#8595;</span>
 32
-<span style="color: #00ffff;">X=Y</span>?                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">- speed slow key</span>
-<span style="color: #00ffff;">GTO</span> 66
-R&#8595;
+<span style="color: #00ffff;">X=Y?</span>                 <span style="color: #ffa500;">@@@@ - speed slow key</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">66</span>
+<span style="color: #00ffff;">R&#8595;</span>
 37
-<span style="color: #00ffff;">X=Y</span>?                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">- speed fast key</span>
-<span style="color: #00ffff;">GTO</span> 65
-R&#8595;
+<span style="color: #00ffff;">X=Y?</span>                 <span style="color: #ffa500;">@@@@ - speed fast key</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">65</span>
+<span style="color: #00ffff;">R&#8595;</span>
 24
-<span style="color: #00ffff;">X=Y</span>?                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">24 LEFT key</span>
-<span style="color: #00ffff;">GTO</span> 61
-R&#8595;
+<span style="color: #00ffff;">X=Y?</span>                 <span style="color: #ffa500;">@@@@ 24 LEFT key</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">61</span>
+<span style="color: #00ffff;">R&#8595;</span>
 26
-<span style="color: #00ffff;">X=Y</span>?                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">26 RIGHT key</span>
-<span style="color: #00ffff;">GTO</span> 62
-R&#8595;
+<span style="color: #00ffff;">X=Y?</span>                 <span style="color: #ffa500;">@@@@ 26 RIGHT key</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">62</span>
+<span style="color: #00ffff;">R&#8595;</span>
 20
-<span style="color: #00ffff;">X=Y</span>?                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">20 TOP key</span>
-<span style="color: #00ffff;">GTO</span> 63
-R&#8595;
+<span style="color: #00ffff;">X=Y?</span>                 <span style="color: #ffa500;">@@@@ 20 TOP key</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">63</span>
+<span style="color: #00ffff;">R&#8595;</span>
 30
-<span style="color: #00ffff;">X=Y</span>?                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">30 BOTTOM key</span>
-<span style="color: #00ffff;">GTO</span> 64
-R&#8595;
+<span style="color: #00ffff;">X=Y?</span>                 <span style="color: #ffa500;">@@@@ 30 BOTTOM key</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">64</span>
+<span style="color: #00ffff;">R&#8595;</span>
 14
-<span style="color: #00ffff;">X=Y</span>?                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">14 autoscale key</span>
-<span style="color: #00ffff;">GTO</span> 68
-R&#8595;
+<span style="color: #00ffff;">X=Y?</span>                 <span style="color: #ffa500;">@@@@ 14 autoscale key</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">68</span>
+<span style="color: #00ffff;">R&#8595;</span>
 22
-<span style="color: #00ffff;">X=Y</span>?                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">22 zoom in key</span>
-<span style="color: #00ffff;">GTO</span> 67
-R&#8595;
+<span style="color: #00ffff;">X=Y?</span>                 <span style="color: #ffa500;">@@@@ 22 zoom in key</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">67</span>
+<span style="color: #00ffff;">R&#8595;</span>
 35
-<span style="color: #00ffff;">X=Y</span>?                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">35 period.  toggle dots/lines</span>
-<span style="color: #00ffff;">GTO</span> 75
-R&#8595;
+<span style="color: #00ffff;">X=Y?</span>                 <span style="color: #ffa500;">@@@@ 35 period.  toggle dots/lines</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">75</span>
+<span style="color: #00ffff;">R&#8595;</span>
 27
-<span style="color: #00ffff;">X=Y</span>?                 <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">27 zoom out key</span>
-<span style="color: #00ffff;">GTO</span> 69
-<span style="color: #00ffff;">GTO</span> 44               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Nothing matched get another key</span>
-<span style="color: #00ffff;">LBL</span> 67               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">22 / zoom</span>
+<span style="color: #00ffff;">X=Y?</span>                 <span style="color: #ffa500;">@@@@ 27 zoom out key</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">69</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">44</span>               <span style="color: #ffa500;">@@@@ Nothing matched get another key</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">67</span>               <span style="color: #ffa500;">@@@@ 22 / zoom</span>
 0.5
 <span style="color: #00ffff;">ENTER</span>
 <span style="color: #00ffff;">ENTER</span>
-<span style="color: #00ffff;">XEQ</span> 03
-<span style="color: #00ffff;">XEQ</span> 04
-<span style="color: #00ffff;">GTO</span> 07
-<span style="color: #00ffff;">LBL</span> 69               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">27 x zoom out</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">07</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">69</span>               <span style="color: #ffa500;">@@@@ 27 x zoom out</span>
 2.0
 <span style="color: #00ffff;">ENTER</span>
 <span style="color: #00ffff;">ENTER</span>
-<span style="color: #00ffff;">XEQ</span> 03
-<span style="color: #00ffff;">XEQ</span> 04
-<span style="color: #00ffff;">GTO</span> 07
-<span style="color: #00ffff;">LBL</span> 68               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Autoscale Y</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">07</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">68</span>               <span style="color: #ffa500;">@@@@ Autoscale Y</span>
 1
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZBLFT"</span>
 <span style="color: #00ffff;">-</span>
@@ -2214,20 +2214,20 @@ R&#8595;
 <span style="color: #00ffff;">-</span>
 <span style="color: #00ffff;">ABS</span>
 <span style="color: #00ffff;">+</span>
-<span style="color: #00ffff;">X=0</span>?
-<span style="color: #00ffff;">GTO</span> 14
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Zoom box has been set</span>
+<span style="color: #00ffff;">X=0?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">14</span>
+<span style="color: #ffa500;">@@@@ Zoom box has been set</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZBLFT"</span>
-<span style="color: #00ffff;">XEQ</span> 47
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">47</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZBRGT"</span>
-<span style="color: #00ffff;">XEQ</span> 47
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">47</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"ULIM"</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"LLIM"</span>
 <span style="color: #00ffff;">SF</span> 83
-<span style="color: #00ffff;">GTO</span> 07
-<span style="color: #00ffff;">LBL</span> 14
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">No zoom box</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">07</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">14</span>
+<span style="color: #ffa500;">@@@@ No zoom box</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_YPMAX"</span>
 -5
 <span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"YWID"</span>
@@ -2239,33 +2239,33 @@ R&#8595;
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"YMIN"</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"YMAX"</span>
-<span style="color: #00ffff;">GTO</span> 07
-<span style="color: #00ffff;">LBL</span> 75               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">35 toggle dots/lines</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">07</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">75</span>               <span style="color: #ffa500;">@@@@ 35 toggle dots/lines</span>
 <span style="color: #00ffff;">FS?C</span> 03
-<span style="color: #00ffff;">GTO</span> 07
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">07</span>
 <span style="color: #00ffff;">SF</span> 03
-<span style="color: #00ffff;">GTO</span> 07
-<span style="color: #00ffff;">LBL</span> 65               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">37 + set speed fast</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">07</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">65</span>               <span style="color: #ffa500;">@@@@ 37 + set speed fast</span>
 10
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_ZSPD"</span>
-<span style="color: #00ffff;">GTO</span> 16
-<span style="color: #00ffff;">LBL</span> 66               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">32 - set speed slow</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">16</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">66</span>               <span style="color: #ffa500;">@@@@ 32 - set speed slow</span>
 1
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_ZSPD"</span>
-<span style="color: #00ffff;">GTO</span> 16
-<span style="color: #00ffff;">LBL</span> 61               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">LEFT REDO</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">16</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">61</span>               <span style="color: #ffa500;">@@@@ LEFT REDO</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZBRGT"</span>
 -2
 <span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"_ZSPD"</span>
 <span style="color: #00ffff;">+</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZSPD"</span>
 <span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"_ZBLFT"</span>
-<span style="color: #00ffff;">X&lt;Y</span>?
+<span style="color: #00ffff;">X&lt;Y?</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_ZBLFT"</span>
-<span style="color: #00ffff;">XEQ</span> 47
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">47</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"ZLLIM"</span>
-<span style="color: #00ffff;">GTO</span> 16
-<span style="color: #00ffff;">LBL</span> 62               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">RIGHT REDO</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">16</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">62</span>               <span style="color: #ffa500;">@@@@ RIGHT REDO</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZBLFT"</span>
 2
 <span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"_ZSPD"</span>
@@ -2273,131 +2273,131 @@ R&#8595;
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZSPD"</span>
 <span style="color: #00ffff;">+/-</span>
 <span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"_ZBRGT"</span>
-<span style="color: #00ffff;">X&gt;Y</span>?
+<span style="color: #00ffff;">X&gt;Y?</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_ZBRGT"</span>
-<span style="color: #00ffff;">XEQ</span> 47
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">47</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"ZULIM"</span>
-<span style="color: #00ffff;">GTO</span> 16
-<span style="color: #00ffff;">LBL</span> 63               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TOP REDO</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">16</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">63</span>               <span style="color: #ffa500;">@@@@ TOP REDO</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZBBOT"</span>
 -2
 <span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"_ZSPD"</span>
-<span style="color: #00ffff;">+</span>                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Upper_limit</span>
+<span style="color: #00ffff;">+</span>                    <span style="color: #ffa500;">@@@@ Upper_limit</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZSPD"</span>
-<span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"_ZBTOP"</span>         <span style="color: #ff7f24;">@@@ New_ZBTOP Lower_limit</span>
-<span style="color: #00ffff;">X&lt;Y</span>?
+<span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"_ZBTOP"</span>         <span style="color: #ffa500;">@@@@ New_ZBTOP Lower_limit</span>
+<span style="color: #00ffff;">X&lt;Y?</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_ZBTOP"</span>
-<span style="color: #00ffff;">GTO</span> 16
-<span style="color: #00ffff;">LBL</span> 64               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BOT REDO</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">16</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">64</span>               <span style="color: #ffa500;">@@@@ BOT REDO</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZBTOP"</span>
 2
 <span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"_ZSPD"</span>
-<span style="color: #00ffff;">+</span>                    <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Lower_limit</span>
+<span style="color: #00ffff;">+</span>                    <span style="color: #ffa500;">@@@@ Lower_limit</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZSPD"</span>
 <span style="color: #00ffff;">+/-</span>
-<span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"_ZBBOT"</span>         <span style="color: #ff7f24;">@@@ New_ZBBOT Lower_limit</span>
-<span style="color: #00ffff;">X&gt;Y</span>?
+<span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"_ZBBOT"</span>         <span style="color: #ffa500;">@@@@ New_ZBBOT Lower_limit</span>
+<span style="color: #00ffff;">X&gt;Y?</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_ZBBOT"</span>
-<span style="color: #00ffff;">GTO</span> 16
-<span style="color: #00ffff;">LBL</span> 73
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">16</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">73</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZBTOP"</span>
-<span style="color: #00ffff;">XEQ</span> 57
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">57</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZBBOT"</span>
-<span style="color: #00ffff;">XEQ</span> 57
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">57</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"YMIN"</span>
-R&#8595;
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"YMAX"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZBRGT"</span>
-<span style="color: #00ffff;">XEQ</span> 47
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">47</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_ZBLFT"</span>
-<span style="color: #00ffff;">XEQ</span> 47
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">47</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"LLIM"</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"ULIM"</span>
-<span style="color: #00ffff;">GTO</span> 07
-<span style="color: #00ffff;">LBL</span> 60
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">07</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">60</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 40  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Draw Line</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">40</span>  <span style="color: #ffa500;">@@@@ Draw Line</span>
 <span style="color: #00ffff;">FUNC</span> 00
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">xi newy lasty</span>
+<span style="color: #ffa500;">@@@@ xi newy lasty</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_XNUE"</span>
-R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">yn yo</span>
-<span style="color: #00ffff;">RCL</span> ST Y        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">yo yn yo</span>
-<span style="color: #00ffff;">RCL- ST</span> Y       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">yo-yn yn yo</span>
-<span style="color: #00ffff;">ABS</span>             <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">|yo-yn| yn yo</span>
+<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ yn yo</span>
+<span style="color: #00ffff;">RCL ST</span> Y        <span style="color: #ffa500;">@@@@ yo yn yo</span>
+<span style="color: #00ffff;">RCL- ST</span> Y       <span style="color: #ffa500;">@@@@ yo-yn yn yo</span>
+<span style="color: #00ffff;">ABS</span>             <span style="color: #ffa500;">@@@@ |yo-yn| yn yo</span>
 3
-<span style="color: #00ffff;">X&gt;Y</span>?
-<span style="color: #00ffff;">RTN</span> <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Pts too close, no line to draw</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">We are drawing a line!</span>
-R&#8595;
-R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">yn yo</span>
+<span style="color: #00ffff;">X&gt;Y?</span>
+<span style="color: #00ffff;">RTN</span> <span style="color: #ffa500;">@@@@ Pts too close, no line to draw</span>
+<span style="color: #ffa500;">@@@@ We are drawing a line!</span>
+<span style="color: #00ffff;">R&#8595;</span>
+<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ yn yo</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_YNUE"</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_YOLD"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">yo yn</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_YOLD"</span>     <span style="color: #ffa500;">@@@@ yo yn</span>
 <span style="color: #00ffff;">+</span>
 2
 <span style="color: #00ffff;">&#247;</span>
 <span style="color: #00ffff;">IP</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_YCTR"</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CTR -&gt; OLD Y</span>
+<span style="color: #ffa500;">@@@@ CTR -&gt; OLD Y</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_XNUE"</span>
 1
 <span style="color: #00ffff;">-</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_YOLD"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_YCTR"</span>
-<span style="color: #00ffff;">XEQ</span> 70
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CTR -&gt; NEW Y</span>
-R&#8595;
-R&#8595;
-R&#8595;
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">70</span>
+<span style="color: #ffa500;">@@@@ CTR -&gt; NEW Y</span>
+<span style="color: #00ffff;">R&#8595;</span>
+<span style="color: #00ffff;">R&#8595;</span>
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_XNUE"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_YNUE"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_YCTR"</span>
-<span style="color: #00ffff;">XEQ</span> 70
-R&#8595;
-R&#8595;
-R&#8595;
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">70</span>
+<span style="color: #00ffff;">R&#8595;</span>
+<span style="color: #00ffff;">R&#8595;</span>
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 70          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Draw Fat, Vertical Line Segment   Ystart Yend X .  Yend already has a fat point drawn.</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">70</span>          <span style="color: #ffa500;">@@@@ Draw Fat, Vertical Line Segment   Ystart Yend X .  Yend already has a fat point drawn.</span>
 <span style="color: #00ffff;">FUNC</span> 00
-<span style="color: #00ffff;">X&lt;Y</span>?
-<span style="color: #00ffff;">GTO</span> 71
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Line going up</span>
+<span style="color: #00ffff;">X&lt;Y?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">71</span>
+<span style="color: #ffa500;">@@@@ Line going up</span>
 1
 <span style="color: #00ffff;">STO- ST</span> T
-R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Ystart Yend X-1</span>
+<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ Ystart Yend X-1</span>
 1
 <span style="color: #00ffff;">STO- ST</span> Z
-R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Ystart Yend-1 X-1</span>
+<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ Ystart Yend-1 X-1</span>
 3
-<span style="color: #00ffff;">-</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Ystart-3 Yend+1 X-1</span>
-<span style="color: #00ffff;">LBL</span> 72          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">ycur Yend-1 X-1</span>
-<span style="color: #00ffff;">RCL</span> ST Z        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X-1 ycur Yend-1 X-1</span>
+<span style="color: #00ffff;">-</span>               <span style="color: #ffa500;">@@@@ Ystart-3 Yend+1 X-1</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">72</span>          <span style="color: #ffa500;">@@@@ ycur Yend-1 X-1</span>
+<span style="color: #00ffff;">RCL ST</span> Z        <span style="color: #ffa500;">@@@@ X-1 ycur Yend-1 X-1</span>
 <span style="color: #00ffff;">AGRAPH</span>
-R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">ycur Yend-1 X-1</span>
+<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ ycur Yend-1 X-1</span>
 3
-<span style="color: #00ffff;">-</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">ycur(updated) Yend-1 X-1</span>
-<span style="color: #00ffff;">X&gt;Y</span>?
-<span style="color: #00ffff;">GTO</span> 72
+<span style="color: #00ffff;">-</span>               <span style="color: #ffa500;">@@@@ ycur(updated) Yend-1 X-1</span>
+<span style="color: #00ffff;">X&gt;Y?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">72</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 71
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Line going down</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">71</span>
+<span style="color: #ffa500;">@@@@ Line going down</span>
 1
 <span style="color: #00ffff;">STO- ST</span> T
-R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Ystart Yend X-1</span>
+<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ Ystart Yend X-1</span>
 1
 <span style="color: #00ffff;">STO- ST</span> Z
-R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Ystart Yend-1 X-1</span>
-<span style="color: #00ffff;">LBL</span> 18          <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Ycur Yend-1 X-1</span>
-<span style="color: #00ffff;">RCL</span> ST Z        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X-1 Ycur Yend-1 X-1</span>
+<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ Ystart Yend-1 X-1</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">18</span>          <span style="color: #ffa500;">@@@@ Ycur Yend-1 X-1</span>
+<span style="color: #00ffff;">RCL ST</span> Z        <span style="color: #ffa500;">@@@@ X-1 Ycur Yend-1 X-1</span>
 <span style="color: #00ffff;">AGRAPH</span>
-R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">yc yn+1 xn-1</span>
+<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ yc yn+1 xn-1</span>
 3
-<span style="color: #00ffff;">+</span>               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">yc yn+1 xn-1</span>
-<span style="color: #00ffff;">X&lt;Y</span>?
-<span style="color: #00ffff;">GTO</span> 18
+<span style="color: #00ffff;">+</span>               <span style="color: #ffa500;">@@@@ yc yn+1 xn-1</span>
+<span style="color: #00ffff;">X&lt;Y?</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">18</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 51               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Draw BIG Pix  (assumes Alpha is set)</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">51</span>               <span style="color: #ffa500;">@@@@ Draw BIG Pix  (assumes Alpha is set)</span>
 <span style="color: #00ffff;">FUNC</span> 00
 1
 <span style="color: #00ffff;">-</span>
@@ -2407,108 +2407,108 @@ R&#8595;              <span style="color: #ffa500;">@@@@ </span><span style="col
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">AGRAPH</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 58               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">HLINE</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">58</span>               <span style="color: #ffa500;">@@@@ HLINE</span>
 <span style="color: #00ffff;">FUNC</span> 00
-<span style="color: #00ffff;">XEQ</span> 55
-<span style="color: #00ffff;">GTO</span> 27
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">55</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">27</span>
 <span style="color: #00ffff;">+/-</span>
 1
 <span style="color: #00ffff;">PIXEL</span>
-<span style="color: #00ffff;">LBL</span> 27
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">27</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 48               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">VLINE</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">48</span>               <span style="color: #ffa500;">@@@@ VLINE</span>
 <span style="color: #00ffff;">FUNC</span> 00
-<span style="color: #00ffff;">XEQ</span> 45
-<span style="color: #00ffff;">GTO</span> 28
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">45</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">28</span>
 <span style="color: #00ffff;">+/-</span>
 1
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">PIXEL</span>
-<span style="color: #00ffff;">LBL</span> 28
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">28</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 45               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">X Out Of Range</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">45</span>               <span style="color: #ffa500;">@@@@ X Out Of Range</span>
 <span style="color: #00ffff;">FUNC</span> 00
-<span style="color: #00ffff;">X&#8804;0</span>?
+<span style="color: #00ffff;">X&#8804;0?</span>
 <span style="color: #00ffff;">RTNYES</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ResX"</span>
-<span style="color: #00ffff;">X&lt;Y</span>?
+<span style="color: #00ffff;">X&lt;Y?</span>
 <span style="color: #00ffff;">RTNYES</span>
 <span style="color: #00ffff;">RTNNO</span>
-<span style="color: #00ffff;">LBL</span> 55               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Y Out Of Range</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">55</span>               <span style="color: #ffa500;">@@@@ Y Out Of Range</span>
 <span style="color: #00ffff;">FUNC</span> 00
-<span style="color: #00ffff;">X&#8804;0</span>?
+<span style="color: #00ffff;">X&#8804;0?</span>
 <span style="color: #00ffff;">RTNYES</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ResY"</span>
-<span style="color: #00ffff;">X&lt;Y</span>?
+<span style="color: #00ffff;">X&lt;Y?</span>
 <span style="color: #00ffff;">RTNYES</span>
 <span style="color: #00ffff;">RTNNO</span>
-<span style="color: #00ffff;">LBL</span> 46               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">XR-&gt;XI</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">46</span>               <span style="color: #ffa500;">@@@@ XR-&gt;XI</span>
 <span style="color: #00ffff;">FUNC</span> 11
 <span style="color: #00ffff;">RCL-</span> <span style="color: #fa8072;">"LLIM"</span>
 <span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"XWID"</span>
 1
 <span style="color: #00ffff;">+</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 47               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">XI-&gt;XR</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">47</span>               <span style="color: #ffa500;">@@@@ XI-&gt;XR</span>
 <span style="color: #00ffff;">FUNC</span> 11
 1
 <span style="color: #00ffff;">-</span>
 <span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"XWID"</span>
 <span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"LLIM"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 56               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">YR-&gt;YI</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">56</span>               <span style="color: #ffa500;">@@@@ YR-&gt;YI</span>
 <span style="color: #00ffff;">FUNC</span> 11
 <span style="color: #00ffff;">RCL-</span> <span style="color: #fa8072;">"YMAX"</span>
 <span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"YWID"</span>
 1
 <span style="color: #00ffff;">+</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 57               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">YI-&gt;YR</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">57</span>               <span style="color: #ffa500;">@@@@ YI-&gt;YR</span>
 <span style="color: #00ffff;">FUNC</span> 11
 1
 <span style="color: #00ffff;">-</span>
 <span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"YWID"</span>
 <span style="color: #00ffff;">RCL+</span> <span style="color: #fa8072;">"YMAX"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 39               <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Swap rng &amp; box</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">39</span>               <span style="color: #ffa500;">@@@@ Swap rng &amp; box</span>
 <span style="color: #00ffff;">FUNC</span> 00
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ZLLIM"</span>
 <span style="color: #00ffff;">FC?C</span> 25
-<span style="color: #00ffff;">GTO</span> 38
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">38</span>
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ZULIM"</span>
 <span style="color: #00ffff;">FC?C</span> 25
-<span style="color: #00ffff;">GTO</span> 38
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">38</span>
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"LLIM"</span>
 <span style="color: #00ffff;">FC?C</span> 25
-<span style="color: #00ffff;">GTO</span> 38
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">38</span>
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ULIM"</span>
 <span style="color: #00ffff;">FC?C</span> 25
-<span style="color: #00ffff;">GTO</span> 38
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">38</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"ZULIM"</span>
-R&#8595;
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"ZLLIM"</span>
-R&#8595;
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"ULIM"</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"LLIM"</span>
 <span style="color: #fa8072;">"XMIN: "</span>
-<span style="color: #00ffff;">ARCL</span> ST X
-R&#8595;
-&#9500;<span style="color: #fa8072;">"[LF]XMAX: "</span>
-<span style="color: #00ffff;">ARCL</span> ST X
-R&#8595;
+<span style="color: #00ffff;">ARCL ST</span> X
+<span style="color: #00ffff;">R&#8595;</span>
+<span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">"[LF]XMAX: "</span>
+<span style="color: #00ffff;">ARCL ST</span> X
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 38
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">38</span>
 <span style="color: #fa8072;">"ERR: Range or "</span>
-<span style="color: #fa8072;">"&#9500; unset"</span>
+<span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">" unset"</span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 74   <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Set any unset global variables to defaults</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">74</span>   <span style="color: #ffa500;">@@@@ Set any unset global variables to defaults</span>
 10
 <span style="color: #00ffff;">SF</span> 25
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"ULIM"</span>
@@ -2540,15 +2540,15 @@ R&#8595;
 <span style="color: #00ffff;">FC?C</span> 25
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"STEP"</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">END</span>
+END
 </pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orge120311" class="outline-2">
-<h2 id="orge120311"><span class="section-number-2">6.</span> Test Functions</h2>
+<div id="outline-container-org318acf7" class="outline-2">
+<h2 id="org318acf7"><span class="section-number-2">6.</span> Test Functions</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 A few <code>MVAR</code> functions to test with
@@ -2557,8 +2557,8 @@ A few <code>MVAR</code> functions to test with
 <div class="org-src-container">
 <pre class="src src-hp42s">
 <span id="coderef-TFS" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TFS)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: SIGN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TFS"</span>
+<span style="color: #ffa500;">@@@@ DSC: SIGN</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"TFS"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
 1
@@ -2570,8 +2570,8 @@ A few <code>MVAR</code> functions to test with
 <span style="color: #00ffff;">END</span>
 
 <span id="coderef-TFE" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TFE)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Exponential</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TFE"</span>
+<span style="color: #ffa500;">@@@@ DSC: Exponential</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"TFE"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
 <span style="color: #00ffff;">E&#8593;X</span>
@@ -2579,8 +2579,8 @@ A few <code>MVAR</code> functions to test with
 <span style="color: #00ffff;">END</span>
 
 <span id="coderef-TFL" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TFL)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Linear M*X+B</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TFL"</span>
+<span style="color: #ffa500;">@@@@ DSC: Linear M*X+B</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"TFL"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"M"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"B"</span>
@@ -2591,8 +2591,8 @@ A few <code>MVAR</code> functions to test with
 <span style="color: #00ffff;">END</span>
 
 <span id="coderef-TFQ" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TFQ)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: A quadratic with zeros at 0 and 1</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TFQ"</span>
+<span style="color: #ffa500;">@@@@ DSC: A quadratic with zeros at 0 and 1</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"TFQ"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
 1
@@ -2603,8 +2603,8 @@ A few <code>MVAR</code> functions to test with
 <span style="color: #00ffff;">END</span>
 
 <span id="coderef-TFC" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TFC)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: A cubic with zeros at -1, 0.9, and 1</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TFC"</span>
+<span style="color: #ffa500;">@@@@ DSC: A cubic with zeros at -1, 0.9, and 1</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"TFC"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
 1
@@ -2621,8 +2621,8 @@ A few <code>MVAR</code> functions to test with
 <span style="color: #00ffff;">END</span>
 
 <span id="coderef-TFO" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TFO)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: A function that with increasing frequency approaching zero</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TFO"</span>
+<span style="color: #ffa500;">@@@@ DSC: A function that with increasing frequency approaching zero</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"TFO"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
 <span style="color: #00ffff;">ABS</span>
@@ -2634,9 +2634,9 @@ A few <code>MVAR</code> functions to test with
 <span style="color: #00ffff;">END</span>
 
 <span id="coderef-TFI" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TFI)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: A function that has many undefined regions</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Good test to make sure we don't connect across known discontinuities</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TFI"</span>
+<span style="color: #ffa500;">@@@@ DSC: A function that has many undefined regions</span>
+<span style="color: #ffa500;">@@@@ FAQ: Good test to make sure we don't connect across known discontinuities</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"TFI"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
 2
@@ -2649,8 +2649,8 @@ A few <code>MVAR</code> functions to test with
 <span style="color: #00ffff;">END</span>
 
 <span id="coderef-TFM" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TFM)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: A function that has many step discontinuities</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TFM"</span>
+<span style="color: #ffa500;">@@@@ DSC: A function that has many step discontinuities</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"TFM"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"X"</span>
 2
@@ -2664,9 +2664,9 @@ A few <code>MVAR</code> functions to test with
 <span style="color: #00ffff;">END</span>
 
 <span id="coderef-TFF" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TFF)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: A function flips between 1 and -1 each call</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">FAQ: Worst case performance for connecting dots</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TFF"</span>
+<span style="color: #ffa500;">@@@@ DSC: A function flips between 1 and -1 each call</span>
+<span style="color: #ffa500;">@@@@ FAQ: Worst case performance for connecting dots</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"TFF"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
 5
 <span style="color: #00ffff;">FS?C</span> 85
@@ -2674,14 +2674,14 @@ A few <code>MVAR</code> functions to test with
 <span style="color: #00ffff;">SF</span> 85
 -5
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">END</span>
+END
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgdc09545" class="outline-2">
-<h2 id="orgdc09545"><span class="section-number-2">7.</span> EOF</h2>
+<div id="outline-container-org2db1b53" class="outline-2">
+<h2 id="org2db1b53"><span class="section-number-2">7.</span> EOF</h2>
 <div class="outline-text-2" id="text-7">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -2692,7 +2692,7 @@ A few <code>MVAR</code> functions to test with
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-10-20 Wed 21:23 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-10-27 Wed 19:07 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.6)
 </div>
 </body>
 </html>

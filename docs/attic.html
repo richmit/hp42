@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-10-20 Wed 21:22 -->
+<!-- 2021-10-27 Wed 18:49 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=1024, initial-scale=1" />
 <title>free42 Code Attic</title>
@@ -241,22 +241,22 @@ Copyright 2021 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org4009826">1. Metadata</a></li>
+<li><a href="#org03e18c5">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
-<li><a href="#org5b55125">3. Tiny Number Printing</a>
+<li><a href="#org1b40a82">3. Tiny Number Printing</a>
 <ul>
-<li><a href="#orgeac5189">3.1. <code>TNPR</code>: Tiny number printer</a></li>
-<li><a href="#orgec6247f">3.2. <code>PATN</code>: Test <code>TNPR</code> by printing all characters</a></li>
+<li><a href="#org642522a">3.1. <code>TNPR</code>: Tiny number printer</a></li>
+<li><a href="#org769c9e5">3.2. <code>PATN</code>: Test <code>TNPR</code> by printing all characters</a></li>
 </ul>
 </li>
-<li><a href="#org5da6954">4. <code>SGN</code>: Sign function</a></li>
-<li><a href="#org8e09303">5. EOF</a></li>
+<li><a href="#org85007c3">4. <code>SGN</code>: Sign function</a></li>
+<li><a href="#org6f7697f">5. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org4009826" class="outline-2">
-<h2 id="org4009826"><span class="section-number-2">1.</span> Metadata</h2>
+<div id="outline-container-org03e18c5" class="outline-2">
+<h2 id="org03e18c5"><span class="section-number-2">1.</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/attic.html">https://richmit.github.io/hp42/attic.html</a>
@@ -281,258 +281,258 @@ This is where old code goes&#x2026; ;)
 </div>
 </div>
 
-<div id="outline-container-org5b55125" class="outline-2">
-<h2 id="org5b55125"><span class="section-number-2">3.</span> Tiny Number Printing</h2>
+<div id="outline-container-org1b40a82" class="outline-2">
+<h2 id="org1b40a82"><span class="section-number-2">3.</span> Tiny Number Printing</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgeac5189" class="outline-3">
-<h3 id="orgeac5189"><span class="section-number-3">3.1.</span> <code>TNPR</code>: Tiny number printer</h3>
+<div id="outline-container-org642522a" class="outline-3">
+<h3 id="org642522a"><span class="section-number-3">3.1.</span> <code>TNPR</code>: Tiny number printer</h3>
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-TNPR" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TNPR)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Tiny Number PRint</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  Z: Y coordinate for upper left point of character -- Top of screen is 1</span>
-<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">Y: X coordinate for upper left point of character -- Left of screen is 1</span>
-<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">X: Character number -- integer in [0, 28]</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: No return</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-24</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">BUG: Characters can be *VERY* tiny in high resolution modes on DM42</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Designed to print numbers:</span>
-<span style="color: #ffa500;">@@@@    </span><span style="color: #ff7f24;">101010b Binary      | 1234567 Decimal    | 123e+45 Float | 123/456 Rational | 123 i56 Complex</span>
-<span style="color: #ffa500;">@@@@    </span><span style="color: #ff7f24;">1A8F10h Hexadecimal | 123,456 Decimal    | 12&#215;10^3 Float | 123456&#176; Degrees  | 123 &#8737;56 Complex</span>
-<span style="color: #ffa500;">@@@@    </span><span style="color: #ff7f24;">154823o Octal       | -123456 Signed Dec | 1.34567 Float | </span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Characters can be underlined</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Characters are 3x5 pixels in size.  Underlined characters are 3x7.</span>
-<span style="color: #ffa500;">@@@@   </span><span style="color: #ff7f24;">- Stock HP-42s screen: 32 characters across.  Two full lines on the screen.</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Non-Underlined Character numbers:</span>
-<span style="color: #ffa500;">@@@@     </span><span style="color: #ff7f24;">00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21  22 23 24 25 26  27  28  29 30  31</span>
-<span style="color: #ffa500;">@@@@      </span><span style="color: #ff7f24;">0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F  e  -  +  &#215;  /  ^ UNK  ,  .  &#176;  b   o   h   i  &#8737; SPC</span>
-<span style="color: #ffa500;">@@@@     </span><span style="color: #ff7f24;">48 49 50 51 52 53 54 55 56 57 65 66 67 68 69 70 16 45 43 01 00 94  -- 23 46 19 98 111 104 105 23  32</span>
-<span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">C   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y                    Y  Y  Y              Y  Y                 Y  Y   Y</span>
-<span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">R   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y                    Y  Y  Y              Y  Y               </span>
-<span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">B   Y  Y                                               Y  Y                               </span>
-<span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">O   Y  Y  Y  Y  Y  Y  Y  Y                             Y  Y                               </span>
-<span style="color: #ffa500;">@@@@  </span><span style="color: #ff7f24;">H   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y     Y  Y</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">Add 40 to the above character number for the underlined version</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"TNPR"</span>
-<span style="color: #00ffff;">FUNC</span> 30      <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>        <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0</span>
+<span style="color: #ffa500;">@@@@ DSC: Tiny Number PRint</span>
+<span style="color: #ffa500;">@@@@ IN:  Z: Y coordinate for upper left point of character -- Top of screen is 1</span>
+<span style="color: #ffa500;">@@@@      Y: X coordinate for upper left point of character -- Left of screen is 1</span>
+<span style="color: #ffa500;">@@@@      X: Character number -- integer in [0, 28]</span>
+<span style="color: #ffa500;">@@@@ OUT: No return</span>
+<span style="color: #ffa500;">@@@@ UPD: 2021-02-24</span>
+<span style="color: #ffa500;">@@@@ BUG: Characters can be *VERY* tiny in high resolution modes on DM42</span>
+<span style="color: #ffa500;">@@@@ Designed to print numbers:</span>
+<span style="color: #ffa500;">@@@@    101010b Binary      | 1234567 Decimal    | 123e+45 Float | 123/456 Rational | 123 i56 Complex</span>
+<span style="color: #ffa500;">@@@@    1A8F10h Hexadecimal | 123,456 Decimal    | 12&#215;10^3 Float | 123456&#176; Degrees  | 123 &#8737;56 Complex</span>
+<span style="color: #ffa500;">@@@@    154823o Octal       | -123456 Signed Dec | 1.34567 Float | </span>
+<span style="color: #ffa500;">@@@@ Characters can be underlined</span>
+<span style="color: #ffa500;">@@@@ Characters are 3x5 pixels in size.  Underlined characters are 3x7.</span>
+<span style="color: #ffa500;">@@@@   - Stock HP-42s screen: 32 characters across.  Two full lines on the screen.</span>
+<span style="color: #ffa500;">@@@@ Non-Underlined Character numbers:</span>
+<span style="color: #ffa500;">@@@@     00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21  22 23 24 25 26  27  28  29 30  31</span>
+<span style="color: #ffa500;">@@@@      0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F  e  -  +  &#215;  /  ^ UNK  ,  .  &#176;  b   o   h   i  &#8737; SPC</span>
+<span style="color: #ffa500;">@@@@     48 49 50 51 52 53 54 55 56 57 65 66 67 68 69 70 16 45 43 01 00 94  -- 23 46 19 98 111 104 105 23  32</span>
+<span style="color: #ffa500;">@@@@  C   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y                    Y  Y  Y              Y  Y                 Y  Y   Y</span>
+<span style="color: #ffa500;">@@@@  R   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y                    Y  Y  Y              Y  Y               </span>
+<span style="color: #ffa500;">@@@@  B   Y  Y                                               Y  Y                               </span>
+<span style="color: #ffa500;">@@@@  O   Y  Y  Y  Y  Y  Y  Y  Y                             Y  Y                               </span>
+<span style="color: #ffa500;">@@@@  H   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y     Y  Y</span>
+<span style="color: #ffa500;">@@@@ Add 40 to the above character number for the underlined version</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"TNPR"</span>
+<span style="color: #00ffff;">FUNC</span> 30      <span style="color: #6495ed;">@@## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>        <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">IP</span>
 <span style="color: #00ffff;">XEQ IND ST</span> X
-R&#8595;
+<span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">AGRAPH</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 00       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 0</span>
-<span style="color: #fa8072;">"&#8226;&#956;&#8226;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11111 #b10001 #b11111</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">00</span>       <span style="color: #ffa500;">@@@@ CHAR: 0</span>
+<span style="color: #fa8072;">"&#8226;&#956;&#8226;"</span>        <span style="color: #ffa500;">@@@@ #b11111 #b10001 #b11111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 01       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 1</span>
-<span style="color: #fa8072;">"&#163;&#8226;&#8592;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b10010 #b11111 #b10000</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">01</span>       <span style="color: #ffa500;">@@@@ CHAR: 1</span>
+<span style="color: #fa8072;">"&#163;&#8226;&#8592;"</span>        <span style="color: #ffa500;">@@@@ #b10010 #b11111 #b10000</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 02       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 2</span>
-<span style="color: #fa8072;">"&#220;&#209;&#8737;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11101 #b10101 #b10111</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">02</span>       <span style="color: #ffa500;">@@@@ CHAR: 2</span>
+<span style="color: #fa8072;">"&#220;&#209;&#8737;"</span>        <span style="color: #ffa500;">@@@@ #b11101 #b10101 #b10111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 03       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 3</span>
-<span style="color: #fa8072;">"&#956;&#209;&#8226;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b10001 #b10101 #b11111</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">03</span>       <span style="color: #ffa500;">@@@@ CHAR: 3</span>
+<span style="color: #fa8072;">"&#956;&#209;&#8226;"</span>        <span style="color: #ffa500;">@@@@ #b10001 #b10101 #b11111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 04       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 4</span>
-<span style="color: #fa8072;">"&#960;&#9618;&#8226;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b00111 #b00100 #b11111</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">04</span>       <span style="color: #ffa500;">@@@@ CHAR: 4</span>
+<span style="color: #fa8072;">"&#960;&#9618;&#8226;"</span>        <span style="color: #ffa500;">@@@@ #b00111 #b00100 #b11111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 05       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 5</span>
-<span style="color: #fa8072;">"&#8737;&#209;&#220;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b10111 #b10101 #b11101</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">05</span>       <span style="color: #ffa500;">@@@@ CHAR: 5</span>
+<span style="color: #fa8072;">"&#8737;&#209;&#220;"</span>        <span style="color: #ffa500;">@@@@ #b10111 #b10101 #b11101</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 06       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 6</span>
-<span style="color: #fa8072;">"&#8226;&#209;&#220;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11111 #b10101 #b11101</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">06</span>       <span style="color: #ffa500;">@@@@ CHAR: 6</span>
+<span style="color: #fa8072;">"&#8226;&#209;&#220;"</span>        <span style="color: #ffa500;">@@@@ #b11111 #b10101 #b11101</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 07       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 7</span>
-<span style="color: #fa8072;">"&#215;&#215;&#8226;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b00001 #b00001 #b11111</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">07</span>       <span style="color: #ffa500;">@@@@ CHAR: 7</span>
+<span style="color: #fa8072;">"&#215;&#215;&#8226;"</span>        <span style="color: #ffa500;">@@@@ #b00001 #b00001 #b11111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 08       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 8</span>
-<span style="color: #fa8072;">"&#8226;&#209;&#8226;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11111 #b10101 #b11111</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">08</span>       <span style="color: #ffa500;">@@@@ CHAR: 8</span>
+<span style="color: #fa8072;">"&#8226;&#209;&#8226;"</span>        <span style="color: #ffa500;">@@@@ #b11111 #b10101 #b11111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 09       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 9</span>
-<span style="color: #fa8072;">"&#8737;&#209;&#8226;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b00111 #b00101 #b11111</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">09</span>       <span style="color: #ffa500;">@@@@ CHAR: 9</span>
+<span style="color: #fa8072;">"&#8737;&#209;&#8226;"</span>        <span style="color: #ffa500;">@@@@ #b00111 #b00101 #b11111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 10       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: A</span>
-<span style="color: #fa8072;">"&#8226;&#931;&#8226;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11111 #b00101 #b11111</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">10</span>       <span style="color: #ffa500;">@@@@ CHAR: A</span>
+<span style="color: #fa8072;">"&#8226;&#931;&#8226;"</span>        <span style="color: #ffa500;">@@@@ #b11111 #b00101 #b11111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 11       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: B</span>
-<span style="color: #fa8072;">"&#8226;&#209;[LF]"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11111 #b10101 #b01010</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">11</span>       <span style="color: #ffa500;">@@@@ CHAR: B</span>
+<span style="color: #fa8072;">"&#8226;&#209;[LF]"</span>     <span style="color: #ffa500;">@@@@ #b11111 #b10101 #b01010</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 12       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: C</span>
-<span style="color: #fa8072;">"&#8595;&#956;&#956;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b01110 #b10001 #b10001</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">12</span>       <span style="color: #ffa500;">@@@@ CHAR: C</span>
+<span style="color: #fa8072;">"&#8595;&#956;&#956;"</span>        <span style="color: #ffa500;">@@@@ #b01110 #b10001 #b10001</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 13       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: D</span>
-<span style="color: #fa8072;">"&#8226;&#956;&#8595;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11111 #b10001 #b01110</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">13</span>       <span style="color: #ffa500;">@@@@ CHAR: D</span>
+<span style="color: #fa8072;">"&#8226;&#956;&#8595;"</span>        <span style="color: #ffa500;">@@@@ #b11111 #b10001 #b01110</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 14       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: E</span>
-<span style="color: #fa8072;">"&#8226;&#209;&#956;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11111 #b10101 #b10001</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">14</span>       <span style="color: #ffa500;">@@@@ CHAR: E</span>
+<span style="color: #fa8072;">"&#8226;&#209;&#956;"</span>        <span style="color: #ffa500;">@@@@ #b11111 #b10101 #b10001</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 15       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: F</span>
-<span style="color: #fa8072;">"&#8226;&#931;&#215;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11111 #b00101 #b00001</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">15</span>       <span style="color: #ffa500;">@@@@ CHAR: F</span>
+<span style="color: #fa8072;">"&#8226;&#931;&#215;"</span>        <span style="color: #ffa500;">@@@@ #b11111 #b00101 #b00001</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 16       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: e</span>
-<span style="color: #fa8072;">"[LF]&#209;&#209;"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b01010 #b10101 #b10101</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">16</span>       <span style="color: #ffa500;">@@@@ CHAR: e</span>
+<span style="color: #fa8072;">"[LF]&#209;&#209;"</span>     <span style="color: #ffa500;">@@@@ #b01010 #b10101 #b10101</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 17       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: -</span>
-<span style="color: #fa8072;">"&#9618;&#9618;&#9618;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b00100 #b00100 #b00100</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">17</span>       <span style="color: #ffa500;">@@@@ CHAR: -</span>
+<span style="color: #fa8072;">"&#9618;&#9618;&#9618;"</span>        <span style="color: #ffa500;">@@@@ #b00100 #b00100 #b00100</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 18       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: +</span>
-<span style="color: #fa8072;">"&#9618;&#8595;&#9618;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b01110 #b00100 #b01110</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">18</span>       <span style="color: #ffa500;">@@@@ CHAR: +</span>
+<span style="color: #fa8072;">"&#9618;&#8595;&#9618;"</span>        <span style="color: #ffa500;">@@@@ #b01110 #b00100 #b01110</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 19       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: &#215;</span>
-<span style="color: #fa8072;">"[LF]&#9618;[LF]"</span>  <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b01010 #b00100 #b01010</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">19</span>       <span style="color: #ffa500;">@@@@ CHAR: &#215;</span>
+<span style="color: #fa8072;">"[LF]&#9618;[LF]"</span>  <span style="color: #ffa500;">@@@@ #b01010 #b00100 #b01010</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 20       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: /</span>
-<span style="color: #fa8072;">"&#7431;&#9618;&#8747;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11000 #b00100 #b00011</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">20</span>       <span style="color: #ffa500;">@@@@ CHAR: /</span>
+<span style="color: #fa8072;">"&#7431;&#9618;&#8747;"</span>        <span style="color: #ffa500;">@@@@ #b11000 #b00100 #b00011</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 21       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: ^</span>
-<span style="color: #fa8072;">"&#8730;&#215;&#8730;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b00010 #b000010 #b00010</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">21</span>       <span style="color: #ffa500;">@@@@ CHAR: ^</span>
+<span style="color: #fa8072;">"&#8730;&#215;&#8730;"</span>        <span style="color: #ffa500;">@@@@ #b00010 #b000010 #b00010</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 22       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: :</span>
-<span style="color: #fa8072;">"&#247;[LF]&#247;"</span>     <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b00000 #b01010 #b00000</span>
-<span style="color: #fa8072;">"&#8226;&#8226;&#8226;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11111 #b11111 #b11111</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">22</span>       <span style="color: #ffa500;">@@@@ CHAR: :</span>
+<span style="color: #fa8072;">"&#247;[LF]&#247;"</span>     <span style="color: #ffa500;">@@@@ #b00000 #b01010 #b00000</span>
+<span style="color: #fa8072;">"&#8226;&#8226;&#8226;"</span>        <span style="color: #ffa500;">@@@@ #b11111 #b11111 #b11111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 23       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: ,</span>
-<span style="color: #fa8072;">"&#8592;&#191;&#247;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b10000 #b01000 #b00000</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">23</span>       <span style="color: #ffa500;">@@@@ CHAR: ,</span>
+<span style="color: #fa8072;">"&#8592;&#191;&#247;"</span>        <span style="color: #ffa500;">@@@@ #b10000 #b01000 #b00000</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 24       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: .</span>
-<span style="color: #fa8072;">"&#247;&#8592;&#247;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b00000 #b10000 #b00000</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">24</span>       <span style="color: #ffa500;">@@@@ CHAR: .</span>
+<span style="color: #fa8072;">"&#247;&#8592;&#247;"</span>        <span style="color: #ffa500;">@@@@ #b00000 #b10000 #b00000</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 25       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">degrees</span>
-<span style="color: #fa8072;">"&#8730;&#931;&#8730;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b00010 #b00101 #b00010</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">25</span>       <span style="color: #ffa500;">@@@@ degrees</span>
+<span style="color: #fa8072;">"&#8730;&#931;&#8730;"</span>        <span style="color: #ffa500;">@@@@ #b00010 #b00101 #b00010</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 26       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: b</span>
-<span style="color: #fa8072;">"&#8226;&#197;&#191;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11111 #b10100 #b01000</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">26</span>       <span style="color: #ffa500;">@@@@ CHAR: b</span>
+<span style="color: #fa8072;">"&#8226;&#197;&#191;"</span>        <span style="color: #ffa500;">@@@@ #b11111 #b10100 #b01000</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 27       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: o</span>
-<span style="color: #fa8072;">"&#8800;&#163;&#8800;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b01100 #b10010 #b01100</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">27</span>       <span style="color: #ffa500;">@@@@ CHAR: o</span>
+<span style="color: #fa8072;">"&#8800;&#163;&#8800;"</span>        <span style="color: #ffa500;">@@@@ #b01100 #b10010 #b01100</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 28       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: h</span>
-<span style="color: #fa8072;">"&#8226;&#9618;&#7431;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11111 #b10100 #b11000</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">28</span>       <span style="color: #ffa500;">@@@@ CHAR: h</span>
+<span style="color: #fa8072;">"&#8226;&#9618;&#7431;"</span>        <span style="color: #ffa500;">@@@@ #b11111 #b10100 #b11000</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 29       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: i</span>
-<span style="color: #fa8072;">"&#247;&#220;&#247;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b00000 #b11101 #b00000</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">29</span>       <span style="color: #ffa500;">@@@@ CHAR: i</span>
+<span style="color: #fa8072;">"&#247;&#220;&#247;"</span>        <span style="color: #ffa500;">@@@@ #b00000 #b11101 #b00000</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 30       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: &#8737;</span>
-<span style="color: #fa8072;">"&#7431;&#197;&#163;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b11000 #b10100 #b10010</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">30</span>       <span style="color: #ffa500;">@@@@ CHAR: &#8737;</span>
+<span style="color: #fa8072;">"&#7431;&#197;&#163;"</span>        <span style="color: #ffa500;">@@@@ #b11000 #b10100 #b10010</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 31       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: SPC</span>
-<span style="color: #fa8072;">"&#247;&#247;&#247;"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b00000 #b00000 #b00000</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">31</span>       <span style="color: #ffa500;">@@@@ CHAR: SPC</span>
+<span style="color: #fa8072;">"&#247;&#247;&#247;"</span>        <span style="color: #ffa500;">@@@@ #b00000 #b00000 #b00000</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 40       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 0</span>
-<span style="color: #fa8072;">"_Q_"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011111 #b1010001 #b1011111</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">40</span>       <span style="color: #ffa500;">@@@@ CHAR: 0</span>
+<span style="color: #fa8072;">"_Q_"</span>        <span style="color: #ffa500;">@@@@ #b1011111 #b1010001 #b1011111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 41       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 1</span>
-<span style="color: #fa8072;">"R_P"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1010010 #b1011111 #b1010000</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">41</span>       <span style="color: #ffa500;">@@@@ CHAR: 1</span>
+<span style="color: #fa8072;">"R_P"</span>        <span style="color: #ffa500;">@@@@ #b1010010 #b1011111 #b1010000</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 42       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 2</span>
-<span style="color: #fa8072;">"]UW"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011101 #b1010101 #b1010111</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">42</span>       <span style="color: #ffa500;">@@@@ CHAR: 2</span>
+<span style="color: #fa8072;">"]UW"</span>        <span style="color: #ffa500;">@@@@ #b1011101 #b1010101 #b1010111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 43       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 3</span>
-<span style="color: #fa8072;">"QU_"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1010001 #b1010101 #b1011111</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">43</span>       <span style="color: #ffa500;">@@@@ CHAR: 3</span>
+<span style="color: #fa8072;">"QU_"</span>        <span style="color: #ffa500;">@@@@ #b1010001 #b1010101 #b1011111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 44       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 4</span>
-<span style="color: #fa8072;">"GD_"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1000111 #b1000100 #b1011111</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">44</span>       <span style="color: #ffa500;">@@@@ CHAR: 4</span>
+<span style="color: #fa8072;">"GD_"</span>        <span style="color: #ffa500;">@@@@ #b1000111 #b1000100 #b1011111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 45       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 5</span>
-<span style="color: #fa8072;">"WU]"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1010111 #b1010101 #b1011101</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">45</span>       <span style="color: #ffa500;">@@@@ CHAR: 5</span>
+<span style="color: #fa8072;">"WU]"</span>        <span style="color: #ffa500;">@@@@ #b1010111 #b1010101 #b1011101</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 46       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 6</span>
-<span style="color: #fa8072;">"_U]"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011111 #b1010101 #b1011101</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">46</span>       <span style="color: #ffa500;">@@@@ CHAR: 6</span>
+<span style="color: #fa8072;">"_U]"</span>        <span style="color: #ffa500;">@@@@ #b1011111 #b1010101 #b1011101</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 47       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 7</span>
-<span style="color: #fa8072;">"AA_"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1000001 #b1000001 #b1011111</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">47</span>       <span style="color: #ffa500;">@@@@ CHAR: 7</span>
+<span style="color: #fa8072;">"AA_"</span>        <span style="color: #ffa500;">@@@@ #b1000001 #b1000001 #b1011111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 48       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 8</span>
-<span style="color: #fa8072;">"_U_"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011111 #b1010101 #b1011111</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">48</span>       <span style="color: #ffa500;">@@@@ CHAR: 8</span>
+<span style="color: #fa8072;">"_U_"</span>        <span style="color: #ffa500;">@@@@ #b1011111 #b1010101 #b1011111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 49       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: 9</span>
-<span style="color: #fa8072;">"GE_"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1000111 #b1000101 #b1011111</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">49</span>       <span style="color: #ffa500;">@@@@ CHAR: 9</span>
+<span style="color: #fa8072;">"GE_"</span>        <span style="color: #ffa500;">@@@@ #b1000111 #b1000101 #b1011111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 50       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: A</span>
-<span style="color: #fa8072;">"_E_"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011111 #b1000101 #b1011111</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">50</span>       <span style="color: #ffa500;">@@@@ CHAR: A</span>
+<span style="color: #fa8072;">"_E_"</span>        <span style="color: #ffa500;">@@@@ #b1011111 #b1000101 #b1011111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 51       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: B</span>
-<span style="color: #fa8072;">"_UJ"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011111 #b1010101 #b1001010</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">51</span>       <span style="color: #ffa500;">@@@@ CHAR: B</span>
+<span style="color: #fa8072;">"_UJ"</span>        <span style="color: #ffa500;">@@@@ #b1011111 #b1010101 #b1001010</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 52       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: C</span>
-<span style="color: #fa8072;">"NQQ"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1001110 #b1010001 #b1010001</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">52</span>       <span style="color: #ffa500;">@@@@ CHAR: C</span>
+<span style="color: #fa8072;">"NQQ"</span>        <span style="color: #ffa500;">@@@@ #b1001110 #b1010001 #b1010001</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 53       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: D</span>
-<span style="color: #fa8072;">"_QN"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011111 #b1010001 #b1001110</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">53</span>       <span style="color: #ffa500;">@@@@ CHAR: D</span>
+<span style="color: #fa8072;">"_QN"</span>        <span style="color: #ffa500;">@@@@ #b1011111 #b1010001 #b1001110</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 54       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: E</span>
-<span style="color: #fa8072;">"_UQ"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011111 #b1010101 #b1010001</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">54</span>       <span style="color: #ffa500;">@@@@ CHAR: E</span>
+<span style="color: #fa8072;">"_UQ"</span>        <span style="color: #ffa500;">@@@@ #b1011111 #b1010101 #b1010001</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 55       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: F</span>
-<span style="color: #fa8072;">"_EA"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011111 #b1000101 #b1000001</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">55</span>       <span style="color: #ffa500;">@@@@ CHAR: F</span>
+<span style="color: #fa8072;">"_EA"</span>        <span style="color: #ffa500;">@@@@ #b1011111 #b1000101 #b1000001</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 56       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: e</span>
-<span style="color: #fa8072;">"JUU"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1001010 #b1010101 #b1010101</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">56</span>       <span style="color: #ffa500;">@@@@ CHAR: e</span>
+<span style="color: #fa8072;">"JUU"</span>        <span style="color: #ffa500;">@@@@ #b1001010 #b1010101 #b1010101</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 57       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: -</span>
-<span style="color: #fa8072;">"DDD"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1000100 #b1000100 #b1000100</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">57</span>       <span style="color: #ffa500;">@@@@ CHAR: -</span>
+<span style="color: #fa8072;">"DDD"</span>        <span style="color: #ffa500;">@@@@ #b1000100 #b1000100 #b1000100</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 58       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: +</span>
-<span style="color: #fa8072;">"NDN"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1001110 #b1000100 #b1001110</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">58</span>       <span style="color: #ffa500;">@@@@ CHAR: +</span>
+<span style="color: #fa8072;">"NDN"</span>        <span style="color: #ffa500;">@@@@ #b1001110 #b1000100 #b1001110</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 59       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: &#215;</span>
-<span style="color: #fa8072;">"JDJ"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1001010 #b1000100 #b1001010</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">59</span>       <span style="color: #ffa500;">@@@@ CHAR: &#215;</span>
+<span style="color: #fa8072;">"JDJ"</span>        <span style="color: #ffa500;">@@@@ #b1001010 #b1000100 #b1001010</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 60       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: /</span>
-<span style="color: #fa8072;">"XDC"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011000 #b1000100 #b1000011</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">60</span>       <span style="color: #ffa500;">@@@@ CHAR: /</span>
+<span style="color: #fa8072;">"XDC"</span>        <span style="color: #ffa500;">@@@@ #b1011000 #b1000100 #b1000011</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 61       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: ^</span>
-<span style="color: #fa8072;">"BAB"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1000010 #b1000001 #b1000010</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">61</span>       <span style="color: #ffa500;">@@@@ CHAR: ^</span>
+<span style="color: #fa8072;">"BAB"</span>        <span style="color: #ffa500;">@@@@ #b1000010 #b1000001 #b1000010</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 62       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: :</span>
-<span style="color: #fa8072;">"@J@"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1000000 #b1001010 #b1000000</span>
-<span style="color: #fa8072;">"___"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011111 #b1011111 #b1011111</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">62</span>       <span style="color: #ffa500;">@@@@ CHAR: :</span>
+<span style="color: #fa8072;">"@J@"</span>        <span style="color: #ffa500;">@@@@ #b1000000 #b1001010 #b1000000</span>
+<span style="color: #fa8072;">"___"</span>        <span style="color: #ffa500;">@@@@ #b1011111 #b1011111 #b1011111</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 63       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: ,</span>
-<span style="color: #fa8072;">"PH@"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1010000 #b1001000 #b1000000</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">63</span>       <span style="color: #ffa500;">@@@@ CHAR: ,</span>
+<span style="color: #fa8072;">"PH@"</span>        <span style="color: #ffa500;">@@@@ #b1010000 #b1001000 #b1000000</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 64       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: .</span>
-<span style="color: #fa8072;">"@P@"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1000000 #b1010000 #b1000000</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">64</span>       <span style="color: #ffa500;">@@@@ CHAR: .</span>
+<span style="color: #fa8072;">"@P@"</span>        <span style="color: #ffa500;">@@@@ #b1000000 #b1010000 #b1000000</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 65       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">degrees</span>
-<span style="color: #fa8072;">"BEB"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1000010 #b1000101 #b1000010</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">65</span>       <span style="color: #ffa500;">@@@@ degrees</span>
+<span style="color: #fa8072;">"BEB"</span>        <span style="color: #ffa500;">@@@@ #b1000010 #b1000101 #b1000010</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 66       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: b</span>
-<span style="color: #fa8072;">"_TH"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011111 #b1010100 #b1001000</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">66</span>       <span style="color: #ffa500;">@@@@ CHAR: b</span>
+<span style="color: #fa8072;">"_TH"</span>        <span style="color: #ffa500;">@@@@ #b1011111 #b1010100 #b1001000</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 67       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: o</span>
-<span style="color: #fa8072;">"LRL"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1001100 #b1010010 #b1001100</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">67</span>       <span style="color: #ffa500;">@@@@ CHAR: o</span>
+<span style="color: #fa8072;">"LRL"</span>        <span style="color: #ffa500;">@@@@ #b1001100 #b1010010 #b1001100</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 68       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: h</span>
-<span style="color: #fa8072;">"_TX"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011111 #b1010100 #b1011000</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">68</span>       <span style="color: #ffa500;">@@@@ CHAR: h</span>
+<span style="color: #fa8072;">"_TX"</span>        <span style="color: #ffa500;">@@@@ #b1011111 #b1010100 #b1011000</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 69       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: i</span>
-<span style="color: #fa8072;">"@]@"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1000000 #b1011101 #b1000000</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">69</span>       <span style="color: #ffa500;">@@@@ CHAR: i</span>
+<span style="color: #fa8072;">"@]@"</span>        <span style="color: #ffa500;">@@@@ #b1000000 #b1011101 #b1000000</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 70       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: &#8737;</span>
-<span style="color: #fa8072;">"XTR"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1011000 #b1010100 #b1010010</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">70</span>       <span style="color: #ffa500;">@@@@ CHAR: &#8737;</span>
+<span style="color: #fa8072;">"XTR"</span>        <span style="color: #ffa500;">@@@@ #b1011000 #b1010100 #b1010010</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> 71       <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">CHAR: SPC</span>
-<span style="color: #fa8072;">"@@@"</span>        <span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">#b1000000 #b1000000 #b1000000</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">71</span>       <span style="color: #ffa500;">@@@@ CHAR: SPC</span>
+<span style="color: #fa8072;">"@@@"</span>        <span style="color: #ffa500;">@@@@ #b1000000 #b1000000 #b1000000</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">END</span>
+END
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgec6247f" class="outline-3">
-<h3 id="orgec6247f"><span class="section-number-3">3.2.</span> <code>PATN</code>: Test <code>TNPR</code> by printing all characters</h3>
+<div id="outline-container-org769c9e5" class="outline-3">
+<h3 id="org769c9e5"><span class="section-number-3">3.2.</span> <code>PATN</code>: Test <code>TNPR</code> by printing all characters</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-PATN" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PATN)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Print All Tiny Number Characters</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"PATN"</span>
+<span style="color: #ffa500;">@@@@ DSC: Print All Tiny Number Characters</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"PATN"</span>
 <span style="color: #00ffff;">CLLCD</span>
 0.031
 <span style="color: #00ffff;">STO</span> 00
-<span style="color: #00ffff;">LBL</span> 00
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
 1
 <span style="color: #00ffff;">RCL</span> 00
 4
@@ -541,7 +541,7 @@ R&#8595;
 <span style="color: #00ffff;">+</span>
 <span style="color: #00ffff;">RCL</span> 00
 <span style="color: #00ffff;">IP</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"TNPR"</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"TNPR"</span>
 8
 <span style="color: #00ffff;">RCL</span> 00
 4
@@ -552,11 +552,11 @@ R&#8595;
 40
 <span style="color: #00ffff;">+</span>
 <span style="color: #00ffff;">IP</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #fa8072;">"TNPR"</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"TNPR"</span>
 <span style="color: #00ffff;">ISG</span> 00
-<span style="color: #00ffff;">GTO</span> 00
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">END</span>
+END
 </pre>
 </div>
 </div>
@@ -564,36 +564,36 @@ R&#8595;
 </div>
 
 
-<div id="outline-container-org5da6954" class="outline-2">
-<h2 id="org5da6954"><span class="section-number-2">4.</span> <code>SGN</code>: Sign function</h2>
+<div id="outline-container-org85007c3" class="outline-2">
+<h2 id="org85007c3"><span class="section-number-2">4.</span> <code>SGN</code>: Sign function</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-SGN" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SGN)</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">DSC: Sign function</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">IN:  X: a number</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">OUT: X:  0 when input was 0</span>
-<span style="color: #ffa500;">@@@@         </span><span style="color: #ff7f24;">-1 when input was negative</span>
-<span style="color: #ffa500;">@@@@          </span><span style="color: #ff7f24;">1 when input was positive</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">UPD: 2021-02-26</span>
-<span style="color: #ffa500;">@@@@ </span><span style="color: #ff7f24;">TST: free42_3.0</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #fa8072;">"SGN"</span>
-<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>                <span style="color: #ffa500;">@@## </span><span style="color: #ff7f24;">REQ:free42&gt;=3.0</span>
+<span style="color: #ffa500;">@@@@ DSC: Sign function</span>
+<span style="color: #ffa500;">@@@@ IN:  X: a number</span>
+<span style="color: #ffa500;">@@@@ OUT: X:  0 when input was 0</span>
+<span style="color: #ffa500;">@@@@         -1 when input was negative</span>
+<span style="color: #ffa500;">@@@@          1 when input was positive</span>
+<span style="color: #ffa500;">@@@@ UPD: 2021-02-26</span>
+<span style="color: #ffa500;">@@@@ TST: free42_3.0</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"SGN"</span>
+<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #6495ed;">@@## REQ:free42&gt;=2.5.24</span>
+<span style="color: #00ffff;">L4STK</span>                <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">ENTER</span>
 <span style="color: #00ffff;">ABS</span>
-<span style="color: #00ffff;">X=0</span>?
+<span style="color: #00ffff;">X=0?</span>
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">&#247;</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">END</span>
+END
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-org8e09303" class="outline-2">
-<h2 id="org8e09303"><span class="section-number-2">5.</span> EOF</h2>
+<div id="outline-container-org6f7697f" class="outline-2">
+<h2 id="org6f7697f"><span class="section-number-2">5.</span> EOF</h2>
 <div class="outline-text-2" id="text-5">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -604,7 +604,7 @@ R&#8595;
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-10-20 Wed 21:22 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.6)
+Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-10-27 Wed 18:49 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.6)
 </div>
 </body>
 </html>

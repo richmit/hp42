@@ -3,16 +3,15 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-10-27 Wed 19:06 -->
+<!-- 2022-06-04 Sat 16:22 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=1024, initial-scale=1" />
 <title>free42 Uncertainty Propagation</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="Mitch Richling" />
-<meta name="description" content="Some simple math stuff for free42"
- />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="description" content="Some simple math stuff for free42" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -33,8 +32,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -43,21 +43,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
   pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -193,7 +193,6 @@
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { width: 90%; }
-  /*]]>*/-->
 </style>
 <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
 <style>body { min-width: 500px; max-width: 1024px; }</style>
@@ -211,7 +210,7 @@
  <a accesskey="h" href="https://richmit.github.io/hp42/"> UP </a>
  |
  <a accesskey="H" href="https://www.mitchr.me/"> HOME </a>
-</div><div id="content">
+</div><div id="content" class="content">
 <h1 class="title">free42 Uncertainty Propagation</h1>
 <table border="2 solid #ccc" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -229,42 +228,42 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-10-27 19:02:09</i></td>
+<td class="org-left"><i>2022-06-04 16:21:08</i></td>
 </tr>
 </tbody>
 </table>
 <p align="center">
-Copyright 2021 Mitch Richling. All rights reserved.
+Copyright 2022 Mitch Richling. All rights reserved.
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org397e45f">1. Metadata</a></li>
+<li><a href="#org9f4651d">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
 <li><a href="#menu-uprop">3. Menu</a>
 <ul>
-<li><a href="#org97f9027">3.1. Notes</a>
+<li><a href="#orgdedab4e">3.1. Notes</a>
 <ul>
-<li><a href="#org95a292d">3.1.1. <code>[SHIFT]</code> key magic for menus</a></li>
-<li><a href="#org47728e2">3.1.2. Global Labels</a></li>
-<li><a href="#org5a8123d">3.1.3. <code>UI→VU</code> &amp; <code>UVU→I</code>: Intervals</a></li>
-<li><a href="#org028a7d2">3.1.4. <code>UVU→%</code></a></li>
-<li><a href="#org24a191c">3.1.5. <code>UxU</code>: Multiply uncertainty</a></li>
+<li><a href="#org81d12ad">3.1.1. <code>[SHIFT]</code> key magic for menus</a></li>
+<li><a href="#orgf6ae57f">3.1.2. Global Labels</a></li>
+<li><a href="#org483c81d">3.1.3. <code>UI→VU</code> &amp; <code>UVU→I</code>: Intervals</a></li>
+<li><a href="#org479808e">3.1.4. <code>UVU→%</code></a></li>
+<li><a href="#org5b8b3c9">3.1.5. <code>UxU</code>: Multiply uncertainty</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org58cbecf">4. Menu Code</a></li>
-<li><a href="#orgc88b0cd">5. Functions</a></li>
-<li><a href="#orgb27a292">6. EOF</a></li>
+<li><a href="#org8211381">4. Menu Code</a></li>
+<li><a href="#orgd2a2b16">5. Functions</a></li>
+<li><a href="#org4d01a99">6. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org397e45f" class="outline-2">
-<h2 id="org397e45f"><span class="section-number-2">1.</span> Metadata</h2>
+<div id="outline-container-org9f4651d" class="outline-2">
+<h2 id="org9f4651d"><span class="section-number-2">1.</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/uprop.html">https://richmit.github.io/hp42/uprop.html</a>
@@ -334,7 +333,7 @@ U (a standard deviation).
 <div id="outline-container-menu-uprop" class="outline-2">
 <h2 id="menu-uprop"><span class="section-number-2">3.</span> Menu</h2>
 <div class="outline-text-2" id="text-menu-uprop">
-<table id="org7a30f73" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="orga0286a2" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -605,12 +604,12 @@ U (a standard deviation).
 </table>
 </div>
 
-<div id="outline-container-org97f9027" class="outline-3">
-<h3 id="org97f9027"><span class="section-number-3">3.1.</span> Notes</h3>
+<div id="outline-container-orgdedab4e" class="outline-3">
+<h3 id="orgdedab4e"><span class="section-number-3">3.1.</span> Notes</h3>
 <div class="outline-text-3" id="text-3-1">
 </div>
-<div id="outline-container-org95a292d" class="outline-4">
-<h4 id="org95a292d"><span class="section-number-4">3.1.1.</span> <code>[SHIFT]</code> key magic for menus</h4>
+<div id="outline-container-org81d12ad" class="outline-4">
+<h4 id="org81d12ad"><span class="section-number-4">3.1.1.</span> <code>[SHIFT]</code> key magic for menus</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <p>
 Menu keys that can accept a value with uncertainty in the X position of the stack behave differently when used with the <code>[SHIFT]</code> key.  If the <code>[SHIFT]</code> key is
@@ -624,8 +623,8 @@ Note that <code>I→VU</code> doesn't take a value with uncertainty, and thus pr
 </div>
 </div>
 
-<div id="outline-container-org47728e2" class="outline-4">
-<h4 id="org47728e2"><span class="section-number-4">3.1.2.</span> Global Labels</h4>
+<div id="outline-container-orgf6ae57f" class="outline-4">
+<h4 id="orgf6ae57f"><span class="section-number-4">3.1.2.</span> Global Labels</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <p>
 The menu items correspond to global labels that you can <code>XEQ</code> from other programs.  The names are the menu labels prefixed with "<code>U</code>" &#x2013; so "<code>SIN</code>" becomes
@@ -634,8 +633,8 @@ The menu items correspond to global labels that you can <code>XEQ</code> from ot
 </div>
 </div>
 
-<div id="outline-container-org5a8123d" class="outline-4">
-<h4 id="org5a8123d"><span class="section-number-4">3.1.3.</span> <code>UI→VU</code> &amp; <code>UVU→I</code>: Intervals</h4>
+<div id="outline-container-org483c81d" class="outline-4">
+<h4 id="org483c81d"><span class="section-number-4">3.1.3.</span> <code>UI→VU</code> &amp; <code>UVU→I</code>: Intervals</h4>
 <div class="outline-text-4" id="text-3-1-3">
 <p>
 These functions convert between intervals and quantity with uncertainty.  Intervals are specified by interval end points on levels X &amp; Y of the stack.  For
@@ -644,8 +643,8 @@ These functions convert between intervals and quantity with uncertainty.  Interv
 </div>
 </div>
 
-<div id="outline-container-org028a7d2" class="outline-4">
-<h4 id="org028a7d2"><span class="section-number-4">3.1.4.</span> <code>UVU→%</code></h4>
+<div id="outline-container-org479808e" class="outline-4">
+<h4 id="org479808e"><span class="section-number-4">3.1.4.</span> <code>UVU→%</code></h4>
 <div class="outline-text-4" id="text-3-1-4">
 <p>
 Given a quantity with uncertainty in X, it will return <code>T%</code> of the uncertainty.  This value is always positive.
@@ -653,8 +652,8 @@ Given a quantity with uncertainty in X, it will return <code>T%</code> of the un
 </div>
 </div>
 
-<div id="outline-container-org24a191c" class="outline-4">
-<h4 id="org24a191c"><span class="section-number-4">3.1.5.</span> <code>UxU</code>: Multiply uncertainty</h4>
+<div id="outline-container-org5b8b3c9" class="outline-4">
+<h4 id="org5b8b3c9"><span class="section-number-4">3.1.5.</span> <code>UxU</code>: Multiply uncertainty</h4>
 <div class="outline-text-4" id="text-3-1-5">
 <p>
 This is a quick way to multiply the uncertainty by a factor.  For example if you are using an expanded uncertainty value.
@@ -664,8 +663,8 @@ This is a quick way to multiply the uncertainty by a factor.  For example if you
 </div>
 </div>
 
-<div id="outline-container-org58cbecf" class="outline-2">
-<h2 id="org58cbecf"><span class="section-number-2">4.</span> Menu Code</h2>
+<div id="outline-container-org8211381" class="outline-2">
+<h2 id="org8211381"><span class="section-number-2">4.</span> Menu Code</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"UPROP"</span> 0 tbl 0 1 'stay 'up 'auto
@@ -681,246 +680,11 @@ This is a quick way to multiply the uncertainty by a factor.  For example if you
                                               <span style="color: #fa8072;">"\n"</span>))))
 </pre>
 </div>
-
-<div class="org-src-container">
-<pre class="src src-hp42s"><span id="coderef-UPROP" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (UPROP)</span>
-<span style="color: #ffa500;">@@@@ DSC: Auto-generated menu program</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"UPROP"</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">01</span>            <span style="color: #ffa500;">@@@@ Page 1 of menu UPROP</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"+"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">06</span>
-<span style="color: #fa8072;">"-"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">07</span>
-<span style="color: #fa8072;">"&#215;"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">08</span>
-<span style="color: #fa8072;">"&#247;"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">09</span>
-<span style="color: #fa8072;">"+/-"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">10</span>
-<span style="color: #fa8072;">"1/X"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">11</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">05</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">02</span>            <span style="color: #ffa500;">@@@@ Page 2 of menu UPROP</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"LN"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">12</span>
-<span style="color: #fa8072;">"E&#8593;X"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">13</span>
-<span style="color: #fa8072;">"Y&#8593;X"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">14</span>
-<span style="color: #fa8072;">"ABS"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">15</span>
-<span style="color: #fa8072;">"GAMMA"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">16</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">03</span>            <span style="color: #ffa500;">@@@@ Page 3 of menu UPROP</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"SIN"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">17</span>
-<span style="color: #fa8072;">"COS"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">18</span>
-<span style="color: #fa8072;">"TAN"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">19</span>
-<span style="color: #fa8072;">"ASIN"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">20</span>
-<span style="color: #fa8072;">"ACOS"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">21</span>
-<span style="color: #fa8072;">"ATAN"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">22</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">04</span>            <span style="color: #ffa500;">@@@@ Page 4 of menu UPROP</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"SINH"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">23</span>
-<span style="color: #fa8072;">"COSH"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">24</span>
-<span style="color: #fa8072;">"TANH"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">25</span>
-<span style="color: #fa8072;">"ASINH"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">26</span>
-<span style="color: #fa8072;">"ACOSH"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">27</span>
-<span style="color: #fa8072;">"ATANH"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">28</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">05</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">05</span>            <span style="color: #ffa500;">@@@@ Page 5 of menu UPROP</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"I&#8594;VU"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UI&#8594;VU"</span>
-<span style="color: #fa8072;">"VU&#8594;I"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">29</span>
-<span style="color: #fa8072;">"VU&#8594;%"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">30</span>
-<span style="color: #fa8072;">"&#215;U"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">31</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">05</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">00</span> <span style="color: #ffa500;">@@@@ Application Exit</span>
-<span style="color: #00ffff;">EXITALL</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">06</span>    <span style="color: #ffa500;">@@@@ Action for menu key +</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"U+"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">07</span>    <span style="color: #ffa500;">@@@@ Action for menu key -</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"U-"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">08</span>    <span style="color: #ffa500;">@@@@ Action for menu key &#215;</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"U&#215;"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">09</span>    <span style="color: #ffa500;">@@@@ Action for menu key &#247;</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"U&#247;"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">10</span>    <span style="color: #ffa500;">@@@@ Action for menu key +/-</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"U+/-"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">11</span>    <span style="color: #ffa500;">@@@@ Action for menu key 1/X</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"U1/X"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">12</span>    <span style="color: #ffa500;">@@@@ Action for menu key LN</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"ULN"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">13</span>    <span style="color: #ffa500;">@@@@ Action for menu key E&#8593;X</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UE&#8593;X"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">14</span>    <span style="color: #ffa500;">@@@@ Action for menu key Y&#8593;X</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UY&#8593;X"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">15</span>    <span style="color: #ffa500;">@@@@ Action for menu key ABS</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UABS"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">16</span>    <span style="color: #ffa500;">@@@@ Action for menu key GAMMA</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UGAMMA"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">17</span>    <span style="color: #ffa500;">@@@@ Action for menu key SIN</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"USIN"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">18</span>    <span style="color: #ffa500;">@@@@ Action for menu key COS</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UCOS"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">19</span>    <span style="color: #ffa500;">@@@@ Action for menu key TAN</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UTAN"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">20</span>    <span style="color: #ffa500;">@@@@ Action for menu key ASIN</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UASIN"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">21</span>    <span style="color: #ffa500;">@@@@ Action for menu key ACOS</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UACOS"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">22</span>    <span style="color: #ffa500;">@@@@ Action for menu key ATAN</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UATAN"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">23</span>    <span style="color: #ffa500;">@@@@ Action for menu key SINH</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"USINH"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">24</span>    <span style="color: #ffa500;">@@@@ Action for menu key COSH</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UCOSH"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">25</span>    <span style="color: #ffa500;">@@@@ Action for menu key TANH</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UTANH"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">26</span>    <span style="color: #ffa500;">@@@@ Action for menu key ASINH</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UASINH"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">27</span>    <span style="color: #ffa500;">@@@@ Action for menu key ACOSH</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UACOSH"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">28</span>    <span style="color: #ffa500;">@@@@ Action for menu key ATANH</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UATANH"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">29</span>    <span style="color: #ffa500;">@@@@ Action for menu key VU&#8594;I</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UVU&#8594;I"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">30</span>    <span style="color: #ffa500;">@@@@ Action for menu key VU&#8594;%</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UVU&#8594;%"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">31</span>    <span style="color: #ffa500;">@@@@ Action for menu key &#215;U</span>
-<span style="color: #00ffff;">FS?</span> 64
-<span style="color: #00ffff;">COMPLEX</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"U&#215;U"</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #ffa500;">@@@@ Free labels start at: 32</span>
-</pre>
-</div>
 </div>
 </div>
 
-<div id="outline-container-orgc88b0cd" class="outline-2">
-<h2 id="orgc88b0cd"><span class="section-number-2">5.</span> Functions</h2>
+<div id="outline-container-orgd2a2b16" class="outline-2">
+<h2 id="orgd2a2b16"><span class="section-number-2">5.</span> Functions</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-UPLUS" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (UPLUS)</span>
@@ -1504,8 +1268,8 @@ END
 </div>
 </div>
 
-<div id="outline-container-orgb27a292" class="outline-2">
-<h2 id="orgb27a292"><span class="section-number-2">6.</span> EOF</h2>
+<div id="outline-container-org4d01a99" class="outline-2">
+<h2 id="org4d01a99"><span class="section-number-2">6.</span> EOF</h2>
 <div class="outline-text-2" id="text-6">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1516,7 +1280,11 @@ END
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-10-27 Wed 19:06 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.6)
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 </div>
 </body>
 </html>

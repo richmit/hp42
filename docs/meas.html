@@ -3,16 +3,15 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-10-27 Wed 18:50 -->
+<!-- 2022-06-04 Sat 16:22 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=1024, initial-scale=1" />
 <title>free42 Repeated Measurements</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="Mitch Richling" />
-<meta name="description" content="Description of some free42/hp-42s/DM42 programs repeated measurements and uncertainty reporting"
- />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="description" content="Description of some free42/hp-42s/DM42 programs repeated measurements and uncertainty reporting" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -33,8 +32,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -43,21 +43,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
   pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -193,7 +193,6 @@
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { width: 90%; }
-  /*]]>*/-->
 </style>
 <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
 <style>body { min-width: 500px; max-width: 1024px; }</style>
@@ -225,15 +224,14 @@
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="org-div-home-and-up">
  <a accesskey="h" href="https://richmit.github.io/hp42/"> UP </a>
  |
  <a accesskey="H" href="https://www.mitchr.me/"> HOME </a>
-</div><div id="content">
+</div><div id="content" class="content">
 <h1 class="title">free42 Repeated Measurements</h1>
 <table border="2 solid #ccc" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -251,46 +249,46 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-05-18 21:09:45</i></td>
+<td class="org-left"><i>2022-06-04 16:21:07</i></td>
 </tr>
 </tbody>
 </table>
 <p align="center">
-Copyright 2021 Mitch Richling. All rights reserved.
+Copyright 2022 Mitch Richling. All rights reserved.
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgfc1c997">1. Metadata</a></li>
+<li><a href="#org30bb83a">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
-<li><a href="#orgd55d1ac">3. Supported Methods</a></li>
-<li><a href="#org6a6219b">4. Setup</a>
+<li><a href="#org23250fb">3. Supported Methods</a></li>
+<li><a href="#orgca2016d">4. Setup</a>
 <ul>
-<li><a href="#orged4e27a">4.1. Reporting Scheme</a></li>
-<li><a href="#org2c7e926">4.2. Coverage Factors</a></li>
-<li><a href="#org2a31d33">4.3. Automatic Reporting</a></li>
+<li><a href="#org2b9402a">4.1. Reporting Scheme</a></li>
+<li><a href="#orge6e6c7d">4.2. Coverage Factors</a></li>
+<li><a href="#org4a94414">4.3. Automatic Reporting</a></li>
 </ul>
 </li>
-<li><a href="#org3aa578f">5. Reporting</a></li>
+<li><a href="#org15642dd">5. Reporting</a></li>
 <li><a href="#menu">6. Application Menu</a></li>
-<li><a href="#orgb7a2a1e">7. Global Variables</a></li>
-<li><a href="#org90e62b0">8. Use</a></li>
-<li><a href="#org647c95d">9. Future</a></li>
-<li><a href="#org9fdaf92">10. Code</a>
+<li><a href="#org90dc554">7. Global Variables</a></li>
+<li><a href="#org7e0eede">8. Use</a></li>
+<li><a href="#org56465cc">9. Future</a></li>
+<li><a href="#org94281b5">10. Code</a>
 <ul>
-<li><a href="#org28b1a5a">10.1. Menu Code</a></li>
+<li><a href="#orgfbf6d66">10.1. Menu Code</a></li>
 <li><a href="#localcode">10.2. Local Subroutines</a></li>
 </ul>
 </li>
-<li><a href="#org0f08054">11. EOF</a></li>
+<li><a href="#orge3a62cb">11. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgfc1c997" class="outline-2">
-<h2 id="orgfc1c997"><span class="section-number-2">1.</span> Metadata</h2>
+<div id="outline-container-org30bb83a" class="outline-2">
+<h2 id="org30bb83a"><span class="section-number-2">1.</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/meas.html">https://richmit.github.io/hp42/meas.html</a>
@@ -357,8 +355,8 @@ and use the midrange as the value.  The application described below is designed 
 </div>
 </div>
 
-<div id="outline-container-orgd55d1ac" class="outline-2">
-<h2 id="orgd55d1ac"><span class="section-number-2">3.</span> Supported Methods</h2>
+<div id="outline-container-org23250fb" class="outline-2">
+<h2 id="org23250fb"><span class="section-number-2">3.</span> Supported Methods</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 The two most common methods for estimating &amp; reporting measurement uncertainty are nicely documented in <a href="https://www.nist.gov/pml/nist-technical-note-1297">NIST Technical Note 1297</a>.  The first method assumes
@@ -395,16 +393,16 @@ Finally, the application provides a number of raw statistics that might be usefu
 </div>
 </div>
 
-<div id="outline-container-org6a6219b" class="outline-2">
-<h2 id="org6a6219b"><span class="section-number-2">4.</span> Setup</h2>
+<div id="outline-container-orgca2016d" class="outline-2">
+<h2 id="orgca2016d"><span class="section-number-2">4.</span> Setup</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 The last menu provides configuration options.
 </p>
 </div>
 
-<div id="outline-container-orged4e27a" class="outline-3">
-<h3 id="orged4e27a"><span class="section-number-3">4.1.</span> Reporting Scheme</h3>
+<div id="outline-container-org2b9402a" class="outline-3">
+<h3 id="org2b9402a"><span class="section-number-3">4.1.</span> Reporting Scheme</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 The reporting scheme is set via the first menu button &#x2013; the current selection is displayed in the menu label (N=Normal, R=Rectangular, and Q=Quartiles).  This key
@@ -413,8 +411,8 @@ cycles between the schemes when pressed.  Note that it also defaults the coverag
 </div>
 </div>
 
-<div id="outline-container-org2c7e926" class="outline-3">
-<h3 id="org2c7e926"><span class="section-number-3">4.2.</span> Coverage Factors</h3>
+<div id="outline-container-orge6e6c7d" class="outline-3">
+<h3 id="orge6e6c7d"><span class="section-number-3">4.2.</span> Coverage Factors</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 The coverage factor used to compute the expanded uncertainty is set via the second menu key.  Repeatedly pressing this button will cycle through predefined
@@ -496,8 +494,8 @@ For errors with a rectangular distribution the following coverage factors are su
 </div>
 </div>
 
-<div id="outline-container-org2a31d33" class="outline-3">
-<h3 id="org2a31d33"><span class="section-number-3">4.3.</span> Automatic Reporting</h3>
+<div id="outline-container-org4a94414" class="outline-3">
+<h3 id="org4a94414"><span class="section-number-3">4.3.</span> Automatic Reporting</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 A report can be generated upon entering a specified number of measurements.  This is very handy when a batch of items needs to be measured, and one wishes to
@@ -508,8 +506,8 @@ as part of the menu label.  A dash (-) means no automatic reporting is configure
 </div>
 </div>
 
-<div id="outline-container-org3aa578f" class="outline-2">
-<h2 id="org3aa578f"><span class="section-number-2">5.</span> Reporting</h2>
+<div id="outline-container-org15642dd" class="outline-2">
+<h2 id="org15642dd"><span class="section-number-2">5.</span> Reporting</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 I find that most of the time I use units such that measurements have integer values.  For example with paper thickness measurements I will use micrometers in
@@ -532,7 +530,7 @@ Reports can be automatically generated upon entry of a configurable number of me
 <div id="outline-container-menu" class="outline-2">
 <h2 id="menu"><span class="section-number-2">6.</span> Application Menu</h2>
 <div class="outline-text-2" id="text-menu">
-<table id="orgf8eba95" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+<table id="org690bdf7" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
 <colgroup>
@@ -819,8 +817,8 @@ Notes:
 </div>
 </div>
 
-<div id="outline-container-orgb7a2a1e" class="outline-2">
-<h2 id="orgb7a2a1e"><span class="section-number-2">7.</span> Global Variables</h2>
+<div id="outline-container-org90dc554" class="outline-2">
+<h2 id="org90dc554"><span class="section-number-2">7.</span> Global Variables</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Application state is maintained in a number of global variables.
@@ -872,8 +870,8 @@ Application state is maintained in a number of global variables.
 </div>
 </div>
 
-<div id="outline-container-org90e62b0" class="outline-2">
-<h2 id="org90e62b0"><span class="section-number-2">8.</span> Use</h2>
+<div id="outline-container-org7e0eede" class="outline-2">
+<h2 id="org7e0eede"><span class="section-number-2">8.</span> Use</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 In use the application is quite like the built in statistics application in that <code>[M+]</code> &amp; <code>[M+]</code> add and delete measurements.  All measurements are stored in
@@ -897,8 +895,8 @@ function (menu page one: <code>[M+]</code>) such that a report is automatically 
 </div>
 </div>
 
-<div id="outline-container-org647c95d" class="outline-2">
-<h2 id="org647c95d"><span class="section-number-2">9.</span> Future</h2>
+<div id="outline-container-org56465cc" class="outline-2">
+<h2 id="org56465cc"><span class="section-number-2">9.</span> Future</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 Some things I might do some day&#x2026;
@@ -920,124 +918,15 @@ Some things I might do some day&#x2026;
 </div>
 </div>
 
-<div id="outline-container-org9fdaf92" class="outline-2">
-<h2 id="org9fdaf92"><span class="section-number-2">10.</span> Code</h2>
+<div id="outline-container-org94281b5" class="outline-2">
+<h2 id="org94281b5"><span class="section-number-2">10.</span> Code</h2>
 <div class="outline-text-2" id="text-10">
 </div>
-<div id="outline-container-org28b1a5a" class="outline-3">
-<h3 id="org28b1a5a"><span class="section-number-3">10.1.</span> Menu Code</h3>
+<div id="outline-container-orgfbf6d66" class="outline-3">
+<h3 id="orgfbf6d66"><span class="section-number-3">10.1.</span> Menu Code</h3>
 <div class="outline-text-3" id="text-10-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"MEAS"</span> 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-hp42s"><span id="coderef-MEAS" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MEAS)</span>
-<span style="color: #ffa500;">@@@@ DSC: Auto-generated menu program</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"MEAS"</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">01</span>            <span style="color: #ffa500;">@@@@ Page 1 of menu MEAS</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">70</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">98</span>
-<span style="color: #fa8072;">"M-"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">97</span>
-<span style="color: #fa8072;">"EDIT"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">38</span>
-<span style="color: #fa8072;">"REP"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">96</span>
-<span style="color: #fa8072;">"&#8594;STK"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">39</span>
-<span style="color: #fa8072;">"CLRM"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">95</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">05</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">02</span>            <span style="color: #ffa500;">@@@@ Page 2 of menu MEAS</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"&#956;"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">94</span>
-<span style="color: #fa8072;">"kuN"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">93</span>
-<span style="color: #fa8072;">"MR"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">92</span>
-<span style="color: #fa8072;">"kuR"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">91</span>
-<span style="color: #fa8072;">"MIN"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">89</span>
-<span style="color: #fa8072;">"MAX"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">88</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">03</span>            <span style="color: #ffa500;">@@@@ Page 3 of menu MEAS</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"PSD"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">87</span>
-<span style="color: #fa8072;">"SSD"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">86</span>
-<span style="color: #fa8072;">"RNG"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">85</span>
-<span style="color: #fa8072;">"RtVA"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">90</span>
-<span style="color: #fa8072;">"N"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">84</span>
-<span style="color: #fa8072;">"SUMS"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">83</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">04</span>            <span style="color: #ffa500;">@@@@ Page 4 of menu MEAS</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"Q25"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">35</span>
-<span style="color: #fa8072;">"MED"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">77</span>
-<span style="color: #fa8072;">"Q75"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">36</span>
-<span style="color: #fa8072;">"IQR"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">34</span>
-<span style="color: #fa8072;">"kuQ"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">46</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">05</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">05</span>            <span style="color: #ffa500;">@@@@ Page 5 of menu MEAS</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">79</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">82</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">48</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">81</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">78</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">80</span>
-<span style="color: #fa8072;">"REP"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">96</span>
-<span style="color: #fa8072;">"&#8594;STK"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">39</span>
-<span style="color: #fa8072;">"RESET"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"RSTMES"</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">05</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">00</span> <span style="color: #ffa500;">@@@@ Application Exit</span>
-<span style="color: #00ffff;">EXITALL</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #ffa500;">@@@@ Free labels start at: 6</span>
 </pre>
 </div>
 </div>
@@ -1232,7 +1121,7 @@ Some things I might do some day&#x2026;
 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">83</span> <span style="color: #ffa500;">@NM@ SUMS</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">84</span> <span style="color: #ffa500;">@NM@ N</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
-X&#8593;2
+<span style="color: #00ffff;">X&#8593;2</span>
 <span style="color: #00ffff;">RCL&#247; ST</span> Y
 <span style="color: #00ffff;">RCL&#247; ST</span> Y
 <span style="color: #00ffff;">RCL ST</span> Z
@@ -1251,7 +1140,7 @@ X&#8593;2
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeDAT"</span>
 <span style="color: #00ffff;">FC?C</span> 25
 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">72</span>               <span style="color: #ffa500;">@@@@ MeDAT is missing</span>
-DIM?
+<span style="color: #00ffff;">DIM?</span>
 <span style="color: #00ffff;">R&#8595;</span>
 1
 <span style="color: #00ffff;">X=Y?</span>
@@ -1297,7 +1186,7 @@ DIM?
 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">55</span>
 1
 1
-<span style="color: #00ffff;">DIM</span> <span style="color: #fa8072;">"MeDAT"</span>
+DIM <span style="color: #fa8072;">"MeDAT"</span>
 <span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"MeDAT"</span>
 <span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">R&#8595;</span>
@@ -1370,7 +1259,7 @@ DIM?
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeDAT"</span>
 <span style="color: #00ffff;">FC?C</span> 25
 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">26</span>
-DIM?
+<span style="color: #00ffff;">DIM?</span>
 <span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeRSC"</span>
 27
@@ -1416,11 +1305,11 @@ DIM?
 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">75</span>
 <span style="color: #00ffff;">R&#8595;</span>                   <span style="color: #ffa500;">@@@@ U V</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">21</span> <span style="color: #ffa500;">@NM@ MN=2A</span>
-<span style="color: #00ffff;">ARCL</span> ST Y
+<span style="color: #00ffff;">ARCL ST</span> Y
 <span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">" "</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">22</span> <span style="color: #ffa500;">@@@@ |-CNA</span>
 <span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">"&#215;u="</span>
-<span style="color: #00ffff;">ARCL</span> ST X            <span style="color: #ffa500;">@@@@ U V</span>
+<span style="color: #00ffff;">ARCL ST</span> X            <span style="color: #ffa500;">@@@@ U V</span>
 <span style="color: #00ffff;">ALENG</span>                <span style="color: #ffa500;">@@@@ ALEN1 U V </span>
 21                   <span style="color: #ffa500;">@@@@ 21 ALEN1 U V </span>
 <span style="color: #00ffff;">X&lt;Y?</span>                 <span style="color: #ffa500;">@@@@ Can we keep going with 4 value report?</span>
@@ -1429,11 +1318,11 @@ DIM?
 <span style="color: #00ffff;">R&#8595;</span>                   <span style="color: #ffa500;">@@@@ ALEN1 U V </span>
 <span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">"[LF]&#8595;="</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">89</span> <span style="color: #ffa500;">@NM@ MIN      @@@@ MIN ALEN1 U V </span>
-<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">ARCL ST</span> X
 <span style="color: #00ffff;">R&#8595;</span>                   <span style="color: #ffa500;">@@@@ ALEN1 U V </span>
 <span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">"  &#8593;="</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">88</span> <span style="color: #ffa500;">@NM@ MAX      @@@@ MAX ALEN1 U V </span>
-<span style="color: #00ffff;">ARCL</span> ST X
+<span style="color: #00ffff;">ARCL ST</span> X
 <span style="color: #00ffff;">R&#8595;</span>                   <span style="color: #ffa500;">@@@@ ALEN1 U V </span>
 <span style="color: #00ffff;">ALENG</span>                <span style="color: #ffa500;">@@@@ ALEN2 ALEN1 U V </span>
 <span style="color: #00ffff;">-</span>                    <span style="color: #ffa500;">@@@@ ALEND U V </span>
@@ -1448,11 +1337,11 @@ DIM?
 <span style="color: #00ffff;">R&#8595;</span>                   <span style="color: #ffa500;">@@@@ ALEN? U V </span>
 <span style="color: #00ffff;">R&#8595;</span>                   <span style="color: #ffa500;">@@@@ U V </span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">21</span> <span style="color: #ffa500;">@NM@ MN=2A</span>
-<span style="color: #00ffff;">ARCL</span> ST Y            <span style="color: #ffa500;">@@@@ U V </span>
+<span style="color: #00ffff;">ARCL ST</span> Y            <span style="color: #ffa500;">@@@@ U V </span>
 <span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">"[LF]"</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">22</span> <span style="color: #ffa500;">@@@@ |-CNA</span>
 <span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">"&#215;u="</span>
-<span style="color: #00ffff;">ARCL</span> ST X            <span style="color: #ffa500;">@@@@ U V </span>
+<span style="color: #00ffff;">ARCL ST</span> X            <span style="color: #ffa500;">@@@@ U V </span>
 <span style="color: #00ffff;">AVIEW</span>
 <span style="color: #00ffff;">RTN</span>
 
@@ -1580,7 +1469,7 @@ DIM?
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeDAT"</span>
 <span style="color: #00ffff;">FC?C</span> 25
 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">99</span>
-DIM?
+<span style="color: #00ffff;">DIM?</span>
 <span style="color: #00ffff;">R&#8595;</span>
 2
 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">86</span> <span style="color: #ffa500;">@NM@ SSD</span>
@@ -1601,7 +1490,7 @@ DIM?
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"MeDAT"</span>
 <span style="color: #00ffff;">FC?C</span> 25
 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">99</span>
-DIM?
+<span style="color: #00ffff;">DIM?</span>
 <span style="color: #00ffff;">R&#8595;</span>
 2
 <span style="color: #00ffff;">X&gt;Y?</span>
@@ -1609,7 +1498,7 @@ DIM?
 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">83</span> <span style="color: #ffa500;">@NM@ SUMS</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">84</span> <span style="color: #ffa500;">@NM@ N</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
-X&#8593;2
+<span style="color: #00ffff;">X&#8593;2</span>
 <span style="color: #00ffff;">RCL&#247; ST</span> Y
 <span style="color: #00ffff;">RCL ST</span> Z
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
@@ -1651,7 +1540,7 @@ X&#8593;2
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">33</span>
 <span style="color: #00ffff;">RCLEL</span>
 <span style="color: #00ffff;">STO+ ST</span> Y
-X&#8593;2
+<span style="color: #00ffff;">X&#8593;2</span>
 <span style="color: #00ffff;">STO+ ST</span> Z
 <span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">J+</span>
@@ -1670,7 +1559,7 @@ X&#8593;2
 0
 <span style="color: #00ffff;">RTN</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">54</span>
-DIM?
+<span style="color: #00ffff;">DIM?</span>
 <span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">RTN</span>
 
@@ -1712,7 +1601,7 @@ DIM?
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">-</span>
 <span style="color: #00ffff;">RTN</span>
-    
+
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
 <span style="color: #ffa500;">@@@@ DSC: kuQ (Quartiles uncertainty) 46</span>
 <span style="color: #ffa500;">@@@@ FAQ: Needs at least 3 values</span>
@@ -1746,7 +1635,7 @@ DIM?
 <span style="color: #00ffff;">FC?C</span> 25
 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">99</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_TMP"</span>
-DIM?
+<span style="color: #00ffff;">DIM?</span>
 <span style="color: #00ffff;">R&#8595;</span>
 3
 <span style="color: #00ffff;">X&gt;Y?</span>
@@ -1764,7 +1653,7 @@ DIM?
 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">71</span>
 <span style="color: #ffa500;">@@@@ Array is sorted now</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_TMP"</span>
-DIM?                 <span style="color: #ffa500;">@@@@ ROWS=1 COLS </span>
+<span style="color: #00ffff;">DIM?</span>                 <span style="color: #ffa500;">@@@@ ROWS=1 COLS </span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">76</span> <span style="color: #ffa500;">@NM@ MED-RNG  @@@@ Q2 N</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>                 <span style="color: #ffa500;">@@@@ N Q2</span>
 <span style="color: #00ffff;">RCL ST</span> X             <span style="color: #ffa500;">@@@@ N N Q2</span>
@@ -1804,7 +1693,7 @@ DIM?                 <span style="color: #ffa500;">@@@@ ROWS=1 COLS </span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>                 <span style="color: #ffa500;">@@@@ N Q3 Q2 Q1</span>
 <span style="color: #00ffff;">R&#8595;</span>                   <span style="color: #ffa500;">@@@@ Q3 Q2 Q1</span>
 <span style="color: #00ffff;">RTN</span>
- 
+
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
 <span style="color: #ffa500;">@@@@ DSC: MED of indexed matrix on RANGE X: Lower Y: upper </span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">76</span> <span style="color: #ffa500;">@NM@ MED-RNG</span>
@@ -1845,7 +1734,7 @@ DIM?                 <span style="color: #ffa500;">@@@@ ROWS=1 COLS </span>
 <span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">RCLEL</span>
 <span style="color: #00ffff;">RTN</span>
-        
+
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
 <span style="color: #ffa500;">@@@@ DSC: "ERR: No MeDAT!" 99</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">99</span>
@@ -1944,8 +1833,8 @@ END
 
 
 
-<div id="outline-container-org0f08054" class="outline-2">
-<h2 id="org0f08054"><span class="section-number-2">11.</span> EOF</h2>
+<div id="outline-container-orge3a62cb" class="outline-2">
+<h2 id="orge3a62cb"><span class="section-number-2">11.</span> EOF</h2>
 <div class="outline-text-2" id="text-11">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1956,7 +1845,11 @@ END
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-10-27 Wed 18:50 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.6)
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 </div>
 </body>
 </html>

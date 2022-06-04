@@ -3,16 +3,15 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-10-27 Wed 19:06 -->
+<!-- 2022-06-04 Sat 16:22 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=1024, initial-scale=1" />
 <title>free42 Programming Tools</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="Mitch Richling" />
-<meta name="description" content="Random stuff to assist with free42/hp-42s/DM42 programing"
- />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="description" content="Random stuff to assist with free42/hp-42s/DM42 programing" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -33,8 +32,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -43,21 +43,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
   pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -193,7 +193,6 @@
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { width: 90%; }
-  /*]]>*/-->
 </style>
 <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
 <style>body { min-width: 500px; max-width: 1024px; }</style>
@@ -211,7 +210,7 @@
  <a accesskey="h" href="https://richmit.github.io/hp42/"> UP </a>
  |
  <a accesskey="H" href="https://www.mitchr.me/"> HOME </a>
-</div><div id="content">
+</div><div id="content" class="content">
 <h1 class="title">free42 Programming Tools</h1>
 <table border="2 solid #ccc" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -229,54 +228,54 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-10-27 19:05:47</i></td>
+<td class="org-left"><i>2022-06-04 16:21:07</i></td>
 </tr>
 </tbody>
 </table>
 <p align="center">
-Copyright 2021 Mitch Richling. All rights reserved.
+Copyright 2022 Mitch Richling. All rights reserved.
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5dda47e">1. Metadata</a></li>
+<li><a href="#org9ee0f53">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
 <li><a href="#menu-gen">3. Generating 42s menu code</a>
 <ul>
-<li><a href="#orga0027b9">3.1. Generic menu generator</a></li>
-<li><a href="#org952fc52">3.2. For CUSTOM-type Menus</a></li>
-<li><a href="#orged96052">3.3. Always generate local lables</a></li>
+<li><a href="#org81550b3">3.1. Generic menu generator</a></li>
+<li><a href="#org9d1e1e8">3.2. For CUSTOM-type Menus</a></li>
+<li><a href="#org321fd22">3.3. Always generate local lables</a></li>
 </ul>
 </li>
-<li><a href="#orge49bf4d">4. Emacs Helper Stuff</a>
+<li><a href="#org2621bf4">4. Emacs Helper Stuff</a>
 <ul>
-<li><a href="#orgdf9778c">4.1. Prepare Code For Conversion</a></li>
-<li><a href="#orgcbec341">4.2. Automatically processing tangled code</a></li>
-<li><a href="#orgc840b78">4.3. Tangle &amp; Load Tangled File</a></li>
-<li><a href="#orgc7b532d">4.4. yas templates</a></li>
+<li><a href="#orgd64e9bf">4.1. Prepare Code For Conversion</a></li>
+<li><a href="#orgb2e9670">4.2. Automatically processing tangled code</a></li>
+<li><a href="#org063e15d">4.3. Tangle &amp; Load Tangled File</a></li>
+<li><a href="#org84a13ef">4.4. yas templates</a></li>
 </ul>
 </li>
-<li><a href="#orgf87bbc2">5. free42 Notes</a>
+<li><a href="#org6fa918e">5. free42 Notes</a>
 <ul>
-<li><a href="#org93c8e6a">5.1. Character Set</a></li>
-<li><a href="#org55b8c53">5.2. Date format</a></li>
-<li><a href="#orgfd54c99">5.3. Stats registers</a></li>
+<li><a href="#org0269d5a">5.1. Character Set</a></li>
+<li><a href="#orgbc33257">5.2. Date format</a></li>
+<li><a href="#org4aafc86">5.3. Stats registers</a></li>
 </ul>
 </li>
-<li><a href="#orgd983f9b">6. DM 42 Notes</a>
+<li><a href="#orgb3ca064">6. DM 42 Notes</a>
 <ul>
-<li><a href="#org57c76d8">6.1. Display</a></li>
+<li><a href="#org5605d37">6.1. Display</a></li>
 </ul>
 </li>
-<li><a href="#orgcb41032">7. EOF</a></li>
+<li><a href="#orgde203b7">7. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org5dda47e" class="outline-2">
-<h2 id="org5dda47e"><span class="section-number-2">1.</span> Metadata</h2>
+<div id="outline-container-org9ee0f53" class="outline-2">
+<h2 id="org9ee0f53"><span class="section-number-2">1.</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/hp42s-meta.html">https://richmit.github.io/hp42/hp42s-meta.html</a>
@@ -358,8 +357,8 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
 <div class="outline-text-2" id="text-menu-gen">
 </div>
 
-<div id="outline-container-orga0027b9" class="outline-3">
-<h3 id="orga0027b9"><span class="section-number-3">3.1.</span> Generic menu generator</h3>
+<div id="outline-container-org81550b3" class="outline-3">
+<h3 id="org81550b3"><span class="section-number-3">3.1.</span> Generic menu generator</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 This code will read an org-mode table describing a menu, and generate 42s code to implement the menu.  The only limitation on menu depth and size are the
@@ -742,8 +741,8 @@ tables.
 </div>
 </div>
 
-<div id="outline-container-org952fc52" class="outline-3">
-<h3 id="org952fc52"><span class="section-number-3">3.2.</span> For CUSTOM-type Menus</h3>
+<div id="outline-container-org9d1e1e8" class="outline-3">
+<h3 id="org9d1e1e8"><span class="section-number-3">3.2.</span> For CUSTOM-type Menus</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 These functions are useful for CUSTOM-type menus &#x2013; that is menus that call other programs or built in functions.  I use this as a way to add hierarchy to the
@@ -826,8 +825,8 @@ the org-mode file and the whole thing will then be tangled together into one pro
 </div>
 </div>
 
-<div id="outline-container-orged96052" class="outline-3">
-<h3 id="orged96052"><span class="section-number-3">3.3.</span> Always generate local lables</h3>
+<div id="outline-container-org321fd22" class="outline-3">
+<h3 id="org321fd22"><span class="section-number-3">3.3.</span> Always generate local lables</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 This function is handy when you want to always generate local labels.
@@ -841,8 +840,8 @@ This function is handy when you want to always generate local labels.
 </div>
 </div>
 
-<div id="outline-container-orge49bf4d" class="outline-2">
-<h2 id="orge49bf4d"><span class="section-number-2">4.</span> Emacs Helper Stuff</h2>
+<div id="outline-container-org2621bf4" class="outline-2">
+<h2 id="org2621bf4"><span class="section-number-2">4.</span> Emacs Helper Stuff</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 The elisp file <code>hp42s-mode.el</code> provides few things:
@@ -866,8 +865,8 @@ To activate the functionality, simply <code>load</code> the <code>hp42s-mode.el<
 </div>
 </div>
 
-<div id="outline-container-orgdf9778c" class="outline-3">
-<h3 id="orgdf9778c"><span class="section-number-3">4.1.</span> Prepare Code For Conversion</h3>
+<div id="outline-container-orgd64e9bf" class="outline-3">
+<h3 id="orgd64e9bf"><span class="section-number-3">4.1.</span> Prepare Code For Conversion</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 I include comments like <code>@@##</code> that I use like compiler directives in C.  They provide a way to remove lines of code that are incompatible or unnecessary for
@@ -919,8 +918,8 @@ buffer, the code is automatically filtered for the selected version of free42 (s
 </div>
 </div>
 
-<div id="outline-container-orgcbec341" class="outline-3">
-<h3 id="orgcbec341"><span class="section-number-3">4.2.</span> Automatically processing tangled code</h3>
+<div id="outline-container-orgb2e9670" class="outline-3">
+<h3 id="orgb2e9670"><span class="section-number-3">4.2.</span> Automatically processing tangled code</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 By adding <code>MJR-process-buffer-as-42s-code</code> to the <code>org-babel-post-tangle-hook</code>, you can automatically process tangled code.  You can do that by evaluating
@@ -938,8 +937,8 @@ A handy way to tangle a file, or files in dired, is the <code>MJR-org-export-der
 </div>
 </div>
 
-<div id="outline-container-orgc840b78" class="outline-3">
-<h3 id="orgc840b78"><span class="section-number-3">4.3.</span> Tangle &amp; Load Tangled File</h3>
+<div id="outline-container-org063e15d" class="outline-3">
+<h3 id="org063e15d"><span class="section-number-3">4.3.</span> Tangle &amp; Load Tangled File</h3>
 <div class="outline-text-3" id="text-4-3">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-tangle-and-load</span> ()
@@ -957,85 +956,24 @@ A handy way to tangle a file, or files in dired, is the <code>MJR-org-export-der
 </div>
 </div>
 
-<div id="outline-container-orgc7b532d" class="outline-3">
-<h3 id="orgc7b532d"><span class="section-number-3">4.4.</span> yas templates</h3>
+<div id="outline-container-org84a13ef" class="outline-3">
+<h3 id="org84a13ef"><span class="section-number-3">4.4.</span> yas templates</h3>
 <div class="outline-text-3" id="text-4-4">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #b0c4de;">echo</span> <span style="color: #fa8072;">''</span>
 <span style="color: #00ffff;">for</span> f<span style="color: #00ffff;"> in</span> ~/core/yasnippet/hp42s-mode/*; <span style="color: #00ffff;">do</span> cat $<span style="color: #7fffd4;">f</span>; <span style="color: #b0c4de;">echo</span> <span style="color: #fa8072;">''</span>; <span style="color: #00ffff;">done</span>
 </pre>
 </div>
-
-<div class="org-src-container">
-<pre class="src src-snippet">
-<span style="color: #ff7f24;"># -*- mode: snippet -*-</span>
-<span style="color: #ff7f24;"># name: if-then-end</span>
-<span style="color: #ff7f24;"># key: if</span>
-<span style="color: #ff7f24;"># --</span>
-...?   @@@@ IF-BEGIN (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
-GTO <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span>1<span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (string-to-number yas-text))<span style="color: #00ffff;">}</span>
-GTO <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>
-LBL <span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span> @@@@ IF-THEN (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
-@@@@ True Code (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
-LBL <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span> @@@@ IF-END (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
-
-<span style="color: #ff7f24;"># -*- mode: snippet -*-</span>
-<span style="color: #ff7f24;"># name: if-then-else-end</span>
-<span style="color: #ff7f24;"># key: ife</span>
-<span style="color: #ff7f24;"># --</span>
-...?   @@@@ IF-BEGIN (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 2 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
-GTO <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span>1<span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (string-to-number yas-text))<span style="color: #00ffff;">}</span>
-GTO <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>
-LBL <span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span> @@@@ IF-THEN (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 2 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
-@@@@ True Code (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 2 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
-GTO <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 2 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>
-LBL <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span> @@@@ IF-ELSE (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 2 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
-@@@@ False Code (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 2 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
-LBL <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 2 (string-to-number yas-text)))<span style="color: #00ffff;">}</span> @@@@ IF-END (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 1 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>/<span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span><span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (+ 2 (string-to-number yas-text)))<span style="color: #00ffff;">}</span>)
-
-<span style="color: #ff7f24;"># -*- mode: snippet -*-</span>
-<span style="color: #ff7f24;"># name: if-not-then-end</span>
-<span style="color: #ff7f24;"># key: ifn</span>
-<span style="color: #ff7f24;"># --</span>
-...?   @@@@ IF-NOT-BEGIN (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
-GTO <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span>1<span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (string-to-number yas-text))<span style="color: #00ffff;">}</span>
-@@@@ False Code (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
-LBL <span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span> @@@@ IF-NOT-END (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
-
-<span style="color: #ff7f24;"># -*- mode: snippet -*-</span>
-<span style="color: #ff7f24;"># name: if-not-then-end</span>
-<span style="color: #ff7f24;"># key: ifn</span>
-<span style="color: #ff7f24;"># --</span>
-...?   @@@@ IF-NOT-BEGIN (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
-GTO <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span>1<span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (string-to-number yas-text))<span style="color: #00ffff;">}</span>
-@@@@ False Code (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
-LBL <span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span> @@@@ IF-NOT-END (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
-
-<span style="color: #ff7f24;"># -*- mode: snippet -*-</span>
-<span style="color: #ff7f24;"># name: if-then-end-return</span>
-<span style="color: #ff7f24;"># key: ifr</span>
-<span style="color: #ff7f24;"># --</span>
-...?      @@@@ IF-BEGIN (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
-GTO <span style="color: #00ffff;">${</span><span style="color: #ffc0cb; font-weight: bold;">1</span><span style="color: #00ffff;">:</span>1<span style="color: #6495ed;">$(</span>format <span style="color: #fa8072;">"%02d"</span> (string-to-number yas-text))<span style="color: #00ffff;">}</span>    @@@@ IF-FALSE-BEGIN (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
-@@@@ False Code (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
-RTN       @@@@ IF-FALSE-END (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
-LBL <span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>    @@@@ IF-TRUE-BEGIN (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
-@@@@ True Code (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
-RTN       @@@@ IF-TRUE-END (<span style="color: #00ffff;">$</span><span style="color: #fa8072;">1</span>)
-
-</pre>
-</div>
 </div>
 </div>
 </div>
 
-
-<div id="outline-container-orgf87bbc2" class="outline-2">
-<h2 id="orgf87bbc2"><span class="section-number-2">5.</span> free42 Notes</h2>
+<div id="outline-container-org6fa918e" class="outline-2">
+<h2 id="org6fa918e"><span class="section-number-2">5.</span> free42 Notes</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-org93c8e6a" class="outline-3">
-<h3 id="org93c8e6a"><span class="section-number-3">5.1.</span> Character Set</h3>
+<div id="outline-container-org0269d5a" class="outline-3">
+<h3 id="org0269d5a"><span class="section-number-3">5.1.</span> Character Set</h3>
 <div class="outline-text-3" id="text-5-1">
 <div class="org-src-container">
 <pre class="src src-text">  0 &#247;
@@ -1173,8 +1111,8 @@ RTN       @@@@ IF-TRUE-END (<span style="color: #00ffff;">$</span><span style="c
 </div>
 </div>
 
-<div id="outline-container-org55b8c53" class="outline-3">
-<h3 id="org55b8c53"><span class="section-number-3">5.2.</span> Date format</h3>
+<div id="outline-container-orgbc33257" class="outline-3">
+<h3 id="orgbc33257"><span class="section-number-3">5.2.</span> Date format</h3>
 <div class="outline-text-3" id="text-5-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -1216,8 +1154,8 @@ RTN       @@@@ IF-TRUE-END (<span style="color: #00ffff;">$</span><span style="c
 </div>
 </div>
 
-<div id="outline-container-orgfd54c99" class="outline-3">
-<h3 id="orgfd54c99"><span class="section-number-3">5.3.</span> Stats registers</h3>
+<div id="outline-container-org4aafc86" class="outline-3">
+<h3 id="org4aafc86"><span class="section-number-3">5.3.</span> Stats registers</h3>
 <div class="outline-text-3" id="text-5-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1304,12 +1242,12 @@ RTN       @@@@ IF-TRUE-END (<span style="color: #00ffff;">$</span><span style="c
 </div>
 </div>
 
-<div id="outline-container-orgd983f9b" class="outline-2">
-<h2 id="orgd983f9b"><span class="section-number-2">6.</span> DM 42 Notes</h2>
+<div id="outline-container-orgb3ca064" class="outline-2">
+<h2 id="orgb3ca064"><span class="section-number-2">6.</span> DM 42 Notes</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-org57c76d8" class="outline-3">
-<h3 id="org57c76d8"><span class="section-number-3">6.1.</span> Display</h3>
+<div id="outline-container-org5605d37" class="outline-3">
+<h3 id="org5605d37"><span class="section-number-3">6.1.</span> Display</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 GrMod is a read write variable.
@@ -1327,8 +1265,8 @@ ResX &amp; ResY are read only variables that have the display resolution
 </div>
 </div>
 
-<div id="outline-container-orgcb41032" class="outline-2">
-<h2 id="orgcb41032"><span class="section-number-2">7.</span> EOF</h2>
+<div id="outline-container-orgde203b7" class="outline-2">
+<h2 id="orgde203b7"><span class="section-number-2">7.</span> EOF</h2>
 <div class="outline-text-2" id="text-7">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -1339,7 +1277,11 @@ ResX &amp; ResY are read only variables that have the display resolution
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-10-27 Wed 19:06 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.6)
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 </div>
 </body>
 </html>

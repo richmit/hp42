@@ -3,16 +3,15 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-10-27 Wed 18:49 -->
+<!-- 2022-06-04 Sat 16:22 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=1024, initial-scale=1" />
 <title>free42 Base-N Tools</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="Mitch Richling" />
-<meta name="description" content="Description of some free42/hp-42s/DM42 programs for base-n computations"
- />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="description" content="Description of some free42/hp-42s/DM42 programs for base-n computations" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -33,8 +32,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -43,21 +43,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
   pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -193,7 +193,6 @@
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { width: 90%; }
-  /*]]>*/-->
 </style>
 <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
 <style>body { min-width: 500px; max-width: 1024px; }</style>
@@ -211,7 +210,7 @@
  <a accesskey="h" href="https://richmit.github.io/hp42/"> UP </a>
  |
  <a accesskey="H" href="https://www.mitchr.me/"> HOME </a>
-</div><div id="content">
+</div><div id="content" class="content">
 <h1 class="title">free42 Base-N Tools</h1>
 <table border="2 solid #ccc" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -229,34 +228,34 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-10-27 14:10:30</i></td>
+<td class="org-left"><i>2022-06-04 16:21:07</i></td>
 </tr>
 </tbody>
 </table>
 <p align="center">
-Copyright 2021 Mitch Richling. All rights reserved.
+Copyright 2022 Mitch Richling. All rights reserved.
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org32c34e2">1. Metadata</a></li>
+<li><a href="#org5f7165a">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
-<li><a href="#orgafd9449">3. <code>BASE</code>: BASE-N Application</a>
+<li><a href="#org1616395">3. <code>BASE</code>: BASE-N Application</a>
 <ul>
 <li><a href="#menu">3.1. Functionality &amp; Menu</a></li>
-<li><a href="#orgcb16101">3.2. Menu Code</a></li>
-<li><a href="#org381ef9a">3.3. Application Local Subroutines</a></li>
+<li><a href="#org1a5d4f4">3.2. Menu Code</a></li>
+<li><a href="#orgfbaee36">3.3. Application Local Subroutines</a></li>
 </ul>
 </li>
-<li><a href="#orgc65184a">4. EOF</a></li>
+<li><a href="#orgc29d59e">4. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org32c34e2" class="outline-2">
-<h2 id="org32c34e2"><span class="section-number-2">1.</span> Metadata</h2>
+<div id="outline-container-org5f7165a" class="outline-2">
+<h2 id="org5f7165a"><span class="section-number-2">1.</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/base.html">https://richmit.github.io/hp42/base.html</a>
@@ -316,7 +315,7 @@ Directory contents:
 <h2 id="introduction"><span class="section-number-2">2.</span> Introduction</h2>
 <div class="outline-text-2" id="text-introduction">
 
-<div id="org9fe3b8e" class="figure">
+<div id="org58c15eb" class="figure">
 <p><img src="bviewSS.jpeg" alt="bviewSS.jpeg" align="center" />
 </p>
 </div>
@@ -337,14 +336,14 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 </div>
 </div>
 
-<div id="outline-container-orgafd9449" class="outline-2">
-<h2 id="orgafd9449"><span class="section-number-2">3.</span> <code>BASE</code>: BASE-N Application</h2>
+<div id="outline-container-org1616395" class="outline-2">
+<h2 id="org1616395"><span class="section-number-2">3.</span> <code>BASE</code>: BASE-N Application</h2>
 <div class="outline-text-2" id="text-3">
 </div>
 <div id="outline-container-menu" class="outline-3">
 <h3 id="menu"><span class="section-number-3">3.1.</span> Functionality &amp; Menu</h3>
 <div class="outline-text-3" id="text-menu">
-<table id="orgb87284d" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+<table id="orga7da350" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
 <colgroup>
@@ -935,8 +934,8 @@ The only thing that still bugs me is the annoying way the 42s requires one to en
 </div>
 </div>
 
-<div id="outline-container-orgcb16101" class="outline-3">
-<h3 id="orgcb16101"><span class="section-number-3">3.2.</span> Menu Code</h3>
+<div id="outline-container-org1a5d4f4" class="outline-3">
+<h3 id="org1a5d4f4"><span class="section-number-3">3.2.</span> Menu Code</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 The menu program is generated via the following bit of elisp.  You must first define the <code>MJR-generate-42-menu-code</code> and <code>MJR-custom-x-gen</code> by evaluating the code blocks in the <code>hp42s-meta.org</code> file.
@@ -947,322 +946,11 @@ The skeleton was generated by the following code.  That skeleton has been fleshe
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"BASE"</span> 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 </pre>
 </div>
-
-<div class="org-src-container">
-<pre class="src src-hp42s"><span id="coderef-BASE" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (BASE)</span>
-<span style="color: #ffa500;">@@@@ DSC: Auto-generated menu program</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"BASE"</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">01</span>            <span style="color: #ffa500;">@@@@ Page 1 of menu BASE</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"S&amp;R"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
-<span style="color: #fa8072;">"BITS"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">05</span>
-<span style="color: #fa8072;">"FUN"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">06</span>
-<span style="color: #fa8072;">"MASK"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">07</span>
-<span style="color: #fa8072;">"ARTH"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">08</span>
-<span style="color: #fa8072;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">02</span>            <span style="color: #ffa500;">@@@@ Page 2 of menu BASE</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">92</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">09</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">93</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">10</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">94</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">11</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">95</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">12</span>
-<span style="color: #fa8072;">"BMNU"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">75</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">03</span>            <span style="color: #ffa500;">@@@@ Page 3 of menu BASE</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">96</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">13</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">97</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">14</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">98</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">15</span>
-<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">99</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">74</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">04</span>            <span style="color: #ffa500;">@@@@ Page 1 of menu S&amp;R</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"SLn"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"SLn"</span>
-<span style="color: #fa8072;">"SRn"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"SRn"</span>
-<span style="color: #fa8072;">"RLn"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"RLn"</span>
-<span style="color: #fa8072;">"RRn"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"RRn"</span>
-<span style="color: #fa8072;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">17</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">16</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">16</span>            <span style="color: #ffa500;">@@@@ Page 2 of menu S&amp;R</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"LJ"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"LJ"</span>
-<span style="color: #fa8072;">"RJ"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"RJ"</span>
-<span style="color: #fa8072;">"SHFXY"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"SHFXY"</span>
-<span style="color: #fa8072;">"ROTXY"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">18</span>
-<span style="color: #fa8072;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">17</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">16</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">17</span>            <span style="color: #ffa500;">@@@@ Page 3 of menu S&amp;R</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"SL"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"SL"</span>
-<span style="color: #fa8072;">"SR"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"SR"</span>
-<span style="color: #fa8072;">"RL"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"RL"</span>
-<span style="color: #fa8072;">"RR"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"RR"</span>
-<span style="color: #fa8072;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">16</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">17</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">05</span>            <span style="color: #ffa500;">@@@@ Page 1 of menu BITS</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"GETB"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"GETB"</span>
-<span style="color: #fa8072;">"SB"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"SETB"</span>
-<span style="color: #fa8072;">"CB"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"CLRB"</span>
-<span style="color: #fa8072;">"AB"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"ASNB"</span>
-<span style="color: #fa8072;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">20</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">19</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">05</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">19</span>            <span style="color: #ffa500;">@@@@ Page 2 of menu BITS</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"GY@X"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"GY@X"</span>
-<span style="color: #fa8072;">"SY@X"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"SY@X"</span>
-<span style="color: #fa8072;">"CY@X"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"CY@X"</span>
-<span style="color: #fa8072;">"AZ@Y"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"AZ@Y"</span>
-<span style="color: #fa8072;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">05</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">20</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">19</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">20</span>            <span style="color: #ffa500;">@@@@ Page 3 of menu BITS</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"POPRB"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"POPRB"</span>
-<span style="color: #fa8072;">"POPLB"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"POPLB"</span>
-<span style="color: #fa8072;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">19</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">05</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">20</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">06</span>            <span style="color: #ffa500;">@@@@ Page 1 of menu FUN</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"B#"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"B#"</span>
-<span style="color: #fa8072;">"MSSB"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"MSSB"</span>
-<span style="color: #fa8072;">"LSSB"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"LSSB"</span>
-<span style="color: #fa8072;">"ILN2"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"ILN2"</span>
-<span style="color: #fa8072;">"ISQRT"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"ISQRT"</span>
-<span style="color: #fa8072;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">21</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">21</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">06</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">21</span>            <span style="color: #ffa500;">@@@@ Page 2 of menu FUN</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"REVNB"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"REVNB"</span>
-<span style="color: #fa8072;">"REVB"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"REVB"</span>
-<span style="color: #fa8072;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">06</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">06</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">21</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">07</span>            <span style="color: #ffa500;">@@@@ Page 1 of menu MASK</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"MSKL"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"MSKL"</span>
-<span style="color: #fa8072;">"MSKR"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"MSKR"</span>
-<span style="color: #fa8072;">"MSKn"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"MSKn"</span>
-<span style="color: #fa8072;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">07</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">08</span>            <span style="color: #ffa500;">@@@@ Page 1 of menu ARTH</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"AND"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">23</span>
-<span style="color: #fa8072;">"OR"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">24</span>
-<span style="color: #fa8072;">"XOR"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">25</span>
-<span style="color: #fa8072;">"NOT"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">26</span>
-<span style="color: #fa8072;">"NEG"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">27</span>
-<span style="color: #fa8072;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">22</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">22</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">08</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">22</span>            <span style="color: #ffa500;">@@@@ Page 2 of menu ARTH</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"+"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">28</span>
-<span style="color: #fa8072;">"-"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">29</span>
-<span style="color: #fa8072;">"&#215;"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">30</span>
-<span style="color: #fa8072;">"&#247;"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">31</span>
-<span style="color: #fa8072;">"MOD"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">32</span>
-<span style="color: #fa8072;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"BVIEW"</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">08</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">08</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">22</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">00</span> <span style="color: #ffa500;">@@@@ Application Exit</span>
-<span style="color: #00ffff;">EXITALL</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">09</span>    <span style="color: #ffa500;">@@@@ Action for menu key LBL 92</span>
-<span style="color: #00ffff;">HEXM</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">10</span>    <span style="color: #ffa500;">@@@@ Action for menu key LBL 93</span>
-<span style="color: #00ffff;">DECM</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">11</span>    <span style="color: #ffa500;">@@@@ Action for menu key LBL 94</span>
-<span style="color: #00ffff;">OCTM</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">12</span>    <span style="color: #ffa500;">@@@@ Action for menu key LBL 95</span>
-<span style="color: #00ffff;">BINM</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">13</span>    <span style="color: #ffa500;">@@@@ Action for menu key LBL 96</span>
-<span style="color: #00ffff;">WSIZE</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">14</span>    <span style="color: #ffa500;">@@@@ Action for menu key LBL 97</span>
-<span style="color: #00ffff;">BSIGNED</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">15</span>    <span style="color: #ffa500;">@@@@ Action for menu key LBL 98</span>
-<span style="color: #00ffff;">BWRAP</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">18</span>    <span style="color: #ffa500;">@@@@ Action for menu key ROTXY</span>
-<span style="color: #00ffff;">ROTXY</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">23</span>    <span style="color: #ffa500;">@@@@ Action for menu key AND</span>
-<span style="color: #00ffff;">AND</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">24</span>    <span style="color: #ffa500;">@@@@ Action for menu key OR</span>
-<span style="color: #00ffff;">OR</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">25</span>    <span style="color: #ffa500;">@@@@ Action for menu key XOR</span>
-XOR
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">26</span>    <span style="color: #ffa500;">@@@@ Action for menu key NOT</span>
-<span style="color: #00ffff;">NOT</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">27</span>    <span style="color: #ffa500;">@@@@ Action for menu key NEG</span>
-<span style="color: #00ffff;">BASE+/-</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">28</span>    <span style="color: #ffa500;">@@@@ Action for menu key +</span>
-<span style="color: #00ffff;">BASE+</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">29</span>    <span style="color: #ffa500;">@@@@ Action for menu key -</span>
-<span style="color: #00ffff;">BASE-</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">30</span>    <span style="color: #ffa500;">@@@@ Action for menu key &#215;</span>
-<span style="color: #00ffff;">BASE&#215;</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">31</span>    <span style="color: #ffa500;">@@@@ Action for menu key &#247;</span>
-<span style="color: #00ffff;">BASE&#247;</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">32</span>    <span style="color: #ffa500;">@@@@ Action for menu key MOD</span>
-<span style="color: #00ffff;">MOD</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #ffa500;">@@@@ Free labels start at: 33</span>
-</pre>
-</div>
 </div>
 </div>
 
-<div id="outline-container-org381ef9a" class="outline-3">
-<h3 id="org381ef9a"><span class="section-number-3">3.3.</span> Application Local Subroutines</h3>
+<div id="outline-container-orgfbaee36" class="outline-3">
+<h3 id="orgfbaee36"><span class="section-number-3">3.3.</span> Application Local Subroutines</h3>
 <div class="outline-text-3" id="text-3-3">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:b#)</span>
@@ -2327,8 +2015,8 @@ END
 </div>
 </div>
 
-<div id="outline-container-orgc65184a" class="outline-2">
-<h2 id="orgc65184a"><span class="section-number-2">4.</span> EOF</h2>
+<div id="outline-container-orgc29d59e" class="outline-2">
+<h2 id="orgc29d59e"><span class="section-number-2">4.</span> EOF</h2>
 <div class="outline-text-2" id="text-4">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -2339,7 +2027,11 @@ END
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-10-27 Wed 18:49 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.6)
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 </div>
 </body>
 </html>

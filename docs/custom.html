@@ -3,16 +3,15 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-10-27 Wed 19:07 -->
+<!-- 2022-06-04 Sat 16:22 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=1024, initial-scale=1" />
 <title>free42 Custom Menus</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="Mitch Richling" />
-<meta name="description" content="Making Custom Menus for the free42/hp-42s/DM42"
- />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="description" content="Making Custom Menus for the free42/hp-42s/DM42" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -33,8 +32,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -43,21 +43,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
   pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -193,7 +193,6 @@
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { width: 90%; }
-  /*]]>*/-->
 </style>
 <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
 <style>body { min-width: 500px; max-width: 1024px; }</style>
@@ -211,7 +210,7 @@
  <a accesskey="h" href="https://richmit.github.io/hp42/"> UP </a>
  |
  <a accesskey="H" href="https://www.mitchr.me/"> HOME </a>
-</div><div id="content">
+</div><div id="content" class="content">
 <h1 class="title">free42 Custom Menus</h1>
 <table border="2 solid #ccc" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -229,40 +228,40 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2021-10-27 18:52:41</i></td>
+<td class="org-left"><i>2022-06-04 16:21:07</i></td>
 </tr>
 </tbody>
 </table>
 <p align="center">
-Copyright 2021 Mitch Richling. All rights reserved.
+Copyright 2022 Mitch Richling. All rights reserved.
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org71d5691">1. Metadata</a></li>
+<li><a href="#org6aab85f">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a>
 <ul>
-<li><a href="#org476180f">2.1. Customizing Custom Menu Table</a></li>
+<li><a href="#org14b618b">2.1. Customizing Custom Menu Table</a></li>
 </ul>
 </li>
-<li><a href="#org118ee80">3. Custom Menus</a>
+<li><a href="#org50f516a">3. Custom Menus</a>
 <ul>
-<li><a href="#org1ed5e56">3.1. Menu Contents</a></li>
-<li><a href="#orgf63966f">3.2. Menu Code</a></li>
+<li><a href="#org77e043c">3.1. Menu Contents</a></li>
+<li><a href="#orgd7d36f4">3.2. Menu Code</a></li>
 </ul>
 </li>
 <li><a href="#system-custom">4. Create system <code>CUSTOM</code> Menu</a></li>
-<li><a href="#org89bce37">5. <code>SPREF</code>: Set some of my personal prefrences</a></li>
-<li><a href="#orga8eb846">6. END</a></li>
-<li><a href="#org8246b12">7. EOF</a></li>
+<li><a href="#org5fb5748">5. <code>SPREF</code>: Set some of my personal prefrences</a></li>
+<li><a href="#org7087ed7">6. END</a></li>
+<li><a href="#org0041da0">7. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org71d5691" class="outline-2">
-<h2 id="org71d5691"><span class="section-number-2">1.</span> Metadata</h2>
+<div id="outline-container-org6aab85f" class="outline-2">
+<h2 id="org6aab85f"><span class="section-number-2">1.</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/custom.html">https://richmit.github.io/hp42/custom.html</a>
@@ -333,14 +332,14 @@ The flow to create your custom CUST program:
 <ul class="org-ul">
 <li>Evaluate the "Generic menu generator" babel block in the <code>hp42s-meta.org</code> file.  This will define the function <code>MJR-generate-42-menu-code</code></li>
 <li>Evaluate the "For CUSTOM-type Menus" babel block in the <code>hp42s-meta.org</code> file.  This will define the function <code>MJR-custom-x-gen</code></li>
-<li>Define your menu in the <a href="#org1ed5e56">Menu Contents</a> section.</li>
-<li>Evaluate the babel block in the <a href="#orgf63966f">Menu Code</a> section below.</li>
+<li>Define your menu in the <a href="#org77e043c">Menu Contents</a> section.</li>
+<li>Evaluate the babel block in the <a href="#orgd7d36f4">Menu Code</a> section below.</li>
 <li>Load the program on your calculator</li>
 </ul>
 </div>
 
-<div id="outline-container-org476180f" class="outline-3">
-<h3 id="org476180f"><span class="section-number-3">2.1.</span> Customizing Custom Menu Table</h3>
+<div id="outline-container-org14b618b" class="outline-3">
+<h3 id="org14b618b"><span class="section-number-3">2.1.</span> Customizing Custom Menu Table</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 The first column (which I labeled Menu) describes the menu keys.  Colons are used to define a menu hierarchy.  For example "<code>top:mid:thingy</code>" means we have a
@@ -365,14 +364,14 @@ The other columns of the table are not used.
 </div>
 </div>
 
-<div id="outline-container-org118ee80" class="outline-2">
-<h2 id="org118ee80"><span class="section-number-2">3.</span> Custom Menus</h2>
+<div id="outline-container-org50f516a" class="outline-2">
+<h2 id="org50f516a"><span class="section-number-2">3.</span> Custom Menus</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org1ed5e56" class="outline-3">
-<h3 id="org1ed5e56"><span class="section-number-3">3.1.</span> Menu Contents</h3>
+<div id="outline-container-org77e043c" class="outline-3">
+<h3 id="org77e043c"><span class="section-number-3">3.1.</span> Menu Contents</h3>
 <div class="outline-text-3" id="text-3-1">
-<table id="org6d90758" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
+<table id="org2b805e6" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
 
 
 <colgroup>
@@ -474,8 +473,8 @@ The other columns of the table are not used.
 </div>
 </div>
 
-<div id="outline-container-orgf63966f" class="outline-3">
-<h3 id="orgf63966f"><span class="section-number-3">3.2.</span> Menu Code</h3>
+<div id="outline-container-orgd7d36f4" class="outline-3">
+<h3 id="orgd7d36f4"><span class="section-number-3">3.2.</span> Menu Code</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 The menu program is generated via the following bit of elisp.  You must first define the <code>MJR-generate-42-menu-code</code> and <code>MJR-custom-x-gen</code> by evaluating the code blocks in the <code>hp42s-meta.org</code> file.
@@ -483,67 +482,6 @@ The menu program is generated via the following bit of elisp.  You must first de
 
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"CUST"</span> 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-hp42s"><span id="coderef-CUST" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (CUST)</span>
-<span style="color: #ffa500;">@@@@ DSC: Auto-generated menu program</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"CUST"</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">01</span>            <span style="color: #ffa500;">@@@@ Page 1 of menu CUST</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"SFUN"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"SFUN"</span>
-<span style="color: #fa8072;">"MATH"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
-<span style="color: #fa8072;">"BASE"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"BASE"</span>
-<span style="color: #fa8072;">"PHIL"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"PHIL"</span>
-<span style="color: #fa8072;">"MEAS"</span>
-<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"MEAS"</span>
-<span style="color: #fa8072;">"DATE"</span>
-<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"DMENU"</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">02</span>            <span style="color: #ffa500;">@@@@ Page 2 of menu CUST</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"CONS"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"CONS"</span>
-<span style="color: #fa8072;">"UNIT"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UNIT"</span>
-<span style="color: #fa8072;">"SIPFX"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"SIPFX"</span>
-<span style="color: #fa8072;">"UPROP"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"UPROP"</span>
-<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">03</span>            <span style="color: #ffa500;">@@@@ Page 1 of menu MATH</span>
-<span style="color: #00ffff;">CLMENU</span>
-<span style="color: #fa8072;">"POLY"</span>
-<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"POLY"</span>
-<span style="color: #fa8072;">"FUNC"</span>
-<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"FMENU"</span>
-<span style="color: #fa8072;">"VEC3"</span>
-<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"VEC3"</span>
-<span style="color: #fa8072;">"NLA"</span>
-<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"NLA"</span>
-<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
-<span style="color: #00ffff;">MENU</span>
-<span style="color: #00ffff;">STOP</span>
-<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">00</span> <span style="color: #ffa500;">@@@@ Application Exit</span>
-<span style="color: #00ffff;">EXITALL</span>
-<span style="color: #00ffff;">RTN</span>
-<span style="color: #ffa500;">@@@@ Free labels start at: 4</span>
 </pre>
 </div>
 </div>
@@ -559,7 +497,7 @@ Sometimes our carefully built in <code>CUSTOM</code> menu is lost &#x2013; an er
 each key.
 </p>
 
-<table id="orgb4e9525" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
+<table id="org309834f" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="box" align="center">
 
 
 <colgroup>
@@ -717,40 +655,11 @@ Simply evaluate the followign lisp block, and the 42s program will be created.
 (princ <span style="color: #fa8072;">"RTN\n"</span>)
 </pre>
 </div>
-
-<div class="org-src-container">
-<pre class="src src-hp42s"><span id="coderef-MKCM" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MKCM)</span>
-<span style="color: #ffa500;">@@@@ DSC: Autogenerated menu program</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"MKCM"</span>
-<span style="color: #00ffff;">CLKEYS</span>
-<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">"CUST"</span> TO 01
-<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">"EEPFX"</span> TO 05
-<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">"||"</span> TO 06
-<span style="color: #00ffff;">SF</span> 25
-<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"GrMod"</span>
-<span style="color: #00ffff;">FS?C</span> 25
-<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">"VirtV"</span> TO 07
-<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">"SST"</span> TO 13
-<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">"SST&#8593;"</span> TO 14
-<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">"SST&#8594;"</span> TO 15
-<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">"GTO"</span> TO 16
-<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">"XEQ"</span> TO 17
-<span style="color: #00ffff;">SF</span> 25
-<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"GrMod"</span>
-<span style="color: #00ffff;">FS?C</span> 25
-<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">"VIEW"</span> TO 18
-<span style="color: #00ffff;">SF</span> 25
-<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"GrMod"</span>
-<span style="color: #00ffff;">FC?C</span> 25
-<span style="color: #00ffff;">ASSIGN</span> <span style="color: #fa8072;">"PRV"</span> TO 18
-RTN
-</pre>
-</div>
 </div>
 </div>
 
-<div id="outline-container-org89bce37" class="outline-2">
-<h2 id="org89bce37"><span class="section-number-2">5.</span> <code>SPREF</code>: Set some of my personal prefrences</h2>
+<div id="outline-container-org5fb5748" class="outline-2">
+<h2 id="org5fb5748"><span class="section-number-2">5.</span> <code>SPREF</code>: Set some of my personal prefrences</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-SPREF" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SPREF)</span>
@@ -784,8 +693,8 @@ RTN
 </div>
 </div>
 
-<div id="outline-container-orga8eb846" class="outline-2">
-<h2 id="orga8eb846"><span class="section-number-2">6.</span> END</h2>
+<div id="outline-container-org7087ed7" class="outline-2">
+<h2 id="org7087ed7"><span class="section-number-2">6.</span> END</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -795,8 +704,8 @@ END
 </div>
 </div>
 
-<div id="outline-container-org8246b12" class="outline-2">
-<h2 id="org8246b12"><span class="section-number-2">7.</span> EOF</h2>
+<div id="outline-container-org0041da0" class="outline-2">
+<h2 id="org0041da0"><span class="section-number-2">7.</span> EOF</h2>
 <div class="outline-text-2" id="text-7">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -807,7 +716,11 @@ END
 </div>
 </div>
 <div id="postamble" class="status">
-Created by Mitch Richling <<a href="mailto:http://www.mitchr.me/">http://www.mitchr.me/</a>>.  Rendered on 2021-10-27 Wed 19:07 via <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.6)
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 </div>
 </body>
 </html>

@@ -466,7 +466,7 @@
   ;; Remove code only needed for an older version of free42 than our target
   (goto-char (point-min))
   (while (re-search-forward "^.*@@## REQ:free42<\\([0-9.]+\\) *$" nil t)
-    (if (and MJR-target-free42-version (version<= MJR-target-free42-version (match-string 1)))
+    (if (and MJR-target-free42-version (version<= (match-string 1) MJR-target-free42-version))
         (progn (cl-incf zap-loc-too-old)
                (replace-match ""))))
   ;; Zap comments

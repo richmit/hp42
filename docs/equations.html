@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-06-04 Sat 16:22 -->
+<!-- 2024-02-13 Tue 22:55 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=1024, initial-scale=1" />
 <title>free42 equations</title>
@@ -192,7 +192,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
+  .org-svg { }
 </style>
 <style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
 <style>body { min-width: 500px; max-width: 1024px; }</style>
@@ -204,27 +204,38 @@
 <style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
 <style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
 <style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 <body>
 <div id="org-div-home-and-up">
@@ -254,41 +265,41 @@
 </tbody>
 </table>
 <p align="center">
-Copyright 2022 Mitch Richling. All rights reserved.
+Copyright 2024 Mitch Richling. All rights reserved.
 </p>
 
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4516357">1. Metadata</a></li>
-<li><a href="#org3843fc2">2. Introduction</a></li>
-<li><a href="#org615bad4">3. Master Program Label</a></li>
-<li><a href="#orgff04923">4. Equations</a>
+<li><a href="#org1f7486d">1. Metadata</a></li>
+<li><a href="#orgc358429">2. Introduction</a></li>
+<li><a href="#org62c0236">3. Master Program Label</a></li>
+<li><a href="#org8e77c57">4. Equations</a>
 <ul>
-<li><a href="#orge8e4bcd">4.1. <code>KEPLE</code>: Kepler's Equation</a></li>
-<li><a href="#org5a2eddc">4.2. <code>KIUS</code>: Kiusalas Perfs</a></li>
-<li><a href="#org13d5e4e">4.3. <code>TVM</code>: Time Value of Money Equation</a></li>
-<li><a href="#org11afc9c">4.4. <code>EULI</code>:Euler Integral</a></li>
-<li><a href="#org6271e42">4.5. <code>NORMD</code>: Normal Distribution PDF</a></li>
-<li><a href="#orga5df699">4.6. <code>FDIST</code>: F Distribution PDF</a></li>
-<li><a href="#org14883cd">4.7. <code>CHI2</code>: Chi Square Distribution PDF</a></li>
-<li><a href="#org44e951d">4.8. <code>BETAF</code>: Beta Distribution PDF</a></li>
-<li><a href="#org7a3c32f">4.9. <code>LOGID</code>: Logistic Distribution PDF</a></li>
-<li><a href="#orge885047">4.10. <code>STUTD</code>: Student's t Distribution PDF</a></li>
-<li><a href="#orge5a27e5">4.11. <code>WEIBD</code>: Weibull Distribution PDF</a></li>
-<li><a href="#org6eadd2e">4.12. <code>EXPOD</code>: Exponential Distribution PDF</a></li>
-<li><a href="#org2bad555">4.13. <code>SINFSF</code>: Sinusoid Frequency Standard Form</a></li>
+<li><a href="#org38c30aa">4.1. <code>KEPLE</code>: Kepler's Equation</a></li>
+<li><a href="#org1ef9fde">4.2. <code>KIUS</code>: Kiusalas Perfs</a></li>
+<li><a href="#org7b2956c">4.3. <code>TVM</code>: Time Value of Money Equation</a></li>
+<li><a href="#org084eaae">4.4. <code>EULI</code>:Euler Integral</a></li>
+<li><a href="#org504ae10">4.5. <code>NORMD</code>: Normal Distribution PDF</a></li>
+<li><a href="#org1ac4a9c">4.6. <code>FDIST</code>: F Distribution PDF</a></li>
+<li><a href="#org6e3ee4c">4.7. <code>CHI2</code>: Chi Square Distribution PDF</a></li>
+<li><a href="#org160f7a7">4.8. <code>BETAF</code>: Beta Distribution PDF</a></li>
+<li><a href="#orga1869e8">4.9. <code>LOGID</code>: Logistic Distribution PDF</a></li>
+<li><a href="#orga2dc77f">4.10. <code>STUTD</code>: Student's t Distribution PDF</a></li>
+<li><a href="#org47d4c0b">4.11. <code>WEIBD</code>: Weibull Distribution PDF</a></li>
+<li><a href="#org6e11260">4.12. <code>EXPOD</code>: Exponential Distribution PDF</a></li>
+<li><a href="#orgd5c158d">4.13. <code>SINFSF</code>: Sinusoid Frequency Standard Form</a></li>
 </ul>
 </li>
-<li><a href="#orgd37384a">5. Master Program END</a></li>
-<li><a href="#orgd287999">6. EOF</a></li>
+<li><a href="#orgc63981a">5. Master Program END</a></li>
+<li><a href="#org8e321c1">6. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org4516357" class="outline-2">
-<h2 id="org4516357"><span class="section-number-2">1.</span> Metadata</h2>
+<div id="outline-container-org1f7486d" class="outline-2">
+<h2 id="org1f7486d"><span class="section-number-2">1.</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/equations.html">https://richmit.github.io/hp42/equations.html</a>
@@ -344,8 +355,8 @@ Directory contents:
 </div>
 </div>
 
-<div id="outline-container-org3843fc2" class="outline-2">
-<h2 id="org3843fc2"><span class="section-number-2">2.</span> Introduction</h2>
+<div id="outline-container-orgc358429" class="outline-2">
+<h2 id="orgc358429"><span class="section-number-2">2.</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Here we have a few handy equations.  All of them have MVAR declarations so they work with the 42s' integrator and solver.
@@ -360,8 +371,8 @@ time so they can all be reloaded when the Git repo is updated.
 </div>
 </div>
 
-<div id="outline-container-org615bad4" class="outline-2">
-<h2 id="org615bad4"><span class="section-number-2">3.</span> Master Program Label</h2>
+<div id="outline-container-org62c0236" class="outline-2">
+<h2 id="org62c0236"><span class="section-number-2">3.</span> Master Program Label</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-EQLIB" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (EQLIB)</span>
@@ -373,12 +384,12 @@ time so they can all be reloaded when the Git repo is updated.
 </div>
 </div>
 
-<div id="outline-container-orgff04923" class="outline-2">
-<h2 id="orgff04923"><span class="section-number-2">4.</span> Equations</h2>
+<div id="outline-container-org8e77c57" class="outline-2">
+<h2 id="org8e77c57"><span class="section-number-2">4.</span> Equations</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-orge8e4bcd" class="outline-3">
-<h3 id="orge8e4bcd"><span class="section-number-3">4.1.</span> <code>KEPLE</code>: Kepler's Equation</h3>
+<div id="outline-container-org38c30aa" class="outline-3">
+<h3 id="org38c30aa"><span class="section-number-3">4.1.</span> <code>KEPLE</code>: Kepler's Equation</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 \[E_A - E \sin(E_A) - M_A = 0\]
@@ -410,8 +421,8 @@ the eccentricity.
 </div>
 </div>
 
-<div id="outline-container-org5a2eddc" class="outline-3">
-<h3 id="org5a2eddc"><span class="section-number-3">4.2.</span> <code>KIUS</code>: Kiusalas Perfs</h3>
+<div id="outline-container-org1ef9fde" class="outline-3">
+<h3 id="org1ef9fde"><span class="section-number-3">4.2.</span> <code>KIUS</code>: Kiusalas Perfs</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 \[\frac{100000}{127 K}-P = 0\]
@@ -436,8 +447,8 @@ the eccentricity.
 </div>
 </div>
 
-<div id="outline-container-org13d5e4e" class="outline-3">
-<h3 id="org13d5e4e"><span class="section-number-3">4.3.</span> <code>TVM</code>: Time Value of Money Equation</h3>
+<div id="outline-container-org7b2956c" class="outline-3">
+<h3 id="org7b2956c"><span class="section-number-3">4.3.</span> <code>TVM</code>: Time Value of Money Equation</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 Can be used to solve TVM problems when solved.
@@ -493,8 +504,8 @@ In the program we use "<code>B1/E0</code>" for the variable \(p\).
 </div>
 </div>
 
-<div id="outline-container-org11afc9c" class="outline-3">
-<h3 id="org11afc9c"><span class="section-number-3">4.4.</span> <code>EULI</code>:Euler Integral</h3>
+<div id="outline-container-org084eaae" class="outline-3">
+<h3 id="org084eaae"><span class="section-number-3">4.4.</span> <code>EULI</code>:Euler Integral</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 Can be used to directly compute the incomplete beta function when integrated.
@@ -535,8 +546,8 @@ Related to the beta function, F distribution, and z distributions.
 </div>
 </div>
 
-<div id="outline-container-org6271e42" class="outline-3">
-<h3 id="org6271e42"><span class="section-number-3">4.5.</span> <code>NORMD</code>: Normal Distribution PDF</h3>
+<div id="outline-container-org504ae10" class="outline-3">
+<h3 id="org504ae10"><span class="section-number-3">4.5.</span> <code>NORMD</code>: Normal Distribution PDF</h3>
 <div class="outline-text-3" id="text-4-5">
 <p>
 Can be used to compute normal probabilities when integrated.
@@ -582,8 +593,8 @@ In most sources \(\sigma\) is used instead of \(s\) and \(\mu\) is used instead 
 </div>
 </div>
 
-<div id="outline-container-orga5df699" class="outline-3">
-<h3 id="orga5df699"><span class="section-number-3">4.6.</span> <code>FDIST</code>: F Distribution PDF</h3>
+<div id="outline-container-org1ac4a9c" class="outline-3">
+<h3 id="org1ac4a9c"><span class="section-number-3">4.6.</span> <code>FDIST</code>: F Distribution PDF</h3>
 <div class="outline-text-3" id="text-4-6">
 <p>
 Can be used to compute F probabilities when integrated.
@@ -634,8 +645,8 @@ Can be used to compute F probabilities when integrated.
 </div>
 </div>
 
-<div id="outline-container-org14883cd" class="outline-3">
-<h3 id="org14883cd"><span class="section-number-3">4.7.</span> <code>CHI2</code>: Chi Square Distribution PDF</h3>
+<div id="outline-container-org6e3ee4c" class="outline-3">
+<h3 id="org6e3ee4c"><span class="section-number-3">4.7.</span> <code>CHI2</code>: Chi Square Distribution PDF</h3>
 <div class="outline-text-3" id="text-4-7">
 <p>
 Can be used to compute chi square probabilities when integrated.
@@ -681,8 +692,8 @@ Can be used to compute chi square probabilities when integrated.
 </div>
 </div>
 
-<div id="outline-container-org44e951d" class="outline-3">
-<h3 id="org44e951d"><span class="section-number-3">4.8.</span> <code>BETAF</code>: Beta Distribution PDF</h3>
+<div id="outline-container-org160f7a7" class="outline-3">
+<h3 id="org160f7a7"><span class="section-number-3">4.8.</span> <code>BETAF</code>: Beta Distribution PDF</h3>
 <div class="outline-text-3" id="text-4-8">
 <p>
 Can be used to compute beta probabilities when integrated.
@@ -728,8 +739,8 @@ In most sources \(\alpha\) is used instead of \(a\) and \(\beta\) is used instea
 </div>
 </div>
 
-<div id="outline-container-org7a3c32f" class="outline-3">
-<h3 id="org7a3c32f"><span class="section-number-3">4.9.</span> <code>LOGID</code>: Logistic Distribution PDF</h3>
+<div id="outline-container-orga1869e8" class="outline-3">
+<h3 id="orga1869e8"><span class="section-number-3">4.9.</span> <code>LOGID</code>: Logistic Distribution PDF</h3>
 <div class="outline-text-3" id="text-4-9">
 <p>
 Can be used to compute logistic probabilities when integrated.
@@ -773,8 +784,8 @@ Also note that various symbols are used for the parameters &#x2013; \(\mu\) &amp
 </div>
 </div>
 
-<div id="outline-container-orge885047" class="outline-3">
-<h3 id="orge885047"><span class="section-number-3">4.10.</span> <code>STUTD</code>: Student's t Distribution PDF</h3>
+<div id="outline-container-orga2dc77f" class="outline-3">
+<h3 id="orga2dc77f"><span class="section-number-3">4.10.</span> <code>STUTD</code>: Student's t Distribution PDF</h3>
 <div class="outline-text-3" id="text-4-10">
 <p>
 Can be used to compute Student's t probabilities when integrated.
@@ -822,8 +833,8 @@ In the program "<code>V</code>" is used for \(\nu\).
 </div>
 </div>
 
-<div id="outline-container-orge5a27e5" class="outline-3">
-<h3 id="orge5a27e5"><span class="section-number-3">4.11.</span> <code>WEIBD</code>: Weibull Distribution PDF</h3>
+<div id="outline-container-org47d4c0b" class="outline-3">
+<h3 id="org47d4c0b"><span class="section-number-3">4.11.</span> <code>WEIBD</code>: Weibull Distribution PDF</h3>
 <div class="outline-text-3" id="text-4-11">
 <p>
 Can be used to compute Weibull probabilities when integrated.
@@ -871,8 +882,8 @@ Note that some sources use \(\frac{1}{\lambda}\) as the parameter instead of \(\
 </div>
 </div>
 
-<div id="outline-container-org6eadd2e" class="outline-3">
-<h3 id="org6eadd2e"><span class="section-number-3">4.12.</span> <code>EXPOD</code>: Exponential Distribution PDF</h3>
+<div id="outline-container-org6e11260" class="outline-3">
+<h3 id="org6e11260"><span class="section-number-3">4.12.</span> <code>EXPOD</code>: Exponential Distribution PDF</h3>
 <div class="outline-text-3" id="text-4-12">
 <p>
 Can be used to compute exponential probabilities when integrated.
@@ -909,8 +920,8 @@ Note that some sources use \(\frac{1}{\lambda}\) as the parameter instead of \(\
 </div>
 </div>
 
-<div id="outline-container-org2bad555" class="outline-3">
-<h3 id="org2bad555"><span class="section-number-3">4.13.</span> <code>SINFSF</code>: Sinusoid Frequency Standard Form</h3>
+<div id="outline-container-orgd5c158d" class="outline-3">
+<h3 id="orgd5c158d"><span class="section-number-3">4.13.</span> <code>SINFSF</code>: Sinusoid Frequency Standard Form</h3>
 <div class="outline-text-3" id="text-4-13">
 <p>
 \[A\cdot\sin(2\pi Fx+P)\]
@@ -940,8 +951,8 @@ RTN
 </div>
 </div>
 
-<div id="outline-container-orgd37384a" class="outline-2">
-<h2 id="orgd37384a"><span class="section-number-2">5.</span> Master Program END</h2>
+<div id="outline-container-orgc63981a" class="outline-2">
+<h2 id="orgc63981a"><span class="section-number-2">5.</span> Master Program END</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -951,8 +962,8 @@ END
 </div>
 </div>
 
-<div id="outline-container-orgd287999" class="outline-2">
-<h2 id="orgd287999"><span class="section-number-2">6.</span> EOF</h2>
+<div id="outline-container-org8e321c1" class="outline-2">
+<h2 id="org8e321c1"><span class="section-number-2">6.</span> EOF</h2>
 <div class="outline-text-2" id="text-6">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />

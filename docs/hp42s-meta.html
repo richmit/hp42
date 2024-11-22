@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-02-13 Tue 22:55 -->
+<!-- 2024-11-21 Thu 16:50 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=1024, initial-scale=1" />
 <title>free42 Programming Tools</title>
@@ -228,7 +228,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2024-02-12 12:16:36</i></td>
+<td class="org-left"><i>2024-11-21 16:49:22</i></td>
 </tr>
 </tbody>
 </table>
@@ -240,49 +240,45 @@ Copyright 2024 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf719fe8">1. Metadata</a></li>
+<li><a href="#orgd0bde63">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
 <li><a href="#menu-gen">3. Generating 42s menu code</a>
 <ul>
-<li><a href="#org4a75bf6">3.1. Generic menu generator</a></li>
-<li><a href="#orgeb05d89">3.2. For CUSTOM-type Menus</a></li>
-<li><a href="#orgb596c61">3.3. Always generate local lables</a></li>
+<li><a href="#org23cb92e">3.1. Generic menu generator</a></li>
+<li><a href="#org3413d1e">3.2. For CUSTOM-type Menus</a></li>
+<li><a href="#orgd32ff44">3.3. Always generate local lables</a></li>
 </ul>
 </li>
-<li><a href="#org984ce9a">4. Emacs Helper Stuff</a>
+<li><a href="#org996f064">4. Emacs Helper Stuff</a>
 <ul>
-<li><a href="#org5cbc3fe">4.1. Prepare Code For Conversion</a></li>
-<li><a href="#org76d609b">4.2. Automatically processing tangled code</a></li>
-<li><a href="#org3c72136">4.3. Tangle &amp; Load Tangled File</a></li>
-<li><a href="#org07f804c">4.4. yas templates</a></li>
+<li><a href="#org961b25d">4.1. Prepare Code For Conversion</a></li>
+<li><a href="#org4f6b68e">4.2. Automatically processing tangled code</a></li>
+<li><a href="#org048b6c8">4.3. Tangle &amp; Load Tangled File</a></li>
+<li><a href="#orgf02eb12">4.4. yas templates</a></li>
 </ul>
 </li>
-<li><a href="#orgbe8b54b">5. free42 Notes</a>
+<li><a href="#org290a212">5. free42 Notes</a>
 <ul>
-<li><a href="#org8c0f779">5.1. Character Set</a></li>
-<li><a href="#orge99f62e">5.2. Date format</a></li>
-<li><a href="#org36871a4">5.3. Stats registers</a></li>
+<li><a href="#orgefdb3ae">5.1. Character Set</a></li>
+<li><a href="#org5458f70">5.2. Date format</a></li>
+<li><a href="#org695db83">5.3. Stats registers</a></li>
 </ul>
 </li>
-<li><a href="#orgc7e42b0">6. DM 42 Notes</a>
+<li><a href="#org32f7755">6. DM 42 Notes</a>
 <ul>
-<li><a href="#org24c86a0">6.1. Display</a></li>
+<li><a href="#org028d71c">6.1. Display</a></li>
 </ul>
 </li>
-<li><a href="#orge7fccc3">7. EOF</a></li>
+<li><a href="#orga9b1d5d">7. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgf719fe8" class="outline-2">
-<h2 id="orgf719fe8"><span class="section-number-2">1.</span> Metadata</h2>
+<div id="outline-container-orgd0bde63" class="outline-2">
+<h2 id="orgd0bde63"><span class="section-number-2">1.</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/hp42s-meta.html">https://richmit.github.io/hp42/hp42s-meta.html</a>
-</p>
-
-<p>
-A PDF version of this file may be found here: <a href="https://richmit.github.io/hp42/hp42s-meta.pdf">https://richmit.github.io/hp42/hp42s-meta.pdf</a>
 </p>
 
 <p>
@@ -357,8 +353,8 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
 <div class="outline-text-2" id="text-menu-gen">
 </div>
 
-<div id="outline-container-org4a75bf6" class="outline-3">
-<h3 id="org4a75bf6"><span class="section-number-3">3.1.</span> Generic menu generator</h3>
+<div id="outline-container-org23cb92e" class="outline-3">
+<h3 id="org23cb92e"><span class="section-number-3">3.1.</span> Generic menu generator</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 This code will read an org-mode table describing a menu, and generate 42s code to implement the menu.  The only limitation on menu depth and size are the
@@ -741,8 +737,8 @@ tables.
 </div>
 </div>
 
-<div id="outline-container-orgeb05d89" class="outline-3">
-<h3 id="orgeb05d89"><span class="section-number-3">3.2.</span> For CUSTOM-type Menus</h3>
+<div id="outline-container-org3413d1e" class="outline-3">
+<h3 id="org3413d1e"><span class="section-number-3">3.2.</span> For CUSTOM-type Menus</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 These functions are useful for CUSTOM-type menus &#x2013; that is menus that call other programs or built in functions.  I use this as a way to add hierarchy to the
@@ -825,8 +821,8 @@ the org-mode file and the whole thing will then be tangled together into one pro
 </div>
 </div>
 
-<div id="outline-container-orgb596c61" class="outline-3">
-<h3 id="orgb596c61"><span class="section-number-3">3.3.</span> Always generate local lables</h3>
+<div id="outline-container-orgd32ff44" class="outline-3">
+<h3 id="orgd32ff44"><span class="section-number-3">3.3.</span> Always generate local lables</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 This function is handy when you want to always generate local labels.
@@ -840,8 +836,8 @@ This function is handy when you want to always generate local labels.
 </div>
 </div>
 
-<div id="outline-container-org984ce9a" class="outline-2">
-<h2 id="org984ce9a"><span class="section-number-2">4.</span> Emacs Helper Stuff</h2>
+<div id="outline-container-org996f064" class="outline-2">
+<h2 id="org996f064"><span class="section-number-2">4.</span> Emacs Helper Stuff</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 The elisp file <code>hp42s-mode.el</code> provides few things:
@@ -865,8 +861,8 @@ To activate the functionality, simply <code>load</code> the <code>hp42s-mode.el<
 </div>
 </div>
 
-<div id="outline-container-org5cbc3fe" class="outline-3">
-<h3 id="org5cbc3fe"><span class="section-number-3">4.1.</span> Prepare Code For Conversion</h3>
+<div id="outline-container-org961b25d" class="outline-3">
+<h3 id="org961b25d"><span class="section-number-3">4.1.</span> Prepare Code For Conversion</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 I include comments like <code>@@##</code> that I use like compiler directives in C.  They provide a way to remove lines of code that are incompatible or unnecessary for
@@ -918,8 +914,8 @@ buffer, the code is automatically filtered for the selected version of free42 (s
 </div>
 </div>
 
-<div id="outline-container-org76d609b" class="outline-3">
-<h3 id="org76d609b"><span class="section-number-3">4.2.</span> Automatically processing tangled code</h3>
+<div id="outline-container-org4f6b68e" class="outline-3">
+<h3 id="org4f6b68e"><span class="section-number-3">4.2.</span> Automatically processing tangled code</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 By adding <code>MJR-process-buffer-as-42s-code</code> to the <code>org-babel-post-tangle-hook</code>, you can automatically process tangled code.  You can do that by evaluating
@@ -937,8 +933,8 @@ A handy way to tangle a file, or files in dired, is the <code>MJR-org-export-der
 </div>
 </div>
 
-<div id="outline-container-org3c72136" class="outline-3">
-<h3 id="org3c72136"><span class="section-number-3">4.3.</span> Tangle &amp; Load Tangled File</h3>
+<div id="outline-container-org048b6c8" class="outline-3">
+<h3 id="org048b6c8"><span class="section-number-3">4.3.</span> Tangle &amp; Load Tangled File</h3>
 <div class="outline-text-3" id="text-4-3">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-tangle-and-load</span> ()
@@ -956,8 +952,8 @@ A handy way to tangle a file, or files in dired, is the <code>MJR-org-export-der
 </div>
 </div>
 
-<div id="outline-container-org07f804c" class="outline-3">
-<h3 id="org07f804c"><span class="section-number-3">4.4.</span> yas templates</h3>
+<div id="outline-container-orgf02eb12" class="outline-3">
+<h3 id="orgf02eb12"><span class="section-number-3">4.4.</span> yas templates</h3>
 <div class="outline-text-3" id="text-4-4">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #b0c4de;">echo</span> <span style="color: #fa8072;">''</span>
@@ -968,12 +964,12 @@ A handy way to tangle a file, or files in dired, is the <code>MJR-org-export-der
 </div>
 </div>
 
-<div id="outline-container-orgbe8b54b" class="outline-2">
-<h2 id="orgbe8b54b"><span class="section-number-2">5.</span> free42 Notes</h2>
+<div id="outline-container-org290a212" class="outline-2">
+<h2 id="org290a212"><span class="section-number-2">5.</span> free42 Notes</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-org8c0f779" class="outline-3">
-<h3 id="org8c0f779"><span class="section-number-3">5.1.</span> Character Set</h3>
+<div id="outline-container-orgefdb3ae" class="outline-3">
+<h3 id="orgefdb3ae"><span class="section-number-3">5.1.</span> Character Set</h3>
 <div class="outline-text-3" id="text-5-1">
 <div class="org-src-container">
 <pre class="src src-text">  0 &#247;
@@ -1111,8 +1107,8 @@ A handy way to tangle a file, or files in dired, is the <code>MJR-org-export-der
 </div>
 </div>
 
-<div id="outline-container-orge99f62e" class="outline-3">
-<h3 id="orge99f62e"><span class="section-number-3">5.2.</span> Date format</h3>
+<div id="outline-container-org5458f70" class="outline-3">
+<h3 id="org5458f70"><span class="section-number-3">5.2.</span> Date format</h3>
 <div class="outline-text-3" id="text-5-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -1154,8 +1150,8 @@ A handy way to tangle a file, or files in dired, is the <code>MJR-org-export-der
 </div>
 </div>
 
-<div id="outline-container-org36871a4" class="outline-3">
-<h3 id="org36871a4"><span class="section-number-3">5.3.</span> Stats registers</h3>
+<div id="outline-container-org695db83" class="outline-3">
+<h3 id="org695db83"><span class="section-number-3">5.3.</span> Stats registers</h3>
 <div class="outline-text-3" id="text-5-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1242,12 +1238,12 @@ A handy way to tangle a file, or files in dired, is the <code>MJR-org-export-der
 </div>
 </div>
 
-<div id="outline-container-orgc7e42b0" class="outline-2">
-<h2 id="orgc7e42b0"><span class="section-number-2">6.</span> DM 42 Notes</h2>
+<div id="outline-container-org32f7755" class="outline-2">
+<h2 id="org32f7755"><span class="section-number-2">6.</span> DM 42 Notes</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-org24c86a0" class="outline-3">
-<h3 id="org24c86a0"><span class="section-number-3">6.1.</span> Display</h3>
+<div id="outline-container-org028d71c" class="outline-3">
+<h3 id="org028d71c"><span class="section-number-3">6.1.</span> Display</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 GrMod is a read write variable.
@@ -1265,8 +1261,8 @@ ResX &amp; ResY are read only variables that have the display resolution
 </div>
 </div>
 
-<div id="outline-container-orge7fccc3" class="outline-2">
-<h2 id="orge7fccc3"><span class="section-number-2">7.</span> EOF</h2>
+<div id="outline-container-orga9b1d5d" class="outline-2">
+<h2 id="orga9b1d5d"><span class="section-number-2">7.</span> EOF</h2>
 <div class="outline-text-2" id="text-7">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />

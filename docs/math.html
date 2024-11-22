@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-02-13 Tue 22:55 -->
+<!-- 2024-11-21 Thu 16:50 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=1024, initial-scale=1" />
 <title>free42 Random Math Stuff</title>
@@ -228,7 +228,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2024-02-12 12:55:50</i></td>
+<td class="org-left"><i>2024-11-21 16:49:29</i></td>
 </tr>
 </tbody>
 </table>
@@ -240,63 +240,59 @@ Copyright 2024 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc9df8a7">1. Metadata</a></li>
+<li><a href="#org724a3d0">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
-<li><a href="#orgbb8d2d3">3. <code>NLA</code>: Linear Algebra</a>
+<li><a href="#org4787322">3. <code>NLA</code>: Linear Algebra</a>
 <ul>
 <li><a href="#menu-nla">3.1. Menu</a></li>
-<li><a href="#orgc9984b1">3.2. Notes on individual programs</a>
+<li><a href="#orgeca925f">3.2. Notes on individual programs</a>
 <ul>
-<li><a href="#org39e0f29">3.2.1. <code>MXCPLY</code>: Characteristic polynomial</a></li>
-<li><a href="#org506a112">3.2.2. <code>EQCPLY</code>: Characteristic polynomial as an <code>MVAR</code> program</a></li>
+<li><a href="#orgfa10b01">3.2.1. <code>MXCPLY</code>: Characteristic polynomial</a></li>
+<li><a href="#org60d14da">3.2.2. <code>EQCPLY</code>: Characteristic polynomial as an <code>MVAR</code> program</a></li>
 </ul>
 </li>
-<li><a href="#org3632dae">3.3. Code for Menu</a></li>
-<li><a href="#org2ade77e">3.4. Functions</a></li>
+<li><a href="#org8fd77ed">3.3. Code for Menu</a></li>
+<li><a href="#org17fd357">3.4. Functions</a></li>
 </ul>
 </li>
-<li><a href="#orge5c3d8d">4. <code>POLY</code>: A collection of polynomial tools</a>
+<li><a href="#orgbccda33">4. <code>POLY</code>: A collection of polynomial tools</a>
 <ul>
 <li><a href="#menu-poly">4.1. Menu</a></li>
-<li><a href="#orgbd9aaf4">4.2. Notes for individual programs</a>
+<li><a href="#orgef81e96">4.2. Notes for individual programs</a>
 <ul>
-<li><a href="#org9ef6a0c">4.2.1. <code>PEVAL</code>, <code>PEVL1</code>, &amp; <code>PEVL2</code>: Evaluating Polynomials</a></li>
-<li><a href="#org9e9d7b8">4.2.2. <code>PWRP</code>: Wrapping a polynomial matrix in an <code>MVAR</code> function</a></li>
-<li><a href="#org7266408">4.2.3. <code>PR1ST</code> &amp; <code>PRNXT</code>: Finding the roots of a polynomial</a></li>
-<li><a href="#orge6017bc">4.2.4. <code>PLGRR</code>: Search for a polynomial root</a></li>
+<li><a href="#org3c56b0c">4.2.1. <code>PEVAL</code>, <code>PEVL1</code>, &amp; <code>PEVL2</code>: Evaluating Polynomials</a></li>
+<li><a href="#org3adfac5">4.2.2. <code>PWRP</code>: Wrapping a polynomial matrix in an <code>MVAR</code> function</a></li>
+<li><a href="#orge362150">4.2.3. <code>PR1ST</code> &amp; <code>PRNXT</code>: Finding the roots of a polynomial</a></li>
+<li><a href="#orgb554a33">4.2.4. <code>PLGRR</code>: Search for a polynomial root</a></li>
 </ul>
 </li>
-<li><a href="#org1a483f1">4.3. Code for Menu</a></li>
-<li><a href="#org7f83294">4.4. Local functions</a></li>
+<li><a href="#orga7a8b9f">4.3. Code for Menu</a></li>
+<li><a href="#org59b1db1">4.4. Local functions</a></li>
 </ul>
 </li>
-<li><a href="#orgc8a645a">5. <code>VEC3</code>: 3D Real Vector Application</a>
+<li><a href="#orgaa0d316">5. <code>VEC3</code>: 3D Real Vector Application</a>
 <ul>
 <li><a href="#menu-vec3">5.1. Menu</a></li>
-<li><a href="#org481e6f2">5.2. Code for Menu</a></li>
-<li><a href="#org6350d90">5.3. Local functions</a></li>
+<li><a href="#orgd5085cb">5.2. Code for Menu</a></li>
+<li><a href="#org5a9972a">5.3. Local functions</a></li>
 </ul>
 </li>
-<li><a href="#org61fe9ce">6. <code>STATR</code>: Statistics Registers</a>
+<li><a href="#orgf7dff24">6. <code>STATR</code>: Statistics Registers</a>
 <ul>
 <li><a href="#menu-statr">6.1. Menu</a></li>
-<li><a href="#org83d3ca3">6.2. Code</a></li>
+<li><a href="#org488cc4c">6.2. Code</a></li>
 </ul>
 </li>
-<li><a href="#orge508cc6">7. EOF</a></li>
+<li><a href="#org2349255">7. EOF</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgc9df8a7" class="outline-2">
-<h2 id="orgc9df8a7"><span class="section-number-2">1.</span> Metadata</h2>
+<div id="outline-container-org724a3d0" class="outline-2">
+<h2 id="org724a3d0"><span class="section-number-2">1.</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/math.html">https://richmit.github.io/hp42/math.html</a>
-</p>
-
-<p>
-A PDF version of this file may be found here: <a href="https://richmit.github.io/hp42/math.pdf">https://richmit.github.io/hp42/math.pdf</a>
 </p>
 
 <p>
@@ -355,14 +351,14 @@ in this file.  That stuff has moved to <a href="sfun.html">sfun.html</a>.
 </div>
 </div>
 
-<div id="outline-container-orgbb8d2d3" class="outline-2">
-<h2 id="orgbb8d2d3"><span class="section-number-2">3.</span> <code>NLA</code>: Linear Algebra</h2>
+<div id="outline-container-org4787322" class="outline-2">
+<h2 id="org4787322"><span class="section-number-2">3.</span> <code>NLA</code>: Linear Algebra</h2>
 <div class="outline-text-2" id="text-3">
 </div>
 <div id="outline-container-menu-nla" class="outline-3">
 <h3 id="menu-nla"><span class="section-number-3">3.1.</span> Menu</h3>
 <div class="outline-text-3" id="text-menu-nla">
-<table id="org60fa6ab" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="orgdbee8d1" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -487,12 +483,12 @@ in this file.  That stuff has moved to <a href="sfun.html">sfun.html</a>.
 </div>
 </div>
 
-<div id="outline-container-orgc9984b1" class="outline-3">
-<h3 id="orgc9984b1"><span class="section-number-3">3.2.</span> Notes on individual programs</h3>
+<div id="outline-container-orgeca925f" class="outline-3">
+<h3 id="orgeca925f"><span class="section-number-3">3.2.</span> Notes on individual programs</h3>
 <div class="outline-text-3" id="text-3-2">
 </div>
-<div id="outline-container-org39e0f29" class="outline-4">
-<h4 id="org39e0f29"><span class="section-number-4">3.2.1.</span> <code>MXCPLY</code>: Characteristic polynomial</h4>
+<div id="outline-container-orgfa10b01" class="outline-4">
+<h4 id="orgfa10b01"><span class="section-number-4">3.2.1.</span> <code>MXCPLY</code>: Characteristic polynomial</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <p>
 <code>MXCPLY</code> uses the Faddeev–LeVerrier algorithm to compute the characteristic polynomial of a matrix.  The polynomial is a matrix of coefficients suitable for use
@@ -505,8 +501,8 @@ One can find the eigenvalues of a matrix by using <code>PR1ST</code> &amp; <code
 </div>
 </div>
 
-<div id="outline-container-org506a112" class="outline-4">
-<h4 id="org506a112"><span class="section-number-4">3.2.2.</span> <code>EQCPLY</code>: Characteristic polynomial as an <code>MVAR</code> program</h4>
+<div id="outline-container-org60d14da" class="outline-4">
+<h4 id="org60d14da"><span class="section-number-4">3.2.2.</span> <code>EQCPLY</code>: Characteristic polynomial as an <code>MVAR</code> program</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <p>
 The <code>EQCPLY</code> function is an <code>MVAR</code> function that directly computes values of the characteristic polynomial.  It is horribly inefficient, but it can be used by
@@ -516,8 +512,8 @@ the built in solver to find real eigenvalues or to plot the characteristic polyn
 </div>
 </div>
 
-<div id="outline-container-org3632dae" class="outline-3">
-<h3 id="org3632dae"><span class="section-number-3">3.3.</span> Code for Menu</h3>
+<div id="outline-container-org8fd77ed" class="outline-3">
+<h3 id="org8fd77ed"><span class="section-number-3">3.3.</span> Code for Menu</h3>
 <div class="outline-text-3" id="text-3-3">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"NLA"</span> 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
@@ -526,8 +522,8 @@ the built in solver to find real eigenvalues or to plot the characteristic polyn
 </div>
 </div>
 
-<div id="outline-container-org2ade77e" class="outline-3">
-<h3 id="org2ade77e"><span class="section-number-3">3.4.</span> Functions</h3>
+<div id="outline-container-org17fd357" class="outline-3">
+<h3 id="org17fd357"><span class="section-number-3">3.4.</span> Functions</h3>
 <div class="outline-text-3" id="text-3-4">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-MXCPLY" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MXCPLY)</span>
@@ -722,14 +718,14 @@ END
 </div>
 </div>
 
-<div id="outline-container-orge5c3d8d" class="outline-2">
-<h2 id="orge5c3d8d"><span class="section-number-2">4.</span> <code>POLY</code>: A collection of polynomial tools</h2>
+<div id="outline-container-orgbccda33" class="outline-2">
+<h2 id="orgbccda33"><span class="section-number-2">4.</span> <code>POLY</code>: A collection of polynomial tools</h2>
 <div class="outline-text-2" id="text-4">
 </div>
 <div id="outline-container-menu-poly" class="outline-3">
 <h3 id="menu-poly"><span class="section-number-3">4.1.</span> Menu</h3>
 <div class="outline-text-3" id="text-menu-poly">
-<table id="orge1ed7a0" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="orgcc89a64" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -957,12 +953,12 @@ degree.
 </div>
 </div>
 
-<div id="outline-container-orgbd9aaf4" class="outline-3">
-<h3 id="orgbd9aaf4"><span class="section-number-3">4.2.</span> Notes for individual programs</h3>
+<div id="outline-container-orgef81e96" class="outline-3">
+<h3 id="orgef81e96"><span class="section-number-3">4.2.</span> Notes for individual programs</h3>
 <div class="outline-text-3" id="text-4-2">
 </div>
-<div id="outline-container-org9ef6a0c" class="outline-4">
-<h4 id="org9ef6a0c"><span class="section-number-4">4.2.1.</span> <code>PEVAL</code>, <code>PEVL1</code>, &amp; <code>PEVL2</code>: Evaluating Polynomials</h4>
+<div id="outline-container-org3c56b0c" class="outline-4">
+<h4 id="org3c56b0c"><span class="section-number-4">4.2.1.</span> <code>PEVAL</code>, <code>PEVL1</code>, &amp; <code>PEVL2</code>: Evaluating Polynomials</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <p>
 These functions efficiently evaluate a polynomial (and its first and/or second derivative).  They are handy for simply evaluating a polynomial repeatedly;
@@ -972,8 +968,8 @@ to repeatedly evaluate a polynomial.
 </div>
 </div>
 
-<div id="outline-container-org9e9d7b8" class="outline-4">
-<h4 id="org9e9d7b8"><span class="section-number-4">4.2.2.</span> <code>PWRP</code>: Wrapping a polynomial matrix in an <code>MVAR</code> function</h4>
+<div id="outline-container-org3adfac5" class="outline-4">
+<h4 id="org3adfac5"><span class="section-number-4">4.2.2.</span> <code>PWRP</code>: Wrapping a polynomial matrix in an <code>MVAR</code> function</h4>
 <div class="outline-text-4" id="text-4-2-2">
 <p>
 Simply store the polynomial into the global variable "<code>WRPP</code>", and then feed <code>PWRP</code> to things like the built in solver/integrator and similar tools (See:
@@ -982,8 +978,8 @@ Simply store the polynomial into the global variable "<code>WRPP</code>", and th
 </div>
 </div>
 
-<div id="outline-container-org7266408" class="outline-4">
-<h4 id="org7266408"><span class="section-number-4">4.2.3.</span> <code>PR1ST</code> &amp; <code>PRNXT</code>: Finding the roots of a polynomial</h4>
+<div id="outline-container-orge362150" class="outline-4">
+<h4 id="orge362150"><span class="section-number-4">4.2.3.</span> <code>PR1ST</code> &amp; <code>PRNXT</code>: Finding the roots of a polynomial</h4>
 <div class="outline-text-4" id="text-4-2-3">
 <p>
 These two programs provide a way to find all the roots of a polynomial.  They work on real or complex polynomials, and finds both real and complex roots.
@@ -1024,8 +1020,8 @@ Alternately, with a bit more round off error, you can just repeatedly use <code>
 </div>
 </div>
 
-<div id="outline-container-orge6017bc" class="outline-4">
-<h4 id="orge6017bc"><span class="section-number-4">4.2.4.</span> <code>PLGRR</code>: Search for a polynomial root</h4>
+<div id="outline-container-orgb554a33" class="outline-4">
+<h4 id="orgb554a33"><span class="section-number-4">4.2.4.</span> <code>PLGRR</code>: Search for a polynomial root</h4>
 <div class="outline-text-4" id="text-4-2-4">
 <p>
 This is designed to be used by other programs.  It takes a polynomial, a guess, a tolerance, and a maximum number of iterations.  If the tolerance is
@@ -1035,8 +1031,8 @@ negative, then the function will always preform the maximum number of iterations
 </div>
 </div>
 
-<div id="outline-container-org1a483f1" class="outline-3">
-<h3 id="org1a483f1"><span class="section-number-3">4.3.</span> Code for Menu</h3>
+<div id="outline-container-orga7a8b9f" class="outline-3">
+<h3 id="orga7a8b9f"><span class="section-number-3">4.3.</span> Code for Menu</h3>
 <div class="outline-text-3" id="text-4-3">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"POLY"</span> 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
@@ -1045,8 +1041,8 @@ negative, then the function will always preform the maximum number of iterations
 </div>
 </div>
 
-<div id="outline-container-org7f83294" class="outline-3">
-<h3 id="org7f83294"><span class="section-number-3">4.4.</span> Local functions</h3>
+<div id="outline-container-org59b1db1" class="outline-3">
+<h3 id="org59b1db1"><span class="section-number-3">4.4.</span> Local functions</h3>
 <div class="outline-text-3" id="text-4-4">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-PINTRP" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PINTRP)</span>
@@ -1635,8 +1631,8 @@ END
 </div>
 </div>
 
-<div id="outline-container-orgc8a645a" class="outline-2">
-<h2 id="orgc8a645a"><span class="section-number-2">5.</span> <code>VEC3</code>: 3D Real Vector Application</h2>
+<div id="outline-container-orgaa0d316" class="outline-2">
+<h2 id="orgaa0d316"><span class="section-number-2">5.</span> <code>VEC3</code>: 3D Real Vector Application</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 This is a simple little application that makes working with 3D vectors less painfull.  
@@ -1645,7 +1641,7 @@ This is a simple little application that makes working with 3D vectors less pain
 <div id="outline-container-menu-vec3" class="outline-3">
 <h3 id="menu-vec3"><span class="section-number-3">5.1.</span> Menu</h3>
 <div class="outline-text-3" id="text-menu-vec3">
-<table id="org40e721b" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="org028a575" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -1703,8 +1699,8 @@ This is a simple little application that makes working with 3D vectors less pain
 </div>
 </div>
 
-<div id="outline-container-org481e6f2" class="outline-3">
-<h3 id="org481e6f2"><span class="section-number-3">5.2.</span> Code for Menu</h3>
+<div id="outline-container-orgd5085cb" class="outline-3">
+<h3 id="orgd5085cb"><span class="section-number-3">5.2.</span> Code for Menu</h3>
 <div class="outline-text-3" id="text-5-2">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"VEC3"</span> 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
@@ -1713,8 +1709,8 @@ This is a simple little application that makes working with 3D vectors less pain
 </div>
 </div>
 
-<div id="outline-container-org6350d90" class="outline-3">
-<h3 id="org6350d90"><span class="section-number-3">5.3.</span> Local functions</h3>
+<div id="outline-container-org5a9972a" class="outline-3">
+<h3 id="org5a9972a"><span class="section-number-3">5.3.</span> Local functions</h3>
 <div class="outline-text-3" id="text-5-3">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -1823,14 +1819,14 @@ END
 </div>
 </div>
 
-<div id="outline-container-org61fe9ce" class="outline-2">
-<h2 id="org61fe9ce"><span class="section-number-2">6.</span> <code>STATR</code>: Statistics Registers</h2>
+<div id="outline-container-orgf7dff24" class="outline-2">
+<h2 id="orgf7dff24"><span class="section-number-2">6.</span> <code>STATR</code>: Statistics Registers</h2>
 <div class="outline-text-2" id="text-6">
 </div>
 <div id="outline-container-menu-statr" class="outline-3">
 <h3 id="menu-statr"><span class="section-number-3">6.1.</span> Menu</h3>
 <div class="outline-text-3" id="text-menu-statr">
-<table id="orgeb48b71" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="org039ff1d" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -1914,8 +1910,8 @@ END
 </div>
 </div>
 
-<div id="outline-container-org83d3ca3" class="outline-3">
-<h3 id="org83d3ca3"><span class="section-number-3">6.2.</span> Code</h3>
+<div id="outline-container-org488cc4c" class="outline-3">
+<h3 id="org488cc4c"><span class="section-number-3">6.2.</span> Code</h3>
 <div class="outline-text-3" id="text-6-2">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"STATR"</span> 0 tbl 0 nil 'stay 'up 'auto
@@ -1930,8 +1926,8 @@ END
 </div>
 </div>
 
-<div id="outline-container-orge508cc6" class="outline-2">
-<h2 id="orge508cc6"><span class="section-number-2">7.</span> EOF</h2>
+<div id="outline-container-org2349255" class="outline-2">
+<h2 id="org2349255"><span class="section-number-2">7.</span> EOF</h2>
 <div class="outline-text-2" id="text-7">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />

@@ -9,6 +9,7 @@ All the code is contained in `org-mode` files in the `src` directory.
 Binary free42 programs are in the `bin` directory.
 
 Documentation (rendered `org-mode` files) may be found in the `docs` directory.
+Note: only HTML documentation at this time -- no PDFs.
 
 The documentation is also published here: [Docs](https://richmit.github.io/hp42/)
 

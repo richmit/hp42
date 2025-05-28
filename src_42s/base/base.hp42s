@@ -1,7 +1,5 @@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BASE)
-@@@@ DSC: Auto-generated menu program
 LBL "BASE"
-LBL 01            @@@@ Page 1 of menu BASE
+LBL 01
 CLMENU
 "S&R"
 KEY 1 GTO 04
@@ -21,7 +19,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02            @@@@ Page 2 of menu BASE
+LBL 02
 CLMENU
 XEQ 92
 KEY 1 XEQ 09
@@ -39,7 +37,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 03            @@@@ Page 3 of menu BASE
+LBL 03
 CLMENU
 XEQ 96
 KEY 1 XEQ 13
@@ -55,7 +53,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 03
-LBL 04            @@@@ Page 1 of menu S&R
+LBL 04
 CLMENU
 "SLn"
 KEY 1 XEQ "SLn"
@@ -73,7 +71,7 @@ KEY 9 GTO 01
 MENU
 STOP
 GTO 04
-LBL 16            @@@@ Page 2 of menu S&R
+LBL 16
 CLMENU
 "LJ"
 KEY 1 XEQ "LJ"
@@ -91,7 +89,7 @@ KEY 9 GTO 01
 MENU
 STOP
 GTO 16
-LBL 17            @@@@ Page 3 of menu S&R
+LBL 17
 CLMENU
 "SL"
 KEY 1 XEQ "SL"
@@ -109,7 +107,7 @@ KEY 9 GTO 01
 MENU
 STOP
 GTO 17
-LBL 05            @@@@ Page 1 of menu BITS
+LBL 05
 CLMENU
 "GETB"
 KEY 1 XEQ "GETB"
@@ -127,7 +125,7 @@ KEY 9 GTO 01
 MENU
 STOP
 GTO 05
-LBL 19            @@@@ Page 2 of menu BITS
+LBL 19
 CLMENU
 "GY@X"
 KEY 1 XEQ "GY@X"
@@ -145,7 +143,7 @@ KEY 9 GTO 01
 MENU
 STOP
 GTO 19
-LBL 20            @@@@ Page 3 of menu BITS
+LBL 20
 CLMENU
 "POPRB"
 KEY 1 XEQ "POPRB"
@@ -159,7 +157,7 @@ KEY 9 GTO 01
 MENU
 STOP
 GTO 20
-LBL 06            @@@@ Page 1 of menu FUN
+LBL 06
 CLMENU
 "B#"
 KEY 1 XEQ "B#"
@@ -179,7 +177,7 @@ KEY 9 GTO 01
 MENU
 STOP
 GTO 06
-LBL 21            @@@@ Page 2 of menu FUN
+LBL 21
 CLMENU
 "REVNB"
 KEY 1 XEQ "REVNB"
@@ -193,7 +191,7 @@ KEY 9 GTO 01
 MENU
 STOP
 GTO 21
-LBL 07            @@@@ Page 1 of menu MASK
+LBL 07
 CLMENU
 "MSKL"
 KEY 1 XEQ "MSKL"
@@ -207,7 +205,7 @@ KEY 9 GTO 01
 MENU
 STOP
 GTO 07
-LBL 08            @@@@ Page 1 of menu ARTH
+LBL 08
 CLMENU
 "AND"
 KEY 1 XEQ 23
@@ -227,7 +225,7 @@ KEY 9 GTO 01
 MENU
 STOP
 GTO 08
-LBL 22            @@@@ Page 2 of menu ARTH
+LBL 22
 CLMENU
 "+"
 KEY 1 XEQ 28
@@ -247,192 +245,138 @@ KEY 9 GTO 01
 MENU
 STOP
 GTO 22
-LBL 00 @@@@ Application Exit
+LBL 00
 EXITALL
 RTN
-LBL 09    @@@@ Action for menu key LBL 92
+LBL 09
 HEXM
 RTN
-LBL 10    @@@@ Action for menu key LBL 93
+LBL 10
 DECM
 RTN
-LBL 11    @@@@ Action for menu key LBL 94
+LBL 11
 OCTM
 RTN
-LBL 12    @@@@ Action for menu key LBL 95
+LBL 12
 BINM
 RTN
-LBL 13    @@@@ Action for menu key LBL 96
+LBL 13
 WSIZE
 RTN
-LBL 14    @@@@ Action for menu key LBL 97
+LBL 14
 BSIGNED
 RTN
-LBL 15    @@@@ Action for menu key LBL 98
+LBL 15
 BWRAP
 RTN
-LBL 18    @@@@ Action for menu key ROTXY
+LBL 18
 ROTXY
 RTN
-LBL 23    @@@@ Action for menu key AND
+LBL 23
 AND
 RTN
-LBL 24    @@@@ Action for menu key OR
+LBL 24
 OR
 RTN
-LBL 25    @@@@ Action for menu key XOR
+LBL 25
 XOR
 RTN
-LBL 26    @@@@ Action for menu key NOT
+LBL 26
 NOT
 RTN
-LBL 27    @@@@ Action for menu key NEG
+LBL 27
 BASE+/-
 RTN
-LBL 28    @@@@ Action for menu key +
+LBL 28
 BASE+
 RTN
-LBL 29    @@@@ Action for menu key -
+LBL 29
 BASE-
 RTN
-LBL 30    @@@@ Action for menu key ×
+LBL 30
 BASE×
 RTN
-LBL 31    @@@@ Action for menu key ÷
+LBL 31
 BASE÷
 RTN
-LBL 32    @@@@ Action for menu key MOD
+LBL 32
 MOD
 RTN
-@@@@ Free labels start at: 33
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:b#)
-@@@@ DSC: Number of bits set
-@@@@ IN:  X: an integer
-@@@@ OUT: X: Number of 1 bits in IP(X)
-@@@@ FAQ: Runtime complexity O(log_2(X))
-@@@@ LBL: Used 70-72
-@@@@ UPD: 2021-04-10
-@@@@ LBL "B#"
 LBL "B#"
-FUNC 11    @@## REQ:free42>=2.5.24
-L4STK      @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 IP
 0
-X<>Y       @@@@ NUM CNT
+X<>Y
 1
 NOT
-X<>Y       @@@@ NUM MASK CNT
+X<>Y
 LBL 70
-RCL ST Y   @@@@ MASK NUM MASK CNT
-X<>Y       @@@@ NUM MASK MASK CNT
-AND        @@@@ NUM_N MASK CNT
-LASTX      @@@@ NUM NUM_N MASK CNT
+RCL ST Y
+X<>Y
+AND
+LASTX
 X=Y?
 GTO 71
-@@@@ Current bit was set: increment counter
-R↓         @@@@ NUM_N MASK CNT
-1 
-STO+ ST T  @@@@ 1 NUM_N MASK CNT
+R↓
+1
+STO+ ST T
 LBL 71
-@@@@ Current bit was clear
-R↓         @@@@ NUM_N MASK CNT
+R↓
 X=0?
-GTO 72  
-@@@@ Still have bits to check
-X<>Y       @@@@ MASK NUM_N CNT
+GTO 72
+X<>Y
 -1
 ROTXY
-X<>Y       @@@@ NUM_N MASK CNT
+X<>Y
 GTO 70
 LBL 72
-@@@@ No bits left to check
-R↓         @@@@ MASK CNT
-R↓         @@@@ CNT
+R↓
+R↓
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MSKn)
-@@@@ DSC: Create integer with Y set bits located at bit X
-@@@@ IN:  Y: An integer
-@@@@ IN:  X: An integer (LSB=0)
-@@@@ OUT: X: Integer with IP(X) least significant bits set
-@@@@ FAQ: Returns int with all 0 bits when X<=0
-@@@@ FAQ: Returns int with all 1 bits when X>=WSIZE?
-@@@@ UPD: 2021-03-20
 LBL "MSKn"
-FUNC 21                        @@## REQ:free42>=2.5.24
-L4STK                          @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 X<>Y
 XEQ "MSKR"
 X<>Y
 XEQ "SLn"
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MSKL)
-@@@@ DSC: Create integer with left most X bits set
-@@@@ IN:  X: An integer
-@@@@ OUT: X: Integer with IP(X) most significant bits set
-@@@@ FAQ: Returns int with all 0 bits when X<=0
-@@@@ FAQ: Returns int with all 1 bits when X>=WSIZE?
-@@@@ UPD: 2021-03-20
 LBL "MSKL"
-FUNC 11                        @@## REQ:free42>=2.5.24
-L4STK                          @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 XEQ "MSKR"
 XEQ "LJ"
 R↓
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MSKR)
-@@@@ DSC: Create integer with right most X bits set
-@@@@ IN:  X: An integer
-@@@@ OUT: X: Integer with IP(X) least significant bits set
-@@@@ FAQ: Returns int with all 0 bits when X<=0
-@@@@ FAQ: Returns int with all 1 bits when X>=WSIZE?
-@@@@ UPD: 2021-03-20
 LBL "MSKR"
-FUNC 11                        @@## REQ:free42>=2.5.24
-L4STK                          @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 IP
-@@@@ All zeros case?
 0
 0≥? ST Y
 RTN
 R↓
 0
 NOT
-@@@@ All ones case?
-XEQ 67 @@@@ Y≥WSIZE?
+XEQ 67
 RTN
 R↓
-@@@@ Some ones case
 2
 X<>Y
 Y↑X
 1
 -
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SETB)
-@@@@ DSC: Set the Xth bit of Y
-@@@@ IN:  Y: An integer
-@@@@      X: An integer (0=LSB)
-@@@@ OUT: X: Integer with IP(X)th bit of Y set
-@@@@ FAQ: Y is returned unchanged  when X is out of range
-@@@@ BUG: When X out of range, the type Y is not error checked
-@@@@ UPD: 2021-03-20
 LBL "SETB"
-FUNC 21                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 IP
 X<>Y
-@@@@ Do nothing if X was negative
 0>? ST Y
 RTN
-@@@@ Do nothing if X was >= WSIZE
-XEQ 67 @@@@ Y≥WSIZE?
+XEQ 67
 RTN
-@@@@ X must have been >= 0 & < WSIZE
 X<>Y
 1
 X<>Y
@@ -440,28 +384,16 @@ X<>Y
 ROTXY
 OR
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CLRB)
-@@@@ DSC: Clear the Xth bit in Y
-@@@@ IN:  Y: An integer
-@@@@      X: An integer (0=LSB)
-@@@@ OUT: X: Integer with IP(X)th bit of Y set
-@@@@ FAQ: Y is returned unchanged  when X is out of range
-@@@@ BUG: When X out of range, the type Y is not error checked
-@@@@ UPD: 2021-03-20
 LBL "CLRB"
-FUNC 21                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 IP
 X<>Y
 IP
-@@@@ Do nothing if X was negative
 0>? ST Y
 RTN
-@@@@ Do nothing if X was >= WSIZE
-XEQ 67 @@@@ Y≥WSIZE?
+XEQ 67
 RTN
-@@@@ X must have been >= 0 & < WSIZE
 X<>Y
 1
 X<>Y
@@ -470,27 +402,14 @@ ROTXY
 NOT
 AND
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:GETB)
-@@@@ DSC: Return the Xth bit of Y
-@@@@ IN:  Y: An integer
-@@@@      X: An integer (0=LSB)
-@@@@ OUT: The IP(X)th bit of Y
-@@@@ FAQ: Returns 0 when X is out of range
-@@@@ BUG: When X out of range, type Y is not error checked
-@@@@ LBL: Used 69
-@@@@ UPD: 2021-03-20
 LBL "GETB"
-FUNC 21                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 0
-@@@@ Return 0 if X was negative
 0>? ST Y
 RTN
-@@@@ Return 0  if X was >= WSIZE
-XEQ 67 @@@@ Y≥WSIZE?
+XEQ 67
 RTN
-@@@@ X must have been >= 0 & < WSIZE
 R↓
 BIT?
 GTO 69
@@ -499,17 +418,9 @@ RTN
 LBL 69
 1
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ASNB)
-@@@@ DSC: Set the Yth bit of Z to X
-@@@@ IN:  Z: An integer
-@@@@ IN:  Y: An integer (0=LSB)
-@@@@      X: An integer
-@@@@ OUT: Set the IP(Y)th bit of IP(Z) to IP(X)
-@@@@ UPD: 2021-03-20
 LBL "ASNB"
-FUNC 31                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 31
+L4STK
 X=0?
 GTO 54
 R↓
@@ -519,169 +430,96 @@ LBL 54
 R↓
 XEQ "CLRB"
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:GYaX)
-@@@@ DSC: Return the Y bits of Z starting at bit X
-@@@@ EX:  Z: 111000 Y: 3 X: 2 -> X: 110
-@@@@ IN:  Z: An integer
-@@@@      Y: An integer
-@@@@      X: An integer (0=LSB)
-@@@@ OUT: IP(Y) bits of IP(Z) starting at bit IP(X)
-@@@@ UPD: 2021-04-21
 LBL "GY@X"
-FUNC 31                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
-RCL ST Z   @@@@ Z     X     Y     Z
-X<>Y       @@@@ X     Z     Y     Z
-XEQ "SRn"  @@@@ SHF_Z Y     Z     Z
-X<>Y       @@@@ Y     SHF_Z Z     Z
-XEQ "MSKR" @@@@ MASK  SHF_Z Z     Z
-AND        @@@@ BITS  Z     Z     Z
+FUNC 31
+L4STK
+RCL ST Z
+X<>Y
+XEQ "SRn"
+X<>Y
+XEQ "MSKR"
+AND
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:CYaX)
-@@@@ DSC: Clear Y bits of Z starting at bit X
-@@@@ EX:  Z: 111000 Y: 3 X: 2 -> X: 100000
-@@@@ IN:  Z: An integer
-@@@@      Y: An integer
-@@@@      X: An integer (0=LSB)
-@@@@ OUT: IP(Z) with IP(Y) bits starting at bit IP(X) cleared
-@@@@ UPD: 2021-04-21
 LBL "CY@X"
-FUNC 31                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 31
+L4STK
 XEQ "MSKn"
 NOT
 AND
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SYaX)
-@@@@ DSC: Set Y bits of Z starting at bit X
-@@@@ EX:  Z: 111000 Y: 3 X: 2 -> X: 111100
-@@@@ IN:  Z: An integer
-@@@@      Y: An integer
-@@@@      X: An integer (0=LSB)
-@@@@ OUT: IP(Z) with IP(Y) bits starting at bit IP(X) set
-@@@@ UPD: 2021-04-21
 LBL "SY@X"
-FUNC 31                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 31
+L4STK
 XEQ "MSKn"
 OR
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:AZaY)
-@@@@ DSC: Place Z bits of X into T starting at bit Y
-@@@@ EX:  T: 111000 Z: 3 Y: 2 X: 011 -> X: 101100
-@@@@ IN:  T: An integer
-@@@@ IN:  Z: An integer
-@@@@      Y: An integer
-@@@@      X: An integer (0=LSB)
-@@@@ OUT: IP(Z) bits of IP(T) are set to IP(Z) bits of IP(X) starting at IP(Y)
-@@@@ UPD: 2021-04-21
 LBL "AZ@Y"
-FUNC 41                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 41
+L4STK
 LSTO "_X"
-R↓              @@@@  Y Z T T
+R↓
 LSTO "_Y"
-R↓              @@@@  Z T T T
-LSTO "_Z"     @@@@  Z T T T
-RCL "_Y"      @@@@  Y Z T T
+R↓
+LSTO "_Z"
+RCL "_Y"
 XEQ "MSKn"
 NOT
-AND             @@@@ TM T T T
+AND
 RCL "_X"
 RCL "_Z"
 XEQ "MSKR"
 AND
 RCL "_Y"
-XEQ "SLn" 
-OR              @@@@
+XEQ "SLn"
+OR
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SL)
-@@@@ DSC: Shift Left 1 Bit
-@@@@ IN:  X: An integer
-@@@@ OUT: X: Integer shifted left 1 bit
-@@@@ UPD: 2021-03-20
 LBL "SL"
-FUNC 11                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 -1
 ROTXY
-1 
+1
 NOT
 AND
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SR)
-@@@@ DSC: Shift Right 1 Bit
-@@@@ IN:  X: An integer
-@@@@ OUT: X: Integer shifted right 1 bit
-@@@@ UPD: 2021-03-20
 LBL "SR"
-FUNC 11                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 1
 NOT
 AND
 1
 ROTXY
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RL)
-@@@@ DSC: Rotate Left 1 Bit
-@@@@ IN:  X: An integer
-@@@@ OUT: X: Integer rotated left 1 bit
 LBL "RL"
-FUNC 11                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 -1
 ROTXY
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RR)
-@@@@ DSC: Rotate Right 1 Bit
-@@@@ IN:  X: An integer
-@@@@ OUT: X: Integer rotated right 1 bit
 LBL "RR"
-FUNC 11                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 1
 ROTXY
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SLn)
-@@@@ DSC: Shift Y Left X Bits
-@@@@ IN:  Y: An integer
-@@@@ IN:  X: An integer
-@@@@ OUT: X: IP(Y) shifted left IP(Y) bit(s)
-@@@@ FAQ: IP(Y) is returned unchanged when IP(X) is zero or negative
-@@@@ FAQ: 0 is returned when IP(X)>=WSIZE
-@@@@ UPD: 2021-03-20
 LBL "SLn"
-FUNC 21                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 IP
 X<>Y
 IP
-@@@@ Return Y if X was negative
 0≥? ST Y
 RTN
 X<>Y
 0
-@@@@ Return 0 if X was >= WSIZE
-XEQ 67 @@@@ Y≥WSIZE?
+XEQ 67
 RTN
-@@@@ X must have been > 0 & < WSIZE
 R↓
 X<>Y
-RCL ST Y  
-@@@@ Rotate left X bits
+RCL ST Y
 +/-
 ROTXY
-@@@@ Zap the right most X bits
 2
 RCL ST Z
 Y↑X
@@ -690,32 +528,19 @@ Y↑X
 NOT
 AND
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SRn)
-@@@@ DSC: Shift Y Right X Bits
-@@@@ IN:  Y: An integer
-@@@@ IN:  X: An integer
-@@@@ OUT: X: IP(Y) shifted right IP(X) bit(s)
-@@@@ FAQ: IP(Y) is returned unchanged when IP(X) is zero or negative
-@@@@ FAQ: 0 is returned when IP(X)>=WSIZE
-@@@@ UPD: 2021-03-20
 LBL "SRn"
-FUNC 21                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 IP
 X<>Y
 IP
-@@@@ Return Y if X was negative
 0≥? ST Y
 RTN
 X<>Y
 0
-@@@@ Return 0 if X was >= WSIZE
-XEQ 67 @@@@ Y≥WSIZE?
+XEQ 67
 RTN
-@@@@ X must have been > 0 & < WSIZE
 R↓
-@@@@ Zap the right most X bits
 X<>Y
 RCL ST Y
 2
@@ -725,90 +550,48 @@ Y↑X
 -
 NOT
 AND
-@@@@ Rotate right X bits
 X<>Y
 ROTXY
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RLn)
-@@@@ DSC: Rotate Y Left by X bits
-@@@@ IN:  Y: An integer
-@@@@ IN:  X: An integer
-@@@@ OUT: X: X rotated left IP(Y) bit(s)
-@@@@ FAQ: Y is returned unchanged when X is zero or negative
-@@@@ UPD: 2021-03-20
 LBL "RLn"
-FUNC 21                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 IP
 X<>Y
-@@@@ Return Y if X was negative
 0≥? ST Y
 RTN
 X<>Y
-@@@@ X was positive
 +/-
 ROTXY
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RRn)
-@@@@ DSC: Rotate Y Right by X bits
-@@@@ IN:  Y: An integer
-@@@@ IN:  X: An integer
-@@@@ OUT: X: X rotated right ABS(IP(Y)) bit(s)
-@@@@ FAQ: Y is returned unchanged when X is zero or negative
-@@@@ UPD: 2021-03-20
 LBL "RRn"
-FUNC 21                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 IP
 X<>Y
-@@@@ Return Y if X was negative
 0≥? ST Y
 RTN
 X<>Y
-@@@@ X was positive
 ROTXY
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SHFXY)
-@@@@ DSC: Shift X by Y Bits (left when Y negative)
-@@@@ IN:  Y: An integer
-@@@@ IN:  X: An integer
-@@@@ OUT: X: Integer shifted by IP(Y) bit(s)
-@@@@ FAQ: Uses SLn & SLr.
-@@@@ LBL: Used 59
-@@@@ UPD: 2021-03-20
 LBL "SHFXY"
-FUNC 21                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 IP
 X<0?
 GTO 59
-@@@@ X is non-negative -- shift right
 XEQ "SRn"
 RTN
-LBL 59 
-@@@@ X negative -- shift left
+LBL 59
 +/-
 XEQ "SLn"
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:RJ)
-@@@@ DSC: Right Justify Bits
-@@@@ IN:  X: an integer
-@@@@ OUT: Y: Number of shifts required to justify
-@@@@ OUT: X: Justified number
-@@@@ FAQ: Like the HP-16c's LJ funciton, but justifies in the other direction
-@@@@ LBL: Used 56-58
-@@@@ UPD: 2021-03-20
 LBL "RJ"
-FUNC 12                        @@## REQ:free42>=2.5.24
-L4STK                          @@## REQ:free42>=3.0
+FUNC 12
+L4STK
 IP
 X=0?
-RTNERR 4                       @@## REQ:free42>=2.5.24
-1/X                            @@## REQ:free42<2.5.24
+RTNERR 4
 0
 X<>Y
 LBL 57
@@ -816,32 +599,22 @@ LBL 57
 BIT?
 GTO 56
 GTO 58
-LBL 56   @@@@ LSB is one -- DONE!
+LBL 56
 R↓
 X<>Y
 RTN
-LBL 58   @@@@ LSB is zero
+LBL 58
 R↓
 1
 STO+ ST Z
 ROTXY
 GTO 57
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:LJ)
-@@@@ DSC: Left Justify Bits
-@@@@ IN:  X: an integer
-@@@@ OUT: Y: Number of shifts required to justify
-@@@@ OUT: X: Justified number
-@@@@ FAQ: Just like the HP-16c's LJ funciton
-@@@@ LBL: Used 64-66
-@@@@ UPD: 2021-03-20
 LBL "LJ"
-FUNC 12                        @@## REQ:free42>=2.5.24
-L4STK                          @@## REQ:free42>=3.0
+FUNC 12
+L4STK
 IP
 X=0?
-RTNERR 4                       @@## REQ:free42>=2.5.24
-1/X                            @@## REQ:free42<2.5.24
+RTNERR 4
 0
 X<>Y
 LBL 64
@@ -851,39 +624,27 @@ WSIZE?
 BIT?
 GTO 65
 GTO 66
-LBL 65   @@@@ MSB is one -- DONE!
+LBL 65
 R↓
 X<>Y
 RTN
-LBL 66   @@@@ MSB is zero
+LBL 66
 R↓
 1
 STO+ ST Z
 +/-
 ROTXY
 GTO 64
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ISQRT)
-@@@@ DSC: Integer square root
-@@@@ IN:  X: a non-negative real number
-@@@@ OUT: X: IP(SQRT(ABS(X)))
-@@@@ UPD: 2021-03-16
 LBL "ISQRT"
-FUNC 11                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 ABS
 SQRT
 IP
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:ILN2)
-@@@@ DSC: Integer base 2 log
-@@@@ IN:  X: a positive real number
-@@@@ OUT: X: IP(log_2(ABS(X)))
-@@@@ UPD: 2021-03-16
 LBL "ILN2"
-FUNC 11                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 ABS
 LN
 2
@@ -891,18 +652,9 @@ LN
 ÷
 IP
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MSSB)
-@@@@ DSC: Position of the Most Significant Set Bit
-@@@@ IN:  X: An integer
-@@@@ OUT: X: Position of MSSB in IP(X) or -1 if IP(X) was 0
-@@@@ USE: LJ
-@@@@ UPD: 2021-03-16
-@@@@ FAQ: Runtime Complexity O(WSIZE-log_2(X))
-@@@@ FAQ: Closely related to LJ program
 LBL "MSSB"
-FUNC 11                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 IP
 -1
 0=? ST Y
@@ -915,17 +667,9 @@ WSIZE?
 X<>Y
 -
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:LSSB)
-@@@@ DSC: Position of the Least Significant Set Bit
-@@@@ IN:  X: An integer
-@@@@ OUT: X: Position of LSSB in IP(X) or -1 if IP(X) was 0
-@@@@ UPD: 2021-03-16
-@@@@ FAQ: Runtime Complexity O(LSSB(X)) & LSSB<WSIZE
-@@@@ FAQ: Closely related to RJ program
 LBL "LSSB"
-FUNC 11                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 IP
 -1
 0=? ST Y
@@ -933,53 +677,35 @@ RTN
 R↓
 XEQ "RJ"
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Menu Label: WSIZE
 LBL 96
 "W:"
 WSIZE?
 AIP
 R↓
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Menu Label: BSIGNED
 LBL 97
 FS? 78
 "S:+/-"
 FC? 78
 "S:+"
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Menu Label: BWRAP
 LBL 98
 FS? 79
 "BWR•"
 FC? 79
 "BWRP"
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Menu Label: BVP (BVIEW Padding)
 LBL 99
 FC? 02
 "BVP•"
 FS? 02
 "BVP"
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Menu Label: HEX
 LBL 92
 "HEX"
 FS? 71
 ├"•"
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Menu Label: DEC
 LBL 93
 "DEC"
 SF 81
@@ -992,9 +718,6 @@ CF 81
 FS? 81
 ├"•"
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Menu Label: OCT
 LBL 94
 "OCT"
 SF 81
@@ -1005,9 +728,6 @@ CF 81
 FS? 81
 ├"•"
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Menu Label: BIN
 LBL 95
 "BIN"
 SF 81
@@ -1018,17 +738,11 @@ CF 81
 FS? 81
 ├"•"
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Toggle 02
 LBL 74
 FS?C 02
 RTN
 SF 02
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ Menu Action BINM
 LBL 75
 EXITALL
 "Press R/S To"
@@ -1037,13 +751,6 @@ AVIEW
 HEXM
 STOP
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ DSC: Test if Y<WSIZE
-@@@@ NAM: Y≥WSIZE? 67
-@@@@ I/O: No stack change.  Uses Y
-@@@@ RET: YES if Y≥WSIZE, NO otherwise
-@@@@ UPD: 2021-04-21
 LBL 67
 FUNC 00
 L4STK
@@ -1052,32 +759,24 @@ WSIZE?
 X>Y?
 RTNNO
 RTNYES
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:REVBIT)
-@@@@ DSC: Reverse Bits rightmost X bits of Y
-@@@@ NAM: REVBIT
-@@@@ IN:  Y: An integer
-@@@@      X: An integer
-@@@@ OUT: X: An integer
-@@@@ UPD: 2021-04-21
 LBL "REVNB"
 FUNC 21
 L4STK
-ENTER           @@@@ X X Y
-XEQ "MSKR"      @@@@ M X Y
-X<>Y            @@@@ X M Y
+ENTER
+XEQ "MSKR"
+X<>Y
 1
 -
 LSTO "_MBC"
 1000
 ÷
 LSTO "_CTR"
-R↓              @@@@ M Y
-RCL ST Y        @@@@ Y M Y
-OR              @@@@ N Y
-X<>Y            @@@@ OLD NEW 
+R↓
+RCL ST Y
+OR
+X<>Y
 LBL 51
-RCL "_CTR"       @@@@ CTR OLD NEW 
+RCL "_CTR"
 IP
 BIT?
 GTO 52
@@ -1099,72 +798,40 @@ ISG "_CTR"
 GTO 51
 X<>Y
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:REVBIT)
-@@@@ DSC: Reverse all Bits of X
-@@@@ NAM: REVBIT
-@@@@ IN:  X: An integer
-@@@@ OUT: X: An integer
-@@@@ UPD: 2021-04-21
 LBL "REVB"
 FUNC 11
 L4STK
 WSIZE?
 XEQ "REVNB"
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:POPRB)
-@@@@ DSC: Shift rihtmost X bits off Y.
-@@@@ IN:  Y: An integer
-@@@@      X: An integer (number of bits)
-@@@@ OUT: Y: Part of Y left
-@@@@      X: Part of Y shifted off
 LBL "POPRB"
 FUNC 22
 L4STK
-RCL ST Y     @@@@ Y   X   Y   ?
-RCL ST Y     @@@@ X   Y   X   Y
-XEQ "SRn"    @@@@ LFT X   Y   Y
-RCL ST Z     @@@@ Y   LFT X   Y
-RCL ST Z     @@@@ X   Y   LFT X
-XEQ "MSKR"   @@@@ MSK Y   LFT X
-AND          @@@@ POP LFT X   Y
+RCL ST Y
+RCL ST Y
+XEQ "SRn"
+RCL ST Z
+RCL ST Z
+XEQ "MSKR"
+AND
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:POPLB)
-@@@@ DSC: Shift leftmost X bits off Y.
-@@@@ IN:  Y: An integer
-@@@@      X: An integer (number of bits)
-@@@@ OUT: Y: Part of Y left
-@@@@      X: Part of Y shifted off
 LBL "POPLB"
 FUNC 22
 L4STK
-RCL ST Y     @@@@ Y   X   Y   ?
-RCL ST Y     @@@@ X   Y   X   Y
-XEQ "SLn"    @@@@ LFT X   Y   Y
-RCL ST Z     @@@@ Y   LFT X   Y
-RCL ST Z     @@@@ X   Y   LFT X
-XEQ "MSKL"   @@@@ MSK Y   LFT X
-AND          @@@@ PS  LFT X   Y
+RCL ST Y
+RCL ST Y
+XEQ "SLn"
+RCL ST Z
+RCL ST Z
+XEQ "MSKL"
+AND
 RCL ST Z
 +/-
-ROTXY        @@@@ POP LFT X   Y
+ROTXY
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:BVIEW)
-@@@@ DSC: Print binary numbers (up to 64-bit)
-@@@@ IN:  X: An integer
-@@@@ OUT: Nothing -- prints to screen
-@@@@ FLG: 81: TEMP: Set: We are on DM42;            Clear: We are not on DM42
-@@@@ FLG: 01: PREF: Reserved
-@@@@ FLG: 02: PREF: Set: BVIEW prints WSIZE digits; Clear: BVIEW prints 64 digits
-@@@@ FAQ: If XEQ while system BASE menu is active, returns to same menu.
-@@@@ BUG: Sometimes gets the system base menu to return to wrong. ;)
-@@@@ UPD: 2021-03-20
 LBL "BVIEW"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 0
 SF 25
 BIT?
@@ -1185,7 +852,7 @@ FS? 70
 STO+ ST Y
 FS? 71
 STO+ ST Y
-R↓             @@@@ 20:DECN 21:BINM 22:OCTM 23:HEXM
+R↓
 LSTO "_SBMD"
 R↓
 CF 81
@@ -1195,9 +862,8 @@ FS?C 25
 SF 81
 FC? 81
 GTO 88
-@@@@ We are on a DM42
 0
-STO "GrMod"     @@@@ Set graphics mode to 42 classic on DM42
+STO "GrMod"
 R↓
 LBL 88
 CLLCD
@@ -1207,14 +873,13 @@ EXITALL
 ÷
 LSTO "_CTR"
 LBL 76
-@@@@ Figure out X&Y coordinates for digit
-RCL "_CTR"            @@@@ IF
+RCL "_CTR"
 IP
 32
 X>Y?
 GTO 73
 GTO 83
-LBL 73               @@@@ IF-THEN FIRST ROW
+LBL 73
 1
 RCL "_CTR"
 4
@@ -1222,7 +887,7 @@ RCL "_CTR"
 1
 +
 GTO 90
-LBL 83               @@@@ IF-ELSE SECOND ROW
+LBL 83
 9
 RCL "_CTR"
 32
@@ -1231,19 +896,18 @@ RCL "_CTR"
 ×
 1
 +
-LBL 90               @@@@ IF-END
-@@@@ Figure out current bit value
+LBL 90
 63
-RCL "_CTR"            @@@@ IF-BEGIN
+RCL "_CTR"
 IP
 -
 WSIZE?
 X>Y?
 GTO 80
 GTO 81
-LBL 80               @@@@ IF-THEN
+LBL 80
 R↓
-+/-                  @@@@ IF-BEGIN
++/-
 1
 X<>Y
 ROTXY
@@ -1252,28 +916,26 @@ AND
 X=0?
 GTO 85
 GTO 86
-LBL 85               @@@@ IF-THEN bit is 0
+LBL 85
 R↓
 0
 GTO 87
-LBL 86               @@@@ IF-ELSE bit is 1
+LBL 86
 R↓
 1
 LBL 87
 LSTO "_CB"
 GTO 82
-LBL 81               @@@@ IF-ELSE
+LBL 81
 R↓
 R↓
-@@@@ Bit beyond WSIZE padding character
 0
 LSTO "_CB"
 FS? 02
 GTO 84
-LBL 82               @@@@ IF-END
+LBL 82
 R↓
-@@@@ Figure out grouping
-RCL "_CTR"            @@@@ IF-START grouping
+RCL "_CTR"
 IP
 4
 ÷
@@ -1284,28 +946,21 @@ FP
 X=0?
 GTO 55
 GTO 68
-LBL 55               @@@@ IF-THEN
+LBL 55
 R↓
 0
 GTO 77
-LBL 68               @@@@ IF-ELSE
+LBL 68
 R↓
 2
-LBL 77               @@@@ IF-END
-@@@@ Compute digit character code
+LBL 77
 RCL+ "_CB"
-@@@@ Draw it
 XEQ 78
 LBL 84
 ISG  "_CTR"
 GTO 76
 FC? 81
 GTO 89
-@@@@ @@@@ On DM42.  Hack to keep screen clean
-@@@@ GETKEY
-@@@@ CLLCD
-@@@@ "BVIEW FINISHED"
-@@@@ AVIEW
 LBL 89
 RCL "_SBMD"
 20
@@ -1324,28 +979,11 @@ R↓
 X=Y?
 HEXM
 R↓
-@@@@ Recall original X
 RCL "_X"
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@ DSC: tiny binary digit print
-@@@@ IN:  Z: Y coordinate for upper left point of character -- Top of screen is 1
-@@@@      Y: X coordinate for upper left point of character -- Left of screen is 1
-@@@@      X: Character number
-@@@@ OUT: No return
-@@@@ UPD: 2021-04-11
-@@@@ BUG: Characters can be *VERY* tiny in high resolution modes on DM42
-@@@@ Characters can be underlined
-@@@@ Characters are 3x5 pixels in size.  Underlined characters are 3x7.
-@@@@   - Stock HP-42s screen: 32 characters across.  Two full lines on the screen.
-@@@@ Non-Underlined Character numbers:
-@@@@     00 01
-@@@@      0  1
-@@@@ Add 2 to the above character number for the underlined version
 LBL 78
-FUNC 30      @@## REQ:free42>=2.5.24
-L4STK        @@## REQ:free42>=3.0
+FUNC 30
+L4STK
 IP
 60
 +
@@ -1353,18 +991,17 @@ XEQ IND ST X
 R↓
 AGRAPH
 RTN
-LBL 60       @@@@ CHAR: 0
-"•μ•"        @@@@ #b11111 #b10001 #b11111
+LBL 60
+"•μ•"
 RTN
-LBL 61       @@@@ CHAR: 1
-"£•←"        @@@@ #b10010 #b11111 #b10000
+LBL 61
+"£•←"
 RTN
-LBL 62       @@@@ CHAR: 0
-"_Q_"        @@@@ #b1011111 #b1010001 #b1011111
+LBL 62
+"_Q_"
 RTN
-LBL 63       @@@@ CHAR: 1
-"R_P"        @@@@ #b1010010 #b1011111 #b1010000
+LBL 63
+"R_P"
 RTN
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
+

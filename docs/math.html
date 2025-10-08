@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-10-07 Tue 12:57 -->
+<!-- 2025-10-08 Wed 14:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=1024, initial-scale=1" />
 <title>free42 Random Math Stuff</title>
@@ -228,7 +228,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2025-10-07 11:03:21</i></td>
+<td class="org-left"><i>2025-10-08 14:51:44</i></td>
 </tr>
 </tbody>
 </table>
@@ -240,103 +240,62 @@ Copyright 2025 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1cbae46">1. Metadata</a></li>
+<li><a href="#org8f64c95">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
-<li><a href="#org6a440a9">3. <code>NLA</code>: Linear Algebra</a>
+<li><a href="#orgc3f9124">3. <code>NLA</code>: Linear Algebra</a>
 <ul>
 <li><a href="#menu-nla">3.1. Menu</a></li>
-<li><a href="#orgbb43e49">3.2. Notes on individual programs</a>
+<li><a href="#org43d4049">3.2. Notes on individual programs</a>
 <ul>
-<li><a href="#org6df4590">3.2.1. <code>MXCPLY</code>: Characteristic polynomial</a></li>
-<li><a href="#org8060bd6">3.2.2. <code>EQCPLY</code>: Characteristic polynomial as an <code>MVAR</code> program</a></li>
+<li><a href="#org5186869">3.2.1. <code>MXCPLY</code>: Characteristic polynomial</a></li>
+<li><a href="#orgb10871e">3.2.2. <code>EQCPLY</code>: Characteristic polynomial as an <code>MVAR</code> program</a></li>
 </ul>
 </li>
-<li><a href="#orgc229e25">3.3. Code for Menu</a></li>
-<li><a href="#org027e6f6">3.4. Functions</a></li>
+<li><a href="#org818104c">3.3. Code for Menu</a></li>
+<li><a href="#orgfa3bf7b">3.4. Functions</a></li>
 </ul>
 </li>
-<li><a href="#orgd77c0d0">4. <code>POLY</code>: A collection of polynomial tools</a>
+<li><a href="#orgf3c7a5c">4. <code>POLY</code>: A collection of polynomial tools</a>
 <ul>
 <li><a href="#menu-poly">4.1. Menu</a></li>
-<li><a href="#org32d8ddd">4.2. Notes for individual programs</a>
+<li><a href="#orgfdfb2b7">4.2. Notes for individual programs</a>
 <ul>
-<li><a href="#orgd22bc36">4.2.1. <code>PEVAL</code>, <code>PEVL1</code>, &amp; <code>PEVL2</code>: Evaluating Polynomials</a></li>
-<li><a href="#org3cede25">4.2.2. <code>PWRP</code>: Wrapping a polynomial matrix in an <code>MVAR</code> function</a></li>
-<li><a href="#org4d3ee78">4.2.3. <code>PR1ST</code> &amp; <code>PRNXT</code>: Finding the roots of a polynomial</a></li>
-<li><a href="#orgc6cd69d">4.2.4. <code>PLGRR</code>: Search for a polynomial root</a></li>
+<li><a href="#org2518d0c">4.2.1. <code>PEVAL</code>, <code>PEVL1</code>, &amp; <code>PEVL2</code>: Evaluating Polynomials</a></li>
+<li><a href="#orgc212b94">4.2.2. <code>PWRP</code>: Wrapping a polynomial matrix in an <code>MVAR</code> function</a></li>
+<li><a href="#orgb2ba222">4.2.3. <code>PR1ST</code> &amp; <code>PRNXT</code>: Finding the roots of a polynomial</a></li>
+<li><a href="#org6db697b">4.2.4. <code>PLGRR</code>: Search for a polynomial root</a></li>
 </ul>
 </li>
-<li><a href="#orge731482">4.3. Code for Menu</a></li>
-<li><a href="#org2619d33">4.4. Local functions</a></li>
+<li><a href="#org56990a3">4.3. Code for Menu</a></li>
+<li><a href="#orga4983de">4.4. Local functions</a></li>
 </ul>
 </li>
-<li><a href="#org9babf12">5. <code>VEC3</code>: 3D Real Vector Application</a>
+<li><a href="#org227f709">5. <code>VEC3</code>: 3D Real Vector Application</a>
 <ul>
 <li><a href="#menu-vec3">5.1. Menu</a></li>
-<li><a href="#org6086c39">5.2. Code for Menu</a></li>
-<li><a href="#org9495327">5.3. Local functions</a></li>
+<li><a href="#org1e3f00d">5.2. Code for Menu</a></li>
+<li><a href="#org91b1df9">5.3. Local functions</a></li>
 </ul>
 </li>
-<li><a href="#orgb4536b0">6. <code>STATR</code>: Statistics Registers</a>
+<li><a href="#org8133c07">6. <code>STATR</code>: Statistics Registers</a>
 <ul>
 <li><a href="#menu-statr">6.1. Menu</a></li>
-<li><a href="#org341796a">6.2. Code</a></li>
+<li><a href="#org9c55244">6.2. Code</a></li>
 </ul>
 </li>
-<li><a href="#org3c3476d">7. EOF</a></li>
+<li><a href="#org59bf1b3">7. EOF</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org1cbae46" class="outline-2">
-<h2 id="org1cbae46"><span class="section-number-2">1.</span> Metadata</h2>
+<div id="outline-container-org8f64c95" class="outline-2">
+<h2 id="org8f64c95"><span class="section-number-2">1.</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
-<p>
-The home for this HTML file is: <a href="https://richmit.github.io/hp42/math.html">https://richmit.github.io/hp42/math.html</a>
-</p>
-
-<p>
-Files related to this document may be found on github: <a href="https://github.com/richmit/hp42">https://github.com/richmit/hp42</a>
-</p>
-
-<p>
-Directory contents:
-</p>
-<table border="0" cellspacing="0" cellpadding="6" rules="none" frame="none" align="center">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left"><code>src</code></td>
-<td class="org-left">-</td>
-<td class="org-left">The org-mode file that generated this HTML document</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>src_42s</code></td>
-<td class="org-left">-</td>
-<td class="org-left">Ready to convert source listings for 42s code in this document</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>docs</code></td>
-<td class="org-left">-</td>
-<td class="org-left">This html document and associated PDF</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>bin</code></td>
-<td class="org-left">-</td>
-<td class="org-left">Importable RAW program files</td>
-</tr>
-</tbody>
-</table>
+<ul class="org-ul">
+<li>Connonical URL for this file: <a href="https://richmit.github.io/hp42/math.html">https://richmit.github.io/hp42/math.html</a></li>
+<li>org-mode file source for this file: <a href="https://github.com/richmit/hp42/blob/master/src/math.org">https://github.com/richmit/hp42/blob/master/src/math.org</a></li>
+<li>42s code listings in this file: <a href="https://github.com/richmit/hp42/blob/master/src_42s/math/math.hp42s">https://github.com/richmit/hp42/blob/master/src_42s/math/math.hp42s</a></li>
+<li>GitHub repository: <a href="https://github.com/richmit/hp42">https://github.com/richmit/hp42</a></li>
+</ul>
 </div>
 </div>
 <div id="outline-container-introduction" class="outline-2">
@@ -348,14 +307,14 @@ in this file.  That stuff has moved to <a href="sfun.html">sfun.html</a>.
 </p>
 </div>
 </div>
-<div id="outline-container-org6a440a9" class="outline-2">
-<h2 id="org6a440a9"><span class="section-number-2">3.</span> <code>NLA</code>: Linear Algebra</h2>
+<div id="outline-container-orgc3f9124" class="outline-2">
+<h2 id="orgc3f9124"><span class="section-number-2">3.</span> <code>NLA</code>: Linear Algebra</h2>
 <div class="outline-text-2" id="text-3">
 </div>
 <div id="outline-container-menu-nla" class="outline-3">
 <h3 id="menu-nla"><span class="section-number-3">3.1.</span> Menu</h3>
 <div class="outline-text-3" id="text-menu-nla">
-<table id="orge35c977" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="orgfbc93af" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -479,12 +438,12 @@ in this file.  That stuff has moved to <a href="sfun.html">sfun.html</a>.
 </table>
 </div>
 </div>
-<div id="outline-container-orgbb43e49" class="outline-3">
-<h3 id="orgbb43e49"><span class="section-number-3">3.2.</span> Notes on individual programs</h3>
+<div id="outline-container-org43d4049" class="outline-3">
+<h3 id="org43d4049"><span class="section-number-3">3.2.</span> Notes on individual programs</h3>
 <div class="outline-text-3" id="text-3-2">
 </div>
-<div id="outline-container-org6df4590" class="outline-4">
-<h4 id="org6df4590"><span class="section-number-4">3.2.1.</span> <code>MXCPLY</code>: Characteristic polynomial</h4>
+<div id="outline-container-org5186869" class="outline-4">
+<h4 id="org5186869"><span class="section-number-4">3.2.1.</span> <code>MXCPLY</code>: Characteristic polynomial</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <p>
 <code>MXCPLY</code> uses the Faddeev–LeVerrier algorithm to compute the characteristic polynomial of a matrix.  The polynomial is a matrix of coefficients suitable for use
@@ -496,8 +455,8 @@ One can find the eigenvalues of a matrix by using <code>PR1ST</code> &amp; <code
 </p>
 </div>
 </div>
-<div id="outline-container-org8060bd6" class="outline-4">
-<h4 id="org8060bd6"><span class="section-number-4">3.2.2.</span> <code>EQCPLY</code>: Characteristic polynomial as an <code>MVAR</code> program</h4>
+<div id="outline-container-orgb10871e" class="outline-4">
+<h4 id="orgb10871e"><span class="section-number-4">3.2.2.</span> <code>EQCPLY</code>: Characteristic polynomial as an <code>MVAR</code> program</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <p>
 The <code>EQCPLY</code> function is an <code>MVAR</code> function that directly computes values of the characteristic polynomial.  It is horribly inefficient, but it can be used by
@@ -506,17 +465,55 @@ the built in solver to find real eigenvalues or to plot the characteristic polyn
 </div>
 </div>
 </div>
-<div id="outline-container-orgc229e25" class="outline-3">
-<h3 id="orgc229e25"><span class="section-number-3">3.3.</span> Code for Menu</h3>
+<div id="outline-container-org818104c" class="outline-3">
+<h3 id="org818104c"><span class="section-number-3">3.3.</span> Code for Menu</h3>
 <div class="outline-text-3" id="text-3-3">
 <div class="org-src-container">
-<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"NLA"</span> 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
+<pre class="src src-hp42s"><span id="coderef-NLA" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (NLA)</span>
+<span style="color: #ffa500;">@@@@ DSC: Auto-generated menu program</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"NLA"</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">01</span>            <span style="color: #ffa500;">@@@@ Page 1 of menu NLA</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"IDEN"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"MXIDN"</span>
+<span style="color: #fa8072;">"DIAG"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"MXDIAG"</span>
+<span style="color: #fa8072;">"TR"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"MXTR"</span>
+<span style="color: #fa8072;">"CPLY"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"MXCPLY"</span>
+<span style="color: #fa8072;">"EDIT"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">96</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">02</span>            <span style="color: #ffa500;">@@@@ Page 2 of menu NLA</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"MAT"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">98</span>
+<span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">97</span>
+<span style="color: #fa8072;">"EVCP"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"EQCPLY"</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">00</span> <span style="color: #ffa500;">@@@@ Application Exit</span>
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ Free labels start at: 3</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org027e6f6" class="outline-3">
-<h3 id="org027e6f6"><span class="section-number-3">3.4.</span> Functions</h3>
+<div id="outline-container-orgfa3bf7b" class="outline-3">
+<h3 id="orgfa3bf7b"><span class="section-number-3">3.4.</span> Functions</h3>
 <div class="outline-text-3" id="text-3-4">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-MXCPLY" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MXCPLY)</span>
@@ -710,14 +707,14 @@ END
 </div>
 </div>
 </div>
-<div id="outline-container-orgd77c0d0" class="outline-2">
-<h2 id="orgd77c0d0"><span class="section-number-2">4.</span> <code>POLY</code>: A collection of polynomial tools</h2>
+<div id="outline-container-orgf3c7a5c" class="outline-2">
+<h2 id="orgf3c7a5c"><span class="section-number-2">4.</span> <code>POLY</code>: A collection of polynomial tools</h2>
 <div class="outline-text-2" id="text-4">
 </div>
 <div id="outline-container-menu-poly" class="outline-3">
 <h3 id="menu-poly"><span class="section-number-3">4.1.</span> Menu</h3>
 <div class="outline-text-3" id="text-menu-poly">
-<table id="org81caeb2" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="org8e0e5d7" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -944,12 +941,12 @@ degree.
 </p>
 </div>
 </div>
-<div id="outline-container-org32d8ddd" class="outline-3">
-<h3 id="org32d8ddd"><span class="section-number-3">4.2.</span> Notes for individual programs</h3>
+<div id="outline-container-orgfdfb2b7" class="outline-3">
+<h3 id="orgfdfb2b7"><span class="section-number-3">4.2.</span> Notes for individual programs</h3>
 <div class="outline-text-3" id="text-4-2">
 </div>
-<div id="outline-container-orgd22bc36" class="outline-4">
-<h4 id="orgd22bc36"><span class="section-number-4">4.2.1.</span> <code>PEVAL</code>, <code>PEVL1</code>, &amp; <code>PEVL2</code>: Evaluating Polynomials</h4>
+<div id="outline-container-org2518d0c" class="outline-4">
+<h4 id="org2518d0c"><span class="section-number-4">4.2.1.</span> <code>PEVAL</code>, <code>PEVL1</code>, &amp; <code>PEVL2</code>: Evaluating Polynomials</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <p>
 These functions efficiently evaluate a polynomial (and its first and/or second derivative).  They are handy for simply evaluating a polynomial repeatedly;
@@ -958,8 +955,8 @@ to repeatedly evaluate a polynomial.
 </p>
 </div>
 </div>
-<div id="outline-container-org3cede25" class="outline-4">
-<h4 id="org3cede25"><span class="section-number-4">4.2.2.</span> <code>PWRP</code>: Wrapping a polynomial matrix in an <code>MVAR</code> function</h4>
+<div id="outline-container-orgc212b94" class="outline-4">
+<h4 id="orgc212b94"><span class="section-number-4">4.2.2.</span> <code>PWRP</code>: Wrapping a polynomial matrix in an <code>MVAR</code> function</h4>
 <div class="outline-text-4" id="text-4-2-2">
 <p>
 Simply store the polynomial into the global variable "<code>WRPP</code>", and then feed <code>PWRP</code> to things like the built in solver/integrator and similar tools (See:
@@ -967,8 +964,8 @@ Simply store the polynomial into the global variable "<code>WRPP</code>", and th
 </p>
 </div>
 </div>
-<div id="outline-container-org4d3ee78" class="outline-4">
-<h4 id="org4d3ee78"><span class="section-number-4">4.2.3.</span> <code>PR1ST</code> &amp; <code>PRNXT</code>: Finding the roots of a polynomial</h4>
+<div id="outline-container-orgb2ba222" class="outline-4">
+<h4 id="orgb2ba222"><span class="section-number-4">4.2.3.</span> <code>PR1ST</code> &amp; <code>PRNXT</code>: Finding the roots of a polynomial</h4>
 <div class="outline-text-4" id="text-4-2-3">
 <p>
 These two programs provide a way to find all the roots of a polynomial.  They work on real or complex polynomials, and finds both real and complex roots.
@@ -1008,8 +1005,8 @@ Alternately, with a bit more round off error, you can just repeatedly use <code>
 </p>
 </div>
 </div>
-<div id="outline-container-orgc6cd69d" class="outline-4">
-<h4 id="orgc6cd69d"><span class="section-number-4">4.2.4.</span> <code>PLGRR</code>: Search for a polynomial root</h4>
+<div id="outline-container-org6db697b" class="outline-4">
+<h4 id="org6db697b"><span class="section-number-4">4.2.4.</span> <code>PLGRR</code>: Search for a polynomial root</h4>
 <div class="outline-text-4" id="text-4-2-4">
 <p>
 This is designed to be used by other programs.  It takes a polynomial, a guess, a tolerance, and a maximum number of iterations.  If the tolerance is
@@ -1018,17 +1015,91 @@ negative, then the function will always preform the maximum number of iterations
 </div>
 </div>
 </div>
-<div id="outline-container-orge731482" class="outline-3">
-<h3 id="orge731482"><span class="section-number-3">4.3.</span> Code for Menu</h3>
+<div id="outline-container-org56990a3" class="outline-3">
+<h3 id="org56990a3"><span class="section-number-3">4.3.</span> Code for Menu</h3>
 <div class="outline-text-3" id="text-4-3">
 <div class="org-src-container">
-<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"POLY"</span> 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
+<pre class="src src-hp42s"><span id="coderef-POLY" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (POLY)</span>
+<span style="color: #ffa500;">@@@@ DSC: Auto-generated menu program</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"POLY"</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">01</span>            <span style="color: #ffa500;">@@@@ Page 1 of menu POLY</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"NEW"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"NEWPLY"</span>
+<span style="color: #fa8072;">"INTRP"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"PINTRP"</span>
+<span style="color: #fa8072;">"EDIT"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">78</span>
+<span style="color: #fa8072;">"VIEW"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"VPOLY"</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">02</span>            <span style="color: #ffa500;">@@@@ Page 2 of menu POLY</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"SLV2"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"P2SLV"</span>
+<span style="color: #fa8072;">"SLV1"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"P1SLV"</span>
+<span style="color: #fa8072;">"R1ST"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"PR1ST"</span>
+<span style="color: #fa8072;">"RNXT"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"PRNXT"</span>
+<span style="color: #fa8072;">"VIEW"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"VPOLY"</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">03</span>            <span style="color: #ffa500;">@@@@ Page 3 of menu POLY</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"DFALT"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"PDEFLT"</span>
+<span style="color: #fa8072;">"EVAL"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"PEVAL"</span>
+<span style="color: #fa8072;">"EVAL1"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"PEVL1"</span>
+<span style="color: #fa8072;">"EVAL2"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"PEVL2"</span>
+<span style="color: #fa8072;">"LGRR"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"PLGRR"</span>
+<span style="color: #fa8072;">"VIEW"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"VPOLY"</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">04</span>            <span style="color: #ffa500;">@@@@ Page 4 of menu POLY</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"POLY"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">98</span>
+<span style="color: #fa8072;">"X"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">97</span>
+<span style="color: #fa8072;">"EVAL"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"PWRP"</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">00</span> <span style="color: #ffa500;">@@@@ Application Exit</span>
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ Free labels start at: 5</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org2619d33" class="outline-3">
-<h3 id="org2619d33"><span class="section-number-3">4.4.</span> Local functions</h3>
+<div id="outline-container-orga4983de" class="outline-3">
+<h3 id="orga4983de"><span class="section-number-3">4.4.</span> Local functions</h3>
 <div class="outline-text-3" id="text-4-4">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-PINTRP" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PINTRP)</span>
@@ -1616,8 +1687,8 @@ END
 </div>
 </div>
 </div>
-<div id="outline-container-org9babf12" class="outline-2">
-<h2 id="org9babf12"><span class="section-number-2">5.</span> <code>VEC3</code>: 3D Real Vector Application</h2>
+<div id="outline-container-org227f709" class="outline-2">
+<h2 id="org227f709"><span class="section-number-2">5.</span> <code>VEC3</code>: 3D Real Vector Application</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 This is a simple little application that makes working with 3D vectors less painfull.
@@ -1626,7 +1697,7 @@ This is a simple little application that makes working with 3D vectors less pain
 <div id="outline-container-menu-vec3" class="outline-3">
 <h3 id="menu-vec3"><span class="section-number-3">5.1.</span> Menu</h3>
 <div class="outline-text-3" id="text-menu-vec3">
-<table id="orga58b139" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="org70088fc" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -1683,17 +1754,50 @@ This is a simple little application that makes working with 3D vectors less pain
 </table>
 </div>
 </div>
-<div id="outline-container-org6086c39" class="outline-3">
-<h3 id="org6086c39"><span class="section-number-3">5.2.</span> Code for Menu</h3>
+<div id="outline-container-org1e3f00d" class="outline-3">
+<h3 id="org1e3f00d"><span class="section-number-3">5.2.</span> Code for Menu</h3>
 <div class="outline-text-3" id="text-5-2">
 <div class="org-src-container">
-<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"VEC3"</span> 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
+<pre class="src src-hp42s"><span id="coderef-VEC3" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (VEC3)</span>
+<span style="color: #ffa500;">@@@@ DSC: Auto-generated menu program</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"VEC3"</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">01</span>            <span style="color: #ffa500;">@@@@ Page 1 of menu VEC3</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"&#8594;V"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">99</span>
+<span style="color: #fa8072;">"V&#8594;"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">98</span>
+<span style="color: #fa8072;">"DOT"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #fa8072;">"CROSS"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
+<span style="color: #fa8072;">"MAG"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
+<span style="color: #fa8072;">"VVIEW"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">96</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">00</span> <span style="color: #ffa500;">@@@@ Application Exit</span>
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">02</span>    <span style="color: #ffa500;">@@@@ Action for menu key DOT</span>
+<span style="color: #00ffff;">DOT</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">03</span>    <span style="color: #ffa500;">@@@@ Action for menu key CROSS</span>
+<span style="color: #00ffff;">CROSS</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">04</span>    <span style="color: #ffa500;">@@@@ Action for menu key MAG</span>
+<span style="color: #00ffff;">FNRM</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ Free labels start at: 5</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org9495327" class="outline-3">
-<h3 id="org9495327"><span class="section-number-3">5.3.</span> Local functions</h3>
+<div id="outline-container-org91b1df9" class="outline-3">
+<h3 id="org91b1df9"><span class="section-number-3">5.3.</span> Local functions</h3>
 <div class="outline-text-3" id="text-5-3">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -1801,14 +1905,14 @@ END
 </div>
 </div>
 </div>
-<div id="outline-container-orgb4536b0" class="outline-2">
-<h2 id="orgb4536b0"><span class="section-number-2">6.</span> <code>STATR</code>: Statistics Registers</h2>
+<div id="outline-container-org8133c07" class="outline-2">
+<h2 id="org8133c07"><span class="section-number-2">6.</span> <code>STATR</code>: Statistics Registers</h2>
 <div class="outline-text-2" id="text-6">
 </div>
 <div id="outline-container-menu-statr" class="outline-3">
 <h3 id="menu-statr"><span class="section-number-3">6.1.</span> Menu</h3>
 <div class="outline-text-3" id="text-menu-statr">
-<table id="org3ead1ae" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="org5c7cb10" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -1891,23 +1995,218 @@ END
 </table>
 </div>
 </div>
-<div id="outline-container-org341796a" class="outline-3">
-<h3 id="org341796a"><span class="section-number-3">6.2.</span> Code</h3>
+<div id="outline-container-org9c55244" class="outline-3">
+<h3 id="org9c55244"><span class="section-number-3">6.2.</span> Code</h3>
 <div class="outline-text-3" id="text-6-2">
 <div class="org-src-container">
-<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"STATR"</span> 0 tbl 0 nil 'stay 'up 'auto
-                           #'MJR-local-only-gen-lab
-                           (<span style="color: #00ffff;">lambda</span> (atrg target row)
-                             (<span style="color: #00ffff;">cl-destructuring-bind</span> (menu prog) row
-                               (mapconcat #'string-trim-left
-                                          (split-string prog <span style="color: #fa8072;">";"</span>) <span style="color: #fa8072;">"\n"</span>))))
+<pre class="src src-hp42s"><span id="coderef-STATR" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (STATR)</span>
+<span style="color: #ffa500;">@@@@ DSC: Auto-generated menu program</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"STATR"</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">01</span>            <span style="color: #ffa500;">@@@@ Page 1 of menu STATR</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"&#931;x"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
+<span style="color: #fa8072;">"&#931;x&#8593;2"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">05</span>
+<span style="color: #fa8072;">"&#931;y"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">06</span>
+<span style="color: #fa8072;">"&#931;y&#8593;2"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">07</span>
+<span style="color: #fa8072;">"&#931;xy"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">08</span>
+<span style="color: #fa8072;">"n"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">09</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">02</span>            <span style="color: #ffa500;">@@@@ Page 2 of menu STATR</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"&#931;lnx"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">10</span>
+<span style="color: #fa8072;">"&#931;lnx&#8593;2"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">11</span>
+<span style="color: #fa8072;">"&#931;lny"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">12</span>
+<span style="color: #fa8072;">"&#931;lny&#8593;2"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">13</span>
+<span style="color: #fa8072;">"&#931;lnxlny"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">14</span>
+<span style="color: #fa8072;">"&#931;xlny"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">15</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">03</span>            <span style="color: #ffa500;">@@@@ Page 3 of menu STATR</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"&#931;ylnx"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">16</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">00</span> <span style="color: #ffa500;">@@@@ Application Exit</span>
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">04</span>    <span style="color: #ffa500;">@@@@ Action for menu key &#931;x</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG?</span>
+0
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;x="</span>
+<span style="color: #00ffff;">ARCL ST</span> X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">05</span>    <span style="color: #ffa500;">@@@@ Action for menu key &#931;x&#8593;2</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG?</span>
+1
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;x^2="</span>
+<span style="color: #00ffff;">ARCL ST</span> X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">06</span>    <span style="color: #ffa500;">@@@@ Action for menu key &#931;y</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG?</span>
+2
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;y="</span>
+<span style="color: #00ffff;">ARCL ST</span> X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">07</span>    <span style="color: #ffa500;">@@@@ Action for menu key &#931;y&#8593;2</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG?</span>
+3
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;y^2="</span>
+<span style="color: #00ffff;">ARCL ST</span> X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">08</span>    <span style="color: #ffa500;">@@@@ Action for menu key &#931;xy</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG?</span>
+4
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;xy="</span>
+<span style="color: #00ffff;">ARCL ST</span> X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">09</span>    <span style="color: #ffa500;">@@@@ Action for menu key n</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG?</span>
+5
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"n="</span>
+<span style="color: #00ffff;">ARCL ST</span> X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">10</span>    <span style="color: #ffa500;">@@@@ Action for menu key &#931;lnx</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG?</span>
+6
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;lnx="</span>
+<span style="color: #00ffff;">ARCL ST</span> X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">11</span>    <span style="color: #ffa500;">@@@@ Action for menu key &#931;lnx&#8593;2</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG?</span>
+7
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;(lnx)^2="</span>
+<span style="color: #00ffff;">ARCL ST</span> X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">12</span>    <span style="color: #ffa500;">@@@@ Action for menu key &#931;lny</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG?</span>
+8
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;lny="</span>
+<span style="color: #00ffff;">ARCL ST</span> X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">13</span>    <span style="color: #ffa500;">@@@@ Action for menu key &#931;lny&#8593;2</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG?</span>
+9
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;(lny)^2="</span>
+<span style="color: #00ffff;">ARCL ST</span> X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">14</span>    <span style="color: #ffa500;">@@@@ Action for menu key &#931;lnxlny</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG?</span>
+10
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;lnxlny="</span>
+<span style="color: #00ffff;">ARCL ST</span> X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">15</span>    <span style="color: #ffa500;">@@@@ Action for menu key &#931;xlny</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG?</span>
+11
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;xlny="</span>
+<span style="color: #00ffff;">ARCL ST</span> X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">16</span>    <span style="color: #ffa500;">@@@@ Action for menu key &#931;ylnx</span>
+<span style="color: #00ffff;">FUNC</span> 01
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">&#931;REG?</span>
+12
+<span style="color: #00ffff;">+</span>
+<span style="color: #00ffff;">RCL IND ST</span> X
+<span style="color: #fa8072;">"&#931;ylnx="</span>
+<span style="color: #00ffff;">ARCL ST</span> X
+<span style="color: #00ffff;">AVIEW</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ Free labels start at: 17</span>
+END
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org3c3476d" class="outline-2">
-<h2 id="org3c3476d"><span class="section-number-2">7.</span> EOF</h2>
+<div id="outline-container-org59bf1b3" class="outline-2">
+<h2 id="org59bf1b3"><span class="section-number-2">7.</span> EOF</h2>
 <div class="outline-text-2" id="text-7">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />

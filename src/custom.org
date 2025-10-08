@@ -59,50 +59,14 @@ Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 
 * Metadata
 
-The home for this HTML file is: https://richmit.github.io/hp42/custom.html
+ - Connonical URL for this file: https://richmit.github.io/hp42/custom.html
+ - org-mode file source for this file: https://github.com/richmit/hp42/blob/master/src/custom.org
+ - 42s code listings in this file: https://github.com/richmit/hp42/blob/master/src_42s/custom/custom.hp42s
+ - GitHub repository: https://github.com/richmit/hp42
 
-Files related to this document may be found on github: https://github.com/richmit/hp42
+* My Custom Menu
 
-Directory contents:
-#+ATTR_HTML: :border 0 :frame none :rules none :align center
-   | =src=     | - | The org-mode file that generated this HTML document            |
-   | =src_42s= | - | Ready to convert source listings for 42s code in this document |
-   | =docs=    | - | This html document and associated PDF                          |
-   | =bin=     | - | Importable RAW program files                                   |
-
-* Introduction
-:PROPERTIES:
-:CUSTOM_ID: introduction
-:END:
-
-The custom menu on the 42s is a wonderful thing, but it is also very limited.  It's just too small!!  And it is only one level deep!!  So instead of simply
-assigning functions to the menu keys, how about assigning programs to the keys which present a hierarchical menu of functions?  Coding up such programs is
-tedious.  So this org-mode document has a Little bit of Emacs lisp that will consume a table, and generate a 42s program implementing a hierarchical menu.
-
-The flow to create your custom CUST program:
-  - Evaluate the "Generic menu generator" babel block in the =hp42s-meta.org= file.  This will define the function =MJR-generate-42-menu-code=
-  - Evaluate the "For CUSTOM-type Menus" babel block in the =hp42s-meta.org= file.  This will define the function =MJR-custom-x-gen=
-  - Define your menu in the [[Menu Contents][Menu Contents]] section.
-  - Evaluate the babel block in the [[Menu Code][Menu Code]] section below.
-  - Load the program on your calculator
-
-** Customizing Custom Menu Table
-
-The first column (which I labeled Menu) describes the menu keys.  Colons are used to define a menu hierarchy.  For example "=top:mid:thingy=" means we have a
-top level menu "=top=" containing a menu "=mid=" containing a function/program "=thingy=".  Another entry like "=top:thingy2=" would add a function/program
-key "=thingy2="to the "=top=" menu -- yes menus can contain a mix of functions/programs and menus.
-
-The only limitation on menu hierarchy depth or size comes from the use of two digit local labels in the generated code.  A label is consume for each
-function/program and for each menu page.
-
-The second column is the function/program name/label to call.  If this is empty, then the menu name will be used.  For example "=SFUN:HYP:SINH=" will call the
-=SINH= function if no Program is specified.
-
-The other columns of the table are not used.
-
-* Custom Menus
-
-** Menu Contents
+Instead of using the CUSTOM menu for my programs, I use a program that makes a nice menu.  I then put this program in the CUSTOM menu.
 
 #+ATTR_HTML: :rules groups :frame box :align center
 #+NAME: cust
@@ -127,9 +91,7 @@ The other columns of the table are not used.
 
 ** Menu Code
 
-The menu program is generated via the following bit of elisp.  You must first define the =MJR-generate-42-menu-code= and =MJR-custom-x-gen= by evaluating the code blocks in the =hp42s-meta.org= file.
-
-#+BEGIN_SRC elisp :var tbl=cust :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/custom/custom.hp42s"
+#+BEGIN_SRC elisp :exports results :var tbl=cust :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/custom/custom.hp42s"
 (MJR-generate-42-menu-code "CUST" 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 
@@ -194,14 +156,12 @@ RTN
 @@@@ Free labels start at: 4
 #+end_src
 
-* Create system =CUSTOM= Menu
+* Create system =CUSTOM= Menu                                      
 :PROPERTIES:
 :CUSTOM_ID: system-custom
 :END:
 
-Sometimes our carefully built in =CUSTOM= menu is lost -- an errant program or system memory clear.  What to do?  How about a program that will recreate your
-=CUSTOM= menu when you need it?  In the table below we have the definition of our custom menu, and a bit of lisp that will write a 42s program to =ASSIGN=
-each key.
+This program creates a =CUSTOM= menu.
 
 #+ATTR_HTML: :rules groups :frame box :align center
 #+NAME: custom
@@ -230,9 +190,7 @@ each key.
 |   18 | PRV        | !DM42   |
 |------+------------+---------|
 
-Simply evaluate the followign lisp block, and the 42s program will be created.
-
-#+BEGIN_SRC elisp :var tbl=custom :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/custom/custom.hp42s"
+#+BEGIN_SRC elisp :exports results :var tbl=custom :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/custom/custom.hp42s"
 ;; The generated code uses the existance of GrMod to guess if we are on a DM42
 (princ (message "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:%s)\n" "MKCM"))
 (princ "@@@@ DSC: Autogenerated menu program\n")
@@ -279,7 +237,7 @@ ASSIGN "PRV" TO 18
 RTN
 #+end_src
 
-* =SPREF=: Set some of my personal prefrences
+* Set some of my personal prefrences
 
 #+BEGIN_src hp42s :eval never :tangle ../src_42s/custom/custom.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SPREF)
@@ -308,28 +266,40 @@ CLK12   @@@@ AM/PM mode
 4STK    @@@@ Four level stack
 EXITALL @@@@ Exit menus
 RTN
-#+END_SRC
-
-* END
-#+BEGIN_src hp42s :eval never :tangle ../src_42s/custom/custom.hp42s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 #+END_SRC
 
-* WORKING                                                          :noexport:
 
-#+BEGIN_SRC text :eval never
-:::::::::::::::::::::::'##:::::'##::::'###::::'########::'##::: ##:'####:'##::: ##::'######::::::::::::::::::::::::
-::::::::::::::::::::::: ##:'##: ##:::'## ##::: ##.... ##: ###:: ##:. ##:: ###:: ##:'##... ##:::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##::'##:. ##:: ##:::: ##: ####: ##:: ##:: ####: ##: ##:::..::::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##:'##:::. ##: ########:: ## ## ##:: ##:: ## ## ##: ##::'####::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##: #########: ##.. ##::: ##. ####:: ##:: ##. ####: ##::: ##:::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##: ##.... ##: ##::. ##:: ##:. ###:: ##:: ##:. ###: ##::: ##:::::::::::::::::::::::
-:::::::::::::::::::::::. ###. ###:: ##:::: ##: ##:::. ##: ##::. ##:'####: ##::. ##:. ######::::::::::::::::::::::::
-::::::::::::::::::::::::...::...:::..:::::..::..:::::..::..::::..::....::..::::..:::......:::::::::::::::::::::::::
-#+END_SRC
 
-Code in this section is under construction.  Most likely broken.
+* Introduction :noexport:
+:PROPERTIES:
+:CUSTOM_ID: introduction
+:END:
+
+The custom menu on the 42s is a wonderful thing, but it is also very limited.  It's just too small!!  And it is only one level deep!!  So instead of simply
+assigning functions to the menu keys, how about assigning programs to the keys which present a hierarchical menu of functions?  Coding up such programs is
+tedious.  So this org-mode document has a Little bit of Emacs lisp that will consume a table, and generate a 42s program implementing a hierarchical menu.
+
+The flow to create your custom CUST program:
+  - Evaluate the "Generic menu generator" babel block in the =hp42s-meta.org= file.  This will define the function =MJR-generate-42-menu-code=
+  - Evaluate the "For CUSTOM-type Menus" babel block in the =hp42s-meta.org= file.  This will define the function =MJR-custom-x-gen=
+  - Define your menu in the [[Menu Contents][Menu Contents]] section.
+  - Evaluate the babel block in the [[Menu Code][Menu Code]] section below.
+  - Load the program on your calculator
+
+** Customizing Custom Menu Table
+
+The first column (which I labeled Menu) describes the menu keys.  Colons are used to define a menu hierarchy.  For example "=top:mid:thingy=" means we have a
+top level menu "=top=" containing a menu "=mid=" containing a function/program "=thingy=".  Another entry like "=top:thingy2=" would add a function/program
+key "=thingy2="to the "=top=" menu -- yes menus can contain a mix of functions/programs and menus.
+
+The only limitation on menu hierarchy depth or size comes from the use of two digit local labels in the generated code.  A label is consume for each
+function/program and for each menu page.
+
+The second column is the function/program name/label to call.  If this is empty, then the menu name will be used.  For example "=SFUN:HYP:SINH=" will call the
+=SINH= function if no Program is specified.
+
+The other columns of the table are not used.
 
 * EOF
 

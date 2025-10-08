@@ -59,16 +59,10 @@ Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 
 * Metadata
 
-The home for this HTML file is: https://richmit.github.io/hp42/meas.html
-
-Files related to this document may be found on github: https://github.com/richmit/hp42
-
-Directory contents:
-#+ATTR_HTML: :border 0 :frame none :rules none :align center
-   | =src=     | - | The org-mode file that generated this HTML document            |
-   | =src_42s= | - | Ready to convert source listings for 42s code in this document |
-   | =docs=    | - | This html document and associated PDF                          |
-   | =bin=     | - | Importable RAW program files                                   |
+ - Connonical URL for this file: https://richmit.github.io/hp42/meas.html
+ - org-mode file source for this file: https://github.com/richmit/hp42/blob/master/src/meas.org
+ - 42s code listings in this file: https://github.com/richmit/hp42/blob/master/src_42s/meas/meas.hp42s
+ - GitHub repository: https://github.com/richmit/hp42
 
 * Introduction
 :PROPERTIES:
@@ -245,26 +239,10 @@ Menu page five is for setup.  The reporting scheme impacts reporting (menu page 
 and and the expanded uncertainty computations (menu page two & four: =[kuN]=, =[kuR]=, & =[kuQ]=).  The automatic reporting option impacts the add measurement
 function (menu page one: =[M+]=) such that a report is automatically generated when a specified number of measurements have been entered.
 
-* Future
-
-Some things I might do some day...
-
- - A graphical representation showing the points and various confidence intervals would be cool
- - It would be neat to see a live dot plot of the measurements as they are being entered
- - Arbitrary k values
- - Support the larger screen when running on the DM42
- - Drop the data into the built in statistics tool
- - Add option to use "Tukey's hinges" for the first & third quartiles
- - +Make the sub-functions perfect (i.e. minimally alter stack/last X)+
- - +Add rank statistics+
- - +Add the median & interquartile range reporting scheme used in biology+
- - +Make the setup menu not alter the stack+
- - Add a printed report listing data and both normal & square estimates for all coverage factors
-
 * Code
 ** Menu Code
 
-#+BEGIN_SRC elisp :var tbl=menu :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/meas/meas.hp42s"
+#+BEGIN_SRC elisp :exports results :var tbl=menu :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/meas/meas.hp42s"
 (MJR-generate-42-menu-code "MEAS" 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 

@@ -62,23 +62,18 @@ Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
 
 * Metadata
 
-The home for this HTML file is: https://richmit.github.io/hp42/phil.html
-
-Files related to this document may be found on github: https://github.com/richmit/hp42
-
-Directory contents:
-#+ATTR_HTML: :border 0 :frame none :rules none :align center
-   | =src=     | - | The org-mode file that generated this HTML document            |
-   | =src_42s= | - | Ready to convert source listings for 42s code in this document |
-   | =docs=    | - | This html document and associated PDF                          |
-   | =bin=     | - | Importable RAW program files                                   |
+ - Connonical URL for this file: https://richmit.github.io/hp42/phil.html
+ - org-mode file source for this file: https://github.com/richmit/hp42/blob/master/src/phil.org
+ - 42s code listings in this file: https://github.com/richmit/hp42/blob/master/src_42s/phil/phil.hp42s
+ - GitHub repository: https://github.com/richmit/hp42
 
 * Introduction
 
 This application might be best described as an image metrology tool with a focus on philatelic applications.  It supports a few standard measurements useful
 for philately (length & angle) as well as some specialized functionality for philatelists (perforation measurement, kiusalas gauge conversion, Thirkell &
-design coordinates, design size, & parallel edge checks).  While I do most of this kind of work on my laptop with ImageJ (Fiji actually), I frequently use
-this calculator application with the digital microscope on my "stamp table" or when I'm away from my laptop.
+design coordinates, design size, & parallel edge checks).  While I do most of this kind of work on my laptop with
+[[https://richmit.github.io/imagej/PhilaJ.html][PhilaJ]], I frequently use this calculator application with the digital microscope on my "stamp table" or when
+I'm away from my laptop.
 
 * The Main Menu
 :PROPERTIES:
@@ -573,7 +568,7 @@ Our stamp is 18.553mm x 22.00mm -- and so it must be a flat plate stamp.
 * Code
 ** Menu Code
 
-#+BEGIN_SRC elisp :var tbl=PHIL :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/phil/phil.hp42s"
+#+BEGIN_SRC elisp :exports results :var tbl=PHIL :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/phil/phil.hp42s"
 (MJR-generate-42-menu-code "PHIL" 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
 #+END_SRC
 

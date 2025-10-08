@@ -3,14 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-11-21 Thu 16:50 -->
+<!-- 2025-10-08 Wed 14:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=1024, initial-scale=1" />
 <title>free42 Repeated Measurements</title>
 <meta name="author" content="Mitch Richling" />
 <meta name="description" content="Description of some free42/hp-42s/DM42 programs repeated measurements and uncertainty reporting" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
@@ -260,97 +260,53 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2024-11-21 16:49:33</i></td>
+<td class="org-left"><i>2025-10-08 14:51:58</i></td>
 </tr>
 </tbody>
 </table>
 <p align="center">
-Copyright 2024 Mitch Richling. All rights reserved.
+Copyright 2025 Mitch Richling. All rights reserved.
 </p>
 
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga1b1023">1. Metadata</a></li>
+<li><a href="#org3b3eae8">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
-<li><a href="#orgc856bef">3. Supported Methods</a></li>
-<li><a href="#org849efdb">4. Setup</a>
+<li><a href="#org61aa358">3. Supported Methods</a></li>
+<li><a href="#orgba9bc5b">4. Setup</a>
 <ul>
-<li><a href="#org06e8951">4.1. Reporting Scheme</a></li>
-<li><a href="#org555e1b9">4.2. Coverage Factors</a></li>
-<li><a href="#orga0de4e5">4.3. Automatic Reporting</a></li>
+<li><a href="#orgc9d9b9d">4.1. Reporting Scheme</a></li>
+<li><a href="#org798e681">4.2. Coverage Factors</a></li>
+<li><a href="#org63ec3b8">4.3. Automatic Reporting</a></li>
 </ul>
 </li>
-<li><a href="#org9264f91">5. Reporting</a></li>
+<li><a href="#orgd24aa99">5. Reporting</a></li>
 <li><a href="#menu">6. Application Menu</a></li>
-<li><a href="#org64e98d0">7. Global Variables</a></li>
-<li><a href="#orgc97a8f2">8. Use</a></li>
-<li><a href="#orgc9167e0">9. Future</a></li>
-<li><a href="#orgae4e252">10. Code</a>
+<li><a href="#org6f35c49">7. Global Variables</a></li>
+<li><a href="#org027a38d">8. Use</a></li>
+<li><a href="#org764527f">9. Code</a>
 <ul>
-<li><a href="#org4ee1abe">10.1. Menu Code</a></li>
-<li><a href="#localcode">10.2. Local Subroutines</a></li>
+<li><a href="#org0825aa6">9.1. Menu Code</a></li>
+<li><a href="#localcode">9.2. Local Subroutines</a></li>
 </ul>
 </li>
-<li><a href="#orge892ed0">11. EOF</a></li>
+<li><a href="#org9c58493">10. EOF</a></li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-orga1b1023" class="outline-2">
-<h2 id="orga1b1023"><span class="section-number-2">1.</span> Metadata</h2>
+<div id="outline-container-org3b3eae8" class="outline-2">
+<h2 id="org3b3eae8"><span class="section-number-2">1.</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
-<p>
-The home for this HTML file is: <a href="https://richmit.github.io/hp42/meas.html">https://richmit.github.io/hp42/meas.html</a>
-</p>
-
-<p>
-Files related to this document may be found on github: <a href="https://github.com/richmit/hp42">https://github.com/richmit/hp42</a>
-</p>
-
-<p>
-Directory contents:
-</p>
-<table border="0" cellspacing="0" cellpadding="6" rules="none" frame="none" align="center">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left"><code>src</code></td>
-<td class="org-left">-</td>
-<td class="org-left">The org-mode file that generated this HTML document</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>src_42s</code></td>
-<td class="org-left">-</td>
-<td class="org-left">Ready to convert source listings for 42s code in this document</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>docs</code></td>
-<td class="org-left">-</td>
-<td class="org-left">This html document and associated PDF</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>bin</code></td>
-<td class="org-left">-</td>
-<td class="org-left">Importable RAW program files</td>
-</tr>
-</tbody>
-</table>
+<ul class="org-ul">
+<li>Connonical URL for this file: <a href="https://richmit.github.io/hp42/meas.html">https://richmit.github.io/hp42/meas.html</a></li>
+<li>org-mode file source for this file: <a href="https://github.com/richmit/hp42/blob/master/src/meas.org">https://github.com/richmit/hp42/blob/master/src/meas.org</a></li>
+<li>42s code listings in this file: <a href="https://github.com/richmit/hp42/blob/master/src_42s/meas/meas.hp42s">https://github.com/richmit/hp42/blob/master/src_42s/meas/meas.hp42s</a></li>
+<li>GitHub repository: <a href="https://github.com/richmit/hp42">https://github.com/richmit/hp42</a></li>
+</ul>
 </div>
 </div>
-
 <div id="outline-container-introduction" class="outline-2">
 <h2 id="introduction"><span class="section-number-2">2.</span> Introduction</h2>
 <div class="outline-text-2" id="text-introduction">
@@ -361,9 +317,8 @@ and use the midrange as the value.  The application described below is designed 
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgc856bef" class="outline-2">
-<h2 id="orgc856bef"><span class="section-number-2">3.</span> Supported Methods</h2>
+<div id="outline-container-org61aa358" class="outline-2">
+<h2 id="org61aa358"><span class="section-number-2">3.</span> Supported Methods</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 The two most common methods for estimating &amp; reporting measurement uncertainty are nicely documented in <a href="https://www.nist.gov/pml/nist-technical-note-1297">NIST Technical Note 1297</a>.  The first method assumes
@@ -399,17 +354,15 @@ Finally, the application provides a number of raw statistics that might be usefu
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org849efdb" class="outline-2">
-<h2 id="org849efdb"><span class="section-number-2">4.</span> Setup</h2>
+<div id="outline-container-orgba9bc5b" class="outline-2">
+<h2 id="orgba9bc5b"><span class="section-number-2">4.</span> Setup</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 The last menu provides configuration options.
 </p>
 </div>
-
-<div id="outline-container-org06e8951" class="outline-3">
-<h3 id="org06e8951"><span class="section-number-3">4.1.</span> Reporting Scheme</h3>
+<div id="outline-container-orgc9d9b9d" class="outline-3">
+<h3 id="orgc9d9b9d"><span class="section-number-3">4.1.</span> Reporting Scheme</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 The reporting scheme is set via the first menu button &#x2013; the current selection is displayed in the menu label (N=Normal, R=Rectangular, and Q=Quartiles).  This key
@@ -417,9 +370,8 @@ cycles between the schemes when pressed.  Note that it also defaults the coverag
 </p>
 </div>
 </div>
-
-<div id="outline-container-org555e1b9" class="outline-3">
-<h3 id="org555e1b9"><span class="section-number-3">4.2.</span> Coverage Factors</h3>
+<div id="outline-container-org798e681" class="outline-3">
+<h3 id="org798e681"><span class="section-number-3">4.2.</span> Coverage Factors</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 The coverage factor used to compute the expanded uncertainty is set via the second menu key.  Repeatedly pressing this button will cycle through predefined
@@ -500,9 +452,8 @@ For errors with a rectangular distribution the following coverage factors are su
 </table>
 </div>
 </div>
-
-<div id="outline-container-orga0de4e5" class="outline-3">
-<h3 id="orga0de4e5"><span class="section-number-3">4.3.</span> Automatic Reporting</h3>
+<div id="outline-container-org63ec3b8" class="outline-3">
+<h3 id="org63ec3b8"><span class="section-number-3">4.3.</span> Automatic Reporting</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 A report can be generated upon entering a specified number of measurements.  This is very handy when a batch of items needs to be measured, and one wishes to
@@ -512,9 +463,8 @@ as part of the menu label.  A dash (-) means no automatic reporting is configure
 </div>
 </div>
 </div>
-
-<div id="outline-container-org9264f91" class="outline-2">
-<h2 id="org9264f91"><span class="section-number-2">5.</span> Reporting</h2>
+<div id="outline-container-orgd24aa99" class="outline-2">
+<h2 id="orgd24aa99"><span class="section-number-2">5.</span> Reporting</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 I find that most of the time I use units such that measurements have integer values.  For example with paper thickness measurements I will use micrometers in
@@ -533,11 +483,10 @@ Reports can be automatically generated upon entry of a configurable number of me
 </p>
 </div>
 </div>
-
 <div id="outline-container-menu" class="outline-2">
 <h2 id="menu"><span class="section-number-2">6.</span> Application Menu</h2>
 <div class="outline-text-2" id="text-menu">
-<table id="org9ee3ab2" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
+<table id="org0b13130" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
 <colgroup>
@@ -823,9 +772,8 @@ Notes:
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org64e98d0" class="outline-2">
-<h2 id="org64e98d0"><span class="section-number-2">7.</span> Global Variables</h2>
+<div id="outline-container-org6f35c49" class="outline-2">
+<h2 id="org6f35c49"><span class="section-number-2">7.</span> Global Variables</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Application state is maintained in a number of global variables.
@@ -876,9 +824,8 @@ Application state is maintained in a number of global variables.
 </table>
 </div>
 </div>
-
-<div id="outline-container-orgc97a8f2" class="outline-2">
-<h2 id="orgc97a8f2"><span class="section-number-2">8.</span> Use</h2>
+<div id="outline-container-org027a38d" class="outline-2">
+<h2 id="org027a38d"><span class="section-number-2">8.</span> Use</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 In use the application is quite like the built in statistics application in that <code>[M+]</code> &amp; <code>[M+]</code> add and delete measurements.  All measurements are stored in
@@ -901,46 +848,125 @@ function (menu page one: <code>[M+]</code>) such that a report is automatically 
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgc9167e0" class="outline-2">
-<h2 id="orgc9167e0"><span class="section-number-2">9.</span> Future</h2>
+<div id="outline-container-org764527f" class="outline-2">
+<h2 id="org764527f"><span class="section-number-2">9.</span> Code</h2>
 <div class="outline-text-2" id="text-9">
-<p>
-Some things I might do some day&#x2026;
-</p>
-
-<ul class="org-ul">
-<li>A graphical representation showing the points and various confidence intervals would be cool</li>
-<li>It would be neat to see a live dot plot of the measurements as they are being entered</li>
-<li>Arbitrary k values</li>
-<li>Support the larger screen when running on the DM42</li>
-<li>Drop the data into the built in statistics tool</li>
-<li>Add option to use "Tukey's hinges" for the first &amp; third quartiles</li>
-<li><del>Make the sub-functions perfect (i.e. minimally alter stack/last X)</del></li>
-<li><del>Add rank statistics</del></li>
-<li><del>Add the median &amp; interquartile range reporting scheme used in biology</del></li>
-<li><del>Make the setup menu not alter the stack</del></li>
-<li>Add a printed report listing data and both normal &amp; square estimates for all coverage factors</li>
-</ul>
 </div>
-</div>
-
-<div id="outline-container-orgae4e252" class="outline-2">
-<h2 id="orgae4e252"><span class="section-number-2">10.</span> Code</h2>
-<div class="outline-text-2" id="text-10">
-</div>
-<div id="outline-container-org4ee1abe" class="outline-3">
-<h3 id="org4ee1abe"><span class="section-number-3">10.1.</span> Menu Code</h3>
-<div class="outline-text-3" id="text-10-1">
+<div id="outline-container-org0825aa6" class="outline-3">
+<h3 id="org0825aa6"><span class="section-number-3">9.1.</span> Menu Code</h3>
+<div class="outline-text-3" id="text-9-1">
 <div class="org-src-container">
-<pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"MEAS"</span> 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
+<pre class="src src-hp42s"><span id="coderef-MEAS" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MEAS)</span>
+<span style="color: #ffa500;">@@@@ DSC: Auto-generated menu program</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"MEAS"</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">01</span>            <span style="color: #ffa500;">@@@@ Page 1 of menu MEAS</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">70</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">98</span>
+<span style="color: #fa8072;">"M-"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">97</span>
+<span style="color: #fa8072;">"EDIT"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">38</span>
+<span style="color: #fa8072;">"REP"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">96</span>
+<span style="color: #fa8072;">"&#8594;STK"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">39</span>
+<span style="color: #fa8072;">"CLRM"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">95</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">05</span>
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">02</span>            <span style="color: #ffa500;">@@@@ Page 2 of menu MEAS</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"&#956;"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">94</span>
+<span style="color: #fa8072;">"kuN"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">93</span>
+<span style="color: #fa8072;">"MR"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">92</span>
+<span style="color: #fa8072;">"kuR"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">91</span>
+<span style="color: #fa8072;">"MIN"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">89</span>
+<span style="color: #fa8072;">"MAX"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">88</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">03</span>            <span style="color: #ffa500;">@@@@ Page 3 of menu MEAS</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"PSD"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">87</span>
+<span style="color: #fa8072;">"SSD"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">86</span>
+<span style="color: #fa8072;">"RNG"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">85</span>
+<span style="color: #fa8072;">"RtVA"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">90</span>
+<span style="color: #fa8072;">"N"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">84</span>
+<span style="color: #fa8072;">"SUMS"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">83</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">02</span>
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">04</span>            <span style="color: #ffa500;">@@@@ Page 4 of menu MEAS</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #fa8072;">"Q25"</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">35</span>
+<span style="color: #fa8072;">"MED"</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">77</span>
+<span style="color: #fa8072;">"Q75"</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">36</span>
+<span style="color: #fa8072;">"IQR"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">34</span>
+<span style="color: #fa8072;">"kuQ"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">46</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">03</span>
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">05</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">05</span>            <span style="color: #ffa500;">@@@@ Page 5 of menu MEAS</span>
+<span style="color: #00ffff;">CLMENU</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">79</span>
+<span style="color: #00ffff;">KEY</span> 1 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">82</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">48</span>
+<span style="color: #00ffff;">KEY</span> 2 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">81</span>
+<span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">78</span>
+<span style="color: #00ffff;">KEY</span> 3 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">80</span>
+<span style="color: #fa8072;">"REP"</span>
+<span style="color: #00ffff;">KEY</span> 4 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">96</span>
+<span style="color: #fa8072;">"&#8594;STK"</span>
+<span style="color: #00ffff;">KEY</span> 5 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">39</span>
+<span style="color: #fa8072;">"RESET"</span>
+<span style="color: #00ffff;">KEY</span> 6 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"RSTMES"</span>
+<span style="color: #00ffff;">KEY</span> 7 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">04</span>
+<span style="color: #00ffff;">KEY</span> 8 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">01</span>
+<span style="color: #00ffff;">KEY</span> 9 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">00</span>
+<span style="color: #00ffff;">MENU</span>
+<span style="color: #00ffff;">STOP</span>
+<span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">05</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">00</span> <span style="color: #ffa500;">@@@@ Application Exit</span>
+<span style="color: #00ffff;">EXITALL</span>
+<span style="color: #00ffff;">RTN</span>
+<span style="color: #ffa500;">@@@@ Free labels start at: 6</span>
 </pre>
 </div>
 </div>
 </div>
-
 <div id="outline-container-localcode" class="outline-3">
-<h3 id="localcode"><span class="section-number-3">10.2.</span> Local Subroutines</h3>
+<h3 id="localcode"><span class="section-number-3">9.2.</span> Local Subroutines</h3>
 <div class="outline-text-3" id="text-localcode">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@ LBL: Used: 30-52, 54-99</span>
@@ -1837,12 +1863,9 @@ END
 </div>
 </div>
 </div>
-
-
-
-<div id="outline-container-orge892ed0" class="outline-2">
-<h2 id="orge892ed0"><span class="section-number-2">11.</span> EOF</h2>
-<div class="outline-text-2" id="text-11">
+<div id="outline-container-org9c58493" class="outline-2">
+<h2 id="org9c58493"><span class="section-number-2">10.</span> EOF</h2>
+<div class="outline-text-2" id="text-10">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />

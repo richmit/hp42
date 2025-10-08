@@ -20,7 +20,7 @@
 #+HTML_LINK_HOME: https://www.mitchr.me/
 #+HTML_LINK_UP: https://richmit.github.io/hp42/
 #+EXPORT_FILE_NAME: ../docs/math
-#+LATEX_HEADER: \usepackage{extsizes} 
+#+LATEX_HEADER: \usepackage{extsizes}
 #+LATEX_HEADER: \usepackage[margin=0.5in]{geometry}
 #+LATEX_HEADER: \usepackage{mathabx}
 #+LATEX_HEADER: \usepackage{boisik}
@@ -111,7 +111,7 @@ in this file.  That stuff has moved to file:sfun.org.
 =MXCPLY= uses the Faddeev–LeVerrier algorithm to compute the characteristic polynomial of a matrix.  The polynomial is a matrix of coefficients suitable for use
 by the polynomials tools found later on this page.
 
-One can find the eigenvalues of a matrix by using =PR1ST= & =PRNXT= to solve the characteristic polynomial.  
+One can find the eigenvalues of a matrix by using =PR1ST= & =PRNXT= to solve the characteristic polynomial.
 
 *** =EQCPLY=: Characteristic polynomial as an =MVAR= program
 
@@ -176,11 +176,11 @@ RTN
 @@@@ OUT: X: Characteristic polynomial
 @@@@ LBL: 28
 @@@@ FAQ: Uses INDEX
-@@@@ UPD: 2021-04-27
+@@@@ UPD: 2025-10-07
 @@@@ TC:  [[1,2,3][4,5,6][7,8,10]] => [1, -16, -12, 3]
 LBL "MXCPLY"
-FUNC 11         @@## REQ:free42>=2.5.24 
-L4STK           @@## REQ:free42>=3.0    
+FUNC 11
+L4STK
 LSTO "_A"
 DIM?
 XEQ "MXIDN"
@@ -227,11 +227,11 @@ RTN
 @@@@ IN:  X: Matrix
 @@@@ OUT: X: trace
 @@@@ FAQ: Dosen't use INDEX
-@@@@ UPD: 2021-04-27
+@@@@ UPD: 2025-10-07
 @@@@ TC:  [[1,2,3][4,5,6][7,8,10]] => 16
 LBL "MXTR"
-FUNC 11         @@## REQ:free42>=2.5.24 
-L4STK           @@## REQ:free42>=3.0    
+FUNC 11
+L4STK
 LSTO "_M"       @@@@ M           -- M is an nxn matrix
 DIM?            @@@@ n n M
 1               @@@@ 1 n n M
@@ -247,7 +247,7 @@ R↓              @@@@ 1+n n M     -- P is a 1x1 matrix e_1
 X<>Y            @@@@ 1+n 1   n   -- P is a 1x1 matrix e_1
 DIM "_P"        @@@@ 1+n 1       -- P is now an 1x(1+n) e_1 row matrix
 RCL "_P"        @@@@ P   1+n 1
-RCL "_M"        @@@@ M   P   1+n 
+RCL "_M"        @@@@ M   P   1+n
 TRANS           @@@@ X   P   1+n -- X is now an (n+1)xn matrix with original diag in first row
 ×               @@@@ X   1+n 1   -- X is now an 1xn matrix with original diag in first row
 RSUM            @@@@ X   1+n 1   -- X is now a 1x1 matrix with the sum of the diag
@@ -259,14 +259,14 @@ RTN
 @@@@ IN:  X: Size of matrix to make
 @@@@ OUT: X: Identity matrix of size X
 @@@@ FAQ: Dosen't use INDEX
-@@@@ UPD: 2021-04-27
+@@@@ UPD: 2025-10-07
 @@@@ REF: https://forum.swissmicros.com/viewtopic.php?f=19&t=2958
 @@@@ FAQ: This code is longer, but easier to understand -- for me anyhow.
 LBL "MXIDN"
-FUNC 11         @@## REQ:free42>=2.5.24 
-L4STK           @@## REQ:free42>=3.0    
+FUNC 11
+L4STK
 1
-NEWMAT          @@@@ X is an nx1 zero matrix 
+NEWMAT          @@@@ X is an nx1 zero matrix
 SIGN            @@@@ X is now a constant matrix filled with 1s
 XEQ "MXDIAG"
 RTN
@@ -277,12 +277,12 @@ RTN
 @@@@ IN:  X: diagonal matrix
 @@@@ FAQ: Dosen't use INDEX
 @@@@ FAQ: Uses all elements of X -- even if it is not 1xn or nx1
-@@@@ UPD: 2021-04-27
+@@@@ UPD: 2025-10-07
 @@@@ REF: https://forum.swissmicros.com/viewtopic.php?f=19&t=2958
 @@@@ FAQ: This code is longer, but easier to understand -- for me anyhow.
 LBL "MXDIAG"
-FUNC 11         @@## REQ:free42>=2.5.24 
-L4STK           @@## REQ:free42>=3.0    
+FUNC 11
+L4STK
 LSTO "_M"       @@@@ D
 DIM?            @@@@ n m
 ×               @@@@ N
@@ -310,9 +310,9 @@ RTN
 @@@@ VAR: CPM a square matrix
 @@@@ VAR: X a real or complex number
 @@@@ LAB: 24-25
-@@@@ FAQ: Can be used 
+@@@@ FAQ: Can be used
 @@@@ FAQ: Dosen't use INDEX
-@@@@ UPD: 2021-04-27
+@@@@ UPD: 2025-10-07
 LBL "EQCPLY"
 MVAR "CPM"
 MVAR "X"
@@ -329,7 +329,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ Store/Recall variable "CPM"
-LBL 98 
+LBL 98
 FS? 64
 RCL "CPM"
 STO "CPM"
@@ -425,7 +425,7 @@ output is precisely what is needed to find more roots.
 
 The second function, =PRNXT=, finds the *next* root of the polynomial.  It requires three arguments (original polynomial, deflated polynomial, and a guess).
 This is precisely what the =PR1ST= function returns.  =PRNXT= also returns the original polynomial, the polynomial with the located root removed, and a new
-root.  So you can feed =PRNXT= the return of =PR1ST= or =PRNXT=.  
+root.  So you can feed =PRNXT= the return of =PR1ST= or =PRNXT=.
 
 A common question: Why is the original polynomial required by =PRNXT=, and not just the deflated one?  A series of polynomial deflations leads to a deflated
 polynomial with some round off error.  So wen =PRNXT= finds a root of the deflated polynomial, it then uses that root as the initial guess to =PLGRR= on the
@@ -527,7 +527,7 @@ RTN
 @@@@ Free labels start at: 5
 #+end_src
 
-** Local functions 
+** Local functions
 
 #+BEGIN_src hp42s :eval never :tangle ../src_42s/math/math.hp42s
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PINTRP)
@@ -536,15 +536,15 @@ RTN
 @@@@      X: Y data matrix
 @@@@ OUT: X: interpolateing polynomial
 @@@@ TST: free42_3.0.2.2
-@@@@ UPD: 2021-04-28
+@@@@ UPD: 2025-10-07
 @@@@ FAQ: X & Y must have the same number of elements, but dimintions may differ.
 @@@@ FAQ: Explicitly constructs the vandermonde matrix, and solves the system
 @@@@ FAQ: Uses INDEX
 @@@@ TC:  xdat:[ 1, 2, 3, 4] ydat:[1, -1, 1, -1] => [-4/3 10 -68/3 15] = [-1.33.. 10 -22.66.. 15]
-@@@@ TC:  xdat:[-1, 0, 1, 2] ydat:[-2, 3, -24, -77] => [1, -16, -12, 3]  
+@@@@ TC:  xdat:[-1, 0, 1, 2] ydat:[-2, 3, -24, -77] => [1, -16, -12, 3]
 LBL "PINTRP"
-FUNC 21         @@## REQ:free42>=2.5.24 
-L4STK           @@## REQ:free42>=3.0    
+FUNC 21
+L4STK
 LSTO "_YDAT"    @@@@ YDAT XDAT
 DIM?
 ×
@@ -591,10 +591,10 @@ RTN
 @@@@ IN:  X: degree
 @@@@ OUT: X: polynomial
 @@@@ TST: free42_3.0.2
-@@@@ UPD: 2021-04-26
+@@@@ UPD: 2025-10-07
 LBL "NEWPLY"
-FUNC 11         @@## REQ:free42>=2.5.24 
-L4STK           @@## REQ:free42>=3.0    
+FUNC 11
+L4STK
 1
 X<>Y
 1
@@ -607,10 +607,10 @@ RTN
 @@@@ IN:  X: polynomial
 @@@@ OUT: X: polynomial
 @@@@ TST: free42_3.0.2
-@@@@ UPD: 2021-04-26
-LBL 78 
-FUNC 11         @@## REQ:free42>=2.5.24 
-L4STK           @@## REQ:free42>=3.0    
+@@@@ UPD: 2025-10-07
+LBL 78
+FUNC 11
+L4STK
 EDIT
 "Enter data; R/S"
 ├" to end"
@@ -625,13 +625,13 @@ RTN
 @@@@      X: root_2
 @@@@ TST: free42_3.0.2
 @@@@ FAQ: Uses INDEX
-@@@@ UPD: 2021-04-26
+@@@@ UPD: 2025-10-07
 LBL "P2SLV"
-FUNC 12         @@## REQ:free42>=2.5.24
-L4STK           @@## REQ:free42>=3.0
-LSTO "_M"  
+FUNC 12
+L4STK
+LSTO "_M"
 R↓
-INDEX "_M"  
+INDEX "_M"
 WRAP
 LBL 77
 RCLEL
@@ -645,11 +645,11 @@ RTNERR 3
 R↓              @@@@  a                     c                     b                     a
 2               @@@@  2                     c                     b                      a
 RCL× ST T       @@@@  2a                    c                     b                      a
-R↓              @@@@  c                     b                     a                     2a                    
-RCL÷ ST T       @@@@  c/(2a)                b                     a                     2a                    
-X<>Y            @@@@  b                     c/(2a)                a                     2a                    
-RCL÷ ST T       @@@@  b/(2a)                c/(2a)                a                     2a                    
-+/-             @@@@  -B                    C                     a                     2a                    
+R↓              @@@@  c                     b                     a                     2a
+RCL÷ ST T       @@@@  c/(2a)                b                     a                     2a
+X<>Y            @@@@  b                     c/(2a)                a                     2a
+RCL÷ ST T       @@@@  b/(2a)                c/(2a)                a                     2a
++/-             @@@@  -B                    C                     a                     2a
 ENTER           @@@@  -B                   -B                     C                      a
 X↑2             @@@@  B^2                  -B                     C                      a
 RCL- ST Z       @@@@  B^2-C                -B                     C                      a
@@ -657,8 +657,8 @@ RCL- ST Z       @@@@  B^2-2C               -B                     C             
 SQRT            @@@@  √(B^2-2C)            -B                     C                      a
 RCL ST Y        @@@@  -B                    √(B^2-2C)            -B                      C
 RCL- ST Y       @@@@  -B-√(B^2-2C)          √(B^2-2C)            -B                      C
-RCL ST Z        @@@@  -B                   -B-√(B^2-2C)          √(B^2-2C)              -B                     
-RCL+ ST Z       @@@@  -B+√(B^2-2C)         -B-√(B^2-2C)          √(B^2-2C)              -B                     
+RCL ST Z        @@@@  -B                   -B-√(B^2-2C)          √(B^2-2C)              -B
+RCL+ ST Z       @@@@  -B+√(B^2-2C)         -B-√(B^2-2C)          √(B^2-2C)              -B
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:P1SLV)
@@ -667,13 +667,13 @@ RTN
 @@@@ OUT: X: root
 @@@@ TST: free42_3.0.2
 @@@@ FAQ: Uses INDEX
-@@@@ UPD: 2021-04-26
+@@@@ UPD: 2025-10-07
 LBL "P1SLV"
-FUNC 11         @@## REQ:free42>=2.5.24
-L4STK           @@## REQ:free42>=3.0
-LSTO "_M"  
+FUNC 11
+L4STK
+LSTO "_M"
 R↓
-INDEX "_M"  
+INDEX "_M"
 WRAP
 RCLEL           @@@@ a_1
 J+
@@ -690,13 +690,13 @@ RTN
 @@@@ LBL: 91
 @@@@ FAQ: Uses INDEX
 @@@@ TST: free42_3.0.2
-@@@@ UPD: 2021-04-03
+@@@@ UPD: 2025-10-07
 LBL "PEVAL"
-FUNC 21         @@## REQ:free42>=2.5.24
-L4STK           @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 X<>Y            @@@@ P X
-LSTO "_M"  
-INDEX "_M"  
+LSTO "_M"
+INDEX "_M"
 WRAP
 0               @@@@ PV P X
 LBL 91
@@ -717,13 +717,13 @@ RTN
 @@@@ LBL: 91
 @@@@ FAQ: Uses INDEX
 @@@@ TST: free42_3.0.2
-@@@@ UPD: 2021-04-03
+@@@@ UPD: 2025-10-07
 LBL "PEVL1"
-FUNC 22         @@## REQ:free42>=2.5.24
-L4STK           @@## REQ:free42>=3.0
+FUNC 22
+L4STK
 X<>Y            @@@@ P       X
-LSTO "_M"  
-INDEX "_M"  
+LSTO "_M"
+INDEX "_M"
 R↓              @@@@ X
 WRAP
 0               @@@@ PV      X
@@ -751,32 +751,32 @@ RTN
 @@@@ LBL: 91
 @@@@ FAQ: Uses INDEX
 @@@@ TST: free42_3.0.2
-@@@@ UPD: 2021-04-03
+@@@@ UPD: 2025-10-07
 LBL "PEVL2"
-FUNC 23         @@## REQ:free42>=2.5.24
-L4STK           @@## REQ:free42>=3.0
+FUNC 23
+L4STK
 LSTO "_X"       @@@@ X       P
 R↓              @@@@ P
-LSTO "_M"  
-INDEX "_M"  
-R↓              @@@@ 
+LSTO "_M"
+INDEX "_M"
+R↓              @@@@
 WRAP
-0               @@@@ PV      
-0               @@@@ DV       PV       
-0               @@@@ DDV      DV       PV       
+0               @@@@ PV
+0               @@@@ DV       PV
+0               @@@@ DDV      DV       PV
 LBL 93
-RCL× "_X"       @@@@ DDV*X    DV       PV       
-RCL+ ST Y       @@@@ DDV*X+DV DV       PV       
-X<>Y            @@@@ DV       DDV*X+DV PV       
-RCL× "_X"       @@@@ DV*X     DDV*X+DV PV       
-RCL+ ST Z       @@@@ DV*X+PV  DDV*X+DV PV       
-X<>Y            @@@@ DDV*X+DV DV*X+PV  PV       
-RCL ST Z        @@@@ PV       DDV*X+DV DV*X+PV  PV       
-RCL× "_X"       @@@@ PV*X     DDV*X+DV DV*X+PV  PV       
+RCL× "_X"       @@@@ DDV*X    DV       PV
+RCL+ ST Y       @@@@ DDV*X+DV DV       PV
+X<>Y            @@@@ DV       DDV*X+DV PV
+RCL× "_X"       @@@@ DV*X     DDV*X+DV PV
+RCL+ ST Z       @@@@ DV*X+PV  DDV*X+DV PV
+X<>Y            @@@@ DDV*X+DV DV*X+PV  PV
+RCL ST Z        @@@@ PV       DDV*X+DV DV*X+PV  PV
+RCL× "_X"       @@@@ PV*X     DDV*X+DV DV*X+PV  PV
 RCLEL           @@@@ C        PV*X     DDV*X+DV DV*X+PV
 +               @@@@ C+PV*X   DDV*X+DV DV*X+PV
-STO ST T        @@@@ C+PV*X   DDV*X+DV DV*X+PV  C+PV*X   
-R↓              @@@@ DDV*X+DV DV*X+PV  C+PV*X   
+STO ST T        @@@@ C+PV*X   DDV*X+DV DV*X+PV  C+PV*X
+R↓              @@@@ DDV*X+DV DV*X+PV  C+PV*X
 J+
 FC? 77
 GTO 93
@@ -793,10 +793,10 @@ RTN
 @@@@ LBL: 96
 @@@@ FAQ: Uses INDEX
 @@@@ TST: free42_3.0.2
-@@@@ UPD: 2021-04-03
+@@@@ UPD: 2025-10-07
 LBL "PDEFLT"
-FUNC 22         @@## REQ:free42>=2.5.24
-L4STK           @@## REQ:free42>=3.0
+FUNC 22
+L4STK
 REAL?
 GTO 88
 X<>Y
@@ -804,8 +804,8 @@ XEQ 89          @@@@ MAT2C
 X<>Y
 LBL 88
 X<>Y            @@@@ P R
-LSTO "_M"  
-INDEX "_M"  
+LSTO "_M"
+INDEX "_M"
 WRAP
 R↓              @@@@ R
 +/-
@@ -815,7 +815,7 @@ RCL× ST Y       @@@@ LC*R R
 RCLEL           @@@@ C LC*R R
 X<>Y            @@@@ LC*R C R
 -               @@@@ C-LC*R  R
-STOEL         
+STOEL
 J+
 FC? 77
 GTO 96
@@ -826,7 +826,7 @@ DIM?            @@@@ m n REM
 -               @@@@ N-1 REM
 1               @@@@ 1 N-1 REM
 X<>Y            @@@@ N-1 1 REM
-DIM "_M"  
+DIM "_M"
 R↓
 R↓              @@@@ REM
 RCL "_M"        @@@@ P REM
@@ -842,8 +842,8 @@ RTN
 LBL 89
 FUNC 11
 L4STK
-LSTO "_M"  
-INDEX "_M"  
+LSTO "_M"
+INDEX "_M"
 RCLEL
 REAL?
 GTO 87
@@ -863,11 +863,11 @@ RTN
 @@@@ OUT: N/A
 @@@@ TST: free42_3.0.2
 @@@@ FAQ: Uses INDEX
-@@@@ UPD: 2021-04-03
+@@@@ UPD: 2025-10-07
 LBL "VPOLY"
 FUNC 00
-LSTO "_M"  
-INDEX "_M"  
+LSTO "_M"
+INDEX "_M"
 WRAP
 DIM?
 ×
@@ -934,10 +934,10 @@ LBL "PRNXT"
 FUNC 33
 L4STK
 RCL ST Z        @@@@ Poly Gues DPly Poly
-LSTO "_P"  
+LSTO "_P"
 R↓              @@@@ Gues DPly Poly
 RCL ST Y        @@@@ DPLY Gues DPly Poly
-LSTO "_DP"  
+LSTO "_DP"
 XEQ 81          @@@@ PLYBAD
 RTNERR 5
 R↓              @@@@ Gues DPly Poly
@@ -1001,22 +1001,22 @@ FUNC 43
 L4STK
 LSTO "_I"       @@@@ ITR   TOL   GUESS POLY
 R↓              @@@@ TOL   GUESS POLY
-LSTO "_T"  
+LSTO "_T"
 R↓              @@@@ GUESS POLY
-LSTO "_G"        
+LSTO "_G"
 R↓              @@@@ POLY
-LSTO "_P"  
-DIM?                       
+LSTO "_P"
+DIM?
 ×               @@@@ N
-LSTO "_N"  
+LSTO "_N"
 @@@@ TODO: Check N>1.  Another status: 4 = polynomial is constant
 1
 -               @@@@ N-1
-LSTO "_NM1"  
+LSTO "_NM1"
 R↓
 LBL 94
-RCL "_P"  
-RCL "_G"  
+RCL "_P"
+RCL "_G"
 XEQ "PEVL2"     @@@@ P''         P'     P        ?
 RCL ST Z
 ABS             @@@@ |P|         P''    P'       P
@@ -1025,9 +1025,9 @@ GTO 95
 R↓              @@@@ P''         P'     P        ?
 @@@@ TODO: Check P' for /0.  Another status: 5 = Iteration failed due to division by zero
 RCL÷ ST Y       @@@@ P''/P'      P'     P        ?
-R↓              @@@@ P'          P      ?        P''/P'  
-÷               @@@@ -N=P/P'     ?      P''/P'   P''/P' 
-X<>Y            @@@@ ?           -N     P''/P'   P''/P' 
+R↓              @@@@ P'          P      ?        P''/P'
+÷               @@@@ -N=P/P'     ?      P''/P'   P''/P'
+X<>Y            @@@@ ?           -N     P''/P'   P''/P'
 R↓              @@@@ -N          P''/P' P''/P'   ?
 +/-             @@@@ N           P''/P' P''/P'   ?
 X<>Y            @@@@ P''/P'      N      P''/P'   ?
@@ -1035,17 +1035,17 @@ RCL× ST Y       @@@@ -L          N      P''/P'   ?
 RCL× "_N"       @@@@ -L*n        N      P''/P'   ?
 RCL÷ "_NM1"     @@@@ -L*n/(n-1)  N      P''/P'   ?
 1
-+               @@@@ 1-L*n/(n-1) N      P''/P'   P''/P'  
++               @@@@ 1-L*n/(n-1) N      P''/P'   P''/P'
 SQRT
-RCL× "_NM1"  
-RCL÷ "_N"  
-RCL "_N"  
+RCL× "_NM1"
+RCL÷ "_N"
+RCL "_N"
 1/X
-+  
++
 1/X
-×               @@@@ LD          P''/P'   P''/P'  
-STO+ "_G"  
-DSE "_I"  
+×               @@@@ LD          P''/P'   P''/P'
+STO+ "_G"
+DSE "_I"
 GTO 94
 @@@@ EXIT: Max iter
 3               @@@@ 3      LD       P''/P'   ?
@@ -1054,11 +1054,11 @@ RCL "_G"        @@@@ G      POLY     3        ?
 XEQ "PEVAL"     @@@@ P      3        ?        ?
 RCL "_G"        @@@@ G      P        3        ?
 RTN
-LBL 95          @@@@ |P|    P''      P'       P   
+LBL 95          @@@@ |P|    P''      P'       P
 @@@@ EXIT: Found root
-R↓              @@@@ P''    P'       P   
-R↓              @@@@ P'     P   
-R↓              @@@@ P   
+R↓              @@@@ P''    P'       P
+R↓              @@@@ P'     P
+R↓              @@@@ P
 0
 X<>Y            @@@@ P      0
 RCL "_G"        @@@@ Root   Pval     0
@@ -1072,7 +1072,7 @@ RTN
 @@@@ TST: free42_3.0.2
 @@@@ FAQ: Allows one to use SOLVER & INTEG on polynomials
 @@@@ USE: PEVAL
-@@@@ UPD: 2021-04-03
+@@@@ UPD: 2025-10-07
 LBL "PWRP"
 MVAR "X"
 RCL "WRPP"
@@ -1082,7 +1082,7 @@ RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ Store/Recall variable "WRPP"
-LBL 98 
+LBL 98
 FS? 64
 RCL "WRPP"
 STO "WRPP"
@@ -1114,7 +1114,7 @@ END
 
 * =VEC3=: 3D Real Vector Application
 
-This is a simple little application that makes working with 3D vectors less painfull.  
+This is a simple little application that makes working with 3D vectors less painfull.
 ** Menu
 :PROPERTIES:
 :CUSTOM_ID: menu-vec3
@@ -1189,13 +1189,13 @@ RTN
 @@@@ LBL: Used: 51
 @@@@ FAQ: Uses INDEX
 @@@@ TST: free42_3.0.2
-@@@@ UPD: 2021-04-03
+@@@@ UPD: 2025-10-07
 LBL 99
 FUNC 31
 XEQ 95
-LSTO "_M"  
+LSTO "_M"
 R↓
-INDEX "_M"  
+INDEX "_M"
 WRAP
 J-
 LBL 51
@@ -1204,7 +1204,7 @@ R↓
 J-
 FC? 77
 GTO 51
-RCL "_M"  
+RCL "_M"
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1217,12 +1217,12 @@ RTN
 @@@@ LBL: Used: 52
 @@@@ FAQ: Uses INDEX
 @@@@ TST: free42_3.0.2
-@@@@ UPD: 2021-04-03
+@@@@ UPD: 2025-10-07
 LBL 98
 FUNC 13
-LSTO "_M"  
+LSTO "_M"
 R↓
-INDEX "_M"  
+INDEX "_M"
 WRAP
 LBL 52
 RCLEL
@@ -1239,11 +1239,11 @@ RTN
 @@@@ LBL: Used: 53
 @@@@ FAQ: Uses INDEX
 @@@@ TST: free42_3.0.2
-@@@@ UPD: 2021-04-03
+@@@@ UPD: 2025-10-07
 LBL 96
 FUNC 00
-LSTO "_M"  
-INDEX "_M"  
+LSTO "_M"
+INDEX "_M"
 WRAP
 1
 LBL 54
@@ -1269,7 +1269,7 @@ RTN
 @@@@ OUT: X: 1x3 Matrix
 @@@@ LBL: Used: 53
 @@@@ TST: free42_3.0.2
-@@@@ UPD: 2021-04-03
+@@@@ UPD: 2025-10-07
 LBL 95
 FUNC 01
 1
@@ -1309,10 +1309,10 @@ END
 
 #+BEGIN_SRC elisp :var tbl=STATR :colnames y :results output verbatum :wrap "src hp42s :eval never :tangle ../src_42s/math/math.hp42s"
 (MJR-generate-42-menu-code "STATR" 0 tbl 0 nil 'stay 'up 'auto
-                           #'MJR-local-only-gen-lab 
-                           (lambda (atrg target row) 
+                           #'MJR-local-only-gen-lab
+                           (lambda (atrg target row)
                              (cl-destructuring-bind (menu prog) row
-                               (mapconcat #'string-trim-left 
+                               (mapconcat #'string-trim-left
                                           (split-string prog ";") "\n"))))
 #+END_SRC
 
@@ -1520,21 +1520,6 @@ RTN
 @@@@ Free labels start at: 17
 END
 #+end_src
-
-* WORKING                                                          :noexport:
-
-#+BEGIN_SRC text :eval never
-:::::::::::::::::::::::'##:::::'##::::'###::::'########::'##::: ##:'####:'##::: ##::'######::::::::::::::::::::::::
-::::::::::::::::::::::: ##:'##: ##:::'## ##::: ##.... ##: ###:: ##:. ##:: ###:: ##:'##... ##:::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##::'##:. ##:: ##:::: ##: ####: ##:: ##:: ####: ##: ##:::..::::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##:'##:::. ##: ########:: ## ## ##:: ##:: ## ## ##: ##::'####::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##: #########: ##.. ##::: ##. ####:: ##:: ##. ####: ##::: ##:::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##: ##.... ##: ##::. ##:: ##:. ###:: ##:: ##:. ###: ##::: ##:::::::::::::::::::::::
-:::::::::::::::::::::::. ###. ###:: ##:::: ##: ##:::. ##: ##::. ##:'####: ##::. ##:. ######::::::::::::::::::::::::
-::::::::::::::::::::::::...::...:::..:::::..::..:::::..::..::::..::....::..::::..:::......:::::::::::::::::::::::::
-#+END_SRC
-
-Code in this section is under construction.  Most likely broken.
 
 * EOF
 

@@ -1174,8 +1174,8 @@ RTN
 @@@@ DSC: Action for menu key CAL
 @@@@ NAM: CAL 95
 LBL 95
-FUNC 00            @@## REQ:free42>=2.5.24
-L4STK              @@## REQ:free42>=3.0
+FUNC 00            
+L4STK              
 FS? 64
 GTO 29
 X<>Y
@@ -1194,8 +1194,8 @@ RTN
 @@@@ DSC: Action for menu key D→P
 @@@@ NAM: D→P 96
 LBL 96
-FUNC 11            @@## REQ:free42>=2.5.24
-L4STK              @@## REQ:free42>=3.0
+FUNC 11            
+L4STK              
 XEQ 39 @@@@ Convert distance to mm
 XEQ 78 @@@@ GET "PhilPC"
 1
@@ -1209,8 +1209,8 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Action for menu key P<>K
 LBL "P<>K"
-FUNC 11            @@## REQ:free42>=2.5.24
-L4STK              @@## REQ:free42>=3.0
+FUNC 11            
+L4STK              
 127
 ×
 100000
@@ -1223,8 +1223,8 @@ RTN
 @@@@ DSC: Action for menu key C:
 @@@@ NAM: C: 98
 LBL 98
-FUNC 00            @@## REQ:free42>=2.5.24
-L4STK              @@## REQ:free42>=3.0
+FUNC 00            
+L4STK              
 STO "PhilPC"
 RTN
 
@@ -1232,8 +1232,8 @@ RTN
 @@@@ DSC: Action for menu key D:UNIT
 @@@@ NAM: D: 99
 LBL 99
-FUNC 00            @@## REQ:free42>=2.5.24
-L4STK              @@## REQ:free42>=3.0
+FUNC 00            
+L4STK              
 XEQ 77 @@@@ GET "PhilDU"
 1
 +
@@ -1247,8 +1247,8 @@ RTN
 @@@@ DSC: Action for menu key I:UNIT
 @@@@ NAM: I: 88
 LBL 88
-FUNC 00            @@## REQ:free42>=2.5.24
-L4STK              @@## REQ:free42>=3.0
+FUNC 00            
+L4STK              
 XEQ 79 @@@@ GET "PhilIU"
 1
 +
@@ -1261,8 +1261,8 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Convert distance to mm
 LBL 39
-FUNC 01            @@## REQ:free42>=2.5.24
-L4STK              @@## REQ:free42>=3.0
+FUNC 01            
+L4STK              
 XEQ 77 @@@@ GET "PhilDU"
 X=0?         @@@@ IF-BOOL
 GTO 34
@@ -1288,8 +1288,8 @@ RTN
 @@@@ DSC: Action for menu key PX>D
 @@@@ NAM: PX>D 91
 LBL 91
-FUNC 11            @@## REQ:free42>=2.5.24
-L4STK              @@## REQ:free42>=3.0
+FUNC 11            
+L4STK              
 ABS
 XEQ 76 @@@@ GET "PhilIC"
 ÷
@@ -1299,8 +1299,8 @@ RTN
 @@@@ DSC: Action for menu key D>PX
 @@@@ NAM: D>PX 66
 LBL 66
-FUNC 11            @@## REQ:free42>=2.5.24
-L4STK              @@## REQ:free42>=3.0
+FUNC 11            
+L4STK              
 ABS
 XEQ 76 @@@@ GET "PhilIC"
 ×
@@ -1445,22 +1445,6 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 #+end_src
-
-* WORKING                                                          :noexport:
-
-#+BEGIN_SRC text :eval never
-:::::::::::::::::::::::'##:::::'##::::'###::::'########::'##::: ##:'####:'##::: ##::'######::::::::::::::::::::::::
-::::::::::::::::::::::: ##:'##: ##:::'## ##::: ##.... ##: ###:: ##:. ##:: ###:: ##:'##... ##:::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##::'##:. ##:: ##:::: ##: ####: ##:: ##:: ####: ##: ##:::..::::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##:'##:::. ##: ########:: ## ## ##:: ##:: ## ## ##: ##::'####::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##: #########: ##.. ##::: ##. ####:: ##:: ##. ####: ##::: ##:::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##: ##.... ##: ##::. ##:: ##:. ###:: ##:: ##:. ###: ##::: ##:::::::::::::::::::::::
-:::::::::::::::::::::::. ###. ###:: ##:::: ##: ##:::. ##: ##::. ##:'####: ##::. ##:. ######::::::::::::::::::::::::
-::::::::::::::::::::::::...::...:::..:::::..::..:::::..::..::::..::....::..::::..:::......:::::::::::::::::::::::::
-#+END_SRC
-
-Code in this section is under construction.  Most likely broken.
-
 
 * EOF
 

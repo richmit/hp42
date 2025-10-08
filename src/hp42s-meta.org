@@ -81,7 +81,7 @@ This org-mode document contains various tools (mostly for Emacs) that help me wr
    - A tool to insert free42 utf-8 characters given a list of character numbers
    - Elisp function to generate custom menus (menus of built-in functions and global labels)
    - yasnippet templates to help type code
-   - ElISP Code to translate my code listings into code for free42 & MD42
+   - ElISP Code to translate my code listings into code for free42
    - 42s notes
      - free42 utf-8 characters with character numbers
 
@@ -513,8 +513,7 @@ END
 The elisp file =hp42s-mode.el= provides few things:
  - A language mode for free42 code -- mostly just provides syntax highlighting
  - =MJR-ins42char=: Lisp function to insert characters given a list of character codes
- - =MJR-dired-org-export=: Lisp function to export to HTML and tangle all marked files in a dired buffer
- - =MJR-process-buffer-as-42s-code=: Lisp function to process *all free42 code in a buffer* for pasting into free42
+ - =MJR-process-buffer-as-42s-code=: Lisp function to process *all free42 code in a buffer* for pasting into free42 (removes comments)
  - =MJR-target-free42-version=: Variable used by =MJR-process-buffer-as-42s-code= & =MJR-copy-42s-code-in-region= to control version of free42
  - =MJR-copy-42s-code-in-region=: Lisp function that process marked region for pasting into free42 and puts the test on the kill ring -- like =MJR-process-buffer-as-42s-code= but for a region.
 
@@ -523,25 +522,6 @@ To activate the functionality, simply =load= the =hp42s-mode.el= file into emacs
 #+BEGIN_SRC elisp :results output silent
 (load-file "../emacs/hp42s-mode.el")
 #+END_SRC
-
-** Prepare Code For Conversion
-
-I include comments like =@@##= that I use like compiler directives in C.  They provide a way to remove lines of code that are incompatible or unnecessary for
-the target version of free42.  It's a bit of a hack, but it lets me maintain one program for diff-rent versions of free42.  When I "tangle" an =org-mode=
-buffer, the code is automatically filtered for the selected version of free42 (set via =MJR-target-free42-version=).
-
-#+ATTR_HTML: :border 2 :frame box :rules all :align center
-|------------------------+---------------|
-| DM42 Version           | Target Free42 |
-|------------------------+---------------|
-| DMCP 3.26 / DM42 v3.24 |         3.2.6 |
-| DMCP 3.25 / DM42 v3.23 |         3.1.8 |
-| DMCP 3.22 / DM42 v3.20 |         3.0.5 |
-| DMCP 3.21 / DM42 v3.18 |         3.0.2 |
-| DMCP-3.20 / DM42-3.17  |        2.5.20 |
-| DMCP-3.20 / DM42-3.16  |        2.5.20 |
-| DMCP 3.18 / DM42 v3.15 |        2.5.16 |
-|------------------------+---------------|
 
 ** Automatically processing tangled code
 
@@ -789,32 +769,6 @@ RTN       @@@@ IF-TRUE-END ($1)
 | ΣREG? + 10 | Σlnxlny  |
 | ΣREG? + 11 | Σxlny    |
 | ΣREG? + 12 | Σylnx    |
-
-* DM 42 Notes
-
-** Display
-
-GrMod is a read write variable.
-   - 0 = standard HP-42S resolution 131x16
-   - 2 = DM42 full resolution 200x120
-   - 3 = DM42 full resolution 400x240
-
-ResX & ResY are read only variables that have the display resolution
-
-* WORKING                                                          :noexport:
-
-#+BEGIN_SRC text :eval never
-:::::::::::::::::::::::'##:::::'##::::'###::::'########::'##::: ##:'####:'##::: ##::'######::::::::::::::::::::::::
-::::::::::::::::::::::: ##:'##: ##:::'## ##::: ##.... ##: ###:: ##:. ##:: ###:: ##:'##... ##:::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##::'##:. ##:: ##:::: ##: ####: ##:: ##:: ####: ##: ##:::..::::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##:'##:::. ##: ########:: ## ## ##:: ##:: ## ## ##: ##::'####::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##: #########: ##.. ##::: ##. ####:: ##:: ##. ####: ##::: ##:::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##: ##.... ##: ##::. ##:: ##:. ###:: ##:: ##:. ###: ##::: ##:::::::::::::::::::::::
-:::::::::::::::::::::::. ###. ###:: ##:::: ##: ##:::. ##: ##::. ##:'####: ##::. ##:. ######::::::::::::::::::::::::
-::::::::::::::::::::::::...::...:::..:::::..::..:::::..::..::::..::....::..::::..:::......:::::::::::::::::::::::::
-#+END_SRC
-
-Code in this section is under construction.  Most likely broken.
 
 * EOF
 

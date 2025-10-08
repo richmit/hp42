@@ -20,7 +20,7 @@
 #+HTML_LINK_HOME: https://www.mitchr.me/
 #+HTML_LINK_UP: https://richmit.github.io/hp42/
 #+EXPORT_FILE_NAME: ../docs/attic
-#+LATEX_HEADER: \usepackage{extsizes} 
+#+LATEX_HEADER: \usepackage{extsizes}
 #+LATEX_HEADER: \usepackage[landscape,margin=0.5in]{geometry}
 #+LATEX_HEADER: \usepackage{mathabx}
 #+LATEX_HEADER: \usepackage{boisik}
@@ -81,12 +81,12 @@ This is where old code goes... ;)
 @@@@      Y: X coordinate for upper left point of character -- Left of screen is 1
 @@@@      X: Character number -- integer in [0, 28]
 @@@@ OUT: No return
-@@@@ UPD: 2021-02-24
+@@@@ UPD: 2025-10-07
 @@@@ BUG: Characters can be *VERY* tiny in high resolution modes on DM42
 @@@@ Designed to print numbers:
 @@@@    101010b Binary      | 1234567 Decimal    | 123e+45 Float | 123/456 Rational | 123 i56 Complex
 @@@@    1A8F10h Hexadecimal | 123,456 Decimal    | 12×10^3 Float | 123456° Degrees  | 123 ∡56 Complex
-@@@@    154823o Octal       | -123456 Signed Dec | 1.34567 Float | 
+@@@@    154823o Octal       | -123456 Signed Dec | 1.34567 Float |
 @@@@ Characters can be underlined
 @@@@ Characters are 3x5 pixels in size.  Underlined characters are 3x7.
 @@@@   - Stock HP-42s screen: 32 characters across.  Two full lines on the screen.
@@ -95,14 +95,14 @@ This is where old code goes... ;)
 @@@@      0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F  e  -  +  ×  /  ^ UNK  ,  .  °  b   o   h   i  ∡ SPC
 @@@@     48 49 50 51 52 53 54 55 56 57 65 66 67 68 69 70 16 45 43 01 00 94  -- 23 46 19 98 111 104 105 23  32
 @@@@  C   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y                    Y  Y  Y              Y  Y                 Y  Y   Y
-@@@@  R   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y                    Y  Y  Y              Y  Y               
-@@@@  B   Y  Y                                               Y  Y                               
-@@@@  O   Y  Y  Y  Y  Y  Y  Y  Y                             Y  Y                               
+@@@@  R   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y                    Y  Y  Y              Y  Y
+@@@@  B   Y  Y                                               Y  Y
+@@@@  O   Y  Y  Y  Y  Y  Y  Y  Y                             Y  Y
 @@@@  H   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y     Y  Y
 @@@@ Add 40 to the above character number for the underlined version
 LBL "TNPR"
-FUNC 30      @@## REQ:free42>=2.5.24
-L4STK        @@## REQ:free42>=3.0
+FUNC 30
+L4STK
 IP
 XEQ IND ST X
 R↓
@@ -351,11 +351,10 @@ END
 @@@@ OUT: X:  0 when input was 0
 @@@@         -1 when input was negative
 @@@@          1 when input was positive
-@@@@ UPD: 2021-02-26
-@@@@ TST: free42_3.0
+@@@@ UPD: 2025-10-07
 LBL "SGN"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 ENTER
 ABS
 X=0?

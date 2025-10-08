@@ -3,14 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-11-21 Thu 16:50 -->
+<!-- 2025-10-07 Tue 12:57 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=1024, initial-scale=1" />
 <title>free42: Programs For Functions</title>
 <meta name="author" content="Mitch Richling" />
 <meta name="description" content="free42/hp-42s/DM42 programs for working with MVAR functions" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
@@ -260,66 +260,65 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2024-11-21 16:49:37</i></td>
+<td class="org-left"><i>2025-10-07 12:10:17</i></td>
 </tr>
 </tbody>
 </table>
 <p align="center">
-Copyright 2024 Mitch Richling. All rights reserved.
+Copyright 2025 Mitch Richling. All rights reserved.
 </p>
 
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0411b52">1. Metadata</a></li>
+<li><a href="#orga974c65">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a>
 <ul>
 <li><a href="#menu-fmenu">2.1. Functionality &amp; the Main Menu</a></li>
-<li><a href="#orga538eca">2.2. Notes Regarding Some Individual Programs</a>
+<li><a href="#org5fd366e">2.2. Notes Regarding Some Individual Programs</a>
 <ul>
-<li><a href="#org82d3527">2.2.1. Interactive vs Non-interactive</a></li>
-<li><a href="#org1073779">2.2.2. <code>FVARM</code>: Global Variables</a></li>
-<li><a href="#org736fda3">2.2.3. <code>FEVL</code>: Evaluating the current equation</a></li>
-<li><a href="#org1e6bc1d">2.2.4. <code>PICF</code>: Selecting a <code>MVAR</code> program</a></li>
-<li><a href="#org7845c14">2.2.5. <code>SFWRP</code>: Wrap a simple function</a></li>
-<li><a href="#org31db2e3">2.2.6. <code>FSLV</code> &amp; <code>FINT</code>: Apply the built in <code>SOLVE</code> &amp; <code>INTG</code> tools to the current <code>EqP</code></a></li>
-<li><a href="#orgb54ae2f">2.2.7. <code>FPRD</code> &amp; <code>FSUM</code>: Non-interactive Sums &amp; Products</a></li>
+<li><a href="#orgebcce6f">2.2.1. Interactive vs Non-interactive</a></li>
+<li><a href="#org3f40c2f">2.2.2. <code>FVARM</code>: Global Variables</a></li>
+<li><a href="#org64c27cc">2.2.3. <code>FEVL</code>: Evaluating the current equation</a></li>
+<li><a href="#org36d0555">2.2.4. <code>PICF</code>: Selecting a <code>MVAR</code> program</a></li>
+<li><a href="#org6c52d43">2.2.5. <code>SFWRP</code>: Wrap a simple function</a></li>
+<li><a href="#org7f644e2">2.2.6. <code>FSLV</code> &amp; <code>FINT</code>: Apply the built in <code>SOLVE</code> &amp; <code>INTG</code> tools to the current <code>EqP</code></a></li>
+<li><a href="#org0884824">2.2.7. <code>FPRD</code> &amp; <code>FSUM</code>: Non-interactive Sums &amp; Products</a></li>
 </ul>
 </li>
-<li><a href="#org83f3ec2">2.3. Organizing Principles</a></li>
+<li><a href="#orgd5999d4">2.3. Organizing Principles</a></li>
 </ul>
 </li>
-<li><a href="#org0a99f35">3. <code>FMENU</code>: Main menu for all apps</a>
+<li><a href="#org1d62d11">3. <code>FMENU</code>: Main menu for all apps</a>
 <ul>
-<li><a href="#org642c77b">3.1. Menu Code</a></li>
-<li><a href="#org742c3dd">3.2. Functions</a></li>
+<li><a href="#orgf352cc1">3.1. Menu Code</a></li>
+<li><a href="#org4cdb916">3.2. Functions</a></li>
 </ul>
 </li>
-<li><a href="#org7cf904d">4. <code>FSPT</code>: Interactive Sums, Products, &amp; Tables</a></li>
-<li><a href="#org7cb8490">5. <code>FPLT</code>: Interactive Plotting</a>
+<li><a href="#org087d0cf">4. <code>FSPT</code>: Interactive Sums, Products, &amp; Tables</a></li>
+<li><a href="#org1c3aa9b">5. <code>FPLT</code>: Interactive Plotting</a>
 <ul>
-<li><a href="#org550526c">5.1. User Interface</a>
+<li><a href="#orgc6e6491">5.1. User Interface</a>
 <ul>
-<li><a href="#org8273e7f">5.1.1. Main Menu</a></li>
+<li><a href="#org4c11d54">5.1.1. Main Menu</a></li>
 </ul>
 </li>
-<li><a href="#org9e42096">5.2. Computational Menu</a>
+<li><a href="#org54e93dc">5.2. Computational Menu</a>
 <ul>
-<li><a href="#org6411b4a">5.2.1. Graphics Display</a></li>
+<li><a href="#orga698f2e">5.2.1. Graphics Display</a></li>
 </ul>
 </li>
-<li><a href="#org1598263">5.3. Code</a></li>
+<li><a href="#org4707527">5.3. Code</a></li>
 </ul>
 </li>
-<li><a href="#orgbf26803">6. Test Functions</a></li>
-<li><a href="#org87fc69d">7. EOF</a></li>
+<li><a href="#org0a2df8c">6. Test Functions</a></li>
+<li><a href="#org64035ae">7. EOF</a></li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org0411b52" class="outline-2">
-<h2 id="org0411b52"><span class="section-number-2">1.</span> Metadata</h2>
+<div id="outline-container-orga974c65" class="outline-2">
+<h2 id="orga974c65"><span class="section-number-2">1.</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/pgmforfun.html">https://richmit.github.io/hp42/pgmforfun.html</a>
@@ -370,12 +369,11 @@ Directory contents:
 </table>
 </div>
 </div>
-
 <div id="outline-container-introduction" class="outline-2">
 <h2 id="introduction"><span class="section-number-2">2.</span> Introduction</h2>
 <div class="outline-text-2" id="text-introduction">
 <p>
-\[\mathrm{Plots} \;\;\;\;\;\;\; \mathrm{Sums} \;\; \sum_{n=1}^{15}\frac{1}{n^2} \;\;\;\;\;\;\; \mathrm{Products} \;\; \prod_{n=1}^{15}\frac{1}{n^2} \;\;\;\;\;\;\; \mathrm{Integrals} \;\; \int_{1}^{15}\frac{1}{x^2}dx \;\;\;\;\;\;\; \mathrm{Roots} \]
+\[ \mathrm{Plots} \;\;\;\;\;\;\; \mathrm{Sums} \;\; \sum_{n=1}^{15}\frac{1}{n^2} \;\;\;\;\;\;\; \mathrm{Products} \;\; \prod_{n=1}^{15}\frac{1}{n^2} \;\;\;\;\;\;\; \mathrm{Integrals} \;\; \int_{1}^{15}\frac{1}{x^2}dx \;\;\;\;\;\;\; \mathrm{Roots} \]
 </p>
 
 <p>
@@ -385,7 +383,7 @@ This is a collection of programs that work with <code>MVAR</code>-type programs 
 <div id="outline-container-menu-fmenu" class="outline-3">
 <h3 id="menu-fmenu"><span class="section-number-3">2.1.</span> Functionality &amp; the Main Menu</h3>
 <div class="outline-text-3" id="text-menu-fmenu">
-<table id="org10ecc07" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="orga50b133" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -498,13 +496,12 @@ Please ignore the first two columns in the table &#x2013; they are used to auto-
 </p>
 </div>
 </div>
-
-<div id="outline-container-orga538eca" class="outline-3">
-<h3 id="orga538eca"><span class="section-number-3">2.2.</span> Notes Regarding Some Individual Programs</h3>
+<div id="outline-container-org5fd366e" class="outline-3">
+<h3 id="org5fd366e"><span class="section-number-3">2.2.</span> Notes Regarding Some Individual Programs</h3>
 <div class="outline-text-3" id="text-2-2">
 </div>
-<div id="outline-container-org82d3527" class="outline-4">
-<h4 id="org82d3527"><span class="section-number-4">2.2.1.</span> Interactive vs Non-interactive</h4>
+<div id="outline-container-orgebcce6f" class="outline-4">
+<h4 id="orgebcce6f"><span class="section-number-4">2.2.1.</span> Interactive vs Non-interactive</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <p>
 <code>SPT</code> &amp; <code>FPLT</code> are fully interactive, user friendly applications.  The rest are stripped down programs designed to offer performance and good programmatic
@@ -513,22 +510,20 @@ what they do as fast as they can do it.  This can lead to rather cryptic error m
 </p>
 </div>
 </div>
-
-<div id="outline-container-org1073779" class="outline-4">
-<h4 id="org1073779"><span class="section-number-4">2.2.2.</span> <code>FVARM</code>: Global Variables</h4>
+<div id="outline-container-org3f40c2f" class="outline-4">
+<h4 id="org3f40c2f"><span class="section-number-4">2.2.2.</span> <code>FVARM</code>: Global Variables</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <p>
 While <code>FVARM</code> is simply an MVAR program with all the global variables, the <code>[FVARM]</code> menu key actually shows the variable menu with <code>VARMENU</code>.
 </p>
 </div>
 </div>
-
-<div id="outline-container-org736fda3" class="outline-4">
-<h4 id="org736fda3"><span class="section-number-4">2.2.3.</span> <code>FEVL</code>: Evaluating the current equation</h4>
+<div id="outline-container-org64c27cc" class="outline-4">
+<h4 id="org64c27cc"><span class="section-number-4">2.2.3.</span> <code>FEVL</code>: Evaluating the current equation</h4>
 <div class="outline-text-4" id="text-2-2-3">
 <p>
 I frequently use <code>VARMENU</code> to repeatedly evaluate a formula, with different input values.  Functionally that means typing in the value, and then hitting the
-variable button twice.  That's not super efficient when repeatedly changing the same variable.  That's where this little function comes in!  
+variable button twice.  That's not super efficient when repeatedly changing the same variable.  That's where this little function comes in!
 </p>
 
 <p>
@@ -537,19 +532,17 @@ evaluate EqP on X.
 </p>
 </div>
 </div>
-
-<div id="outline-container-org1e6bc1d" class="outline-4">
-<h4 id="org1e6bc1d"><span class="section-number-4">2.2.4.</span> <code>PICF</code>: Selecting a <code>MVAR</code> program</h4>
+<div id="outline-container-org36d0555" class="outline-4">
+<h4 id="org36d0555"><span class="section-number-4">2.2.4.</span> <code>PICF</code>: Selecting a <code>MVAR</code> program</h4>
 <div class="outline-text-4" id="text-2-2-4">
 <p>
 This little function is at the center of all the tools on this page.  It queries for an <code>MVAR</code> program, lets you set constants, pick an independent variable,
-and describe the number of returns from the function.  See the section <a href="#org83f3ec2">Organizing Principles</a> for more about the global variables used to house this data.
+and describe the number of returns from the function.  See the section <a href="#orgd5999d4">Organizing Principles</a> for more about the global variables used to house this data.
 </p>
 </div>
 </div>
-
-<div id="outline-container-org7845c14" class="outline-4">
-<h4 id="org7845c14"><span class="section-number-4">2.2.5.</span> <code>SFWRP</code>: Wrap a simple function</h4>
+<div id="outline-container-org6c52d43" class="outline-4">
+<h4 id="org6c52d43"><span class="section-number-4">2.2.5.</span> <code>SFWRP</code>: Wrap a simple function</h4>
 <div class="outline-text-4" id="text-2-2-5">
 <p>
 This <code>MVAR</code> program allows one to wrap a simple function for use with tools that need an <code>MVAR</code> program.  For example, if you have a program for <code>SECH</code> you
@@ -561,9 +554,8 @@ To use this program simply put the name of the simple function into the variable
 </p>
 </div>
 </div>
-
-<div id="outline-container-org31db2e3" class="outline-4">
-<h4 id="org31db2e3"><span class="section-number-4">2.2.6.</span> <code>FSLV</code> &amp; <code>FINT</code>: Apply the built in <code>SOLVE</code> &amp; <code>INTG</code> tools to the current <code>EqP</code></h4>
+<div id="outline-container-org7f644e2" class="outline-4">
+<h4 id="org7f644e2"><span class="section-number-4">2.2.6.</span> <code>FSLV</code> &amp; <code>FINT</code>: Apply the built in <code>SOLVE</code> &amp; <code>INTG</code> tools to the current <code>EqP</code></h4>
 <div class="outline-text-4" id="text-2-2-6">
 <p>
 These are handy little functions that allow one to apply the built in solver and integration capabilities of the 42s to the program currently active function.
@@ -571,9 +563,8 @@ I debated putting them in the menu because they are really more suited to progra
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgb54ae2f" class="outline-4">
-<h4 id="orgb54ae2f"><span class="section-number-4">2.2.7.</span> <code>FPRD</code> &amp; <code>FSUM</code>: Non-interactive Sums &amp; Products</h4>
+<div id="outline-container-org0884824" class="outline-4">
+<h4 id="org0884824"><span class="section-number-4">2.2.7.</span> <code>FPRD</code> &amp; <code>FSUM</code>: Non-interactive Sums &amp; Products</h4>
 <div class="outline-text-4" id="text-2-2-7">
 <p>
 These programs are well suited for use by other programs.  They print no status, and are significantly faster than the interactive tool <code>FSPT</code>.  Note that
@@ -582,9 +573,8 @@ they do not support the <code>LN</code> transform capability of <code>FSPT</code
 </div>
 </div>
 </div>
-
-<div id="outline-container-org83f3ec2" class="outline-3">
-<h3 id="org83f3ec2"><span class="section-number-3">2.3.</span> Organizing Principles</h3>
+<div id="outline-container-orgd5999d4" class="outline-3">
+<h3 id="orgd5999d4"><span class="section-number-3">2.3.</span> Organizing Principles</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 All the top level programs use <code>PICF</code> to collect information about the <code>MVAR</code> program to be used.  The collected information is housed in three global
@@ -703,13 +693,12 @@ If an accuracy is required, then we use the variable <code>ACC</code>.
 </div>
 </div>
 </div>
-
-<div id="outline-container-org0a99f35" class="outline-2">
-<h2 id="org0a99f35"><span class="section-number-2">3.</span> <code>FMENU</code>: Main menu for all apps</h2>
+<div id="outline-container-org1d62d11" class="outline-2">
+<h2 id="org1d62d11"><span class="section-number-2">3.</span> <code>FMENU</code>: Main menu for all apps</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org642c77b" class="outline-3">
-<h3 id="org642c77b"><span class="section-number-3">3.1.</span> Menu Code</h3>
+<div id="outline-container-orgf352cc1" class="outline-3">
+<h3 id="orgf352cc1"><span class="section-number-3">3.1.</span> Menu Code</h3>
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"FMENU"</span> 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
@@ -717,9 +706,8 @@ If an accuracy is required, then we use the variable <code>ACC</code>.
 </div>
 </div>
 </div>
-
-<div id="outline-container-org742c3dd" class="outline-3">
-<h3 id="org742c3dd"><span class="section-number-3">3.2.</span> Functions</h3>
+<div id="outline-container-org4cdb916" class="outline-3">
+<h3 id="org4cdb916"><span class="section-number-3">3.2.</span> Functions</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@ LBL: 80-87, 91-87, 99</span>
@@ -728,12 +716,11 @@ If an accuracy is required, then we use the variable <code>ACC</code>.
 <span style="color: #ffa500;">@@@@ DSC: Pick an MVAR function and variable</span>
 <span style="color: #ffa500;">@@@@ IN:  X: integer</span>
 <span style="color: #ffa500;">@@@@ FAQ: If X=0, then EqD is set to 1.  Otherwise the user is prompted.</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-02-24</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #ffa500;">@@@@ GBL: EqP  -- Name of selected function</span>
 <span style="color: #ffa500;">@@@@ GBL: EqV -- Name of selected variable</span>
 <span style="color: #ffa500;">@@@@ GBL: EqD -- Return count</span>
 <span style="color: #ffa500;">@@@@ BUG: Variable menu works like solver, not like integrator.  Can't fix that...</span>
-<span style="color: #ffa500;">@@@@ REQ: REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"PICF"</span>
 <span style="color: #00ffff;">FUNC</span> 10
 <span style="color: #00ffff;">L4STK</span>
@@ -752,8 +739,7 @@ If an accuracy is required, then we use the variable <code>ACC</code>.
 <span style="color: #00ffff;">STOP</span>
 <span style="color: #00ffff;">ASTO</span> <span style="color: #fa8072;">"EqP"</span>
 <span style="color: #00ffff;">EXITALL</span>
-<span style="color: #00ffff;">VARMENU</span> IND <span style="color: #fa8072;">"EqP"</span>      <span style="color: #6495ed;">@@## REQ:free42&lt;3.0.5</span>
-<span style="color: #00ffff;">VARMNU1</span> IND <span style="color: #fa8072;">"EqP"</span>      <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0.5</span>
+<span style="color: #00ffff;">VARMNU1</span> IND <span style="color: #fa8072;">"EqP"</span>
 <span style="color: #fa8072;">"Set Var; "</span>
 <span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">"Pick Free Var"</span>
 <span style="color: #00ffff;">AVIEW</span>
@@ -826,8 +812,7 @@ If an accuracy is required, then we use the variable <code>ACC</code>.
 <span style="color: #ffa500;">@@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP</span>
 <span style="color: #ffa500;">@@@@ FAQ: Faster than product in FSPT</span>
 <span style="color: #ffa500;">@@@@ FAQ: EqD is ignored -- only last function value is summed</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-06</span>
-<span style="color: #ffa500;">@@@@ REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"FPRD"</span>
 <span style="color: #00ffff;">FUNC</span> 01
 1
@@ -859,8 +844,7 @@ If an accuracy is required, then we use the variable <code>ACC</code>.
 <span style="color: #ffa500;">@@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP</span>
 <span style="color: #ffa500;">@@@@ FAQ: Faster than sum in FSPT</span>
 <span style="color: #ffa500;">@@@@ FAQ: EqD is ignored -- only last function value is summed</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-06</span>
-<span style="color: #ffa500;">@@@@ REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"FSUM"</span>
 <span style="color: #00ffff;">FUNC</span> 01
 0
@@ -901,8 +885,7 @@ If an accuracy is required, then we use the variable <code>ACC</code>.
 <span style="color: #ffa500;">@@@@ FAQ: Faster than product in FSPT</span>
 <span style="color: #ffa500;">@@@@ FAQ: EqD is ignored -- only last function value is summed</span>
 <span style="color: #ffa500;">@@@@ GBL: EqP, EqV, LLIM, ULIM</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-06</span>
-<span style="color: #ffa500;">@@@@ REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"FSLV"</span>
 <span style="color: #00ffff;">FUNC</span> 04
 <span style="color: #00ffff;">PGMSLV</span> IND <span style="color: #fa8072;">"EqP"</span>
@@ -918,8 +901,7 @@ If an accuracy is required, then we use the variable <code>ACC</code>.
 <span style="color: #ffa500;">@@@@ FAQ: No error checking is done on ACC, LLIM, ULIM, STEP, EqV, or EqP</span>
 <span style="color: #ffa500;">@@@@ FAQ: EqD is ignored -- only last function value is summed</span>
 <span style="color: #ffa500;">@@@@ GBL: EqP, EqV, LLIM, ULIM, ACC</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-06</span>
-<span style="color: #ffa500;">@@@@ REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"FINT"</span>
 <span style="color: #00ffff;">FUNC</span> 03
 <span style="color: #00ffff;">PGMINT</span> IND <span style="color: #fa8072;">"EqP"</span>
@@ -931,8 +913,7 @@ If an accuracy is required, then we use the variable <code>ACC</code>.
 <span style="color: #ffa500;">@@@@ OUT: X: EqP(x)</span>
 <span style="color: #ffa500;">@@@@ FAQ: No error checking is done on EqV or EqP</span>
 <span style="color: #ffa500;">@@@@ GBL: EqP, EqV</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-09</span>
-<span style="color: #ffa500;">@@@@ REQ: REQ:free42&gt;=3.0</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"FEVL"</span>
 <span style="color: #00ffff;">STO</span> IND <span style="color: #fa8072;">"EqV"</span>
 <span style="color: #00ffff;">XEQ IND</span> <span style="color: #fa8072;">"EqP"</span>
@@ -985,7 +966,7 @@ If an accuracy is required, then we use the variable <code>ACC</code>.
 <span id="coderef-FVARM" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FVARM)</span>
 <span style="color: #ffa500;">@@@@ DSC: MVAR Program with all the global vartiables used by the F* programs</span>
 <span style="color: #ffa500;">@@@@ GBL: EqP, EqV, EqD, ACC, WFUN, LLIM, ULIM, STEP, YMIN, YMAX, &amp; YSTP</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-06</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"FVARM"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"LLIM"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"ULIM"</span>
@@ -1027,9 +1008,8 @@ END
 </div>
 </div>
 </div>
-
-<div id="outline-container-org7cf904d" class="outline-2">
-<h2 id="org7cf904d"><span class="section-number-2">4.</span> <code>FSPT</code>: Interactive Sums, Products, &amp; Tables</h2>
+<div id="outline-container-org087d0cf" class="outline-2">
+<h2 id="org087d0cf"><span class="section-number-2">4.</span> <code>FSPT</code>: Interactive Sums, Products, &amp; Tables</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Create function tables and computes sums &amp; products.  Works much like the built in integration application.
@@ -1056,7 +1036,7 @@ Note: Using <code>[SHIFT]</code> before <code>[LLIM]</code>, <code>[ULIM]</code>
 <span style="color: #ffa500;">@@@@ DSC: Sums, Products, &amp; Tables</span>
 <span style="color: #ffa500;">@@@@ IN:  N/A</span>
 <span style="color: #ffa500;">@@@@ OUT: N/A</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-03</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #ffa500;">@@@@ GBL: LLIM -- Lower limit for variable</span>
 <span style="color: #ffa500;">@@@@ GBL: ULIM -- Upper limit for variable</span>
 <span style="color: #ffa500;">@@@@ GBL: STEP -- Size of steps to make</span>
@@ -1067,7 +1047,6 @@ Note: Using <code>[SHIFT]</code> before <code>[LLIM]</code>, <code>[ULIM]</code>
 <span style="color: #ffa500;">@@@@ LLB: 00-12,14-24,26-33</span>
 <span style="color: #ffa500;">@@@@ GLB: FSPT</span>
 <span style="color: #ffa500;">@@@@ USE: PICF</span>
-<span style="color: #ffa500;">@@@@ REQ: REQ:free42&gt;=3.0</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"FSPT"</span>
 <span style="color: #00ffff;">CF</span> 82
 <span style="color: #00ffff;">SF</span> 83
@@ -1340,9 +1319,8 @@ END
 </div>
 </div>
 </div>
-
-<div id="outline-container-org7cb8490" class="outline-2">
-<h2 id="org7cb8490"><span class="section-number-2">5.</span> <code>FPLT</code>: Interactive Plotting</h2>
+<div id="outline-container-org1c3aa9b" class="outline-2">
+<h2 id="org1c3aa9b"><span class="section-number-2">5.</span> <code>FPLT</code>: Interactive Plotting</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Features:
@@ -1360,13 +1338,12 @@ Features:
 <li>Integrated with other tools on this page &#x2013; solver &amp; integration</li>
 </ul>
 </div>
-
-<div id="outline-container-org550526c" class="outline-3">
-<h3 id="org550526c"><span class="section-number-3">5.1.</span> User Interface</h3>
+<div id="outline-container-orgc6e6491" class="outline-3">
+<h3 id="orgc6e6491"><span class="section-number-3">5.1.</span> User Interface</h3>
 <div class="outline-text-3" id="text-5-1">
 </div>
-<div id="outline-container-org8273e7f" class="outline-4">
-<h4 id="org8273e7f"><span class="section-number-4">5.1.1.</span> Main Menu</h4>
+<div id="outline-container-org4c11d54" class="outline-4">
+<h4 id="org4c11d54"><span class="section-number-4">5.1.1.</span> Main Menu</h4>
 <div class="outline-text-4" id="text-5-1-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -1436,9 +1413,8 @@ For a graph with default settings: [0] [ENTER] [XRNG] [YRNG] [GRID] [PLOT]
 </div>
 </div>
 </div>
-
-<div id="outline-container-org9e42096" class="outline-3">
-<h3 id="org9e42096"><span class="section-number-3">5.2.</span> Computational Menu</h3>
+<div id="outline-container-org54e93dc" class="outline-3">
+<h3 id="org54e93dc"><span class="section-number-3">5.2.</span> Computational Menu</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 This menu is for doing computations on the current equation based on
@@ -1492,9 +1468,8 @@ the current plot range or last zoom box region.
 </tbody>
 </table>
 </div>
-
-<div id="outline-container-org6411b4a" class="outline-4">
-<h4 id="org6411b4a"><span class="section-number-4">5.2.1.</span> Graphics Display</h4>
+<div id="outline-container-orga698f2e" class="outline-4">
+<h4 id="orga698f2e"><span class="section-number-4">5.2.1.</span> Graphics Display</h4>
 <div class="outline-text-4" id="text-5-2-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -1575,9 +1550,8 @@ the current plot range or last zoom box region.
 </div>
 </div>
 </div>
-
-<div id="outline-container-org1598263" class="outline-3">
-<h3 id="org1598263"><span class="section-number-3">5.3.</span> Code</h3>
+<div id="outline-container-org4707527" class="outline-3">
+<h3 id="org4707527"><span class="section-number-3">5.3.</span> Code</h3>
 <div class="outline-text-3" id="text-5-3">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-FPLT" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (FPLT)</span>
@@ -1592,8 +1566,7 @@ the current plot range or last zoom box region.
 <span style="color: #ffa500;">@@@@ FLG: 83: TEMP: Used for automatic autoscale redraw</span>
 <span style="color: #ffa500;">@@@@ FLG: 84: TEMP: Reserved</span>
 <span style="color: #ffa500;">@@@@ FRE: LBL: 79-99</span>
-<span style="color: #ffa500;">@@@@ REQ: REQ:free42&gt;=3.0</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-09</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"FPLT"</span>
 <span style="color: #00ffff;">FC?</span> 04
@@ -2502,9 +2475,8 @@ END
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgbf26803" class="outline-2">
-<h2 id="orgbf26803"><span class="section-number-2">6.</span> Test Functions</h2>
+<div id="outline-container-org0a2df8c" class="outline-2">
+<h2 id="org0a2df8c"><span class="section-number-2">6.</span> Test Functions</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 A few <code>MVAR</code> functions to test with
@@ -2635,9 +2607,8 @@ END
 </div>
 </div>
 </div>
-
-<div id="outline-container-org87fc69d" class="outline-2">
-<h2 id="org87fc69d"><span class="section-number-2">7.</span> EOF</h2>
+<div id="outline-container-org64035ae" class="outline-2">
+<h2 id="org64035ae"><span class="section-number-2">7.</span> EOF</h2>
 <div class="outline-text-2" id="text-7">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />

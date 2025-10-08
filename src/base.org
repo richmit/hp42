@@ -20,7 +20,7 @@
 #+HTML_LINK_HOME: https://www.mitchr.me/
 #+HTML_LINK_UP: https://richmit.github.io/hp42/
 #+EXPORT_FILE_NAME: ../docs/base
-#+LATEX_HEADER: \usepackage{extsizes} 
+#+LATEX_HEADER: \usepackage{extsizes}
 #+LATEX_HEADER: \usepackage[margin=0.5in]{geometry}
 #+LATEX_HEADER: \usepackage{mathabx}
 #+LATEX_HEADER: \usepackage{boisik}
@@ -520,11 +520,11 @@ RTN
 @@@@ OUT: X: Number of 1 bits in IP(X)
 @@@@ FAQ: Runtime complexity O(log_2(X))
 @@@@ LBL: Used 70-72
-@@@@ UPD: 2021-04-10
+@@@@ UPD: 2025-10-07
 @@@@ LBL "B#"
 LBL "B#"
-FUNC 11    @@## REQ:free42>=2.5.24
-L4STK      @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 IP
 0
 X<>Y       @@@@ NUM CNT
@@ -540,13 +540,13 @@ X=Y?
 GTO 71
 @@@@ Current bit was set: increment counter
 R↓         @@@@ NUM_N MASK CNT
-1 
+1
 STO+ ST T  @@@@ 1 NUM_N MASK CNT
 LBL 71
 @@@@ Current bit was clear
 R↓         @@@@ NUM_N MASK CNT
 X=0?
-GTO 72  
+GTO 72
 @@@@ Still have bits to check
 X<>Y       @@@@ MASK NUM_N CNT
 -1
@@ -566,10 +566,10 @@ RTN
 @@@@ OUT: X: Integer with IP(X) least significant bits set
 @@@@ FAQ: Returns int with all 0 bits when X<=0
 @@@@ FAQ: Returns int with all 1 bits when X>=WSIZE?
-@@@@ UPD: 2021-03-20
+@@@@ UPD: 2025-10-07
 LBL "MSKn"
-FUNC 21                        @@## REQ:free42>=2.5.24
-L4STK                          @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 X<>Y
 XEQ "MSKR"
 X<>Y
@@ -582,10 +582,10 @@ RTN
 @@@@ OUT: X: Integer with IP(X) most significant bits set
 @@@@ FAQ: Returns int with all 0 bits when X<=0
 @@@@ FAQ: Returns int with all 1 bits when X>=WSIZE?
-@@@@ UPD: 2021-03-20
+@@@@ UPD: 2025-10-07
 LBL "MSKL"
-FUNC 11                        @@## REQ:free42>=2.5.24
-L4STK                          @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 XEQ "MSKR"
 XEQ "LJ"
 R↓
@@ -597,10 +597,10 @@ RTN
 @@@@ OUT: X: Integer with IP(X) least significant bits set
 @@@@ FAQ: Returns int with all 0 bits when X<=0
 @@@@ FAQ: Returns int with all 1 bits when X>=WSIZE?
-@@@@ UPD: 2021-03-20
+@@@@ UPD: 2025-10-07
 LBL "MSKR"
-FUNC 11                        @@## REQ:free42>=2.5.24
-L4STK                          @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 IP
 @@@@ All zeros case?
 0
@@ -628,10 +628,10 @@ RTN
 @@@@ OUT: X: Integer with IP(X)th bit of Y set
 @@@@ FAQ: Y is returned unchanged  when X is out of range
 @@@@ BUG: When X out of range, the type Y is not error checked
-@@@@ UPD: 2021-03-20
+@@@@ UPD: 2025-10-07
 LBL "SETB"
-FUNC 21                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 IP
 X<>Y
 @@@@ Do nothing if X was negative
@@ -656,10 +656,10 @@ RTN
 @@@@ OUT: X: Integer with IP(X)th bit of Y set
 @@@@ FAQ: Y is returned unchanged  when X is out of range
 @@@@ BUG: When X out of range, the type Y is not error checked
-@@@@ UPD: 2021-03-20
+@@@@ UPD: 2025-10-07
 LBL "CLRB"
-FUNC 21                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 IP
 X<>Y
 IP
@@ -687,10 +687,10 @@ RTN
 @@@@ FAQ: Returns 0 when X is out of range
 @@@@ BUG: When X out of range, type Y is not error checked
 @@@@ LBL: Used 69
-@@@@ UPD: 2021-03-20
+@@@@ UPD: 2025-10-07
 LBL "GETB"
-FUNC 21                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 0
 @@@@ Return 0 if X was negative
 0>? ST Y
@@ -714,10 +714,10 @@ RTN
 @@@@ IN:  Y: An integer (0=LSB)
 @@@@      X: An integer
 @@@@ OUT: Set the IP(Y)th bit of IP(Z) to IP(X)
-@@@@ UPD: 2021-03-20
+@@@@ UPD: 2025-10-07
 LBL "ASNB"
-FUNC 31                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 31
+L4STK
 X=0?
 GTO 54
 R↓
@@ -735,10 +735,10 @@ RTN
 @@@@      Y: An integer
 @@@@      X: An integer (0=LSB)
 @@@@ OUT: IP(Y) bits of IP(Z) starting at bit IP(X)
-@@@@ UPD: 2021-04-21
+@@@@ UPD: 2025-10-07
 LBL "GY@X"
-FUNC 31                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 31
+L4STK
 RCL ST Z   @@@@ Z     X     Y     Z
 X<>Y       @@@@ X     Z     Y     Z
 XEQ "SRn"  @@@@ SHF_Z Y     Z     Z
@@ -754,10 +754,10 @@ RTN
 @@@@      Y: An integer
 @@@@      X: An integer (0=LSB)
 @@@@ OUT: IP(Z) with IP(Y) bits starting at bit IP(X) cleared
-@@@@ UPD: 2021-04-21
+@@@@ UPD: 2025-10-07
 LBL "CY@X"
-FUNC 31                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 31
+L4STK
 XEQ "MSKn"
 NOT
 AND
@@ -770,10 +770,10 @@ RTN
 @@@@      Y: An integer
 @@@@      X: An integer (0=LSB)
 @@@@ OUT: IP(Z) with IP(Y) bits starting at bit IP(X) set
-@@@@ UPD: 2021-04-21
+@@@@ UPD: 2025-10-07
 LBL "SY@X"
-FUNC 31                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 31
+L4STK
 XEQ "MSKn"
 OR
 RTN
@@ -786,10 +786,10 @@ RTN
 @@@@      Y: An integer
 @@@@      X: An integer (0=LSB)
 @@@@ OUT: IP(Z) bits of IP(T) are set to IP(Z) bits of IP(X) starting at IP(Y)
-@@@@ UPD: 2021-04-21
+@@@@ UPD: 2025-10-07
 LBL "AZ@Y"
-FUNC 41                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 41
+L4STK
 LSTO "_X"
 R↓              @@@@  Y Z T T
 LSTO "_Y"
@@ -804,7 +804,7 @@ RCL "_Z"
 XEQ "MSKR"
 AND
 RCL "_Y"
-XEQ "SLn" 
+XEQ "SLn"
 OR              @@@@
 RTN
 
@@ -812,13 +812,13 @@ RTN
 @@@@ DSC: Shift Left 1 Bit
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer shifted left 1 bit
-@@@@ UPD: 2021-03-20
+@@@@ UPD: 2025-10-07
 LBL "SL"
-FUNC 11                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 -1
 ROTXY
-1 
+1
 NOT
 AND
 RTN
@@ -827,10 +827,10 @@ RTN
 @@@@ DSC: Shift Right 1 Bit
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer shifted right 1 bit
-@@@@ UPD: 2021-03-20
+@@@@ UPD: 2025-10-07
 LBL "SR"
-FUNC 11                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 1
 NOT
 AND
@@ -843,8 +843,8 @@ RTN
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer rotated left 1 bit
 LBL "RL"
-FUNC 11                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 -1
 ROTXY
 RTN
@@ -854,8 +854,8 @@ RTN
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Integer rotated right 1 bit
 LBL "RR"
-FUNC 11                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 1
 ROTXY
 RTN
@@ -867,10 +867,10 @@ RTN
 @@@@ OUT: X: IP(Y) shifted left IP(Y) bit(s)
 @@@@ FAQ: IP(Y) is returned unchanged when IP(X) is zero or negative
 @@@@ FAQ: 0 is returned when IP(X)>=WSIZE
-@@@@ UPD: 2021-03-20
+@@@@ UPD: 2025-10-07
 LBL "SLn"
-FUNC 21                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 IP
 X<>Y
 IP
@@ -885,7 +885,7 @@ RTN
 @@@@ X must have been > 0 & < WSIZE
 R↓
 X<>Y
-RCL ST Y  
+RCL ST Y
 @@@@ Rotate left X bits
 +/-
 ROTXY
@@ -906,10 +906,10 @@ RTN
 @@@@ OUT: X: IP(Y) shifted right IP(X) bit(s)
 @@@@ FAQ: IP(Y) is returned unchanged when IP(X) is zero or negative
 @@@@ FAQ: 0 is returned when IP(X)>=WSIZE
-@@@@ UPD: 2021-03-20
+@@@@ UPD: 2025-10-07
 LBL "SRn"
-FUNC 21                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 IP
 X<>Y
 IP
@@ -944,10 +944,10 @@ RTN
 @@@@ IN:  X: An integer
 @@@@ OUT: X: X rotated left IP(Y) bit(s)
 @@@@ FAQ: Y is returned unchanged when X is zero or negative
-@@@@ UPD: 2021-03-20
+@@@@ UPD: 2025-10-07
 LBL "RLn"
-FUNC 21                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 IP
 X<>Y
 @@@@ Return Y if X was negative
@@ -965,10 +965,10 @@ RTN
 @@@@ IN:  X: An integer
 @@@@ OUT: X: X rotated right ABS(IP(Y)) bit(s)
 @@@@ FAQ: Y is returned unchanged when X is zero or negative
-@@@@ UPD: 2021-03-20
+@@@@ UPD: 2025-10-07
 LBL "RRn"
-FUNC 21                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 IP
 X<>Y
 @@@@ Return Y if X was negative
@@ -986,17 +986,17 @@ RTN
 @@@@ OUT: X: Integer shifted by IP(Y) bit(s)
 @@@@ FAQ: Uses SLn & SLr.
 @@@@ LBL: Used 59
-@@@@ UPD: 2021-03-20
+@@@@ UPD: 2025-10-07
 LBL "SHFXY"
-FUNC 21                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 IP
 X<0?
 GTO 59
 @@@@ X is non-negative -- shift right
 XEQ "SRn"
 RTN
-LBL 59 
+LBL 59
 @@@@ X negative -- shift left
 +/-
 XEQ "SLn"
@@ -1009,14 +1009,13 @@ RTN
 @@@@ OUT: X: Justified number
 @@@@ FAQ: Like the HP-16c's LJ funciton, but justifies in the other direction
 @@@@ LBL: Used 56-58
-@@@@ UPD: 2021-03-20
+@@@@ UPD: 2025-10-07
 LBL "RJ"
-FUNC 12                        @@## REQ:free42>=2.5.24
-L4STK                          @@## REQ:free42>=3.0
+FUNC 12
+L4STK
 IP
 X=0?
-RTNERR 4                       @@## REQ:free42>=2.5.24
-1/X                            @@## REQ:free42<2.5.24
+RTNERR 4
 0
 X<>Y
 LBL 57
@@ -1042,14 +1041,13 @@ GTO 57
 @@@@ OUT: X: Justified number
 @@@@ FAQ: Just like the HP-16c's LJ funciton
 @@@@ LBL: Used 64-66
-@@@@ UPD: 2021-03-20
+@@@@ UPD: 2025-10-07
 LBL "LJ"
-FUNC 12                        @@## REQ:free42>=2.5.24
-L4STK                          @@## REQ:free42>=3.0
+FUNC 12
+L4STK
 IP
 X=0?
-RTNERR 4                       @@## REQ:free42>=2.5.24
-1/X                            @@## REQ:free42<2.5.24
+RTNERR 4
 0
 X<>Y
 LBL 64
@@ -1075,10 +1073,10 @@ GTO 64
 @@@@ DSC: Integer square root
 @@@@ IN:  X: a non-negative real number
 @@@@ OUT: X: IP(SQRT(ABS(X)))
-@@@@ UPD: 2021-03-16
+@@@@ UPD: 2025-10-07
 LBL "ISQRT"
-FUNC 11                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 ABS
 SQRT
 IP
@@ -1088,10 +1086,10 @@ RTN
 @@@@ DSC: Integer base 2 log
 @@@@ IN:  X: a positive real number
 @@@@ OUT: X: IP(log_2(ABS(X)))
-@@@@ UPD: 2021-03-16
+@@@@ UPD: 2025-10-07
 LBL "ILN2"
-FUNC 11                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 ABS
 LN
 2
@@ -1105,12 +1103,12 @@ RTN
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Position of MSSB in IP(X) or -1 if IP(X) was 0
 @@@@ USE: LJ
-@@@@ UPD: 2021-03-16
+@@@@ UPD: 2025-10-07
 @@@@ FAQ: Runtime Complexity O(WSIZE-log_2(X))
 @@@@ FAQ: Closely related to LJ program
 LBL "MSSB"
-FUNC 11                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 IP
 -1
 0=? ST Y
@@ -1128,12 +1126,12 @@ RTN
 @@@@ DSC: Position of the Least Significant Set Bit
 @@@@ IN:  X: An integer
 @@@@ OUT: X: Position of LSSB in IP(X) or -1 if IP(X) was 0
-@@@@ UPD: 2021-03-16
+@@@@ UPD: 2025-10-07
 @@@@ FAQ: Runtime Complexity O(LSSB(X)) & LSSB<WSIZE
 @@@@ FAQ: Closely related to RJ program
 LBL "LSSB"
-FUNC 11                       @@## REQ:free42>=2.5.24
-L4STK                         @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 IP
 -1
 0=? ST Y
@@ -1251,7 +1249,7 @@ RTN
 @@@@ NAM: Y≥WSIZE? 67
 @@@@ I/O: No stack change.  Uses Y
 @@@@ RET: YES if Y≥WSIZE, NO otherwise
-@@@@ UPD: 2021-04-21
+@@@@ UPD: 2025-10-07
 LBL 67
 FUNC 00
 L4STK
@@ -1267,7 +1265,7 @@ RTNYES
 @@@@ IN:  Y: An integer
 @@@@      X: An integer
 @@@@ OUT: X: An integer
-@@@@ UPD: 2021-04-21
+@@@@ UPD: 2025-10-07
 LBL "REVNB"
 FUNC 21
 L4STK
@@ -1283,9 +1281,9 @@ LSTO "_CTR"
 R↓              @@@@ M Y
 RCL ST Y        @@@@ Y M Y
 OR              @@@@ N Y
-X<>Y            @@@@ OLD NEW 
+X<>Y            @@@@ OLD NEW
 LBL 51
-RCL "_CTR"       @@@@ CTR OLD NEW 
+RCL "_CTR"       @@@@ CTR OLD NEW
 IP
 BIT?
 GTO 52
@@ -1313,7 +1311,7 @@ RTN
 @@@@ NAM: REVBIT
 @@@@ IN:  X: An integer
 @@@@ OUT: X: An integer
-@@@@ UPD: 2021-04-21
+@@@@ UPD: 2025-10-07
 LBL "REVB"
 FUNC 11
 L4STK
@@ -1369,10 +1367,10 @@ RTN
 @@@@ FLG: 02: PREF: Set: BVIEW prints WSIZE digits; Clear: BVIEW prints 64 digits
 @@@@ FAQ: If XEQ while system BASE menu is active, returns to same menu.
 @@@@ BUG: Sometimes gets the system base menu to return to wrong. ;)
-@@@@ UPD: 2021-03-20
+@@@@ UPD: 2025-10-07
 LBL "BVIEW"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 0
 SF 25
 BIT?
@@ -1542,7 +1540,7 @@ RTN
 @@@@      Y: X coordinate for upper left point of character -- Left of screen is 1
 @@@@      X: Character number
 @@@@ OUT: No return
-@@@@ UPD: 2021-04-11
+@@@@ UPD: 2025-10-07
 @@@@ BUG: Characters can be *VERY* tiny in high resolution modes on DM42
 @@@@ Characters can be underlined
 @@@@ Characters are 3x5 pixels in size.  Underlined characters are 3x7.
@@ -1552,8 +1550,8 @@ RTN
 @@@@      0  1
 @@@@ Add 2 to the above character number for the underlined version
 LBL 78
-FUNC 30      @@## REQ:free42>=2.5.24
-L4STK        @@## REQ:free42>=3.0
+FUNC 30
+L4STK
 IP
 60
 +
@@ -1577,24 +1575,6 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 #+END_SRC
-
-* WORKING                                                          :noexport:
-
-#+BEGIN_SRC text :eval never
-:::::::::::::::::::::::'##:::::'##::::'###::::'########::'##::: ##:'####:'##::: ##::'######::::::::::::::::::::::::
-::::::::::::::::::::::: ##:'##: ##:::'## ##::: ##.... ##: ###:: ##:. ##:: ###:: ##:'##... ##:::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##::'##:. ##:: ##:::: ##: ####: ##:: ##:: ####: ##: ##:::..::::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##:'##:::. ##: ########:: ## ## ##:: ##:: ## ## ##: ##::'####::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##: #########: ##.. ##::: ##. ####:: ##:: ##. ####: ##::: ##:::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##: ##.... ##: ##::. ##:: ##:. ###:: ##:: ##:. ###: ##::: ##:::::::::::::::::::::::
-:::::::::::::::::::::::. ###. ###:: ##:::: ##: ##:::. ##: ##::. ##:'####: ##::. ##:. ######::::::::::::::::::::::::
-::::::::::::::::::::::::...::...:::..:::::..::..:::::..::..::::..::....::..::::..:::......:::::::::::::::::::::::::
-#+END_SRC
-
-Code in this section is under construction.  Most likely broken.
-
-  - Reverse bytes
-  - flip bit
 
 * EOF
 

@@ -3,14 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-11-21 Thu 16:50 -->
+<!-- 2025-10-07 Tue 12:57 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=1024, initial-scale=1" />
 <title>free42 Random Math Stuff</title>
 <meta name="author" content="Mitch Richling" />
 <meta name="description" content="Some simple math stuff for free42" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
@@ -228,68 +228,67 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2024-11-21 16:49:29</i></td>
+<td class="org-left"><i>2025-10-07 11:03:21</i></td>
 </tr>
 </tbody>
 </table>
 <p align="center">
-Copyright 2024 Mitch Richling. All rights reserved.
+Copyright 2025 Mitch Richling. All rights reserved.
 </p>
 
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org724a3d0">1. Metadata</a></li>
+<li><a href="#org1cbae46">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
-<li><a href="#org4787322">3. <code>NLA</code>: Linear Algebra</a>
+<li><a href="#org6a440a9">3. <code>NLA</code>: Linear Algebra</a>
 <ul>
 <li><a href="#menu-nla">3.1. Menu</a></li>
-<li><a href="#orgeca925f">3.2. Notes on individual programs</a>
+<li><a href="#orgbb43e49">3.2. Notes on individual programs</a>
 <ul>
-<li><a href="#orgfa10b01">3.2.1. <code>MXCPLY</code>: Characteristic polynomial</a></li>
-<li><a href="#org60d14da">3.2.2. <code>EQCPLY</code>: Characteristic polynomial as an <code>MVAR</code> program</a></li>
+<li><a href="#org6df4590">3.2.1. <code>MXCPLY</code>: Characteristic polynomial</a></li>
+<li><a href="#org8060bd6">3.2.2. <code>EQCPLY</code>: Characteristic polynomial as an <code>MVAR</code> program</a></li>
 </ul>
 </li>
-<li><a href="#org8fd77ed">3.3. Code for Menu</a></li>
-<li><a href="#org17fd357">3.4. Functions</a></li>
+<li><a href="#orgc229e25">3.3. Code for Menu</a></li>
+<li><a href="#org027e6f6">3.4. Functions</a></li>
 </ul>
 </li>
-<li><a href="#orgbccda33">4. <code>POLY</code>: A collection of polynomial tools</a>
+<li><a href="#orgd77c0d0">4. <code>POLY</code>: A collection of polynomial tools</a>
 <ul>
 <li><a href="#menu-poly">4.1. Menu</a></li>
-<li><a href="#orgef81e96">4.2. Notes for individual programs</a>
+<li><a href="#org32d8ddd">4.2. Notes for individual programs</a>
 <ul>
-<li><a href="#org3c56b0c">4.2.1. <code>PEVAL</code>, <code>PEVL1</code>, &amp; <code>PEVL2</code>: Evaluating Polynomials</a></li>
-<li><a href="#org3adfac5">4.2.2. <code>PWRP</code>: Wrapping a polynomial matrix in an <code>MVAR</code> function</a></li>
-<li><a href="#orge362150">4.2.3. <code>PR1ST</code> &amp; <code>PRNXT</code>: Finding the roots of a polynomial</a></li>
-<li><a href="#orgb554a33">4.2.4. <code>PLGRR</code>: Search for a polynomial root</a></li>
+<li><a href="#orgd22bc36">4.2.1. <code>PEVAL</code>, <code>PEVL1</code>, &amp; <code>PEVL2</code>: Evaluating Polynomials</a></li>
+<li><a href="#org3cede25">4.2.2. <code>PWRP</code>: Wrapping a polynomial matrix in an <code>MVAR</code> function</a></li>
+<li><a href="#org4d3ee78">4.2.3. <code>PR1ST</code> &amp; <code>PRNXT</code>: Finding the roots of a polynomial</a></li>
+<li><a href="#orgc6cd69d">4.2.4. <code>PLGRR</code>: Search for a polynomial root</a></li>
 </ul>
 </li>
-<li><a href="#orga7a8b9f">4.3. Code for Menu</a></li>
-<li><a href="#org59b1db1">4.4. Local functions</a></li>
+<li><a href="#orge731482">4.3. Code for Menu</a></li>
+<li><a href="#org2619d33">4.4. Local functions</a></li>
 </ul>
 </li>
-<li><a href="#orgaa0d316">5. <code>VEC3</code>: 3D Real Vector Application</a>
+<li><a href="#org9babf12">5. <code>VEC3</code>: 3D Real Vector Application</a>
 <ul>
 <li><a href="#menu-vec3">5.1. Menu</a></li>
-<li><a href="#orgd5085cb">5.2. Code for Menu</a></li>
-<li><a href="#org5a9972a">5.3. Local functions</a></li>
+<li><a href="#org6086c39">5.2. Code for Menu</a></li>
+<li><a href="#org9495327">5.3. Local functions</a></li>
 </ul>
 </li>
-<li><a href="#orgf7dff24">6. <code>STATR</code>: Statistics Registers</a>
+<li><a href="#orgb4536b0">6. <code>STATR</code>: Statistics Registers</a>
 <ul>
 <li><a href="#menu-statr">6.1. Menu</a></li>
-<li><a href="#org488cc4c">6.2. Code</a></li>
+<li><a href="#org341796a">6.2. Code</a></li>
 </ul>
 </li>
-<li><a href="#org2349255">7. EOF</a></li>
+<li><a href="#org3c3476d">7. EOF</a></li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org724a3d0" class="outline-2">
-<h2 id="org724a3d0"><span class="section-number-2">1.</span> Metadata</h2>
+<div id="outline-container-org1cbae46" class="outline-2">
+<h2 id="org1cbae46"><span class="section-number-2">1.</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/math.html">https://richmit.github.io/hp42/math.html</a>
@@ -340,7 +339,6 @@ Directory contents:
 </table>
 </div>
 </div>
-
 <div id="outline-container-introduction" class="outline-2">
 <h2 id="introduction"><span class="section-number-2">2.</span> Introduction</h2>
 <div class="outline-text-2" id="text-introduction">
@@ -350,15 +348,14 @@ in this file.  That stuff has moved to <a href="sfun.html">sfun.html</a>.
 </p>
 </div>
 </div>
-
-<div id="outline-container-org4787322" class="outline-2">
-<h2 id="org4787322"><span class="section-number-2">3.</span> <code>NLA</code>: Linear Algebra</h2>
+<div id="outline-container-org6a440a9" class="outline-2">
+<h2 id="org6a440a9"><span class="section-number-2">3.</span> <code>NLA</code>: Linear Algebra</h2>
 <div class="outline-text-2" id="text-3">
 </div>
 <div id="outline-container-menu-nla" class="outline-3">
 <h3 id="menu-nla"><span class="section-number-3">3.1.</span> Menu</h3>
 <div class="outline-text-3" id="text-menu-nla">
-<table id="orgdbee8d1" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="orge35c977" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -482,13 +479,12 @@ in this file.  That stuff has moved to <a href="sfun.html">sfun.html</a>.
 </table>
 </div>
 </div>
-
-<div id="outline-container-orgeca925f" class="outline-3">
-<h3 id="orgeca925f"><span class="section-number-3">3.2.</span> Notes on individual programs</h3>
+<div id="outline-container-orgbb43e49" class="outline-3">
+<h3 id="orgbb43e49"><span class="section-number-3">3.2.</span> Notes on individual programs</h3>
 <div class="outline-text-3" id="text-3-2">
 </div>
-<div id="outline-container-orgfa10b01" class="outline-4">
-<h4 id="orgfa10b01"><span class="section-number-4">3.2.1.</span> <code>MXCPLY</code>: Characteristic polynomial</h4>
+<div id="outline-container-org6df4590" class="outline-4">
+<h4 id="org6df4590"><span class="section-number-4">3.2.1.</span> <code>MXCPLY</code>: Characteristic polynomial</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <p>
 <code>MXCPLY</code> uses the Faddeev–LeVerrier algorithm to compute the characteristic polynomial of a matrix.  The polynomial is a matrix of coefficients suitable for use
@@ -496,13 +492,12 @@ by the polynomials tools found later on this page.
 </p>
 
 <p>
-One can find the eigenvalues of a matrix by using <code>PR1ST</code> &amp; <code>PRNXT</code> to solve the characteristic polynomial.  
+One can find the eigenvalues of a matrix by using <code>PR1ST</code> &amp; <code>PRNXT</code> to solve the characteristic polynomial.
 </p>
 </div>
 </div>
-
-<div id="outline-container-org60d14da" class="outline-4">
-<h4 id="org60d14da"><span class="section-number-4">3.2.2.</span> <code>EQCPLY</code>: Characteristic polynomial as an <code>MVAR</code> program</h4>
+<div id="outline-container-org8060bd6" class="outline-4">
+<h4 id="org8060bd6"><span class="section-number-4">3.2.2.</span> <code>EQCPLY</code>: Characteristic polynomial as an <code>MVAR</code> program</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <p>
 The <code>EQCPLY</code> function is an <code>MVAR</code> function that directly computes values of the characteristic polynomial.  It is horribly inefficient, but it can be used by
@@ -511,9 +506,8 @@ the built in solver to find real eigenvalues or to plot the characteristic polyn
 </div>
 </div>
 </div>
-
-<div id="outline-container-org8fd77ed" class="outline-3">
-<h3 id="org8fd77ed"><span class="section-number-3">3.3.</span> Code for Menu</h3>
+<div id="outline-container-orgc229e25" class="outline-3">
+<h3 id="orgc229e25"><span class="section-number-3">3.3.</span> Code for Menu</h3>
 <div class="outline-text-3" id="text-3-3">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"NLA"</span> 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
@@ -521,9 +515,8 @@ the built in solver to find real eigenvalues or to plot the characteristic polyn
 </div>
 </div>
 </div>
-
-<div id="outline-container-org17fd357" class="outline-3">
-<h3 id="org17fd357"><span class="section-number-3">3.4.</span> Functions</h3>
+<div id="outline-container-org027e6f6" class="outline-3">
+<h3 id="org027e6f6"><span class="section-number-3">3.4.</span> Functions</h3>
 <div class="outline-text-3" id="text-3-4">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-MXCPLY" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (MXCPLY)</span>
@@ -532,11 +525,11 @@ the built in solver to find real eigenvalues or to plot the characteristic polyn
 <span style="color: #ffa500;">@@@@ OUT: X: Characteristic polynomial</span>
 <span style="color: #ffa500;">@@@@ LBL: 28</span>
 <span style="color: #ffa500;">@@@@ FAQ: Uses INDEX</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-27</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #ffa500;">@@@@ TC:  [[1,2,3][4,5,6][7,8,10]] =&gt; [1, -16, -12, 3]</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"MXCPLY"</span>
-<span style="color: #00ffff;">FUNC</span> 11         <span style="color: #6495ed;">@@## REQ:free42&gt;=2.5.24 </span>
-<span style="color: #00ffff;">L4STK</span>           <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0    </span>
+<span style="color: #00ffff;">FUNC</span> 11
+<span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_A"</span>
 <span style="color: #00ffff;">DIM?</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"MXIDN"</span>
@@ -583,11 +576,11 @@ the built in solver to find real eigenvalues or to plot the characteristic polyn
 <span style="color: #ffa500;">@@@@ IN:  X: Matrix</span>
 <span style="color: #ffa500;">@@@@ OUT: X: trace</span>
 <span style="color: #ffa500;">@@@@ FAQ: Dosen't use INDEX</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-27</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #ffa500;">@@@@ TC:  [[1,2,3][4,5,6][7,8,10]] =&gt; 16</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"MXTR"</span>
-<span style="color: #00ffff;">FUNC</span> 11         <span style="color: #6495ed;">@@## REQ:free42&gt;=2.5.24 </span>
-<span style="color: #00ffff;">L4STK</span>           <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0    </span>
+<span style="color: #00ffff;">FUNC</span> 11
+<span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>       <span style="color: #ffa500;">@@@@ M           -- M is an nxn matrix</span>
 <span style="color: #00ffff;">DIM?</span>            <span style="color: #ffa500;">@@@@ n n M</span>
 1               <span style="color: #ffa500;">@@@@ 1 n n M</span>
@@ -603,7 +596,7 @@ DIM <span style="color: #fa8072;">"_M"</span>        <span style="color: #ffa500
 <span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ 1+n 1   n   -- P is a 1x1 matrix e_1</span>
 DIM <span style="color: #fa8072;">"_P"</span>        <span style="color: #ffa500;">@@@@ 1+n 1       -- P is now an 1x(1+n) e_1 row matrix</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_P"</span>        <span style="color: #ffa500;">@@@@ P   1+n 1</span>
-<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_M"</span>        <span style="color: #ffa500;">@@@@ M   P   1+n </span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_M"</span>        <span style="color: #ffa500;">@@@@ M   P   1+n</span>
 <span style="color: #00ffff;">TRANS</span>           <span style="color: #ffa500;">@@@@ X   P   1+n -- X is now an (n+1)xn matrix with original diag in first row</span>
 <span style="color: #00ffff;">&#215;</span>               <span style="color: #ffa500;">@@@@ X   1+n 1   -- X is now an 1xn matrix with original diag in first row</span>
 <span style="color: #00ffff;">RSUM</span>            <span style="color: #ffa500;">@@@@ X   1+n 1   -- X is now a 1x1 matrix with the sum of the diag</span>
@@ -615,14 +608,14 @@ DIM <span style="color: #fa8072;">"_P"</span>        <span style="color: #ffa500
 <span style="color: #ffa500;">@@@@ IN:  X: Size of matrix to make</span>
 <span style="color: #ffa500;">@@@@ OUT: X: Identity matrix of size X</span>
 <span style="color: #ffa500;">@@@@ FAQ: Dosen't use INDEX</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-27</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #ffa500;">@@@@ REF: https://forum.swissmicros.com/viewtopic.php?f=19&amp;t=2958</span>
 <span style="color: #ffa500;">@@@@ FAQ: This code is longer, but easier to understand -- for me anyhow.</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"MXIDN"</span>
-<span style="color: #00ffff;">FUNC</span> 11         <span style="color: #6495ed;">@@## REQ:free42&gt;=2.5.24 </span>
-<span style="color: #00ffff;">L4STK</span>           <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0    </span>
+<span style="color: #00ffff;">FUNC</span> 11
+<span style="color: #00ffff;">L4STK</span>
 1
-<span style="color: #00ffff;">NEWMAT</span>          <span style="color: #ffa500;">@@@@ X is an nx1 zero matrix </span>
+<span style="color: #00ffff;">NEWMAT</span>          <span style="color: #ffa500;">@@@@ X is an nx1 zero matrix</span>
 <span style="color: #00ffff;">SIGN</span>            <span style="color: #ffa500;">@@@@ X is now a constant matrix filled with 1s</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"MXDIAG"</span>
 <span style="color: #00ffff;">RTN</span>
@@ -633,12 +626,12 @@ DIM <span style="color: #fa8072;">"_P"</span>        <span style="color: #ffa500
 <span style="color: #ffa500;">@@@@ IN:  X: diagonal matrix</span>
 <span style="color: #ffa500;">@@@@ FAQ: Dosen't use INDEX</span>
 <span style="color: #ffa500;">@@@@ FAQ: Uses all elements of X -- even if it is not 1xn or nx1</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-27</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #ffa500;">@@@@ REF: https://forum.swissmicros.com/viewtopic.php?f=19&amp;t=2958</span>
 <span style="color: #ffa500;">@@@@ FAQ: This code is longer, but easier to understand -- for me anyhow.</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"MXDIAG"</span>
-<span style="color: #00ffff;">FUNC</span> 11         <span style="color: #6495ed;">@@## REQ:free42&gt;=2.5.24 </span>
-<span style="color: #00ffff;">L4STK</span>           <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0    </span>
+<span style="color: #00ffff;">FUNC</span> 11
+<span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>       <span style="color: #ffa500;">@@@@ D</span>
 <span style="color: #00ffff;">DIM?</span>            <span style="color: #ffa500;">@@@@ n m</span>
 <span style="color: #00ffff;">&#215;</span>               <span style="color: #ffa500;">@@@@ N</span>
@@ -666,9 +659,9 @@ DIM <span style="color: #fa8072;">"_M"</span>        <span style="color: #ffa500
 <span style="color: #ffa500;">@@@@ VAR: CPM a square matrix</span>
 <span style="color: #ffa500;">@@@@ VAR: X a real or complex number</span>
 <span style="color: #ffa500;">@@@@ LAB: 24-25</span>
-<span style="color: #ffa500;">@@@@ FAQ: Can be used </span>
+<span style="color: #ffa500;">@@@@ FAQ: Can be used</span>
 <span style="color: #ffa500;">@@@@ FAQ: Dosen't use INDEX</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-27</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"EQCPLY"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"CPM"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
@@ -685,7 +678,7 @@ DIM <span style="color: #fa8072;">"_M"</span>        <span style="color: #ffa500
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
 <span style="color: #ffa500;">@@@@ Store/Recall variable "CPM"</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">98</span> 
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">98</span>
 <span style="color: #00ffff;">FS?</span> 64
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"CPM"</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"CPM"</span>
@@ -717,15 +710,14 @@ END
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgbccda33" class="outline-2">
-<h2 id="orgbccda33"><span class="section-number-2">4.</span> <code>POLY</code>: A collection of polynomial tools</h2>
+<div id="outline-container-orgd77c0d0" class="outline-2">
+<h2 id="orgd77c0d0"><span class="section-number-2">4.</span> <code>POLY</code>: A collection of polynomial tools</h2>
 <div class="outline-text-2" id="text-4">
 </div>
 <div id="outline-container-menu-poly" class="outline-3">
 <h3 id="menu-poly"><span class="section-number-3">4.1.</span> Menu</h3>
 <div class="outline-text-3" id="text-menu-poly">
-<table id="orgcc89a64" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="org81caeb2" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -952,13 +944,12 @@ degree.
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgef81e96" class="outline-3">
-<h3 id="orgef81e96"><span class="section-number-3">4.2.</span> Notes for individual programs</h3>
+<div id="outline-container-org32d8ddd" class="outline-3">
+<h3 id="org32d8ddd"><span class="section-number-3">4.2.</span> Notes for individual programs</h3>
 <div class="outline-text-3" id="text-4-2">
 </div>
-<div id="outline-container-org3c56b0c" class="outline-4">
-<h4 id="org3c56b0c"><span class="section-number-4">4.2.1.</span> <code>PEVAL</code>, <code>PEVL1</code>, &amp; <code>PEVL2</code>: Evaluating Polynomials</h4>
+<div id="outline-container-orgd22bc36" class="outline-4">
+<h4 id="orgd22bc36"><span class="section-number-4">4.2.1.</span> <code>PEVAL</code>, <code>PEVL1</code>, &amp; <code>PEVL2</code>: Evaluating Polynomials</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <p>
 These functions efficiently evaluate a polynomial (and its first and/or second derivative).  They are handy for simply evaluating a polynomial repeatedly;
@@ -967,9 +958,8 @@ to repeatedly evaluate a polynomial.
 </p>
 </div>
 </div>
-
-<div id="outline-container-org3adfac5" class="outline-4">
-<h4 id="org3adfac5"><span class="section-number-4">4.2.2.</span> <code>PWRP</code>: Wrapping a polynomial matrix in an <code>MVAR</code> function</h4>
+<div id="outline-container-org3cede25" class="outline-4">
+<h4 id="org3cede25"><span class="section-number-4">4.2.2.</span> <code>PWRP</code>: Wrapping a polynomial matrix in an <code>MVAR</code> function</h4>
 <div class="outline-text-4" id="text-4-2-2">
 <p>
 Simply store the polynomial into the global variable "<code>WRPP</code>", and then feed <code>PWRP</code> to things like the built in solver/integrator and similar tools (See:
@@ -977,9 +967,8 @@ Simply store the polynomial into the global variable "<code>WRPP</code>", and th
 </p>
 </div>
 </div>
-
-<div id="outline-container-orge362150" class="outline-4">
-<h4 id="orge362150"><span class="section-number-4">4.2.3.</span> <code>PR1ST</code> &amp; <code>PRNXT</code>: Finding the roots of a polynomial</h4>
+<div id="outline-container-org4d3ee78" class="outline-4">
+<h4 id="org4d3ee78"><span class="section-number-4">4.2.3.</span> <code>PR1ST</code> &amp; <code>PRNXT</code>: Finding the roots of a polynomial</h4>
 <div class="outline-text-4" id="text-4-2-3">
 <p>
 These two programs provide a way to find all the roots of a polynomial.  They work on real or complex polynomials, and finds both real and complex roots.
@@ -999,7 +988,7 @@ output is precisely what is needed to find more roots.
 <p>
 The second function, <code>PRNXT</code>, finds the <b>next</b> root of the polynomial.  It requires three arguments (original polynomial, deflated polynomial, and a guess).
 This is precisely what the <code>PR1ST</code> function returns.  <code>PRNXT</code> also returns the original polynomial, the polynomial with the located root removed, and a new
-root.  So you can feed <code>PRNXT</code> the return of <code>PR1ST</code> or <code>PRNXT</code>.  
+root.  So you can feed <code>PRNXT</code> the return of <code>PR1ST</code> or <code>PRNXT</code>.
 </p>
 
 <p>
@@ -1019,9 +1008,8 @@ Alternately, with a bit more round off error, you can just repeatedly use <code>
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgb554a33" class="outline-4">
-<h4 id="orgb554a33"><span class="section-number-4">4.2.4.</span> <code>PLGRR</code>: Search for a polynomial root</h4>
+<div id="outline-container-orgc6cd69d" class="outline-4">
+<h4 id="orgc6cd69d"><span class="section-number-4">4.2.4.</span> <code>PLGRR</code>: Search for a polynomial root</h4>
 <div class="outline-text-4" id="text-4-2-4">
 <p>
 This is designed to be used by other programs.  It takes a polynomial, a guess, a tolerance, and a maximum number of iterations.  If the tolerance is
@@ -1030,9 +1018,8 @@ negative, then the function will always preform the maximum number of iterations
 </div>
 </div>
 </div>
-
-<div id="outline-container-orga7a8b9f" class="outline-3">
-<h3 id="orga7a8b9f"><span class="section-number-3">4.3.</span> Code for Menu</h3>
+<div id="outline-container-orge731482" class="outline-3">
+<h3 id="orge731482"><span class="section-number-3">4.3.</span> Code for Menu</h3>
 <div class="outline-text-3" id="text-4-3">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"POLY"</span> 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
@@ -1040,9 +1027,8 @@ negative, then the function will always preform the maximum number of iterations
 </div>
 </div>
 </div>
-
-<div id="outline-container-org59b1db1" class="outline-3">
-<h3 id="org59b1db1"><span class="section-number-3">4.4.</span> Local functions</h3>
+<div id="outline-container-org2619d33" class="outline-3">
+<h3 id="org2619d33"><span class="section-number-3">4.4.</span> Local functions</h3>
 <div class="outline-text-3" id="text-4-4">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-PINTRP" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PINTRP)</span>
@@ -1051,15 +1037,15 @@ negative, then the function will always preform the maximum number of iterations
 <span style="color: #ffa500;">@@@@      X: Y data matrix</span>
 <span style="color: #ffa500;">@@@@ OUT: X: interpolateing polynomial</span>
 <span style="color: #ffa500;">@@@@ TST: free42_3.0.2.2</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-28</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #ffa500;">@@@@ FAQ: X &amp; Y must have the same number of elements, but dimintions may differ.</span>
 <span style="color: #ffa500;">@@@@ FAQ: Explicitly constructs the vandermonde matrix, and solves the system</span>
 <span style="color: #ffa500;">@@@@ FAQ: Uses INDEX</span>
 <span style="color: #ffa500;">@@@@ TC:  xdat:[ 1, 2, 3, 4] ydat:[1, -1, 1, -1] =&gt; [-4/3 10 -68/3 15] = [-1.33.. 10 -22.66.. 15]</span>
-<span style="color: #ffa500;">@@@@ TC:  xdat:[-1, 0, 1, 2] ydat:[-2, 3, -24, -77] =&gt; [1, -16, -12, 3]  </span>
+<span style="color: #ffa500;">@@@@ TC:  xdat:[-1, 0, 1, 2] ydat:[-2, 3, -24, -77] =&gt; [1, -16, -12, 3]</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"PINTRP"</span>
-<span style="color: #00ffff;">FUNC</span> 21         <span style="color: #6495ed;">@@## REQ:free42&gt;=2.5.24 </span>
-<span style="color: #00ffff;">L4STK</span>           <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0    </span>
+<span style="color: #00ffff;">FUNC</span> 21
+<span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_YDAT"</span>    <span style="color: #ffa500;">@@@@ YDAT XDAT</span>
 <span style="color: #00ffff;">DIM?</span>
 <span style="color: #00ffff;">&#215;</span>
@@ -1106,10 +1092,10 @@ DIM <span style="color: #fa8072;">"_YDAT"</span>     <span style="color: #ffa500
 <span style="color: #ffa500;">@@@@ IN:  X: degree</span>
 <span style="color: #ffa500;">@@@@ OUT: X: polynomial</span>
 <span style="color: #ffa500;">@@@@ TST: free42_3.0.2</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-26</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"NEWPLY"</span>
-<span style="color: #00ffff;">FUNC</span> 11         <span style="color: #6495ed;">@@## REQ:free42&gt;=2.5.24 </span>
-<span style="color: #00ffff;">L4STK</span>           <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0    </span>
+<span style="color: #00ffff;">FUNC</span> 11
+<span style="color: #00ffff;">L4STK</span>
 1
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 1
@@ -1122,10 +1108,10 @@ DIM <span style="color: #fa8072;">"_YDAT"</span>     <span style="color: #ffa500
 <span style="color: #ffa500;">@@@@ IN:  X: polynomial</span>
 <span style="color: #ffa500;">@@@@ OUT: X: polynomial</span>
 <span style="color: #ffa500;">@@@@ TST: free42_3.0.2</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-26</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">78</span> 
-<span style="color: #00ffff;">FUNC</span> 11         <span style="color: #6495ed;">@@## REQ:free42&gt;=2.5.24 </span>
-<span style="color: #00ffff;">L4STK</span>           <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0    </span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">78</span>
+<span style="color: #00ffff;">FUNC</span> 11
+<span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">EDIT</span>
 <span style="color: #fa8072;">"Enter data; R/S"</span>
 <span style="color: #00ffff;">&#9500;</span><span style="color: #fa8072;">" to end"</span>
@@ -1140,13 +1126,13 @@ DIM <span style="color: #fa8072;">"_YDAT"</span>     <span style="color: #ffa500
 <span style="color: #ffa500;">@@@@      X: root_2</span>
 <span style="color: #ffa500;">@@@@ TST: free42_3.0.2</span>
 <span style="color: #ffa500;">@@@@ FAQ: Uses INDEX</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-26</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"P2SLV"</span>
-<span style="color: #00ffff;">FUNC</span> 12         <span style="color: #6495ed;">@@## REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>           <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">FUNC</span> 12
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>
 <span style="color: #00ffff;">R&#8595;</span>
-<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>
 <span style="color: #00ffff;">WRAP</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">77</span>
 <span style="color: #00ffff;">RCLEL</span>
@@ -1160,11 +1146,11 @@ DIM <span style="color: #fa8072;">"_YDAT"</span>     <span style="color: #ffa500
 <span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@  a                     c                     b                     a</span>
 2               <span style="color: #ffa500;">@@@@  2                     c                     b                      a</span>
 <span style="color: #00ffff;">RCL&#215; ST</span> T       <span style="color: #ffa500;">@@@@  2a                    c                     b                      a</span>
-<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@  c                     b                     a                     2a                    </span>
-<span style="color: #00ffff;">RCL&#247; ST</span> T       <span style="color: #ffa500;">@@@@  c/(2a)                b                     a                     2a                    </span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@  b                     c/(2a)                a                     2a                    </span>
-<span style="color: #00ffff;">RCL&#247; ST</span> T       <span style="color: #ffa500;">@@@@  b/(2a)                c/(2a)                a                     2a                    </span>
-<span style="color: #00ffff;">+/-</span>             <span style="color: #ffa500;">@@@@  -B                    C                     a                     2a                    </span>
+<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@  c                     b                     a                     2a</span>
+<span style="color: #00ffff;">RCL&#247; ST</span> T       <span style="color: #ffa500;">@@@@  c/(2a)                b                     a                     2a</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@  b                     c/(2a)                a                     2a</span>
+<span style="color: #00ffff;">RCL&#247; ST</span> T       <span style="color: #ffa500;">@@@@  b/(2a)                c/(2a)                a                     2a</span>
+<span style="color: #00ffff;">+/-</span>             <span style="color: #ffa500;">@@@@  -B                    C                     a                     2a</span>
 <span style="color: #00ffff;">ENTER</span>           <span style="color: #ffa500;">@@@@  -B                   -B                     C                      a</span>
 <span style="color: #00ffff;">X&#8593;2</span>             <span style="color: #ffa500;">@@@@  B^2                  -B                     C                      a</span>
 <span style="color: #00ffff;">RCL- ST</span> Z       <span style="color: #ffa500;">@@@@  B^2-C                -B                     C                      a</span>
@@ -1172,8 +1158,8 @@ DIM <span style="color: #fa8072;">"_YDAT"</span>     <span style="color: #ffa500
 <span style="color: #00ffff;">SQRT</span>            <span style="color: #ffa500;">@@@@  &#8730;(B^2-2C)            -B                     C                      a</span>
 <span style="color: #00ffff;">RCL ST</span> Y        <span style="color: #ffa500;">@@@@  -B                    &#8730;(B^2-2C)            -B                      C</span>
 <span style="color: #00ffff;">RCL- ST</span> Y       <span style="color: #ffa500;">@@@@  -B-&#8730;(B^2-2C)          &#8730;(B^2-2C)            -B                      C</span>
-<span style="color: #00ffff;">RCL ST</span> Z        <span style="color: #ffa500;">@@@@  -B                   -B-&#8730;(B^2-2C)          &#8730;(B^2-2C)              -B                     </span>
-<span style="color: #00ffff;">RCL+ ST</span> Z       <span style="color: #ffa500;">@@@@  -B+&#8730;(B^2-2C)         -B-&#8730;(B^2-2C)          &#8730;(B^2-2C)              -B                     </span>
+<span style="color: #00ffff;">RCL ST</span> Z        <span style="color: #ffa500;">@@@@  -B                   -B-&#8730;(B^2-2C)          &#8730;(B^2-2C)              -B</span>
+<span style="color: #00ffff;">RCL+ ST</span> Z       <span style="color: #ffa500;">@@@@  -B+&#8730;(B^2-2C)         -B-&#8730;(B^2-2C)          &#8730;(B^2-2C)              -B</span>
 <span style="color: #00ffff;">RTN</span>
 
 <span id="coderef-P1SLV" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (P1SLV)</span>
@@ -1182,13 +1168,13 @@ DIM <span style="color: #fa8072;">"_YDAT"</span>     <span style="color: #ffa500
 <span style="color: #ffa500;">@@@@ OUT: X: root</span>
 <span style="color: #ffa500;">@@@@ TST: free42_3.0.2</span>
 <span style="color: #ffa500;">@@@@ FAQ: Uses INDEX</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-26</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"P1SLV"</span>
-<span style="color: #00ffff;">FUNC</span> 11         <span style="color: #6495ed;">@@## REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>           <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">FUNC</span> 11
+<span style="color: #00ffff;">L4STK</span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>
 <span style="color: #00ffff;">R&#8595;</span>
-<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>
 <span style="color: #00ffff;">WRAP</span>
 <span style="color: #00ffff;">RCLEL</span>           <span style="color: #ffa500;">@@@@ a_1</span>
 <span style="color: #00ffff;">J+</span>
@@ -1205,13 +1191,13 @@ DIM <span style="color: #fa8072;">"_YDAT"</span>     <span style="color: #ffa500
 <span style="color: #ffa500;">@@@@ LBL: 91</span>
 <span style="color: #ffa500;">@@@@ FAQ: Uses INDEX</span>
 <span style="color: #ffa500;">@@@@ TST: free42_3.0.2</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-03</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"PEVAL"</span>
-<span style="color: #00ffff;">FUNC</span> 21         <span style="color: #6495ed;">@@## REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>           <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">FUNC</span> 21
+<span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ P X</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
-<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>
 <span style="color: #00ffff;">WRAP</span>
 0               <span style="color: #ffa500;">@@@@ PV P X</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">91</span>
@@ -1232,13 +1218,13 @@ DIM <span style="color: #fa8072;">"_YDAT"</span>     <span style="color: #ffa500
 <span style="color: #ffa500;">@@@@ LBL: 91</span>
 <span style="color: #ffa500;">@@@@ FAQ: Uses INDEX</span>
 <span style="color: #ffa500;">@@@@ TST: free42_3.0.2</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-03</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"PEVL1"</span>
-<span style="color: #00ffff;">FUNC</span> 22         <span style="color: #6495ed;">@@## REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>           <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">FUNC</span> 22
+<span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ P       X</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
-<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>
 <span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ X</span>
 <span style="color: #00ffff;">WRAP</span>
 0               <span style="color: #ffa500;">@@@@ PV      X</span>
@@ -1266,32 +1252,32 @@ DIM <span style="color: #fa8072;">"_YDAT"</span>     <span style="color: #ffa500
 <span style="color: #ffa500;">@@@@ LBL: 91</span>
 <span style="color: #ffa500;">@@@@ FAQ: Uses INDEX</span>
 <span style="color: #ffa500;">@@@@ TST: free42_3.0.2</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-03</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"PEVL2"</span>
-<span style="color: #00ffff;">FUNC</span> 23         <span style="color: #6495ed;">@@## REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>           <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">FUNC</span> 23
+<span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_X"</span>       <span style="color: #ffa500;">@@@@ X       P</span>
 <span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ P</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
-<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
-<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ </span>
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>
+<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@</span>
 <span style="color: #00ffff;">WRAP</span>
-0               <span style="color: #ffa500;">@@@@ PV      </span>
-0               <span style="color: #ffa500;">@@@@ DV       PV       </span>
-0               <span style="color: #ffa500;">@@@@ DDV      DV       PV       </span>
+0               <span style="color: #ffa500;">@@@@ PV</span>
+0               <span style="color: #ffa500;">@@@@ DV       PV</span>
+0               <span style="color: #ffa500;">@@@@ DDV      DV       PV</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">93</span>
-<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"_X"</span>       <span style="color: #ffa500;">@@@@ DDV*X    DV       PV       </span>
-<span style="color: #00ffff;">RCL+ ST</span> Y       <span style="color: #ffa500;">@@@@ DDV*X+DV DV       PV       </span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ DV       DDV*X+DV PV       </span>
-<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"_X"</span>       <span style="color: #ffa500;">@@@@ DV*X     DDV*X+DV PV       </span>
-<span style="color: #00ffff;">RCL+ ST</span> Z       <span style="color: #ffa500;">@@@@ DV*X+PV  DDV*X+DV PV       </span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ DDV*X+DV DV*X+PV  PV       </span>
-<span style="color: #00ffff;">RCL ST</span> Z        <span style="color: #ffa500;">@@@@ PV       DDV*X+DV DV*X+PV  PV       </span>
-<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"_X"</span>       <span style="color: #ffa500;">@@@@ PV*X     DDV*X+DV DV*X+PV  PV       </span>
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"_X"</span>       <span style="color: #ffa500;">@@@@ DDV*X    DV       PV</span>
+<span style="color: #00ffff;">RCL+ ST</span> Y       <span style="color: #ffa500;">@@@@ DDV*X+DV DV       PV</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ DV       DDV*X+DV PV</span>
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"_X"</span>       <span style="color: #ffa500;">@@@@ DV*X     DDV*X+DV PV</span>
+<span style="color: #00ffff;">RCL+ ST</span> Z       <span style="color: #ffa500;">@@@@ DV*X+PV  DDV*X+DV PV</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ DDV*X+DV DV*X+PV  PV</span>
+<span style="color: #00ffff;">RCL ST</span> Z        <span style="color: #ffa500;">@@@@ PV       DDV*X+DV DV*X+PV  PV</span>
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"_X"</span>       <span style="color: #ffa500;">@@@@ PV*X     DDV*X+DV DV*X+PV  PV</span>
 <span style="color: #00ffff;">RCLEL</span>           <span style="color: #ffa500;">@@@@ C        PV*X     DDV*X+DV DV*X+PV</span>
 <span style="color: #00ffff;">+</span>               <span style="color: #ffa500;">@@@@ C+PV*X   DDV*X+DV DV*X+PV</span>
-<span style="color: #00ffff;">STO ST</span> T        <span style="color: #ffa500;">@@@@ C+PV*X   DDV*X+DV DV*X+PV  C+PV*X   </span>
-<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ DDV*X+DV DV*X+PV  C+PV*X   </span>
+<span style="color: #00ffff;">STO ST</span> T        <span style="color: #ffa500;">@@@@ C+PV*X   DDV*X+DV DV*X+PV  C+PV*X</span>
+<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ DDV*X+DV DV*X+PV  C+PV*X</span>
 <span style="color: #00ffff;">J+</span>
 <span style="color: #00ffff;">FC?</span> 77
 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">93</span>
@@ -1308,10 +1294,10 @@ DIM <span style="color: #fa8072;">"_YDAT"</span>     <span style="color: #ffa500
 <span style="color: #ffa500;">@@@@ LBL: 96</span>
 <span style="color: #ffa500;">@@@@ FAQ: Uses INDEX</span>
 <span style="color: #ffa500;">@@@@ TST: free42_3.0.2</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-03</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"PDEFLT"</span>
-<span style="color: #00ffff;">FUNC</span> 22         <span style="color: #6495ed;">@@## REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>           <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">FUNC</span> 22
+<span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">REAL?</span>
 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">88</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
@@ -1319,8 +1305,8 @@ DIM <span style="color: #fa8072;">"_YDAT"</span>     <span style="color: #ffa500
 <span style="color: #00ffff;">X&lt;&gt;Y</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">88</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ P R</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
-<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>
 <span style="color: #00ffff;">WRAP</span>
 <span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ R</span>
 <span style="color: #00ffff;">+/-</span>
@@ -1330,7 +1316,7 @@ DIM <span style="color: #fa8072;">"_YDAT"</span>     <span style="color: #ffa500
 <span style="color: #00ffff;">RCLEL</span>           <span style="color: #ffa500;">@@@@ C LC*R R</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ LC*R C R</span>
 <span style="color: #00ffff;">-</span>               <span style="color: #ffa500;">@@@@ C-LC*R  R</span>
-<span style="color: #00ffff;">STOEL</span>         
+<span style="color: #00ffff;">STOEL</span>
 <span style="color: #00ffff;">J+</span>
 <span style="color: #00ffff;">FC?</span> 77
 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">96</span>
@@ -1341,7 +1327,7 @@ DIM <span style="color: #fa8072;">"_YDAT"</span>     <span style="color: #ffa500
 <span style="color: #00ffff;">-</span>               <span style="color: #ffa500;">@@@@ N-1 REM</span>
 1               <span style="color: #ffa500;">@@@@ 1 N-1 REM</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ N-1 1 REM</span>
-DIM <span style="color: #fa8072;">"_M"</span>  
+DIM <span style="color: #fa8072;">"_M"</span>
 <span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ REM</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_M"</span>        <span style="color: #ffa500;">@@@@ P REM</span>
@@ -1357,8 +1343,8 @@ DIM <span style="color: #fa8072;">"_M"</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">89</span>
 <span style="color: #00ffff;">FUNC</span> 11
 <span style="color: #00ffff;">L4STK</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
-<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>
 <span style="color: #00ffff;">RCLEL</span>
 <span style="color: #00ffff;">REAL?</span>
 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">87</span>
@@ -1378,11 +1364,11 @@ DIM <span style="color: #fa8072;">"_M"</span>
 <span style="color: #ffa500;">@@@@ OUT: N/A</span>
 <span style="color: #ffa500;">@@@@ TST: free42_3.0.2</span>
 <span style="color: #ffa500;">@@@@ FAQ: Uses INDEX</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-03</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"VPOLY"</span>
 <span style="color: #00ffff;">FUNC</span> 00
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
-<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>
 <span style="color: #00ffff;">WRAP</span>
 <span style="color: #00ffff;">DIM?</span>
 <span style="color: #00ffff;">&#215;</span>
@@ -1449,10 +1435,10 @@ DIM <span style="color: #fa8072;">"_M"</span>
 <span style="color: #00ffff;">FUNC</span> 33
 <span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">RCL ST</span> Z        <span style="color: #ffa500;">@@@@ Poly Gues DPly Poly</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_P"</span>  
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_P"</span>
 <span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ Gues DPly Poly</span>
 <span style="color: #00ffff;">RCL ST</span> Y        <span style="color: #ffa500;">@@@@ DPLY Gues DPly Poly</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_DP"</span>  
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_DP"</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">81</span>          <span style="color: #ffa500;">@@@@ PLYBAD</span>
 <span style="color: #00ffff;">RTNERR</span> 5
 <span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ Gues DPly Poly</span>
@@ -1516,22 +1502,22 @@ MAT?
 <span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_I"</span>       <span style="color: #ffa500;">@@@@ ITR   TOL   GUESS POLY</span>
 <span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ TOL   GUESS POLY</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_T"</span>  
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_T"</span>
 <span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ GUESS POLY</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_G"</span>        
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_G"</span>
 <span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ POLY</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_P"</span>  
-<span style="color: #00ffff;">DIM?</span>                       
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_P"</span>
+<span style="color: #00ffff;">DIM?</span>
 <span style="color: #00ffff;">&#215;</span>               <span style="color: #ffa500;">@@@@ N</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_N"</span>  
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_N"</span>
 <span style="color: #ffa500;">@@@@ TODO: Check N&gt;1.  Another status: 4 = polynomial is constant</span>
 1
 <span style="color: #00ffff;">-</span>               <span style="color: #ffa500;">@@@@ N-1</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_NM1"</span>  
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_NM1"</span>
 <span style="color: #00ffff;">R&#8595;</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">94</span>
-<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_P"</span>  
-<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_G"</span>  
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_P"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_G"</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"PEVL2"</span>     <span style="color: #ffa500;">@@@@ P''         P'     P        ?</span>
 <span style="color: #00ffff;">RCL ST</span> Z
 <span style="color: #00ffff;">ABS</span>             <span style="color: #ffa500;">@@@@ |P|         P''    P'       P</span>
@@ -1540,9 +1526,9 @@ X&lt;? <span style="color: #fa8072;">"_T"</span>
 <span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ P''         P'     P        ?</span>
 <span style="color: #ffa500;">@@@@ TODO: Check P' for /0.  Another status: 5 = Iteration failed due to division by zero</span>
 <span style="color: #00ffff;">RCL&#247; ST</span> Y       <span style="color: #ffa500;">@@@@ P''/P'      P'     P        ?</span>
-<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ P'          P      ?        P''/P'  </span>
-<span style="color: #00ffff;">&#247;</span>               <span style="color: #ffa500;">@@@@ -N=P/P'     ?      P''/P'   P''/P' </span>
-<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ ?           -N     P''/P'   P''/P' </span>
+<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ P'          P      ?        P''/P'</span>
+<span style="color: #00ffff;">&#247;</span>               <span style="color: #ffa500;">@@@@ -N=P/P'     ?      P''/P'   P''/P'</span>
+<span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ ?           -N     P''/P'   P''/P'</span>
 <span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ -N          P''/P' P''/P'   ?</span>
 <span style="color: #00ffff;">+/-</span>             <span style="color: #ffa500;">@@@@ N           P''/P' P''/P'   ?</span>
 <span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ P''/P'      N      P''/P'   ?</span>
@@ -1550,17 +1536,17 @@ X&lt;? <span style="color: #fa8072;">"_T"</span>
 <span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"_N"</span>       <span style="color: #ffa500;">@@@@ -L*n        N      P''/P'   ?</span>
 <span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"_NM1"</span>     <span style="color: #ffa500;">@@@@ -L*n/(n-1)  N      P''/P'   ?</span>
 1
-<span style="color: #00ffff;">+</span>               <span style="color: #ffa500;">@@@@ 1-L*n/(n-1) N      P''/P'   P''/P'  </span>
+<span style="color: #00ffff;">+</span>               <span style="color: #ffa500;">@@@@ 1-L*n/(n-1) N      P''/P'   P''/P'</span>
 <span style="color: #00ffff;">SQRT</span>
-<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"_NM1"</span>  
-<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"_N"</span>  
-<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_N"</span>  
+<span style="color: #00ffff;">RCL&#215;</span> <span style="color: #fa8072;">"_NM1"</span>
+<span style="color: #00ffff;">RCL&#247;</span> <span style="color: #fa8072;">"_N"</span>
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_N"</span>
 <span style="color: #00ffff;">1/X</span>
-<span style="color: #00ffff;">+</span>  
+<span style="color: #00ffff;">+</span>
 <span style="color: #00ffff;">1/X</span>
-<span style="color: #00ffff;">&#215;</span>               <span style="color: #ffa500;">@@@@ LD          P''/P'   P''/P'  </span>
-<span style="color: #00ffff;">STO+</span> <span style="color: #fa8072;">"_G"</span>  
-<span style="color: #00ffff;">DSE</span> <span style="color: #fa8072;">"_I"</span>  
+<span style="color: #00ffff;">&#215;</span>               <span style="color: #ffa500;">@@@@ LD          P''/P'   P''/P'</span>
+<span style="color: #00ffff;">STO+</span> <span style="color: #fa8072;">"_G"</span>
+<span style="color: #00ffff;">DSE</span> <span style="color: #fa8072;">"_I"</span>
 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">94</span>
 <span style="color: #ffa500;">@@@@ EXIT: Max iter</span>
 3               <span style="color: #ffa500;">@@@@ 3      LD       P''/P'   ?</span>
@@ -1569,11 +1555,11 @@ X&lt;? <span style="color: #fa8072;">"_T"</span>
 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">"PEVAL"</span>     <span style="color: #ffa500;">@@@@ P      3        ?        ?</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_G"</span>        <span style="color: #ffa500;">@@@@ G      P        3        ?</span>
 <span style="color: #00ffff;">RTN</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">95</span>          <span style="color: #ffa500;">@@@@ |P|    P''      P'       P   </span>
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">95</span>          <span style="color: #ffa500;">@@@@ |P|    P''      P'       P</span>
 <span style="color: #ffa500;">@@@@ EXIT: Found root</span>
-<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ P''    P'       P   </span>
-<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ P'     P   </span>
-<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ P   </span>
+<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ P''    P'       P</span>
+<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ P'     P</span>
+<span style="color: #00ffff;">R&#8595;</span>              <span style="color: #ffa500;">@@@@ P</span>
 0
 <span style="color: #00ffff;">X&lt;&gt;Y</span>            <span style="color: #ffa500;">@@@@ P      0</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_G"</span>        <span style="color: #ffa500;">@@@@ Root   Pval     0</span>
@@ -1587,7 +1573,7 @@ X&lt;? <span style="color: #fa8072;">"_T"</span>
 <span style="color: #ffa500;">@@@@ TST: free42_3.0.2</span>
 <span style="color: #ffa500;">@@@@ FAQ: Allows one to use SOLVER &amp; INTEG on polynomials</span>
 <span style="color: #ffa500;">@@@@ USE: PEVAL</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-03</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"PWRP"</span>
 <span style="color: #00ffff;">MVAR</span> <span style="color: #fa8072;">"X"</span>
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"WRPP"</span>
@@ -1597,7 +1583,7 @@ X&lt;? <span style="color: #fa8072;">"_T"</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
 <span style="color: #ffa500;">@@@@ Store/Recall variable "WRPP"</span>
-<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">98</span> 
+<span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">98</span>
 <span style="color: #00ffff;">FS?</span> 64
 <span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"WRPP"</span>
 <span style="color: #00ffff;">STO</span> <span style="color: #fa8072;">"WRPP"</span>
@@ -1630,18 +1616,17 @@ END
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgaa0d316" class="outline-2">
-<h2 id="orgaa0d316"><span class="section-number-2">5.</span> <code>VEC3</code>: 3D Real Vector Application</h2>
+<div id="outline-container-org9babf12" class="outline-2">
+<h2 id="org9babf12"><span class="section-number-2">5.</span> <code>VEC3</code>: 3D Real Vector Application</h2>
 <div class="outline-text-2" id="text-5">
 <p>
-This is a simple little application that makes working with 3D vectors less painfull.  
+This is a simple little application that makes working with 3D vectors less painfull.
 </p>
 </div>
 <div id="outline-container-menu-vec3" class="outline-3">
 <h3 id="menu-vec3"><span class="section-number-3">5.1.</span> Menu</h3>
 <div class="outline-text-3" id="text-menu-vec3">
-<table id="org028a575" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="orga58b139" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -1698,9 +1683,8 @@ This is a simple little application that makes working with 3D vectors less pain
 </table>
 </div>
 </div>
-
-<div id="outline-container-orgd5085cb" class="outline-3">
-<h3 id="orgd5085cb"><span class="section-number-3">5.2.</span> Code for Menu</h3>
+<div id="outline-container-org6086c39" class="outline-3">
+<h3 id="org6086c39"><span class="section-number-3">5.2.</span> Code for Menu</h3>
 <div class="outline-text-3" id="text-5-2">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"VEC3"</span> 0 tbl 0 1 'stay 'up 'auto #'MJR-custom-gen-lab #'MJR-custom-gen-sub)
@@ -1708,9 +1692,8 @@ This is a simple little application that makes working with 3D vectors less pain
 </div>
 </div>
 </div>
-
-<div id="outline-container-org5a9972a" class="outline-3">
-<h3 id="org5a9972a"><span class="section-number-3">5.3.</span> Local functions</h3>
+<div id="outline-container-org9495327" class="outline-3">
+<h3 id="org9495327"><span class="section-number-3">5.3.</span> Local functions</h3>
 <div class="outline-text-3" id="text-5-3">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -1723,13 +1706,13 @@ This is a simple little application that makes working with 3D vectors less pain
 <span style="color: #ffa500;">@@@@ LBL: Used: 51</span>
 <span style="color: #ffa500;">@@@@ FAQ: Uses INDEX</span>
 <span style="color: #ffa500;">@@@@ TST: free42_3.0.2</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-03</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">99</span>
 <span style="color: #00ffff;">FUNC</span> 31
 <span style="color: #00ffff;">XEQ</span> <span style="color: #00fa9a; font-weight: bold;">95</span>
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>
 <span style="color: #00ffff;">R&#8595;</span>
-<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>
 <span style="color: #00ffff;">WRAP</span>
 <span style="color: #00ffff;">J-</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">51</span>
@@ -1738,7 +1721,7 @@ This is a simple little application that makes working with 3D vectors less pain
 <span style="color: #00ffff;">J-</span>
 <span style="color: #00ffff;">FC?</span> 77
 <span style="color: #00ffff;">GTO</span> <span style="color: #00fa9a; font-weight: bold;">51</span>
-<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">RCL</span> <span style="color: #fa8072;">"_M"</span>
 <span style="color: #00ffff;">RTN</span>
 
 <span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
@@ -1751,12 +1734,12 @@ This is a simple little application that makes working with 3D vectors less pain
 <span style="color: #ffa500;">@@@@ LBL: Used: 52</span>
 <span style="color: #ffa500;">@@@@ FAQ: Uses INDEX</span>
 <span style="color: #ffa500;">@@@@ TST: free42_3.0.2</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-03</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">98</span>
 <span style="color: #00ffff;">FUNC</span> 13
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>
 <span style="color: #00ffff;">R&#8595;</span>
-<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>
 <span style="color: #00ffff;">WRAP</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">52</span>
 <span style="color: #00ffff;">RCLEL</span>
@@ -1773,11 +1756,11 @@ This is a simple little application that makes working with 3D vectors less pain
 <span style="color: #ffa500;">@@@@ LBL: Used: 53</span>
 <span style="color: #ffa500;">@@@@ FAQ: Uses INDEX</span>
 <span style="color: #ffa500;">@@@@ TST: free42_3.0.2</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-03</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">96</span>
 <span style="color: #00ffff;">FUNC</span> 00
-<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>  
-<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>  
+<span style="color: #00ffff;">LSTO</span> <span style="color: #fa8072;">"_M"</span>
+<span style="color: #00ffff;">INDEX</span> <span style="color: #fa8072;">"_M"</span>
 <span style="color: #00ffff;">WRAP</span>
 1
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">54</span>
@@ -1803,7 +1786,7 @@ This is a simple little application that makes working with 3D vectors less pain
 <span style="color: #ffa500;">@@@@ OUT: X: 1x3 Matrix</span>
 <span style="color: #ffa500;">@@@@ LBL: Used: 53</span>
 <span style="color: #ffa500;">@@@@ TST: free42_3.0.2</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-04-03</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">95</span>
 <span style="color: #00ffff;">FUNC</span> 01
 1
@@ -1818,15 +1801,14 @@ END
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgf7dff24" class="outline-2">
-<h2 id="orgf7dff24"><span class="section-number-2">6.</span> <code>STATR</code>: Statistics Registers</h2>
+<div id="outline-container-orgb4536b0" class="outline-2">
+<h2 id="orgb4536b0"><span class="section-number-2">6.</span> <code>STATR</code>: Statistics Registers</h2>
 <div class="outline-text-2" id="text-6">
 </div>
 <div id="outline-container-menu-statr" class="outline-3">
 <h3 id="menu-statr"><span class="section-number-3">6.1.</span> Menu</h3>
 <div class="outline-text-3" id="text-menu-statr">
-<table id="org039ff1d" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
+<table id="org3ead1ae" border="2" cellspacing="0" cellpadding="6" rules="all" frame="box" align="center">
 
 
 <colgroup>
@@ -1909,25 +1891,23 @@ END
 </table>
 </div>
 </div>
-
-<div id="outline-container-org488cc4c" class="outline-3">
-<h3 id="org488cc4c"><span class="section-number-3">6.2.</span> Code</h3>
+<div id="outline-container-org341796a" class="outline-3">
+<h3 id="org341796a"><span class="section-number-3">6.2.</span> Code</h3>
 <div class="outline-text-3" id="text-6-2">
 <div class="org-src-container">
 <pre class="src src-elisp">(MJR-generate-42-menu-code <span style="color: #fa8072;">"STATR"</span> 0 tbl 0 nil 'stay 'up 'auto
-                           #'MJR-local-only-gen-lab 
-                           (<span style="color: #00ffff;">lambda</span> (atrg target row) 
+                           #'MJR-local-only-gen-lab
+                           (<span style="color: #00ffff;">lambda</span> (atrg target row)
                              (<span style="color: #00ffff;">cl-destructuring-bind</span> (menu prog) row
-                               (mapconcat #'string-trim-left 
+                               (mapconcat #'string-trim-left
                                           (split-string prog <span style="color: #fa8072;">";"</span>) <span style="color: #fa8072;">"\n"</span>))))
 </pre>
 </div>
 </div>
 </div>
 </div>
-
-<div id="outline-container-org2349255" class="outline-2">
-<h2 id="org2349255"><span class="section-number-2">7.</span> EOF</h2>
+<div id="outline-container-org3c3476d" class="outline-2">
+<h2 id="org3c3476d"><span class="section-number-2">7.</span> EOF</h2>
 <div class="outline-text-2" id="text-7">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />

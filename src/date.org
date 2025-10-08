@@ -20,7 +20,7 @@
 #+HTML_LINK_HOME: https://www.mitchr.me/
 #+HTML_LINK_UP: https://richmit.github.io/hp42/
 #+EXPORT_FILE_NAME: ../docs/date
-#+LATEX_HEADER: \usepackage{extsizes} 
+#+LATEX_HEADER: \usepackage{extsizes}
 #+LATEX_HEADER: \usepackage[margin=0.5in]{geometry}
 #+LATEX_HEADER: \usepackage{mathabx}
 #+LATEX_HEADER: \usepackage{boisik}
@@ -191,13 +191,13 @@ RTN
 @@@@ NAM: IDATE
 @@@@ OUT: X: Date encoded as a real
 @@@@ SFX: Prints date even when called from a program
-@@@@ UPD: 2021-03-16
+@@@@ UPD: 2025-10-07
 LBL 95
-FUNC 01              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-DATE                 @@## REQ:free42>=1.4.66
+FUNC 01
+L4STK
+DATE
 "Date: "
-ADATE                @@## REQ:free42>=1.4.66
+ADATE
 AVIEW
 RTN
 
@@ -206,25 +206,25 @@ RTN
 @@@@ NAM: ITIME
 @@@@ OUT: X: Time in H.MM.SS format
 @@@@ SFX: Prints time even when called from a program
-@@@@ UPD: 2021-03-16
+@@@@ UPD: 2025-10-07
 LBL 88
-FUNC 01              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-TIME                 @@## REQ:free42>=1.4.66
+FUNC 01
+L4STK
+TIME
 "Time: "
-ATIME                @@## REQ:free42>=1.4.66
+ATIME
 AVIEW
 RTN
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Current UNIX time
 @@@@ OUT: X: UNIX time
-@@@@ UPD: 2021-03-16
+@@@@ UPD: 2025-10-07
 LBL "UTIME"
-FUNC 02              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-DATE                 @@## REQ:free42>=1.4.66
-TIME                 @@## REQ:free42>=1.4.66
+FUNC 02
+L4STK
+DATE
+TIME
 XEQ "DT→U"
 RTN
 
@@ -233,16 +233,16 @@ RTN
 @@@@ IN:  Y: Date
 @@@@ IN:  X: Time
 @@@@ OUT: X: UNIX time
-@@@@ UPD: 2021-03-16
+@@@@ UPD: 2025-10-07
 LBL "DT→U"
-FUNC 21              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 21
+L4STK
 FS? 67               @@@@ In Y.MD mode
 1970.0101
 FC? 67               @@@@ Not in Y.MD mode
 1.011970             @@@@ Works for M.DY & D.MY
 RCL ST Z
-DDAYS                @@## REQ:free42>=1.4.66
+DDAYS
 24
 ×
 X<>Y
@@ -258,10 +258,10 @@ RTN
 @@@@ OUT: Y: Date
 @@@@ OUT: X: Time
 @@@@ SFX: Prints date & time even when called from a program
-@@@@ UPD: 2021-03-16
+@@@@ UPD: 2025-10-07
 LBL "U→DT"
-FUNC 12              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 12
+L4STK
 3600
 ÷
 RCL ST X
@@ -273,17 +273,17 @@ FS? 67               @@@@ In Y.MD mode
 FC? 67               @@@@ Not in Y.MD mode
 1.011970             @@@@ Works for M.DY & D.MY
 X<>Y
-DATE+                @@## REQ:free42>=1.4.66
+DATE+
 X<>Y
 24
-MOD                  @@## REQ:free42>=1.4.66
+MOD
 →HMS
 X<>Y
 "Date:  "
-ADATE                @@## REQ:free42>=1.4.66
+ADATE
 X<>Y
 ├"[LF]Time: "
-ATIME                @@## REQ:free42>=1.4.66
+ATIME
 AVIEW
 RTN
 
@@ -293,13 +293,13 @@ RTN
 @@@@ IN:  Y: Date
 @@@@ IN:  X: Integer
 @@@@ OUT: X: Date + Integer
-@@@@ UPD: 2021-03-16
+@@@@ UPD: 2025-10-07
 LBL 92
-FUNC 21              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-DATE+                @@## REQ:free42>=1.4.66
+FUNC 21
+L4STK
+DATE+
 "Date: "
-ADATE                @@## REQ:free42>=1.4.66
+ADATE
 AVIEW
 RTN
 
@@ -309,11 +309,11 @@ RTN
 @@@@ IN:  X: Date
 @@@@ OUT: X: Integer
 @@@@ SFX: Prints day of week even when called from a program
-@@@@ UPD: 2021-03-16
+@@@@ UPD: 2025-10-07
 LBL 91
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-DOW                  @@## REQ:free42>=1.4.66
+FUNC 11
+L4STK
+DOW
 "Day of Week: "
 70
 +
@@ -345,11 +345,11 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@ DSC: Today's Julian day
 @@@@ OUT: X: Julian day for today
-@@@@ UPD: 2021-03-16
+@@@@ UPD: 2025-10-07
 LBL "JDATE"
-FUNC 01              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
-DATE                 @@## REQ:free42>=1.4.66
+FUNC 01
+L4STK
+DATE
 XEQ "D→J"
 RTN
 
@@ -358,10 +358,10 @@ RTN
 @@@@ NAM: J→D
 @@@@ IN:  X: Date
 @@@@ OUT: X: Julian day
-@@@@ UPD: 2021-03-16
+@@@@ UPD: 2025-10-07
 LBL "J→D"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 2440587.5
 -
 FS? 67               @@@@ In Y.MD mode
@@ -369,9 +369,9 @@ FS? 67               @@@@ In Y.MD mode
 FC? 67               @@@@ Not in Y.MD mode
 1.011970             @@@@ Works for M.DY & D.MY
 X<>Y
-DATE+                @@## REQ:free42>=1.4.66
+DATE+
 "Date: "
-ADATE                @@## REQ:free42>=1.4.66
+ADATE
 AVIEW
 RTN
 
@@ -379,16 +379,16 @@ RTN
 @@@@ DSC: Today's Julian day
 @@@@ NAM: D→J
 @@@@ OUT: X: Julian day for today
-@@@@ UPD: 2021-03-16
+@@@@ UPD: 2025-10-07
 LBL "D→J"
-FUNC 11              @@## REQ:free42>=2.5.24
-L4STK                @@## REQ:free42>=3.0
+FUNC 11
+L4STK
 FS? 67               @@@@ In Y.MD mode
 1970.0101
 FC? 67               @@@@ Not in Y.MD mode
 1.011970             @@@@ Works for M.DY & D.MY
 X<>Y
-DDAYS                @@## REQ:free42>=1.4.66
+DDAYS
 2440587.5
 +
 RTN
@@ -396,20 +396,6 @@ RTN
 END
 #+end_src
 
-* WORKING                                                          :noexport:
-
-#+BEGIN_SRC text :eval never
-:::::::::::::::::::::::'##:::::'##::::'###::::'########::'##::: ##:'####:'##::: ##::'######::::::::::::::::::::::::
-::::::::::::::::::::::: ##:'##: ##:::'## ##::: ##.... ##: ###:: ##:. ##:: ###:: ##:'##... ##:::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##::'##:. ##:: ##:::: ##: ####: ##:: ##:: ####: ##: ##:::..::::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##:'##:::. ##: ########:: ## ## ##:: ##:: ## ## ##: ##::'####::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##: #########: ##.. ##::: ##. ####:: ##:: ##. ####: ##::: ##:::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##: ##.... ##: ##::. ##:: ##:. ###:: ##:: ##:. ###: ##::: ##:::::::::::::::::::::::
-:::::::::::::::::::::::. ###. ###:: ##:::: ##: ##:::. ##: ##::. ##:'####: ##::. ##:. ######::::::::::::::::::::::::
-::::::::::::::::::::::::...::...:::..:::::..::..:::::..::..::::..::....::..::::..:::......:::::::::::::::::::::::::
-#+END_SRC
-
-Code in this section is under construction.  Most likely broken.
 * EOF
 
 # End of document.
@@ -420,8 +406,3 @@ Code in this section is under construction.  Most likely broken.
 #+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 #+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 #+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
-
-
-
-
-

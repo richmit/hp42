@@ -3,14 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-11-21 Thu 16:50 -->
+<!-- 2025-10-07 Tue 12:57 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=1024, initial-scale=1" />
 <title>free42 Code Attic</title>
 <meta name="author" content="Mitch Richling" />
 <meta name="description" content="A place to put old code I don't use, but don't want to delete" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
@@ -228,34 +228,33 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2024-11-21 16:48:51</i></td>
+<td class="org-left"><i>2025-10-07 11:01:33</i></td>
 </tr>
 </tbody>
 </table>
 <p align="center">
-Copyright 2024 Mitch Richling. All rights reserved.
+Copyright 2025 Mitch Richling. All rights reserved.
 </p>
 
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org21b460d">1. Metadata</a></li>
+<li><a href="#orgfcecb7b">1. Metadata</a></li>
 <li><a href="#introduction">2. Introduction</a></li>
-<li><a href="#org9a3ed28">3. Tiny Number Printing</a>
+<li><a href="#org791d50b">3. Tiny Number Printing</a>
 <ul>
-<li><a href="#org1922d26">3.1. <code>TNPR</code>: Tiny number printer</a></li>
-<li><a href="#org920accf">3.2. <code>PATN</code>: Test <code>TNPR</code> by printing all characters</a></li>
+<li><a href="#org3e5cd71">3.1. <code>TNPR</code>: Tiny number printer</a></li>
+<li><a href="#org786b90a">3.2. <code>PATN</code>: Test <code>TNPR</code> by printing all characters</a></li>
 </ul>
 </li>
-<li><a href="#org1b29029">4. <code>SGN</code>: Sign function</a></li>
-<li><a href="#org5cfbe57">5. EOF</a></li>
+<li><a href="#orgf28cf99">4. <code>SGN</code>: Sign function</a></li>
+<li><a href="#org1d01ff8">5. EOF</a></li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org21b460d" class="outline-2">
-<h2 id="org21b460d"><span class="section-number-2">1.</span> Metadata</h2>
+<div id="outline-container-orgfcecb7b" class="outline-2">
+<h2 id="orgfcecb7b"><span class="section-number-2">1.</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The home for this HTML file is: <a href="https://richmit.github.io/hp42/attic.html">https://richmit.github.io/hp42/attic.html</a>
@@ -266,7 +265,6 @@ Files related to this document may be found on github: <a href="https://github.c
 </p>
 </div>
 </div>
-
 <div id="outline-container-introduction" class="outline-2">
 <h2 id="introduction"><span class="section-number-2">2.</span> Introduction</h2>
 <div class="outline-text-2" id="text-introduction">
@@ -275,13 +273,12 @@ This is where old code goes&#x2026; ;)
 </p>
 </div>
 </div>
-
-<div id="outline-container-org9a3ed28" class="outline-2">
-<h2 id="org9a3ed28"><span class="section-number-2">3.</span> Tiny Number Printing</h2>
+<div id="outline-container-org791d50b" class="outline-2">
+<h2 id="org791d50b"><span class="section-number-2">3.</span> Tiny Number Printing</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org1922d26" class="outline-3">
-<h3 id="org1922d26"><span class="section-number-3">3.1.</span> <code>TNPR</code>: Tiny number printer</h3>
+<div id="outline-container-org3e5cd71" class="outline-3">
+<h3 id="org3e5cd71"><span class="section-number-3">3.1.</span> <code>TNPR</code>: Tiny number printer</h3>
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-TNPR" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (TNPR)</span>
@@ -290,12 +287,12 @@ This is where old code goes&#x2026; ;)
 <span style="color: #ffa500;">@@@@      Y: X coordinate for upper left point of character -- Left of screen is 1</span>
 <span style="color: #ffa500;">@@@@      X: Character number -- integer in [0, 28]</span>
 <span style="color: #ffa500;">@@@@ OUT: No return</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-02-24</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #ffa500;">@@@@ BUG: Characters can be *VERY* tiny in high resolution modes on DM42</span>
 <span style="color: #ffa500;">@@@@ Designed to print numbers:</span>
 <span style="color: #ffa500;">@@@@    101010b Binary      | 1234567 Decimal    | 123e+45 Float | 123/456 Rational | 123 i56 Complex</span>
 <span style="color: #ffa500;">@@@@    1A8F10h Hexadecimal | 123,456 Decimal    | 12&#215;10^3 Float | 123456&#176; Degrees  | 123 &#8737;56 Complex</span>
-<span style="color: #ffa500;">@@@@    154823o Octal       | -123456 Signed Dec | 1.34567 Float | </span>
+<span style="color: #ffa500;">@@@@    154823o Octal       | -123456 Signed Dec | 1.34567 Float |</span>
 <span style="color: #ffa500;">@@@@ Characters can be underlined</span>
 <span style="color: #ffa500;">@@@@ Characters are 3x5 pixels in size.  Underlined characters are 3x7.</span>
 <span style="color: #ffa500;">@@@@   - Stock HP-42s screen: 32 characters across.  Two full lines on the screen.</span>
@@ -304,14 +301,14 @@ This is where old code goes&#x2026; ;)
 <span style="color: #ffa500;">@@@@      0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F  e  -  +  &#215;  /  ^ UNK  ,  .  &#176;  b   o   h   i  &#8737; SPC</span>
 <span style="color: #ffa500;">@@@@     48 49 50 51 52 53 54 55 56 57 65 66 67 68 69 70 16 45 43 01 00 94  -- 23 46 19 98 111 104 105 23  32</span>
 <span style="color: #ffa500;">@@@@  C   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y                    Y  Y  Y              Y  Y                 Y  Y   Y</span>
-<span style="color: #ffa500;">@@@@  R   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y                    Y  Y  Y              Y  Y               </span>
-<span style="color: #ffa500;">@@@@  B   Y  Y                                               Y  Y                               </span>
-<span style="color: #ffa500;">@@@@  O   Y  Y  Y  Y  Y  Y  Y  Y                             Y  Y                               </span>
+<span style="color: #ffa500;">@@@@  R   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y                    Y  Y  Y              Y  Y</span>
+<span style="color: #ffa500;">@@@@  B   Y  Y                                               Y  Y</span>
+<span style="color: #ffa500;">@@@@  O   Y  Y  Y  Y  Y  Y  Y  Y                             Y  Y</span>
 <span style="color: #ffa500;">@@@@  H   Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y  Y     Y  Y</span>
 <span style="color: #ffa500;">@@@@ Add 40 to the above character number for the underlined version</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"TNPR"</span>
-<span style="color: #00ffff;">FUNC</span> 30      <span style="color: #6495ed;">@@## REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>        <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">FUNC</span> 30
+<span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">IP</span>
 <span style="color: #00ffff;">XEQ IND ST</span> X
 <span style="color: #00ffff;">R&#8595;</span>
@@ -516,9 +513,8 @@ END
 </div>
 </div>
 </div>
-
-<div id="outline-container-org920accf" class="outline-3">
-<h3 id="org920accf"><span class="section-number-3">3.2.</span> <code>PATN</code>: Test <code>TNPR</code> by printing all characters</h3>
+<div id="outline-container-org786b90a" class="outline-3">
+<h3 id="org786b90a"><span class="section-number-3">3.2.</span> <code>PATN</code>: Test <code>TNPR</code> by printing all characters</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-PATN" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (PATN)</span>
@@ -557,10 +553,8 @@ END
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org1b29029" class="outline-2">
-<h2 id="org1b29029"><span class="section-number-2">4.</span> <code>SGN</code>: Sign function</h2>
+<div id="outline-container-orgf28cf99" class="outline-2">
+<h2 id="orgf28cf99"><span class="section-number-2">4.</span> <code>SGN</code>: Sign function</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-hp42s"><span id="coderef-SGN" class="coderef-off"><span style="color: #ffa500;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span> (SGN)</span>
@@ -569,11 +563,10 @@ END
 <span style="color: #ffa500;">@@@@ OUT: X:  0 when input was 0</span>
 <span style="color: #ffa500;">@@@@         -1 when input was negative</span>
 <span style="color: #ffa500;">@@@@          1 when input was positive</span>
-<span style="color: #ffa500;">@@@@ UPD: 2021-02-26</span>
-<span style="color: #ffa500;">@@@@ TST: free42_3.0</span>
+<span style="color: #ffa500;">@@@@ UPD: 2025-10-07</span>
 <span style="color: #00ffff;">LBL</span> <span style="color: #00fa9a; font-weight: bold;">"SGN"</span>
-<span style="color: #00ffff;">FUNC</span> 11              <span style="color: #6495ed;">@@## REQ:free42&gt;=2.5.24</span>
-<span style="color: #00ffff;">L4STK</span>                <span style="color: #6495ed;">@@## REQ:free42&gt;=3.0</span>
+<span style="color: #00ffff;">FUNC</span> 11
+<span style="color: #00ffff;">L4STK</span>
 <span style="color: #00ffff;">ENTER</span>
 <span style="color: #00ffff;">ABS</span>
 <span style="color: #00ffff;">X=0?</span>
@@ -585,10 +578,8 @@ END
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org5cfbe57" class="outline-2">
-<h2 id="org5cfbe57"><span class="section-number-2">5.</span> EOF</h2>
+<div id="outline-container-org1d01ff8" class="outline-2">
+<h2 id="org1d01ff8"><span class="section-number-2">5.</span> EOF</h2>
 <div class="outline-text-2" id="text-5">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />

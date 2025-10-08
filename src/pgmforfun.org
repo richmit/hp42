@@ -20,7 +20,7 @@
 #+HTML_LINK_HOME: https://www.mitchr.me/
 #+HTML_LINK_UP: https://richmit.github.io/hp42/
 #+EXPORT_FILE_NAME: ../docs/pgmforfun
-#+LATEX_HEADER: \usepackage{extsizes} 
+#+LATEX_HEADER: \usepackage{extsizes}
 #+LATEX_HEADER: \usepackage[margin=0.5in]{geometry}
 #+LATEX_HEADER: \usepackage{mathabx}
 #+LATEX_HEADER: \usepackage{boisik}
@@ -75,7 +75,7 @@ Directory contents:
 :CUSTOM_ID: introduction
 :END:
 
-$$\mathrm{Plots} \;\;\;\;\;\;\; \mathrm{Sums} \;\; \sum_{n=1}^{15}\frac{1}{n^2} \;\;\;\;\;\;\; \mathrm{Products} \;\; \prod_{n=1}^{15}\frac{1}{n^2} \;\;\;\;\;\;\; \mathrm{Integrals} \;\; \int_{1}^{15}\frac{1}{x^2}dx \;\;\;\;\;\;\; \mathrm{Roots} $$
+\[ \mathrm{Plots} \;\;\;\;\;\;\; \mathrm{Sums} \;\; \sum_{n=1}^{15}\frac{1}{n^2} \;\;\;\;\;\;\; \mathrm{Products} \;\; \prod_{n=1}^{15}\frac{1}{n^2} \;\;\;\;\;\;\; \mathrm{Integrals} \;\; \int_{1}^{15}\frac{1}{x^2}dx \;\;\;\;\;\;\; \mathrm{Roots} \]
 
 This is a collection of programs that work with =MVAR=-type programs (equations).  I was inspired to do this when the =PGMENU= function was added to free42.
 
@@ -121,7 +121,7 @@ While =FVARM= is simply an MVAR program with all the global variables, the =[FVA
 *** =FEVL=: Evaluating the current equation
 
 I frequently use =VARMENU= to repeatedly evaluate a formula, with different input values.  Functionally that means typing in the value, and then hitting the
-variable button twice.  That's not super efficient when repeatedly changing the same variable.  That's where this little function comes in!  
+variable button twice.  That's not super efficient when repeatedly changing the same variable.  That's where this little function comes in!
 
 Note the program =FEVL= and the menu key =[EVAL]= are different.  The menu will do some error checking before it runs while the program just attempts to
 evaluate EqP on X.
@@ -131,7 +131,7 @@ evaluate EqP on X.
 This little function is at the center of all the tools on this page.  It queries for an =MVAR= program, lets you set constants, pick an independent variable,
 and describe the number of returns from the function.  See the section [[Organizing Principles][Organizing Principles]] for more about the global variables used to house this data.
 
-*** =SFWRP=: Wrap a simple function 
+*** =SFWRP=: Wrap a simple function
 
 This =MVAR= program allows one to wrap a simple function for use with tools that need an =MVAR= program.  For example, if you have a program for =SECH= you
 can use this program to wrap =SECH= allowing you to use the built in solver & integrator or programs like =FPLT=.
@@ -253,12 +253,11 @@ RTN
 @@@@ DSC: Pick an MVAR function and variable
 @@@@ IN:  X: integer
 @@@@ FAQ: If X=0, then EqD is set to 1.  Otherwise the user is prompted.
-@@@@ UPD: 2021-02-24
+@@@@ UPD: 2025-10-07
 @@@@ GBL: EqP  -- Name of selected function
 @@@@ GBL: EqV -- Name of selected variable
 @@@@ GBL: EqD -- Return count
 @@@@ BUG: Variable menu works like solver, not like integrator.  Can't fix that...
-@@@@ REQ: REQ:free42>=3.0
 LBL "PICF"
 FUNC 10
 L4STK
@@ -277,8 +276,7 @@ AVIEW
 STOP
 ASTO "EqP"
 EXITALL
-VARMENU IND "EqP"      @@## REQ:free42<3.0.5
-VARMNU1 IND "EqP"      @@## REQ:free42>=3.0.5
+VARMNU1 IND "EqP"
 "Set Var; "
 ├"Pick Free Var"
 AVIEW
@@ -351,8 +349,7 @@ RTN
 @@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP
 @@@@ FAQ: Faster than product in FSPT
 @@@@ FAQ: EqD is ignored -- only last function value is summed
-@@@@ UPD: 2021-04-06
-@@@@ REQ: REQ:free42>=3.0
+@@@@ UPD: 2025-10-07
 LBL "FPRD"
 FUNC 01
 1
@@ -384,8 +381,7 @@ RTN
 @@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP
 @@@@ FAQ: Faster than sum in FSPT
 @@@@ FAQ: EqD is ignored -- only last function value is summed
-@@@@ UPD: 2021-04-06
-@@@@ REQ: REQ:free42>=3.0
+@@@@ UPD: 2025-10-07
 LBL "FSUM"
 FUNC 01
 0
@@ -426,8 +422,7 @@ RTN
 @@@@ FAQ: Faster than product in FSPT
 @@@@ FAQ: EqD is ignored -- only last function value is summed
 @@@@ GBL: EqP, EqV, LLIM, ULIM
-@@@@ UPD: 2021-04-06
-@@@@ REQ: REQ:free42>=3.0
+@@@@ UPD: 2025-10-07
 LBL "FSLV"
 FUNC 04
 PGMSLV IND "EqP"
@@ -443,8 +438,7 @@ RTN
 @@@@ FAQ: No error checking is done on ACC, LLIM, ULIM, STEP, EqV, or EqP
 @@@@ FAQ: EqD is ignored -- only last function value is summed
 @@@@ GBL: EqP, EqV, LLIM, ULIM, ACC
-@@@@ UPD: 2021-04-06
-@@@@ REQ: REQ:free42>=3.0
+@@@@ UPD: 2025-10-07
 LBL "FINT"
 FUNC 03
 PGMINT IND "EqP"
@@ -456,8 +450,7 @@ RTN
 @@@@ OUT: X: EqP(x)
 @@@@ FAQ: No error checking is done on EqV or EqP
 @@@@ GBL: EqP, EqV
-@@@@ UPD: 2021-04-09
-@@@@ REQ: REQ:free42>=3.0
+@@@@ UPD: 2025-10-07
 LBL "FEVL"
 STO IND "EqV"
 XEQ IND "EqP"
@@ -510,7 +503,7 @@ RTN
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FVARM)
 @@@@ DSC: MVAR Program with all the global vartiables used by the F* programs
 @@@@ GBL: EqP, EqV, EqD, ACC, WFUN, LLIM, ULIM, STEP, YMIN, YMAX, & YSTP
-@@@@ UPD: 2021-04-06
+@@@@ UPD: 2025-10-07
 LBL "FVARM"
 MVAR "LLIM"
 MVAR "ULIM"
@@ -566,7 +559,7 @@ Note: Using =[SHIFT]= before =[LLIM]=, =[ULIM]=, and =[STEP]= menu keys will rec
 @@@@ DSC: Sums, Products, & Tables
 @@@@ IN:  N/A
 @@@@ OUT: N/A
-@@@@ UPD: 2021-04-03
+@@@@ UPD: 2025-10-07
 @@@@ GBL: LLIM -- Lower limit for variable
 @@@@ GBL: ULIM -- Upper limit for variable
 @@@@ GBL: STEP -- Size of steps to make
@@ -577,7 +570,6 @@ Note: Using =[SHIFT]= before =[LLIM]=, =[ULIM]=, and =[STEP]= menu keys will rec
 @@@@ LLB: 00-12,14-24,26-33
 @@@@ GLB: FSPT
 @@@@ USE: PICF
-@@@@ REQ: REQ:free42>=3.0
 LBL "FSPT"
 CF 82
 SF 83
@@ -943,8 +935,7 @@ the current plot range or last zoom box region.
 @@@@ FLG: 83: TEMP: Used for automatic autoscale redraw
 @@@@ FLG: 84: TEMP: Reserved
 @@@@ FRE: LBL: 79-99
-@@@@ REQ: REQ:free42>=3.0
-@@@@ UPD: 2021-04-09
+@@@@ UPD: 2025-10-07
 
 LBL "FPLT"
 FC? 04
@@ -1975,21 +1966,6 @@ SF 85
 RTN
 END
 #+END_SRC
-
-* WORKING                                                          :noexport:
-
-#+BEGIN_SRC text :eval never
-:::::::::::::::::::::::'##:::::'##::::'###::::'########::'##::: ##:'####:'##::: ##::'######::::::::::::::::::::::::
-::::::::::::::::::::::: ##:'##: ##:::'## ##::: ##.... ##: ###:: ##:. ##:: ###:: ##:'##... ##:::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##::'##:. ##:: ##:::: ##: ####: ##:: ##:: ####: ##: ##:::..::::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##:'##:::. ##: ########:: ## ## ##:: ##:: ## ## ##: ##::'####::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##: #########: ##.. ##::: ##. ####:: ##:: ##. ####: ##::: ##:::::::::::::::::::::::
-::::::::::::::::::::::: ##: ##: ##: ##.... ##: ##::. ##:: ##:. ###:: ##:: ##:. ###: ##::: ##:::::::::::::::::::::::
-:::::::::::::::::::::::. ###. ###:: ##:::: ##: ##:::. ##: ##::. ##:'####: ##::. ##:. ######::::::::::::::::::::::::
-::::::::::::::::::::::::...::...:::..:::::..::..:::::..::..::::..::....::..::::..:::......:::::::::::::::::::::::::
-#+END_SRC
-
-Code in this section is under construction.  Most likely broken.
 
 * EOF
 

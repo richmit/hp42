@@ -1,5 +1,7 @@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PHIL)
+@@@@ DSC: Auto-generated menu program
 LBL "PHIL"
-LBL 01
+LBL 01            @@@@ Page 1 of menu PHIL
 CLMENU
 XEQ 85
 KEY 1 XEQ 92
@@ -17,7 +19,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02
+LBL 02            @@@@ Page 1 of menu LENG
 CLMENU
 "PX>D"
 KEY 1 XEQ 91
@@ -29,7 +31,7 @@ KEY 9 GTO 01
 MENU
 STOP
 GTO 02
-LBL 03
+LBL 03            @@@@ Page 1 of menu QUAD
 CLMENU
 "UL"
 KEY 1 XEQ 57
@@ -47,7 +49,7 @@ KEY 9 GTO 01
 MENU
 STOP
 GTO 03
-LBL 06
+LBL 06            @@@@ Page 2 of menu QUAD
 CLMENU
 "∡TB"
 KEY 1 XEQ 62
@@ -63,7 +65,7 @@ KEY 9 GTO 01
 MENU
 STOP
 GTO 06
-LBL 04
+LBL 04            @@@@ Page 1 of menu PERF
 CLMENU
 "D<>P"
 KEY 1 XEQ 96
@@ -81,7 +83,7 @@ KEY 9 GTO 01
 MENU
 STOP
 GTO 04
-LBL 05
+LBL 05            @@@@ Page 1 of menu DCRD
 CLMENU
 "PX>DC"
 KEY 1 XEQ 75
@@ -97,9 +99,24 @@ KEY 9 GTO 01
 MENU
 STOP
 GTO 05
-LBL 00
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
+@@@@ Free labels start at: 7
+
+@@@@ GBL: PhilIC -- Image calibration factor.  Set via CAL
+@@@@      PhilIU -- Units for Image distances used by D→P & D→K.  Set via I:UNIT Default: mm
+@@@@      PhilDU -- Units for Distance used by D→P & D→K.  Set via D:UNIT Default: mm
+@@@@      PhilPC -- Perf count used by used by D→P & D→K.  Set via C:NN.  Default: 10
+@@@@      PhilCo -- Orition for design coordinates.  Default: (0, 0)
+@@@@      PhilP1 -- Point
+@@@@      PhilP2 -- Point
+@@@@      PhilP3 -- Point
+@@@@      PhilP4 -- Point
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ NAM: SET-REP-P1 57
 LBL 57
 FUNC 00
 L4STK
@@ -112,6 +129,9 @@ STO "PhilP1"
 ARCL ST X
 AVIEW
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ NAM: SET-REP-P2 58
 LBL 58
 FUNC 00
 L4STK
@@ -124,6 +144,9 @@ STO "PhilP2"
 ARCL ST X
 AVIEW
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ NAM: SET-REP-P3 59
 LBL 59
 FUNC 00
 L4STK
@@ -136,6 +159,9 @@ STO "PhilP3"
 ARCL ST X
 AVIEW
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ NAM: SET-REP-P4 60
 LBL 60
 FUNC 00
 L4STK
@@ -148,6 +174,9 @@ STO "PhilP4"
 ARCL ST X
 AVIEW
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ NAM: NUM-P 61
 LBL 61
 FUNC 01
 L4STK
@@ -175,6 +204,10 @@ ISG "_TMPC"
 NOP
 RCL "_TMPC"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Action for ∡TB
+@@@@ NAM: TB_ANGLE 62
 LBL 62
 FUNC 01
 L4STK
@@ -184,12 +217,16 @@ X≠Y?
 GTO 56
 RCL "PhilP2"
 RCL- "PhilP1"
-XEQ 37
+XEQ 37 @@@@ ANGLE
 RCL "PhilP3"
 RCL- "PhilP4"
-XEQ 37
+XEQ 37 @@@@ ANGLE
 -
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Action for ∡LR
+@@@@ NAM: LR_ANGLE 63
 LBL 63
 FUNC 01
 L4STK
@@ -199,12 +236,19 @@ X≠Y?
 GTO 56
 RCL "PhilP4"
 RCL- "PhilP1"
-XEQ 37
+XEQ 37 @@@@ ANGLE
 RCL "PhilP3"
 RCL- "PhilP2"
-XEQ 37
+XEQ 37 @@@@ ANGLE
 -
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Action for WIDE
+@@@@ NAM: LR_ANGLE 64
+@@@@ OUT: Z: Top Width
+@@@@ OUT: Y: Bottom Width
+@@@@ OUT: X: Average Width
 LBL 64
 FUNC 03
 L4STK
@@ -214,16 +258,23 @@ X≠Y?
 GTO 56
 RCL "PhilP2"
 RCL- "PhilP1"
-XEQ 91
+XEQ 91 @@@@ Convert PX to length
 RCL "PhilP3"
 RCL- "PhilP4"
-XEQ 91
+XEQ 91 @@@@ Convert PX to length
 RCL ST Y
 RCL ST Y
 +
 2
 ÷
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Action for TALL
+@@@@ NAM: LR_ANGLE 65
+@@@@ OUT: Z: LEFT
+@@@@ OUT: Y: RIGHT
+@@@@ OUT: X: Average Width
 LBL 65
 FUNC 03
 L4STK
@@ -233,21 +284,29 @@ X≠Y?
 GTO 56
 RCL "PhilP4"
 RCL- "PhilP1"
-XEQ 91
+XEQ 91 @@@@ Convert PX to length
 RCL "PhilP3"
 RCL- "PhilP2"
-XEQ 91
+XEQ 91 @@@@ Convert PX to length
 RCL ST Y
 RCL ST Y
 +
 2
 ÷
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: ERR: Enter Data First
+@@@@ FAQ: NOT A FUNCTION.  GTO Target
+@@@@ NAM: EEDF 56
 LBL 56
 "ERR: Enter"
 ├" Corners"
 AVIEW
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ NAM: DCRD:ORIG 90
 LBL 90
 FUNC 00
 L4STK
@@ -255,37 +314,57 @@ REAL?
 COMPLEX
 FC? 64
 STO "PhilCo"
-XEQ 45
+XEQ 45 @@@@ GET "PhilCo"
 "Orig: "
 ARCL ST X
 AVIEW
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: ACTION for DCRD:PX>DC
+@@@@ NAM: DCRD:PX>DC 75
 LBL 75
 L4STK
 REAL?
 COMPLEX
-XEQ 68
+XEQ 68 @@@@ CPLX-PX>DC
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ NAM: CPLX-PX>DC
+@@@@ DSC: CPLX-PX>DC for complex input
 LBL 68
 FUNC 11
 L4STK
-XEQ 45
+XEQ 45 @@@@ GET "PhilCo"
 -
-XEQ 91
+XEQ 91 @@@@ Convert PX to Distance
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: ACTION for DCRD:DC>PX
+@@@@ NAM: DCRD:DC>PX 49
 LBL 49
 L4STK
 REAL?
 COMPLEX
-XEQ 69
+XEQ 69 @@@@ CPLX-PX>DC
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ NAM: CPLX-PX>DC 69
+@@@@ DSC: CPLX-DC>PX for complex input only
 LBL 69
 FUNC 11
 L4STK
-XEQ 66
-XEQ 45
+XEQ 66 @@@@ Convert Distance to PX
+XEQ 45 @@@@ GET "PhilCo"
 +
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Return PhilCo.  Set it to default if it is unset.
+@@@@ NAM: GET PhilCo  45
 LBL 45
 FUNC 01
 L4STK
@@ -297,12 +376,19 @@ RCL "PhilCo"
 FC?C 25
 STO "PhilCo"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: ACTION for FOO
 LBL "MM>T"
 L4STK
 REAL?
 COMPLEX
-XEQ 38
+XEQ 38 @@@@ CPLX-MM>T
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ NAM: CPLX-MM>T 38
+@@@@ DSC: CPLX-MM>T complex input only
 LBL 38
 FUNC 11
 L4STK
@@ -310,31 +396,33 @@ L4STK
 ÷
 COMPLEX
 IP
-ABS
-X<>Y
+ABS         @@@@ Y X
+X<>Y        @@@@ X Y
 IP
 ABS
 1
-+
-X<>Y
++           @@@@ X Y
+X<>Y        @@@@ Y X
 65
-+
-86
++           @@@@ Y X
+86          @@@@ 86 Y X
 X>Y?
 GTO 46
-X<>Y
-R↓
-63
-X<>Y
+X<>Y        @@@@ Y 86 X
+R↓          @@@@ 86 X
+63          @@@@ 63 86 X
+X<>Y        @@@@ 86 63 X
 LBL 46
-R↓
+R↓          @@@@ CHAR-NUM X
 "Thirkell: "
 XTOA
-R↓
-AIP
+R↓          @@@@ X
+AIP   
 R↓
 AVIEW
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 LBL "T>MM"
 FUNC 01
 L4STK
@@ -398,84 +486,111 @@ STOP
 AOFF
 GTO 40
 RTN
+   
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: ANGL Label 85
 LBL 85
 FUNC 00
 L4STK
-RECT
+RECT  @@@@ We require RECT mode!
 "ANGL"
-XEQ 79
-XEQ 77
-XEQ 78
-XEQ 76
+XEQ 79 @@@@ GET "PhilIU"
+XEQ 77 @@@@ GET "PhilDU"
+XEQ 78 @@@@ GET "PhilPC"
+XEQ 76 @@@@ GET "PhilIC"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: CAL in PERF Label 67
 LBL 67
 FUNC 00
 L4STK
-XEQ 77
-X≠0?
+XEQ 77 @@@@ GET "PhilDU"
+X≠0?         @@@@ IF-BOOL
 RTNNO
 "CAL"
 RTNYES
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: I: Label 86
 LBL 86
 FUNC 00
 L4STK
 CLA
-XEQ 77
-X≠0?
+XEQ 77 @@@@ GET "PhilDU"
+X≠0?         @@@@ IF-BOOL
 RTNNO
 "I:"
-XEQ 79
+XEQ 79 @@@@ GET "PhilIU"
 70
 +
 XEQ IND ST X
 R↓
 RTNYES
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: D: Label 89
 LBL 89
 FUNC 00
 L4STK
 "D:"
-XEQ 77
+XEQ 77 @@@@ GET "PhilDU"
 50
 +
 XEQ IND ST X
 R↓
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: C: Label 87
 LBL 87
 FUNC 00
 L4STK
 "C:"
-XEQ 78
+XEQ 78 @@@@ GET "PhilPC"
 AIP
 R↓
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Action for menu key ANGLE
+@@@@ NAM: ANGLE 92
 LBL 92
 L4STK
 REAL?
 COMPLEX
-XEQ 37
+XEQ 37 @@@@ CPLX-FOO
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ NAM: CPLX-ANGLE 37
+@@@@ DSC: CPLX-ANGLE complex input only
 LBL 37
 FUNC 11
 L4STK
-FC? 73
+FC? 73 @@@@ IF-RECT
 GTO 42
 GTO 31
-LBL 42
+LBL 42 @@@@ IF-THEN RECT MODE
 POLAR
 COMPLEX
 RECT
 GTO 44
-LBL 31
+LBL 31 @@@@ IF-ELSE POLAR MODE
 POLAR
 COMPLEX
 RECT
-LBL 44
+LBL 44 @@@@ IF-END
 X<>Y
 R↓
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Action for menu key CAL
+@@@@ NAM: CAL 95
 LBL 95
-FUNC 00
-L4STK
+FUNC 00            
+L4STK              
 FS? 64
 GTO 29
 X<>Y
@@ -489,11 +604,15 @@ RCL "PhilIC"
 ARCL ST X
 AVIEW
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Action for menu key D→P
+@@@@ NAM: D→P 96
 LBL 96
-FUNC 11
-L4STK
-XEQ 39
-XEQ 78
+FUNC 11            
+L4STK              
+XEQ 39 @@@@ Convert distance to mm
+XEQ 78 @@@@ GET "PhilPC"
 1
 -
 X<>Y
@@ -501,9 +620,12 @@ X<>Y
 20
 ×
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Action for menu key P<>K
 LBL "P<>K"
-FUNC 11
-L4STK
+FUNC 11            
+L4STK              
 127
 ×
 100000
@@ -511,15 +633,23 @@ X<>Y
 ÷
 RTN
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Action for menu key C:
+@@@@ NAM: C: 98
 LBL 98
-FUNC 00
-L4STK
+FUNC 00            
+L4STK              
 STO "PhilPC"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Action for menu key D:UNIT
+@@@@ NAM: D: 99
 LBL 99
-FUNC 00
-L4STK
-XEQ 77
+FUNC 00            
+L4STK              
+XEQ 77 @@@@ GET "PhilDU"
 1
 +
 6
@@ -527,10 +657,14 @@ MOD
 STO "PhilDU"
 R↓
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Action for menu key I:UNIT
+@@@@ NAM: I: 88
 LBL 88
-FUNC 00
-L4STK
-XEQ 79
+FUNC 00            
+L4STK              
+XEQ 79 @@@@ GET "PhilIU"
 1
 +
 5
@@ -538,43 +672,57 @@ MOD
 STO "PhilIU"
 R↓
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Convert distance to mm
 LBL 39
-FUNC 01
-L4STK
-XEQ 77
-X=0?
+FUNC 01            
+L4STK              
+XEQ 77 @@@@ GET "PhilDU"
+X=0?         @@@@ IF-BOOL
 GTO 34
 GTO 35
-LBL 34
+LBL 34       @@@@ IF-THEN (pixels)
 R↓
-XEQ 91
-XEQ 79
+XEQ 91 @@@@ Convert PX to I units
+XEQ 79 @@@@ GET "PhilIU"
 80
 +
 XEQ IND ST X
 GTO 36
-LBL 35
+LBL 35       @@@@ IF-ELSE (not-pixels)
 80
 +
 1
 -
 XEQ IND ST X
-LBL 36
+LBL 36       @@@@ IF-END
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Action for menu key PX>D
+@@@@ NAM: PX>D 91
 LBL 91
-FUNC 11
-L4STK
+FUNC 11            
+L4STK              
 ABS
-XEQ 76
+XEQ 76 @@@@ GET "PhilIC"
 ÷
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Action for menu key D>PX
+@@@@ NAM: D>PX 66
 LBL 66
-FUNC 11
-L4STK
+FUNC 11            
+L4STK              
 ABS
-XEQ 76
+XEQ 76 @@@@ GET "PhilIC"
 ×
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Names for D units
 LBL 50
 ├"px"
 RTN
@@ -593,6 +741,9 @@ RTN
 LBL 55
 ├"cm"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: @@@@ Names for I units
 LBL 70
 ├"mm"
 RTN
@@ -608,31 +759,37 @@ RTN
 LBL 74
 ├"cm"
 RTN
-LBL 80
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Conversion to mm.
+LBL 80       @@@@ ├"mm"
 R↓
 RTN
-LBL 81
+LBL 81       @@@@ ├"mil"
 R↓
 25.4
 ×
 1000
 ÷
 RTN
-LBL 82
+LBL 82       @@@@ ├"μm"
 R↓
 1e3
 ÷
 RTN
-LBL 83
+LBL 83       @@@@ ├"in"
 R↓
 25.4
 ×
 RTN
-LBL 84
+LBL 84       @@@@ ├"cm"
 R↓
 10
 ×
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: GET PhilIC.  Set to default if not set.
 LBL 76
 FUNC 01
 SF 25
@@ -642,6 +799,9 @@ RTN
 94.4881889764
 STO "PhilIC"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: GET PhilDU.  Set to default if not set.
 LBL 77
 FUNC 01
 SF 25
@@ -651,6 +811,9 @@ RTN
 0
 STO "PhilDU"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: GET PhilPC.  Set to default if not set.
 LBL 78
 FUNC 01
 SF 25
@@ -660,6 +823,9 @@ RTN
 10
 STO "PhilPC"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: GET PhilIU.  Set to default if not set.
 LBL 79
 FUNC 01
 SF 25
@@ -669,16 +835,27 @@ RTN
 0
 STO "PhilIU"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+@@@@ The following functions are not currently used, but may be someday.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: RESET 94
 LBL 94
 FUNC 00
 CLV "PhilIU"
 CLV "PhilDU"
 CLV "PhilPC"
 CLV "PhilIC"
-XEQ 79
-XEQ 77
-XEQ 78
-XEQ 76
+XEQ 79 @@@@ GET "PhilIU"
+XEQ 77 @@@@ GET "PhilDU"
+XEQ 78 @@@@ GET "PhilPC"
+XEQ 76 @@@@ GET "PhilIC"
 RTN
-END
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+END

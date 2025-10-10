@@ -1,5 +1,7 @@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:NLA)
+@@@@ DSC: Auto-generated menu program
 LBL "NLA"
-LBL 01
+LBL 01            @@@@ Page 1 of menu NLA
 CLMENU
 "IDEN"
 KEY 1 XEQ "MXIDN"
@@ -17,7 +19,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02
+LBL 02            @@@@ Page 2 of menu NLA
 CLMENU
 "MAT"
 KEY 1 XEQ 98
@@ -31,9 +33,19 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 00
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
+@@@@ Free labels start at: 3
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MXCPLY)
+@@@@ DSC: Compute matrix Characteristic polynomial
+@@@@ IN:  X: Matrix
+@@@@ OUT: X: Characteristic polynomial
+@@@@ LBL: 28
+@@@@ FAQ: Uses INDEX
+@@@@ UPD: 2025-10-07
+@@@@ TC:  [[1,2,3][4,5,6][7,8,10]] => [1, -16, -12, 3]
 LBL "MXCPLY"
 FUNC 11
 L4STK
@@ -56,18 +68,18 @@ STOEL
 J+
 +/-
 LSTO "_CTR"
-0
+0               @@@@ p_{n-1}
 LBL 28
-RCL "_A"
-RCL "_M"
-RCL "_I"
-RCL× ST T
--
-×
+RCL "_A"        @@@@ A               p_{n-1}
+RCL "_M"        @@@@ M               A        p_{n-1}
+RCL "_I"        @@@@ I               M        A         p_{n-1}
+RCL× ST T       @@@@ I*p_{n-1}       M        A         p_{n-1}
+-               @@@@ M-I*p_{n-1}     A        p_{n-1}
+×               @@@@ A*(M-I*p_{n-1}) p_{n-1}
 LSTO "_M"
-XEQ "MXTR"
+XEQ "MXTR"      @@@@ A*(M-I*p_{n-1}) p_{n-1}
 RCL "_CTR"
-÷
+÷               @@@@ p_n             p_{n-1}
 STOEL
 ISG "_CTR"
 NOP
@@ -77,59 +89,98 @@ GTO 28
 RCL "_P"
 +/-
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MXTR)
+@@@@ DSC: Compute matrix trace (sum of the diagonal elements)
+@@@@ IN:  X: Matrix
+@@@@ OUT: X: trace
+@@@@ FAQ: Dosen't use INDEX
+@@@@ UPD: 2025-10-07
+@@@@ TC:  [[1,2,3][4,5,6][7,8,10]] => 16
 LBL "MXTR"
 FUNC 11
 L4STK
-LSTO "_M"
-DIM?
-1
-+
-DIM "_M"
-1
-1
-NEWMAT
-SIGN
+LSTO "_M"       @@@@ M           -- M is an nxn matrix
+DIM?            @@@@ n n M
+1               @@@@ 1 n n M
++               @@@@ 1+n n M
+DIM "_M"        @@@@ 1+n n M     -- M is now an nx(n+1) matrix with original diag in first column
+1               @@@@ 1 1+n n M
+1               @@@@ 1 1 1+n n M
+NEWMAT          @@@@ P 1+n n M   -- P is a 1x1 zero matrix
+SIGN            @@@@ P 1+n n M   -- P is a 1x1 identity matrix
 LSTO "_P"
-R↓
-1
-X<>Y
-DIM "_P"
-RCL "_P"
-RCL "_M"
-TRANS
-×
-RSUM
-DET
+R↓              @@@@ 1+n n M     -- P is a 1x1 matrix e_1
+1               @@@@ 1   1+n n   -- P is a 1x1 matrix e_1
+X<>Y            @@@@ 1+n 1   n   -- P is a 1x1 matrix e_1
+DIM "_P"        @@@@ 1+n 1       -- P is now an 1x(1+n) e_1 row matrix
+RCL "_P"        @@@@ P   1+n 1
+RCL "_M"        @@@@ M   P   1+n
+TRANS           @@@@ X   P   1+n -- X is now an (n+1)xn matrix with original diag in first row
+×               @@@@ X   1+n 1   -- X is now an 1xn matrix with original diag in first row
+RSUM            @@@@ X   1+n 1   -- X is now a 1x1 matrix with the sum of the diag
+DET             @@@@ TR          -- DET of a 1x1 matrix is matrix element
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MXIDN)
+@@@@ DSC: Create an XxX identity matrix
+@@@@ IN:  X: Size of matrix to make
+@@@@ OUT: X: Identity matrix of size X
+@@@@ FAQ: Dosen't use INDEX
+@@@@ UPD: 2025-10-07
+@@@@ REF: https://forum.swissmicros.com/viewtopic.php?f=19&t=2958
+@@@@ FAQ: This code is longer, but easier to understand -- for me anyhow.
 LBL "MXIDN"
 FUNC 11
 L4STK
 1
-NEWMAT
-SIGN
+NEWMAT          @@@@ X is an nx1 zero matrix
+SIGN            @@@@ X is now a constant matrix filled with 1s
 XEQ "MXDIAG"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:MXDIAG)
+@@@@ DSC: Create diagonal matrix with given elements
+@@@@ IN:  X: matrix
+@@@@ IN:  X: diagonal matrix
+@@@@ FAQ: Dosen't use INDEX
+@@@@ FAQ: Uses all elements of X -- even if it is not 1xn or nx1
+@@@@ UPD: 2025-10-07
+@@@@ REF: https://forum.swissmicros.com/viewtopic.php?f=19&t=2958
+@@@@ FAQ: This code is longer, but easier to understand -- for me anyhow.
 LBL "MXDIAG"
 FUNC 11
 L4STK
-LSTO "_M"
-DIM?
-×
-1
+LSTO "_M"       @@@@ D
+DIM?            @@@@ n m
+×               @@@@ N
+1               @@@@ 1 N
 X=Y?
 GTO 23
-RCL+ ST Y
-X<>Y
-DIM "_M"
-RCL "_M"
-TRANS
+                @@@@ non 1x1 case
+RCL+ ST Y       @@@@ N+1 N
+X<>Y            @@@@ N N+1
+DIM "_M"        @@@@ N N+1      -- M is now an (N+1)xN matrix with D on first row
+RCL "_M"        @@@@ M N N+1
+TRANS           @@@@ M N N+1    -- M is now an Nx(N+1) matrix with D on first column
 STO "_M"
-R↓
+R↓              @@@@ 1 N+1  N
 ENTER
-DIM "_M"
-LBL 23
+DIM "_M"        @@@@ 1 N+1  N  -- M is now an NxN matrix with D on the diagonal
+LBL 23          @@@@ 1 N+1  N  -- due to the resize reshuffle
+                @@@@ All done.  Return
 RCL "_M"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:EQCPLY)
+@@@@ DSC: Evaluate Chararstic Polynomial of a Matrix: DET(M-X*I)
+@@@@ I/O: N/A MVAR program
+@@@@ VAR: CPM a square matrix
+@@@@ VAR: X a real or complex number
+@@@@ LAB: 24-25
+@@@@ FAQ: Can be used
+@@@@ FAQ: Dosen't use INDEX
+@@@@ UPD: 2025-10-07
 LBL "EQCPLY"
 MVAR "CPM"
 MVAR "X"
@@ -143,16 +194,25 @@ XEQ "MXIDN"
 -
 DET
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Store/Recall variable "CPM"
 LBL 98
 FS? 64
 RCL "CPM"
 STO "CPM"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Store/Recall variable "X"
 LBL 97
 FS? 64
 RCL "X"
 STO "X"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Edit matrix
 LBL 96
 FUNC 11
 EDIT
@@ -161,10 +221,14 @@ EDIT
 PROMPT
 EXITALL
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:POLY)
+@@@@ DSC: Auto-generated menu program
 LBL "POLY"
-LBL 01
+LBL 01            @@@@ Page 1 of menu POLY
 CLMENU
 "NEW"
 KEY 1 XEQ "NEWPLY"
@@ -180,7 +244,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02
+LBL 02            @@@@ Page 2 of menu POLY
 CLMENU
 "SLV2"
 KEY 1 XEQ "P2SLV"
@@ -198,7 +262,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 03
+LBL 03            @@@@ Page 3 of menu POLY
 CLMENU
 "DFALT"
 KEY 1 XEQ "PDEFLT"
@@ -218,7 +282,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 03
-LBL 04
+LBL 04            @@@@ Page 4 of menu POLY
 CLMENU
 "POLY"
 KEY 1 XEQ 98
@@ -232,38 +296,52 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 04
-LBL 00
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
+@@@@ Free labels start at: 5
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PINTRP)
+@@@@ DSC: Create an interpolateing polynomial
+@@@@ IN:  Y: X data matrix
+@@@@      X: Y data matrix
+@@@@ OUT: X: interpolateing polynomial
+@@@@ TST: free42_3.0.2.2
+@@@@ UPD: 2025-10-07
+@@@@ FAQ: X & Y must have the same number of elements, but dimintions may differ.
+@@@@ FAQ: Explicitly constructs the vandermonde matrix, and solves the system
+@@@@ FAQ: Uses INDEX
+@@@@ TC:  xdat:[ 1, 2, 3, 4] ydat:[1, -1, 1, -1] => [-4/3 10 -68/3 15] = [-1.33.. 10 -22.66.. 15]
+@@@@ TC:  xdat:[-1, 0, 1, 2] ydat:[-2, 3, -24, -77] => [1, -16, -12, 3]
 LBL "PINTRP"
 FUNC 21
 L4STK
-LSTO "_YDAT"
+LSTO "_YDAT"    @@@@ YDAT XDAT
 DIM?
 ×
 1
-DIM "_YDAT"
+DIM "_YDAT"     @@@@ 1 N XDAT -- YDAT is now an Nx1 matrix
+R↓              @@@@ N XDAT
+R↓              @@@@ XDAT
+LSTO "_XDAT"    @@@@ XDAT
+XEQ "MXDIAG"    @@@@ MUL      -- nxn diag matrix
+LSTO "_MUL"     @@@@ MUL
+DIM?            @@@@ N N
 R↓
-R↓
-LSTO "_XDAT"
-XEQ "MXDIAG"
-LSTO "_MUL"
-DIM?
-R↓
-1
-NEWMAT
-SIGN
-LSTO "_TPL"
-DIM?
-R↓
-ENTER
-NEWMAT
-LSTO "_VM"
-DIM?
-R↓
+1               @@@@ 1 N
+NEWMAT          @@@@ TPL      -- TPL is an nx1 zero matrix
+SIGN            @@@@ TPL      -- TPL is now an NX1 1 matrix
+LSTO "_TPL"     @@@@ TPL
+DIM?            @@@@ 1 N
+R↓              @@@@ N
+ENTER           @@@@ N N
+NEWMAT          @@@@ VM       -- VM is an NXN zero matrix
+LSTO "_VM"      @@@@ VM
+DIM?            @@@@ N N
+R↓              @@@@ N
 INDEX "_VM"
-1
-X<>Y
+1               @@@@ 1 N
+X<>Y            @@@@ N 1
 STOIJ
 LBL 79
 RCL "_TPL"
@@ -275,9 +353,16 @@ STO "_TPL"
 J-
 FC? 77
 GTO 79
-RCL "_YDAT"
-RCL÷ "_VM"
+RCL "_YDAT"     @@@@ YDAT
+RCL÷ "_VM"      @@@@ POLY
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:NEWPLY)
+@@@@ DSC: Create a new polynomial of degree X
+@@@@ IN:  X: degree
+@@@@ OUT: X: polynomial
+@@@@ TST: free42_3.0.2
+@@@@ UPD: 2025-10-07
 LBL "NEWPLY"
 FUNC 11
 L4STK
@@ -287,6 +372,13 @@ X<>Y
 +
 NEWMAT
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Edit a polynomial in the matrix editor
+@@@@ IN:  X: polynomial
+@@@@ OUT: X: polynomial
+@@@@ TST: free42_3.0.2
+@@@@ UPD: 2025-10-07
 LBL 78
 FUNC 11
 L4STK
@@ -296,6 +388,15 @@ EDIT
 PROMPT
 EXITALL
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:P2SLV)
+@@@@ DSC: Solve quadratic polynomial
+@@@@ IN:  X: Polynomial matrix
+@@@@ OUT: Y: root_1
+@@@@      X: root_2
+@@@@ TST: free42_3.0.2
+@@@@ FAQ: Uses INDEX
+@@@@ UPD: 2025-10-07
 LBL "P2SLV"
 FUNC 12
 L4STK
@@ -308,28 +409,36 @@ RCLEL
 J+
 FC? 77
 GTO 77
-RCL ST Z
-ABS
+RCL ST Z        @@@@  a                     c                     b                     a
+ABS             @@@@  |a|                   c                     b                     a
 X=0?
 RTNERR 3
-R↓
-2
-RCL× ST T
-R↓
-RCL÷ ST T
-X<>Y
-RCL÷ ST T
-+/-
-ENTER
-X↑2
-RCL- ST Z
-RCL- ST Z
-SQRT
-RCL ST Y
-RCL- ST Y
-RCL ST Z
-RCL+ ST Z
+R↓              @@@@  a                     c                     b                     a
+2               @@@@  2                     c                     b                      a
+RCL× ST T       @@@@  2a                    c                     b                      a
+R↓              @@@@  c                     b                     a                     2a
+RCL÷ ST T       @@@@  c/(2a)                b                     a                     2a
+X<>Y            @@@@  b                     c/(2a)                a                     2a
+RCL÷ ST T       @@@@  b/(2a)                c/(2a)                a                     2a
++/-             @@@@  -B                    C                     a                     2a
+ENTER           @@@@  -B                   -B                     C                      a
+X↑2             @@@@  B^2                  -B                     C                      a
+RCL- ST Z       @@@@  B^2-C                -B                     C                      a
+RCL- ST Z       @@@@  B^2-2C               -B                     C                      a
+SQRT            @@@@  √(B^2-2C)            -B                     C                      a
+RCL ST Y        @@@@  -B                    √(B^2-2C)            -B                      C
+RCL- ST Y       @@@@  -B-√(B^2-2C)          √(B^2-2C)            -B                      C
+RCL ST Z        @@@@  -B                   -B-√(B^2-2C)          √(B^2-2C)              -B
+RCL+ ST Z       @@@@  -B+√(B^2-2C)         -B-√(B^2-2C)          √(B^2-2C)              -B
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:P1SLV)
+@@@@ DSC: Solve linear polynomial
+@@@@ IN:  X: Polynomial matrix
+@@@@ OUT: X: root
+@@@@ TST: free42_3.0.2
+@@@@ FAQ: Uses INDEX
+@@@@ UPD: 2025-10-07
 LBL "P1SLV"
 FUNC 11
 L4STK
@@ -337,118 +446,170 @@ LSTO "_M"
 R↓
 INDEX "_M"
 WRAP
-RCLEL
+RCLEL           @@@@ a_1
 J+
-RCLEL
+RCLEL           @@@@ a_0
 ÷
 +/-
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PEVAL)
+@@@@ DSC: Evaluate a polynomial
+@@@@ IN:  Y: Matrix with polynomial coefficients.  DIM of 1xn, nx1, whatever...
+@@@@      X: Value at which polynomial should be evaluated
+@@@@ OUT: X: value of polynomial evaluated at X
+@@@@ LBL: 91
+@@@@ FAQ: Uses INDEX
+@@@@ TST: free42_3.0.2
+@@@@ UPD: 2025-10-07
 LBL "PEVAL"
 FUNC 21
 L4STK
-X<>Y
+X<>Y            @@@@ P X
 LSTO "_M"
 INDEX "_M"
 WRAP
-0
+0               @@@@ PV P X
 LBL 91
-RCL× ST Z
-RCLEL
-+
+RCL× ST Z       @@@@ PV*X P X
+RCLEL           @@@@ Coef PV*X P X
++               @@@@ PV=Coef+PV*X P X
 J+
 FC? 77
 GTO 91
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PEVL1)
+@@@@ DSC: Evaluate a polynomial and it's first derivative
+@@@@ IN:  Y: Matrix with polynomial coefficients.  DIM of 1xn, nx1, whatever...
+@@@@      X: Value at which polynomial & derivative should be evaluated
+@@@@ OUT: Y: value of polynomial evaluated at X
+@@@@      X: value of polynomial's derivative evaluated at X
+@@@@ LBL: 91
+@@@@ FAQ: Uses INDEX
+@@@@ TST: free42_3.0.2
+@@@@ UPD: 2025-10-07
 LBL "PEVL1"
 FUNC 22
 L4STK
-X<>Y
+X<>Y            @@@@ P       X
 LSTO "_M"
 INDEX "_M"
-R↓
+R↓              @@@@ X
 WRAP
-0
-0
+0               @@@@ PV      X
+0               @@@@ DV      PV       X
 LBL 92
-RCL× ST Z
-RCL+ ST Y
-X<>Y
-RCL× ST Z
-RCLEL
-+
-X<>Y
+RCL× ST Z       @@@@ DV*X    PV       X
+RCL+ ST Y       @@@@ DV*X+PV PV       X
+X<>Y            @@@@ PV      DV*X+PV  X
+RCL× ST Z       @@@@ PV*X    DV*X+PV  X
+RCLEL           @@@@ C       PV*X     DV*X+PV  X
++               @@@@ C+PV*X  DV*X+PV  X
+X<>Y            @@@@ DV*X+PV C+PV*X   X
 J+
 FC? 77
 GTO 92
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PEVL2)
+@@@@ DSC: Evaluate a polynomial and it's first two derivatives
+@@@@ IN:  Y: Matrix with polynomial coefficients.  DIM of 1xn, nx1, whatever...
+@@@@      X: Value at which polynomial & derivative should be evaluated
+@@@@ OUT: Z: value of polynomial evaluated at X
+@@@@      Y: value of polynomial's first derivative evaluated at X
+@@@@      X: value of polynomial's second derivative evaluated at X
+@@@@ LBL: 91
+@@@@ FAQ: Uses INDEX
+@@@@ TST: free42_3.0.2
+@@@@ UPD: 2025-10-07
 LBL "PEVL2"
 FUNC 23
 L4STK
-LSTO "_X"
-R↓
+LSTO "_X"       @@@@ X       P
+R↓              @@@@ P
 LSTO "_M"
 INDEX "_M"
-R↓
+R↓              @@@@
 WRAP
-0
-0
-0
+0               @@@@ PV
+0               @@@@ DV       PV
+0               @@@@ DDV      DV       PV
 LBL 93
-RCL× "_X"
-RCL+ ST Y
-X<>Y
-RCL× "_X"
-RCL+ ST Z
-X<>Y
-RCL ST Z
-RCL× "_X"
-RCLEL
-+
-STO ST T
-R↓
+RCL× "_X"       @@@@ DDV*X    DV       PV
+RCL+ ST Y       @@@@ DDV*X+DV DV       PV
+X<>Y            @@@@ DV       DDV*X+DV PV
+RCL× "_X"       @@@@ DV*X     DDV*X+DV PV
+RCL+ ST Z       @@@@ DV*X+PV  DDV*X+DV PV
+X<>Y            @@@@ DDV*X+DV DV*X+PV  PV
+RCL ST Z        @@@@ PV       DDV*X+DV DV*X+PV  PV
+RCL× "_X"       @@@@ PV*X     DDV*X+DV DV*X+PV  PV
+RCLEL           @@@@ C        PV*X     DDV*X+DV DV*X+PV
++               @@@@ C+PV*X   DDV*X+DV DV*X+PV
+STO ST T        @@@@ C+PV*X   DDV*X+DV DV*X+PV  C+PV*X
+R↓              @@@@ DDV*X+DV DV*X+PV  C+PV*X
 J+
 FC? 77
 GTO 93
 2
 ×
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PDEFLT)
+@@@@ DSC: Deflate polynomial
+@@@@ IN:  Y: Matrix with polynomial coefficients.  DIM of 1xn, nx1, whatever...
+@@@@      X: Root
+@@@@ OUT: Y: Remainder (a number)
+@@@@      X: Deflated polynomial
+@@@@ LBL: 96
+@@@@ FAQ: Uses INDEX
+@@@@ TST: free42_3.0.2
+@@@@ UPD: 2025-10-07
 LBL "PDEFLT"
 FUNC 22
 L4STK
 REAL?
 GTO 88
 X<>Y
-XEQ 89
+XEQ 89          @@@@ MAT2C
 X<>Y
 LBL 88
-X<>Y
+X<>Y            @@@@ P R
 LSTO "_M"
 INDEX "_M"
 WRAP
-R↓
+R↓              @@@@ R
 +/-
-0
+0               @@@@ LC R
 LBL 96
-RCL× ST Y
-RCLEL
-X<>Y
--
+RCL× ST Y       @@@@ LC*R R
+RCLEL           @@@@ C LC*R R
+X<>Y            @@@@ LC*R C R
+-               @@@@ C-LC*R  R
 STOEL
 J+
 FC? 77
 GTO 96
-RCL "_M"
-DIM?
-×
-1
--
-1
-X<>Y
+RCL "_M"        @@@@ REM
+DIM?            @@@@ m n REM
+×               @@@@ N REM
+1               @@@@ 1 N REM
+-               @@@@ N-1 REM
+1               @@@@ 1 N-1 REM
+X<>Y            @@@@ N-1 1 REM
 DIM "_M"
 R↓
-R↓
-RCL "_M"
+R↓              @@@@ REM
+RCL "_M"        @@@@ P REM
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Make matrix complex
+@@@@ NAM: MAT2C 89
+@@@@ IN:  X: Matrix
+@@@@ OUT: X: Matrix
+@@@@ FAQ: Uses INDEX
+@@@@ LBL: MAT2C
 LBL 89
 FUNC 11
 L4STK
@@ -466,6 +627,14 @@ DIM?
 NEWMAT
 COMPLEX
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:VPOLY)
+@@@@ DSC: View elements of polynomial
+@@@@ IN:  X: polynomial matrix
+@@@@ OUT: N/A
+@@@@ TST: free42_3.0.2
+@@@@ FAQ: Uses INDEX
+@@@@ UPD: 2025-10-07
 LBL "VPOLY"
 FUNC 00
 LSTO "_M"
@@ -488,65 +657,92 @@ J+
 FC? 77
 GTO 90
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PR1ST)
+@@@@ DSC: Find a root
+@@@@ IN:  X: Polynomial
+@@@@ OUT: Z: Origional Polynomial
+@@@@      Y: Deflated Polynomial
+@@@@      X: Root
+@@@@ FAQ: If set, the global variable ACC is used to set accuracy
+@@@@ TC:  [1, -16, -12, 3] => -0.90574, 0.1982, 16.70749
 LBL "PR1ST"
 FUNC 13
 L4STK
-XEQ 81
+XEQ 81          @@@@ PLYBAD
 RTNERR 5
-LSTO "_P"
+LSTO "_P"       @@@@ P
 RAN
 RAN
-COMPLEX
+COMPLEX         @@@@ Guss Poly
 SF 25
 RCL "ACC"
 FC?C 25
-1e-15
-50
-XEQ "PLGRR"
+1e-15           @@@@ Tol  Guss Poly
+50              @@@@ Itr  Tol  Guss  Poly
+XEQ "PLGRR"     @@@@ Root Pval Stat
 0≠? ST Z
 RTNERR 6
-RCL "_P"
-RCL "_P"
-RCL ST Z
-XEQ "PDEFLT"
-X<>Y
-R↓
-RCL ST Z
+RCL "_P"        @@@@ Poly Root Pval Stat
+RCL "_P"        @@@@ Poly Poly Root Pval
+RCL ST Z        @@@@ Root Poly Poly Root
+XEQ "PDEFLT"    @@@@ DPly Rem  Poly Root
+X<>Y            @@@@ Rem  DPly Poly Root
+R↓              @@@@ DPly Poly Root
+RCL ST Z        @@@@ Root DPly Poly Root
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PRNXT)
+@@@@ DSC: Find a another/next root
+@@@@ in:  Z: Origional Polynomial
+@@@@      Y: Deflated Polynomial
+@@@@      X: Guess
+@@@@ OUT: Z: Origional Polynomial
+@@@@      Y: Deflated Polynomial or 0 if fully deflated
+@@@@      X: Root
+@@@@ FAQ: If set, the global variable ACC is used to set accuracy
 LBL "PRNXT"
 FUNC 33
 L4STK
-RCL ST Z
+RCL ST Z        @@@@ Poly Gues DPly Poly
 LSTO "_P"
-R↓
-RCL ST Y
+R↓              @@@@ Gues DPly Poly
+RCL ST Y        @@@@ DPLY Gues DPly Poly
 LSTO "_DP"
-XEQ 81
+XEQ 81          @@@@ PLYBAD
 RTNERR 5
-R↓
+R↓              @@@@ Gues DPly Poly
 SF 25
 RCL "ACC"
 FC?C 25
-1e-15
-50
-XEQ "PLGRR"
+1e-15           @@@@ Tol  Gues DPly Poly
+50              @@@@ Itr  Tol  Gues DPly
+XEQ "PLGRR"     @@@@ Root Pval Stat
 0≠? ST Z
 RTNERR 6
-RCL "_P"
+RCL "_P"        @@@@ Poly Root Pval Stat
+X<>Y            @@@@ Root Poly Pval Stat
+-1              @@@@ -1   Root Poly Pval
+5               @@@@ 5    -1   Root Poly
+XEQ "PLGRR"     @@@@ Root Pval Stat
+RCL ST X        @@@@ Root Root Pval Stat
+RCL "_DP"       @@@@ DPly Root Root Pval
+X<>Y            @@@@ Root DPly Root Pval
+XEQ "PDEFLT"    @@@@ DPly Rem  Root Pval
 X<>Y
--1
-5
-XEQ "PLGRR"
-RCL ST X
-RCL "_DP"
-X<>Y
-XEQ "PDEFLT"
-X<>Y
-R↓
-RCL "_P"
-X<>Y
-RCL ST Z
+R↓              @@@@ DPly Root Pval
+@@@@ TODO: Should check if |Rem| is near zero.  If it is not, then we probably converged to a previously found root and removed from DPly. It is also possible
+@@@@ TODO: that we we might have diverged, but that is super unlikely.  In fact, both cases are quite unlikely.  Still good software should check.
+RCL "_P"        @@@@ Poly DPly Root Pval
+X<>Y            @@@@ DPly Poly Root Pval
+RCL ST Z        @@@@ Root DPly Poly Root
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: RTNNO if X is not a polynomial of degree>0
+@@@@ NAM: PLYBAD 81
+@@@@ IN:  X: Polynomial
+@@@@ OUT: N/A
 LBL 81
 FUNC 00
 MAT?
@@ -559,44 +755,58 @@ DIM?
 X>Y?
 RTNYES
 RTNNO
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PLGRR)
+@@@@ DSC: Use Laguerre's method to find a polynomial root
+@@@@ IN:  T: Polynomial
+@@@@      Z: Guess
+@@@@      Y: Tolerance
+@@@@      X: Maximum Iteration
+@@@@ OUT: Z: Reason for exit
+@@@@         0 = A solution has been found.
+@@@@         3 = Bad guess was used.
+@@@@      Y: P(X)
+@@@@      X: Root
 LBL "PLGRR"
 FUNC 43
 L4STK
-LSTO "_I"
-R↓
+LSTO "_I"       @@@@ ITR   TOL   GUESS POLY
+R↓              @@@@ TOL   GUESS POLY
 LSTO "_T"
-R↓
+R↓              @@@@ GUESS POLY
 LSTO "_G"
-R↓
+R↓              @@@@ POLY
 LSTO "_P"
 DIM?
-×
+×               @@@@ N
 LSTO "_N"
+@@@@ TODO: Check N>1.  Another status: 4 = polynomial is constant
 1
--
+-               @@@@ N-1
 LSTO "_NM1"
 R↓
 LBL 94
 RCL "_P"
 RCL "_G"
-XEQ "PEVL2"
+XEQ "PEVL2"     @@@@ P''         P'     P        ?
 RCL ST Z
-ABS
+ABS             @@@@ |P|         P''    P'       P
 X<? "_T"
 GTO 95
-R↓
-RCL÷ ST Y
-R↓
-÷
-X<>Y
-R↓
-+/-
-X<>Y
-RCL× ST Y
-RCL× "_N"
-RCL÷ "_NM1"
+R↓              @@@@ P''         P'     P        ?
+@@@@ TODO: Check P' for /0.  Another status: 5 = Iteration failed due to division by zero
+RCL÷ ST Y       @@@@ P''/P'      P'     P        ?
+R↓              @@@@ P'          P      ?        P''/P'
+÷               @@@@ -N=P/P'     ?      P''/P'   P''/P'
+X<>Y            @@@@ ?           -N     P''/P'   P''/P'
+R↓              @@@@ -N          P''/P' P''/P'   ?
++/-             @@@@ N           P''/P' P''/P'   ?
+X<>Y            @@@@ P''/P'      N      P''/P'   ?
+RCL× ST Y       @@@@ -L          N      P''/P'   ?
+RCL× "_N"       @@@@ -L*n        N      P''/P'   ?
+RCL÷ "_NM1"     @@@@ -L*n/(n-1)  N      P''/P'   ?
 1
-+
++               @@@@ 1-L*n/(n-1) N      P''/P'   P''/P'
 SQRT
 RCL× "_NM1"
 RCL÷ "_N"
@@ -604,40 +814,62 @@ RCL "_N"
 1/X
 +
 1/X
-×
+×               @@@@ LD          P''/P'   P''/P'
 STO+ "_G"
 DSE "_I"
 GTO 94
-3
-RCL "_P"
-RCL "_G"
-XEQ "PEVAL"
-RCL "_G"
+@@@@ EXIT: Max iter
+3               @@@@ 3      LD       P''/P'   ?
+RCL "_P"        @@@@ POLY   3        LD       ?
+RCL "_G"        @@@@ G      POLY     3        ?
+XEQ "PEVAL"     @@@@ P      3        ?        ?
+RCL "_G"        @@@@ G      P        3        ?
 RTN
-LBL 95
-R↓
-R↓
-R↓
+LBL 95          @@@@ |P|    P''      P'       P
+@@@@ EXIT: Found root
+R↓              @@@@ P''    P'       P
+R↓              @@@@ P'     P
+R↓              @@@@ P
 0
-X<>Y
-RCL "_G"
+X<>Y            @@@@ P      0
+RCL "_G"        @@@@ Root   Pval     0
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PWRP)
+@@@@ DSC: Make a polynomial stored in a matrix into a =MVAR= function
+@@@@ IN:  X: N/A
+@@@@ OUT: X: N/A
+@@@@ GLB: WRPP -- Store a polynomial matrix in this variable
+@@@@ TST: free42_3.0.2
+@@@@ FAQ: Allows one to use SOLVER & INTEG on polynomials
+@@@@ USE: PEVAL
+@@@@ UPD: 2025-10-07
 LBL "PWRP"
 MVAR "X"
 RCL "WRPP"
 RCL "X"
 XEQ "PEVAL"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Store/Recall variable "WRPP"
 LBL 98
 FS? 64
 RCL "WRPP"
 STO "WRPP"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ Store/Recall variable "X"
 LBL 97
 FS? 64
 RCL "X"
 STO "X"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Is a number very close to zero
+@@@@ NAM: ZEROISH 80
 LBL 80
 FUNC 11
 L4STK
@@ -646,10 +878,14 @@ ABS
 X>Y?
 RTNYES
 RTNNO
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:VEC3)
+@@@@ DSC: Auto-generated menu program
 LBL "VEC3"
-LBL 01
+LBL 01            @@@@ Page 1 of menu VEC3
 CLMENU
 "→V"
 KEY 1 XEQ 99
@@ -667,18 +903,31 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 00
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 02
+LBL 02    @@@@ Action for menu key DOT
 DOT
 RTN
-LBL 03
+LBL 03    @@@@ Action for menu key CROSS
 CROSS
 RTN
-LBL 04
+LBL 04    @@@@ Action for menu key MAG
 FNRM
 RTN
+@@@@ Free labels start at: 5
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Create a vector from stack contents
+@@@@ NAM: →V 99
+@@@@ IN:  Z: real number
+@@@@      Y: real number
+@@@@      X: real number
+@@@@ OUT: X: 1x3 matrix
+@@@@ LBL: Used: 51
+@@@@ FAQ: Uses INDEX
+@@@@ TST: free42_3.0.2
+@@@@ UPD: 2025-10-07
 LBL 99
 FUNC 31
 XEQ 95
@@ -695,6 +944,18 @@ FC? 77
 GTO 51
 RCL "_M"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Put vector elements on stack
+@@@@ NAM: V→ 98
+@@@@ IN:  X: 1x3 matrix V
+@@@@ OUT: Z: First component of V
+@@@@      Y: Second component of V
+@@@@      X: Third component of V
+@@@@ LBL: Used: 52
+@@@@ FAQ: Uses INDEX
+@@@@ TST: free42_3.0.2
+@@@@ UPD: 2025-10-07
 LBL 98
 FUNC 13
 LSTO "_M"
@@ -707,6 +968,16 @@ J+
 FC? 77
 GTO 52
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: View elements of vector
+@@@@ NAM: VVIEW 96
+@@@@ IN:  X: 1x3 matrix V
+@@@@ OUT: N/A
+@@@@ LBL: Used: 53
+@@@@ FAQ: Uses INDEX
+@@@@ TST: free42_3.0.2
+@@@@ UPD: 2025-10-07
 LBL 96
 FUNC 00
 LSTO "_M"
@@ -728,16 +999,29 @@ J+
 FC? 77
 GTO 54
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Make a 3D vector full of zeros
+@@@@ NAM: VVIEW 95
+@@@@ IN:  N/A
+@@@@ OUT: X: 1x3 Matrix
+@@@@ LBL: Used: 53
+@@@@ TST: free42_3.0.2
+@@@@ UPD: 2025-10-07
 LBL 95
 FUNC 01
 1
 3
 NEWMAT
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:STATR)
+@@@@ DSC: Auto-generated menu program
 LBL "STATR"
-LBL 01
+LBL 01            @@@@ Page 1 of menu STATR
 CLMENU
 "Σx"
 KEY 1 XEQ 04
@@ -757,7 +1041,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02
+LBL 02            @@@@ Page 2 of menu STATR
 CLMENU
 "Σlnx"
 KEY 1 XEQ 10
@@ -777,7 +1061,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 03
+LBL 03            @@@@ Page 3 of menu STATR
 CLMENU
 "Σylnx"
 KEY 1 XEQ 16
@@ -787,10 +1071,10 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 03
-LBL 00
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 04
+LBL 04    @@@@ Action for menu key Σx
 FUNC 01
 L4STK
 ΣREG?
@@ -801,7 +1085,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 05
+LBL 05    @@@@ Action for menu key Σx↑2
 FUNC 01
 L4STK
 ΣREG?
@@ -812,7 +1096,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 06
+LBL 06    @@@@ Action for menu key Σy
 FUNC 01
 L4STK
 ΣREG?
@@ -823,7 +1107,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 07
+LBL 07    @@@@ Action for menu key Σy↑2
 FUNC 01
 L4STK
 ΣREG?
@@ -834,7 +1118,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 08
+LBL 08    @@@@ Action for menu key Σxy
 FUNC 01
 L4STK
 ΣREG?
@@ -845,7 +1129,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 09
+LBL 09    @@@@ Action for menu key n
 FUNC 01
 L4STK
 ΣREG?
@@ -856,7 +1140,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 10
+LBL 10    @@@@ Action for menu key Σlnx
 FUNC 01
 L4STK
 ΣREG?
@@ -867,7 +1151,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 11
+LBL 11    @@@@ Action for menu key Σlnx↑2
 FUNC 01
 L4STK
 ΣREG?
@@ -878,7 +1162,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 12
+LBL 12    @@@@ Action for menu key Σlny
 FUNC 01
 L4STK
 ΣREG?
@@ -889,7 +1173,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 13
+LBL 13    @@@@ Action for menu key Σlny↑2
 FUNC 01
 L4STK
 ΣREG?
@@ -900,7 +1184,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 14
+LBL 14    @@@@ Action for menu key Σlnxlny
 FUNC 01
 L4STK
 ΣREG?
@@ -911,7 +1195,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 15
+LBL 15    @@@@ Action for menu key Σxlny
 FUNC 01
 L4STK
 ΣREG?
@@ -922,7 +1206,7 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
-LBL 16
+LBL 16    @@@@ Action for menu key Σylnx
 FUNC 01
 L4STK
 ΣREG?
@@ -933,5 +1217,5 @@ RCL IND ST X
 ARCL ST X
 AVIEW
 RTN
+@@@@ Free labels start at: 17
 END
-

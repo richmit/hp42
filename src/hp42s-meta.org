@@ -63,21 +63,6 @@ Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
  - org-mode file source for this file: https://github.com/richmit/hp42/blob/master/src/hp42s-meta.org
  - GitHub repository: https://github.com/richmit/hp42
 
-* Introduction
-:PROPERTIES:
-:CUSTOM_ID: introduction
-:END:
-
-This org-mode document contains various tools (mostly for Emacs) that help me write programs for the 42s:
-
-   - Elisp function to generate 42s menu programs
-   - A tool to insert free42 utf-8 characters given a list of character numbers
-   - Elisp function to generate custom menus (menus of built-in functions and global labels)
-   - yasnippet templates to help type code
-   - ElISP Code to translate my code listings into code for free42
-   - 42s notes
-     - free42 utf-8 characters with character numbers
-
 * Generating 42s menu code
 :PROPERTIES:
 :CUSTOM_ID: menu-gen
@@ -506,9 +491,6 @@ END
 The elisp file =hp42s-mode.el= provides few things:
  - A language mode for free42 code -- mostly just provides syntax highlighting
  - =MJR-ins42char=: Lisp function to insert characters given a list of character codes
- - =MJR-process-buffer-as-42s-code=: Lisp function to process *all free42 code in a buffer* for pasting into free42 (removes comments)
- - =MJR-target-free42-version=: Variable used by =MJR-process-buffer-as-42s-code= & =MJR-copy-42s-code-in-region= to control version of free42
- - =MJR-copy-42s-code-in-region=: Lisp function that process marked region for pasting into free42 and puts the test on the kill ring -- like =MJR-process-buffer-as-42s-code= but for a region.
 
 To activate the functionality, simply =load= the =hp42s-mode.el= file into emacs.  You can evaluate teh folloing block to do that:
 
@@ -516,35 +498,9 @@ To activate the functionality, simply =load= the =hp42s-mode.el= file into emacs
 (load-file "../emacs/hp42s-mode.el")
 #+END_SRC
 
-** Automatically processing tangled code
-
-By adding =MJR-process-buffer-as-42s-code= to the =org-babel-post-tangle-hook=, you can automatically process tangled code.  You can do that by evaluating
-the next block:
-
-#+BEGIN_SRC elisp :results output silent
-(add-hook 'org-babel-post-tangle-hook 'MJR-process-buffer-as-42s-code)
-#+END_SRC
-
-A handy way to tangle a file, or files in dired, is the =MJR-org-export-der= in my =.emacs= file.
-
-** Tangle & Load Tangled File
-
-#+BEGIN_SRC elisp :results output silent
-(defun MJR-tangle-and-load ()
-  "Tangles current file and attempts to load the tangled file.
-The tangled file is determiend by looking backward for a :tangle argument."
-  (interactive)
-  (save-excursion (org-babel-tangle)
-                  (if (re-search-backward ":tangle[[:blank:]]+\\([^[:blank:]]+.hp42s\\)$" nil t)
-                      (let ((file-name (match-string 1)))
-                        (if (or (string-equal "yes" file-name) (string-equal "no" file-name))
-                            (message "No explicit tangle file specified")
-                            (find-file file-name))))))
-#+END_SRC
-
 ** yas templates
 
-#+BEGIN_SRC sh :results output verbatum :wrap "src snippet :eval never"
+#+BEGIN_SRC sh :exports results :results output verbatum :wrap "src snippet :eval never"
 echo ''
 for f in ~/core/yasnippet/hp42s-mode/*; do cat $f; echo ''; done
 #+END_SRC
@@ -604,137 +560,40 @@ RTN       @@@@ IF-TRUE-END ($1)
 ** Character Set
 
 #+BEGIN_SRC text :eval never
-   0 ÷
-   1 ×
-   2 √
-   3 ∫
-   4 ▒
-   5 Σ
-   6 ▸
-   7 π
-   8 ¿
-   9 ≤
-  10 [LF]
-  11 ≥
-  12 ≠
-  13 ↵
-  14 ↓
-  15 →
-  16 ←
-  17 μ
-  18 £
-  19 °
-  20 Å
-  21 Ñ
-  22 Ä
-  23 ∡
-  24 ᴇ
-  25 Æ
-  26 …
-  27 [ESC]
-  28 Ö
-  29 Ü
-  30 ▒
-  31 •
-  32 [SPACE]
-  33 !
-  34 "
-  35 #
-  36 $
-  37 %
-  38 &
-  39 '
-  40 (
-  41 )
-  42 *
-  43 +
-  44 ,
-  45 -
-  46 .
-  47 /
-  48 0
-  49 1
-  50 2
-  51 3
-  52 4
-  53 5
-  54 6
-  55 7
-  56 8
-  57 9
-  58 :
-  59 ;
-  60 <
-  61 =
-  62 >
-  63 ?
-  64 @
-  65 A
-  66 B
-  67 C
-  68 D
-  69 E
-  70 F
-  71 G
-  72 H
-  73 I
-  74 J
-  75 K
-  76 L
-  77 M
-  78 N
-  79 O
-  80 P
-  81 Q
-  82 R
-  83 S
-  84 T
-  85 U
-  86 V
-  87 W
-  88 X
-  89 Y
-  90 Z
-  91 [
-  92 \
-  93 ]
-  94 ↑
-  95 _
-  96 `
-  97 a
-  98 b
-  99 c
- 100 d
- 101 e
- 102 f
- 103 g
- 104 h
- 105 i
- 106 j
- 107 k
- 108 l
- 109 m
- 110 n
- 111 o
- 112 p
- 113 q
- 114 r
- 115 s
- 116 t
- 117 u
- 118 v
- 119 w
- 120 x
- 121 y
- 122 z
- 123 {
- 124 |
- 125 }
- 126 ~
- 127 ├
- 128 :
- 129 ʏ
-#+END_SRC
+     0 ÷                                33 !                                 65 A                               97 a   
+     1 ×                                34 "                                 66 B                               98 b
+     2 √                                35 #                                 67 C                               99 c
+     3 ∫                                36 $                                 68 D                              100 d
+     4 ▒                                37 %                                 69 E                              101 e
+     5 Σ                                38 &                                 70 F                              102 f
+     6 ▸                                39 '                                 71 G                              103 g
+     7 π                                40 (                                 72 H                              104 h
+     8 ¿                                41 )                                 73 I                              105 i
+     9 ≤                                42 *                                 74 J                              106 j
+    10 [LF]                             43 +                                 75 K                              107 k
+    11 ≥                                44 ,                                 76 L                              108 l
+    12 ≠                                45 -                                 77 M                              109 m
+    13 ↵                                46 .                                 78 N                              110 n
+    14 ↓                                47 /                                 79 O                              111 o
+    15 →                                48 0                                 80 P                              112 p
+    16 ←                                49 1                                 81 Q                              113 q
+    17 μ                                50 2                                 82 R                              114 r
+    18 £                                51 3                                 83 S                              115 s
+    19 °                                52 4                                 84 T                              116 t
+    20 Å                                53 5                                 85 U                              117 u
+    21 Ñ                                54 6                                 86 V                              118 v
+    22 Ä                                55 7                                 87 W                              119 w
+    23 ∡                                56 8                                 88 X                              120 x
+    24 ᴇ                                57 9                                 89 Y                              121 y
+    25 Æ                                58 :                                 90 Z                              122 z
+    26 …                                59 ;                                 91 [                              123 {
+    27 [ESC]                            60 <                                 92 \                              124 |
+    28 Ö                                61 =                                 93 ]                              125 }
+    29 Ü                                62 >                                 94 ↑                              126 ~
+    30 ▒                                63 ?                                 95 _                              127 ├
+    31 •                                64 @                                 96 `                              128 :
+    32 [SPACE]                                                                                                 129 ʏ 
+                                                        #+END_SRC
 
 ** Date format
 
@@ -747,6 +606,7 @@ RTN       @@@@ IF-TRUE-END ($1)
 
 ** Stats registers
 
+#+ATTR_HTML: :align center
 | Register   | Contents |
 |------------+----------|
 | ΣREG? +  0 | Σx       |

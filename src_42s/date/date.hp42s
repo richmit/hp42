@@ -1,5 +1,7 @@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:DMENU)
+@@@@ DSC: Auto-generated menu program
 LBL "DMENU"
-LBL 01
+LBL 01            @@@@ Page 1 of menu DMENU
 CLMENU
 "DATE"
 KEY 1 XEQ 95
@@ -17,7 +19,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02
+LBL 02            @@@@ Page 2 of menu DMENU
 CLMENU
 "DATE"
 KEY 1 XEQ 95
@@ -33,7 +35,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 03
+LBL 03            @@@@ Page 3 of menu DMENU
 CLMENU
 "DATE+"
 KEY 1 XEQ 92
@@ -47,12 +49,20 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 03
-LBL 00
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
-LBL 04
+LBL 04    @@@@ Action for menu key DDAYS
 DDAYS
 RTN
+@@@@ Free labels start at: 5
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Interactive Current Date
+@@@@ NAM: IDATE
+@@@@ OUT: X: Date encoded as a real
+@@@@ SFX: Prints date even when called from a program
+@@@@ UPD: 2025-10-07
 LBL 95
 FUNC 01
 L4STK
@@ -61,6 +71,13 @@ DATE
 ADATE
 AVIEW
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Interactive Current Time
+@@@@ NAM: ITIME
+@@@@ OUT: X: Time in H.MM.SS format
+@@@@ SFX: Prints time even when called from a program
+@@@@ UPD: 2025-10-07
 LBL 88
 FUNC 01
 L4STK
@@ -69,6 +86,11 @@ TIME
 ATIME
 AVIEW
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Current UNIX time
+@@@@ OUT: X: UNIX time
+@@@@ UPD: 2025-10-07
 LBL "UTIME"
 FUNC 02
 L4STK
@@ -76,13 +98,20 @@ DATE
 TIME
 XEQ "DT→U"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Convert date & time to UNIX time
+@@@@ IN:  Y: Date
+@@@@ IN:  X: Time
+@@@@ OUT: X: UNIX time
+@@@@ UPD: 2025-10-07
 LBL "DT→U"
 FUNC 21
 L4STK
-FS? 67
+FS? 67               @@@@ In Y.MD mode
 1970.0101
-FC? 67
-1.011970
+FC? 67               @@@@ Not in Y.MD mode
+1.011970             @@@@ Works for M.DY & D.MY
 RCL ST Z
 DDAYS
 24
@@ -93,6 +122,14 @@ X<>Y
 3600
 ×
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Interactive U→DT (prints date & time)
+@@@@ IN:  X: UNIX time
+@@@@ OUT: Y: Date
+@@@@ OUT: X: Time
+@@@@ SFX: Prints date & time even when called from a program
+@@@@ UPD: 2025-10-07
 LBL "U→DT"
 FUNC 12
 L4STK
@@ -102,10 +139,10 @@ RCL ST X
 24
 ÷
 IP
-FS? 67
+FS? 67               @@@@ In Y.MD mode
 1970.0101
-FC? 67
-1.011970
+FC? 67               @@@@ Not in Y.MD mode
+1.011970             @@@@ Works for M.DY & D.MY
 X<>Y
 DATE+
 X<>Y
@@ -120,6 +157,14 @@ X<>Y
 ATIME
 AVIEW
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Interactive DATE+ (prints date)
+@@@@ NAM: IDATE+
+@@@@ IN:  Y: Date
+@@@@ IN:  X: Integer
+@@@@ OUT: X: Date + Integer
+@@@@ UPD: 2025-10-07
 LBL 92
 FUNC 21
 L4STK
@@ -128,6 +173,14 @@ DATE+
 ADATE
 AVIEW
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Interactive DOW (prints day)
+@@@@ NAM: IDOW
+@@@@ IN:  X: Date
+@@@@ OUT: X: Integer
+@@@@ SFX: Prints day of week even when called from a program
+@@@@ UPD: 2025-10-07
 LBL 91
 FUNC 11
 L4STK
@@ -159,38 +212,56 @@ RTN
 LBL 76
 ├"SAT"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Today's Julian day
+@@@@ OUT: X: Julian day for today
+@@@@ UPD: 2025-10-07
 LBL "JDATE"
 FUNC 01
 L4STK
 DATE
 XEQ "D→J"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Interactive J→D (prints date)
+@@@@ NAM: J→D
+@@@@ IN:  X: Date
+@@@@ OUT: X: Julian day
+@@@@ UPD: 2025-10-07
 LBL "J→D"
 FUNC 11
 L4STK
 2440587.5
 -
-FS? 67
+FS? 67               @@@@ In Y.MD mode
 1970.0101
-FC? 67
-1.011970
+FC? 67               @@@@ Not in Y.MD mode
+1.011970             @@@@ Works for M.DY & D.MY
 X<>Y
 DATE+
 "Date: "
 ADATE
 AVIEW
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Today's Julian day
+@@@@ NAM: D→J
+@@@@ OUT: X: Julian day for today
+@@@@ UPD: 2025-10-07
 LBL "D→J"
 FUNC 11
 L4STK
-FS? 67
+FS? 67               @@@@ In Y.MD mode
 1970.0101
-FC? 67
-1.011970
+FC? 67               @@@@ Not in Y.MD mode
+1.011970             @@@@ Works for M.DY & D.MY
 X<>Y
 DDAYS
 2440587.5
 +
 RTN
-END
 
+END

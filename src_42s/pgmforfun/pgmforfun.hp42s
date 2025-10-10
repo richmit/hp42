@@ -1,5 +1,7 @@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FMENU)
+@@@@ DSC: Auto-generated menu program
 LBL "FMENU"
-LBL 01
+LBL 01            @@@@ Page 1 of menu FMENU
 CLMENU
 "SPT"
 KEY 1 XEQ "FSPT"
@@ -17,7 +19,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02
+LBL 02            @@@@ Page 2 of menu FMENU
 CLMENU
 "SOLVE"
 KEY 1 XEQ "FSLV"
@@ -37,9 +39,22 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 02
-LBL 00
+LBL 00 @@@@ Application Exit
 EXITALL
 RTN
+@@@@ Free labels start at: 3
+
+@@@@ LBL: 80-87, 91-87, 99
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:PICF)
+@@@@ DSC: Pick an MVAR function and variable
+@@@@ IN:  X: integer
+@@@@ FAQ: If X=0, then EqD is set to 1.  Otherwise the user is prompted.
+@@@@ UPD: 2025-10-07
+@@@@ GBL: EqP  -- Name of selected function
+@@@@ GBL: EqV -- Name of selected variable
+@@@@ GBL: EqD -- Return count
+@@@@ BUG: Variable menu works like solver, not like integrator.  Can't fix that...
 LBL "PICF"
 FUNC 10
 L4STK
@@ -106,58 +121,105 @@ RTN
 LBL 85
 4
 RTN
-LBL 96
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Run PICF with a 1 value for X -- so return count is queried
+LBL 96 @NM@ IPICF
 FUNC 00
 1
 XEQ "PICF"
 RTN
-LBL 95
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: Wrap "FVARM"
+LBL 95 @NM@ FVARMM
 "Set Vars; "
 ├"R/S To End"
 AVIEW
 VARMENU "FVARM"
 STOP
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FPRD)
+@@@@ DSC: Product of a function evaluated at regular intervals over a range
+@@@@ OUT: X: The product
+@@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP
+@@@@ FAQ: Faster than product in FSPT
+@@@@ FAQ: EqD is ignored -- only last function value is summed
+@@@@ UPD: 2025-10-07
 LBL "FPRD"
 FUNC 01
 1
 LSTO "_PROD"
+@@@@ Step through independent variable values and do product
 RCL "LLIM"
 STO IND "EqV"
 LBL 80
+@@@@ Evaluate function
 SF 25
 XEQ IND "EqP"
 FC?C 25
 RTNERR 2
 STO× "_PROD"
+@@@@ Increment independent variable
 RCL "STEP"
 RCL+ IND "EqV"
 STO IND "EqV"
 RCL "ULIM"
 X≥Y?
 GTO 80
+@@@@ All done, put Prd on stack
 RCL "_PROD"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FSUM)
+@@@@ DSC: Sum a function evaluated at regular intervals over a range
+@@@@ OUT: X: The sum
+@@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP
+@@@@ FAQ: Faster than sum in FSPT
+@@@@ FAQ: EqD is ignored -- only last function value is summed
+@@@@ UPD: 2025-10-07
 LBL "FSUM"
 FUNC 01
 0
 LSTO "_SUM"
+@@@@ Step through independent variable values and do sum
 RCL "LLIM"
 STO IND "EqV"
 LBL 81
+@@@@ Evaluate function
 SF 25
 XEQ IND "EqP"
 FC?C 25
 RTNERR 2
 STO+ "_SUM"
+@@@@ Increment independent variable
 RCL "STEP"
 RCL+ IND "EqV"
 STO IND "EqV"
 RCL "ULIM"
 X≥Y?
 GTO 81
+@@@@ All done, put Sum on stack
 RCL "_SUM"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FSLV)
+@@@@ DSC: Use SOLVE to find a root for EqV in EqP on [LLIM, ULIM]
+@@@@ OUT: T: Code indicating solver exit reason
+@@@@         0 Found a root
+@@@@         1 Sign Reversal
+@@@@         2 Extremum
+@@@@         3 Bad Guess or Guesses
+@@@@         3 Constant?
+@@@@ OUT: Z: EqP evaluated at X
+@@@@ OUT: Y: Previous best guess
+@@@@ OUT: X: Final best guess -- a root if we are lucky
+@@@@ FAQ: No error checking is done on LLIM, ULIM, STEP, EqV, or EqP
+@@@@ FAQ: Faster than product in FSPT
+@@@@ FAQ: EqD is ignored -- only last function value is summed
+@@@@ GBL: EqP, EqV, LLIM, ULIM
+@@@@ UPD: 2025-10-07
 LBL "FSLV"
 FUNC 04
 PGMSLV IND "EqP"
@@ -166,25 +228,49 @@ STO IND "EqV"
 RCL "ULIM"
 SOLVE IND "EqV"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FINT)
+@@@@ DSC: Use INTEG to find a root for EqV in EqP on [LLIM, ULIM]
+@@@@ OUT: X: The integral
+@@@@ FAQ: No error checking is done on ACC, LLIM, ULIM, STEP, EqV, or EqP
+@@@@ FAQ: EqD is ignored -- only last function value is summed
+@@@@ GBL: EqP, EqV, LLIM, ULIM, ACC
+@@@@ UPD: 2025-10-07
 LBL "FINT"
 FUNC 03
 PGMINT IND "EqP"
 INTEG IND "EqV"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FEVL)
+@@@@ DSC: Evaluate EqP at X
+@@@@ OUT: X: EqP(x)
+@@@@ FAQ: No error checking is done on EqV or EqP
+@@@@ GBL: EqP, EqV
+@@@@ UPD: 2025-10-07
 LBL "FEVL"
 STO IND "EqV"
 XEQ IND "EqP"
 RTN
-LBL 94
-XEQ 91
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: FEVL Menu Action
+LBL 94 @NM@ FEVLM
+XEQ 91 @NM@ CHKEqX
 X≠0?
-GTO 97
+GTO 97 @NM@ AVRTN
 XEQ "FEVL"
 RTN
-LBL 97
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: GTO TARGET!! Display string and cause calling function to return
+LBL 97 @NM@ AVRTN
 AVIEW
 RTN
-LBL 91
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ DSC: FEVLM menu action -- wrapper for FEVL
+LBL 91 @NM@ FEVLM
 "ERR: EqP"
 ├" is unset"
 SF 25
@@ -210,6 +296,11 @@ RTN
 LBL 92
 AVIEW
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FVARM)
+@@@@ DSC: MVAR Program with all the global vartiables used by the F* programs
+@@@@ GBL: EqP, EqV, EqD, ACC, WFUN, LLIM, ULIM, STEP, YMIN, YMAX, & YSTP
+@@@@ UPD: 2025-10-07
 LBL "FVARM"
 MVAR "LLIM"
 MVAR "ULIM"
@@ -223,13 +314,19 @@ MVAR "EqD"
 MVAR "ACC"
 MVAR "WFUN"
 RTN
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:SFWRP)
+@@@@ DSC: Wrap a simple function inside an =MVAR= program
 LBL "SFWRP"
 MVAR "WFUN"
 MVAR "X"
 RCL "X"
 XEQ IND "WFUN"
 RTN
-LBL 99
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@ LBL for FPLT menu
+LBL 99 @NM@ FPLTM
 CLA
 SF 25
 RCL "GrMod"
@@ -237,15 +334,32 @@ FC?C 25
 RTNNO
 "PLOT"
 RTNYES
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 END
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:FSPT)
+@@@@ DSC: Sums, Products, & Tables
+@@@@ IN:  N/A
+@@@@ OUT: N/A
+@@@@ UPD: 2025-10-07
+@@@@ GBL: LLIM -- Lower limit for variable
+@@@@ GBL: ULIM -- Upper limit for variable
+@@@@ GBL: STEP -- Size of steps to make
+@@@@ FLG: 82: Set: log function returns
+@@@@ FLG: 83: Set: Store independent variable in table
+@@@@ FLG: 84: Set: doing table, Clear: Doing sum or product (see flag 85)
+@@@@ FLG: 85: Set: doing sum, Clear; doing product
+@@@@ LLB: 00-12,14-24,26-33
+@@@@ GLB: FSPT
+@@@@ USE: PICF
 LBL "FSPT"
 CF 82
 SF 83
 1
 XEQ "PICF"
 R↓
-LBL 01
+LBL 01            @@@@ Page 1 of menu PROG_NAME
 CLMENU
 "LLIM"
 KEY 1 XEQ 03
@@ -265,7 +379,7 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 02
+LBL 02            @@@@ Page 2 of menu PROG_NAME
 CLMENU
 "EQ"
 KEY 1 XEQ 09
@@ -288,7 +402,7 @@ GTO 02
 LBL 00
 EXITALL
 RTN
-LBL 03
+LBL 03               @@@@ Action for menu key LLIM
 FS? 64
 RCL "LLIM"
 STO "LLIM"
@@ -296,7 +410,7 @@ STO "LLIM"
 ARCL ST X
 AVIEW
 RTN
-LBL 04
+LBL 04               @@@@ Action for menu key ULIM
 FS? 64
 RCL "ULIM"
 STO "ULIM"
@@ -304,7 +418,7 @@ STO "ULIM"
 ARCL ST X
 AVIEW
 RTN
-LBL 05
+LBL 05               @@@@ Action for menu key STEP
 FS? 64
 RCL "STEP"
 STO "STEP"
@@ -312,36 +426,37 @@ STO "STEP"
 ARCL ST X
 AVIEW
 RTN
-LBL 06
-CF 84
-SF 85
+LBL 06               @@@@ Action for menu key Σ
+CF 84                @@@@ 84 clear -> not a table
+SF 85                @@@@ 85 set   -> sum
 GTO 20
 RTN
-LBL 07
-CF 84
-CF 85
+LBL 07               @@@@ Action for menu key π
+CF 84                @@@@ 84 clear -> not a table
+CF 85                @@@@ 85 clear   -> product
 GTO 20
 RTN
-LBL 08
-SF 84
+LBL 08               @@@@ Action for menu key ▒
+SF 84                @@@@ 84 set ->  table
 GTO 20
 RTN
-LBL 09
+LBL 09               @@@@ Action for menu key EQ
 1
 XEQ "PICF"
 R↓
 RTN
-LBL 10
+LBL 10               @@@@ Action for menu key LN
 FS?C 82
 RTN
 SF 82
 RTN
-LBL 11
+LBL 11               @@@@ Action for menu key IND
 FS?C 83
 RTN
 SF 83
 RTN
-LBL 20
+LBL 20  @@@@ Guts of the sum, product, table code
+@@@@ Default LLIM & STEP to 1 if unset
 1
 SF 25
 RCL "LLIM"
@@ -351,6 +466,7 @@ SF 25
 RCL "STEP"
 FC?C 25
 STO "STEP"
+@@@@ Check for bad LLIM, ULIM, & STEP.
 RCL "LLIM"
 RCL "ULIM"
 X>Y?
@@ -381,10 +497,12 @@ GTO 16
 AVIEW
 RTN
 LBL 16
-FS? 84
-GTO 21
+@@@@ Init before loop
+FS? 84          @@@@ 84 set -> table
+GTO 21          @@@@ 84 clear -> (85 set -> sum , 85 clear -> product)
 GTO 22
 LBL 22
+@@@@ Sum or Product
 FS? 85
 0
 FC? 85
@@ -392,6 +510,7 @@ FC? 85
 LSTO "_SOP"
 GTO 23
 LBL 21
+@@@@ Table
 1
 ENTER
 ENTER
@@ -400,13 +519,15 @@ FS? 83
 +
 NEWMAT
 LSTO "_TMAT"
-R↓
+R↓    @@@@ Drop matrix off stack to save RAM
 INDEX "_TMAT"
 GROW
 LBL 23
+@@@@ Step through independent variable values and do sum, product, or table
 RCL "LLIM"
 STO IND "EqV"
 LBL 24
+@@@@ Print progress
 CLA
 ARCL "EqV"
 ├"="
@@ -414,14 +535,17 @@ ARCL IND "EqV"
 AVIEW
 FC? 84
 GTO 32
+@@@@  Doing a table: Setup CTR for loop later
 RCL "EqD"
 LSTO "_CTR"
+@@@@  Doing a table:  Store independent variable if FS? 83
 FC? 83
 GTO 32
 RCL IND "EqV"
 STOEL
 J+
 LBL 32
+@@@@ Evaluate function
 SF 25
 XEQ IND "EqP"
 FS?C 25
@@ -430,10 +554,12 @@ GTO 17
 AVIEW
 RTN
 LBL 17
+@@@@ Do thing for sum, product, or table
 FS? 84
 GTO 26
 GTO 27
 LBL 27
+@@@@ Sum or Product
 FC? 82
 GTO 29
 SF 25
@@ -449,6 +575,7 @@ FC? 85
 STO× "_SOP"
 GTO 28
 LBL 26
+@@@@ Table
 LBL 30
 FC? 82
 GTO 31
@@ -465,6 +592,7 @@ R↓
 DSE "_CTR"
 GTO 30
 LBL 28
+@@@@ Increment independent variable
 RCL "STEP"
 RCL IND "EqV"
 +
@@ -472,10 +600,12 @@ STO IND "EqV"
 RCL "ULIM"
 X≥Y?
 GTO 24
-FS? 84
-GTO 33
+@@@@ All done.  Report Results
+FS? 84          @@@@ 84 set -> table
+GTO 33          @@@@ 84 clear -> (85 set -> sum , 85 clear -> product)
 GTO 19
 LBL 19
+@@@@ Sum or Product
 FS? 85
 "SUM: "
 FC? 85
@@ -483,6 +613,7 @@ FC? 85
 RCL "_SOP"
 GTO 18
 LBL 33
+@@@@ Table
 CLA
 RCL "_TMAT"
 LBL 18
@@ -490,6 +621,20 @@ ARCL ST X
 AVIEW
 RTN
 END
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (REF:FPLT)
+@@@@ DSC: Plot a MVAR function
+@@@@ GBL: EqP, EqV, LLIM, ULIM, STEP, YMIN, YMAX, YSTP
+@@@@ GBL: ZLLIM, ZULIM -- zoom box limits.
+@@@@ FAQ: STEP & YSTP are used for grids
+@@@@ FLG: 03: PREF: Set: draw dots only;  Clear: connect dots
+@@@@ FLG: 04: PREF: Set: Use GrMod 2; Clear Use GrMod 3
+@@@@ FLG: 05: PREF: Reserved
+@@@@ FLG: 82: TEMP: Used for max/min computation
+@@@@ FLG: 83: TEMP: Used for automatic autoscale redraw
+@@@@ FLG: 84: TEMP: Reserved
+@@@@ FRE: LBL: 79-99
+@@@@ UPD: 2025-10-07
 
 LBL "FPLT"
 FC? 04
@@ -505,8 +650,8 @@ R↓
 STO "ResY"
 R↓
 XEQ 74
-LBL 01
-CF 83
+LBL 01               @@@@ Page 1 of menu FPLT
+CF 83                @@@@ Turn off auto yscale redraw
 CLMENU
 "EQ"
 KEY 1 XEQ 02
@@ -524,21 +669,22 @@ KEY 9 GTO 00
 MENU
 STOP
 GTO 01
-LBL 00
+LBL 00               @@@@ Application Exit
 EXITALL
 RTN
-LBL 02
+LBL 02               @@@@ Action for menu key EQ
 0
 XEQ "PICF"
 RTN
-LBL 03
+LBL 03               @@@@ Action for menu key XRNG
 FUNC 00
 FS? 64
-GTO 10
+GTO 10               @@@@ For shift we just display settings
 X≠Y?
 GTO 24
 X=0?
 GTO 26
+@@@@ Code for LLIM=ULIM≠0
 RCL "ULIM"
 RCL- "LLIM"
 2
@@ -557,11 +703,13 @@ R↓
 STO "ULIM"
 GTO 10
 LBL 26
+@@@@ Code for LLIM=ULIM=0
 CLV "LLIM"
 CLV "ULIM"
 XEQ 74
 GTO 10
 LBL 24
+@@@@ Code for LLIM≠ULIM
 STO "ULIM"
 X<>Y
 STO "LLIM"
@@ -575,14 +723,15 @@ RCL "ULIM"
 ARCL ST X
 AVIEW
 RTN
-LBL 04
+LBL 04               @@@@ Action for menu key YRNG
 FUNC 00
 FS? 64
-GTO 50
+GTO 50               @@@@ For shift we just display settings
 X≠Y?
 GTO 22
 X=0?
 GTO 23
+@@@@ Code for YMIN=YMAX≠0
 RCL "YMAX"
 RCL- "YMIN"
 2
@@ -601,11 +750,13 @@ R↓
 STO "YMAX"
 GTO 50
 LBL 23
+@@@@ Code for YMIN=YMAX=0
 CLV "YMIN"
 CLV "YMAX"
 XEQ 74
 GTO 50
 LBL 22
+@@@@ Code for YMIN≠YMAX
 STO "YMAX"
 X<>Y
 STO "YMIN"
@@ -619,10 +770,10 @@ RCL "YMAX"
 ARCL ST X
 AVIEW
 RTN
-LBL 05
+LBL 05               @@@@ Action for menu key GRID
 FUNC 00
 FS? 64
-GTO 49
+GTO 49               @@@@ For shift we just display settings
 STO "YSTP"
 X<>Y
 STO "STEP"
@@ -635,8 +786,8 @@ RCL "YSTP"
 ARCL ST X
 AVIEW
 RTN
-LBL 06
-LBL 30
+LBL 06               @@@@ Action for menu key COMP
+LBL 30               @@@@ menu COMP
 CLMENU
 "ROOT"
 KEY 1 XEQ 32
@@ -644,19 +795,23 @@ KEY 1 XEQ 32
 KEY 2 XEQ 33
 "EVAL"
 KEY 3 XEQ 34
+@@@@ "RSV1"
+@@@@ KEY 4 XEQ 35
+@@@@ "RSV2"
+@@@@ KEY 5 XEQ 36
 "R<>B"
 KEY 6 XEQ 37
 KEY 9 GTO 31
 MENU
 STOP
 GTO 30
-LBL 31
+LBL 31               @@@@ Menu Exit
 RTN
-LBL 32
+LBL 32               @@@@ Action for menu key FSLV
 FUNC 04
 XEQ "FSLV"
 RTN
-LBL 33
+LBL 33               @@@@ Action for menu key FINT
 FUNC 01
 RCL "ULIM"
 RCL- "LLIM"
@@ -667,20 +822,25 @@ RCL÷ "ResY"
 ×
 XEQ "FINT"
 RTN
-LBL 34
+LBL 34               @@@@ Action for menu key RSV0
 XEQ "FEVL"
+@@@@ RSV0
 RTN
-LBL 35
+LBL 35               @@@@ Action for menu key RSV1
+@@@@ RSV1
 RTN
-LBL 36
+LBL 36               @@@@ Action for menu key RSV2
+@@@@ RSV2
 RTN
-LBL 37
+LBL 37               @@@@ Action for menu key RANGE <> BOX swap
 XEQ 39
 RTN
 RCL "GrMod"
-LBL 07
+LBL 07               @@@@ Action for menu key PLOT
+@@@@ Set AGRAPH flags to OR
 CF 34
 CF 35
+@@@@ Just in case an important var is not set
 XEQ 74
 SF 25
 RCL "EqV"
@@ -692,13 +852,14 @@ RCL "EqP"
 FC?C 25
 GTO 76
 R↓
-GTO 77
+GTO 77  @@@@ All good
 LBL 76
 "ERR: Pick An"
 ├" EQ First!"
 AVIEW
 RTN
 LBL 77
+@@@@ Set YWID
 RCL "YMAX"
 RCL- "YMIN"
 1
@@ -706,6 +867,7 @@ RCL "ResY"
 -
 ÷
 STO "YWID"
+@@@@ Set YWID
 RCL "ULIM"
 RCL- "LLIM"
 RCL "ResX"
@@ -713,11 +875,13 @@ RCL "ResX"
 -
 ÷
 STO "XWID"
+@@@@ Draw stuff
 CLLCD
-CLMENU
-EXITALL
+CLMENU               @@@@ Only needed on DM42
+EXITALL              @@@@ Only needed on DM42
 FC? 83
 GTO 17
+@@@@ Doing an autoscale draw
 RCL "ResX"
 14
 ÷
@@ -728,26 +892,27 @@ LSTO "_I"
 LBL 15
 RCL "ResY"
 2
-÷
+÷                             @@@@ Yctr
 9
 -
 RCL "_I"
 14
-×
-"@`px|~├~|xp`@"
+×                             @@@@ X coord
+"@`px|~├~|xp`@"               @@@@ Draw up triangle
 AGRAPH
-"×∫π→•?├?•→π∫×"
+"×∫π→•?├?•→π∫×"               @@@@ Draw down triangle
 X<>Y
 12
 +
 X<>Y
 AGRAPH
-DSE "_I"
+DSE "_I"                       @@@@ Loopity doopity do
 GTO 15
-GTO 20
+GTO 20               @@@@ Jump past axis and grid drawing for autoscale redraw
 LBL 17
+@@@@ Draw X Axis
 RCL "STEP"
-X<0?
+X<0?                 @@@@ No axis if negative
 GTO 11
 0
 XEQ 56
@@ -759,14 +924,15 @@ XEQ 58
 +
 XEQ 58
 LBL 11
+@@@@ Draw X Grid
 RCL "STEP"
 X≤0?
-GTO 08
+GTO 08               @@@@ no grid when STEP<=0
 RCL "XWID"
 10
 ×
 X>Y?
-GTO 08
+GTO 08               @@@@ no grid when too small
 R↓
 RCL "ULIM"
 RCL÷ "STEP"
@@ -787,8 +953,9 @@ RCL+ "STEP"
 X<Y?
 GTO 09
 LBL 08
+@@@@ Draw Y Axis
 RCL "YSTP"
-X<0?
+X<0?                 @@@@ No axis if negative
 GTO 12
 0
 XEQ 46
@@ -800,14 +967,15 @@ XEQ 48
 +
 XEQ 48
 LBL 12
+@@@@ Draw Y Grid
 RCL "YSTP"
 X≤0?
-GTO 20
+GTO 20               @@@@ no grid when STEP<=0
 RCL "YWID"
 -10
 ×
 X>Y?
-GTO 20
+GTO 20               @@@@ no grid when too small
 R↓
 RCL "YMAX"
 RCL÷ "YSTP"
@@ -828,11 +996,16 @@ RCL+ "YSTP"
 X<Y?
 GTO 21
 LBL 20
+@@@@ Set Alpha to our box
 "πππ"
+@@@@ Plot curve
+@@@@ Init YPMAX & YPMIN
 SF 82
+@@@@ Init LASTY
 0
 LSTO "_LASTY"
 R↓
+@@@@ Loop across screen
 RCL "ResX"
 1000
 ÷
@@ -850,10 +1023,12 @@ FC?C 25
 GTO 29
 FC? 82
 GTO 43
+@@@@ Setup YPMIN & YPMAX
 LSTO "_YPMAX"
 LSTO "_YPMIN"
 CF 82
 LBL 43
+@@@@ Update YPMIN & YPMAX if required.
 RCL "_YPMAX"
 X<>Y
 X>Y?
@@ -864,6 +1039,7 @@ X<Y?
 LSTO "_YPMIN"
 FC? 83
 GTO 78
+@@@@ Draw autoscale progress bar
 RCL "ResY"
 2
 ÷
@@ -875,32 +1051,42 @@ R↓
 R↓
 GTO 19
 LBL 78
+@@@@ If y is on screen, then draw it
 XEQ 56
 XEQ 55
 GTO 29
+@@@@ DRAW FAT PIXEL
 RCL "_XICUR"
-XEQ 51
+XEQ 51              @@@@ XICUR YICUR
 R↓
+@@@@ Do we draw lines?
 FS? 03
 GTO 19
+@@@@ Don't do lines for an autoscale draw
 FS? 83
 GTO 19
+@@@@ Do we have a last point?
 RCL "_LASTY"
 X=0?
 GTO 19
+@@@@ Yep & Yep.  We draw a line!
 X<>Y
-RCL "_XICUR"
+RCL "_XICUR"  @@@@ xi  newy lasty
 XEQ 40
 LBL 19
+@@@@ Save last Y
 R↓
 LSTO "_LASTY"
 GTO 42
-LBL 29
+LBL 29  @@@@ Bad Y target
 0
 LSTO "_LASTY"
+@@@@ Backend of loop
 LBL 42
 ISG "_XICUR"
 GTO 41
+@@@@ Done with graph.
+@@@@ Setup zoom box
 10
 LSTO "_ZSPD"
 1
@@ -910,8 +1096,10 @@ RCL "ResY"
 LSTO "_ZBBOT"
 RCL "ResX"
 LSTO "_ZBRGT"
+@@@@ Do we redraw with autoscale?
 FS?C 83
 GTO 68
+@@@@ graph UI
 LBL 16
 RCL "_ZSPD"
 LSTO "_CTR"
@@ -952,68 +1140,68 @@ GTO 59
 LBL 44
 GETKEY1
 13
-X=Y?
+X=Y?                 @@@@ 13 ENTER key
 GTO 73
 R↓
 17
-X=Y?
+X=Y?                 @@@@ 24 Backspace key
 GTO 60
 R↓
 32
-X=Y?
+X=Y?                 @@@@ - speed slow key
 GTO 66
 R↓
 37
-X=Y?
+X=Y?                 @@@@ - speed fast key
 GTO 65
 R↓
 24
-X=Y?
+X=Y?                 @@@@ 24 LEFT key
 GTO 61
 R↓
 26
-X=Y?
+X=Y?                 @@@@ 26 RIGHT key
 GTO 62
 R↓
 20
-X=Y?
+X=Y?                 @@@@ 20 TOP key
 GTO 63
 R↓
 30
-X=Y?
+X=Y?                 @@@@ 30 BOTTOM key
 GTO 64
 R↓
 14
-X=Y?
+X=Y?                 @@@@ 14 autoscale key
 GTO 68
 R↓
 22
-X=Y?
+X=Y?                 @@@@ 22 zoom in key
 GTO 67
 R↓
 35
-X=Y?
+X=Y?                 @@@@ 35 period.  toggle dots/lines
 GTO 75
 R↓
 27
-X=Y?
+X=Y?                 @@@@ 27 zoom out key
 GTO 69
-GTO 44
-LBL 67
+GTO 44               @@@@ Nothing matched get another key
+LBL 67               @@@@ 22 / zoom
 0.5
 ENTER
 ENTER
 XEQ 03
 XEQ 04
 GTO 07
-LBL 69
+LBL 69               @@@@ 27 x zoom out
 2.0
 ENTER
 ENTER
 XEQ 03
 XEQ 04
 GTO 07
-LBL 68
+LBL 68               @@@@ Autoscale Y
 1
 RCL "_ZBLFT"
 -
@@ -1025,6 +1213,7 @@ ABS
 +
 X=0?
 GTO 14
+@@@@ Zoom box has been set
 RCL "_ZBLFT"
 XEQ 47
 RCL "_ZBRGT"
@@ -1035,6 +1224,7 @@ STO "LLIM"
 SF 83
 GTO 07
 LBL 14
+@@@@ No zoom box
 RCL "_YPMAX"
 -5
 RCL× "YWID"
@@ -1047,20 +1237,20 @@ STO "YMIN"
 X<>Y
 STO "YMAX"
 GTO 07
-LBL 75
+LBL 75               @@@@ 35 toggle dots/lines
 FS?C 03
 GTO 07
 SF 03
 GTO 07
-LBL 65
+LBL 65               @@@@ 37 + set speed fast
 10
 LSTO "_ZSPD"
 GTO 16
-LBL 66
+LBL 66               @@@@ 32 - set speed slow
 1
 LSTO "_ZSPD"
 GTO 16
-LBL 61
+LBL 61               @@@@ LEFT REDO
 RCL "_ZBRGT"
 -2
 RCL× "_ZSPD"
@@ -1072,7 +1262,7 @@ LSTO "_ZBLFT"
 XEQ 47
 STO "ZLLIM"
 GTO 16
-LBL 62
+LBL 62               @@@@ RIGHT REDO
 RCL "_ZBLFT"
 2
 RCL× "_ZSPD"
@@ -1085,24 +1275,24 @@ LSTO "_ZBRGT"
 XEQ 47
 STO "ZULIM"
 GTO 16
-LBL 63
+LBL 63               @@@@ TOP REDO
 RCL "_ZBBOT"
 -2
 RCL× "_ZSPD"
-+
++                    @@@@ Upper_limit
 RCL "_ZSPD"
-RCL+ "_ZBTOP"
+RCL+ "_ZBTOP"         @@@@ New_ZBTOP Lower_limit
 X<Y?
 LSTO "_ZBTOP"
 GTO 16
-LBL 64
+LBL 64               @@@@ BOT REDO
 RCL "_ZBTOP"
 2
 RCL× "_ZSPD"
-+
++                    @@@@ Lower_limit
 RCL "_ZSPD"
 +/-
-RCL+ "_ZBBOT"
+RCL+ "_ZBBOT"         @@@@ New_ZBBOT Lower_limit
 X>Y?
 LSTO "_ZBBOT"
 GTO 16
@@ -1124,32 +1314,36 @@ STO "ULIM"
 GTO 07
 LBL 60
 RTN
-LBL 40
+LBL 40  @@@@ Draw Line
 FUNC 00
+@@@@ xi newy lasty
 LSTO "_XNUE"
-R↓
-RCL ST Y
-RCL- ST Y
-ABS
+R↓              @@@@ yn yo
+RCL ST Y        @@@@ yo yn yo
+RCL- ST Y       @@@@ yo-yn yn yo
+ABS             @@@@ |yo-yn| yn yo
 3
 X>Y?
-RTN
+RTN @@@@ Pts too close, no line to draw
+@@@@ We are drawing a line!
 R↓
-R↓
+R↓              @@@@ yn yo
 LSTO "_YNUE"
 X<>Y
-LSTO "_YOLD"
+LSTO "_YOLD"     @@@@ yo yn
 +
 2
 ÷
 IP
 LSTO "_YCTR"
+@@@@ CTR -> OLD Y
 RCL "_XNUE"
 1
 -
 RCL "_YOLD"
 RCL "_YCTR"
 XEQ 70
+@@@@ CTR -> NEW Y
 R↓
 R↓
 R↓
@@ -1161,44 +1355,46 @@ R↓
 R↓
 R↓
 RTN
-LBL 70
+LBL 70          @@@@ Draw Fat, Vertical Line Segment   Ystart Yend X .  Yend already has a fat point drawn.
 FUNC 00
 X<Y?
 GTO 71
+@@@@ Line going up
 1
 STO- ST T
-R↓
+R↓              @@@@ Ystart Yend X-1
 1
 STO- ST Z
-R↓
+R↓              @@@@ Ystart Yend-1 X-1
 3
--
-LBL 72
-RCL ST Z
+-               @@@@ Ystart-3 Yend+1 X-1
+LBL 72          @@@@ ycur Yend-1 X-1
+RCL ST Z        @@@@ X-1 ycur Yend-1 X-1
 AGRAPH
-R↓
+R↓              @@@@ ycur Yend-1 X-1
 3
--
+-               @@@@ ycur(updated) Yend-1 X-1
 X>Y?
 GTO 72
 RTN
 LBL 71
+@@@@ Line going down
 1
 STO- ST T
-R↓
+R↓              @@@@ Ystart Yend X-1
 1
 STO- ST Z
-R↓
-LBL 18
-RCL ST Z
+R↓              @@@@ Ystart Yend-1 X-1
+LBL 18          @@@@ Ycur Yend-1 X-1
+RCL ST Z        @@@@ X-1 Ycur Yend-1 X-1
 AGRAPH
-R↓
+R↓              @@@@ yc yn+1 xn-1
 3
-+
++               @@@@ yc yn+1 xn-1
 X<Y?
 GTO 18
 RTN
-LBL 51
+LBL 51               @@@@ Draw BIG Pix  (assumes Alpha is set)
 FUNC 00
 1
 -
@@ -1208,7 +1404,7 @@ X<>Y
 X<>Y
 AGRAPH
 RTN
-LBL 58
+LBL 58               @@@@ HLINE
 FUNC 00
 XEQ 55
 GTO 27
@@ -1217,7 +1413,7 @@ GTO 27
 PIXEL
 LBL 27
 RTN
-LBL 48
+LBL 48               @@@@ VLINE
 FUNC 00
 XEQ 45
 GTO 28
@@ -1227,7 +1423,7 @@ X<>Y
 PIXEL
 LBL 28
 RTN
-LBL 45
+LBL 45               @@@@ X Out Of Range
 FUNC 00
 X≤0?
 RTNYES
@@ -1235,7 +1431,7 @@ RCL "ResX"
 X<Y?
 RTNYES
 RTNNO
-LBL 55
+LBL 55               @@@@ Y Out Of Range
 FUNC 00
 X≤0?
 RTNYES
@@ -1243,35 +1439,35 @@ RCL "ResY"
 X<Y?
 RTNYES
 RTNNO
-LBL 46
+LBL 46               @@@@ XR->XI
 FUNC 11
 RCL- "LLIM"
 RCL÷ "XWID"
 1
 +
 RTN
-LBL 47
+LBL 47               @@@@ XI->XR
 FUNC 11
 1
 -
 RCL× "XWID"
 RCL+ "LLIM"
 RTN
-LBL 56
+LBL 56               @@@@ YR->YI
 FUNC 11
 RCL- "YMAX"
 RCL÷ "YWID"
 1
 +
 RTN
-LBL 57
+LBL 57               @@@@ YI->YR
 FUNC 11
 1
 -
 RCL× "YWID"
 RCL+ "YMAX"
 RTN
-LBL 39
+LBL 39               @@@@ Swap rng & box
 FUNC 00
 SF 25
 RCL "ZLLIM"
@@ -1309,7 +1505,7 @@ LBL 38
 ├" unset"
 AVIEW
 RTN
-LBL 74
+LBL 74   @@@@ Set any unset global variables to defaults
 10
 SF 25
 RCL "ULIM"
@@ -1342,4 +1538,3 @@ FC?C 25
 STO "STEP"
 RTN
 END
-

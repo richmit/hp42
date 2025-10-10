@@ -1,3 +1,5 @@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFS)
+@@@@ DSC: SIGN
 LBL "TFS"
 MVAR "X"
 RCL "X"
@@ -9,6 +11,8 @@ SIGN
 RTN
 END
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFE)
+@@@@ DSC: Exponential
 LBL "TFE"
 MVAR "X"
 RCL "X"
@@ -16,6 +20,8 @@ E↑X
 RTN
 END
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFL)
+@@@@ DSC: Linear M*X+B
 LBL "TFL"
 MVAR "X"
 MVAR "M"
@@ -26,6 +32,8 @@ RCL+ "B"
 RTN
 END
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFQ)
+@@@@ DSC: A quadratic with zeros at 0 and 1
 LBL "TFQ"
 MVAR "X"
 RCL "X"
@@ -36,6 +44,8 @@ RCL "X"
 RTN
 END
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFC)
+@@@@ DSC: A cubic with zeros at -1, 0.9, and 1
 LBL "TFC"
 MVAR "X"
 RCL "X"
@@ -52,6 +62,8 @@ RCL "X"
 RTN
 END
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFO)
+@@@@ DSC: A function that with increasing frequency approaching zero
 LBL "TFO"
 MVAR "X"
 RCL "X"
@@ -63,6 +75,9 @@ SIN
 RTN
 END
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFI)
+@@@@ DSC: A function that has many undefined regions
+@@@@ FAQ: Good test to make sure we don't connect across known discontinuities
 LBL "TFI"
 MVAR "X"
 RCL "X"
@@ -75,6 +90,8 @@ IP
 RTN
 END
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFM)
+@@@@ DSC: A function that has many step discontinuities
 LBL "TFM"
 MVAR "X"
 RCL "X"
@@ -88,6 +105,9 @@ IP
 RTN
 END
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ (ref:TFF)
+@@@@ DSC: A function flips between 1 and -1 each call
+@@@@ FAQ: Worst case performance for connecting dots
 LBL "TFF"
 MVAR "X"
 5
@@ -97,4 +117,3 @@ SF 85
 -5
 RTN
 END
-

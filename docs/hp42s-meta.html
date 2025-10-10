@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-10-10 Fri 12:06 -->
+<!-- 2025-10-10 Fri 12:27 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=1024, initial-scale=1" />
 <title>free42 Programming Tools</title>
@@ -228,7 +228,7 @@
 
 <tr>
 <td class="org-right"><b>Updated:</b></td>
-<td class="org-left"><i>2025-10-10 12:06:06</i></td>
+<td class="org-left"><i>2025-10-10 12:27:09</i></td>
 </tr>
 </tbody>
 </table>
@@ -240,32 +240,32 @@ Copyright 2025 Mitch Richling. All rights reserved.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org74d0f18">1. Metadata</a></li>
+<li><a href="#org292735c">1. Metadata</a></li>
 <li><a href="#menu-gen">2. Generating 42s menu code</a>
 <ul>
-<li><a href="#org20479b4">2.1. Generic menu generator</a></li>
-<li><a href="#org27ff006">2.2. For CUSTOM-type Menus</a></li>
-<li><a href="#org95fe682">2.3. Always generate local lables</a></li>
+<li><a href="#org63f4964">2.1. Generic menu generator</a></li>
+<li><a href="#org818f659">2.2. For CUSTOM-type Menus</a></li>
+<li><a href="#org9bc45c2">2.3. Always generate local lables</a></li>
 </ul>
 </li>
-<li><a href="#org0ec6478">3. Emacs Helper Stuff</a>
+<li><a href="#org4bb8e6b">3. Emacs Helper Stuff</a>
 <ul>
-<li><a href="#org02b9581">3.1. yas templates</a></li>
+<li><a href="#org948080c">3.1. yas templates</a></li>
 </ul>
 </li>
-<li><a href="#org226c003">4. free42 Notes</a>
+<li><a href="#org4fe5bb0">4. free42 Notes</a>
 <ul>
-<li><a href="#orge690467">4.1. Character Set</a></li>
-<li><a href="#orgcd8e05e">4.2. Date format</a></li>
-<li><a href="#orgb1e1ab1">4.3. Stats registers</a></li>
+<li><a href="#org74d822a">4.1. Character Set</a></li>
+<li><a href="#orgb2e9299">4.2. Date format</a></li>
+<li><a href="#orgff09072">4.3. Stats registers</a></li>
 </ul>
 </li>
-<li><a href="#org0f73e8c">5. EOF</a></li>
+<li><a href="#orgfabf30b">5. EOF</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org74d0f18" class="outline-2">
-<h2 id="org74d0f18"><span class="section-number-2">1.</span> Metadata</h2>
+<div id="outline-container-org292735c" class="outline-2">
+<h2 id="org292735c"><span class="section-number-2">1.</span> Metadata</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Connonical URL for this file: <a href="https://richmit.github.io/hp42/hp42s-meta.html">https://richmit.github.io/hp42/hp42s-meta.html</a></li>
@@ -278,8 +278,8 @@ Copyright 2025 Mitch Richling. All rights reserved.
 <h2 id="menu-gen"><span class="section-number-2">2.</span> Generating 42s menu code</h2>
 <div class="outline-text-2" id="text-menu-gen">
 </div>
-<div id="outline-container-org20479b4" class="outline-3">
-<h3 id="org20479b4"><span class="section-number-3">2.1.</span> Generic menu generator</h3>
+<div id="outline-container-org63f4964" class="outline-3">
+<h3 id="org63f4964"><span class="section-number-3">2.1.</span> Generic menu generator</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 This code will read an org-mode table describing a menu, and generate 42s code to implement the menu.  The only limitation on menu depth and size are the
@@ -456,8 +456,9 @@ In general this might be summarized as follows: When <code>gen-target-label</cod
 
 <p>
 When a local label is generated, the subroutine for that label will also be generated.  The content of that subroutine can be provided by calling the a user
-provided function via the <code>gen-target-code</code> argument.  This allows the <b>entire</b> program to be generated from the contents of the table my <a href="https://richmit.github.io/hp42/cons.html">constants</a> &amp; <a href="https://richmit.github.io/hp42/unit.html">units</a>
-programs are good examples.  Note that if all the lables are generated, then the resulting program is ended with an <code>END</code> instruction.  
+provided function via the <code>gen-target-code</code> argument.  This allows the <b>entire</b> program to be generated from the contents of the table my
+<a href="https://richmit.github.io/hp42/cons.html">constants</a> &amp; <a href="https://richmit.github.io/hp42/unit.html">units</a> programs are good examples.  Note that if all
+the lables are generated, then the resulting program is ended with an <code>END</code> instruction.
 </p>
 
 <p>
@@ -573,7 +574,6 @@ tables.
                                                                  (<span style="color: #00ffff;">if</span> (string-match-p <span style="color: #fa8072;">"^LBL [0-9][0-9]$"</span> auto-trg)
                                                                      (substring auto-trg 4)
                                                                      (format <span style="color: #fa8072;">"\"%s\""</span> auto-trg)))))
-                                    <span style="color: #ffa500;">;;</span><span style="color: #ff7f24;">do (print (format "mkey-str: %s    auto-trg: %s    mkey-trg: %s" mkey-str auto-trg mkey-trg))</span>
                                     when (= page-key 0)
                                     do (<span style="color: #00ffff;">progn</span> (add-m-code (format <span style="color: #fa8072;">"LBL %02d            @@@@ Page %d of menu %s"</span>
                                                                    (nth page-num page-labs)
@@ -636,7 +636,10 @@ tables.
       (gen-mnu numeric-lbl-start 
                (1+ numeric-lbl-start)
                (prc-mnu (append (list top-lab) (<span style="color: #00ffff;">cl-loop</span> for row in tbl
-                                                        for row-strs = (mapcar (<span style="color: #00ffff;">lambda</span> (x) (replace-regexp-in-string <span style="color: #fa8072;">"&#166;"</span> <span style="color: #fa8072;">"|"</span> (format <span style="color: #fa8072;">"%s"</span> x)  't 't)) 
+                                                        for row-strs = (mapcar (<span style="color: #00ffff;">lambda</span> (x) 
+                                                                                 (replace-regexp-in-string <span style="color: #fa8072;">"&#166;"</span> <span style="color: #fa8072;">"|"</span>
+                                                                                                           (format <span style="color: #fa8072;">"%s"</span> x) 
+                                                                                                           't 't)) 
                                                                                row)
                                                         for n from 0
                                                         for menu-parts = (split-string 
@@ -661,8 +664,8 @@ tables.
 </div>
 </div>
 </div>
-<div id="outline-container-org27ff006" class="outline-3">
-<h3 id="org27ff006"><span class="section-number-3">2.2.</span> For CUSTOM-type Menus</h3>
+<div id="outline-container-org818f659" class="outline-3">
+<h3 id="org818f659"><span class="section-number-3">2.2.</span> For CUSTOM-type Menus</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 These functions are useful for CUSTOM-type menus &#x2013; that is menus that call other programs or built in functions.  I use this as a way to add hierarchy to the
@@ -715,23 +718,33 @@ the org-mode file and the whole thing will then be tangled together into one pro
 
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-is-42-builtin</span> (astring) (cl-position astring 
-                                                '(<span style="color: #fa8072;">"%"</span> <span style="color: #fa8072;">"%CH"</span> <span style="color: #fa8072;">"+"</span> <span style="color: #fa8072;">"+/-"</span> <span style="color: #fa8072;">"-"</span> <span style="color: #fa8072;">"1/X"</span> <span style="color: #fa8072;">"10&#8593;X"</span> <span style="color: #fa8072;">"ABS"</span> <span style="color: #fa8072;">"ACOS"</span> <span style="color: #fa8072;">"ACOSH"</span> <span style="color: #fa8072;">"ADV"</span> <span style="color: #fa8072;">"AGRAPH"</span> <span style="color: #fa8072;">"AIP"</span> <span style="color: #fa8072;">"ALENG"</span> <span style="color: #fa8072;">"ALL"</span> <span style="color: #fa8072;">"ALL&#931;"</span> <span style="color: #fa8072;">"AND"</span> <span style="color: #fa8072;">"AOFF"</span> <span style="color: #fa8072;">"AON"</span>
-                                                  <span style="color: #fa8072;">"ARCL"</span> <span style="color: #fa8072;">"AROT"</span> <span style="color: #fa8072;">"ASHF"</span> <span style="color: #fa8072;">"ASIN"</span> <span style="color: #fa8072;">"ASINH"</span> <span style="color: #fa8072;">"ASSIGN"</span> <span style="color: #fa8072;">"ASTO"</span> <span style="color: #fa8072;">"ATAN"</span> <span style="color: #fa8072;">"ATANH"</span> <span style="color: #fa8072;">"ATOX"</span> <span style="color: #fa8072;">"AVIEW"</span> <span style="color: #fa8072;">"BASE+"</span> <span style="color: #fa8072;">"BASE+/-"</span> <span style="color: #fa8072;">"BASE-"</span> <span style="color: #fa8072;">"BASE&#215;"</span>
-                                                  <span style="color: #fa8072;">"BASE&#247;"</span> <span style="color: #fa8072;">"BEEP"</span> <span style="color: #fa8072;">"BEST"</span> <span style="color: #fa8072;">"BINM"</span> <span style="color: #fa8072;">"BIT?"</span>  <span style="color: #fa8072;">"BIT?"</span>  <span style="color: #fa8072;">"CF"</span> <span style="color: #fa8072;">"CLA"</span> <span style="color: #fa8072;">"CLD"</span> <span style="color: #fa8072;">"CLKEYS"</span> <span style="color: #fa8072;">"CLLCD"</span> <span style="color: #fa8072;">"CLMENU"</span> <span style="color: #fa8072;">"CLP"</span> <span style="color: #fa8072;">"CLRG"</span> <span style="color: #fa8072;">"CLST"</span> <span style="color: #fa8072;">"CLV"</span>
-                                                  <span style="color: #fa8072;">"CLX"</span> <span style="color: #fa8072;">"CL&#931;"</span> <span style="color: #fa8072;">"COMB"</span> <span style="color: #fa8072;">"COMPLEX"</span> <span style="color: #fa8072;">"CORR"</span> <span style="color: #fa8072;">"COS"</span> <span style="color: #fa8072;">"COSH"</span> <span style="color: #fa8072;">"CPX?"</span>  <span style="color: #fa8072;">"CPXRES"</span> <span style="color: #fa8072;">"CROSS"</span> <span style="color: #fa8072;">"CUSTOM"</span> <span style="color: #fa8072;">"DECM"</span> <span style="color: #fa8072;">"DEG"</span> <span style="color: #fa8072;">"DELAY"</span> <span style="color: #fa8072;">"DELR"</span>
-                                                  <span style="color: #fa8072;">"DET"</span> <span style="color: #fa8072;">"DIM"</span> <span style="color: #fa8072;">"DIM?"</span>  <span style="color: #fa8072;">"DOT"</span> <span style="color: #fa8072;">"DSE"</span> <span style="color: #fa8072;">"EDIT"</span> <span style="color: #fa8072;">"EDITN"</span> <span style="color: #fa8072;">"END"</span> <span style="color: #fa8072;">"ENG"</span> <span style="color: #fa8072;">"ENTER"</span> <span style="color: #fa8072;">"EXITALL"</span> <span style="color: #fa8072;">"EXPF"</span> <span style="color: #fa8072;">"E&#8593;X"</span> <span style="color: #fa8072;">"E&#8593;X-1"</span> <span style="color: #fa8072;">"FC?"</span>  <span style="color: #fa8072;">"FC?C"</span>
-                                                  <span style="color: #fa8072;">"FCSTX"</span> <span style="color: #fa8072;">"FCSTY"</span> <span style="color: #fa8072;">"FIX"</span> <span style="color: #fa8072;">"FNRM"</span> <span style="color: #fa8072;">"FP"</span> <span style="color: #fa8072;">"FS?"</span>  <span style="color: #fa8072;">"FS?C"</span> <span style="color: #fa8072;">"FUNC"</span> <span style="color: #fa8072;">"GAMMA"</span> <span style="color: #fa8072;">"GETKEY"</span> <span style="color: #fa8072;">"GETM"</span> <span style="color: #fa8072;">"GRAD"</span> <span style="color: #fa8072;">"GROW"</span> <span style="color: #fa8072;">"GTO"</span> <span style="color: #fa8072;">"HEXM"</span> <span style="color: #fa8072;">"HMS+"</span>
-                                                  <span style="color: #fa8072;">"HMS-"</span> <span style="color: #fa8072;">"I+"</span> <span style="color: #fa8072;">"I-"</span> <span style="color: #fa8072;">"INDEX"</span> <span style="color: #fa8072;">"INPUT"</span> <span style="color: #fa8072;">"INSR"</span> <span style="color: #fa8072;">"INTEG"</span> <span style="color: #fa8072;">"INVRT"</span> <span style="color: #fa8072;">"IP"</span> <span style="color: #fa8072;">"ISG"</span> <span style="color: #fa8072;">"J+"</span> <span style="color: #fa8072;">"J-"</span> <span style="color: #fa8072;">"KEY"</span> <span style="color: #fa8072;">"KEYASN"</span> <span style="color: #fa8072;">"L4STK"</span> <span style="color: #fa8072;">"LASTX"</span> <span style="color: #fa8072;">"LBL"</span>
-                                                  <span style="color: #fa8072;">"LCLBL"</span> <span style="color: #fa8072;">"LINF"</span> <span style="color: #fa8072;">"LIN&#931;"</span> <span style="color: #fa8072;">"LN"</span> <span style="color: #fa8072;">"LN1+X"</span> <span style="color: #fa8072;">"LOG"</span> <span style="color: #fa8072;">"LOGF"</span> <span style="color: #fa8072;">"LSTO"</span> <span style="color: #fa8072;">"MAN"</span> <span style="color: #fa8072;">"MAT?"</span>  <span style="color: #fa8072;">"MEAN"</span> <span style="color: #fa8072;">"MENU"</span> <span style="color: #fa8072;">"MOD"</span> <span style="color: #fa8072;">"MVAR"</span> <span style="color: #fa8072;">"N!"</span>  <span style="color: #fa8072;">"NEWMAT"</span>
-                                                  <span style="color: #fa8072;">"NOP"</span> <span style="color: #fa8072;">"NORM"</span> <span style="color: #fa8072;">"NOT"</span> <span style="color: #fa8072;">"OCTM"</span> <span style="color: #fa8072;">"OFF"</span> <span style="color: #fa8072;">"OLD"</span> <span style="color: #fa8072;">"ON"</span> <span style="color: #fa8072;">"OR"</span> <span style="color: #fa8072;">"PERM"</span> <span style="color: #fa8072;">"PGMINT"</span> <span style="color: #fa8072;">"PGMSLV"</span> <span style="color: #fa8072;">"PIXEL"</span> <span style="color: #fa8072;">"POLAR"</span> <span style="color: #fa8072;">"POSA"</span> <span style="color: #fa8072;">"PRA"</span> <span style="color: #fa8072;">"PRLCD"</span>
-                                                  <span style="color: #fa8072;">"PROFF"</span> <span style="color: #fa8072;">"PROMPT"</span> <span style="color: #fa8072;">"PRON"</span> <span style="color: #fa8072;">"PRSTK"</span> <span style="color: #fa8072;">"PRUSR"</span> <span style="color: #fa8072;">"PRV"</span> <span style="color: #fa8072;">"PRX"</span> <span style="color: #fa8072;">"PR&#931;"</span> <span style="color: #fa8072;">"PSE"</span> <span style="color: #fa8072;">"PUTM"</span> <span style="color: #fa8072;">"PWRF"</span> <span style="color: #fa8072;">"R&lt;&gt;R"</span> <span style="color: #fa8072;">"RAD"</span> <span style="color: #fa8072;">"RAN"</span> <span style="color: #fa8072;">"RCL"</span> <span style="color: #fa8072;">"RCL+"</span>
-                                                  <span style="color: #fa8072;">"RCL-"</span> <span style="color: #fa8072;">"RCLEL"</span> <span style="color: #fa8072;">"RCLIJ"</span> <span style="color: #fa8072;">"RCL&#215;"</span> <span style="color: #fa8072;">"RCL&#247;"</span> <span style="color: #fa8072;">"RDX,"</span> <span style="color: #fa8072;">"RDX."</span>  <span style="color: #fa8072;">"REAL?"</span>  <span style="color: #fa8072;">"REALRES"</span> <span style="color: #fa8072;">"RECT"</span> <span style="color: #fa8072;">"RND"</span> <span style="color: #fa8072;">"RNRM"</span> <span style="color: #fa8072;">"ROTXY"</span> <span style="color: #fa8072;">"RSUM"</span> <span style="color: #fa8072;">"RTN"</span>
-                                                  <span style="color: #fa8072;">"RTNERR"</span> <span style="color: #fa8072;">"RTNYES"</span> <span style="color: #fa8072;">"RTNNO"</span> <span style="color: #fa8072;">"R&#8593;"</span> <span style="color: #fa8072;">"R&#8595;"</span> <span style="color: #fa8072;">"SCI"</span> <span style="color: #fa8072;">"SDEV"</span> <span style="color: #fa8072;">"SEED"</span> <span style="color: #fa8072;">"SF"</span> <span style="color: #fa8072;">"SIGN"</span> <span style="color: #fa8072;">"SIN"</span> <span style="color: #fa8072;">"SINH"</span> <span style="color: #fa8072;">"SIZE"</span> <span style="color: #fa8072;">"SLOPE"</span> <span style="color: #fa8072;">"SOLVE"</span> <span style="color: #fa8072;">"SQRT"</span>
-                                                  <span style="color: #fa8072;">"STO"</span> <span style="color: #fa8072;">"STO+"</span> <span style="color: #fa8072;">"STO-"</span> <span style="color: #fa8072;">"STOEL"</span> <span style="color: #fa8072;">"STOIJ"</span> <span style="color: #fa8072;">"STOP"</span> <span style="color: #fa8072;">"STO&#215;"</span> <span style="color: #fa8072;">"STO&#247;"</span> <span style="color: #fa8072;">"STR?"</span>  <span style="color: #fa8072;">"SUM"</span> <span style="color: #fa8072;">"TAN"</span> <span style="color: #fa8072;">"TANH"</span> <span style="color: #fa8072;">"TONE"</span> <span style="color: #fa8072;">"TRACE"</span> <span style="color: #fa8072;">"TRANS"</span> <span style="color: #fa8072;">"UVEC"</span>
-                                                  <span style="color: #fa8072;">"VARMENU"</span> <span style="color: #fa8072;">"VIEW"</span> <span style="color: #fa8072;">"WMEAN"</span> <span style="color: #fa8072;">"WRAP"</span> <span style="color: #fa8072;">"WSIZE?"</span>  <span style="color: #fa8072;">"X&lt;0?"</span>  <span style="color: #fa8072;">"X&lt;&gt;"</span> <span style="color: #fa8072;">"X&lt;&gt;Y"</span> <span style="color: #fa8072;">"X&lt;Y?"</span>  <span style="color: #fa8072;">"X=0?"</span>  <span style="color: #fa8072;">"X=Y?"</span>  <span style="color: #fa8072;">"X&gt;0?"</span>  <span style="color: #fa8072;">"X&gt;Y?"</span>  <span style="color: #fa8072;">"XEQ"</span> <span style="color: #fa8072;">"XTOA"</span>
-                                                  <span style="color: #fa8072;">"X&#8593;2"</span> <span style="color: #fa8072;">"X&#8800;0?"</span>  <span style="color: #fa8072;">"X&#8800;Y?"</span>  <span style="color: #fa8072;">"X&#8804;0?"</span>  <span style="color: #fa8072;">"X&#8804;Y?"</span>  <span style="color: #fa8072;">"X&#8805;0?"</span>  <span style="color: #fa8072;">"X&#8805;Y?"</span>  <span style="color: #fa8072;">"X&#8805;Y?"</span>  <span style="color: #fa8072;">"YINT"</span> <span style="color: #fa8072;">"Y&#8593;X"</span> <span style="color: #fa8072;">"[FIND]"</span> <span style="color: #fa8072;">"[MAX]"</span> <span style="color: #fa8072;">"[MIN]"</span> <span style="color: #fa8072;">"&#215;"</span> <span style="color: #fa8072;">"&#247;"</span> <span style="color: #fa8072;">"&#931;+"</span>
-                                                  <span style="color: #fa8072;">"&#931;-"</span> <span style="color: #fa8072;">"&#931;REG"</span> <span style="color: #fa8072;">"&#931;REG?"</span>  <span style="color: #fa8072;">"&#8592;"</span> <span style="color: #fa8072;">"&#8593;"</span> <span style="color: #fa8072;">"&#8594;"</span> <span style="color: #fa8072;">"&#8594;DEC"</span> <span style="color: #fa8072;">"&#8594;DEG"</span> <span style="color: #fa8072;">"&#8594;HMS"</span> <span style="color: #fa8072;">"&#8594;HR"</span> <span style="color: #fa8072;">"&#8594;OCT"</span> <span style="color: #fa8072;">"&#8594;POL"</span> <span style="color: #fa8072;">"&#8594;RAD"</span> <span style="color: #fa8072;">"&#8594;REC"</span> <span style="color: #fa8072;">"&#8595;"</span> <span style="color: #fa8072;">"DDAYS"</span> <span style="color: #fa8072;">"DOW"</span> <span style="color: #fa8072;">"CLK12"</span>
-                                                  <span style="color: #fa8072;">"CLK24"</span> <span style="color: #fa8072;">"DMY"</span> <span style="color: #fa8072;">"MDY"</span> <span style="color: #fa8072;">"YMD"</span> <span style="color: #fa8072;">"DATE"</span> <span style="color: #fa8072;">"TIME"</span> <span style="color: #fa8072;">"DATE+"</span> <span style="color: #fa8072;">"PI"</span> <span style="color: #fa8072;">"WSIZE"</span> <span style="color: #fa8072;">"BSIGNED"</span> <span style="color: #fa8072;">"BWRAP"</span> <span style="color: #fa8072;">"XOR"</span>)
+                                                '(<span style="color: #fa8072;">"%"</span> <span style="color: #fa8072;">"%CH"</span> <span style="color: #fa8072;">"+"</span> <span style="color: #fa8072;">"+/-"</span> <span style="color: #fa8072;">"-"</span> <span style="color: #fa8072;">"1/X"</span> <span style="color: #fa8072;">"10&#8593;X"</span> <span style="color: #fa8072;">"ABS"</span> <span style="color: #fa8072;">"ACOS"</span> <span style="color: #fa8072;">"ACOSH"</span> <span style="color: #fa8072;">"ADV"</span> <span style="color: #fa8072;">"AGRAPH"</span> 
+                                                  <span style="color: #fa8072;">"AIP"</span> <span style="color: #fa8072;">"ALENG"</span> <span style="color: #fa8072;">"ALL"</span> <span style="color: #fa8072;">"ALL&#931;"</span> <span style="color: #fa8072;">"AND"</span> <span style="color: #fa8072;">"AOFF"</span> <span style="color: #fa8072;">"AON"</span> <span style="color: #fa8072;">"ARCL"</span> <span style="color: #fa8072;">"AROT"</span> <span style="color: #fa8072;">"ASHF"</span> <span style="color: #fa8072;">"ASIN"</span>
+                                                  <span style="color: #fa8072;">"ASINH"</span> <span style="color: #fa8072;">"ASSIGN"</span> <span style="color: #fa8072;">"ASTO"</span> <span style="color: #fa8072;">"ATAN"</span> <span style="color: #fa8072;">"ATANH"</span> <span style="color: #fa8072;">"ATOX"</span> <span style="color: #fa8072;">"AVIEW"</span> <span style="color: #fa8072;">"BASE+"</span> <span style="color: #fa8072;">"BASE+/-"</span>
+                                                  <span style="color: #fa8072;">"BASE-"</span> <span style="color: #fa8072;">"BASE&#215;"</span> <span style="color: #fa8072;">"BASE&#247;"</span> <span style="color: #fa8072;">"BEEP"</span> <span style="color: #fa8072;">"BEST"</span> <span style="color: #fa8072;">"BINM"</span> <span style="color: #fa8072;">"BIT?"</span>  <span style="color: #fa8072;">"BIT?"</span>  <span style="color: #fa8072;">"CF"</span> <span style="color: #fa8072;">"CLA"</span>
+                                                  <span style="color: #fa8072;">"CLD"</span> <span style="color: #fa8072;">"CLKEYS"</span> <span style="color: #fa8072;">"CLLCD"</span> <span style="color: #fa8072;">"CLMENU"</span> <span style="color: #fa8072;">"CLP"</span> <span style="color: #fa8072;">"CLRG"</span> <span style="color: #fa8072;">"CLST"</span> <span style="color: #fa8072;">"CLV"</span> <span style="color: #fa8072;">"CLX"</span> <span style="color: #fa8072;">"CL&#931;"</span>
+                                                  <span style="color: #fa8072;">"COMB"</span> <span style="color: #fa8072;">"COMPLEX"</span> <span style="color: #fa8072;">"CORR"</span> <span style="color: #fa8072;">"COS"</span> <span style="color: #fa8072;">"COSH"</span> <span style="color: #fa8072;">"CPX?"</span>  <span style="color: #fa8072;">"CPXRES"</span> <span style="color: #fa8072;">"CROSS"</span> <span style="color: #fa8072;">"CUSTOM"</span>
+                                                  <span style="color: #fa8072;">"DECM"</span> <span style="color: #fa8072;">"DEG"</span> <span style="color: #fa8072;">"DELAY"</span> <span style="color: #fa8072;">"DELR"</span> <span style="color: #fa8072;">"DET"</span> <span style="color: #fa8072;">"DIM"</span> <span style="color: #fa8072;">"DIM?"</span>  <span style="color: #fa8072;">"DOT"</span> <span style="color: #fa8072;">"DSE"</span> <span style="color: #fa8072;">"EDIT"</span>
+                                                  <span style="color: #fa8072;">"EDITN"</span> <span style="color: #fa8072;">"END"</span> <span style="color: #fa8072;">"ENG"</span> <span style="color: #fa8072;">"ENTER"</span> <span style="color: #fa8072;">"EXITALL"</span> <span style="color: #fa8072;">"EXPF"</span> <span style="color: #fa8072;">"E&#8593;X"</span> <span style="color: #fa8072;">"E&#8593;X-1"</span> <span style="color: #fa8072;">"FC?"</span>  <span style="color: #fa8072;">"FC?C"</span>
+                                                  <span style="color: #fa8072;">"FCSTX"</span> <span style="color: #fa8072;">"FCSTY"</span> <span style="color: #fa8072;">"FIX"</span> <span style="color: #fa8072;">"FNRM"</span> <span style="color: #fa8072;">"FP"</span> <span style="color: #fa8072;">"FS?"</span>  <span style="color: #fa8072;">"FS?C"</span> <span style="color: #fa8072;">"FUNC"</span> <span style="color: #fa8072;">"GAMMA"</span> <span style="color: #fa8072;">"GETKEY"</span>
+                                                  <span style="color: #fa8072;">"GETM"</span> <span style="color: #fa8072;">"GRAD"</span> <span style="color: #fa8072;">"GROW"</span> <span style="color: #fa8072;">"GTO"</span> <span style="color: #fa8072;">"HEXM"</span> <span style="color: #fa8072;">"HMS+"</span> <span style="color: #fa8072;">"HMS-"</span> <span style="color: #fa8072;">"I+"</span> <span style="color: #fa8072;">"I-"</span> <span style="color: #fa8072;">"INDEX"</span> <span style="color: #fa8072;">"INPUT"</span>
+                                                  <span style="color: #fa8072;">"INSR"</span> <span style="color: #fa8072;">"INTEG"</span> <span style="color: #fa8072;">"INVRT"</span> <span style="color: #fa8072;">"IP"</span> <span style="color: #fa8072;">"ISG"</span> <span style="color: #fa8072;">"J+"</span> <span style="color: #fa8072;">"J-"</span> <span style="color: #fa8072;">"KEY"</span> <span style="color: #fa8072;">"KEYASN"</span> <span style="color: #fa8072;">"L4STK"</span>
+                                                  <span style="color: #fa8072;">"LASTX"</span> <span style="color: #fa8072;">"LBL"</span> <span style="color: #fa8072;">"LCLBL"</span> <span style="color: #fa8072;">"LINF"</span> <span style="color: #fa8072;">"LIN&#931;"</span> <span style="color: #fa8072;">"LN"</span> <span style="color: #fa8072;">"LN1+X"</span> <span style="color: #fa8072;">"LOG"</span> <span style="color: #fa8072;">"LOGF"</span> <span style="color: #fa8072;">"LSTO"</span>
+                                                  <span style="color: #fa8072;">"MAN"</span> <span style="color: #fa8072;">"MAT?"</span>  <span style="color: #fa8072;">"MEAN"</span> <span style="color: #fa8072;">"MENU"</span> <span style="color: #fa8072;">"MOD"</span> <span style="color: #fa8072;">"MVAR"</span> <span style="color: #fa8072;">"N!"</span>  <span style="color: #fa8072;">"NEWMAT"</span> <span style="color: #fa8072;">"NOP"</span> <span style="color: #fa8072;">"NORM"</span>
+                                                  <span style="color: #fa8072;">"NOT"</span> <span style="color: #fa8072;">"OCTM"</span> <span style="color: #fa8072;">"OFF"</span> <span style="color: #fa8072;">"OLD"</span> <span style="color: #fa8072;">"ON"</span> <span style="color: #fa8072;">"OR"</span> <span style="color: #fa8072;">"PERM"</span> <span style="color: #fa8072;">"PGMINT"</span> <span style="color: #fa8072;">"PGMSLV"</span> <span style="color: #fa8072;">"PIXEL"</span>
+                                                  <span style="color: #fa8072;">"POLAR"</span> <span style="color: #fa8072;">"POSA"</span> <span style="color: #fa8072;">"PRA"</span> <span style="color: #fa8072;">"PRLCD"</span> <span style="color: #fa8072;">"PROFF"</span> <span style="color: #fa8072;">"PROMPT"</span> <span style="color: #fa8072;">"PRON"</span> <span style="color: #fa8072;">"PRSTK"</span> <span style="color: #fa8072;">"PRUSR"</span>
+                                                  <span style="color: #fa8072;">"PRV"</span> <span style="color: #fa8072;">"PRX"</span> <span style="color: #fa8072;">"PR&#931;"</span> <span style="color: #fa8072;">"PSE"</span> <span style="color: #fa8072;">"PUTM"</span> <span style="color: #fa8072;">"PWRF"</span> <span style="color: #fa8072;">"R&lt;&gt;R"</span> <span style="color: #fa8072;">"RAD"</span> <span style="color: #fa8072;">"RAN"</span> <span style="color: #fa8072;">"RCL"</span> <span style="color: #fa8072;">"RCL+"</span>
+                                                  <span style="color: #fa8072;">"RCL-"</span> <span style="color: #fa8072;">"RCLEL"</span> <span style="color: #fa8072;">"RCLIJ"</span> <span style="color: #fa8072;">"RCL&#215;"</span> <span style="color: #fa8072;">"RCL&#247;"</span> <span style="color: #fa8072;">"RDX,"</span> <span style="color: #fa8072;">"RDX."</span>  <span style="color: #fa8072;">"REAL?"</span>  <span style="color: #fa8072;">"REALRES"</span>
+                                                  <span style="color: #fa8072;">"RECT"</span> <span style="color: #fa8072;">"RND"</span> <span style="color: #fa8072;">"RNRM"</span> <span style="color: #fa8072;">"ROTXY"</span> <span style="color: #fa8072;">"RSUM"</span> <span style="color: #fa8072;">"RTN"</span> <span style="color: #fa8072;">"RTNERR"</span> <span style="color: #fa8072;">"RTNYES"</span> <span style="color: #fa8072;">"RTNNO"</span> <span style="color: #fa8072;">"R&#8593;"</span>
+                                                  <span style="color: #fa8072;">"R&#8595;"</span> <span style="color: #fa8072;">"SCI"</span> <span style="color: #fa8072;">"SDEV"</span> <span style="color: #fa8072;">"SEED"</span> <span style="color: #fa8072;">"SF"</span> <span style="color: #fa8072;">"SIGN"</span> <span style="color: #fa8072;">"SIN"</span> <span style="color: #fa8072;">"SINH"</span> <span style="color: #fa8072;">"SIZE"</span> <span style="color: #fa8072;">"SLOPE"</span> <span style="color: #fa8072;">"SOLVE"</span>
+                                                  <span style="color: #fa8072;">"SQRT"</span> <span style="color: #fa8072;">"STO"</span> <span style="color: #fa8072;">"STO+"</span> <span style="color: #fa8072;">"STO-"</span> <span style="color: #fa8072;">"STOEL"</span> <span style="color: #fa8072;">"STOIJ"</span> <span style="color: #fa8072;">"STOP"</span> <span style="color: #fa8072;">"STO&#215;"</span> <span style="color: #fa8072;">"STO&#247;"</span> <span style="color: #fa8072;">"STR?"</span>
+                                                  <span style="color: #fa8072;">"SUM"</span> <span style="color: #fa8072;">"TAN"</span> <span style="color: #fa8072;">"TANH"</span> <span style="color: #fa8072;">"TONE"</span> <span style="color: #fa8072;">"TRACE"</span> <span style="color: #fa8072;">"TRANS"</span> <span style="color: #fa8072;">"UVEC"</span> <span style="color: #fa8072;">"VARMENU"</span> <span style="color: #fa8072;">"VIEW"</span> <span style="color: #fa8072;">"WMEAN"</span>
+                                                  <span style="color: #fa8072;">"WRAP"</span> <span style="color: #fa8072;">"WSIZE?"</span>  <span style="color: #fa8072;">"X&lt;0?"</span>  <span style="color: #fa8072;">"X&lt;&gt;"</span> <span style="color: #fa8072;">"X&lt;&gt;Y"</span> <span style="color: #fa8072;">"X&lt;Y?"</span>  <span style="color: #fa8072;">"X=0?"</span>  <span style="color: #fa8072;">"X=Y?"</span>  <span style="color: #fa8072;">"X&gt;0?"</span>
+                                                  <span style="color: #fa8072;">"X&gt;Y?"</span>  <span style="color: #fa8072;">"XEQ"</span> <span style="color: #fa8072;">"XTOA"</span> <span style="color: #fa8072;">"X&#8593;2"</span> <span style="color: #fa8072;">"X&#8800;0?"</span>  <span style="color: #fa8072;">"X&#8800;Y?"</span>  <span style="color: #fa8072;">"X&#8804;0?"</span>  <span style="color: #fa8072;">"X&#8804;Y?"</span>  <span style="color: #fa8072;">"X&#8805;0?"</span>  <span style="color: #fa8072;">"X&#8805;Y?"</span>
+                                                  <span style="color: #fa8072;">"X&#8805;Y?"</span>  <span style="color: #fa8072;">"YINT"</span> <span style="color: #fa8072;">"Y&#8593;X"</span> <span style="color: #fa8072;">"[FIND]"</span> <span style="color: #fa8072;">"[MAX]"</span> <span style="color: #fa8072;">"[MIN]"</span> <span style="color: #fa8072;">"&#215;"</span> <span style="color: #fa8072;">"&#247;"</span> <span style="color: #fa8072;">"&#931;+"</span> <span style="color: #fa8072;">"&#931;-"</span> <span style="color: #fa8072;">"&#931;REG"</span>
+                                                  <span style="color: #fa8072;">"&#931;REG?"</span>  <span style="color: #fa8072;">"&#8592;"</span> <span style="color: #fa8072;">"&#8593;"</span> <span style="color: #fa8072;">"&#8594;"</span> <span style="color: #fa8072;">"&#8594;DEC"</span> <span style="color: #fa8072;">"&#8594;DEG"</span> <span style="color: #fa8072;">"&#8594;HMS"</span> <span style="color: #fa8072;">"&#8594;HR"</span> <span style="color: #fa8072;">"&#8594;OCT"</span> <span style="color: #fa8072;">"&#8594;POL"</span> <span style="color: #fa8072;">"&#8594;RAD"</span>
+                                                  <span style="color: #fa8072;">"&#8594;REC"</span> <span style="color: #fa8072;">"&#8595;"</span> <span style="color: #fa8072;">"DDAYS"</span> <span style="color: #fa8072;">"DOW"</span> <span style="color: #fa8072;">"CLK12"</span> <span style="color: #fa8072;">"CLK24"</span> <span style="color: #fa8072;">"DMY"</span> <span style="color: #fa8072;">"MDY"</span> <span style="color: #fa8072;">"YMD"</span> <span style="color: #fa8072;">"DATE"</span> <span style="color: #fa8072;">"TIME"</span>
+                                                  <span style="color: #fa8072;">"DATE+"</span> <span style="color: #fa8072;">"PI"</span> <span style="color: #fa8072;">"WSIZE"</span> <span style="color: #fa8072;">"BSIGNED"</span> <span style="color: #fa8072;">"BWRAP"</span> <span style="color: #fa8072;">"XOR"</span>)
                                                 <span style="color: #b0c4de;">:test</span> #'string-equal))
 
 (<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a; font-weight: bold;">MJR-custom-gen-lab</span> (atrg row) (<span style="color: #00ffff;">if</span> (not (MJR-is-42-builtin atrg))
@@ -744,8 +757,8 @@ the org-mode file and the whole thing will then be tangled together into one pro
 </div>
 </div>
 </div>
-<div id="outline-container-org95fe682" class="outline-3">
-<h3 id="org95fe682"><span class="section-number-3">2.3.</span> Always generate local lables</h3>
+<div id="outline-container-org9bc45c2" class="outline-3">
+<h3 id="org9bc45c2"><span class="section-number-3">2.3.</span> Always generate local lables</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 This function is handy when you want to always generate local labels.
@@ -758,8 +771,8 @@ This function is handy when you want to always generate local labels.
 </div>
 </div>
 </div>
-<div id="outline-container-org0ec6478" class="outline-2">
-<h2 id="org0ec6478"><span class="section-number-2">3.</span> Emacs Helper Stuff</h2>
+<div id="outline-container-org4bb8e6b" class="outline-2">
+<h2 id="org4bb8e6b"><span class="section-number-2">3.</span> Emacs Helper Stuff</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 The elisp file <code>hp42s-mode.el</code> provides few things:
@@ -778,8 +791,8 @@ To activate the functionality, simply <code>load</code> the <code>hp42s-mode.el<
 </pre>
 </div>
 </div>
-<div id="outline-container-org02b9581" class="outline-3">
-<h3 id="org02b9581"><span class="section-number-3">3.1.</span> yas templates</h3>
+<div id="outline-container-org948080c" class="outline-3">
+<h3 id="org948080c"><span class="section-number-3">3.1.</span> yas templates</h3>
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 <pre class="src src-snippet">
@@ -834,12 +847,12 @@ RTN       @@@@ IF-TRUE-END (<span style="color: #00ffff;">$</span><span style="c
 </div>
 </div>
 </div>
-<div id="outline-container-org226c003" class="outline-2">
-<h2 id="org226c003"><span class="section-number-2">4.</span> free42 Notes</h2>
+<div id="outline-container-org4fe5bb0" class="outline-2">
+<h2 id="org4fe5bb0"><span class="section-number-2">4.</span> free42 Notes</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-orge690467" class="outline-3">
-<h3 id="orge690467"><span class="section-number-3">4.1.</span> Character Set</h3>
+<div id="outline-container-org74d822a" class="outline-3">
+<h3 id="org74d822a"><span class="section-number-3">4.1.</span> Character Set</h3>
 <div class="outline-text-3" id="text-4-1">
 <div class="org-src-container">
 <pre class="src src-text"> 0 &#247;                                33 !                                 65 A                               97 a   
@@ -879,8 +892,8 @@ RTN       @@@@ IF-TRUE-END (<span style="color: #00ffff;">$</span><span style="c
 </div>
 </div>
 </div>
-<div id="outline-container-orgcd8e05e" class="outline-3">
-<h3 id="orgcd8e05e"><span class="section-number-3">4.2.</span> Date format</h3>
+<div id="outline-container-orgb2e9299" class="outline-3">
+<h3 id="orgb2e9299"><span class="section-number-3">4.2.</span> Date format</h3>
 <div class="outline-text-3" id="text-4-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -921,8 +934,8 @@ RTN       @@@@ IF-TRUE-END (<span style="color: #00ffff;">$</span><span style="c
 </table>
 </div>
 </div>
-<div id="outline-container-orgb1e1ab1" class="outline-3">
-<h3 id="orgb1e1ab1"><span class="section-number-3">4.3.</span> Stats registers</h3>
+<div id="outline-container-orgff09072" class="outline-3">
+<h3 id="orgff09072"><span class="section-number-3">4.3.</span> Stats registers</h3>
 <div class="outline-text-3" id="text-4-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
@@ -1008,8 +1021,8 @@ RTN       @@@@ IF-TRUE-END (<span style="color: #00ffff;">$</span><span style="c
 </div>
 </div>
 </div>
-<div id="outline-container-org0f73e8c" class="outline-2">
-<h2 id="org0f73e8c"><span class="section-number-2">5.</span> EOF</h2>
+<div id="outline-container-orgfabf30b" class="outline-2">
+<h2 id="orgfabf30b"><span class="section-number-2">5.</span> EOF</h2>
 <div class="outline-text-2" id="text-5">
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
